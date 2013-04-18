@@ -29,74 +29,173 @@ public class Roads {
 	
 		public static CreativeTabs tabRoads = new CreativeTabs("tabRoads") {
 				public ItemStack getIconItemStack() {
-						return new ItemStack(Item.eyeOfEnder, 1, 0);
+						return new ItemStack(Roads.cementDustItem, 1, 0);
 					}
 			};
 	
-		public final static Block roadBlock = new RoadBlock(500, 1, Material.rock)
+		//public final static Block blockTest = new BlockTest(550, 1, Material.rock)
+				//.setHardness(1.0F).setStepSound(Block.soundStoneFootstep)
+				//.setBlockName("blockTest").setCreativeTab(tabRoads);
+		
+		public final static Block roadBlockSWS2 = new RBSideWhiteStripe(812, 0)
+				.setHardness(1.0F).setStepSound(Block.soundStoneFootstep)
+				.setBlockName("roadBlockSWS2").setCreativeTab(tabRoads);
+			
+		public final static Block roadBlock = new RoadBlock(800, Material.rock)
 				.setHardness(1.0F).setStepSound(Block.soundStoneFootstep)
 				.setBlockName("roadBlock").setCreativeTab(tabRoads);
 		
-		public final static Block roadBlockDYS = new RBDoubleYellowStripe(501, 0, Material.rock)
+		public final static Block roadBlockDYS = new RBDoubleYellowStripe(801, 0, Material.rock)
 				.setHardness(1.0F).setStepSound(Block.soundStoneFootstep)
 				.setBlockName("roadBlockDYS").setCreativeTab(tabRoads);
 		
-		public final static Block roadBlockSYS = new RBSingleYellowStripe(504, 0, Material.rock)
-				.setHardness(1.0F).setStepSound(Block.soundStoneFootstep)
-				.setBlockName("roadBlockSYS").setCreativeTab(tabRoads);
-		
-		public final static Block roadBlockSWS = new RBSingleWhiteSide(505, 0, Material.rock)
-				.setHardness(1.0F).setStepSound(Block.soundStoneFootstep)
-				.setBlockName("roadBlockSWS").setCreativeTab(tabRoads);
-		
-		public final static Block roadBlockSWC = new RBSingleWhiteCenter(506, 0, Material.rock)
-				.setHardness(1.0F).setStepSound(Block.soundStoneFootstep)
-				.setBlockName("roadBlockSWC").setCreativeTab(tabRoads);
-		
-		public final static Block roadBlockSYC = new RBSingleYellowCenter(507, 0, Material.rock)
-				.setHardness(1.0F).setStepSound(Block.soundStoneFootstep)
-				.setBlockName("roadBlockSYC").setCreativeTab(tabRoads);
-		
-		public final static Block roadBlockDYC = new RBDoubleYellowCenter(508, 0, Material.rock)
-				.setHardness(1.0F).setStepSound(Block.soundStoneFootstep)
-				.setBlockName("roadBlockDYC").setCreativeTab(tabRoads);
-		
-		public final static Block roadBlockWhiteCross = new RBWhiteCross(509, 0, Material.rock)
-				.setHardness(1.0F).setStepSound(Block.soundStoneFootstep)
-				.setBlockName("roadBlockWhiteCross").setCreativeTab(tabRoads);
-		
-		public final static Block roadBlockYellowCross = new RBYellowCross(510, 0, Material.rock)
-				.setHardness(1.0F).setStepSound(Block.soundStoneFootstep)
-				.setBlockName("roadBlockYellowCross").setCreativeTab(tabRoads);
-		
-		public final static Block roadBlockWhiteFull = new RBWhiteFull(511, 0, Material.rock)
-				.setHardness(1.0F).setStepSound(Block.soundStoneFootstep)
-				.setBlockName("roadBlockWhiteFull").setCreativeTab(tabRoads);
-		
-		
-		public final static Block macadamBlock = new MacadamBlock(502, 4, Material.rock)
+		public final static Block macadamBlock = new MacadamBlock(802, 4, Material.rock)
 				.setHardness(0.7F).setStepSound(Block.soundStoneFootstep)
 				.setBlockName("macadamBlock").setCreativeTab(tabRoads);
-		
-		public final static Block cementBlock = new CementBlock(503, 5, Material.rock)
+
+		public final static Block cementBlock = new CementBlock(803, 5, Material.rock)
 				.setHardness(1.5F).setStepSound(Block.soundStoneFootstep)
 				.setBlockName("cementBlock").setCreativeTab(tabRoads);
 		
-		public final static Block stillTarBlock = new StillTarBlock(520)
+		public final static Block roadBlockSYS = new RBSingleYellowStripe(804, 0, Material.rock)
+				.setHardness(1.0F).setStepSound(Block.soundStoneFootstep)
+				.setBlockName("roadBlockSYS").setCreativeTab(tabRoads);
+		
+		public final static Block roadBlockSWS = new RBSingleWhiteSide(805, 0, Material.rock)
+				.setHardness(1.0F).setStepSound(Block.soundStoneFootstep)
+				.setBlockName("roadBlockSWS").setCreativeTab(tabRoads);
+		
+		public final static Block roadBlockSWC = new RBSingleWhiteCenter(806, 0, Material.rock)
+				.setHardness(1.0F).setStepSound(Block.soundStoneFootstep)
+				.setBlockName("roadBlockSWC").setCreativeTab(tabRoads);
+		
+		public final static Block roadBlockSYC = new RBSingleYellowCenter(807, 0, Material.rock)
+				.setHardness(1.0F).setStepSound(Block.soundStoneFootstep)
+				.setBlockName("roadBlockSYC").setCreativeTab(tabRoads);
+		
+		public final static Block roadBlockDYC = new RBDoubleYellowCenter(808, 0, Material.rock)
+				.setHardness(1.0F).setStepSound(Block.soundStoneFootstep)
+				.setBlockName("roadBlockDYC").setCreativeTab(tabRoads);
+		
+		public final static Block roadBlockWhiteCross = new RBWhiteCross(809, 0, Material.rock)
+				.setHardness(1.0F).setStepSound(Block.soundStoneFootstep)
+				.setBlockName("roadBlockWhiteCross").setCreativeTab(tabRoads);
+		
+		public final static Block roadBlockYellowCross = new RBYellowCross(810, 0, Material.rock)
+				.setHardness(1.0F).setStepSound(Block.soundStoneFootstep)
+				.setBlockName("roadBlockYellowCross").setCreativeTab(tabRoads);
+		
+		public final static Block roadBlockWhiteFull = new RBWhiteFull(811, 0, Material.rock)
+				.setHardness(1.0F).setStepSound(Block.soundStoneFootstep)
+				.setBlockName("roadBlockWhiteFull").setCreativeTab(tabRoads);
+		
+		public final static Block roadBlockWC = new RBWhiteCorner(813, 0, Material.rock)
+				.setHardness(1.0F).setStepSound(Block.soundStoneFootstep)
+				.setBlockName("roadBlockWC").setCreativeTab(tabRoads);
+		
+		public final static Block roadBlockFYS = new RBFarYellowStripe(814, 0, Material.rock)
+				.setHardness(1.0F).setStepSound(Block.soundStoneFootstep)
+				.setBlockName("roadBlockFYS").setCreativeTab(tabRoads);
+		
+		public final static Block roadBlockYC = new RBYellowCorner(815, 0, Material.rock)
+				.setHardness(1.0F).setStepSound(Block.soundStoneFootstep)
+				.setBlockName("roadBlockYC").setCreativeTab(tabRoads);
+		
+		public final static Block roadBlockYAC = new RBYellowAltCorner(816, 0, Material.rock)
+				.setHardness(1.0F).setStepSound(Block.soundStoneFootstep)
+				.setBlockName("roadBlockYAC").setCreativeTab(tabRoads);
+		
+		public final static Block roadBlockWAC = new RBWhiteAltCorner(817, 0, Material.rock)
+				.setHardness(1.0F).setStepSound(Block.soundStoneFootstep)
+				.setBlockName("roadBlockWAC").setCreativeTab(tabRoads);
+		
+		public final static Block roadBlockWSL = new RBWhiteStripedLine(818, 0, Material.rock)
+				.setHardness(1.0F).setStepSound(Block.soundStoneFootstep)
+				.setBlockName("roadBlockWSL").setCreativeTab(tabRoads);
+		
+		public final static Block roadBlockWSSL = new RBWhiteSideStripedLine(819, 0, Material.rock)
+				.setHardness(1.0F).setStepSound(Block.soundStoneFootstep)
+				.setBlockName("roadBlockWSSL").setCreativeTab(tabRoads);
+		
+		public final static Block roadBlockYSSL = new RBYellowSideStripedLine(820, 0, Material.rock)
+				.setHardness(1.0F).setStepSound(Block.soundStoneFootstep)
+				.setBlockName("roadBlockYSSL").setCreativeTab(tabRoads);
+		
+		public final static Block roadBlockJO = new RBJunctOut(821, 0, Material.rock)
+				.setHardness(1.0F).setStepSound(Block.soundStoneFootstep)
+				.setBlockName("roadBlockJO").setCreativeTab(tabRoads);
+		
+		public final static Block roadBlockJI = new RBJunctIn(822, 0, Material.rock)
+				.setHardness(1.0F).setStepSound(Block.soundStoneFootstep)
+				.setBlockName("roadBlockJI").setCreativeTab(tabRoads);
+		
+		public final static Block roadBlockJOL = new RBJunctOutLine(823, 0, Material.rock)
+				.setHardness(1.0F).setStepSound(Block.soundStoneFootstep)
+				.setBlockName("roadBlockJOL").setCreativeTab(tabRoads);
+		
+		public final static Block roadBlockAL = new RBArrowLine(824, 0, Material.rock)
+				.setHardness(1.0F).setStepSound(Block.soundStoneFootstep)
+				.setBlockName("roadBlockAL").setCreativeTab(tabRoads);
+		
+		public final static Block roadBlockAUS = new RBArrowStraight(825, 0, Material.rock)
+				.setHardness(1.0F).setStepSound(Block.soundStoneFootstep)
+				.setBlockName("roadBlockAUS").setCreativeTab(tabRoads);
+		
+		public final static Block roadBlockAUL = new RBArrowLeft(826, 0, Material.rock)
+				.setHardness(1.0F).setStepSound(Block.soundStoneFootstep)
+				.setBlockName("roadBlockAUL").setCreativeTab(tabRoads);
+		
+		public final static Block roadBlockAUR = new RBArrowRight(827, 0, Material.rock)
+				.setHardness(1.0F).setStepSound(Block.soundStoneFootstep)
+				.setBlockName("roadBlockAUR").setCreativeTab(tabRoads);
+		
+		public final static Block roadBlockWDS = new RBWhiteDiagonalStripe(828, 0, Material.rock)
+				.setHardness(1.0F).setStepSound(Block.soundStoneFootstep)
+				.setBlockName("roadBlockWDS").setCreativeTab(tabRoads);
+		
+		public final static Block roadBlockYDS = new RBYellowDiagonalStripe(829, 0, Material.rock)
+				.setHardness(1.0F).setStepSound(Block.soundStoneFootstep)
+				.setBlockName("roadBlockYDS").setCreativeTab(tabRoads);
+		
+		public final static Block roadBlockWSS = new RBWhiteSmallSquare(830, 0, Material.rock)
+				.setHardness(1.0F).setStepSound(Block.soundStoneFootstep)
+				.setBlockName("roadBlockWSS").setCreativeTab(tabRoads);
+		
+		public final static Block roadBlockYSS = new RBYellowSmallSquare(831, 0, Material.rock)
+				.setHardness(1.0F).setStepSound(Block.soundStoneFootstep)
+				.setBlockName("roadBlockYSS").setCreativeTab(tabRoads);
+		
+		public final static Block roadBlockSL = new RBSL(832, 0, Material.rock)
+				.setHardness(1.0F).setStepSound(Block.soundStoneFootstep)
+				.setBlockName("roadBlockSL").setCreativeTab(tabRoads);
+		
+		public final static Block roadBlockOW = new RBOW(833, 0, Material.rock)
+				.setHardness(1.0F).setStepSound(Block.soundStoneFootstep)
+				.setBlockName("roadBlockOW").setCreativeTab(tabRoads);
+		
+		public final static Block roadBlockST = new RBST(834, 0, Material.rock)
+				.setHardness(1.0F).setStepSound(Block.soundStoneFootstep)
+				.setBlockName("roadBlockST").setCreativeTab(tabRoads);
+		
+		public final static Block roadBlockOP = new RBOP(835, 0, Material.rock)
+				.setHardness(1.0F).setStepSound(Block.soundStoneFootstep)
+				.setBlockName("roadBlockOP").setCreativeTab(tabRoads);
+		
+		/*public final static Block stillTarBlock = new StillTarBlock(850)
 				.setBlockName("stillTarBlock").setCreativeTab(tabRoads);
 		
-		public final static Block flowingTarBlock = new FlowingTarBlock(521)
-				.setBlockName("flowingTarBlock").setCreativeTab(tabRoads);
+		public final static Block flowingTarBlock = new FlowingTarBlock(851)
+				.setBlockName("flowingTarBlock").setCreativeTab(tabRoads);*/
 		
-		public final static Item cementItem = new CementItem(20000)
+		public final static Item cementItem = new CementItem(16700)
 				.setMaxStackSize(64).setIconIndex(0)
 				.setCreativeTab(tabRoads).setItemName("cementDust");
 		
-		public final static Item cementDustItem = new CementDustItem(20001)
+		public final static Item cementDustItem = new CementDustItem(16701)
 				.setMaxStackSize(64).setIconIndex(1)
 				.setCreativeTab(tabRoads).setItemName("cementDustItem");
 		
-		public final static Item tarBucketItem = new TarBucketItem(20002, 521)
+		public final static Item tarBucketItem = new TarBucketItem(16702)
 				.setMaxStackSize(1).setIconIndex(2)
 				.setCreativeTab(tabRoads).setItemName("tarBucketItem");
 
@@ -125,7 +224,7 @@ public class Roads {
                 config.save();
                 
                 //config.getBlock(NameOfProperty, defaultID).getInt();
-                int roadBlockID = config.getBlock("roadBlock", 200).getInt();
+                int roadBlockID = config.getBlock("roadBlock", 500).getInt();
                 
                 Property roadBlockProperty = config.get(Configuration.CATEGORY_GENERAL, "SomeConfigString", "nothing");
                 roadBlockProperty.comment = "This is a string. Change it, bitch!";
@@ -136,6 +235,10 @@ public class Roads {
         public void load(FMLInitializationEvent event) {
                 proxy.registerRenderThings();
                 
+                LanguageRegistry.addName(roadBlockSWS2, "Tarmac (Side White Stripe)");
+                MinecraftForge.setBlockHarvestLevel(roadBlockSWS2, "pickaxe", 0);
+                GameRegistry.registerBlock(roadBlockSWS2, "roadBlockSWS2");
+                              
                 //Register the blocks (Name, Tool/Level, register it)
                 LanguageRegistry.addName(roadBlock, "Tarmac (Unpainted)");
                 MinecraftForge.setBlockHarvestLevel(roadBlock, "pickaxe", 0);
@@ -185,6 +288,98 @@ public class Roads {
                 MinecraftForge.setBlockHarvestLevel(roadBlockWhiteFull, "pickaxe", 1);
                 GameRegistry.registerBlock(roadBlockWhiteFull, "roadBlockWhiteFull");
                 
+                LanguageRegistry.addName(roadBlockWC, "Tarmac (White Corner)");
+                MinecraftForge.setBlockHarvestLevel(roadBlockWC, "pickaxe", 1);
+                GameRegistry.registerBlock(roadBlockWC, "roadBlockWC");
+                
+                LanguageRegistry.addName(roadBlockFYS, "Tarmac (Side Yellow Stripe)");
+                MinecraftForge.setBlockHarvestLevel(roadBlockFYS, "pickaxe", 1);
+                GameRegistry.registerBlock(roadBlockFYS, "roadBlockFYS");
+                
+                LanguageRegistry.addName(roadBlockYC, "Tarmac (Yellow Corner)");
+                MinecraftForge.setBlockHarvestLevel(roadBlockYC, "pickaxe", 1);
+                GameRegistry.registerBlock(roadBlockYC, "roadBlockYC");
+                
+                LanguageRegistry.addName(roadBlockYAC, "Tarmac (Yellow Alt. Corner)");
+                MinecraftForge.setBlockHarvestLevel(roadBlockYAC, "pickaxe", 1);
+                GameRegistry.registerBlock(roadBlockYAC, "roadBlockYAC");
+                
+                LanguageRegistry.addName(roadBlockWAC, "Tarmac (White Alt. Corner)");
+                MinecraftForge.setBlockHarvestLevel(roadBlockWAC, "pickaxe", 1);
+                GameRegistry.registerBlock(roadBlockWAC, "roadBlockWAC");
+                
+                LanguageRegistry.addName(roadBlockWSL, "Tarmac (White Striped Line)");
+                MinecraftForge.setBlockHarvestLevel(roadBlockWSL, "pickaxe", 1);
+                GameRegistry.registerBlock(roadBlockWSL, "roadBlockWSL");
+                
+                LanguageRegistry.addName(roadBlockWSSL, "Tarmac (White Side Striped Line)");
+                MinecraftForge.setBlockHarvestLevel(roadBlockWSSL, "pickaxe", 1);
+                GameRegistry.registerBlock(roadBlockWSSL, "roadBlockWSSL");
+                
+                LanguageRegistry.addName(roadBlockYSSL, "Tarmac (Yellow Side Striped Line)");
+                MinecraftForge.setBlockHarvestLevel(roadBlockYSSL, "pickaxe", 1);
+                GameRegistry.registerBlock(roadBlockYSSL, "roadBlockYSSL");
+                
+                LanguageRegistry.addName(roadBlockJO, "Tarmac Junction (Out)");
+                MinecraftForge.setBlockHarvestLevel(roadBlockJO, "pickaxe", 1);
+                GameRegistry.registerBlock(roadBlockJO, "roadBlockJO");
+                
+                LanguageRegistry.addName(roadBlockJI, "Tarmac Junction (In)");
+                MinecraftForge.setBlockHarvestLevel(roadBlockJI, "pickaxe", 1);
+                GameRegistry.registerBlock(roadBlockJI, "roadBlockJI");
+                
+                LanguageRegistry.addName(roadBlockJOL, "Tarmac Junction (Out, Line)");
+                MinecraftForge.setBlockHarvestLevel(roadBlockJOL, "pickaxe", 1);
+                GameRegistry.registerBlock(roadBlockJOL, "roadBlockJOL");
+                
+                LanguageRegistry.addName(roadBlockAL, "Tarmac Arrow (Line)");
+                MinecraftForge.setBlockHarvestLevel(roadBlockAL, "pickaxe", 1);
+                GameRegistry.registerBlock(roadBlockAL, "roadBlockAL");
+                
+                LanguageRegistry.addName(roadBlockAUS, "Tarmac Arrow (Straight)");
+                MinecraftForge.setBlockHarvestLevel(roadBlockAUS, "pickaxe", 1);
+                GameRegistry.registerBlock(roadBlockAUS, "roadBlockAUS");
+                
+                LanguageRegistry.addName(roadBlockAUL, "Tarmac Arrow (Left)");
+                MinecraftForge.setBlockHarvestLevel(roadBlockAUL, "pickaxe", 1);
+                GameRegistry.registerBlock(roadBlockAUL, "roadBlockAUL");
+                
+                LanguageRegistry.addName(roadBlockAUR, "Tarmac Arrow (Right)");
+                MinecraftForge.setBlockHarvestLevel(roadBlockAUR, "pickaxe", 1);
+                GameRegistry.registerBlock(roadBlockAUR, "roadBlockAUR");
+                
+                LanguageRegistry.addName(roadBlockWDS, "Tarmac (White Diagonal Stripe)");
+                MinecraftForge.setBlockHarvestLevel(roadBlockWDS, "pickaxe", 1);
+                GameRegistry.registerBlock(roadBlockWDS, "roadBlockWDS");
+                
+                LanguageRegistry.addName(roadBlockYDS, "Tarmac (Yellow Diagonal Stripe)");
+                MinecraftForge.setBlockHarvestLevel(roadBlockYDS, "pickaxe", 1);
+                GameRegistry.registerBlock(roadBlockYDS, "roadBlockYDS");
+                
+                LanguageRegistry.addName(roadBlockWSS, "Tarmac (White Small Square)");
+                MinecraftForge.setBlockHarvestLevel(roadBlockWSS, "pickaxe", 1);
+                GameRegistry.registerBlock(roadBlockWSS, "roadBlockWSS");
+                
+                LanguageRegistry.addName(roadBlockYSS, "Tarmac (Yellow Small Square)");
+                MinecraftForge.setBlockHarvestLevel(roadBlockYSS, "pickaxe", 1);
+                GameRegistry.registerBlock(roadBlockYSS, "roadBlockYSS");
+                
+                LanguageRegistry.addName(roadBlockSL, "Tarmac (Slow 1)");
+                MinecraftForge.setBlockHarvestLevel(roadBlockSL, "pickaxe", 1);
+                GameRegistry.registerBlock(roadBlockSL, "roadBlockSL");
+                
+                LanguageRegistry.addName(roadBlockOW, "Tarmac (Slow 2)");
+                MinecraftForge.setBlockHarvestLevel(roadBlockOW, "pickaxe", 1);
+                GameRegistry.registerBlock(roadBlockOW, "roadBlockOW");
+                
+                LanguageRegistry.addName(roadBlockST, "Tarmac (Stop 1)");
+                MinecraftForge.setBlockHarvestLevel(roadBlockST, "pickaxe", 1);
+                GameRegistry.registerBlock(roadBlockST, "roadBlockST");
+                
+                LanguageRegistry.addName(roadBlockOP, "Tarmac (Stop 2)");
+                MinecraftForge.setBlockHarvestLevel(roadBlockOP, "pickaxe", 1);
+                GameRegistry.registerBlock(roadBlockOP, "roadBlockOP");
+                
                 //Register the items (name, register it)
                 LanguageRegistry.addName(cementItem, "Cement");
                 GameRegistry.registerItem(cementItem, "cementItem");
@@ -195,12 +390,14 @@ public class Roads {
                 LanguageRegistry.addName(tarBucketItem, "Bucket of Tar");
                 GameRegistry.registerItem(tarBucketItem, "tarBucketItem");
                 
-                //Register the liquids
+                /*//Register the liquids
                 LanguageRegistry.addName(stillTarBlock, "Liquid Tar (Still)");
                 GameRegistry.registerBlock(stillTarBlock, "stillTarBlock");
                 
                 LanguageRegistry.addName(flowingTarBlock, "Liquid Tar (Flowing)");
                 GameRegistry.registerBlock(flowingTarBlock, "flowingTarBlock");
+                */
+                
                 //Set the name for the creative tab
                 LanguageRegistry.instance().addStringLocalization("itemGroup.tabRoads", "en_US", "Roads");
                 

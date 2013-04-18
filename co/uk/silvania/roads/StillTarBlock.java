@@ -1,4 +1,7 @@
+/* Temporarily disabled due to a bug
+
 package co.uk.silvania.roads;
+ 
 
 import net.minecraft.block.BlockFlowing;
 import net.minecraft.block.BlockStationary;
@@ -26,3 +29,4 @@ public class StillTarBlock extends BlockStationary {
 	}
 
 }
+*/

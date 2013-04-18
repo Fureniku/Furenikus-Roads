@@ -5,10 +5,10 @@ import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class TarBucketItem extends ItemBucket {
+public class TarBucketItem extends Item {
 	
-    public TarBucketItem(int id, int blockId) {
-        super(id, blockId);
+    public TarBucketItem(int id) {
+        super(id);
 
     }
     public ItemStack fillCustomBucket(World w, int i, int j, int k) {

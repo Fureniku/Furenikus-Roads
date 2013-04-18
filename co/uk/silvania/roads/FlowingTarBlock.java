@@ -1,3 +1,5 @@
+/* Commented out due to a bug.
+
 package co.uk.silvania.roads;
 
 import net.minecraft.block.BlockFlowing;
@@ -20,4 +22,4 @@ public class FlowingTarBlock extends BlockFlowing {
 		return "/co/uk/silvania/roads/blocks.png";
 	}
 
-}
+}*/
