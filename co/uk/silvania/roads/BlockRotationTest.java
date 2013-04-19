@@ -1,4 +1,4 @@
-package co.uk.silvania.roads.block;
+package co.uk.silvania.roads;
 
 import co.uk.silvania.roads.CommonProxy;
 import co.uk.silvania.roads.Roads;
@@ -16,9 +16,9 @@ import net.minecraft.util.Facing;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class RBSideWhiteStripe extends BlockDirectional
+public class BlockRotationTest extends BlockDirectional
 {
-    public RBSideWhiteStripe(int par1, int par2)
+    public BlockRotationTest(int par1, int par2)
     {
         super(par1, Material.pumpkin);
         this.blockIndexInTexture = par2;
@@ -35,8 +35,7 @@ public class RBSideWhiteStripe extends BlockDirectional
     public int getBlockTextureFromSideAndMetadata(int par1, int par2)
     {
         int var3 = getOrientation(par2);
-        return var3 > 5 ? this.blockIndexInTexture : (par1 == var3 ? 
-        		(this.blockIndexInTexture + 1 * 1) : (par1 == Facing.faceToSide[var3] ? 1 : 14));
+        return var3 > 5 ? this.blockIndexInTexture : (par1 == var3 ? (this.minX <= 0.0D && this.minY <= 0.0D && this.minZ <= 0.0D && this.maxX >= 1.0D && this.maxY >= 1.0D && this.maxZ >= 1.0D ? this.blockIndexInTexture + 1 : 1) : (par1 == Facing.faceToSide[var3] ? 1 : 14));
     }
 
     public int getRenderType()

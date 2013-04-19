@@ -11,6 +11,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.Property;
+import net.minecraftforge.liquids.LiquidContainerData;
+import net.minecraftforge.liquids.LiquidContainerRegistry;
+import net.minecraftforge.liquids.LiquidDictionary;
+import net.minecraftforge.liquids.LiquidStack;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
@@ -26,7 +30,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-@Mod(modid="FlenixRoads", name="FlenixRoads", version="0.0.1")
+@Mod(modid="FlenixRoads", name="FlenixRoads", version="0.0.2")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false)
 public class Roads { 
 	
@@ -201,10 +205,6 @@ public class Roads {
 				.setMaxStackSize(64).setIconIndex(1)
 				.setCreativeTab(tabRoads).setItemName("cementDustItem");
 		
-		public final static Item tarBucketItem = new TarBucketItem(16702)
-				.setMaxStackSize(1).setIconIndex(2)
-				.setCreativeTab(tabRoads).setItemName("tarBucketItem");
-		
 		public final static Item limeStonePowderItem = new LimeStonePowderItem(16703)
 				.setMaxStackSize(64).setIconIndex(3)
 				.setCreativeTab(tabRoads).setItemName("limeStonePowderItem");
@@ -213,9 +213,16 @@ public class Roads {
 				.setMaxStackSize (64).setIconIndex(4)
 				.setCreativeTab(tabRoads).setItemName("limeClayPowderItem");
 		
+		public final static Block blockRotationTest = new BlockRotationTest(870, 0).setCreativeTab(tabRoads);
+		
+		
 		//Some liquids
-		public final static Block roadsTarStill = new StillTarBlock(2013).setBlockName("roadsTarStill");
-		public final static Block roadsTarFlowing = new FlowingTarBlock(2012).setBlockName("roadsTarFlowing");
+		public final static Block roadsTarStill = new StillTarBlock(851).setBlockName("roadsTarStill");
+		public final static Block roadsTarFlowing = new FlowingTarBlock(850).setBlockName("roadsTarFlowing");
+		
+		public final static Item tarBucketItem = new TarBucketItem(16702)
+				.setMaxStackSize(1).setIconIndex(2)
+				.setCreativeTab(tabRoads).setItemName("tarBucketItem");
 		
 		//And finally the worldgen
 		public static WorldGen worldGen = new WorldGen();
@@ -247,11 +254,16 @@ public class Roads {
                 Property roadBlockProperty = config.get(Configuration.CATEGORY_GENERAL, "SomeConfigString", "nothing");
                 roadBlockProperty.comment = "This is a string. Change it, bitch!";
                 String roadBlockString = roadBlockProperty.value;
+                
+                MinecraftForge.EVENT_BUS.register(new TarBucketHandler());
         }
         
         @Init
         public void load(FMLInitializationEvent event) {
                 proxy.registerRenderThings();
+                
+                LanguageRegistry.addName(blockRotationTest, "Rotate Test");
+                GameRegistry.registerBlock(blockRotationTest, "blockRotationTest");
                               
                 LanguageRegistry.addName(roadBlockSWS2, "Tarmac (Side White Stripe)");
                 MinecraftForge.setBlockHarvestLevel(roadBlockSWS2, "pickaxe", 1);
@@ -411,10 +423,7 @@ public class Roads {
                 
                 LanguageRegistry.addName(cementDustItem, "Cement Powder");
                 GameRegistry.registerItem(cementDustItem, "cementDustItem");
-                
-                LanguageRegistry.addName(tarBucketItem, "Bucket of Tar");
-                GameRegistry.registerItem(tarBucketItem, "tarBucketItem");
-                
+                              
                 LanguageRegistry.addName(limeStonePowderItem, "Limestone Powder");
                 GameRegistry.registerItem(limeStonePowderItem, "limeStonePowderItem");
                 
@@ -427,11 +436,15 @@ public class Roads {
                 GameRegistry.registerBlock(roadsTarFlowing, "roadsTarFlowing");
                 LanguageRegistry.addName(roadsTarFlowing, "Tar");             
                 
+                LanguageRegistry.addName(tarBucketItem, "Bucket of Tar");
+                GameRegistry.registerItem(tarBucketItem, "tarBucketItem");
+                LiquidContainerRegistry.registerLiquid(new LiquidContainerData(new LiquidStack(Roads.roadsTarStill, LiquidContainerRegistry.BUCKET_VOLUME), new ItemStack(Roads.tarBucketItem), new ItemStack(Item.bucketEmpty)));
+                                
                 //Set the name for the creative tab
                 LanguageRegistry.instance().addStringLocalization("itemGroup.tabRoads", "en_US", "Roads");
                 
                 //Setup the world generator
-                GameRegistry.registerWorldGenerator(worldGen);
+                GameRegistry.registerWorldGenerator(new WorldGen());
                 
                 //Craftin' Time!
                 //First, register the blocks and items we'll use.
@@ -464,8 +477,9 @@ public class Roads {
                 GameRegistry.addSmelting(Roads.cementItem.itemID, new ItemStack(Roads.cementBlock), 0.2f);
                                 
         }
-        
-        @PostInit
+
+
+		@PostInit
         public void postInit(FMLPostInitializationEvent event) {
                 // Stub Method
         		}

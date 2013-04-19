@@ -20,7 +20,13 @@ public class LimeStoneBlock extends Block {
     }
     
     public int idDropped(int par1, Random random, int par2) {
-    	return Roads.limeStonePowderItem.itemID;
+    	return (Roads.limeStonePowderItem.itemID);
+    	
+    }
+    
+    public int quantityDropped(Random par1Random)
+    {
+        return this.blockID == Roads.limeStoneBlock.blockID ? 4 : 1;
     }
 
 }
