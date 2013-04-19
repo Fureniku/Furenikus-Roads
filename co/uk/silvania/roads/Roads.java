@@ -1,5 +1,8 @@
 package co.uk.silvania.roads;
 
+import co.uk.silvania.roads.block.*;
+import co.uk.silvania.roads.item.*;
+import co.uk.silvania.roads.liquid.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
@@ -32,7 +35,7 @@ public class Roads {
 						return new ItemStack(Roads.cementDustItem, 1, 0);
 					}
 			};
-	
+			
 		//public final static Block blockTest = new BlockTest(550, 1, Material.rock)
 				//.setHardness(1.0F).setStepSound(Block.soundStoneFootstep)
 				//.setBlockName("blockTest").setCreativeTab(tabRoads);
@@ -181,12 +184,15 @@ public class Roads {
 				.setHardness(1.0F).setStepSound(Block.soundStoneFootstep)
 				.setBlockName("roadBlockOP").setCreativeTab(tabRoads);
 		
-		/*public final static Block stillTarBlock = new StillTarBlock(850)
-				.setBlockName("stillTarBlock").setCreativeTab(tabRoads);
+		public final static Block limeStoneBlock = new LimeStoneBlock(836, 2, Material.rock)
+				.setHardness(0.7F).setStepSound(Block.soundStoneFootstep)
+				.setBlockName("limeStoneBlock").setCreativeTab(tabRoads);
 		
-		public final static Block flowingTarBlock = new FlowingTarBlock(851)
-				.setBlockName("flowingTarBlock").setCreativeTab(tabRoads);*/
+		public final static Block hardenedTarBlock = new HardenedTarBlock(837, 3, Material.rock)
+				.setHardness(2.5F).setStepSound(Block.soundStoneFootstep)
+				.setBlockName("hardenedTarBlock").setCreativeTab(tabRoads);
 		
+		//Items Start Here
 		public final static Item cementItem = new CementItem(16700)
 				.setMaxStackSize(64).setIconIndex(0)
 				.setCreativeTab(tabRoads).setItemName("cementDust");
@@ -198,6 +204,21 @@ public class Roads {
 		public final static Item tarBucketItem = new TarBucketItem(16702)
 				.setMaxStackSize(1).setIconIndex(2)
 				.setCreativeTab(tabRoads).setItemName("tarBucketItem");
+		
+		public final static Item limeStonePowderItem = new LimeStonePowderItem(16703)
+				.setMaxStackSize(64).setIconIndex(3)
+				.setCreativeTab(tabRoads).setItemName("limeStonePowderItem");
+		
+		public final static Item limeClayPowderItem = new LimeClayPowderItem(16704)
+				.setMaxStackSize (64).setIconIndex(4)
+				.setCreativeTab(tabRoads).setItemName("limeClayPowderItem");
+		
+		//Some liquids
+		public final static Block roadsTarStill = new StillTarBlock(2013).setBlockName("roadsTarStill");
+		public final static Block roadsTarFlowing = new FlowingTarBlock(2012).setBlockName("roadsTarFlowing");
+		
+		//And finally the worldgen
+		public static WorldGen worldGen = new WorldGen();
 
         // The instance of your mod that Forge uses.
         @Instance("FlenixRoads")
@@ -207,11 +228,8 @@ public class Roads {
         @SidedProxy(clientSide="co.uk.silvania.roads.client.ClientProxy", serverSide="co.uk.silvania.roads.CommonProxy")
         public static CommonProxy proxy;
         
-        public static Block TarrStill;
-        public static Block TarrFlowing;
         
         @SideOnly(Side.CLIENT)
-    	public static int tarModel;
 
         @PreInit
         public void preInit(FMLPreInitializationEvent event) {
@@ -234,18 +252,18 @@ public class Roads {
         @Init
         public void load(FMLInitializationEvent event) {
                 proxy.registerRenderThings();
-                
+                              
                 LanguageRegistry.addName(roadBlockSWS2, "Tarmac (Side White Stripe)");
-                MinecraftForge.setBlockHarvestLevel(roadBlockSWS2, "pickaxe", 0);
+                MinecraftForge.setBlockHarvestLevel(roadBlockSWS2, "pickaxe", 1);
                 GameRegistry.registerBlock(roadBlockSWS2, "roadBlockSWS2");
                               
                 //Register the blocks (Name, Tool/Level, register it)
                 LanguageRegistry.addName(roadBlock, "Tarmac (Unpainted)");
-                MinecraftForge.setBlockHarvestLevel(roadBlock, "pickaxe", 0);
+                MinecraftForge.setBlockHarvestLevel(roadBlock, "pickaxe", 1);
                 GameRegistry.registerBlock(roadBlock, "roadBlock");
                 
                 LanguageRegistry.addName(roadBlockDYS, "Tarmac (Double Yellow Stripe)");
-                MinecraftForge.setBlockHarvestLevel(roadBlockDYS, "pickaxe", 0);
+                MinecraftForge.setBlockHarvestLevel(roadBlockDYS, "pickaxe", 1);
                 GameRegistry.registerBlock(roadBlockDYS, "roadBlockDYS");
                 
                 LanguageRegistry.addName(cementBlock, "Cement");
@@ -380,26 +398,40 @@ public class Roads {
                 MinecraftForge.setBlockHarvestLevel(roadBlockOP, "pickaxe", 1);
                 GameRegistry.registerBlock(roadBlockOP, "roadBlockOP");
                 
+                LanguageRegistry.addName(limeStoneBlock, "Limestone");
+                GameRegistry.registerBlock(limeStoneBlock, "limeStoneBlock");
+                
+                LanguageRegistry.addName(hardenedTarBlock, "Hardened Tar");
+                MinecraftForge.setBlockHarvestLevel(hardenedTarBlock, "pickaxe", 4);
+                GameRegistry.registerBlock(hardenedTarBlock, "hardenedTarBlock");
+                
                 //Register the items (name, register it)
                 LanguageRegistry.addName(cementItem, "Cement");
                 GameRegistry.registerItem(cementItem, "cementItem");
                 
-                LanguageRegistry.addName(cementDustItem, "Cement Dust");
+                LanguageRegistry.addName(cementDustItem, "Cement Powder");
                 GameRegistry.registerItem(cementDustItem, "cementDustItem");
                 
                 LanguageRegistry.addName(tarBucketItem, "Bucket of Tar");
                 GameRegistry.registerItem(tarBucketItem, "tarBucketItem");
                 
-                /*//Register the liquids
-                LanguageRegistry.addName(stillTarBlock, "Liquid Tar (Still)");
-                GameRegistry.registerBlock(stillTarBlock, "stillTarBlock");
+                LanguageRegistry.addName(limeStonePowderItem, "Limestone Powder");
+                GameRegistry.registerItem(limeStonePowderItem, "limeStonePowderItem");
                 
-                LanguageRegistry.addName(flowingTarBlock, "Liquid Tar (Flowing)");
-                GameRegistry.registerBlock(flowingTarBlock, "flowingTarBlock");
-                */
+                LanguageRegistry.addName(limeClayPowderItem, "Lime & Clay Powder Mix");
+                GameRegistry.registerItem(limeClayPowderItem, "limeClayPowderItem");
+                
+                
+                //Register the liquids
+                GameRegistry.registerBlock(roadsTarStill, "roadsTarStill");
+                GameRegistry.registerBlock(roadsTarFlowing, "roadsTarFlowing");
+                LanguageRegistry.addName(roadsTarFlowing, "Tar");             
                 
                 //Set the name for the creative tab
                 LanguageRegistry.instance().addStringLocalization("itemGroup.tabRoads", "en_US", "Roads");
+                
+                //Setup the world generator
+                GameRegistry.registerWorldGenerator(worldGen);
                 
                 //Craftin' Time!
                 //First, register the blocks and items we'll use.
@@ -411,6 +443,7 @@ public class Roads {
                 ItemStack cementItemStack = new ItemStack(Roads.cementItem);
                 ItemStack tarBucketStack = new ItemStack(Roads.tarBucketItem);
                 ItemStack macadamStack = new ItemStack(Roads.macadamBlock);
+                ItemStack limeStack = new ItemStack (Roads.limeStonePowderItem);
                 
                 //Shaped Recipes
                 GameRegistry.addRecipe(new ItemStack(Roads.cementItem, 4), " c ", " w ", "sss",
@@ -419,11 +452,15 @@ public class Roads {
                 GameRegistry.addRecipe(new ItemStack(Roads.macadamBlock, 8), "xxx", "xyx", "xxx",
                 		'x', cobbleStoneStack, 'y', cementItemStack);
                 
+                GameRegistry.addRecipe(new ItemStack(Roads.limeStoneBlock), "ll", "ll",
+                		'l', limeStack);
+                
                 //Shapeless Recipes
                 GameRegistry.addShapelessRecipe(new ItemStack(Roads.roadBlock), macadamStack, tarBucketStack);
+                GameRegistry.addShapelessRecipe(new ItemStack(Roads.limeClayPowderItem), limeStack, clayStack);
                 
                 //And some smelting!
-                GameRegistry.addSmelting(Item.clay.itemID, new ItemStack(Roads.cementDustItem), 0.1f);
+                GameRegistry.addSmelting(Roads.limeClayPowderItem.itemID, new ItemStack(Roads.cementDustItem), 0.1f);
                 GameRegistry.addSmelting(Roads.cementItem.itemID, new ItemStack(Roads.cementBlock), 0.2f);
                                 
         }

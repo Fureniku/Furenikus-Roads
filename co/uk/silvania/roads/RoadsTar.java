@@ -1,3 +1,0 @@
-/*
-This file isn't needed anymore. But I'm not clever enough to find the delete button just yet...
-*/
