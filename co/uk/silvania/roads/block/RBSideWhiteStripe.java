@@ -20,10 +20,12 @@ public class RBSideWhiteStripe extends BlockDirectional
 {
     public RBSideWhiteStripe(int par1, int par2)
     {
-        super(par1, Material.pumpkin);
+        super(par1, Material.rock);
         this.blockIndexInTexture = par2;
         this.setTickRandomly(true);
         this.setCreativeTab(Roads.tabRoads);
+        this.setHardness(1.0F);
+        this.setStepSound(Block.soundStoneFootstep);
     }
     
     @Override

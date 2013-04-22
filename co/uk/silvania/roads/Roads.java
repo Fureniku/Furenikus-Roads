@@ -44,17 +44,9 @@ public class Roads {
 				//.setHardness(1.0F).setStepSound(Block.soundStoneFootstep)
 				//.setBlockName("blockTest").setCreativeTab(tabRoads);
 		
-		public final static Block roadBlockSWS2 = new RBSideWhiteStripe(812, 0)
-				.setHardness(1.0F).setStepSound(Block.soundStoneFootstep)
-				.setBlockName("roadBlockSWS2").setCreativeTab(tabRoads);
-			
-		public final static Block roadBlock = new RoadBlock(800, Material.rock)
-				.setHardness(1.0F).setStepSound(Block.soundStoneFootstep)
-				.setBlockName("roadBlock").setCreativeTab(tabRoads);
-		
-		public final static Block roadBlockDYS = new RBDoubleYellowStripe(801, 0, Material.rock)
-				.setHardness(1.0F).setStepSound(Block.soundStoneFootstep)
-				.setBlockName("roadBlockDYS").setCreativeTab(tabRoads);
+		public final static Block roadBlockSWS2 = new RBSideWhiteStripe(812, 0).setBlockName("roadBlockSWS2");
+		public final static Block roadBlock = new RoadBlock(800, Material.rock).setBlockName("roadBlock");
+		public final static Block roadBlockDYS = new RBDoubleYellowStripe(801, 0).setBlockName("roadBlockDYS");
 		
 		public final static Block macadamBlock = new MacadamBlock(802, 4, Material.rock)
 				.setHardness(0.7F).setStepSound(Block.soundStoneFootstep)
@@ -235,25 +227,20 @@ public class Roads {
         @SidedProxy(clientSide="co.uk.silvania.roads.client.ClientProxy", serverSide="co.uk.silvania.roads.CommonProxy")
         public static CommonProxy proxy;
         
-        
+        //Prepare for config!
+        public static int blockRoadsID;
         @SideOnly(Side.CLIENT)
 
         @PreInit
         public void preInit(FMLPreInitializationEvent event) {
-        		//Does the file exist? If it doesn't this will create it.
-                Configuration config = new Configuration(event.getSuggestedConfigurationFile());
-                
-                //This will load the config file...
-                config.load();
-                //...And this will save it.
-                config.save();
-                
-                //config.getBlock(NameOfProperty, defaultID).getInt();
-                int roadBlockID = config.getBlock("roadBlock", 500).getInt();
-                
-                Property roadBlockProperty = config.get(Configuration.CATEGORY_GENERAL, "SomeConfigString", "nothing");
-                roadBlockProperty.comment = "This is a string. Change it, bitch!";
-                String roadBlockString = roadBlockProperty.value;
+        		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
+        		
+        		blockRoadsID = config.getBlock("roadsBlock", 800).getInt();
+        		
+        		config.load();
+        		
+        		
+        		config.save();
                 
                 MinecraftForge.EVENT_BUS.register(new TarBucketHandler());
         }
