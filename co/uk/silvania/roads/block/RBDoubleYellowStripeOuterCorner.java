@@ -13,9 +13,9 @@ import net.minecraft.util.Facing;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class RBDoubleYellowStripe extends Block
+public class RBDoubleYellowStripeOuterCorner extends Block
 {
-    public RBDoubleYellowStripe(int id) {
+    public RBDoubleYellowStripeOuterCorner(int id) {
         super(id, Material.rock);
         this.setCreativeTab(Roads.tabRoads);
         this.setHardness(1.0F);
@@ -32,7 +32,7 @@ public class RBDoubleYellowStripe extends Block
     {
         int var3 = getOrientation(par2);
         return var3 > 5 ? this.blockIndexInTexture : (par1 == var3 ? 
-        		(this.blockIndexInTexture + 1 * 1) : (par1 == Facing.faceToSide[var3] ? 1 : 0));
+        		(this.blockIndexInTexture + 1 * 1) : (par1 == Facing.faceToSide[var3] ? 1 : 40));
     }
 
     public int getRenderType()

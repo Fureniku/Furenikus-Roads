@@ -5,6 +5,7 @@ import co.uk.silvania.roads.item.*;
 import co.uk.silvania.roads.liquid.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -46,7 +47,10 @@ public class Roads {
 		
 		public final static Block roadBlockSWS2 = new RBSideWhiteStripe(812, 0).setBlockName("roadBlockSWS2");
 		public final static Block roadBlock = new RoadBlock(800, Material.rock).setBlockName("roadBlock");
-		public final static Block roadBlockDYS = new RBDoubleYellowStripe(801, 0).setBlockName("roadBlockDYS");
+		public final static Block roadBlockDYS = new RBDoubleYellowStripe(801).setBlockName("roadBlockDYS");
+		public final static Block roadBlockDYSE = new RBDoubleYellowStripeEnd(838).setBlockName("roadBlockDYSE");
+		public final static Block roadBlockDYSI = new RBDoubleYellowStripeInnerCorner(839).setBlockName("roadBlockDYSI");
+		public final static Block roadBlockDYSO = new RBDoubleYellowStripeOuterCorner(840).setBlockName("roadBlockDYSO");
 		
 		public final static Block macadamBlock = new MacadamBlock(802, 4, Material.rock)
 				.setHardness(0.7F).setStepSound(Block.soundStoneFootstep)
@@ -244,18 +248,27 @@ public class Roads {
                 
                 MinecraftForge.EVENT_BUS.register(new TarBucketHandler());
         }
-        
+               
         @Init
         public void load(FMLInitializationEvent event) {
                 proxy.registerRenderThings();
                 
-                LanguageRegistry.addName(blockRotationTest, "Rotate Test");
-                GameRegistry.registerBlock(blockRotationTest, "blockRotationTest");
-                              
                 LanguageRegistry.addName(roadBlockSWS2, "Tarmac (Side White Stripe)");
                 MinecraftForge.setBlockHarvestLevel(roadBlockSWS2, "pickaxe", 1);
                 GameRegistry.registerBlock(roadBlockSWS2, "roadBlockSWS2");
                               
+                LanguageRegistry.addName(roadBlockDYSE, "Tarmac (Double Yellow Stripe End)");
+                MinecraftForge.setBlockHarvestLevel(roadBlockDYSE, "pickaxe", 1);
+                GameRegistry.registerBlock(roadBlockDYSE, "roadBlockDYSE");
+                
+                LanguageRegistry.addName(roadBlockDYSI, "Tarmac (Double Yellow Stripe Inner Corner");
+                MinecraftForge.setBlockHarvestLevel(roadBlockDYSI, "pickaxe", 1);
+                GameRegistry.registerBlock(roadBlockDYSI, "roadBlockDYSI");
+                
+                LanguageRegistry.addName(roadBlockDYSO, "Tarmac (Double Yellow Stripe Outer Corner");
+                MinecraftForge.setBlockHarvestLevel(roadBlockDYSO, "pickaxe", 1);
+                GameRegistry.registerBlock(roadBlockDYSO, "roadBlockDYSO");
+                
                 //Register the blocks (Name, Tool/Level, register it)
                 LanguageRegistry.addName(roadBlock, "Tarmac (Unpainted)");
                 MinecraftForge.setBlockHarvestLevel(roadBlock, "pickaxe", 1);
