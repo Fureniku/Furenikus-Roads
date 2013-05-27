@@ -13,3 +13,4 @@ You must have FULL permission for all the mods in your modpack, especially if yo
 
 You may not make any money off my mod, unless you've discussed with me first. This includes things like adfly.
 General server donations are acceptible so long as you're running multiple mods (not just mine).
+Note: None of my mods are allowed in the Technic launcher, ever. If you want to know why, feel free to ask, but I wont allow it; use Feed the Beast instead.
