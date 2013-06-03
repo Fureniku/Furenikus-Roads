@@ -7,17 +7,20 @@ import co.uk.silvania.roads.Roads;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 
 public class LimeStoneBlock extends Block {
-
-    public LimeStoneBlock (int id, int texture, Material material) {
-            super(id, texture, material);
-    }
+	
+	public LimeStoneBlock (int id) {
+    super(id, Material.rock);
+    	this.setHardness(0.7F);
+    	this.setStepSound(Block.soundStoneFootstep);
+    	this.setCreativeTab(Roads.tabRoads);
+	}
     
-    @Override
-    public String getTextureFile () {
-            return CommonProxy.BLOCK_PNG;
-    }
+	public void registerIcons(IconRegister iconRegister) {
+		blockIcon = iconRegister.registerIcon("Roads:LimeStone");
+	}
     
     public int idDropped(int par1, Random random, int par2) {
     	return (Roads.limeStonePowderItem.itemID);

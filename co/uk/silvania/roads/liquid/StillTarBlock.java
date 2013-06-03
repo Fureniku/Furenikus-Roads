@@ -1,7 +1,9 @@
 package co.uk.silvania.roads.liquid;
 
+import co.uk.silvania.roads.Roads;
 import net.minecraft.block.BlockStationary;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 
 public class StillTarBlock extends BlockStationary{
 	
@@ -11,11 +13,10 @@ public class StillTarBlock extends BlockStationary{
 		this.blockHardness = 100.0F;
 		this.setLightOpacity(3);
 		this.disableStats();
-		this.setRequiresSelfNotify();
+		//this.setRequiresSelfNotify();
 		}
 	
-	public String getTextureFile(){
-		return "/co/uk/silvania/roads/blocks.png";
-		}
-
+	public void registerIcons(IconRegister iconRegister) {
+		blockIcon = iconRegister.registerIcon("Roads:LiquidTarStill");
+	}
 }

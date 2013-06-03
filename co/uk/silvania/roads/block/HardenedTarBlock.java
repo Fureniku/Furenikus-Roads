@@ -1,18 +1,22 @@
 package co.uk.silvania.roads.block;
 
 import co.uk.silvania.roads.CommonProxy;
+import co.uk.silvania.roads.Roads;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 
 public class HardenedTarBlock extends Block {
 
-    public HardenedTarBlock (int id, int texture, Material material) {
-            super(id, texture, material);
+    public HardenedTarBlock (int id) {
+        super(id, Material.rock);
+        this.setHardness(2.5F);
+        this.setStepSound(Block.soundStoneFootstep);
+        this.setCreativeTab(Roads.tabRoads);
     }
-    
-    @Override
-    public String getTextureFile () {
-            return CommonProxy.BLOCK_PNG;
+        
+    public void registerIcons(IconRegister iconRegister) {
+        blockIcon = iconRegister.registerIcon("Roads:HardenedTar");
     }
 
 }
