@@ -78,27 +78,17 @@ public class RBDoubleYellowCenter extends Block {
             return j1 | b0;
         }
 
+        //Rotate the top-facing texture.
+        //They told me it couldn't be done... THEY LIED. #MinecratForgeTuts
         @SideOnly(Side.CLIENT)
-
-        /**
-         * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
-         */
         public Icon getIcon(int side, int meta)
         {
             int k = meta & 12;
-            if (k == 4 && (side == 1))
+            if (k == 4 && (side == 1)) {
             	return top;
-            else
-            	return sides;
-            //return k == 4 && (side == 1) ? this.top : (k == 4 && (side == 5 || side == 4 || side == 0) ? this.sides : (k == 4 && (side == 2 || side == 3) ? this.sides : this.sides));
+            } else if (k == 8 && (side == 1)) {
+            	return top;
+            }
+			return sides;
         }
-       
-        /*@SideOnly(Side.CLIENT)
-        @Override
-        public Icon getIcon(int side, int meta)
-        {
-        	if (side == 1)
-        		return top;
-        	return sides;
-        }*/
 }
