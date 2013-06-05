@@ -29,7 +29,7 @@ public class RBWhiteCross extends Block {
     	private Icon top;
 
     	public void registerIcons(IconRegister iconRegister) {
-            this.top = iconRegister.registerIcon("Roads:TarmacWhiteCorner");
+            this.top = iconRegister.registerIcon("Roads:TarmacWhiteCross");
             this.sides = iconRegister.registerIcon("Roads:TarmacPlain");
     	}
     	

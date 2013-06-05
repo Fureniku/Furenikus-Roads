@@ -29,7 +29,7 @@ public class RBFarYellowStripe  extends Block {
 	private Icon top;
 
 	public void registerIcons(IconRegister iconRegister) {
-        this.top = iconRegister.registerIcon("Roads:TarmacFarYellowStripe");
+        this.top = iconRegister.registerIcon("Roads:TarmacSideYellowStripe");
         this.sides = iconRegister.registerIcon("Roads:TarmacPlain");
 	}
 	

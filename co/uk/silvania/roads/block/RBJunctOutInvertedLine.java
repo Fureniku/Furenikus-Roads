@@ -29,7 +29,7 @@ public class RBJunctOutInvertedLine extends Block {
 	private Icon top;
 
 	public void registerIcons(IconRegister iconRegister) {
-        this.top = iconRegister.registerIcon("Roads:TarmacJunctionOutInvertedLine");
+        this.top = iconRegister.registerIcon("Roads:TarmacJunctionOutLineInverted");
         this.sides = iconRegister.registerIcon("Roads:TarmacPlain");
 	}
 	
