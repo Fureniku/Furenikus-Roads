@@ -1,0 +1,17 @@
+[
+{
+  "modid": "FlenixRoads",
+  "name": "Roads",
+  "description": "Adds a whole load of blocks for paving your own modern style roads, as well as a few other things to help with a city.",
+  "version": "1.0",
+  "mcversion": "1.5.2",
+  "logoFile": "/roads.png",
+  "url": "http://www.silvania.co.uk/mods/",
+  "updateUrl": "",
+  "authors": ["Flenix"],
+  "credits": "Silvania Studios",
+  "parent": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

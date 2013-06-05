@@ -13,9 +13,9 @@ import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class RBYellowSmallSquare extends Block {
+public class RBJunctInLine extends Block {
 
-    public RBYellowSmallSquare (int id) {
+    public RBJunctInLine (int id) {
         super(id, Material.rock);
         this.setHardness(1.0F);
 		this.setStepSound(Block.soundStoneFootstep);
@@ -29,7 +29,7 @@ public class RBYellowSmallSquare extends Block {
 	private Icon top;
 
 	public void registerIcons(IconRegister iconRegister) {
-        this.top = iconRegister.registerIcon("Roads:TarmacYellowSmallSquare");
+        this.top = iconRegister.registerIcon("Roads:TarmacJunctionInLine");
         this.sides = iconRegister.registerIcon("Roads:TarmacPlain");
 	}
 	

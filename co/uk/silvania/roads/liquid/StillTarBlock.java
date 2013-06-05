@@ -4,19 +4,39 @@ import co.uk.silvania.roads.Roads;
 import net.minecraft.block.BlockStationary;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.util.Icon;
+import net.minecraftforge.liquids.ILiquid;
 
-public class StillTarBlock extends BlockStationary{
+public class StillTarBlock extends BlockStationary implements ILiquid {
 	
-	public StillTarBlock(int par1) {
-		super(par1, Material.water);
+	public StillTarBlock(int id) {
+		super(id, Material.water);
+		this.setHardness(100.0F);
+		this.setLightOpacity(0);
+		this.setTickRandomly(true);
+	}
+	
+	@Override
+	public int getRenderType() {
+		return 4;
+	}
 
-		this.blockHardness = 100.0F;
-		this.setLightOpacity(3);
-		this.disableStats();
-		//this.setRequiresSelfNotify();
-		}
+	@Override
+	public int stillLiquidId() {
+		return this.blockID;
+	}
+
+	@Override
+	public boolean isMetaSensitive() {
+		return false;
+	}
+
+	@Override
+	public int stillLiquidMeta() {
+		return 0;
+	}
 	
 	public void registerIcons(IconRegister iconRegister) {
-		blockIcon = iconRegister.registerIcon("Roads:LiquidTarStill");
+		this.theIcon = new Icon[] {iconRegister.registerIcon("Roads:TarStill"), iconRegister.registerIcon("Roads:TarFlowing")};
 	}
 }

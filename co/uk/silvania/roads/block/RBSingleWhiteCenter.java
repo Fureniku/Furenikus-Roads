@@ -8,6 +8,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.util.Icon;
+import net.minecraft.world.World;
 
 public class RBSingleWhiteCenter extends Block {
 
@@ -36,13 +37,48 @@ public class RBSingleWhiteCenter extends Block {
     public boolean isOpaqueCube() {
     	return false;
     }
+    
+    public int getRenderType()
+    {
+        return 31;
+    }
    
+    public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int meta)
+    {
+        int j1 = meta & 3;
+        byte b0 = 0;
+
+        switch (side)
+        {
+            case 0:
+            case 1:
+                b0 = 0;
+                break;
+            case 2:
+            case 3:
+                b0 = 8;
+                break;
+            case 4:
+            case 5:
+                b0 = 4;
+        }
+
+        return j1 | b0;
+    }
+
+    //Rotate the top-facing texture.
+    //They told me it couldn't be done... THEY LIED. #MinecratForgeTuts
     @SideOnly(Side.CLIENT)
-    @Override
     public Icon getIcon(int side, int meta)
     {
-    	if (side == 1)
-    		return top;
-    	return sides;
+        int k = meta & 12;
+        if (k == 0 && (side == 1)) {
+        	return top;
+    	} else if (k == 4 && (side == 1)) {
+        	return top;
+        } else if (k == 8 && (side == 1)) {
+        	return top;
+        }
+		return sides;
     }
 }

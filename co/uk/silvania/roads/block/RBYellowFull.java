@@ -13,9 +13,9 @@ import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class RBWhiteFull extends Block {
+public class RBYellowFull extends Block {
 
-        public RBWhiteFull (int id) {
+        public RBYellowFull (int id) {
             super(id, Material.rock);
             this.setHardness(1.0F);
     		this.setStepSound(Block.soundStoneFootstep);
@@ -29,7 +29,7 @@ public class RBWhiteFull extends Block {
     	private Icon top;
 
     	public void registerIcons(IconRegister iconRegister) {
-            this.top = iconRegister.registerIcon("Roads:TarmacWhiteFull");
+            this.top = iconRegister.registerIcon("Roads:TarmacYellowFull");
             this.sides = iconRegister.registerIcon("Roads:TarmacPlain");
     	}
     	

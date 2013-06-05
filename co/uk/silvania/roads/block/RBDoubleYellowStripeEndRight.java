@@ -7,15 +7,18 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Facing;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class RBYellowSmallSquare extends Block {
-
-    public RBYellowSmallSquare (int id) {
+public class RBDoubleYellowStripeEndRight extends Block
+{
+    public RBDoubleYellowStripeEndRight(int id) {
         super(id, Material.rock);
         this.setHardness(1.0F);
 		this.setStepSound(Block.soundStoneFootstep);
@@ -29,7 +32,7 @@ public class RBYellowSmallSquare extends Block {
 	private Icon top;
 
 	public void registerIcons(IconRegister iconRegister) {
-        this.top = iconRegister.registerIcon("Roads:TarmacYellowSmallSquare");
+        this.top = iconRegister.registerIcon("Roads:TarmacDoubleYellowStripeEndRight");
         this.sides = iconRegister.registerIcon("Roads:TarmacPlain");
 	}
 	

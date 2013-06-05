@@ -9,12 +9,12 @@ import net.minecraft.world.gen.feature.WorldGenLiquids;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import cpw.mods.fml.common.IWorldGenerator;
 
-public class WorldGen implements IWorldGenerator{
+public class WorldGen implements IWorldGenerator {
     
 	@Override
-	public void generate(Random random, int chunkX, int chunkZ, World world,IChunkProvider chunkGenerator, IChunkProvider chunkProvider){
+	public void generate(Random random, int chunkX, int chunkZ, World world,IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
         
-		switch(world.provider.dimensionId){
+		switch(world.provider.dimensionId) {
             case 1:
                 generateNether(world, random, chunkX * 16, chunkZ * 16);
             case 0:
@@ -30,13 +30,13 @@ public class WorldGen implements IWorldGenerator{
 	}
     
 	private void generateSurface(World world, Random random, int chunkX, int chunkZ){
-		for(int i = 0; i < 5; i++){
+		for(int i = 0; i < 1; i++){
 			int xCoord = chunkX + random.nextInt(16);
 			int yCoord = random.nextInt(80);
 			int zCoord = chunkZ + random.nextInt(16);
 			
 			(new WorldGenMinable(Roads.limeStoneBlock.blockID, 50)).generate(world, random, xCoord, yCoord, zCoord);
-			(new WorldGenLiquids(Roads.roadsTarFlowing.blockID)).generate(world, random, xCoord, yCoord, zCoord);
+			//(new WorldGenLakes(Roads.roadsTarFlowing.blockID)).generate(world, random, xCoord, yCoord, zCoord);
 		}
 	}
     

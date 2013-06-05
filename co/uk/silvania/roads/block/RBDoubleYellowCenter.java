@@ -24,16 +24,6 @@ public class RBDoubleYellowCenter extends Block {
         private Icon sides;
         @SideOnly(Side.CLIENT)
         private Icon top;
-           
-    	/*@SideOnly(Side.CLIENT)
-    	private Icon sides;
-    	@SideOnly(Side.CLIENT)
-    	private Icon top;
-
-    	public void registerIcons(IconRegister iconRegister) {
-            this.top = iconRegister.registerIcon("Roads:TarmacDoubleYellowCenter");
-            this.sides = iconRegister.registerIcon("Roads:TarmacPlain");
-    	}*/
     	
         public void registerIcons(IconRegister par1IconRegister)
         {
@@ -55,12 +45,12 @@ public class RBDoubleYellowCenter extends Block {
         	return false;
         }
         
-        public int onBlockPlaced(World par1World, int par2, int par3, int par4, int par5, float par6, float par7, float par8, int par9)
+        public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int meta)
         {
-            int j1 = par9 & 3;
+            int j1 = meta & 3;
             byte b0 = 0;
 
-            switch (par5)
+            switch (side)
             {
                 case 0:
                 case 1:
@@ -84,7 +74,9 @@ public class RBDoubleYellowCenter extends Block {
         public Icon getIcon(int side, int meta)
         {
             int k = meta & 12;
-            if (k == 4 && (side == 1)) {
+            if (k == 0 && (side == 1)) {
+            	return top;
+        	} else if (k == 4 && (side == 1)) {
             	return top;
             } else if (k == 8 && (side == 1)) {
             	return top;

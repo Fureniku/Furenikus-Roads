@@ -5,23 +5,43 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockFlowing;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.util.Icon;
+import net.minecraftforge.liquids.ILiquid;
 
-public class FlowingTarBlock extends BlockFlowing {
-	
-	public FlowingTarBlock(int par1) {
-		super(par1, Material.water);
-
-		this.blockHardness = 100.0F;
-		this.setLightOpacity(0);
-		this.setCreativeTab(Roads.tabRoads);
-		}
-    @SideOnly(Side.CLIENT)
-    public int getBlockColor() {
-        return 00000000;
-    }
+public class FlowingTarBlock extends BlockFlowing implements ILiquid {
     
-	public String getTextureFile(){
-		return "/co/uk/silvania/roads/blocks.png";
-		}
+    public FlowingTarBlock(int id) {
+		super(id, Material.water);
+		this.setCreativeTab(Roads.tabRoads);
+		this.setHardness(100.0F);
+		this.setLightOpacity(1);
+		this.setTickRandomly(true);
+	}
+
+	
+	@Override
+	public int getRenderType() {
+		return 4;
+	}
+
+	@Override
+	public int stillLiquidId() {
+		return this.blockID + 1;
+	}
+
+	@Override
+	public boolean isMetaSensitive() {
+		return false;
+	}
+
+	@Override
+	public int stillLiquidMeta() {
+		return 0;
+	}
+	
+	public void registerIcons(IconRegister iconRegister) {
+		this.theIcon = new Icon[] {iconRegister.registerIcon("Roads:TarFlowing"), iconRegister.registerIcon("Roads:TarFlowing")};
+	}
 
 }
