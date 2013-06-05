@@ -1,5 +1,133 @@
 package co.uk.silvania.roads;
 
+import net.minecraftforge.common.Configuration;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+
 public class RoadsConfig {
 
+	//Blocks
+	public static int roadBlockID;
+	public static int macadamBlockID;
+	public static int cementBlockID;
+	public static int limeStoneBlockID;
+	public static int hardenedTarBlockID;
+	public static int sidewalkBlocksID;
+	public static int roadsTarStillID;
+	public static int roadsTarFlowingID;
+	
+	public static int roadBlockSWS2ID;
+	public static int roadBlockDYSID;
+	public static int roadBlockDYSELID;
+	public static int roadBlockDYSERID;
+	public static int roadBlockDYSIID;
+	public static int roadBlockDYSOID;
+	public static int roadBlockSYSID;
+	public static int roadBlockSWSID;
+	public static int roadBlockSWCID;
+	public static int roadBlockSYCID;
+	public static int roadBlockDYCID;
+	public static int roadBlockWhiteCrossID;
+	public static int roadBlockYellowCrossID;
+	public static int roadBlockWhiteFullID;
+	public static int roadBlockYellowFullID;
+	public static int roadBlockWCID;
+	public static int roadBlockFYSID;
+	public static int roadBlockYCID;
+	public static int roadBlockYACID;
+	public static int roadBlockWACID;
+	public static int roadBlockWSLID;
+	public static int roadBlockWSSLID;
+	public static int roadBlockYSSLID;
+	public static int roadBlockJOID;
+	public static int roadBlockJIID;
+	public static int roadBlockJOLID;
+	public static int roadBlockJILID;
+	public static int roadBlockJOILID;
+	public static int roadBlockJIILID;
+	public static int roadBlockALID;
+	public static int roadBlockAUSID;
+	public static int roadBlockAULID;
+	public static int roadBlockAURID;
+	public static int roadBlockWDSID;
+	public static int roadBlockYDSID;
+	public static int roadBlockWSSID;
+	public static int roadBlockYSSID;
+	public static int roadBlockSLID;
+	public static int roadBlockOWID;
+	public static int roadBlockSTID;
+	public static int roadBlockOPID;
+	
+	public static int cementItemID;
+	public static int cementDustID;
+	public static int limeStonePowderID;
+	public static int limeClayPowderID;
+	public static int tarBucketID;
+	
+	public static void loadConfig(FMLPreInitializationEvent event) {
+		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
+		
+		config.load();
+		
+		//Block IDs
+		roadBlockID = config.getBlock("Base Road Block", 800).getInt();
+		macadamBlockID = config.getBlock("Macadam", 801).getInt();
+		cementBlockID = config.getBlock("Cement Block", 802).getInt();
+		limeStoneBlockID = config.getBlock("Limestone", 803).getInt();
+		hardenedTarBlockID = config.getBlock("Hardened Tar", 804).getInt();
+		sidewalkBlocksID = config.getBlock("Sidewalk Blocks", 805).getInt();
+		roadsTarStillID = config.getBlock("Tar Still", 819).getInt();
+		roadsTarFlowingID = config.getBlock("Tar Flowing", 818).getInt();
+		
+		//Road Block IDs
+		roadBlockSWS2ID = config.getBlock("Side White Stripe", 820).getInt();
+    	roadBlockDYSID = config.getBlock("Double Yellow Stripe", 821).getInt();
+    	roadBlockDYSELID = config.getBlock("Double Yellow Stripe End Left", 822).getInt();
+    	roadBlockDYSERID = config.getBlock("Double Yellow Stripe End Right", 823).getInt();
+    	roadBlockDYSIID = config.getBlock("Double Yellow Stripe Inner Corner", 824).getInt();
+    	roadBlockDYSOID = config.getBlock("Double Yellow Stripe Outer Corner", 825).getInt();
+    	roadBlockSYSID = config.getBlock("Single Yellow Stripe", 826).getInt();
+    	roadBlockSWSID = config.getBlock("Single White Side Stripe", 827).getInt();
+    	roadBlockSWCID = config.getBlock("Single White Center Stripe", 828).getInt();
+    	roadBlockSYCID = config.getBlock("Single Yellow Center Stripe", 829).getInt();
+    	roadBlockDYCID = config.getBlock("Double Yellow Center Stripe", 830).getInt();
+    	roadBlockWhiteCrossID = config.getBlock("White Cross", 831).getInt();
+    	roadBlockYellowCrossID = config.getBlock("Yellow Cross", 832).getInt();
+    	roadBlockWhiteFullID = config.getBlock("White Full", 833).getInt();
+    	roadBlockYellowFullID = config.getBlock("Yellow Full", 834).getInt();
+    	roadBlockWCID = config.getBlock("White Corner", 835).getInt();
+    	roadBlockFYSID = config.getBlock("Far Side Yellow Stripe", 836).getInt();
+    	roadBlockYCID = config.getBlock("Yellow Corner", 837).getInt();
+    	roadBlockYACID = config.getBlock("Yellow Alternate Corner", 838).getInt();
+    	roadBlockWACID = config.getBlock("White Alternate Corner", 839).getInt();
+    	roadBlockWSLID = config.getBlock("White Striped Line", 840).getInt();
+    	roadBlockWSSLID = config.getBlock("White Side Striped Line", 841).getInt();
+    	roadBlockYSSLID = config.getBlock("Yellow Side Striped Line", 842).getInt();
+    	roadBlockJOID = config.getBlock("Junction Out", 843).getInt();
+    	roadBlockJIID = config.getBlock("Junction In", 844).getInt();
+    	roadBlockJOLID = config.getBlock("Junction Out Line", 845).getInt();
+    	roadBlockJILID = config.getBlock("Junction In Line", 846).getInt();
+    	roadBlockJOILID = config.getBlock("Junction Out Inverted Line", 847).getInt();
+    	roadBlockJIILID = config.getBlock("Junction In Inverted Line", 848).getInt();
+    	roadBlockALID = config.getBlock("Arrow Line", 849).getInt();
+    	roadBlockAUSID = config.getBlock("Arrow Straight", 850).getInt();
+    	roadBlockAULID = config.getBlock("Arrow Left", 851).getInt();
+    	roadBlockAURID = config.getBlock("Arrow Right", 852).getInt();
+    	roadBlockWDSID = config.getBlock("White Diagonal Stripe", 853).getInt();
+    	roadBlockYDSID = config.getBlock("Yellow Diagonal Stripe", 854).getInt();
+    	roadBlockWSSID = config.getBlock("White Small Square", 855).getInt();
+    	roadBlockYSSID = config.getBlock("Yellow Small Square", 856).getInt();
+    	roadBlockSLID = config.getBlock("Slow 1", 857).getInt();
+    	roadBlockOWID = config.getBlock("Slow 2", 858).getInt();
+    	roadBlockSTID = config.getBlock("Stop 1", 859).getInt();
+    	roadBlockOPID = config.getBlock("Stop 2", 860).getInt();
+    	
+    	//Item IDs
+    	cementItemID = config.getItem("Cement", 16700).getInt();
+    	cementDustID = config.getItem("Cement Dust", 16701).getInt();
+    	limeStonePowderID = config.getItem("Limestone Dust", 16704).getInt();
+    	limeClayPowderID = config.getItem("Lime/Clay Dust", 16703).getInt();
+    	tarBucketID = config.getItem("Bucket of Tar", 16702).getInt();
+		
+		config.save();
+	}
 }

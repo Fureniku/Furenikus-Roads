@@ -36,7 +36,7 @@ public class WorldGen implements IWorldGenerator {
 			int zCoord = chunkZ + random.nextInt(16);
 			
 			(new WorldGenMinable(Roads.limeStoneBlock.blockID, 50)).generate(world, random, xCoord, yCoord, zCoord);
-			//(new WorldGenLakes(Roads.roadsTarFlowing.blockID)).generate(world, random, xCoord, yCoord, zCoord);
+			(new WorldGenLakesRoads(Roads.roadsTarFlowing.blockID)).generate(world, random, xCoord, yCoord, zCoord);
 		}
 	}
     
