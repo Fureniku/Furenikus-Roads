@@ -20,9 +20,6 @@ public class RoadsItemBlock extends ItemBlock {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean par4) {
 
-		if(itemStack.itemID == Roads.roadBlockAUS.blockID) list.add("Arrow, Straight");
-		if(itemStack.itemID == Roads.roadBlockAUR.blockID) list.add("Arrow, Straight");
-		
 		
 	}
 	

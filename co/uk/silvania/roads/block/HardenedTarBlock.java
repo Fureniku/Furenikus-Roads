@@ -10,7 +10,7 @@ public class HardenedTarBlock extends Block {
 
     public HardenedTarBlock (int id) {
         super(id, Material.rock);
-        this.setHardness(2.5F);
+        this.setHardness(3.5F);
         this.setStepSound(Block.soundStoneFootstep);
         this.setCreativeTab(Roads.tabRoads);
     }

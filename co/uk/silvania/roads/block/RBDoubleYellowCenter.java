@@ -7,7 +7,10 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 public class RBDoubleYellowCenter extends Block {
@@ -45,42 +48,32 @@ public class RBDoubleYellowCenter extends Block {
         	return false;
         }
         
-        public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int meta)
-        {
-            int j1 = meta & 3;
-            byte b0 = 0;
-
-            switch (side)
-            {
-                case 0:
-                case 1:
-                    b0 = 0;
-                    break;
-                case 2:
-                case 3:
-                    b0 = 8;
-                    break;
-                case 4:
-                case 5:
-                    b0 = 4;
-            }
-
-            return j1 | b0;
-        }
-
-        //Rotate the top-facing texture.
-        //They told me it couldn't be done... THEY LIED. #MinecratForgeTuts
         @SideOnly(Side.CLIENT)
-        public Icon getIcon(int side, int meta)
-        {
-            int k = meta & 12;
+        public Icon getIcon(int side, int meta) {
+            int k = meta;
             if (k == 0 && (side == 1)) {
-            	return top;
-        	} else if (k == 4 && (side == 1)) {
-            	return top;
-            } else if (k == 8 && (side == 1)) {
-            	return top;
+             	return top;
+         	} else if (k == 1 && (side == 1)) {
+               	return top;
+           	} else if (k == 2 && (side == 1)) {
+               	return top;
+            } else if (k == 3 && (side == 1)) {
+              	return top;
+            } else if (k == 4 && (side == 1)) {
+               	return top;
+            } else if (k == 5 && (side == 1)) {
+               	return top;
             }
-			return sides;
+       		return sides;
         }
-}
+
+        public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLiving entity, ItemStack item) {
+            int l = determineOrientation(par1World, par2, par3, par4, entity);
+            par1World.setBlockMetadataWithNotify(par2, par3, par4, l, 2);
+        }
+
+        public static int determineOrientation(World world, int par1, int par2, int par3, EntityLiving entity) {
+            int l = MathHelper.floor_double((double)(entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+            return l == 0 ? 3 : (l == 1 ? 4 : (l == 2 ? 2 : (l == 3 ? 5 : 0)));
+        }
+    }

@@ -10,7 +10,7 @@ public class CementBlock extends Block {
 
     public CementBlock (int id) {
         super(id, Material.rock);
-        this.setHardness(0.7F);
+        this.setHardness(2.0F);
         this.setStepSound(Block.soundStoneFootstep);
         this.setCreativeTab(Roads.tabRoads);
     }

@@ -55,6 +55,15 @@ public class Roads {
 	public static Block sidewalkBlocks;
 	public static Block roadsTarStill;
 	public static Block roadsTarFlowing;
+	public static Block sidewalkKerbed;
+	public static Block sidewalkKerbed1;
+	public static Block sidewalkKerbed2;
+	public static Block sidewalkKerbedInnerCorner;
+	public static Block sidewalkKerbed1InnerCorner;
+	public static Block sidewalkKerbed2InnerCorner;
+	public static Block sidewalkKerbedOuterCorner;
+	public static Block sidewalkKerbed1OuterCorner;
+	public static Block sidewalkKerbed2OuterCorner;
 	
 	public static Block roadBlockSWS2;
 	public static Block roadBlockDYS;
@@ -114,7 +123,7 @@ public class Roads {
     public void preInit(FMLPreInitializationEvent event) {
     	RoadsConfig config = new RoadsConfig();
     	
-    	RoadsConfig.loadConfig(event);
+    	RoadsConfig.loadConfig(event); 
 
     	roadBlock = new RoadBlock(config.roadBlockID).setUnlocalizedName("roadBlock");
     	macadamBlock = new MacadamBlock(config.macadamBlockID).setUnlocalizedName("macadamBlock");
@@ -122,6 +131,15 @@ public class Roads {
     	limeStoneBlock = new LimeStoneBlock(config.limeStoneBlockID).setUnlocalizedName("limeStoneBlock");
     	hardenedTarBlock = new HardenedTarBlock(config.hardenedTarBlockID).setUnlocalizedName("hardenedTarBlock");
     	sidewalkBlocks = new SideWalkBlocks(config.sidewalkBlocksID).setUnlocalizedName("sidewalkBlocks");
+    	sidewalkKerbed = new SideWalkKerbed(config.sidewalkKerbedID).setUnlocalizedName("sidewalkKerbed");
+    	sidewalkKerbed1 = new SideWalkKerbed1(config.sidewalkKerbed1ID).setUnlocalizedName("sidewalkKerbed1");
+    	sidewalkKerbed2 = new SideWalkKerbed2(config.sidewalkKerbed2ID).setUnlocalizedName("sidewalkKerbed2");
+    	sidewalkKerbedInnerCorner = new SideWalkKerbed(config.sidewalkKerbedInnerCornerID).setUnlocalizedName("sidewalkKerbedInnerCorner");
+    	sidewalkKerbed1InnerCorner = new SideWalkKerbed1InnerCorner(config.sidewalkKerbed1InnerCornerID).setUnlocalizedName("sidewalkKerbed1InnerCorner");
+    	sidewalkKerbed2InnerCorner = new SideWalkKerbed2InnerCorner(config.sidewalkKerbed2InnerCornerID).setUnlocalizedName("sidewalkKerbed2InnerCorner");
+    	sidewalkKerbedOuterCorner = new SideWalkKerbed(config.sidewalkKerbedOuterCornerID).setUnlocalizedName("sidewalkKerbedOuterCorner");
+    	sidewalkKerbed1OuterCorner = new SideWalkKerbed1(config.sidewalkKerbed1OuterCornerID).setUnlocalizedName("sidewalkKerbed1OuterCorner");
+    	sidewalkKerbed2OuterCorner = new SideWalkKerbed2(config.sidewalkKerbed2OuterCornerID).setUnlocalizedName("sidewalkKerbed2OuterCorner");
     	roadsTarStill = new StillTarBlock(config.roadsTarStillID).setUnlocalizedName("roadsTarStill");
     	roadsTarFlowing = new FlowingTarBlock(config.roadsTarFlowingID).setUnlocalizedName("roadsTarFlowing");
     	

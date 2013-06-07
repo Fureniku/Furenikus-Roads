@@ -67,23 +67,10 @@ public class RBDoubleYellowStripe extends Block {
     public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLiving entity, ItemStack item) {
         int l = determineOrientation(par1World, par2, par3, par4, entity);
         par1World.setBlockMetadataWithNotify(par2, par3, par4, l, 2);
-
     }
 
     public static int determineOrientation(World world, int par1, int par2, int par3, EntityLiving entity) {
-        if (MathHelper.abs((float)entity.posX - (float)par1) < 2.0F && MathHelper.abs((float)entity.posZ - (float)par3) < 2.0F) {
-            double d0 = entity.posY + 1.82D - (double)entity.yOffset;
-
-            if (d0 - (double)par2 > 2.0D) {
-                return 1;
-            }
-
-            if ((double)par2 - d0 > 0.0D) {
-                return 0;
-            }
-        }
-
         int l = MathHelper.floor_double((double)(entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
-        return l == 0 ? 2 : (l == 1 ? 5 : (l == 2 ? 3 : (l == 3 ? 4 : 0)));
+        return l == 0 ? 3 : (l == 1 ? 4 : (l == 2 ? 2 : (l == 3 ? 5 : 0)));
     }
 }

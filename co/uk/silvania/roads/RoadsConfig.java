@@ -12,6 +12,15 @@ public class RoadsConfig {
 	public static int limeStoneBlockID;
 	public static int hardenedTarBlockID;
 	public static int sidewalkBlocksID;
+	public static int sidewalkKerbedID;
+	public static int sidewalkKerbed1ID;
+	public static int sidewalkKerbed2ID;
+	public static int sidewalkKerbedInnerCornerID;
+	public static int sidewalkKerbed1InnerCornerID;
+	public static int sidewalkKerbed2InnerCornerID;
+	public static int sidewalkKerbedOuterCornerID;
+	public static int sidewalkKerbed1OuterCornerID;
+	public static int sidewalkKerbed2OuterCornerID;;
 	public static int roadsTarStillID;
 	public static int roadsTarFlowingID;
 	
@@ -75,6 +84,15 @@ public class RoadsConfig {
 		limeStoneBlockID = config.getBlock("Limestone", 803).getInt();
 		hardenedTarBlockID = config.getBlock("Hardened Tar", 804).getInt();
 		sidewalkBlocksID = config.getBlock("Sidewalk Blocks", 805).getInt();
+		sidewalkKerbedID = config.getBlock("Sidewalk Kerb", 806).getInt();
+		sidewalkKerbed1ID = config.getBlock("Sidewalk Kerb 1", 807).getInt();
+		sidewalkKerbed2ID = config.getBlock("Sidewalk Kerb 2", 808).getInt();
+		sidewalkKerbedInnerCornerID = config.getBlock("Sidewalk Kerb Inner Corner", 809).getInt();
+		sidewalkKerbed1InnerCornerID = config.getBlock("Sidewalk Kerb Inner Corner 1", 810).getInt();
+		sidewalkKerbed2InnerCornerID = config.getBlock("Sidewalk Kerb Inner Corner 2", 811).getInt();
+		sidewalkKerbedOuterCornerID = config.getBlock("Sidewalk Kerb Outer Corner", 812).getInt();
+		sidewalkKerbed1OuterCornerID = config.getBlock("Sidewalk Kerb Outer Corner 1", 813).getInt();
+		sidewalkKerbed2OuterCornerID = config.getBlock("Sidewalk Kerb Outer Corner 2", 814).getInt();
 		roadsTarStillID = config.getBlock("Tar Still", 819).getInt();
 		roadsTarFlowingID = config.getBlock("Tar Flowing", 818).getInt();
 		

@@ -1,9 +1,5 @@
 package co.uk.silvania.roads.block;
 
-import co.uk.silvania.roads.CommonProxy;
-import co.uk.silvania.roads.Roads;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -12,25 +8,27 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import co.uk.silvania.roads.Roads;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
-public class RBWhiteSmallSquare extends Block {
+public class SideWalkKerbed2OuterCorner extends Block {
 
-    public RBWhiteSmallSquare (int id) {
+    public SideWalkKerbed2OuterCorner (int id) {
         super(id, Material.rock);
         this.setHardness(1.0F);
-		this.setStepSound(Block.soundStoneFootstep);
-		this.setCreativeTab(Roads.tabRoads);
-        this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.825F, 1.0F);
+        this.setStepSound(Block.soundStoneFootstep);
+        this.setCreativeTab(Roads.tabRoads);
     }
-       
+    
 	@SideOnly(Side.CLIENT)
 	private Icon sides;
 	@SideOnly(Side.CLIENT)
 	private Icon top;
-
+    
 	public void registerIcons(IconRegister iconRegister) {
-        this.top = iconRegister.registerIcon("Roads:TarmacWhiteSmallSquare");
-        this.sides = iconRegister.registerIcon("Roads:TarmacPlain");
+        this.top = iconRegister.registerIcon("Roads:SideWalkKerbed2OuterCorner");
+        this.sides = iconRegister.registerIcon("Roads:SideWalkKerbed2");
 	}
 	
     public int getRenderType() {

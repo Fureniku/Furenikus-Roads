@@ -19,6 +19,15 @@ public class CommonProxy {
             GameRegistry.registerBlock(Roads.hardenedTarBlock, "hardenedTarBlock");
             GameRegistry.registerBlock(Roads.roadsTarStill, "roadsTarStill");
             GameRegistry.registerBlock(Roads.roadsTarFlowing, "roadsTarFlowing");
+            GameRegistry.registerBlock(Roads.sidewalkKerbed, "sidewalkKerbed");
+            GameRegistry.registerBlock(Roads.sidewalkKerbed1, "sidewalkKerbed1");
+            GameRegistry.registerBlock(Roads.sidewalkKerbed2, "sidewalkKerbed2");
+            GameRegistry.registerBlock(Roads.sidewalkKerbedInnerCorner, "sidewalkKerbedInnerCorner");
+            GameRegistry.registerBlock(Roads.sidewalkKerbed1InnerCorner, "sidewalkKerbed1InnerCorner");
+            GameRegistry.registerBlock(Roads.sidewalkKerbed2InnerCorner, "sidewalkKerbed2InnerCorner");
+            GameRegistry.registerBlock(Roads.sidewalkKerbedOuterCorner, "sidewalkKerbedOuterCorner");
+            GameRegistry.registerBlock(Roads.sidewalkKerbed1OuterCorner, "sidewalkKerbed1OuterCorner");
+            GameRegistry.registerBlock(Roads.sidewalkKerbed2OuterCorner, "sidewalkKerbed2OuterCorner");
             GameRegistry.registerBlock(Roads.sidewalkBlocks, ItemSideWalkBlocks.class, "Silvania" + (Roads.sidewalkBlocks.getUnlocalizedName().substring(5)));
             
             GameRegistry.registerBlock(Roads.roadBlockSWS2, "roadBlockSWS2");
@@ -74,7 +83,16 @@ public class CommonProxy {
             MinecraftForge.setBlockHarvestLevel(Roads.cementBlock, "pickaxe", 2);
             MinecraftForge.setBlockHarvestLevel(Roads.macadamBlock, "pickaxe", 1);
             MinecraftForge.setBlockHarvestLevel(Roads.hardenedTarBlock, "pickaxe", 4);
-            MinecraftForge.setBlockHarvestLevel(Roads.sidewalkBlocks, "pickaxe", 4);            
+            MinecraftForge.setBlockHarvestLevel(Roads.sidewalkBlocks, "pickaxe", 4); 
+            MinecraftForge.setBlockHarvestLevel(Roads.sidewalkKerbed, "pickaxe", 1);
+            MinecraftForge.setBlockHarvestLevel(Roads.sidewalkKerbed1, "pickaxe", 1);
+            MinecraftForge.setBlockHarvestLevel(Roads.sidewalkKerbed2, "pickaxe", 1);
+            MinecraftForge.setBlockHarvestLevel(Roads.sidewalkKerbedInnerCorner, "pickaxe", 1);
+            MinecraftForge.setBlockHarvestLevel(Roads.sidewalkKerbed1InnerCorner, "pickaxe", 1);
+            MinecraftForge.setBlockHarvestLevel(Roads.sidewalkKerbed2InnerCorner, "pickaxe", 1);
+            MinecraftForge.setBlockHarvestLevel(Roads.sidewalkKerbedOuterCorner, "pickaxe", 1);
+            MinecraftForge.setBlockHarvestLevel(Roads.sidewalkKerbed1OuterCorner, "pickaxe", 1);
+            MinecraftForge.setBlockHarvestLevel(Roads.sidewalkKerbed2OuterCorner, "pickaxe", 1);
             
             MinecraftForge.setBlockHarvestLevel(Roads.roadBlockSWS2, "pickaxe", 1);
             MinecraftForge.setBlockHarvestLevel(Roads.roadBlockDYSEL, "pickaxe", 1);
@@ -126,6 +144,15 @@ public class CommonProxy {
             LanguageRegistry.addName(Roads.cementBlock, "Cement");
             LanguageRegistry.addName(Roads.macadamBlock, "Macadam");
             LanguageRegistry.addName(Roads.roadsTarFlowing, "Tar");
+            LanguageRegistry.addName(Roads.sidewalkKerbed, "Sidewalk (Kerb)");
+            LanguageRegistry.addName(Roads.sidewalkKerbed1, "Sidewalk (Kerb)");
+            LanguageRegistry.addName(Roads.sidewalkKerbed2, "Sidewalk (Kerb)");
+            LanguageRegistry.addName(Roads.sidewalkKerbedInnerCorner, "Sidewalk (Kerb, Inner Corner)");
+            LanguageRegistry.addName(Roads.sidewalkKerbed1InnerCorner, "Sidewalk (Kerb, Inner Corner)");
+            LanguageRegistry.addName(Roads.sidewalkKerbed2InnerCorner, "Sidewalk (Kerb, Inner Corner)");
+            LanguageRegistry.addName(Roads.sidewalkKerbedOuterCorner, "Sidewalk (Kerb, Outer Corner)");
+            LanguageRegistry.addName(Roads.sidewalkKerbed1OuterCorner, "Sidewalk (Kerb, Outer Corner)");
+            LanguageRegistry.addName(Roads.sidewalkKerbed2OuterCorner, "Sidewalk (Kerb, Outer Corner)");
             LanguageRegistry.addName(new ItemStack(Roads.sidewalkBlocks, 1, 0), "Sidewalk 1");
             LanguageRegistry.addName(new ItemStack(Roads.sidewalkBlocks, 1, 1), "Sidewalk 2");
             LanguageRegistry.addName(new ItemStack(Roads.sidewalkBlocks, 1, 2), "Sidewalk 3");
