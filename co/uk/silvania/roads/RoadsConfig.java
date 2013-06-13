@@ -1,5 +1,6 @@
 package co.uk.silvania.roads;
 
+import net.minecraft.block.Block;
 import net.minecraftforge.common.Configuration;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
@@ -20,7 +21,9 @@ public class RoadsConfig {
 	public static int sidewalkKerbed2InnerCornerID;
 	public static int sidewalkKerbedOuterCornerID;
 	public static int sidewalkKerbed1OuterCornerID;
-	public static int sidewalkKerbed2OuterCornerID;;
+	public static int sidewalkKerbed2OuterCornerID;
+	public static int catsEyeID;
+	public static int catsEyeSideID;
 	public static int roadsTarStillID;
 	public static int roadsTarFlowingID;
 	
@@ -66,6 +69,15 @@ public class RoadsConfig {
 	public static int roadBlockSTID;
 	public static int roadBlockOPID;
 	
+	public static int powerPoleID;
+	//public static int roadPainterID;
+	public static int trafficLightID;
+	//public static int trafficHangingID;
+	//public static int lightBollardID;
+	//public static int streetLamp1ID;
+	//public static int streetLamp2ID;
+	//public static int streetSignID;
+	
 	public static int cementItemID;
 	public static int cementDustID;
 	public static int limeStonePowderID;
@@ -93,6 +105,8 @@ public class RoadsConfig {
 		sidewalkKerbedOuterCornerID = config.getBlock("Sidewalk Kerb Outer Corner", 812).getInt();
 		sidewalkKerbed1OuterCornerID = config.getBlock("Sidewalk Kerb Outer Corner 1", 813).getInt();
 		sidewalkKerbed2OuterCornerID = config.getBlock("Sidewalk Kerb Outer Corner 2", 814).getInt();
+		catsEyeID = config.getBlock("Cat's Eye", 815).getInt();
+		catsEyeSideID = config.getBlock("Cat's Eye Side", 816).getInt();
 		roadsTarStillID = config.getBlock("Tar Still", 819).getInt();
 		roadsTarFlowingID = config.getBlock("Tar Flowing", 818).getInt();
 		
@@ -138,6 +152,16 @@ public class RoadsConfig {
 		roadBlockOWID = config.getBlock("Slow 2", 858).getInt();
 		roadBlockSTID = config.getBlock("Stop 1", 859).getInt();
 		roadBlockOPID = config.getBlock("Stop 2", 860).getInt();
+		
+		powerPoleID = config.getBlock("Power Pole", 870).getInt();
+		//roadPainterID = config.getBlock("Road Painter", 871).getInt();
+		trafficLightID = config.getBlock("Traffic Light", 872).getInt();
+		//trafficHangingID = config.getBlock("Traffic Light Hanging", 873).getInt();
+		//lightBollardID = config.getBlock("Light Bollard", 874).getInt();
+		//streetLamp1ID = config.getBlock("Street Lamp 1", 875).getInt();
+		//streetLamp2ID = config.getBlock("Street Lamp 2", 876).getInt();
+		//streetSignID = config.getBlock("Street Sign", 877).getInt();
+
 
 		//Item IDs
 		cementItemID = config.getItem("Cement", 16700).getInt();

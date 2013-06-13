@@ -1,6 +1,7 @@
 package co.uk.silvania.roads;
 
 import co.uk.silvania.roads.block.ItemSideWalkBlocks;
+import co.uk.silvania.roads.tileentities.TileEntityTrafficLightEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -28,6 +29,8 @@ public class CommonProxy {
             GameRegistry.registerBlock(Roads.sidewalkKerbedOuterCorner, "sidewalkKerbedOuterCorner");
             GameRegistry.registerBlock(Roads.sidewalkKerbed1OuterCorner, "sidewalkKerbed1OuterCorner");
             GameRegistry.registerBlock(Roads.sidewalkKerbed2OuterCorner, "sidewalkKerbed2OuterCorner");
+            GameRegistry.registerBlock(Roads.catsEye, "catsEye");
+            GameRegistry.registerBlock(Roads.catsEyeSide, "catsEyeSide");
             GameRegistry.registerBlock(Roads.sidewalkBlocks, ItemSideWalkBlocks.class, "Silvania" + (Roads.sidewalkBlocks.getUnlocalizedName().substring(5)));
             
             GameRegistry.registerBlock(Roads.roadBlockSWS2, "roadBlockSWS2");
@@ -71,6 +74,9 @@ public class CommonProxy {
             GameRegistry.registerBlock(Roads.roadBlockOW, "roadBlockOW");
             GameRegistry.registerBlock(Roads.roadBlockST, "roadBlockST");
             GameRegistry.registerBlock(Roads.roadBlockOP, "roadBlockOP");
+            
+            GameRegistry.registerBlock(Roads.powerPole, "powerPole");
+            GameRegistry.registerBlock(Roads.trafficLight, "trafficLight");
             
             GameRegistry.registerItem(Roads.cementItem, "cementItem");
             GameRegistry.registerItem(Roads.cementDustItem, "cementDustItem");
@@ -153,6 +159,8 @@ public class CommonProxy {
             LanguageRegistry.addName(Roads.sidewalkKerbedOuterCorner, "Sidewalk (Kerb, Outer Corner)");
             LanguageRegistry.addName(Roads.sidewalkKerbed1OuterCorner, "Sidewalk (Kerb, Outer Corner)");
             LanguageRegistry.addName(Roads.sidewalkKerbed2OuterCorner, "Sidewalk (Kerb, Outer Corner)");
+            LanguageRegistry.addName(Roads.catsEye, "Cat's Eye");
+            LanguageRegistry.addName(Roads.catsEyeSide, "Cat's Eye (Side)");
             LanguageRegistry.addName(new ItemStack(Roads.sidewalkBlocks, 1, 0), "Sidewalk 1");
             LanguageRegistry.addName(new ItemStack(Roads.sidewalkBlocks, 1, 1), "Sidewalk 2");
             LanguageRegistry.addName(new ItemStack(Roads.sidewalkBlocks, 1, 2), "Sidewalk 3");
@@ -199,6 +207,9 @@ public class CommonProxy {
             LanguageRegistry.addName(Roads.roadBlockOP, "Tarmac (Stop 2)");
             LanguageRegistry.addName(Roads.roadBlockSL, "Tarmac (Slow 1)");
             LanguageRegistry.addName(Roads.roadBlockOW, "Tarmac (Slow 2)");
+            
+            LanguageRegistry.addName(Roads.powerPole, "Redstone Post");
+            LanguageRegistry.addName(Roads.trafficLight, "Traffic Light");
             
             LanguageRegistry.addName(Roads.cementItem, "Cement");
             LanguageRegistry.addName(Roads.cementDustItem, "Cement Dust");

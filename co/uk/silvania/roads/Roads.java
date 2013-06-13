@@ -3,6 +3,7 @@ package co.uk.silvania.roads;
 import co.uk.silvania.roads.block.*;
 import co.uk.silvania.roads.item.*;
 import co.uk.silvania.roads.liquid.*;
+import co.uk.silvania.roads.tileentities.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -12,10 +13,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.Property;
-import net.minecraftforge.liquids.LiquidContainerData;
-import net.minecraftforge.liquids.LiquidContainerRegistry;
-import net.minecraftforge.liquids.LiquidDictionary;
-import net.minecraftforge.liquids.LiquidStack;
+import net.minecraftforge.liquids.*;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
@@ -64,6 +63,8 @@ public class Roads {
 	public static Block sidewalkKerbedOuterCorner;
 	public static Block sidewalkKerbed1OuterCorner;
 	public static Block sidewalkKerbed2OuterCorner;
+	public static Block catsEye;
+	public static Block catsEyeSide;
 	
 	public static Block roadBlockSWS2;
 	public static Block roadBlockDYS;
@@ -106,7 +107,16 @@ public class Roads {
 	public static Block roadBlockOW;
 	public static Block roadBlockST;
 	public static Block roadBlockOP;
-		
+	
+	public static Block powerPole;
+	//public static Block roadPainter;
+	public static Block trafficLight;
+	//public static Block trafficHanging;
+	//public static Block lightBollard;
+	//public static Block streetLamp1;
+	//public static Block streetLamp2;
+	//public static Block streetSign;
+	
 	//Items Start Here
 	public static Item cementItem;
 	public static Item cementDustItem;
@@ -140,6 +150,8 @@ public class Roads {
     	sidewalkKerbedOuterCorner = new SideWalkKerbed(config.sidewalkKerbedOuterCornerID).setUnlocalizedName("sidewalkKerbedOuterCorner");
     	sidewalkKerbed1OuterCorner = new SideWalkKerbed1(config.sidewalkKerbed1OuterCornerID).setUnlocalizedName("sidewalkKerbed1OuterCorner");
     	sidewalkKerbed2OuterCorner = new SideWalkKerbed2(config.sidewalkKerbed2OuterCornerID).setUnlocalizedName("sidewalkKerbed2OuterCorner");
+    	catsEye = new CatsEye(config.catsEyeID).setUnlocalizedName("catsEye");
+    	catsEyeSide = new CatsEyeSide(config.catsEyeSideID).setUnlocalizedName("catsEyeSide");
     	roadsTarStill = new StillTarBlock(config.roadsTarStillID).setUnlocalizedName("roadsTarStill");
     	roadsTarFlowing = new FlowingTarBlock(config.roadsTarFlowingID).setUnlocalizedName("roadsTarFlowing");
     	
@@ -185,6 +197,16 @@ public class Roads {
     	roadBlockST = new RBST(config.roadBlockSTID).setUnlocalizedName("roadBlockST");
     	roadBlockOP = new RBOP(config.roadBlockOPID).setUnlocalizedName("roadBlockOP");
     	
+    	powerPole = new PowerPoleBlock(config.powerPoleID).setUnlocalizedName("powerPole");
+    	//roadPainter = new TileEntityRoadPainterBlock(config.roadPainterID).setUnlocalizedName("roadPainter");
+    	trafficLight = new TileEntityTrafficLightBlock(config.trafficLightID).setUnlocalizedName("trafficLight");
+    	//trafficHanging = new TileEntityTrafficHangingBlock(config.trafficHangingID).setUnlocalizedName("trafficHanging");
+    	//lightBollard = new TileEntityLightBollardBlock(config.lightBollardID).setUnlocalizedName("lightBollard");
+    	//streetLamp1 = new TileEntityStreetLamp1Block(config.streetLamp1ID).setUnlocalizedName("streetLamp1");
+    	//streetLamp2 = new TileEntityStreetLamp2Block(config.streetLamp2ID).setUnlocalizedName("streetLamp2");
+    	//streetSign = new TileEntityStreetSignBlock(config.streetSignID).setUnlocalizedName("streetSign");
+    	
+    	
     	cementItem = new CementItem(config.cementItemID).setUnlocalizedName("cementItem");
     	cementDustItem = new CementDustItem(config.cementDustID).setUnlocalizedName("cementDustItem");
     	limeStonePowderItem = new LimeStonePowderItem(config.limeStonePowderID).setUnlocalizedName("limeStonePowderItem");
@@ -199,6 +221,8 @@ public class Roads {
             
             proxy.registerBlocks();
             proxy.addNames();
+            
+            GameRegistry.registerTileEntity(TileEntityTrafficLightEntity.class, "tileEntityTrafficLight");
             
             LiquidContainerRegistry.registerLiquid(new LiquidContainerData(new LiquidStack(Roads.roadsTarStill, LiquidContainerRegistry.BUCKET_VOLUME), new ItemStack(Roads.tarBucketItem), new ItemStack(Item.bucketEmpty)));
             LanguageRegistry.instance().addStringLocalization("itemGroup.tabRoads", "en_US", "Roads");
@@ -230,6 +254,8 @@ public class Roads {
             //And some smelting!
             GameRegistry.addSmelting(Roads.limeClayPowderItem.itemID, new ItemStack(Roads.cementDustItem), 0.1f);
             GameRegistry.addSmelting(Roads.cementItem.itemID, new ItemStack(Roads.cementBlock), 0.2f);
+            
+            //RenderingRegistry.registerBlockHandler(new TileEntityTrafficLightRenderer());
         }
 
 

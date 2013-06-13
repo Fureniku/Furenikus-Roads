@@ -17,6 +17,7 @@ public class SideWalkBlocks extends Block {
 
 	public SideWalkBlocks(int id) {
 		super(id, Material.rock);
+		this.setHardness(1.0F);
 		this.setCreativeTab(Roads.tabRoads);
 	}
 	
