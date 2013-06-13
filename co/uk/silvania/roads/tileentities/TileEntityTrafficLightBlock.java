@@ -24,7 +24,7 @@ public class TileEntityTrafficLightBlock extends BlockContainer {
 	}
 	
     public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity) {
-    	this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 3.0F, 1.0F);
+    	this.setBlockBounds(0.4F, 0.0F, 0.4F, 0.6F, 3.0F, 0.6F);
     	super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
     }
 	
@@ -43,7 +43,7 @@ public class TileEntityTrafficLightBlock extends BlockContainer {
 	}
 	
 	public void registerIcons(IconRegister icon) {
-		this.blockIcon = icon.registerIcon("Roads:CementBlock");
+		this.blockIcon = icon.registerIcon("Roads:TrafficLightIcon");
 	}
 
 }

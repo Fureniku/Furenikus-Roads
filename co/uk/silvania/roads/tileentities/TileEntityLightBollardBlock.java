@@ -12,6 +12,8 @@ public class TileEntityLightBollardBlock extends BlockContainer {
 	public TileEntityLightBollardBlock(int id) {
 		super(id, Material.iron);
 		this.setCreativeTab(Roads.tabRoads);
+    	this.setBlockBounds(0.25F, 0.0F, 0.25F, 0.75F, 0.95F, 0.75F);
+        this.setLightValue(1.0F);
 	}
 
 	@Override

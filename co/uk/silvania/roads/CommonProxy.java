@@ -74,9 +74,20 @@ public class CommonProxy {
             GameRegistry.registerBlock(Roads.roadBlockOW, "roadBlockOW");
             GameRegistry.registerBlock(Roads.roadBlockST, "roadBlockST");
             GameRegistry.registerBlock(Roads.roadBlockOP, "roadBlockOP");
+            GameRegistry.registerBlock(Roads.roadBlockStop, "roadBlockStop");
+            GameRegistry.registerBlock(Roads.roadBlockJCUK, "roadBlockJCUK");
+            GameRegistry.registerBlock(Roads.roadBlockJCUSA, "roadBlockJCUSA");
             
             GameRegistry.registerBlock(Roads.powerPole, "powerPole");
+            GameRegistry.registerBlock(Roads.roadPainter, "roadPainter");
             GameRegistry.registerBlock(Roads.trafficLight, "trafficLight");
+            GameRegistry.registerBlock(Roads.trafficHanging, "trafficHanging");
+            GameRegistry.registerBlock(Roads.lightBollard, "lightBollard");
+            GameRegistry.registerBlock(Roads.streetLamp1, "streetLamp1");
+            GameRegistry.registerBlock(Roads.streetLamp2, "streetLamp2");
+            GameRegistry.registerBlock(Roads.streetSign, "streetSign");
+            GameRegistry.registerBlock(Roads.barrierPole, "barrierPole");
+            GameRegistry.registerBlock(Roads.barrierBlock, "barrierBlock");
             
             GameRegistry.registerItem(Roads.cementItem, "cementItem");
             GameRegistry.registerItem(Roads.cementDustItem, "cementDustItem");
@@ -207,9 +218,20 @@ public class CommonProxy {
             LanguageRegistry.addName(Roads.roadBlockOP, "Tarmac (Stop 2)");
             LanguageRegistry.addName(Roads.roadBlockSL, "Tarmac (Slow 1)");
             LanguageRegistry.addName(Roads.roadBlockOW, "Tarmac (Slow 2)");
+            LanguageRegistry.addName(Roads.roadBlockStop, "Stop Paint");
+            LanguageRegistry.addName(Roads.roadBlockJCUK, "Junction Center (Leftie)");
+            LanguageRegistry.addName(Roads.roadBlockJCUSA, "Junction Center (Rightie)");
             
             LanguageRegistry.addName(Roads.powerPole, "Redstone Post");
+            LanguageRegistry.addName(Roads.roadPainter, "Road Painter");
             LanguageRegistry.addName(Roads.trafficLight, "Traffic Light");
+            LanguageRegistry.addName(Roads.trafficHanging, "Traffic Light (Hanging)");
+            LanguageRegistry.addName(Roads.lightBollard, "Light Bollard");
+            LanguageRegistry.addName(Roads.streetLamp1, "Street Lamp (Single)");
+            LanguageRegistry.addName(Roads.streetLamp2, "Street Lamp (Double)");
+            LanguageRegistry.addName(Roads.streetSign, "Street Sign");
+            LanguageRegistry.addName(Roads.barrierPole, "Barrier (Post)");
+            LanguageRegistry.addName(Roads.barrierBlock, "Barrier");
             
             LanguageRegistry.addName(Roads.cementItem, "Cement");
             LanguageRegistry.addName(Roads.cementDustItem, "Cement Dust");

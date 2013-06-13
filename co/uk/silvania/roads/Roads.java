@@ -107,15 +107,21 @@ public class Roads {
 	public static Block roadBlockOW;
 	public static Block roadBlockST;
 	public static Block roadBlockOP;
+	public static Block roadBlockStop;
+	public static Block roadBlockPaintGag;
+	public static Block roadBlockJCUK;
+	public static Block roadBlockJCUSA;
 	
 	public static Block powerPole;
-	//public static Block roadPainter;
+	public static Block roadPainter;
 	public static Block trafficLight;
-	//public static Block trafficHanging;
-	//public static Block lightBollard;
-	//public static Block streetLamp1;
-	//public static Block streetLamp2;
-	//public static Block streetSign;
+	public static Block trafficHanging;
+	public static Block lightBollard;
+	public static Block streetLamp1;
+	public static Block streetLamp2;
+	public static Block streetSign;
+	public static Block barrierPole;
+	public static Block barrierBlock;
 	
 	//Items Start Here
 	public static Item cementItem;
@@ -196,15 +202,21 @@ public class Roads {
     	roadBlockOW = new RBOW(config.roadBlockOWID).setUnlocalizedName("roadBlockOW");
     	roadBlockST = new RBST(config.roadBlockSTID).setUnlocalizedName("roadBlockST");
     	roadBlockOP = new RBOP(config.roadBlockOPID).setUnlocalizedName("roadBlockOP");
+    	roadBlockStop = new RBStop(config.roadBlockStopID).setUnlocalizedName("roadBlockStop");
+    	roadBlockPaintGag = new RBPaintGagBlock(config.roadBlockPaintGagID).setUnlocalizedName("roadBlockPaintGag");
+    	roadBlockJCUK = new RBJunctCenterUK(config.roadBlockJCUKID).setUnlocalizedName("roadBlockJCUK");
+    	roadBlockJCUSA = new RBJunctCenterUSA(config.roadBlockJCUSAID).setUnlocalizedName("roadBlockJCUSA");
     	
     	powerPole = new PowerPoleBlock(config.powerPoleID).setUnlocalizedName("powerPole");
-    	//roadPainter = new TileEntityRoadPainterBlock(config.roadPainterID).setUnlocalizedName("roadPainter");
+    	roadPainter = new TileEntityRoadPainterBlock(config.roadPainterID).setUnlocalizedName("roadPainter");
     	trafficLight = new TileEntityTrafficLightBlock(config.trafficLightID).setUnlocalizedName("trafficLight");
-    	//trafficHanging = new TileEntityTrafficHangingBlock(config.trafficHangingID).setUnlocalizedName("trafficHanging");
-    	//lightBollard = new TileEntityLightBollardBlock(config.lightBollardID).setUnlocalizedName("lightBollard");
-    	//streetLamp1 = new TileEntityStreetLamp1Block(config.streetLamp1ID).setUnlocalizedName("streetLamp1");
-    	//streetLamp2 = new TileEntityStreetLamp2Block(config.streetLamp2ID).setUnlocalizedName("streetLamp2");
-    	//streetSign = new TileEntityStreetSignBlock(config.streetSignID).setUnlocalizedName("streetSign");
+    	trafficHanging = new TileEntityTrafficHangingBlock(config.trafficHangingID).setUnlocalizedName("trafficHanging");
+    	lightBollard = new TileEntityLightBollardBlock(config.lightBollardID).setUnlocalizedName("lightBollard");
+    	streetLamp1 = new TileEntityStreetLamp1Block(config.streetLamp1ID, false).setUnlocalizedName("streetLamp1");
+    	streetLamp2 = new TileEntityStreetLamp2Block(config.streetLamp2ID, false).setUnlocalizedName("streetLamp2");
+    	streetSign = new TileEntityStreetSignBlock(config.streetSignID).setUnlocalizedName("streetSign");
+    	barrierPole = new TileEntityBarrierPoleBlock(config.barrierPoleID).setUnlocalizedName("barrierPole");
+    	barrierBlock = new TileEntityBarrierBlock(config.barrierBlockID).setUnlocalizedName("barrierBlock");
     	
     	
     	cementItem = new CementItem(config.cementItemID).setUnlocalizedName("cementItem");
@@ -223,6 +235,15 @@ public class Roads {
             proxy.addNames();
             
             GameRegistry.registerTileEntity(TileEntityTrafficLightEntity.class, "tileEntityTrafficLight");
+            GameRegistry.registerTileEntity(TileEntityLightBollardEntity.class, "tileEntityLightBollard");
+            GameRegistry.registerTileEntity(TileEntityRoadPainterEntity.class, "tileEntityRoadPainter");
+            GameRegistry.registerTileEntity(TileEntityStreetLamp1Entity.class, "tileEntityStreetLamp1");
+            GameRegistry.registerTileEntity(TileEntityStreetLamp2Entity.class, "tileEntityStreetLamp2");
+            GameRegistry.registerTileEntity(TileEntityStreetSignEntity.class, "tileEntityStreetSign");
+            GameRegistry.registerTileEntity(TileEntityTrafficHangingEntity.class, "tileEntityTrafficHanging");
+            GameRegistry.registerTileEntity(RBPaintGagBlockTE.class, "tileEntityRBPaintGagBlock");
+            GameRegistry.registerTileEntity(TileEntityBarrierPoleEntity.class, "tileEntityBarrierPole");
+            GameRegistry.registerTileEntity(TileEntityBarrierEntity.class, "tileEntityBarrier");
             
             LiquidContainerRegistry.registerLiquid(new LiquidContainerData(new LiquidStack(Roads.roadsTarStill, LiquidContainerRegistry.BUCKET_VOLUME), new ItemStack(Roads.tarBucketItem), new ItemStack(Item.bucketEmpty)));
             LanguageRegistry.instance().addStringLocalization("itemGroup.tabRoads", "en_US", "Roads");

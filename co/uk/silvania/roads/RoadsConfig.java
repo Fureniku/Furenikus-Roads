@@ -68,15 +68,21 @@ public class RoadsConfig {
 	public static int roadBlockOWID;
 	public static int roadBlockSTID;
 	public static int roadBlockOPID;
+	public static int roadBlockStopID;
+	public static int roadBlockPaintGagID;
+	public static int roadBlockJCUKID;
+	public static int roadBlockJCUSAID;
 	
 	public static int powerPoleID;
-	//public static int roadPainterID;
+	public static int roadPainterID;
 	public static int trafficLightID;
-	//public static int trafficHangingID;
-	//public static int lightBollardID;
-	//public static int streetLamp1ID;
-	//public static int streetLamp2ID;
-	//public static int streetSignID;
+	public static int trafficHangingID;
+	public static int lightBollardID;
+	public static int streetLamp1ID;
+	public static int streetLamp2ID;
+	public static int streetSignID;
+	public static int barrierPoleID;
+	public static int barrierBlockID;
 	
 	public static int cementItemID;
 	public static int cementDustID;
@@ -152,15 +158,21 @@ public class RoadsConfig {
 		roadBlockOWID = config.getBlock("Slow 2", 858).getInt();
 		roadBlockSTID = config.getBlock("Stop 1", 859).getInt();
 		roadBlockOPID = config.getBlock("Stop 2", 860).getInt();
+		roadBlockStopID = config.getBlock("Stop Paint", 861).getInt();
+		roadBlockPaintGagID = config.getBlock("Paint Gag (REQUIRED)", 862).getInt();
+		roadBlockJCUKID = config.getBlock("Junction Center UK", 863).getInt();
+		roadBlockJCUSAID = config.getBlock("Junction Center USA", 864).getInt();
 		
 		powerPoleID = config.getBlock("Power Pole", 870).getInt();
-		//roadPainterID = config.getBlock("Road Painter", 871).getInt();
+		roadPainterID = config.getBlock("Road Painter", 871).getInt();
 		trafficLightID = config.getBlock("Traffic Light", 872).getInt();
-		//trafficHangingID = config.getBlock("Traffic Light Hanging", 873).getInt();
-		//lightBollardID = config.getBlock("Light Bollard", 874).getInt();
-		//streetLamp1ID = config.getBlock("Street Lamp 1", 875).getInt();
-		//streetLamp2ID = config.getBlock("Street Lamp 2", 876).getInt();
-		//streetSignID = config.getBlock("Street Sign", 877).getInt();
+		trafficHangingID = config.getBlock("Traffic Light Hanging", 873).getInt();
+		lightBollardID = config.getBlock("Light Bollard", 874).getInt();
+		streetLamp1ID = config.getBlock("Street Lamp 1", 875).getInt();
+		streetLamp2ID = config.getBlock("Street Lamp 2", 876).getInt();
+		streetSignID = config.getBlock("Street Sign", 877).getInt();
+		barrierPoleID = config.getBlock("Barrier (Post)", 878).getInt();
+		barrierBlockID = config.getBlock("Barrier", 879).getInt();
 
 
 		//Item IDs
