@@ -31,6 +31,18 @@ public class CatsEyeSide extends Block {
     	blockIcon = iconRegister.registerIcon("Roads:CatsEye");
     }
     
+    /*
+     *         public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
+                int metadata = world.getBlockMetadata(x, y, z);
+                float f = 0.44F;
+                if ((metadata & 1) == 0)
+                  setBlockBounds(0.5F - f, 0.0F, 0.0F, 0.5F + f, 0.5F, 1.0F);
+                else
+                  setBlockBounds(0.0F, 0.0F, 0.5F - f, 1.0F, 0.5F, 0.5F + f);
+        }(non-Javadoc)
+     * @see net.minecraft.block.Block#onBlockPlacedBy(net.minecraft.world.World, int, int, int, net.minecraft.entity.EntityLiving, net.minecraft.item.ItemStack)
+     */
+    
     public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLiving par5EntityLiving, ItemStack par6ItemStack)
     {
         int l = determineOrientation(par1World, par2, par3, par4, par5EntityLiving);

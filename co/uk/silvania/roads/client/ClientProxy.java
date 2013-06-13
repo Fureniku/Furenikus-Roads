@@ -12,7 +12,7 @@ public class ClientProxy extends CommonProxy {
         @Override
         public void registerRenderThings() {
         	
-        	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTrafficLightEntity.class, new TileEntityTrafficLightRenderer());
+        	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTrafficLightEntity.class, new TileEntityTrafficLightRenderer(false));
         }
         
 }

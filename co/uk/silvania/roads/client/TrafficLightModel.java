@@ -125,6 +125,25 @@ public class TrafficLightModel extends ModelBase
     FrontBottomRight.render(f5);
   }
   
+  /*public void render(float f)
+  {
+    //super.render(f);
+    //setRotationAngles(f);
+    Base.render(f);
+    Pole.render(f);
+    LightBox.render(f);
+    Trim.render(f);
+    FrontTop.render(f);
+    FrontTopRight.render(f);
+    FrontTopLeft.render(f);
+    FrontMidLeft.render(f);
+    FrontMid.render(f);
+    FrontBottom.render(f);
+    FrontBottomLeft.render(f);
+    FrontMidRight.render(f);
+    FrontBottomRight.render(f);
+  }*/
+  
   private void setRotation(ModelRenderer model, float x, float y, float z)
   {
     model.rotateAngleX = x;

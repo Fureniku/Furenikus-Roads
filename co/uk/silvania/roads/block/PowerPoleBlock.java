@@ -524,12 +524,11 @@ import net.minecraft.world.World;
 public class PowerPoleBlock extends BlockRedstoneWire {
 
 	private Material material;
-
+	
 	public PowerPoleBlock(int id) {
 		super(id);
 		this.setCreativeTab(Roads.tabRoads);
         //this.setBlockBounds(0.4F, 0.0F, 0.4F, 0.6F, 1.0F, 0.6F);
-        this.material = Material.iron;
 	}
 	
     public void registerIcons(IconRegister iconRegister) {
