@@ -1,0 +1,60 @@
+package co.uk.silvania.roads.client.models;
+
+import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.entity.Entity;
+
+public class StreetSignModel extends ModelBase
+{
+  //fields
+    ModelRenderer Base;
+    ModelRenderer Pole;
+    ModelRenderer Shape1;
+  
+  public StreetSignModel()
+  {
+    textureWidth = 32;
+    textureHeight = 32;
+    
+      Base = new ModelRenderer(this, 4, 0);
+      Base.addBox(0F, 0F, 0F, 2, 16, 2);
+      Base.setRotationPoint(-1F, 8F, -1F);
+      Base.setTextureSize(32, 32);
+      Base.mirror = true;
+      setRotation(Base, 0F, 0F, 0F);
+      Pole = new ModelRenderer(this, 0, 0);
+      Pole.addBox(0F, 0F, 0F, 1, 24, 1);
+      Pole.setRotationPoint(-0.5F, -16F, -0.5F);
+      Pole.setTextureSize(32, 32);
+      Pole.mirror = true;
+      setRotation(Pole, 0F, 0F, 0F);
+      Shape1 = new ModelRenderer(this, 12, 7);
+      Shape1.addBox(0F, 0F, 0F, 8, 8, 1);
+      Shape1.setRotationPoint(-4F, -16.1F, -1F);
+      Shape1.setTextureSize(32, 32);
+      Shape1.mirror = true;
+      setRotation(Shape1, 0F, 0F, 0F);
+  }
+  
+  public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+  {
+    super.render(entity, f, f1, f2, f3, f4, f5);
+    setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+    Base.render(f5);
+    Pole.render(f5);
+    Shape1.render(f5);
+  }
+  
+  private void setRotation(ModelRenderer model, float x, float y, float z)
+  {
+    model.rotateAngleX = x;
+    model.rotateAngleY = y;
+    model.rotateAngleZ = z;
+  }
+  
+  public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
+  {
+    super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+  }
+
+}

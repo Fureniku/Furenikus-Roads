@@ -1,4 +1,4 @@
-package co.uk.silvania.roads.item;
+/*package co.uk.silvania.roads.item;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -73,4 +73,4 @@ public class StopPaint extends Item {
                 }
         }
 
-}
+}*/

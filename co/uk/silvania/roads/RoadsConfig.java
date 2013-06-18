@@ -83,6 +83,15 @@ public class RoadsConfig {
 	public static int streetSignID;
 	public static int barrierPoleID;
 	public static int barrierBlockID;
+	public static int barrierCornerID;
+	public static int roadSlope1ID;
+	public static int roadSlope2ID;
+	public static int roadSlope3ID;
+	public static int roadSlope4ID;
+	public static int roadSlope5ID;
+	public static int roadSlope6ID;
+	public static int roadSlope7ID;	
+	public static int roadSlopeHalfID;
 	
 	public static int cementItemID;
 	public static int cementDustID;
@@ -173,7 +182,15 @@ public class RoadsConfig {
 		streetSignID = config.getBlock("Street Sign", 877).getInt();
 		barrierPoleID = config.getBlock("Barrier (Post)", 878).getInt();
 		barrierBlockID = config.getBlock("Barrier", 879).getInt();
-
+		barrierCornerID = config.getBlock("Barrier (Corner)", 880).getInt();
+		roadSlope1ID = config.getBlock("Road Slope 1", 881).getInt();
+		roadSlope2ID = config.getBlock("Road Slope 2", 882).getInt();
+		roadSlope3ID = config.getBlock("Road Slope 3", 883).getInt();
+		roadSlope4ID = config.getBlock("Road Slope 4", 884).getInt();
+		roadSlope5ID = config.getBlock("Road Slope 5", 885).getInt();
+		roadSlope6ID = config.getBlock("Road Slope 6", 886).getInt();
+		roadSlope7ID = config.getBlock("Road Slope 7", 887).getInt();
+		roadSlopeHalfID = config.getBlock("Half Slope", 888).getInt();
 
 		//Item IDs
 		cementItemID = config.getItem("Cement", 16700).getInt();

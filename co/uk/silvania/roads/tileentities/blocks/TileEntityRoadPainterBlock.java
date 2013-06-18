@@ -1,0 +1,42 @@
+package co.uk.silvania.roads.tileentities.blocks;
+
+import co.uk.silvania.roads.Roads;
+import co.uk.silvania.roads.tileentities.entities.TileEntityRoadPainterEntity;
+import net.minecraft.block.BlockContainer;
+import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
+
+public class TileEntityRoadPainterBlock extends BlockContainer {
+
+	public TileEntityRoadPainterBlock(int id) {
+		super(id, Material.iron);
+		this.setCreativeTab(Roads.tabRoads);
+		this.setHardness(1.0F);
+	}
+
+	@Override
+	public TileEntity createNewTileEntity(World world) {
+		return new TileEntityRoadPainterEntity();
+	}
+	
+	@Override
+	public int getRenderType() {
+		return -1;
+	}
+	
+	@Override
+	public boolean isOpaqueCube() {
+		return false;
+	}
+	
+	public boolean renderAsNormalBlock() {
+		return false;
+	}
+	
+	public void registerIcons(IconRegister icon) {
+		this.blockIcon = icon.registerIcon("Roads:CementBlock");
+	}
+
+}

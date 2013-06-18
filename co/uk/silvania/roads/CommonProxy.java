@@ -1,7 +1,7 @@
 package co.uk.silvania.roads;
 
 import co.uk.silvania.roads.block.ItemSideWalkBlocks;
-import co.uk.silvania.roads.tileentities.TileEntityTrafficLightEntity;
+import co.uk.silvania.roads.tileentities.entities.TileEntityTrafficLightEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -88,6 +88,15 @@ public class CommonProxy {
             GameRegistry.registerBlock(Roads.streetSign, "streetSign");
             GameRegistry.registerBlock(Roads.barrierPole, "barrierPole");
             GameRegistry.registerBlock(Roads.barrierBlock, "barrierBlock");
+            GameRegistry.registerBlock(Roads.barrierCorner, "barrierCorner");
+            GameRegistry.registerBlock(Roads.roadSlope1, "roadSlope1");
+            GameRegistry.registerBlock(Roads.roadSlope2, "roadSlope2");
+            GameRegistry.registerBlock(Roads.roadSlope3, "roadSlope3");
+            GameRegistry.registerBlock(Roads.roadSlope4, "roadSlope4");
+            GameRegistry.registerBlock(Roads.roadSlope5, "roadSlope5");
+            GameRegistry.registerBlock(Roads.roadSlope6, "roadSlope6");
+            GameRegistry.registerBlock(Roads.roadSlope7, "roadSlope7");
+            GameRegistry.registerBlock(Roads.roadSlopeHalf, "roadSlopeHalf");
             
             GameRegistry.registerItem(Roads.cementItem, "cementItem");
             GameRegistry.registerItem(Roads.cementDustItem, "cementDustItem");
@@ -221,7 +230,7 @@ public class CommonProxy {
             LanguageRegistry.addName(Roads.roadBlockStop, "Stop Paint");
             LanguageRegistry.addName(Roads.roadBlockJCUK, "Junction Center (Leftie)");
             LanguageRegistry.addName(Roads.roadBlockJCUSA, "Junction Center (Rightie)");
-            
+                        
             LanguageRegistry.addName(Roads.powerPole, "Redstone Post");
             LanguageRegistry.addName(Roads.roadPainter, "Road Painter");
             LanguageRegistry.addName(Roads.trafficLight, "Traffic Light");
@@ -232,6 +241,15 @@ public class CommonProxy {
             LanguageRegistry.addName(Roads.streetSign, "Street Sign");
             LanguageRegistry.addName(Roads.barrierPole, "Barrier (Post)");
             LanguageRegistry.addName(Roads.barrierBlock, "Barrier");
+            LanguageRegistry.addName(Roads.barrierCorner, "Barrier (Corner)");
+            LanguageRegistry.addName(Roads.roadSlope1, "Road Slope 1/4");
+            LanguageRegistry.addName(Roads.roadSlope2, "Road Slope 2/4");
+            LanguageRegistry.addName(Roads.roadSlope3, "Road Slope 3/4");
+            LanguageRegistry.addName(Roads.roadSlope4, "Road Slope 4/4");
+            LanguageRegistry.addName(Roads.roadSlope5, "Road Slope 1/2");
+            LanguageRegistry.addName(Roads.roadSlope6, "Road Slope 2/2");
+            LanguageRegistry.addName(Roads.roadSlope7, "Road Slope Full");
+            LanguageRegistry.addName(Roads.roadSlopeHalf, "Road Slope Half");
             
             LanguageRegistry.addName(Roads.cementItem, "Cement");
             LanguageRegistry.addName(Roads.cementDustItem, "Cement Dust");
