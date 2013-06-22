@@ -24,11 +24,29 @@ public class SideWalkKerbed1OuterCorner extends Block {
 	@SideOnly(Side.CLIENT)
 	private Icon sides;
 	@SideOnly(Side.CLIENT)
+	private Icon sidesa;
+	@SideOnly(Side.CLIENT)
+	private Icon sidesb;
+	@SideOnly(Side.CLIENT)
+	private Icon sidesc;
+	@SideOnly(Side.CLIENT)
+	private Icon sidesd;
+	@SideOnly(Side.CLIENT)
+	private Icon sidese;
+	@SideOnly(Side.CLIENT)
+	private Icon base;
+	@SideOnly(Side.CLIENT)
 	private Icon top;
     
 	public void registerIcons(IconRegister iconRegister) {
         this.top = iconRegister.registerIcon("Roads:SideWalkKerbed1OuterCorner");
         this.sides = iconRegister.registerIcon("Roads:SideWalkKerbed1");
+        this.sidesa = iconRegister.registerIcon("Roads:SideWalkKerbed1a");
+        this.sidesb = iconRegister.registerIcon("Roads:SideWalkKerbed1InnerCorner");
+        this.sidesc = iconRegister.registerIcon("Roads:SideWalkKerbed1InnerCornera");
+        this.sidesd = iconRegister.registerIcon("Roads:SideWalkKerbed1InnerCornerb");
+        this.sidese = iconRegister.registerIcon("Roads:SideWalkKerbed1b");
+        this.base = iconRegister.registerIcon("Roads:sidewalkBlocks1");
 	}
 	
     public int getRenderType() {
@@ -58,8 +76,44 @@ public class SideWalkKerbed1OuterCorner extends Block {
            	return top;
         } else if (k == 5 && (side == 1)) {
            	return top;
-        }
-   		return sides;
+           	//Side textures for rotation 1
+        } else if (k == 2 && side == 2) {
+        	return sides;
+        } else if (k == 2 && side == 4) {
+        	return sidesb;
+        } else if (k == 2 && side == 3) {
+        	return sidesb;
+        } else if (k == 2 && side == 5) {
+        	return sidesa;
+        	//Side textures for rotation 2
+        } else if (k == 3 && side == 2) {
+        	return sidesb;
+        } else if (k == 3 && side == 4) {
+        	return sidese;
+        } else if (k == 3 && side == 3) {
+        	return sides;
+        } else if (k == 3 && side == 5) {
+        	return sidesd;
+        	//Side textures for rotation 3
+        } else if (k == 4 && side == 2) {
+        	return sidesa;
+        } else if (k == 4 && side == 4) {
+        	return sides;
+        } else if (k == 4 && side == 3) {
+        	return sidesb;
+        } else if (k == 4 && side == 5) {
+        	return sidesb;
+        	//Side textures for rotation 4
+        } else if (k == 5 && side == 2) {
+        	return sidesd;
+        } else if (k == 5 && side == 4) {
+        	return sidesb;
+        } else if (k == 5 && side == 3) {
+        	return sidese;
+        } else if (k == 5 && side == 5) {
+        	return sides;
+        } else
+   		return base;
     }
 
     public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLiving entity, ItemStack item) {
