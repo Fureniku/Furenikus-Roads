@@ -1,7 +1,10 @@
 package co.uk.silvania.roads.block;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 import co.uk.silvania.roads.Roads;
 import net.minecraft.block.Block;
@@ -12,12 +15,16 @@ import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Direction;
+import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class PowerPoleBlock extends BlockRedstoneWire {
 
 	private Material material;
+	
+	private boolean wiresProvidePower = true;
+    private Set blocksNeedingUpdate = new HashSet();
 	
 	public PowerPoleBlock(int id) {
 		super(id);
@@ -28,7 +35,8 @@ public class PowerPoleBlock extends BlockRedstoneWire {
     public void registerIcons(IconRegister iconRegister) {
         blockIcon = iconRegister.registerIcon("Roads:CementBlock");
     }
-    
+}
+    /*
     @Override
     public int getRenderType()
     {
@@ -117,5 +125,149 @@ public class PowerPoleBlock extends BlockRedstoneWire {
     {
         return Roads.powerPole.blockID;
     }
+    
+    private void notifyWireNeighborsOfNeighborChange(World par1World, int par2, int par3, int par4)
+    {
+        if (par1World.getBlockId(par2, par3, par4) == this.blockID)
+        {
+            par1World.notifyBlocksOfNeighborChange(par2, par3, par4, this.blockID);
+            par1World.notifyBlocksOfNeighborChange(par2 - 1, par3, par4, this.blockID);
+            par1World.notifyBlocksOfNeighborChange(par2 + 1, par3, par4, this.blockID);
+            par1World.notifyBlocksOfNeighborChange(par2, par3, par4 - 1, this.blockID);
+            par1World.notifyBlocksOfNeighborChange(par2, par3, par4 + 1, this.blockID);
+            par1World.notifyBlocksOfNeighborChange(par2, par3 - 1, par4, this.blockID);
+            par1World.notifyBlocksOfNeighborChange(par2, par3 + 1, par4, this.blockID);
+        }
+    }
+    
+    @Override
+    public void onBlockAdded(World par1World, int par2, int par3, int par4)
+    {
+        super.onBlockAdded(par1World, par2, par3, par4);
+
+        if (!par1World.isRemote)
+        {
+            this.updateAndPropagateCurrentStrength(par1World, par2, par3, par4);
+            this.notifyWireNeighborsOfNeighborChange(par1World, par2 + 1, par3, par4);
+            this.notifyWireNeighborsOfNeighborChange(par1World, par2 - 1, par3, par4);
+
+        }
+    }
+    
+    @Override
+    public int isProvidingStrongPower(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
+    {
+        return !this.wiresProvidePower ? 0 : this.isProvidingWeakPower(par1IBlockAccess, par2, par3, par4, par5);
+    }
+    
+    private void updateAndPropagateCurrentStrength(World par1World, int par2, int par3, int par4)
+    {
+        this.calculateCurrentChanges(par1World, par2, par3, par4, par2, par3, par4);
+        ArrayList arraylist = new ArrayList(this.blocksNeedingUpdate);
+        this.blocksNeedingUpdate.clear();
+
+        for (int l = 0; l < arraylist.size(); ++l)
+        {
+            ChunkPosition chunkposition = (ChunkPosition)arraylist.get(l);
+            par1World.notifyBlocksOfNeighborChange(chunkposition.x, chunkposition.y, chunkposition.z, this.blockID);
+        }
+    }
+    
+    @Override
+    public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5)
+    {
+        if (!par1World.isRemote)
+        {
+        	this.updateAndPropagateCurrentStrength(par1World, par2, par3, par4);
+
+            super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
+        }
+    }
+    
+    @Override
+    public int isProvidingWeakPower(IBlockAccess par1IBlockAccess, int x, int y, int z, int side)
+    {
+    	if (!this.wiresProvidePower)
+        {
+            return 0;
+        }
+        else
+        {
+        	int i1 = par1IBlockAccess.getBlockMetadata(x, y, z);
+            if (i1 == 0)
+            {
+                return 0;
+            }
+            else
+            {
+            	boolean flag = isPoweredOrRepeater(par1IBlockAccess, x, y-1, z, -1);
+          		boolean flag2 = par1IBlockAccess.isBlockNormalCube(x, y - 1, z);
+                if(!flag)
+                	return i1;
+                else
+                	return 0;
+            }
+        }
+    }
+    
+    private void calculateCurrentChanges(World par1World, int par2, int par3, int par4, int par5, int par6, int par7)
+    {
+        int k1 = par1World.getBlockMetadata(par2, par3, par4);
+        byte b0 = 0;
+        int l1 = this.getMaxCurrentStrength(par1World, par5, par6, par7, b0);
+        this.wiresProvidePower = false;
+        int i2 = par1World.getStrongestIndirectPower(par2, par3, par4);
+        this.wiresProvidePower = true;
+
+        if (i2 > 0 && i2 > l1 - 3)
+        {
+            l1 = i2;
+        }
+
+        int j2 = 0;
+
+        j2 = this.getMaxCurrentStrength(par1World, par2, par3 - 1, par4, j2);
+
+        if (j2 > l1)
+        {
+            l1 = j2 - 3;
+        }
+        else if (l1 > 3)
+        {
+            l1 -= 3;
+        }
+        else
+        {
+            l1 = 0;
+        }
+
+        if (i2 > l1 - 3)
+        {
+            l1 = i2;
+        }
+        if(l1 < 0)
+        	l1 = 0;
+
+        if (k1 != l1)
+        {
+            par1World.setBlockMetadataWithNotify(par2, par3, par4, l1, 2);
+            this.blocksNeedingUpdate.add(new ChunkPosition(par2, par3, par4));
+            this.blocksNeedingUpdate.add(new ChunkPosition(par2, par3 + 1, par4));
+        }
+    }
+    
+    private int getMaxCurrentStrength(World par1World, int par2, int par3, int par4, int par5)
+    {
+        if (par1World.getBlockId(par2, par3, par4) != this.blockID)
+        {
+            return par5;
+        }
+        else
+        {
+            int i1 = par1World.getBlockMetadata(par2, par3, par4);
+            return i1 > par5 ? i1 : par5;
+        }
+    }
 
 }
+*/

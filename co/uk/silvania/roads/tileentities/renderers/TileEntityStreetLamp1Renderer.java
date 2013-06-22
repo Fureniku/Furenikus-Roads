@@ -49,7 +49,7 @@ public class TileEntityStreetLamp1Renderer extends TileEntitySpecialRenderer {
 			meta = 270;
 		}
 		
-		bindTextureByName("/mods/roads/textures/blocks/StreetLamp.png");
+		bindTextureByName("/mods/Roads/textures/blocks/StreetLamp.png");
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
 		GL11.glRotatef(meta, 0.0F, 1.0F, 0.0F);

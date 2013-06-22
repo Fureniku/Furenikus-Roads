@@ -47,7 +47,7 @@ public class TileEntityBarrierCornerRenderer extends TileEntitySpecialRenderer {
 			meta = 270;
 		}
 		
-		bindTextureByName("/mods/roads/textures/blocks/Barrier.png");
+		bindTextureByName("/mods/Roads/textures/blocks/Barrier.png");
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
 		GL11.glRotatef(meta, 0.0F, 1.0F, 0.0F);

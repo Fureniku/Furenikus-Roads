@@ -49,9 +49,11 @@ public class TileEntityTrafficLightRenderer extends TileEntitySpecialRenderer {
 			meta = 270;
 		}
 		if (this.powered == true) {
-			bindTextureByName("/mods/roads/textures/blocks/TrafficLightPoleRed.png");
+			bindTextureByName("/mods/Roads/textures/blocks/TrafficLightPoleRed.png");
+			System.out.println("Red Light!");
 		} else {
-			bindTextureByName("/mods/roads/textures/blocks/TrafficLightPoleGreen.png");
+			bindTextureByName("/mods/Roads/textures/blocks/TrafficLightPoleGreen.png");
+			System.out.println("Green Light!");
 		}
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);

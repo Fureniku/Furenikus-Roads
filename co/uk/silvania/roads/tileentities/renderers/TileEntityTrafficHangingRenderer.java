@@ -48,9 +48,9 @@ public class TileEntityTrafficHangingRenderer extends TileEntitySpecialRenderer 
 			meta = 270;
 		}
 		if (this.powered == true) {
-			bindTextureByName("/mods/roads/textures/blocks/TrafficHangingRed.png");
+			bindTextureByName("/mods/Roads/textures/blocks/TrafficHangingRed.png");
 		} else {
-			bindTextureByName("/mods/roads/textures/blocks/TrafficHangingGreen.png");
+			bindTextureByName("/mods/Roads/textures/blocks/TrafficHangingGreen.png");
 		}
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
