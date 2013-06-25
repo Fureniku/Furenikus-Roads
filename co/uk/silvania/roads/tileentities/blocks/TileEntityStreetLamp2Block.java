@@ -24,11 +24,7 @@ public class TileEntityStreetLamp2Block extends BlockContainer {
 		this.setCreativeTab(Roads.tabRoads);
 		this.setHardness(1.0F);
 	    this.powered = par2;
-	    
-        if (par2)
-        {
-            this.setLightValue(1.0F);
-        }
+        this.setLightValue(1.0F);
 	}
 
 	@Override

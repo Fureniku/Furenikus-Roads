@@ -3,7 +3,8 @@ package co.uk.silvania.roads.tileentities.renderers;
 import org.lwjgl.opengl.GL11;
 
 import co.uk.silvania.roads.Roads;
-import co.uk.silvania.roads.client.models.RoadSlope4Model;
+import co.uk.silvania.roads.client.models.RoadSlope5Model;
+import co.uk.silvania.roads.client.models.RoadsRampModel;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import net.minecraft.block.Block;
@@ -17,12 +18,12 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 
-public class TileEntityRoadSlope4Renderer extends TileEntitySpecialRenderer {
+public class TileEntityRoadSlopeSWSSRenderer extends TileEntitySpecialRenderer {
 	
-	private final RoadSlope4Model model;
+	private final RoadsRampModel model;
 		
-	public TileEntityRoadSlope4Renderer() {
-		this.model = new RoadSlope4Model();
+	public TileEntityRoadSlopeSWSSRenderer() {
+		this.model = new RoadsRampModel();
 	}
 	
 	@Override
@@ -46,7 +47,7 @@ public class TileEntityRoadSlope4Renderer extends TileEntitySpecialRenderer {
 			meta = 270;
 		}
 		
-		bindTextureByName("/mods/Roads/textures/blocks/RoadSlope.png");
+		bindTextureByName("/mods/Roads/textures/blocks/RoadsRampSWSS.png");
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
 		GL11.glRotatef(meta, 0.0F, 1.0F, 0.0F);

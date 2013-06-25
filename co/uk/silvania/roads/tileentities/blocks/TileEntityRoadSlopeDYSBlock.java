@@ -1,7 +1,7 @@
 package co.uk.silvania.roads.tileentities.blocks;
 
 import co.uk.silvania.roads.Roads;
-import co.uk.silvania.roads.tileentities.entities.TileEntityRoadSlope5Entity;
+import co.uk.silvania.roads.tileentities.entities.TileEntityRoadSlopeDYSEntity;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -12,9 +12,9 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class TileEntityRoadSlope5Block extends BlockContainer {
+public class TileEntityRoadSlopeDYSBlock extends BlockContainer {
 
-	public TileEntityRoadSlope5Block(int id) {
+	public TileEntityRoadSlopeDYSBlock(int id) {
 		super(id, Material.iron);
 		this.setCreativeTab(Roads.tabRoads);
     	this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.5F, 1.0F);
@@ -23,7 +23,7 @@ public class TileEntityRoadSlope5Block extends BlockContainer {
 
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new TileEntityRoadSlope5Entity();
+		return new TileEntityRoadSlopeDYSEntity();
 	}
 	
 	@Override

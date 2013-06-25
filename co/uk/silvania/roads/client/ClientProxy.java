@@ -22,13 +22,13 @@ public class ClientProxy extends CommonProxy {
         	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBarrierEntity.class, new TileEntityBarrierRenderer());
         	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBarrierCornerEntity.class, new TileEntityBarrierCornerRenderer());
         	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHalfSlopeEntity.class, new TileEntityHalfSlopeRenderer());
-        	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRoadSlope1Entity.class, new TileEntityRoadSlope1Renderer());
-        	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRoadSlope2Entity.class, new TileEntityRoadSlope2Renderer());
-        	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRoadSlope3Entity.class, new TileEntityRoadSlope3Renderer());
-        	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRoadSlope4Entity.class, new TileEntityRoadSlope4Renderer());
-        	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRoadSlope5Entity.class, new TileEntityRoadSlope5Renderer());
-        	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRoadSlope6Entity.class, new TileEntityRoadSlope6Renderer());
-        	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRoadSlope7Entity.class, new TileEntityRoadSlope7Renderer());
+        	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRoadSlopeEntity.class, new TileEntityRoadSlopeRenderer());
+        	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRoadSlopeDYSEntity.class, new TileEntityRoadSlopeDYSRenderer());
+        	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRoadSlopeSWCEntity.class, new TileEntityRoadSlopeSWCRenderer());
+        	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRoadSlopeSWSEntity.class, new TileEntityRoadSlopeSWSRenderer());
+        	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRoadSlopeSWSSEntity.class, new TileEntityRoadSlopeSWSSRenderer());
+        	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRoadSlopeKerb1Entity.class, new TileEntityRoadSlopeKerb1Renderer());
+        	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRoadSlopeKerb2Entity.class, new TileEntityRoadSlopeKerb2Renderer());
         }
         
 }
