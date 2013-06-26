@@ -8,10 +8,12 @@ import co.uk.silvania.roads.tileentities.blocks.*;
 import co.uk.silvania.roads.tileentities.entities.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockSign;
 import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntitySign;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.Property;
@@ -27,6 +29,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -38,6 +41,7 @@ public class Roads {
 	
     @Instance("FlenixRoads")
     public static Roads instance;
+    public static GuiHandler roadsGuiHandler = new GuiHandler();
 
     @SidedProxy(clientSide="co.uk.silvania.roads.client.ClientProxy", serverSide="co.uk.silvania.roads.CommonProxy")
     public static CommonProxy proxy;
@@ -132,7 +136,8 @@ public class Roads {
 	public static Block roadSlope5;
 	public static Block roadSlope6;
 	public static Block roadSlope7;
-	public static Block roadSlopeHalf;
+	public static Block roadSlope8;
+	public static Block roadSign;
 	
 	//Items Start Here
 	public static Item cementItem;
@@ -149,6 +154,7 @@ public class Roads {
     @PreInit
     public void preInit(FMLPreInitializationEvent event) {
     	RoadsConfig config = new RoadsConfig();
+    	NetworkRegistry.instance().registerGuiHandler(this, roadsGuiHandler);
     	
     	RoadsConfig.loadConfig(event); 
 
@@ -236,8 +242,9 @@ public class Roads {
     	roadSlope5 = new TileEntityRoadSlopeSWSSBlock(config.roadSlope5ID).setUnlocalizedName("roadSlope5");
     	roadSlope6 = new TileEntityRoadSlopeKerb1Block(config.roadSlope6ID).setUnlocalizedName("roadSlope6");
     	roadSlope7 = new TileEntityRoadSlopeKerb2Block(config.roadSlope7ID).setUnlocalizedName("roadSlope7");
-    	roadSlopeHalf = new TileEntityHalfSlopeBlock(config.roadSlopeHalfID).setUnlocalizedName("roadSlopeHalf");
-    	
+    	roadSlope8 = new TileEntityHalfSlopeBlock(config.roadSlope8ID).setUnlocalizedName("roadSlope8");
+    	roadSign = new TileEntityRoadSignBlock(config.roadSignID, TileEntityRoadSignEntity.class, true).setUnlocalizedName("roadSign");
+
     	
     	cementItem = new CementItem(config.cementItemID).setUnlocalizedName("cementItem");
     	cementDustItem = new CementDustItem(config.cementDustID).setUnlocalizedName("cementDustItem");
@@ -273,6 +280,7 @@ public class Roads {
             GameRegistry.registerTileEntity(TileEntityRoadSlopeKerb1Entity.class, "tileEntityRoadSlope6");
             GameRegistry.registerTileEntity(TileEntityRoadSlopeKerb2Entity.class, "tileEntityRoadSlope7");
             GameRegistry.registerTileEntity(TileEntityHalfSlopeEntity.class, "tileEntityHalfSlope");
+            GameRegistry.registerTileEntity(TileEntityRoadSignEntity.class, "tileEntityRoadSign");
             
             LiquidContainerRegistry.registerLiquid(new LiquidContainerData(new LiquidStack(Roads.roadsTarStill, LiquidContainerRegistry.BUCKET_VOLUME), new ItemStack(Roads.tarBucketItem), new ItemStack(Item.bucketEmpty)));
             LanguageRegistry.instance().addStringLocalization("itemGroup.tabRoads", "en_US", "Roads");

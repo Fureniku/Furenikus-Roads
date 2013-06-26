@@ -96,7 +96,8 @@ public class CommonProxy {
             GameRegistry.registerBlock(Roads.roadSlope5, "roadSlope5");
             GameRegistry.registerBlock(Roads.roadSlope6, "roadSlope6");
             GameRegistry.registerBlock(Roads.roadSlope7, "roadSlope7");
-            GameRegistry.registerBlock(Roads.roadSlopeHalf, "roadSlopeHalf");
+            GameRegistry.registerBlock(Roads.roadSlope8, "roadSlopeHalf");
+            GameRegistry.registerBlock(Roads.roadSign, "roadSign");
             
             GameRegistry.registerItem(Roads.cementItem, "cementItem");
             GameRegistry.registerItem(Roads.cementDustItem, "cementDustItem");
@@ -242,14 +243,15 @@ public class CommonProxy {
             LanguageRegistry.addName(Roads.barrierPole, "Barrier (Post)");
             LanguageRegistry.addName(Roads.barrierBlock, "Barrier");
             LanguageRegistry.addName(Roads.barrierCorner, "Barrier (Corner)");
-            LanguageRegistry.addName(Roads.roadSlope1, "Road Slope 1/4");
-            LanguageRegistry.addName(Roads.roadSlope2, "Road Slope 2/4");
-            LanguageRegistry.addName(Roads.roadSlope3, "Road Slope 3/4");
-            LanguageRegistry.addName(Roads.roadSlope4, "Road Slope 4/4");
-            LanguageRegistry.addName(Roads.roadSlope5, "Road Slope 1/2");
-            LanguageRegistry.addName(Roads.roadSlope6, "Road Slope 2/2");
-            LanguageRegistry.addName(Roads.roadSlope7, "Road Slope Full");
-            LanguageRegistry.addName(Roads.roadSlopeHalf, "Road Slope Half");
+            LanguageRegistry.addName(Roads.roadSlope1, "Road Slope Plain");
+            LanguageRegistry.addName(Roads.roadSlope2, "Road Slope Double Yellow Stripe");
+            LanguageRegistry.addName(Roads.roadSlope3, "Road Slope Single White Stripe");
+            LanguageRegistry.addName(Roads.roadSlope4, "Road Slope Side White Stripe");
+            LanguageRegistry.addName(Roads.roadSlope5, "Road Slope Small White Stripe");
+            LanguageRegistry.addName(Roads.roadSlope6, "Road Slope Kerb (Right)");
+            LanguageRegistry.addName(Roads.roadSlope7, "Road Slope Kerb (Left)");
+            LanguageRegistry.addName(Roads.roadSlope8, "Road Slope Half");
+            LanguageRegistry.addName(Roads.roadSign, "Street Sign");
             
             LanguageRegistry.addName(Roads.cementItem, "Cement");
             LanguageRegistry.addName(Roads.cementDustItem, "Cement Dust");

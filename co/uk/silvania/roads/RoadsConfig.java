@@ -91,7 +91,8 @@ public class RoadsConfig {
 	public static int roadSlope5ID;
 	public static int roadSlope6ID;
 	public static int roadSlope7ID;	
-	public static int roadSlopeHalfID;
+	public static int roadSlope8ID;
+	public static int roadSignID;
 	
 	public static int cementItemID;
 	public static int cementDustID;
@@ -190,7 +191,8 @@ public class RoadsConfig {
 		roadSlope5ID = config.getBlock("Road Slope 5", 885).getInt();
 		roadSlope6ID = config.getBlock("Road Slope 6", 886).getInt();
 		roadSlope7ID = config.getBlock("Road Slope 7", 887).getInt();
-		roadSlopeHalfID = config.getBlock("Half Slope", 888).getInt();
+		roadSlope8ID = config.getBlock("Road Slope 8", 888).getInt();
+		roadSignID = config.getBlock("Road Sign", 889).getInt();
 
 		//Item IDs
 		cementItemID = config.getItem("Cement", 16700).getInt();
