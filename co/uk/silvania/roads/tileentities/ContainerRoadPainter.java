@@ -5,16 +5,34 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.InventoryCraftResult;
+import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.inventory.Slot;
+import net.minecraft.inventory.SlotCrafting;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
 public class ContainerRoadPainter extends Container {
 
 	protected TileEntityRoadPainterEntity tileEntity;
-	private IInventory roadPainterInventory;
+	private IInventory craftResult;
+	private InventoryCrafting craftMatrix;
+	private World worldObj;
+	private EntityPlayer player;
+	private int posX;
+	private int posY;
+	private int posZ;
 
-	public ContainerRoadPainter (InventoryPlayer inventoryPlayer, TileEntityRoadPainterEntity te) {
+	public ContainerRoadPainter (InventoryPlayer inventoryPlayer, TileEntityRoadPainterEntity te, World world, int x, int y, int z) {
+		craftMatrix = new InventoryCrafting(this, 5, 5);
+		craftResult = new InventoryCraftResult();
 		tileEntity = te;
+		worldObj = world;
+		posX = x;
+		posY = y;
+		posZ = z;
+		this.addSlotToContainer(new SlotCrafting(player, craftMatrix, craftResult, 0, 131, 36));
+				
 		//Main Storage
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 5; j++) {
@@ -41,7 +59,24 @@ public class ContainerRoadPainter extends Container {
                     addSlotToContainer(new Slot(inventoryPlayer, o, 8 + o * 18, 161));
             }
     }
-
+    
+    public void onCraftMatrixChanged(IInventory iinventory) {
+             craftResult.setInventorySlotContents(0, RoadPainterCraftingManager.getInstance().findMatchingRecipe(craftMatrix, worldObj));
+    }
+    
+    public void onCraftGuiClosed(EntityPlayer entityplayer) {
+    	super.onCraftGuiClosed(entityplayer);
+    	if(worldObj.isRemote) {
+    		return;
+    	}
+    	for(int i = 0; i < 25; i++) {
+    		ItemStack itemstack = craftMatrix.getStackInSlot(i);
+    		if(itemstack != null) {
+    			entityplayer.dropPlayerItem(itemstack);
+    		}
+    	}
+    }
+    
     @Override
     public ItemStack transferStackInSlot(EntityPlayer player, int slot) {
             ItemStack stack = null;
@@ -76,6 +111,6 @@ public class ContainerRoadPainter extends Container {
     }
     public IInventory getRoadPainterInventory()
     {
-        return this.roadPainterInventory;
+        return this.craftResult;
     }
 }

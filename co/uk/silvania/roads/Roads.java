@@ -35,7 +35,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-@Mod(modid="FlenixRoads", name="FlenixRoads", version="0.0.2")
+@Mod(modid="FlenixRoads", name="FlenixRoads", version="0.4.0")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false)
 public class Roads { 
 	
@@ -138,6 +138,7 @@ public class Roads {
 	public static Block roadSlope7;
 	public static Block roadSlope8;
 	public static Block roadSign;
+	public static Block roadBarrier;
 	
 	//Items Start Here
 	public static Item cementItem;
@@ -244,6 +245,7 @@ public class Roads {
     	roadSlope7 = new TileEntityRoadSlopeKerb2Block(config.roadSlope7ID).setUnlocalizedName("roadSlope7");
     	roadSlope8 = new TileEntityHalfSlopeBlock(config.roadSlope8ID).setUnlocalizedName("roadSlope8");
     	roadSign = new TileEntityRoadSignBlock(config.roadSignID, TileEntityRoadSignEntity.class, true).setUnlocalizedName("roadSign");
+    	roadBarrier = new TileEntityRoadBarrierBlock(config.roadBarrierID).setUnlocalizedName("roadBarrier");
 
     	
     	cementItem = new CementItem(config.cementItemID).setUnlocalizedName("cementItem");

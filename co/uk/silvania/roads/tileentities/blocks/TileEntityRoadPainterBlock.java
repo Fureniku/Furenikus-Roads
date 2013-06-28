@@ -15,6 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class TileEntityRoadPainterBlock extends BlockContainer {
@@ -116,6 +117,18 @@ public class TileEntityRoadPainterBlock extends BlockContainer {
 			}
 		}
 	}
+	
+    public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
+    	int meta = world.getBlockMetadata(x, y, z);
+    	if ((meta) == 3)
+    		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.6F, 1.0F);
+    	else if ((meta) == 5)
+            setBlockBounds(0.875F, 0.0F, 0.0F, 1.0F, 1.6F, 1.0F);
+    	else if ((meta) == 2)
+    		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.6F, 1.0F);
+    	else
+    		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.6F, 1.0F);
+    }
       
 	
 	public void registerIcons(IconRegister icon) {

@@ -30,7 +30,7 @@ public class ItemSideWalkBlocks extends ItemBlock {
 				name = "3";
 				break;
 			}
-			/*case 4: {
+			case 4: {
 				name = "4";
 				break;
 			}
@@ -38,7 +38,7 @@ public class ItemSideWalkBlocks extends ItemBlock {
 				name = "5";
 				break;
 			}
-			case 6: {
+			/*case 6: {
 				name = "6";
 				break;
 			}

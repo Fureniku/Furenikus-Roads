@@ -98,6 +98,7 @@ public class CommonProxy {
             GameRegistry.registerBlock(Roads.roadSlope7, "roadSlope7");
             GameRegistry.registerBlock(Roads.roadSlope8, "roadSlopeHalf");
             GameRegistry.registerBlock(Roads.roadSign, "roadSign");
+            GameRegistry.registerBlock(Roads.roadBarrier, "roadBarrier");
             
             GameRegistry.registerItem(Roads.cementItem, "cementItem");
             GameRegistry.registerItem(Roads.cementDustItem, "cementDustItem");
@@ -185,7 +186,8 @@ public class CommonProxy {
             LanguageRegistry.addName(new ItemStack(Roads.sidewalkBlocks, 1, 0), "Sidewalk 1");
             LanguageRegistry.addName(new ItemStack(Roads.sidewalkBlocks, 1, 1), "Sidewalk 2");
             LanguageRegistry.addName(new ItemStack(Roads.sidewalkBlocks, 1, 2), "Sidewalk 3");
-            LanguageRegistry.addName(new ItemStack(Roads.sidewalkBlocks, 1, 3), "Sidewalk 4");
+            LanguageRegistry.addName(new ItemStack(Roads.sidewalkBlocks, 1, 3), "Concrete");
+            LanguageRegistry.addName(new ItemStack(Roads.sidewalkBlocks, 1, 4), "Full Road Block");
 
             LanguageRegistry.addName(Roads.roadBlockDYS, "Tarmac (Double Yellow Stripe)");
             LanguageRegistry.addName(Roads.roadBlockSYS, "Tarmac (Single Yellow Stripe)");

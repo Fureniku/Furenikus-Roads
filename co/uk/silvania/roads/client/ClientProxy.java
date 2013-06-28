@@ -30,6 +30,7 @@ public class ClientProxy extends CommonProxy {
         	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRoadSlopeKerb1Entity.class, new TileEntityRoadSlopeKerb1Renderer());
         	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRoadSlopeKerb2Entity.class, new TileEntityRoadSlopeKerb2Renderer());
         	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRoadPainterEntity.class, new TileEntityRoadPainterRenderer());
+        	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRoadBarrierEntity.class, new TileEntityRoadBarrierRenderer());
         }
         
 }

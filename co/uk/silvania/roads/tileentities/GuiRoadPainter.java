@@ -3,6 +3,7 @@ package co.uk.silvania.roads.tileentities;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.StatCollector;
+import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
@@ -10,8 +11,8 @@ import co.uk.silvania.roads.tileentities.entities.TileEntityRoadPainterEntity;
 
 public class GuiRoadPainter extends GuiContainer {
 
-        public GuiRoadPainter (InventoryPlayer inventoryPlayer, TileEntityRoadPainterEntity tileEntity) {
-                                super(new ContainerRoadPainter(inventoryPlayer, tileEntity));
+        public GuiRoadPainter (InventoryPlayer inventoryPlayer, TileEntityRoadPainterEntity tileEntity, World world, int x, int y, int z) {
+                                super(new ContainerRoadPainter(inventoryPlayer, tileEntity, world, x, y, z));
         }
         
         /** The X size of the inventory window in pixels. */

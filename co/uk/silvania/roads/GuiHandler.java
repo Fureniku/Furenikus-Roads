@@ -19,7 +19,7 @@ public class GuiHandler implements IGuiHandler {
         	case 0: {
                 TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
                 if(tileEntity instanceof TileEntityRoadPainterEntity) {
-                        return new ContainerRoadPainter(player.inventory, (TileEntityRoadPainterEntity) tileEntity);
+                        return new ContainerRoadPainter(player.inventory, (TileEntityRoadPainterEntity) tileEntity, world, x, y, z);
                 }	
         	}
         }
@@ -32,7 +32,7 @@ public class GuiHandler implements IGuiHandler {
         	case 0: {
                 TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
                 if(tileEntity instanceof TileEntityRoadPainterEntity) {
-                        return new GuiRoadPainter(player.inventory, (TileEntityRoadPainterEntity) tileEntity);
+                        return new GuiRoadPainter(player.inventory, (TileEntityRoadPainterEntity) tileEntity, world, x, y, z);
                 }	
         	}
         }
