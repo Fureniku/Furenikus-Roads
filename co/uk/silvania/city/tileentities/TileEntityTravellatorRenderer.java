@@ -2,8 +2,9 @@ package co.uk.silvania.city.tileentities;
 
 import org.lwjgl.opengl.GL11;
 
-import co.uk.silvania.city.client.models.ATMModel;
+
 import co.uk.silvania.city.client.models.EscalatorModel;
+import co.uk.silvania.city.client.models.TravellatorModel;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import net.minecraft.block.Block;
@@ -17,12 +18,12 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 
-public class TileEntityATMRenderer extends TileEntitySpecialRenderer {
+public class TileEntityTravellatorRenderer extends TileEntitySpecialRenderer {
 	
-	private final ATMModel model;
+	private final TravellatorModel model;
 		
-	public TileEntityATMRenderer() {
-		this.model = new ATMModel();
+	public TileEntityTravellatorRenderer() {
+		this.model = new TravellatorModel();
 	}
 	
 	@Override
@@ -46,7 +47,7 @@ public class TileEntityATMRenderer extends TileEntitySpecialRenderer {
 			meta = 270;
 		}
 		
-		bindTextureByName("/mods/City/textures/blocks/ATM.png");
+		bindTextureByName("/mods/City/textures/blocks/travellator.png");
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
 		GL11.glRotatef(meta, 0.0F, 1.0F, 0.0F);

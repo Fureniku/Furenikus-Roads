@@ -12,6 +12,7 @@ public class CommonProxy {
     public void registerBlocks() {
         GameRegistry.registerBlock(RoadsCity.escalator, "escalator");
         GameRegistry.registerBlock(RoadsCity.atmBlock, "atmBlock");
+        GameRegistry.registerBlock(RoadsCity.travellator, "travellator");
         
         GameRegistry.registerItem(RoadsCity.coin1,"coin1");
         GameRegistry.registerItem(RoadsCity.coin2,"coin2");
@@ -31,22 +32,23 @@ public class CommonProxy {
     }
     
     public void addNames() {
-        LanguageRegistry.addName(RoadsCity.escalator, "Escalator (Up)");
+        LanguageRegistry.addName(RoadsCity.escalator, "Escalator");
+        LanguageRegistry.addName(RoadsCity.travellator, "Travellator");
         LanguageRegistry.addName(RoadsCity.atmBlock, "ATM");
         
-        /*LanguageRegistry.addName(RoadsCity.coin1, "1 " + RoadsCity.config.something + "s");
-        LanguageRegistry.addName(RoadsCity.coin2, "2 " + config.something + "s");
-        LanguageRegistry.addName(RoadsCity.coin5, "5 " + config.something + "s");
-        LanguageRegistry.addName(RoadsCity.coin10, "10 " + config.something + "s");
-        LanguageRegistry.addName(RoadsCity.coin25, "25 " + config.something + "s");
-        LanguageRegistry.addName(RoadsCity.coin50, "50 " + config.something + "s");
-        LanguageRegistry.addName(RoadsCity.coin100, "1 " + config.something);
-        LanguageRegistry.addName(RoadsCity.note100, "1 " + config.something + "s");
-        LanguageRegistry.addName(RoadsCity.note500, "5 " + config.something + "s");
-        LanguageRegistry.addName(RoadsCity.note1000, "10 " + config.something + "s");
-        LanguageRegistry.addName(RoadsCity.note2000, "20 " + config.something + "s");
-        LanguageRegistry.addName(RoadsCity.note5000, "50 " + config.something + "s");
-        LanguageRegistry.addName(RoadsCity.note10000, "100 " + config.something + "s");*/
+        LanguageRegistry.addName(RoadsCity.coin1, "1 " + CityConfig.currencySmall);
+        LanguageRegistry.addName(RoadsCity.coin2, "2 " + CityConfig.currencySmallPlural);
+        LanguageRegistry.addName(RoadsCity.coin5, "5 " + CityConfig.currencySmallPlural);
+        LanguageRegistry.addName(RoadsCity.coin10, "10 " + CityConfig.currencySmallPlural);
+        LanguageRegistry.addName(RoadsCity.coin25, "25 " + CityConfig.currencySmallPlural);
+        LanguageRegistry.addName(RoadsCity.coin50, "50 " + CityConfig.currencySmallPlural);
+        LanguageRegistry.addName(RoadsCity.coin100, "1 " + CityConfig.currencyLarge + " Coin");
+        LanguageRegistry.addName(RoadsCity.note100, "1 " + CityConfig.currencyLarge);
+        LanguageRegistry.addName(RoadsCity.note500, "5 " + CityConfig.currencyLargePlural);
+        LanguageRegistry.addName(RoadsCity.note1000, "10 " + CityConfig.currencyLargePlural);
+        LanguageRegistry.addName(RoadsCity.note2000, "20 " + CityConfig.currencyLargePlural);
+        LanguageRegistry.addName(RoadsCity.note5000, "50 " + CityConfig.currencyLargePlural);
+        LanguageRegistry.addName(RoadsCity.note10000, "100 " + CityConfig.currencyLargePlural);
         LanguageRegistry.addName(RoadsCity.prePaidCard, "Pre-Paid Card");
         LanguageRegistry.addName(RoadsCity.debitCard, "Debit Card");
         

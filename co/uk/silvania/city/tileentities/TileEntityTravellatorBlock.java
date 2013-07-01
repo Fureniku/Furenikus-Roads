@@ -11,25 +11,30 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class TileEntityATMBlock extends BlockContainer {
+public class TileEntityTravellatorBlock extends BlockContainer {
 	
 
-	public TileEntityATMBlock(int id) {
+	public TileEntityTravellatorBlock(int id) {
 		super(id, Material.ice);
-		this.setCreativeTab(RoadsCity.tabEcon);
+		this.setCreativeTab(RoadsCity.tabCity);
+        this.setBlockBounds(0.0F, -0.5F, 0.0F, 1.0F, 0.1F, 1.0F);
 		this.setHardness(1.0F);
-		this.setLightValue(0.5F);
 	}
 
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new TileEntityATMEntity();
+		return new TileEntityTravellatorEntity();
 	}
 	
 	@Override
 	public int getRenderType() {
 		return -1;
 	}
+	
+    public int getRenderBlockPass()
+    {
+        return 1;
+    }
 	
 	@Override
 	public boolean isOpaqueCube() {
