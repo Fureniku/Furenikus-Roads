@@ -225,7 +225,7 @@ public class Roads {
     	roadBlockJCUK = new RBJunctCenterUK(config.roadBlockJCUKID).setUnlocalizedName("roadBlockJCUK");
     	roadBlockJCUSA = new RBJunctCenterUSA(config.roadBlockJCUSAID).setUnlocalizedName("roadBlockJCUSA");
     	
-    	powerPole = new PowerPoleBlock(config.powerPoleID).setUnlocalizedName("powerPole");
+    	powerPole = new PowerPoleLarge(config.powerPoleID).setUnlocalizedName("powerPole");
     	roadPainter = new TileEntityRoadPainterBlock(config.roadPainterID).setUnlocalizedName("roadPainter");
     	trafficLight = new TileEntityTrafficLightBlock(config.trafficLightID).setUnlocalizedName("trafficLight");
     	trafficHanging = new TileEntityTrafficHangingBlock(config.trafficHangingID).setUnlocalizedName("trafficHanging");

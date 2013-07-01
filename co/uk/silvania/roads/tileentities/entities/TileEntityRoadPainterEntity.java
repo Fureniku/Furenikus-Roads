@@ -18,7 +18,7 @@ import net.minecraft.util.AxisAlignedBB;
 
 public class TileEntityRoadPainterEntity extends TileEntityChest implements IInventory
 {
-    private ItemStack[] roadPainterContents = new ItemStack[25];
+    private ItemStack[] roadPainterContents = new ItemStack[26];
 
     public int numUsingPlayers;
 
@@ -27,7 +27,7 @@ public class TileEntityRoadPainterEntity extends TileEntityChest implements IInv
 
     public int getSizeInventory()
     {
-        return 25;
+        return 26;
     }
 
     public ItemStack getStackInSlot(int par1)

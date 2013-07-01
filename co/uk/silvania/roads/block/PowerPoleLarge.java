@@ -11,32 +11,105 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockRedstoneWire;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.crash.CrashReport;
+import net.minecraft.crash.CrashReportCategory;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Direction;
+import net.minecraft.util.ReportedException;
 import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.Chunk;
 
-public class PowerPoleBlock extends BlockRedstoneWire {
+public class PowerPoleLarge extends Block {
 
 	private Material material;
 	
 	private boolean wiresProvidePower = true;
     private Set blocksNeedingUpdate = new HashSet();
 	
-	public PowerPoleBlock(int id) {
-		super(id);
+	public PowerPoleLarge(int id) {
+		super(id, Material.iron);
 		this.setCreativeTab(Roads.tabRoads);
         //this.setBlockBounds(0.4F, 0.0F, 0.4F, 0.6F, 1.0F, 0.6F);
 	}
 	
-    public void registerIcons(IconRegister iconRegister) {
+	/*public void onBlockPlaced(Block block, World world, int x, int y, int z) {
+		if block.set
+		
+	}
+	
+    public int isBlockProvidingPowerTo(int par1, int par2, int par3, int par4)
+    {
+        int i1 = this.getBlockId(par1, par2, par3);
+        return i1 == 0 ? 0 : Block.blocksList[i1].isProvidingStrongPower(this, par1, par2, par3, par4);
+    }
+	
+	private int getBlockId(int par1, int par2, int par3) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int getBlockPowerInput(int par1, int par2, int par3)
+    {
+        byte b0 = 0;
+        int l = Math.max(b0, this.isBlockProvidingPowerTo(par1, par2 - 1, par3, 0));
+
+        if (l >= 15)
+        {
+            return l;
+        }
+        else
+        {
+            l = Math.max(l, this.isBlockProvidingPowerTo(par1, par2 + 1, par3, 1));
+
+            if (l >= 15)
+            {
+                return l;
+            }
+            else
+            {
+                l = Math.max(l, this.isBlockProvidingPowerTo(par1, par2, par3 - 1, 2));
+
+                if (l >= 15)
+                {
+                    return l;
+                }
+                else
+                {
+                    l = Math.max(l, this.isBlockProvidingPowerTo(par1, par2, par3 + 1, 3));
+
+                    if (l >= 15)
+                    {
+                        return l;
+                    }
+                    else
+                    {
+                        l = Math.max(l, this.isBlockProvidingPowerTo(par1 - 1, par2, par3, 4));
+
+                        if (l >= 15)
+                        {
+                            return l;
+                        }
+                        else
+                        {
+                            l = Math.max(l, this.isBlockProvidingPowerTo(par1 + 1, par2, par3, 5));
+                            return l >= 15 ? l : l;
+                        }
+                    }
+                }
+            }
+        }
+    }*/
+	
+}
+	
+    /*public void registerIcons(IconRegister iconRegister) {
         blockIcon = iconRegister.registerIcon("Roads:CementBlock");
     }
-}
-    /*
+
     @Override
     public int getRenderType()
     {
@@ -269,5 +342,4 @@ public class PowerPoleBlock extends BlockRedstoneWire {
         }
     }
 
-}
-*/
+}*/

@@ -64,19 +64,6 @@ public class ContainerRoadPainter extends Container {
              craftResult.setInventorySlotContents(0, RoadPainterCraftingManager.getInstance().findMatchingRecipe(craftMatrix, worldObj));
     }
     
-    public void onCraftGuiClosed(EntityPlayer entityplayer) {
-    	super.onCraftGuiClosed(entityplayer);
-    	if(worldObj.isRemote) {
-    		return;
-    	}
-    	for(int i = 0; i < 25; i++) {
-    		ItemStack itemstack = craftMatrix.getStackInSlot(i);
-    		if(itemstack != null) {
-    			entityplayer.dropPlayerItem(itemstack);
-    		}
-    	}
-    }
-    
     @Override
     public ItemStack transferStackInSlot(EntityPlayer player, int slot) {
             ItemStack stack = null;
