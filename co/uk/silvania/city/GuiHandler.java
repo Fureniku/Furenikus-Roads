@@ -1,5 +1,7 @@
 package co.uk.silvania.city;
 
+import co.uk.silvania.city.tileentities.ContainerATM;
+import co.uk.silvania.city.tileentities.GuiATM;
 import co.uk.silvania.city.tileentities.TileEntityATMEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -17,7 +19,7 @@ public class GuiHandler implements IGuiHandler {
         	case 0: {
                 TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
                 if(tileEntity instanceof TileEntityATMEntity) {
-                        return new ContainerATM(player.inventory, (TileEntityATMEntity) tileEntity, world, x, y, z);
+                        return new ContainerATM(player.inventory, (TileEntityATMEntity) tileEntity);
                 }	
         	}
         }

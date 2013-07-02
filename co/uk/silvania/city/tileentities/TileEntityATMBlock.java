@@ -5,6 +5,7 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
@@ -15,7 +16,7 @@ public class TileEntityATMBlock extends BlockContainer {
 	
 
 	public TileEntityATMBlock(int id) {
-		super(id, Material.ice);
+		super(id, Material.iron);
 		this.setCreativeTab(RoadsCity.tabEcon);
 		this.setHardness(1.0F);
 		this.setLightValue(0.5F);
@@ -30,6 +31,19 @@ public class TileEntityATMBlock extends BlockContainer {
 	public int getRenderType() {
 		return -1;
 	}
+	
+	
+    @Override
+    public boolean onBlockActivated(World world, int x, int y, int z,
+                    EntityPlayer player, int i, float j, float k, float l) {
+            TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+            if (player.getHeldItem() != null) {
+            	if (player.getHeldItem().getItem() == RoadsCity.debitCard) {
+                    player.openGui(RoadsCity.instance, 0, world, x, y, z);
+            	}
+            }
+			return true;
+    }
 	
 	@Override
 	public boolean isOpaqueCube() {

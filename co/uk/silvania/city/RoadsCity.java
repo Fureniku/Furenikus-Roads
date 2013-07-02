@@ -29,7 +29,7 @@ public class RoadsCity {
 	
     @Instance("RoadsCity")
     public static RoadsCity instance;
-    //public static GuiHandler roadsGuiHandler = new GuiHandler();
+    public static GuiHandler roadsGuiHandler = new GuiHandler();
 
     @SidedProxy(clientSide="co.uk.silvania.city.client.ClientProxy", serverSide="co.uk.silvania.city.CommonProxy")
     public static CommonProxy proxy;
@@ -75,7 +75,7 @@ public class RoadsCity {
     @PreInit
     public void preInit(FMLPreInitializationEvent event) {
     	CityConfig config = new CityConfig();
-    	//NetworkRegistry.instance().registerGuiHandler(this, roadsGuiHandler);
+    	NetworkRegistry.instance().registerGuiHandler(this, roadsGuiHandler);
     	
     	CityConfig.loadConfig(event); 
 
