@@ -55,7 +55,6 @@ public class TileEntityStreetLamp2Block extends BlockContainer {
 		this.blockIcon = icon.registerIcon("Roads:StreetLampIcon");
 	}
 	
-	@Override
 	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4,
 			EntityLiving par5EntityLiving, ItemStack par6ItemStack) {
 		int var6 = MathHelper

@@ -26,13 +26,12 @@ public class TarBucketHandler
 			 {
 			  int blockID = world.getBlockId(pos.blockX, pos.blockY, pos.blockZ);
 
-			  if ((blockID == Roads.roadsTarStill.blockID || blockID == Roads.roadsTarFlowing.blockID) && world.getBlockMetadata(pos.blockX, pos.blockY, pos.blockZ) == 0)
-			  {
-			  world.setBlock(pos.blockX, pos.blockY, pos.blockZ, 0);
-			  return new ItemStack(Roads.tarBucketItem);
-			  }
-			  else
-			   return null;
+			  if (blockID == Roads.roadsTarStill.blockID || blockID == Roads.roadsTarFlowing.blockID) {
+				  world.setBlock(pos.blockX, pos.blockY, pos.blockZ, 0);
+				  	return new ItemStack(Roads.tarBucketItem);
+			  	}
+			  	else
+			  		return null;
 			 }
 
 		}

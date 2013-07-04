@@ -42,7 +42,6 @@ public class TileEntityRoadPainterBlock extends BlockContainer {
             return true;
     }
 
-    @Override
     public void breakBlock(World world, int x, int y, int z, int par5, int par6) {
             dropItems(world, x, y, z);
             super.breakBlock(world, x, y, z, par5, par6);
@@ -62,7 +61,6 @@ public class TileEntityRoadPainterBlock extends BlockContainer {
 		return false;
 	}
 	
-	@Override
 	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4,
 			EntityLiving par5EntityLiving, ItemStack par6ItemStack) {
 		int var6 = MathHelper

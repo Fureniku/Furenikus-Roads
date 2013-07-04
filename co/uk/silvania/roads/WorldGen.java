@@ -3,6 +3,7 @@ package co.uk.silvania.roads;
 import java.util.Random;
 
 import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenLakes;
 import net.minecraft.world.gen.feature.WorldGenLiquids;
@@ -29,14 +30,20 @@ public class WorldGen implements IWorldGenerator {
 		
 	}
     
-	private void generateSurface(World world, Random random, int chunkX, int chunkZ){
-		for(int i = 0; i < 1; i++){
+	private void generateSurface(World world, Random random, int chunkX, int chunkZ) {
+		for(int i = 0; i < 1; i++) {
 			int xCoord = chunkX + random.nextInt(16);
 			int yCoord = random.nextInt(80);
 			int zCoord = chunkZ + random.nextInt(16);
-			
-			(new WorldGenMinable(Roads.limeStoneBlock.blockID, 50)).generate(world, random, xCoord, yCoord, zCoord);
-			(new WorldGenLakesRoads(Roads.roadsTarFlowing.blockID)).generate(world, random, xCoord, yCoord, zCoord);
+			(new WorldGenMinable(Roads.limeStoneBlock.blockID, 35)).generate(world, random, xCoord, yCoord, zCoord);
+		}
+		//if( == BiomeGenBase.swampland) {
+			for(int i = 0; i < 1; i++) {
+				int xCoord = chunkX + random.nextInt(16);
+				int yCoord = random.nextInt(80);
+				int zCoord = chunkZ + random.nextInt(16);
+				(new WorldGenLakesRoads(Roads.roadsTarFlowing.blockID)).generate(world, random, xCoord, yCoord, zCoord);
+			//}
 		}
 	}
     

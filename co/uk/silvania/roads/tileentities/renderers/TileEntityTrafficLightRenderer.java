@@ -12,6 +12,7 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
@@ -19,6 +20,9 @@ import net.minecraft.world.World;
 
 
 public class TileEntityTrafficLightRenderer extends TileEntitySpecialRenderer {
+	
+	private static final ResourceLocation texturered = new ResourceLocation("/assets/Roads/textures/blocks/TrafficLightPoleRed.png");
+	private static final ResourceLocation texturegreen = new ResourceLocation("/mods/Roads/textures/blocks/TrafficLightPoleGreen.png");
 	
 	private final TrafficLightModel model;
 	private final boolean powered;
@@ -48,13 +52,7 @@ public class TileEntityTrafficLightRenderer extends TileEntitySpecialRenderer {
 		if (i == 4) {
 			meta = 270;
 		}
-		if (this.powered == true) {
-			bindTextureByName("/mods/Roads/textures/blocks/TrafficLightPoleRed.png");
-			System.out.println("Red Light!");
-		} else {
-			bindTextureByName("/mods/Roads/textures/blocks/TrafficLightPoleGreen.png");
-			//System.out.println("Green Light!");
-		}
+		
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
 		GL11.glRotatef(meta, 0.0F, 1.0F, 0.0F);

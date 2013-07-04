@@ -21,7 +21,7 @@ import net.minecraft.world.World;
 
 public class TileEntityBarrierCornerRenderer extends TileEntitySpecialRenderer {
 	
-    private static final ResourceLocation texture = new ResourceLocation("/mods/Roads/textures/blocks/Barrier.png");
+    private static final ResourceLocation texture = new ResourceLocation("/assets/Roads/textures/blocks/Barrier.png");
 	
 	private final BarrierCornerModel model;
 		

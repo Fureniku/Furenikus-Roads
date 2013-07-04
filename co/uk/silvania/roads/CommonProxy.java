@@ -81,7 +81,6 @@ public class CommonProxy {
             GameRegistry.registerBlock(Roads.powerPole, "powerPole");
             GameRegistry.registerBlock(Roads.roadPainter, "roadPainter");
             GameRegistry.registerBlock(Roads.trafficLight, "trafficLight");
-            GameRegistry.registerBlock(Roads.trafficHanging, "trafficHanging");
             GameRegistry.registerBlock(Roads.lightBollard, "lightBollard");
             GameRegistry.registerBlock(Roads.streetLamp1, "streetLamp1");
             GameRegistry.registerBlock(Roads.streetLamp2, "streetLamp2");
@@ -237,7 +236,6 @@ public class CommonProxy {
             LanguageRegistry.addName(Roads.powerPole, "Redstone Post");
             LanguageRegistry.addName(Roads.roadPainter, "Road Painter");
             LanguageRegistry.addName(Roads.trafficLight, "Traffic Light");
-            LanguageRegistry.addName(Roads.trafficHanging, "Traffic Light (Hanging)");
             LanguageRegistry.addName(Roads.lightBollard, "Light Bollard");
             LanguageRegistry.addName(Roads.streetLamp1, "Street Lamp (Single)");
             LanguageRegistry.addName(Roads.streetLamp2, "Street Lamp (Double)");

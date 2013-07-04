@@ -15,6 +15,7 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
@@ -22,6 +23,8 @@ import net.minecraft.world.World;
 
 
 public class TileEntityRoadBarrierRenderer extends TileEntitySpecialRenderer {
+	
+	private static final ResourceLocation texture = new ResourceLocation("/assets/Roads/textures/blocks/RoadBarrier.png");
 	
 	private final BarrierVerticalModel model;
 		
@@ -50,7 +53,6 @@ public class TileEntityRoadBarrierRenderer extends TileEntitySpecialRenderer {
 			meta = 270;
 		}
 		
-		bindTextureByName("/mods/Roads/textures/blocks/RoadBarrier.png");
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
 		GL11.glRotatef(meta, 0.0F, 1.0F, 0.0F);

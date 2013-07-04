@@ -121,7 +121,6 @@ public class Roads {
 	public static Block powerPole;
 	public static Block roadPainter;
 	public static Block trafficLight;
-	public static Block trafficHanging;
 	public static Block lightBollard;
 	public static Block streetLamp1;
 	public static Block streetLamp2;
@@ -228,7 +227,6 @@ public class Roads {
     	powerPole = new PowerPoleLarge(config.powerPoleID).setUnlocalizedName("powerPole");
     	roadPainter = new TileEntityRoadPainterBlock(config.roadPainterID).setUnlocalizedName("roadPainter");
     	trafficLight = new TileEntityTrafficLightBlock(config.trafficLightID).setUnlocalizedName("trafficLight");
-    	trafficHanging = new TileEntityTrafficHangingBlock(config.trafficHangingID).setUnlocalizedName("trafficHanging");
     	lightBollard = new TileEntityLightBollardBlock(config.lightBollardID).setUnlocalizedName("lightBollard");
     	streetLamp1 = new TileEntityStreetLamp1Block(config.streetLamp1ID, false).setUnlocalizedName("streetLamp1");
     	streetLamp2 = new TileEntityStreetLamp2Block(config.streetLamp2ID, false).setUnlocalizedName("streetLamp2");
@@ -269,7 +267,6 @@ public class Roads {
             GameRegistry.registerTileEntity(TileEntityStreetLamp1Entity.class, "tileEntityStreetLamp1");
             GameRegistry.registerTileEntity(TileEntityStreetLamp2Entity.class, "tileEntityStreetLamp2");
             GameRegistry.registerTileEntity(TileEntityStreetSignEntity.class, "tileEntityStreetSign");
-            GameRegistry.registerTileEntity(TileEntityTrafficHangingEntity.class, "tileEntityTrafficHanging");
             GameRegistry.registerTileEntity(RBPaintGagBlockTE.class, "tileEntityRBPaintGagBlock");
             GameRegistry.registerTileEntity(TileEntityBarrierPoleEntity.class, "tileEntityBarrierPole");
             GameRegistry.registerTileEntity(TileEntityBarrierEntity.class, "tileEntityBarrier");

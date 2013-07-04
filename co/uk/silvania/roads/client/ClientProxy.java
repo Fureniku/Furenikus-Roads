@@ -13,7 +13,6 @@ public class ClientProxy extends CommonProxy {
         public void registerRenderThings() {
         	
         	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTrafficLightEntity.class, new TileEntityTrafficLightRenderer(false));
-        	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTrafficHangingEntity.class, new TileEntityTrafficHangingRenderer(false));
         	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityLightBollardEntity.class, new TileEntityLightBollardRenderer());
         	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityStreetLamp1Entity.class, new TileEntityStreetLamp1Renderer());
         	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityStreetLamp2Entity.class, new TileEntityStreetLamp2Renderer());

@@ -40,9 +40,9 @@ public class StillTarBlock extends BlockStationary implements ILiquid {
 	
     public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
     {
-        entity.motionX *= 0.8D;
-    	entity.motionY *= 0.8D;
-        entity.motionZ *= 0.8D;
+        entity.motionX *= 0.5D;
+    	entity.motionY *= 0.1D;
+        entity.motionZ *= 0.5D;
     }
 	
 	public void registerIcons(IconRegister iconRegister) {
