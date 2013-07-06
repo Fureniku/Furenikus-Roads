@@ -16,7 +16,7 @@ public class HardenedTarBlock extends Block {
     }
         
     public void registerIcons(IconRegister iconRegister) {
-        blockIcon = iconRegister.registerIcon("Roads:HardenedTar");
+        blockIcon = iconRegister.registerIcon("roads:HardenedTar");
     }
 
 }

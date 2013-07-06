@@ -32,8 +32,8 @@ public class CatsEye extends Block {
     }
     
     public void registerIcons(IconRegister iconRegister) {
-    	this.top = iconRegister.registerIcon("Roads:CatsEyeTop");
-    	this.side1 = iconRegister.registerIcon("Roads:CatsEyeSide1");
+    	this.top = iconRegister.registerIcon("roads:CatsEyeTop");
+    	this.side1 = iconRegister.registerIcon("roads:CatsEyeSide1");
     }
     
     public Icon getIcon(int side, int meta) {

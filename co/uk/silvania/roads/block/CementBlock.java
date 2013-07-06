@@ -16,6 +16,6 @@ public class CementBlock extends Block {
     }
         
     public void registerIcons(IconRegister iconRegister) {
-        blockIcon = iconRegister.registerIcon("Roads:CementBlock");
+        blockIcon = iconRegister.registerIcon("roads:CementBlock");
     }
 }
