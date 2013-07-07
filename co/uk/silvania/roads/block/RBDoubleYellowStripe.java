@@ -5,22 +5,23 @@ import co.uk.silvania.roads.Roads;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockPistonBase;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.EntityRenderer;
+import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class RBDoubleYellowStripe extends Block {
 
     public RBDoubleYellowStripe (int id) {
         super(id, Material.rock);
-        this.setHardness(1.0F);
-    	this.setStepSound(Block.soundStoneFootstep);
-    	this.setCreativeTab(Roads.tabRoads);
-        this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.825F, 1.0F);
     }
         
     @SideOnly(Side.CLIENT)
@@ -32,11 +33,7 @@ public class RBDoubleYellowStripe extends Block {
         this.sides = par1IconRegister.registerIcon("Roads:TarmacPlain");
         this.top = par1IconRegister.registerIcon("Roads:TarmacSideDoubleYellowStripe");
         }
-        
-    public int getRenderType() {
-        return 16;
-        }
-
+    
     public boolean isOpaqueCube() {
     	return false;
         }

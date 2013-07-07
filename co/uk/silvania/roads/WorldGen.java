@@ -37,13 +37,16 @@ public class WorldGen implements IWorldGenerator {
 			int zCoord = chunkZ + random.nextInt(16);
 			(new WorldGenMinable(Roads.limeStoneBlock.blockID, 35)).generate(world, random, xCoord, yCoord, zCoord);
 		}
-		//if( == BiomeGenBase.swampland) {
+		
+		BiomeGenBase biome = world.getWorldChunkManager().getBiomeGenAt(chunkX, chunkZ); 
+		
+		if(biome == BiomeGenBase.swampland) {
 			for(int i = 0; i < 1; i++) {
 				int xCoord = chunkX + random.nextInt(16);
 				int yCoord = random.nextInt(80);
 				int zCoord = chunkZ + random.nextInt(16);
 				(new WorldGenLakesRoads(Roads.roadsTarFlowing.blockID)).generate(world, random, xCoord, yCoord, zCoord);
-			//}
+			}
 		}
 	}
     
