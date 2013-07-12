@@ -7,9 +7,11 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
-import net.minecraftforge.liquids.ILiquid;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.IFluidBlock;
 
-public class StillTarBlock extends BlockStationary implements ILiquid {
+public class StillTarBlock extends BlockStationary implements IFluidBlock {
 	
 	public StillTarBlock(int id) {
 		super(id, Material.water);
@@ -23,21 +25,6 @@ public class StillTarBlock extends BlockStationary implements ILiquid {
 		return 4;
 	}
 
-	@Override
-	public int stillLiquidId() {
-		return this.blockID;
-	}
-
-	@Override
-	public boolean isMetaSensitive() {
-		return false;
-	}
-
-	@Override
-	public int stillLiquidMeta() {
-		return 0;
-	}
-	
     public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
     {
         entity.motionX *= 0.5D;
@@ -47,5 +34,23 @@ public class StillTarBlock extends BlockStationary implements ILiquid {
 	
 	public void registerIcons(IconRegister iconRegister) {
 		this.theIcon = new Icon[] {iconRegister.registerIcon("Roads:TarStill"), iconRegister.registerIcon("Roads:TarFlowing")};
+	}
+
+	@Override
+	public Fluid getFluid() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public FluidStack drain(World world, int x, int y, int z, boolean doDrain) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean canDrain(World world, int x, int y, int z) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

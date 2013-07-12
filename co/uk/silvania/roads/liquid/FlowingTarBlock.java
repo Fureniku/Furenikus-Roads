@@ -12,9 +12,11 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
-import net.minecraftforge.liquids.ILiquid;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.IFluidBlock;
 
-public class FlowingTarBlock extends BlockFlowing implements ILiquid {
+public class FlowingTarBlock extends BlockFlowing implements IFluidBlock {
 	
     int numAdjacentSources;
     boolean[] isOptimalFlowDirection = new boolean[4];
@@ -178,21 +180,6 @@ public class FlowingTarBlock extends BlockFlowing implements ILiquid {
 		return 4;
 	}
 
-	@Override
-	public int stillLiquidId() {
-		return this.blockID + 1;
-	}
-
-	@Override
-	public boolean isMetaSensitive() {
-		return false;
-	}
-
-	@Override
-	public int stillLiquidMeta() {
-		return 0;
-	}
-	
 	@Override
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
     {
@@ -361,6 +348,24 @@ public class FlowingTarBlock extends BlockFlowing implements ILiquid {
 	
 	public void registerIcons(IconRegister iconRegister) {
 		this.theIcon = new Icon[] {iconRegister.registerIcon("Roads:TarFlowing"), iconRegister.registerIcon("Roads:TarFlowing")};
+	}
+
+	@Override
+	public Fluid getFluid() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public FluidStack drain(World world, int x, int y, int z, boolean doDrain) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean canDrain(World world, int x, int y, int z) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

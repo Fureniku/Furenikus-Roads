@@ -9,14 +9,10 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.util.Icon;
 
-public class RBYellowCross extends Block {
+public class RBYellowCross extends RoadBlockBase {
 
         public RBYellowCross (int id) {
-            super(id, Material.rock);
-            this.setHardness(1.0F);
-    		this.setStepSound(Block.soundStoneFootstep);
-    		this.setCreativeTab(Roads.tabRoads);
-            this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.825F, 1.0F);
+            super(id);
         }
            
     	@SideOnly(Side.CLIENT)
@@ -29,20 +25,13 @@ public class RBYellowCross extends Block {
             this.sides = iconRegister.registerIcon("Roads:TarmacPlain");
     	}
     	
-        public boolean renderAsNormalBlock() {
-            return false;
-        }
-        
-        public boolean isOpaqueCube() {
-        	return false;
-        }
-       
         @SideOnly(Side.CLIENT)
-        @Override
-        public Icon getIcon(int side, int meta)
-        {
-        	if (side == 1)
-        		return top;
-        	return sides;
+        public Icon getIcon(int side, int meta) {
+            int k = meta;
+            if (side == 1) {
+             	return top;
+            } else {
+            	return sides;
+            }
         }
 }

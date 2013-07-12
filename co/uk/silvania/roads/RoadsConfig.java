@@ -28,16 +28,12 @@ public class RoadsConfig {
 	public static int roadsTarFlowingID;
 	
 	public static int roadBlockSWS2ID;
-	public static int roadBlockDYSID;
-	public static int roadBlockDYSELID;
-	public static int roadBlockDYSERID;
 	public static int roadBlockDYSIID;
 	public static int roadBlockDYSOID;
 	public static int roadBlockSYSID;
 	public static int roadBlockSWSID;
 	public static int roadBlockSWCID;
 	public static int roadBlockSYCID;
-	public static int roadBlockDYCID;
 	public static int roadBlockWhiteCrossID;
 	public static int roadBlockYellowCrossID;
 	public static int roadBlockWhiteFullID;
@@ -56,10 +52,12 @@ public class RoadsConfig {
 	public static int roadBlockJILID;
 	public static int roadBlockJOILID;
 	public static int roadBlockJIILID;
-	public static int roadBlockALID;
-	public static int roadBlockAUSID;
-	public static int roadBlockAULID;
-	public static int roadBlockAURID;
+	
+	
+	public static int roadBlockArrowsID;
+	public static int roadBlockDoubleYellowID;
+	
+	
 	public static int roadBlockWDSID;
 	public static int roadBlockYDSID;
 	public static int roadBlockWSSID;
@@ -129,16 +127,12 @@ public class RoadsConfig {
 		
 		//Road Block IDs
 		roadBlockSWS2ID = config.getBlock("Side White Stripe", 820).getInt();
-		roadBlockDYSID = config.getBlock("Double Yellow Stripe", 821).getInt();
-		roadBlockDYSELID = config.getBlock("Double Yellow Stripe End Left", 822).getInt();
-		roadBlockDYSERID = config.getBlock("Double Yellow Stripe End Right", 823).getInt();
 		roadBlockDYSIID = config.getBlock("Double Yellow Stripe Inner Corner", 824).getInt();
 		roadBlockDYSOID = config.getBlock("Double Yellow Stripe Outer Corner", 825).getInt();
 		roadBlockSYSID = config.getBlock("Single Yellow Stripe", 826).getInt();
 		roadBlockSWSID = config.getBlock("Single White Side Stripe", 827).getInt();
 		roadBlockSWCID = config.getBlock("Single White Center Stripe", 828).getInt();
 		roadBlockSYCID = config.getBlock("Single Yellow Center Stripe", 829).getInt();
-		roadBlockDYCID = config.getBlock("Double Yellow Center Stripe", 830).getInt();
 		roadBlockWhiteCrossID = config.getBlock("White Cross", 831).getInt();
 		roadBlockYellowCrossID = config.getBlock("Yellow Cross", 832).getInt();
 		roadBlockWhiteFullID = config.getBlock("White Full", 833).getInt();
@@ -157,10 +151,11 @@ public class RoadsConfig {
 		roadBlockJILID = config.getBlock("Junction In Line", 846).getInt();
 		roadBlockJOILID = config.getBlock("Junction Out Inverted Line", 847).getInt();
 		roadBlockJIILID = config.getBlock("Junction In Inverted Line", 848).getInt();
-		roadBlockALID = config.getBlock("Arrow Line", 849).getInt();
-		roadBlockAUSID = config.getBlock("Arrow Straight", 850).getInt();
-		roadBlockAULID = config.getBlock("Arrow Left", 851).getInt();
-		roadBlockAURID = config.getBlock("Arrow Right", 852).getInt();
+		
+		
+		roadBlockArrowsID = config.getBlock("Arrows", 849).getInt();
+		roadBlockDoubleYellowID = config.getBlock("Double Yellows", 821).getInt();
+
 		roadBlockWDSID = config.getBlock("White Diagonal Stripe", 853).getInt();
 		roadBlockYDSID = config.getBlock("Yellow Diagonal Stripe", 854).getInt();
 		roadBlockWSSID = config.getBlock("White Small Square", 855).getInt();

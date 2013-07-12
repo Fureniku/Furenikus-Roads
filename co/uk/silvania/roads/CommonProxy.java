@@ -1,6 +1,8 @@
 package co.uk.silvania.roads;
 
 import co.uk.silvania.roads.block.ItemSideWalkBlocks;
+import co.uk.silvania.roads.roadblocks.itemblocks.ItemRoadBlockArrows;
+import co.uk.silvania.roads.roadblocks.itemblocks.ItemRoadBlockDoubleYellow;
 import co.uk.silvania.roads.tileentities.entities.TileEntityTrafficLightEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
@@ -34,16 +36,12 @@ public class CommonProxy {
             GameRegistry.registerBlock(Roads.sidewalkBlocks, ItemSideWalkBlocks.class, "Silvania" + (Roads.sidewalkBlocks.getUnlocalizedName().substring(5)));
             
             GameRegistry.registerBlock(Roads.roadBlockSWS2, "roadBlockSWS2");
-            GameRegistry.registerBlock(Roads.roadBlockDYSEL, "roadBlockDYSE");
-            GameRegistry.registerBlock(Roads.roadBlockDYSER, "roadBlockDYSER");
             GameRegistry.registerBlock(Roads.roadBlockDYSI, "roadBlockDYSI");
             GameRegistry.registerBlock(Roads.roadBlockDYSO, "roadBlockDYSO");
-            GameRegistry.registerBlock(Roads.roadBlockDYS, "roadBlockDYS");
             GameRegistry.registerBlock(Roads.roadBlockSYS, "roadBlockSYS");
             GameRegistry.registerBlock(Roads.roadBlockSWS, "roadBlockSWS");
             GameRegistry.registerBlock(Roads.roadBlockSWC, "roadBlockSWC");
             GameRegistry.registerBlock(Roads.roadBlockSYC, "roadBlockSYC");
-            GameRegistry.registerBlock(Roads.roadBlockDYC, "roadBlockDYC");
             GameRegistry.registerBlock(Roads.roadBlockWhiteCross, "roadBlockWhiteCross");
             GameRegistry.registerBlock(Roads.roadBlockYellowCross, "roadBlockYellowCross");
             GameRegistry.registerBlock(Roads.roadBlockWhiteFull, "roadBlockWhiteFull");
@@ -62,19 +60,15 @@ public class CommonProxy {
             GameRegistry.registerBlock(Roads.roadBlockJIL, "roadBlockJIL");
             GameRegistry.registerBlock(Roads.roadBlockJOIL, "roadBlockJOIL");
             GameRegistry.registerBlock(Roads.roadBlockJIIL, "roadBlockJIIL");
-            GameRegistry.registerBlock(Roads.roadBlockAL, "roadBlockAL");
-            GameRegistry.registerBlock(Roads.roadBlockAUS, "roadBlockAUS");
-            GameRegistry.registerBlock(Roads.roadBlockAUL, "roadBlockAUL");
-            GameRegistry.registerBlock(Roads.roadBlockAUR, "roadBlockAUR");
+            
+            
+            GameRegistry.registerBlock(Roads.roadBlockArrows, ItemRoadBlockArrows.class, "FlenixRoads" + (Roads.roadBlockArrows.getUnlocalizedName().substring(5)));
+            GameRegistry.registerBlock(Roads.roadBlockDoubleYellow, ItemRoadBlockDoubleYellow.class, "FlenixRoads" + (Roads.roadBlockDoubleYellow.getUnlocalizedName().substring(5)));
+            
             GameRegistry.registerBlock(Roads.roadBlockWDS, "roadBlockWDS");
             GameRegistry.registerBlock(Roads.roadBlockYDS, "roadBlockYDS");
             GameRegistry.registerBlock(Roads.roadBlockWSS, "roadBlockWSS");
             GameRegistry.registerBlock(Roads.roadBlockYSS, "roadBlockYSS");
-            GameRegistry.registerBlock(Roads.roadBlockSL, "roadBlockSL");
-            GameRegistry.registerBlock(Roads.roadBlockOW, "roadBlockOW");
-            GameRegistry.registerBlock(Roads.roadBlockST, "roadBlockST");
-            GameRegistry.registerBlock(Roads.roadBlockOP, "roadBlockOP");
-            GameRegistry.registerBlock(Roads.roadBlockStop, "roadBlockStop");
             GameRegistry.registerBlock(Roads.roadBlockJCUK, "roadBlockJCUK");
             GameRegistry.registerBlock(Roads.roadBlockJCUSA, "roadBlockJCUSA");
             
@@ -122,16 +116,12 @@ public class CommonProxy {
             MinecraftForge.setBlockHarvestLevel(Roads.sidewalkKerbed2OuterCorner, "pickaxe", 1);
             
             MinecraftForge.setBlockHarvestLevel(Roads.roadBlockSWS2, "pickaxe", 1);
-            MinecraftForge.setBlockHarvestLevel(Roads.roadBlockDYSEL, "pickaxe", 1);
-            MinecraftForge.setBlockHarvestLevel(Roads.roadBlockDYSER, "pickaxe", 1);
             MinecraftForge.setBlockHarvestLevel(Roads.roadBlockDYSI, "pickaxe", 1);
             MinecraftForge.setBlockHarvestLevel(Roads.roadBlockDYSO, "pickaxe", 1);
-            MinecraftForge.setBlockHarvestLevel(Roads.roadBlockDYS, "pickaxe", 1);
             MinecraftForge.setBlockHarvestLevel(Roads.roadBlockSYS, "pickaxe", 1);
             MinecraftForge.setBlockHarvestLevel(Roads.roadBlockSWS, "pickaxe", 1);
             MinecraftForge.setBlockHarvestLevel(Roads.roadBlockSWC, "pickaxe", 1);
             MinecraftForge.setBlockHarvestLevel(Roads.roadBlockSYC, "pickaxe", 1);
-            MinecraftForge.setBlockHarvestLevel(Roads.roadBlockDYC, "pickaxe", 1);
             MinecraftForge.setBlockHarvestLevel(Roads.roadBlockWhiteCross, "pickaxe", 1);
             MinecraftForge.setBlockHarvestLevel(Roads.roadBlockYellowCross, "pickaxe", 1);
             MinecraftForge.setBlockHarvestLevel(Roads.roadBlockWhiteFull, "pickaxe", 1);
@@ -150,18 +140,16 @@ public class CommonProxy {
             MinecraftForge.setBlockHarvestLevel(Roads.roadBlockJIL, "pickaxe", 1);
             MinecraftForge.setBlockHarvestLevel(Roads.roadBlockJOIL, "pickaxe", 1);
             MinecraftForge.setBlockHarvestLevel(Roads.roadBlockJIIL, "pickaxe", 1);
-            MinecraftForge.setBlockHarvestLevel(Roads.roadBlockAL, "pickaxe", 1);
-            MinecraftForge.setBlockHarvestLevel(Roads.roadBlockAUS, "pickaxe", 1);
-            MinecraftForge.setBlockHarvestLevel(Roads.roadBlockAUL, "pickaxe", 1);
-            MinecraftForge.setBlockHarvestLevel(Roads.roadBlockAUR, "pickaxe", 1);
+            
+            
+            MinecraftForge.setBlockHarvestLevel(Roads.roadBlockArrows, "pickaxe", 1);
+            MinecraftForge.setBlockHarvestLevel(Roads.roadBlockDoubleYellow, "pickaxe", 1);
+
+
             MinecraftForge.setBlockHarvestLevel(Roads.roadBlockWDS, "pickaxe", 1);
             MinecraftForge.setBlockHarvestLevel(Roads.roadBlockYDS, "pickaxe", 1);
             MinecraftForge.setBlockHarvestLevel(Roads.roadBlockWSS, "pickaxe", 1);
             MinecraftForge.setBlockHarvestLevel(Roads.roadBlockYSS, "pickaxe", 1);
-            MinecraftForge.setBlockHarvestLevel(Roads.roadBlockSL, "pickaxe", 1);
-            MinecraftForge.setBlockHarvestLevel(Roads.roadBlockOW, "pickaxe", 1);
-            MinecraftForge.setBlockHarvestLevel(Roads.roadBlockST, "pickaxe", 1);
-            MinecraftForge.setBlockHarvestLevel(Roads.roadBlockOP, "pickaxe", 1);    
         }
         
         public void addNames() {
@@ -188,15 +176,11 @@ public class CommonProxy {
             LanguageRegistry.addName(new ItemStack(Roads.sidewalkBlocks, 1, 3), "Concrete");
             LanguageRegistry.addName(new ItemStack(Roads.sidewalkBlocks, 1, 4), "Full Road Block");
 
-            LanguageRegistry.addName(Roads.roadBlockDYS, "Tarmac (Double Yellow Stripe)");
             LanguageRegistry.addName(Roads.roadBlockSYS, "Tarmac (Single Yellow Stripe)");
             LanguageRegistry.addName(Roads.roadBlockSWS, "Tarmac (Single White Stripe)");
             LanguageRegistry.addName(Roads.roadBlockSWC, "Tarmac (Single White Stripe Center)");
             LanguageRegistry.addName(Roads.roadBlockSYC, "Tarmac (Single Yellow Stripe Center)");
-            LanguageRegistry.addName(Roads.roadBlockDYC, "Tarmac (Double Yellow Stripe Center)");
             LanguageRegistry.addName(Roads.roadBlockSWS2, "Tarmac (Side White Stripe)");
-            LanguageRegistry.addName(Roads.roadBlockDYSEL, "Tarmac (Double Yellow Stripe End)");
-            LanguageRegistry.addName(Roads.roadBlockDYSER, "Tarmac (Double Yellow Stripe End)");
             LanguageRegistry.addName(Roads.roadBlockDYSI, "Tarmac (Double Yellow Stripe Inner Corner)");
             LanguageRegistry.addName(Roads.roadBlockDYSO, "Tarmac (Double Yellow Stripe Outer Corner)");
             LanguageRegistry.addName(Roads.roadBlockWhiteCross, "Tarmac (White Cross)");
@@ -217,19 +201,23 @@ public class CommonProxy {
             LanguageRegistry.addName(Roads.roadBlockJIL, "Tarmac Junction (In, Line)");
             LanguageRegistry.addName(Roads.roadBlockJOIL, "Tarmac Junction (Out, Inverted Line)");
             LanguageRegistry.addName(Roads.roadBlockJIIL, "Tarmac Junction (In, Inverted Line)");
-            LanguageRegistry.addName(Roads.roadBlockAL, "Tarmac Arrow (Line)");
-            LanguageRegistry.addName(Roads.roadBlockAUS, "Tarmac Arrow (Straight)");
-            LanguageRegistry.addName(Roads.roadBlockAUL, "Tarmac Arrow (Left)");
-            LanguageRegistry.addName(Roads.roadBlockAUR, "Tarmac Arrow (Right)");
+            
+            
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockArrows, 1, 0), "Tarmac (Arrow, Straight)");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockArrows, 1, 4), "Tarmac (Arrow, Left)");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockArrows, 1, 8), "Tarmac (Arrow, Right)");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockArrows, 1, 12), "Tarmac (Arrow, Line)");
+            
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockArrows, 1, 0), "Tarmac (Double Yellow Stripes)");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockArrows, 1, 4), "Tarmac (Double Yellow End, Left)");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockArrows, 1, 8), "Tarmac (Double Yellow End, Right");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockArrows, 1, 12), "Tarmac (Double Yellow Center)");
+            
+            
             LanguageRegistry.addName(Roads.roadBlockWDS, "Tarmac (White Diagonal Stripe)");
             LanguageRegistry.addName(Roads.roadBlockYDS, "Tarmac (Yellow Diagonal Stripe)");
             LanguageRegistry.addName(Roads.roadBlockWSS, "Tarmac (White Small Square)");
             LanguageRegistry.addName(Roads.roadBlockYSS, "Tarmac (Yellow Small Square)");
-            LanguageRegistry.addName(Roads.roadBlockST, "Tarmac (Stop 1)");
-            LanguageRegistry.addName(Roads.roadBlockOP, "Tarmac (Stop 2)");
-            LanguageRegistry.addName(Roads.roadBlockSL, "Tarmac (Slow 1)");
-            LanguageRegistry.addName(Roads.roadBlockOW, "Tarmac (Slow 2)");
-            LanguageRegistry.addName(Roads.roadBlockStop, "Stop Paint");
             LanguageRegistry.addName(Roads.roadBlockJCUK, "Junction Center (Leftie)");
             LanguageRegistry.addName(Roads.roadBlockJCUSA, "Junction Center (Rightie)");
                         

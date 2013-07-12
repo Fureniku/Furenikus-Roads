@@ -3,6 +3,8 @@ package co.uk.silvania.roads;
 import co.uk.silvania.roads.block.*;
 import co.uk.silvania.roads.item.*;
 import co.uk.silvania.roads.liquid.*;
+import co.uk.silvania.roads.roadblocks.RoadBlockArrows;
+import co.uk.silvania.roads.roadblocks.RoadBlockDoubleYellow;
 import co.uk.silvania.roads.tileentities.*;
 import co.uk.silvania.roads.tileentities.blocks.*;
 import co.uk.silvania.roads.tileentities.entities.*;
@@ -17,13 +19,13 @@ import net.minecraft.tileentity.TileEntitySign;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.Property;
-import net.minecraftforge.liquids.*;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.Init;
+import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.Mod.PostInit;
-import cpw.mods.fml.common.Mod.PreInit;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -48,9 +50,11 @@ public class Roads {
     
 	public static CreativeTabs tabRoads = new CreativeTabs("tabRoads") {
 		public ItemStack getIconItemStack() {
-			return new ItemStack(Roads.roadBlockDYS, 1, 0);
+			return new ItemStack(Roads.roadBlockDoubleYellow, 1, 0);
 		}
 	};
+	
+	public static int roadsRenderID;
 			
 	public static Block roadBlock;
 	public static Block macadamBlock;
@@ -73,16 +77,14 @@ public class Roads {
 	public static Block catsEyeSide;
 	
 	public static Block roadBlockSWS2;
-	public static Block roadBlockDYS;
-	public static Block roadBlockDYSEL;
-	public static Block roadBlockDYSER;
+
+
 	public static Block roadBlockDYSI;
 	public static Block roadBlockDYSO;
 	public static Block roadBlockSYS;
 	public static Block roadBlockSWS;
 	public static Block roadBlockSWC;
 	public static Block roadBlockSYC;
-	public static Block roadBlockDYC;
 	public static Block roadBlockWhiteCross;
 	public static Block roadBlockYellowCross;
 	public static Block roadBlockWhiteFull;
@@ -101,19 +103,16 @@ public class Roads {
 	public static Block roadBlockJIL;
 	public static Block roadBlockJOIL;
 	public static Block roadBlockJIIL;
-	public static Block roadBlockAL;
-	public static Block roadBlockAUS;
-	public static Block roadBlockAUL;
-	public static Block roadBlockAUR;
+	
+	
+	public static Block roadBlockArrows;
+	public static Block roadBlockDoubleYellow;
+	
+	
 	public static Block roadBlockWDS;
 	public static Block roadBlockYDS;
 	public static Block roadBlockWSS;
 	public static Block roadBlockYSS;
-	public static Block roadBlockSL;
-	public static Block roadBlockOW;
-	public static Block roadBlockST;
-	public static Block roadBlockOP;
-	public static Block roadBlockStop;
 	public static Block roadBlockPaintGag;
 	public static Block roadBlockJCUK;
 	public static Block roadBlockJCUSA;
@@ -151,7 +150,7 @@ public class Roads {
 
     
     
-    @PreInit
+    @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
     	RoadsConfig config = new RoadsConfig();
     	NetworkRegistry.instance().registerGuiHandler(this, roadsGuiHandler);
@@ -179,16 +178,12 @@ public class Roads {
     	roadsTarFlowing = new FlowingTarBlock(config.roadsTarFlowingID).setUnlocalizedName("roadsTarFlowing");
     	
     	roadBlockSWS2 = new RBSideWhiteStripe(config.roadBlockSWS2ID).setUnlocalizedName("roadBlockSWS2");
-    	roadBlockDYS = new RBDoubleYellowStripe(config.roadBlockDYSID).setUnlocalizedName("roadBlockDYS");
-    	roadBlockDYSEL = new RBDoubleYellowStripeEndLeft(config.roadBlockDYSELID).setUnlocalizedName("roadBlockDYSEL");
-    	roadBlockDYSER = new RBDoubleYellowStripeEndRight(config.roadBlockDYSERID).setUnlocalizedName("roadBlockDYSER");
     	roadBlockDYSI = new RBDoubleYellowStripeInnerCorner(config.roadBlockDYSIID).setUnlocalizedName("roadBlockDYSI");
     	roadBlockDYSO = new RBDoubleYellowStripeOuterCorner(config.roadBlockDYSOID).setUnlocalizedName("roadBlockDYSO");
     	roadBlockSYS = new RBSingleYellowStripe(config.roadBlockSYSID).setUnlocalizedName("roadBlockSYS");
     	roadBlockSWS = new RBSingleWhiteSide(config.roadBlockSWSID).setUnlocalizedName("roadBlockSWS");
     	roadBlockSWC = new RBSingleWhiteCenter(config.roadBlockSWCID).setUnlocalizedName("roadBlockSWC");
     	roadBlockSYC = new RBSingleYellowCenter(config.roadBlockSYCID).setUnlocalizedName("roadBlockSYC");
-    	roadBlockDYC = new RBDoubleYellowCenter(config.roadBlockDYCID).setUnlocalizedName("roadBlockDYC");
     	roadBlockWhiteCross = new RBWhiteCross(config.roadBlockWhiteCrossID).setUnlocalizedName("roadBlockWhiteCross");
     	roadBlockYellowCross = new RBYellowCross(config.roadBlockYellowCrossID).setUnlocalizedName("roadBlockYellowCross");
     	roadBlockWhiteFull = new RBWhiteFull(config.roadBlockWhiteFullID).setUnlocalizedName("roadBlockWhiteFull");
@@ -207,19 +202,15 @@ public class Roads {
     	roadBlockJIL = new RBJunctInLine(config.roadBlockJILID).setUnlocalizedName("roadBlockJIL");
     	roadBlockJOIL = new RBJunctOutInvertedLine(config.roadBlockJOILID).setUnlocalizedName("roadBlockJOIL");
     	roadBlockJIIL = new RBJunctInInvertedLine(config.roadBlockJIILID).setUnlocalizedName("roadBlockJIIL");
-    	roadBlockAL = new RBArrowLine(config.roadBlockALID).setUnlocalizedName("roadBlockAL");
-    	roadBlockAUS = new RBArrowStraight(config.roadBlockAUSID).setUnlocalizedName("roadBlockAUS");
-    	roadBlockAUL = new RBArrowLeft(config.roadBlockAULID).setUnlocalizedName("roadBlockAUL");
-    	roadBlockAUR = new RBArrowRight(config.roadBlockAURID).setUnlocalizedName("roadBlockAUR");
+    	
+    	
+    	roadBlockArrows = new RoadBlockArrows(config.roadBlockArrowsID).setUnlocalizedName("roadBlockArrows");
+    	roadBlockDoubleYellow = new RoadBlockDoubleYellow(config.roadBlockDoubleYellowID).setUnlocalizedName("roadBlockDoubleYellow");
+    	
     	roadBlockWDS = new RBWhiteDiagonalStripe(config.roadBlockWDSID).setUnlocalizedName("roadBlockWDS");
     	roadBlockYDS = new RBYellowDiagonalStripe(config.roadBlockYDSID).setUnlocalizedName("roadBlockYDS");
     	roadBlockWSS = new RBWhiteSmallSquare(config.roadBlockWSSID).setUnlocalizedName("roadBlockWSS");
     	roadBlockYSS = new RBYellowSmallSquare(config.roadBlockYSSID).setUnlocalizedName("roadBlockYSS");
-    	roadBlockSL = new RBSL(config.roadBlockSLID).setUnlocalizedName("roadBlockSL");
-    	roadBlockOW = new RBOW(config.roadBlockOWID).setUnlocalizedName("roadBlockOW");
-    	roadBlockST = new RBST(config.roadBlockSTID).setUnlocalizedName("roadBlockST");
-    	roadBlockOP = new RBOP(config.roadBlockOPID).setUnlocalizedName("roadBlockOP");
-    	roadBlockStop = new RBStop(config.roadBlockStopID).setUnlocalizedName("roadBlockStop");
     	roadBlockPaintGag = new RBPaintGagBlock(config.roadBlockPaintGagID).setUnlocalizedName("roadBlockPaintGag");
     	roadBlockJCUK = new RBJunctCenterUK(config.roadBlockJCUKID).setUnlocalizedName("roadBlockJCUK");
     	roadBlockJCUSA = new RBJunctCenterUSA(config.roadBlockJCUSAID).setUnlocalizedName("roadBlockJCUSA");
@@ -254,7 +245,7 @@ public class Roads {
     	
         }
                
-    @Init
+    @EventHandler
     public void load(FMLInitializationEvent event) {
             proxy.registerRenderThings();
             
@@ -281,7 +272,7 @@ public class Roads {
             GameRegistry.registerTileEntity(TileEntityHalfSlopeEntity.class, "tileEntityHalfSlope");
             GameRegistry.registerTileEntity(TileEntityRoadSignEntity.class, "tileEntityRoadSign");
             
-            LiquidContainerRegistry.registerLiquid(new LiquidContainerData(new LiquidStack(Roads.roadsTarStill, LiquidContainerRegistry.BUCKET_VOLUME), new ItemStack(Roads.tarBucketItem), new ItemStack(Item.bucketEmpty)));
+            //FluidRegistry.registerLiquid(new FluidStack(Roads.roadsTarStill, FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(Roads.tarBucketItem), new ItemStack(Item.bucketEmpty));
             LanguageRegistry.instance().addStringLocalization("itemGroup.tabRoads", "en_US", "Roads");
 
             //Setup the world generator
@@ -316,8 +307,10 @@ public class Roads {
         }
 
 
-		@PostInit
+		@EventHandler
         public void postInit(FMLPostInitializationEvent event) {
+			
+			int roadsRenderID = RenderingRegistry.getNextAvailableRenderId();
                 // Stub Method
         		}
 		};

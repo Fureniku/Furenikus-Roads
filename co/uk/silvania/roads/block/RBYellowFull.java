@@ -13,14 +13,10 @@ import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class RBYellowFull extends Block {
+public class RBYellowFull extends RoadBlockBase {
 
         public RBYellowFull (int id) {
-            super(id, Material.rock);
-            this.setHardness(1.0F);
-    		this.setStepSound(Block.soundStoneFootstep);
-    		this.setCreativeTab(Roads.tabRoads);
-            this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.825F, 1.0F);
+            super(id);
         }
            
     	@SideOnly(Side.CLIENT)
@@ -33,24 +29,13 @@ public class RBYellowFull extends Block {
             this.sides = iconRegister.registerIcon("Roads:TarmacPlain");
     	}
     	
-        public int getRenderType() {
-            return 16;
-            }
-
-        public boolean renderAsNormalBlock() {
-            return false;
-        }
-        
-        public boolean isOpaqueCube() {
-        	return false;
-        }
-       
         @SideOnly(Side.CLIENT)
-        @Override
-        public Icon getIcon(int side, int meta)
-        {
-        	if (side == 1)
-        		return top;
-        	return sides;
+        public Icon getIcon(int side, int meta) {
+            int k = meta;
+            if (side == 1) {
+             	return top;
+            } else {
+            	return sides;
+            }
         }
     }

@@ -2,6 +2,7 @@ package co.uk.silvania.roads.client;
 
 import net.minecraftforge.client.MinecraftForgeClient;
 import co.uk.silvania.roads.CommonProxy;
+import co.uk.silvania.roads.Roads;
 import co.uk.silvania.roads.block.RoadBlockRenderer;
 import co.uk.silvania.roads.tileentities.*;
 import co.uk.silvania.roads.tileentities.entities.*;
@@ -10,6 +11,8 @@ import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class ClientProxy extends CommonProxy {
+	
+	//public static int roadsRenderID = RenderingRegistry.getNextAvailableRenderId();
         
         @Override
         public void registerRenderThings() {
@@ -33,7 +36,7 @@ public class ClientProxy extends CommonProxy {
         	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRoadPainterEntity.class, new TileEntityRoadPainterRenderer());
         	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRoadBarrierEntity.class, new TileEntityRoadBarrierRenderer());
         	
-        	RenderingRegistry.registerBlockHandler(new RoadBlockRenderer());
+        	RenderingRegistry.registerBlockHandler(Roads.roadsRenderID, new RoadBlockRenderer());
         }
         
 }

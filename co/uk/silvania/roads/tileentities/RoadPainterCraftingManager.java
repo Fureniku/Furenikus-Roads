@@ -30,7 +30,7 @@ public class RoadPainterCraftingManager {
 	private RoadPainterCraftingManager() {
 
 		recipes = new ArrayList();
-		this.shapedRecipe(new ItemStack(Roads.roadBlockDYS, 1), new Object[] {"YY   ", "YY   ", "YYR  ", "YY   ", "YY   ", Character.valueOf('B'), Roads.roadBlock, Character.valueOf('Y'), Item.rottenFlesh});
+		this.shapedRecipe(new ItemStack(Roads.roadBlockDoubleYellow, 0), new Object[] {"YY   ", "YY   ", "YYR  ", "YY   ", "YY   ", Character.valueOf('B'), Roads.roadBlock, Character.valueOf('Y'), Item.rottenFlesh});
 
 		Collections.sort(this.recipes, new RoadPainterRecipeSorter(this));
 	}
