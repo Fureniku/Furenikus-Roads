@@ -143,7 +143,7 @@ public class WorldGenLakesRoads extends WorldGenerator
 
                         if (par1World.isBlockFreezable(par3 + i1, par4 + b0, par5 + j2))
                         {
-                            par1World.setBlock(par3 + i1, par4 + b0, par5 + j2, Roads.hardenedTarBlock.blockID, 0, 2);
+                            par1World.setBlock(par3 + i1, par4 + b0, par5 + j2, Roads.generalBlocks.blockID, 0, 2);
                         }
                     }
                 }

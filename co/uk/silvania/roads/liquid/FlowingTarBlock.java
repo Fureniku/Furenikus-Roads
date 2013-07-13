@@ -261,7 +261,6 @@ public class FlowingTarBlock extends BlockFlowing implements IFluidBlock {
         {
             if (this.blockMaterial == Material.lava && par1World.getBlockMaterial(par2, par3 - 1, par4) == Material.water)
             {
-                par1World.setBlock(par2, par3 - 1, par4, Roads.hardenedTarBlock.blockID);
                 this.triggerLavaMixEffects(par1World, par2, par3 - 1, par4);
                 return;
             }

@@ -61,46 +61,6 @@ public class RoadBlockArrows extends Block {
 			return sides;
 
 	}
-	
-    
-    /*@SideOnly(Side.CLIENT)
-    public Icon getIcon(int side, int meta) {
-        int k = meta;
-        if (k == 0 && side == 1) {
-         	return top1;
-        } else if (k == 1 && side == 1) {
-         	return top1;
-        } else if (k == 2 && side == 1) {
-         	return top1;
-        } else if (k == 3 && side == 1) {
-         	return top1;
-        } else if (k == 4 && side == 1) {
-         	return top2;
-        } else if (k == 5 && side == 1) {
-         	return top2;
-        } else if (k == 6 && side == 1) {
-         	return top2;
-        } else if (k == 7 && side == 1) {
-         	return top2;
-        } else if (k == 8 && side == 1) {
-         	return top3;
-        } else if (k == 9 && side == 1) {
-         	return top3;
-        } else if (k == 10 && side == 1) {
-         	return top3;
-        } else if (k == 11 && side == 1) {
-         	return top3;
-        } else if (k == 12 && side == 1) {
-         	return top4;
-        } else if (k == 13 && side == 1) {
-         	return top4;
-        } else if (k == 14 && side == 1) {
-         	return top4;
-        } else if (k == 15 && side == 1) {
-         	return top4;
-        } else
-        	return sides;
-    }*/
 
     public int getRenderType() {
     	return 0;

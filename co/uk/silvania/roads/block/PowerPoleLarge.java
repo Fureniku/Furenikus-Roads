@@ -33,8 +33,26 @@ public class PowerPoleLarge extends Block {
 	public PowerPoleLarge(int id) {
 		super(id, Material.iron);
 		this.setCreativeTab(Roads.tabRoads);
-        //this.setBlockBounds(0.4F, 0.0F, 0.4F, 0.6F, 1.0F, 0.6F);
+        this.setBlockBounds(0.45F, 0.0F, 0.45F, 0.55F, 1.0F, 0.55F);
 	}
+	
+    public int getRenderType() {
+    	return 0;
+    }
+
+    public boolean isOpaqueCube()
+    {
+        return false;
+    }
+    
+	public boolean renderAsNormalBlock() {
+		return false;
+	}
+	
+    public void registerIcons(IconRegister iconRegister) {
+    	blockIcon = iconRegister.registerIcon("Roads:PowerPole");
+    }
+}
 	
 	/*public void onBlockPlaced(Block block, World world, int x, int y, int z) {
 		if block.set
@@ -102,12 +120,6 @@ public class PowerPoleLarge extends Block {
                 }
             }
         }
-    }*/
-	
-}
-	
-    /*public void registerIcons(IconRegister iconRegister) {
-        blockIcon = iconRegister.registerIcon("Roads:CementBlock");
     }
 
     @Override
@@ -342,4 +354,5 @@ public class PowerPoleLarge extends Block {
         }
     }
 
-}*/
+}
+/**/

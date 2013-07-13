@@ -20,6 +20,7 @@ public class CatsEyeSide extends Block {
 		this.setStepSound(Block.soundStoneFootstep);
 		this.setCreativeTab(Roads.tabRoads);
         this.setLightValue(0.5F);
+        this.setBlockBounds(0.4F, -0.175F, 0.4F, 0.6F, -0.125F, 0.6F);
 	}
 	
     public boolean renderAsNormalBlock() {

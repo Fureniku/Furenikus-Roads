@@ -3,8 +3,7 @@ package co.uk.silvania.roads;
 import co.uk.silvania.roads.block.*;
 import co.uk.silvania.roads.item.*;
 import co.uk.silvania.roads.liquid.*;
-import co.uk.silvania.roads.roadblocks.RoadBlockArrows;
-import co.uk.silvania.roads.roadblocks.RoadBlockDoubleYellow;
+import co.uk.silvania.roads.roadblocks.*;
 import co.uk.silvania.roads.tileentities.*;
 import co.uk.silvania.roads.tileentities.blocks.*;
 import co.uk.silvania.roads.tileentities.entities.*;
@@ -53,71 +52,35 @@ public class Roads {
 			return new ItemStack(Roads.roadBlockDoubleYellow, 1, 0);
 		}
 	};
-	
-	public static int roadsRenderID;
-			
-	public static Block roadBlock;
-	public static Block macadamBlock;
-	public static Block cementBlock;
+
 	public static Block limeStoneBlock;
-	public static Block hardenedTarBlock;
-	public static Block sidewalkBlocks;
 	public static Block roadsTarStill;
 	public static Block roadsTarFlowing;
-	public static Block sidewalkKerbed;
-	public static Block sidewalkKerbed1;
-	public static Block sidewalkKerbed2;
-	public static Block sidewalkKerbedInnerCorner;
-	public static Block sidewalkKerbed1InnerCorner;
-	public static Block sidewalkKerbed2InnerCorner;
-	public static Block sidewalkKerbedOuterCorner;
-	public static Block sidewalkKerbed1OuterCorner;
-	public static Block sidewalkKerbed2OuterCorner;
 	public static Block catsEye;
 	public static Block catsEyeSide;
-	
-	public static Block roadBlockSWS2;
+	public static Block generalBlocks;
 
-
-	public static Block roadBlockDYSI;
-	public static Block roadBlockDYSO;
-	public static Block roadBlockSYS;
-	public static Block roadBlockSWS;
-	public static Block roadBlockSWC;
-	public static Block roadBlockSYC;
-	public static Block roadBlockWhiteCross;
-	public static Block roadBlockYellowCross;
-	public static Block roadBlockWhiteFull;
-	public static Block roadBlockYellowFull;
-	public static Block roadBlockWC;
-	public static Block roadBlockFYS;
-	public static Block roadBlockYC;
-	public static Block roadBlockYAC;
-	public static Block roadBlockWAC;
-	public static Block roadBlockWSL;
-	public static Block roadBlockWSSL;
-	public static Block roadBlockYSSL;
-	public static Block roadBlockJO;
-	public static Block roadBlockJI;
-	public static Block roadBlockJOL;
-	public static Block roadBlockJIL;
-	public static Block roadBlockJOIL;
-	public static Block roadBlockJIIL;
-	
-	
 	public static Block roadBlockArrows;
+	public static Block roadBlockCorners;
 	public static Block roadBlockDoubleYellow;
+	public static Block roadBlockCornerB;
+	public static Block roadBlockJunctionIn;
+	public static Block roadBlockJunctionOut;
+	public static Block roadBlockMiscSingles;
+	public static Block roadBlockSimpleLines;
+	public static Block roadBlockSideWhiteStripes;
+	public static Block roadBlockStripes;
 	
+	public static Block roadRamp1;
+	public static Block roadRamp2;
 	
-	public static Block roadBlockWDS;
-	public static Block roadBlockYDS;
-	public static Block roadBlockWSS;
-	public static Block roadBlockYSS;
-	public static Block roadBlockPaintGag;
-	public static Block roadBlockJCUK;
-	public static Block roadBlockJCUSA;
+	public static Block sidewalkBlockGrey;
+	public static Block sidewalkBlockLight;
+	public static Block sidewalkBlockTile;
 	
 	public static Block powerPole;
+	public static Block powerPoleSmall;
+	
 	public static Block roadPainter;
 	public static Block trafficLight;
 	public static Block lightBollard;
@@ -127,14 +90,6 @@ public class Roads {
 	public static Block barrierPole;
 	public static Block barrierBlock;
 	public static Block barrierCorner;
-	public static Block roadSlope1;
-	public static Block roadSlope2;
-	public static Block roadSlope3;
-	public static Block roadSlope4;
-	public static Block roadSlope5;
-	public static Block roadSlope6;
-	public static Block roadSlope7;
-	public static Block roadSlope8;
 	public static Block roadSign;
 	public static Block roadBarrier;
 	
@@ -157,65 +112,34 @@ public class Roads {
     	
     	RoadsConfig.loadConfig(event); 
 
-    	roadBlock = new RoadBlock(config.roadBlockID).setUnlocalizedName("roadBlock");
-    	macadamBlock = new MacadamBlock(config.macadamBlockID).setUnlocalizedName("macadamBlock");
-    	cementBlock = new CementBlock(config.cementBlockID).setUnlocalizedName("cementBlock");
     	limeStoneBlock = new LimeStoneBlock(config.limeStoneBlockID).setUnlocalizedName("limeStoneBlock");
-    	hardenedTarBlock = new HardenedTarBlock(config.hardenedTarBlockID).setUnlocalizedName("hardenedTarBlock");
-    	sidewalkBlocks = new SideWalkBlocks(config.sidewalkBlocksID).setUnlocalizedName("sidewalkBlocks");
-    	sidewalkKerbed = new SideWalkKerbed(config.sidewalkKerbedID).setUnlocalizedName("sidewalkKerbed");
-    	sidewalkKerbed1 = new SideWalkKerbed1(config.sidewalkKerbed1ID).setUnlocalizedName("sidewalkKerbed1");
-    	sidewalkKerbed2 = new SideWalkKerbed2(config.sidewalkKerbed2ID).setUnlocalizedName("sidewalkKerbed2");
-    	sidewalkKerbedInnerCorner = new SideWalkKerbedInnerCorner(config.sidewalkKerbedInnerCornerID).setUnlocalizedName("sidewalkKerbedInnerCorner");
-    	sidewalkKerbed1InnerCorner = new SideWalkKerbed1InnerCorner(config.sidewalkKerbed1InnerCornerID).setUnlocalizedName("sidewalkKerbed1InnerCorner");
-    	sidewalkKerbed2InnerCorner = new SideWalkKerbed2InnerCorner(config.sidewalkKerbed2InnerCornerID).setUnlocalizedName("sidewalkKerbed2InnerCorner");
-    	sidewalkKerbedOuterCorner = new SideWalkKerbedOuterCorner(config.sidewalkKerbedOuterCornerID).setUnlocalizedName("sidewalkKerbedOuterCorner");
-    	sidewalkKerbed1OuterCorner = new SideWalkKerbed1OuterCorner(config.sidewalkKerbed1OuterCornerID).setUnlocalizedName("sidewalkKerbed1OuterCorner");
-    	sidewalkKerbed2OuterCorner = new SideWalkKerbed2OuterCorner(config.sidewalkKerbed2OuterCornerID).setUnlocalizedName("sidewalkKerbed2OuterCorner");
     	catsEye = new CatsEye(config.catsEyeID).setUnlocalizedName("catsEye");
     	catsEyeSide = new CatsEyeSide(config.catsEyeSideID).setUnlocalizedName("catsEyeSide");
     	roadsTarStill = new StillTarBlock(config.roadsTarStillID).setUnlocalizedName("roadsTarStill");
     	roadsTarFlowing = new FlowingTarBlock(config.roadsTarFlowingID).setUnlocalizedName("roadsTarFlowing");
-    	
-    	roadBlockSWS2 = new RBSideWhiteStripe(config.roadBlockSWS2ID).setUnlocalizedName("roadBlockSWS2");
-    	roadBlockDYSI = new RBDoubleYellowStripeInnerCorner(config.roadBlockDYSIID).setUnlocalizedName("roadBlockDYSI");
-    	roadBlockDYSO = new RBDoubleYellowStripeOuterCorner(config.roadBlockDYSOID).setUnlocalizedName("roadBlockDYSO");
-    	roadBlockSYS = new RBSingleYellowStripe(config.roadBlockSYSID).setUnlocalizedName("roadBlockSYS");
-    	roadBlockSWS = new RBSingleWhiteSide(config.roadBlockSWSID).setUnlocalizedName("roadBlockSWS");
-    	roadBlockSWC = new RBSingleWhiteCenter(config.roadBlockSWCID).setUnlocalizedName("roadBlockSWC");
-    	roadBlockSYC = new RBSingleYellowCenter(config.roadBlockSYCID).setUnlocalizedName("roadBlockSYC");
-    	roadBlockWhiteCross = new RBWhiteCross(config.roadBlockWhiteCrossID).setUnlocalizedName("roadBlockWhiteCross");
-    	roadBlockYellowCross = new RBYellowCross(config.roadBlockYellowCrossID).setUnlocalizedName("roadBlockYellowCross");
-    	roadBlockWhiteFull = new RBWhiteFull(config.roadBlockWhiteFullID).setUnlocalizedName("roadBlockWhiteFull");
-    	roadBlockYellowFull = new RBYellowFull(config.roadBlockYellowFullID).setUnlocalizedName("roadBlockYellowFull");
-    	roadBlockWC = new RBWhiteCorner(config.roadBlockWCID).setUnlocalizedName("roadBlockWC");
-    	roadBlockFYS = new RBFarYellowStripe(config.roadBlockFYSID).setUnlocalizedName("roadBlockFYS");
-    	roadBlockYC = new RBYellowCorner(config.roadBlockYCID).setUnlocalizedName("roadBlockYC");
-    	roadBlockYAC = new RBYellowAltCorner(config.roadBlockYACID).setUnlocalizedName("roadBlockYAC");
-    	roadBlockWAC = new RBWhiteAltCorner(config.roadBlockWACID).setUnlocalizedName("roadBlockWAC");
-    	roadBlockWSL = new RBWhiteStripedLine(config.roadBlockWSLID).setUnlocalizedName("roadBlockWSL");
-    	roadBlockWSSL = new RBWhiteSideStripedLine(config.roadBlockWSSLID).setUnlocalizedName("roadBlockWSSL");
-    	roadBlockYSSL = new RBYellowSideStripedLine(config.roadBlockYSSLID).setUnlocalizedName("roadBlockYSSL");
-    	roadBlockJO = new RBJunctOut(config.roadBlockJOID).setUnlocalizedName("roadBlockJO");
-    	roadBlockJI = new RBJunctIn(config.roadBlockJIID).setUnlocalizedName("roadBlockJI");
-    	roadBlockJOL = new RBJunctOutLine(config.roadBlockJOLID).setUnlocalizedName("roadBlockJOL");
-    	roadBlockJIL = new RBJunctInLine(config.roadBlockJILID).setUnlocalizedName("roadBlockJIL");
-    	roadBlockJOIL = new RBJunctOutInvertedLine(config.roadBlockJOILID).setUnlocalizedName("roadBlockJOIL");
-    	roadBlockJIIL = new RBJunctInInvertedLine(config.roadBlockJIILID).setUnlocalizedName("roadBlockJIIL");
-    	
-    	
+    	generalBlocks = new GeneralBlocks(config.generalBlocksID).setUnlocalizedName("generalBlocks");
+
     	roadBlockArrows = new RoadBlockArrows(config.roadBlockArrowsID).setUnlocalizedName("roadBlockArrows");
     	roadBlockDoubleYellow = new RoadBlockDoubleYellow(config.roadBlockDoubleYellowID).setUnlocalizedName("roadBlockDoubleYellow");
+    	roadBlockCorners = new RoadBlockCorners(config.roadBlockCornersID).setUnlocalizedName("roadBlockCorners");
+    	roadBlockCornerB = new RoadBlockCornerB(config.roadBlockCornerBID).setUnlocalizedName("roadBlockCornerB");
+    	roadBlockJunctionIn = new RoadBlockJunctionIn(config.roadBlockJunctionInID).setUnlocalizedName("roadBlockJunctionIn");
+    	roadBlockJunctionOut = new RoadBlockJunctionOut(config.roadBlockJunctionOutID).setUnlocalizedName("roadBlockJunctionOut");
+    	roadBlockMiscSingles = new RoadBlockMiscSingles(config.roadBlockMiscSinglesID).setUnlocalizedName("roadBlockMiscSingles");
+    	roadBlockSimpleLines = new RoadBlockSimpleLines(config.roadBlockSimpleLinesID).setUnlocalizedName("roadBlockSimpleLines");
+    	roadBlockSideWhiteStripes = new RoadBlockSideWhiteStripes(config.roadBlockSideWhiteStripesID).setUnlocalizedName("roadBlockSideWhiteStripes");
+    	roadBlockStripes = new RoadBlockStripes(config.roadBlockStripesID).setUnlocalizedName("roadBlockStripes");
+    	sidewalkBlockGrey = new SidewalkBlockGrey(config.sidewalkBlockGreyID).setUnlocalizedName("sidewalkBlockGrey");
+    	sidewalkBlockLight = new SidewalkBlockLight(config.sidewalkBlockLightID).setUnlocalizedName("sidewalkBlockLight");
+    	sidewalkBlockTile = new SidewalkBlockTile(config.sidewalkBlockTileID).setUnlocalizedName("sidewalkBlockTile");
     	
-    	roadBlockWDS = new RBWhiteDiagonalStripe(config.roadBlockWDSID).setUnlocalizedName("roadBlockWDS");
-    	roadBlockYDS = new RBYellowDiagonalStripe(config.roadBlockYDSID).setUnlocalizedName("roadBlockYDS");
-    	roadBlockWSS = new RBWhiteSmallSquare(config.roadBlockWSSID).setUnlocalizedName("roadBlockWSS");
-    	roadBlockYSS = new RBYellowSmallSquare(config.roadBlockYSSID).setUnlocalizedName("roadBlockYSS");
-    	roadBlockPaintGag = new RBPaintGagBlock(config.roadBlockPaintGagID).setUnlocalizedName("roadBlockPaintGag");
-    	roadBlockJCUK = new RBJunctCenterUK(config.roadBlockJCUKID).setUnlocalizedName("roadBlockJCUK");
-    	roadBlockJCUSA = new RBJunctCenterUSA(config.roadBlockJCUSAID).setUnlocalizedName("roadBlockJCUSA");
+    	roadRamp1 = new TileEntityRamp1(config.roadRamp1ID).setUnlocalizedName("roadRamp1");
+    	roadRamp2 = new TileEntityRamp2(config.roadRamp2ID).setUnlocalizedName("roadRamp2");
     	
     	powerPole = new PowerPoleLarge(config.powerPoleID).setUnlocalizedName("powerPole");
+    	powerPoleSmall = new PowerPoleSmall(config.powerPoleSmallID).setUnlocalizedName("powerPoleSmall");
+    	
+    	
     	roadPainter = new TileEntityRoadPainterBlock(config.roadPainterID).setUnlocalizedName("roadPainter");
     	trafficLight = new TileEntityTrafficLightBlock(config.trafficLightID).setUnlocalizedName("trafficLight");
     	lightBollard = new TileEntityLightBollardBlock(config.lightBollardID).setUnlocalizedName("lightBollard");
@@ -225,14 +149,6 @@ public class Roads {
     	barrierPole = new TileEntityBarrierPoleBlock(config.barrierPoleID).setUnlocalizedName("barrierPole");
     	barrierBlock = new TileEntityBarrierBlock(config.barrierBlockID).setUnlocalizedName("barrierBlock");
     	barrierCorner = new TileEntityBarrierCornerBlock(config.barrierCornerID).setUnlocalizedName("barrierCorner");
-    	roadSlope1 = new TileEntityRoadSlopeBlock(config.roadSlope1ID).setUnlocalizedName("roadSlope1");
-    	roadSlope2 = new TileEntityRoadSlopeDYSBlock(config.roadSlope2ID).setUnlocalizedName("roadSlope2");
-    	roadSlope3 = new TileEntityRoadSlopeSWCBlock(config.roadSlope3ID).setUnlocalizedName("roadSlope3");
-    	roadSlope4 = new TileEntityRoadSlopeSWSBlock(config.roadSlope4ID).setUnlocalizedName("roadSlope4");
-    	roadSlope5 = new TileEntityRoadSlopeSWSSBlock(config.roadSlope5ID).setUnlocalizedName("roadSlope5");
-    	roadSlope6 = new TileEntityRoadSlopeKerb1Block(config.roadSlope6ID).setUnlocalizedName("roadSlope6");
-    	roadSlope7 = new TileEntityRoadSlopeKerb2Block(config.roadSlope7ID).setUnlocalizedName("roadSlope7");
-    	roadSlope8 = new TileEntityHalfSlopeBlock(config.roadSlope8ID).setUnlocalizedName("roadSlope8");
     	roadSign = new TileEntityRoadSignBlock(config.roadSignID, TileEntityRoadSignEntity.class, true).setUnlocalizedName("roadSign");
     	roadBarrier = new TileEntityRoadBarrierBlock(config.roadBarrierID).setUnlocalizedName("roadBarrier");
 
@@ -258,18 +174,9 @@ public class Roads {
             GameRegistry.registerTileEntity(TileEntityStreetLamp1Entity.class, "tileEntityStreetLamp1");
             GameRegistry.registerTileEntity(TileEntityStreetLamp2Entity.class, "tileEntityStreetLamp2");
             GameRegistry.registerTileEntity(TileEntityStreetSignEntity.class, "tileEntityStreetSign");
-            GameRegistry.registerTileEntity(RBPaintGagBlockTE.class, "tileEntityRBPaintGagBlock");
             GameRegistry.registerTileEntity(TileEntityBarrierPoleEntity.class, "tileEntityBarrierPole");
             GameRegistry.registerTileEntity(TileEntityBarrierEntity.class, "tileEntityBarrier");
             GameRegistry.registerTileEntity(TileEntityBarrierCornerEntity.class, "tileEntityBarrierCorner");
-            GameRegistry.registerTileEntity(TileEntityRoadSlopeEntity.class, "tileEntityRoadSlope1");
-            GameRegistry.registerTileEntity(TileEntityRoadSlopeDYSEntity.class, "tileEntityRoadSlope2");
-            GameRegistry.registerTileEntity(TileEntityRoadSlopeSWCEntity.class, "tileEntityRoadSlope3");
-            GameRegistry.registerTileEntity(TileEntityRoadSlopeSWSEntity.class, "tileEntityRoadSlope4");
-            GameRegistry.registerTileEntity(TileEntityRoadSlopeSWSSEntity.class, "tileEntityRoadSlope5");
-            GameRegistry.registerTileEntity(TileEntityRoadSlopeKerb1Entity.class, "tileEntityRoadSlope6");
-            GameRegistry.registerTileEntity(TileEntityRoadSlopeKerb2Entity.class, "tileEntityRoadSlope7");
-            GameRegistry.registerTileEntity(TileEntityHalfSlopeEntity.class, "tileEntityHalfSlope");
             GameRegistry.registerTileEntity(TileEntityRoadSignEntity.class, "tileEntityRoadSign");
             
             //FluidRegistry.registerLiquid(new FluidStack(Roads.roadsTarStill, FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(Roads.tarBucketItem), new ItemStack(Item.bucketEmpty));
@@ -287,21 +194,21 @@ public class Roads {
             ItemStack cobbleStoneStack = new ItemStack(Block.cobblestone);
             ItemStack cementItemStack = new ItemStack(Roads.cementItem);
             ItemStack tarBucketStack = new ItemStack(Roads.tarBucketItem);
-            ItemStack macadamStack = new ItemStack(Roads.macadamBlock);
+            //ItemStack macadamStack = new ItemStack(Roads.macadamBlock);
             ItemStack limeStack = new ItemStack (Roads.limeStonePowderItem);
 
             //Shaped Recipes
             GameRegistry.addRecipe(new ItemStack(Roads.cementItem, 4), " c ", " w ", "sss", 'w', waterBucketStack, 's', sandStack, 'c', cementDustStack);
-            GameRegistry.addRecipe(new ItemStack(Roads.macadamBlock, 8), "xxx", "xyx", "xxx", 'x', cobbleStoneStack, 'y', cementItemStack);
+            //GameRegistry.addRecipe(new ItemStack(Roads.macadamBlock, 8), "xxx", "xyx", "xxx", 'x', cobbleStoneStack, 'y', cementItemStack);
             GameRegistry.addRecipe(new ItemStack(Roads.limeStoneBlock), "ll", "ll", 'l', limeStack);
 
             //Shapeless Recipes
-            GameRegistry.addShapelessRecipe(new ItemStack(Roads.roadBlock), macadamStack, tarBucketStack);
+            //GameRegistry.addShapelessRecipe(new ItemStack(Roads.roadBlock), macadamStack, tarBucketStack);
             GameRegistry.addShapelessRecipe(new ItemStack(Roads.limeClayPowderItem), limeStack, clayStack);
 
             //And some smelting!
             GameRegistry.addSmelting(Roads.limeClayPowderItem.itemID, new ItemStack(Roads.cementDustItem), 0.1f);
-            GameRegistry.addSmelting(Roads.cementItem.itemID, new ItemStack(Roads.cementBlock), 0.2f);
+            //GameRegistry.addSmelting(Roads.cementItem.itemID, new ItemStack(Roads.cementBlock), 0.2f);
             
             //RenderingRegistry.registerBlockHandler(new TileEntityTrafficLightRenderer());
         }

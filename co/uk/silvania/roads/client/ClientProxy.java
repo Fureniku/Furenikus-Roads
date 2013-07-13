@@ -3,16 +3,14 @@ package co.uk.silvania.roads.client;
 import net.minecraftforge.client.MinecraftForgeClient;
 import co.uk.silvania.roads.CommonProxy;
 import co.uk.silvania.roads.Roads;
-import co.uk.silvania.roads.block.RoadBlockRenderer;
 import co.uk.silvania.roads.tileentities.*;
+import co.uk.silvania.roads.tileentities.blocks.TileEntityRamp1;
 import co.uk.silvania.roads.tileentities.entities.*;
 import co.uk.silvania.roads.tileentities.renderers.*;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class ClientProxy extends CommonProxy {
-	
-	//public static int roadsRenderID = RenderingRegistry.getNextAvailableRenderId();
         
         @Override
         public void registerRenderThings() {
@@ -25,18 +23,10 @@ public class ClientProxy extends CommonProxy {
         	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBarrierPoleEntity.class, new TileEntityBarrierPoleRenderer());
         	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBarrierEntity.class, new TileEntityBarrierRenderer());
         	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBarrierCornerEntity.class, new TileEntityBarrierCornerRenderer());
-        	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHalfSlopeEntity.class, new TileEntityHalfSlopeRenderer());
-        	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRoadSlopeEntity.class, new TileEntityRoadSlopeRenderer());
-        	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRoadSlopeDYSEntity.class, new TileEntityRoadSlopeDYSRenderer());
-        	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRoadSlopeSWCEntity.class, new TileEntityRoadSlopeSWCRenderer());
-        	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRoadSlopeSWSEntity.class, new TileEntityRoadSlopeSWSRenderer());
-        	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRoadSlopeSWSSEntity.class, new TileEntityRoadSlopeSWSSRenderer());
-        	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRoadSlopeKerb1Entity.class, new TileEntityRoadSlopeKerb1Renderer());
-        	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRoadSlopeKerb2Entity.class, new TileEntityRoadSlopeKerb2Renderer());
+        	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRoadSlope1Entity.class, new TileEntityRoadSlopeRenderer());
+        	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRoadSlope2Entity.class, new TileEntityRoadSlope2Renderer());
         	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRoadPainterEntity.class, new TileEntityRoadPainterRenderer());
         	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRoadBarrierEntity.class, new TileEntityRoadBarrierRenderer());
-        	
-        	RenderingRegistry.registerBlockHandler(Roads.roadsRenderID, new RoadBlockRenderer());
         }
         
 }
