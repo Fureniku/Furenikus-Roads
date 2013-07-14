@@ -7,6 +7,7 @@ import co.uk.silvania.roads.roadblocks.*;
 import co.uk.silvania.roads.tileentities.*;
 import co.uk.silvania.roads.tileentities.blocks.*;
 import co.uk.silvania.roads.tileentities.entities.*;
+import co.uk.silvania.roads.tileentities.itemrenderers.TrafficLightItemRenderer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSign;
@@ -15,6 +16,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntitySign;
+import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.Property;
@@ -158,6 +160,8 @@ public class Roads {
     	limeStonePowderItem = new LimeStonePowderItem(config.limeStonePowderID).setUnlocalizedName("limeStonePowderItem");
     	limeClayPowderItem = new LimeClayPowderItem(config.limeClayPowderID).setUnlocalizedName("limeClayPowderItem");
     	tarBucketItem = new TarBucketItem(config.tarBucketID).setUnlocalizedName("tarBucketItem");
+    	
+    	//MinecraftForgeClient.registerItemRenderer(trafficLight.blockID, new TrafficLightItemRenderer());
     	
         }
                

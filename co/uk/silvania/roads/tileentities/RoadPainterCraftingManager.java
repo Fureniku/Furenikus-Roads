@@ -30,9 +30,11 @@ public class RoadPainterCraftingManager {
 	private RoadPainterCraftingManager() {
 
 		recipes = new ArrayList();
-		//this.shapedRecipe(new ItemStack(Roads.roadBlockDoubleYellow, 0), new Object[] {"YY   ", "YY   ", "YYR  ", "YY   ", "YY   ", Character.valueOf('B'), Roads.roadBlock, Character.valueOf('Y'), Item.rottenFlesh});
-
+		this.shapedRecipe(new ItemStack(Roads.roadBlockDoubleYellow, 0), new Object[] {"YY   ", "YY   ", "YYR  ", "YY   ", "YY   ", Character.valueOf('R'), Item.ingotGold, Character.valueOf('Y'), Item.rottenFlesh});
+		this.addShapelessRecipe(new ItemStack(Item.diamond, 0), new Object[] {"F", Character.valueOf('F'), Item.ingotGold});
+		
 		Collections.sort(this.recipes, new RoadPainterRecipeSorter(this));
+		System.out.println(this.recipes.size() + " recipes");
 	}
 
 	public ShapedRecipes shapedRecipe(ItemStack par1ItemStack, Object ... par2ArrayOfObj) {

@@ -7,6 +7,7 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
@@ -46,25 +47,9 @@ public class TileEntityRoadBarrierBlock extends BlockContainer {
 		this.blockIcon = icon.registerIcon("Roads:CementBlock");
 	}
 	
-	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4,
-			EntityLiving par5EntityLiving, ItemStack par6ItemStack) {
-		int var6 = MathHelper
-				.floor_double(par5EntityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
-
-		if (var6 == 0) {
-			par1World.setBlockMetadataWithNotify(par2, par3, par4, 2, 0);
-		}
-
-		if (var6 == 1) {
-			par1World.setBlockMetadataWithNotify(par2, par3, par4, 5, 0);
-		}
-
-		if (var6 == 2) {
-			par1World.setBlockMetadataWithNotify(par2, par3, par4, 3, 0);
-		}
-
-		if (var6 == 3) {
-			par1World.setBlockMetadataWithNotify(par2, par3, par4, 4, 0);
-		}
+    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)
+    {
+        int l = MathHelper.floor_double((double)(par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
+        par1World.setBlockMetadataWithNotify(par2, par3, par4, l, 2);
 	}	
 }

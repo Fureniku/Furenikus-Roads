@@ -7,10 +7,8 @@ import net.minecraft.entity.Entity;
 public class StreetLamp2Model extends ModelBase
 {
   //fields
-    ModelRenderer PoleUpper;
     ModelRenderer Stem1;
     ModelRenderer Light1;
-    ModelRenderer PoleLower;
     ModelRenderer Joint;
     ModelRenderer Stem2;
     ModelRenderer Light2;
@@ -19,46 +17,34 @@ public class StreetLamp2Model extends ModelBase
   {
     textureWidth = 32;
     textureHeight = 64;
-    
-      PoleUpper = new ModelRenderer(this, 0, 0);
-      PoleUpper.addBox(0F, 0F, 0F, 2, 48, 2);
-      PoleUpper.setRotationPoint(-1F, -72F, -1F);
-      PoleUpper.setTextureSize(32, 64);
-      PoleUpper.mirror = true;
-      setRotation(PoleUpper, 0F, 0F, 0F);
+
       Stem1 = new ModelRenderer(this, 8, 10);
       Stem1.addBox(-0.5F, 0F, -6F, 2, 1, 6);
-      Stem1.setRotationPoint(0F, -74.2F, 0.5F);
+      Stem1.setRotationPoint(0F, 22.2F, 0.5F);
       Stem1.setTextureSize(32, 64);
       Stem1.mirror = true;
       setRotation(Stem1, -0.1396263F, 1.570796F, 0F);
       Light1 = new ModelRenderer(this, 8, 0);
       Light1.addBox(-1.5F, -1F, -13.9F, 3, 2, 8);
-      Light1.setRotationPoint(0F, -74F, 0F);
+      Light1.setRotationPoint(0F, 22F, 0F);
       Light1.setTextureSize(32, 64);
       Light1.mirror = true;
       setRotation(Light1, 0F, 1.570796F, 0F);
-      PoleLower = new ModelRenderer(this, 0, 0);
-      PoleLower.addBox(0F, 0F, 0F, 2, 48, 2);
-      PoleLower.setRotationPoint(-1F, -24F, -1F);
-      PoleLower.setTextureSize(32, 64);
-      PoleLower.mirror = true;
-      setRotation(PoleLower, 0F, 0F, 0F);
       Joint = new ModelRenderer(this, 8, 17);
       Joint.addBox(0F, 0F, 0F, 3, 3, 3);
-      Joint.setRotationPoint(-1.5F, -74.5F, -1.5F);
+      Joint.setRotationPoint(-1.5F, 22.5F, -1.5F);
       Joint.setTextureSize(32, 64);
       Joint.mirror = true;
       setRotation(Joint, 0F, 0F, 0F);
       Stem2 = new ModelRenderer(this, 8, 10);
       Stem2.addBox(-1.5F, 0F, -6F, 2, 1, 6);
-      Stem2.setRotationPoint(0F, -74.2F, 0.5F);
+      Stem2.setRotationPoint(0F, 22.2F, 0.5F);
       Stem2.setTextureSize(32, 64);
       Stem2.mirror = true;
       setRotation(Stem2, -0.1396263F, -1.570796F, 0F);
       Light2 = new ModelRenderer(this, 8, 0);
       Light2.addBox(-1.5F, -1F, -13.9F, 3, 2, 8);
-      Light2.setRotationPoint(0F, -74F, 0F);
+      Light2.setRotationPoint(0F, 22F, 0F);
       Light2.setTextureSize(32, 64);
       Light2.mirror = true;
       setRotation(Light2, 0F, -1.570796F, 0F);
@@ -68,10 +54,8 @@ public class StreetLamp2Model extends ModelBase
   {
     super.render(entity, f, f1, f2, f3, f4, f5);
     setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-    PoleUpper.render(f5);
     Stem1.render(f5);
     Light1.render(f5);
-    PoleLower.render(f5);
     Joint.render(f5);
     Stem2.render(f5);
     Light2.render(f5);

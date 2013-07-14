@@ -12,10 +12,10 @@ import co.uk.silvania.roads.tileentities.entities.TileEntityRoadPainterEntity;
 
 public class GuiRoadPainter extends GuiContainer {
 	
-    private static final ResourceLocation field_110409_t = new ResourceLocation("/mods/Roads/textures/gui/RoadPainterGui.png");
+    private static final ResourceLocation texture = new ResourceLocation("roads", "/textures/gui/RoadPainterGui.png");
 
         public GuiRoadPainter (InventoryPlayer inventoryPlayer, TileEntityRoadPainterEntity tileEntity, World world, int x, int y, int z) {
-                                super(new ContainerRoadPainter(inventoryPlayer, tileEntity, world, x, y, z));
+        	super(new ContainerRoadPainter(inventoryPlayer, tileEntity, world, x, y, z));
         }
         
         /** The X size of the inventory window in pixels. */
@@ -34,7 +34,7 @@ public class GuiRoadPainter extends GuiContainer {
         protected void drawGuiContainerBackgroundLayer(float par1, int par2,
                         int par3) {
                 GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-                //this.mc.renderEngine.bindTexture("/mods/Roads/textures/gui/RoadPainterGui.png");
+                this.mc.func_110434_K().func_110577_a(texture);
                 int x = (width - xSize) / 2;
                 int y = (height - ySize) / 2;
                 this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);

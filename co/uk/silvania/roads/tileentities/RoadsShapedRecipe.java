@@ -43,9 +43,9 @@ public ItemStack getRecipeOutput()
          */
 public boolean matches(InventoryCrafting par1InventoryCrafting, World par2World)
 {
-         for (int i = 0; i <= 5 - this.recipeWidth; ++i)
+         for (int i = 0; i < 5 - this.recipeWidth; ++i)
          {
-                 for (int j = 0; j <= 5 - this.recipeHeight; ++j)
+                 for (int j = 0; j < 5 - this.recipeHeight; ++j)
                  {
                          if (this.checkMatch(par1InventoryCrafting, i, j, true))
                          {

@@ -2,75 +2,83 @@ package co.uk.silvania.roads.tileentities.blocks;
 
 import java.util.List;
 
-import co.uk.silvania.roads.Roads;
-import co.uk.silvania.roads.tileentities.entities.TileEntityStreetSignEntity;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import co.uk.silvania.roads.Roads;
+import co.uk.silvania.roads.tileentities.entities.TileEntityStreetSignEntity;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class TileEntityStreetSignBlock extends BlockContainer {
 
-	public TileEntityStreetSignBlock(int id) {
-		super(id, Material.iron);
-		this.setCreativeTab(Roads.tabRoads);
-		this.setHardness(1.0F);
-	}
-
-	@Override
-	public TileEntity createNewTileEntity(World world) {
-		return new TileEntityStreetSignEntity();
-	}
-	
-    public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity) {
-    	this.setBlockBounds(0.4F, 0.0F, 0.4F, 0.6F, 3.0F, 0.6F);
-    	super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
+    public TileEntityStreetSignBlock(int id) {
+        super(id, Material.iron);
+        this.setHardness(1.0F);
+        this.setCreativeTab(Roads.tabRoads);
+        this.setLightOpacity(0);
     }
-	
-	@Override
-	public int getRenderType() {
-		return -1;
-	}
-	
-	@Override
-	public boolean isOpaqueCube() {
-		return false;
-	}
-	
-	public boolean renderAsNormalBlock() {
-		return false;
-	}
-	
-	public void registerIcons(IconRegister icon) {
-		this.blockIcon = icon.registerIcon("Roads:StreetSignIcon");
-	}
-	
-	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4,
-			EntityLiving par5EntityLiving, ItemStack par6ItemStack) {
-		int var6 = MathHelper
-				.floor_double(par5EntityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 
-		if (var6 == 0) {
-			par1World.setBlockMetadataWithNotify(par2, par3, par4, 2, 0);
-		}
+    @Override
+    public TileEntity createNewTileEntity(World world) {
+        return new TileEntityStreetSignEntity();
+    }
 
-		if (var6 == 1) {
-			par1World.setBlockMetadataWithNotify(par2, par3, par4, 5, 0);
-		}
+    @Override
+    public int getRenderType() {
+        return -1;
+    }
 
-		if (var6 == 2) {
-			par1World.setBlockMetadataWithNotify(par2, par3, par4, 3, 0);
-		}
+    @Override
+    public boolean isOpaqueCube() {
+        return false;
+    }
 
-		if (var6 == 3) {
-			par1World.setBlockMetadataWithNotify(par2, par3, par4, 4, 0);
-		}
-	}	
+    @Override
+    public boolean renderAsNormalBlock() {
+        return false;
+    }
 
+    @Override
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityliving, ItemStack itemStack) {
+	    int blockSet = world.getBlockMetadata(x, y, z) / 4;
+	    int direction = MathHelper.floor_double((double)(entityliving.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
+	    int newMeta = (blockSet * 4) + direction;
+	    world.setBlockMetadataWithNotify(x, y, z, newMeta, 0);
+    }
+
+    @SideOnly(Side.CLIENT)
+    private Icon[] icons;
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void registerIcons(IconRegister iconRegister) {
+        icons = new Icon[16];
+
+        for (int i = 0; i < icons.length; i++) {
+            icons[i] = iconRegister.registerIcon("Roads:" + this.getUnlocalizedName().substring(5) + i);
+        }
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public Icon getIcon(int par1, int par2) {
+        return icons[par2];
+    }
+
+    @SideOnly(Side.CLIENT)
+    public void getSubBlocks(int par1, CreativeTabs creativeTabs, List list) {
+        list.add(new ItemStack(par1, 1, 0));
+        list.add(new ItemStack(par1, 1, 4));
+        list.add(new ItemStack(par1, 1, 8));
+        list.add(new ItemStack(par1, 1, 12));
+    }
 }

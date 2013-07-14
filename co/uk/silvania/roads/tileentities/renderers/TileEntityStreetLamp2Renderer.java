@@ -10,6 +10,7 @@ import co.uk.silvania.roads.client.models.TrafficLightModel;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
@@ -23,38 +24,35 @@ import net.minecraft.world.World;
 
 public class TileEntityStreetLamp2Renderer extends TileEntitySpecialRenderer {
 	
-	private static final ResourceLocation texture = new ResourceLocation("/assets/Roads/textures/blocks/StreetLamp.png");
-	
 	private final StreetLamp2Model model;
 		
 	public TileEntityStreetLamp2Renderer() {
 		this.model = new StreetLamp2Model();
 	}
 	
-	@Override
-	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float scale) {
-		int i = te.getBlockMetadata();
-		int meta = 180;
-
-		if (i == 3) {
-			meta = 0;
-		}
-
-		if (i == 5) {
-			meta = 90;
-		}
-
-		if (i == 2) {
-			meta = 180;
-		}
-
-		if (i == 4) {
-			meta = 270;
-		}
-		
+    @Override
+    public void renderTileEntityAt(TileEntity te, double x, double y, double z,
+            float scale) {
+        int rotation = 180;
+        switch (te.getBlockMetadata() % 4) {
+            case 0:
+                rotation = 0;
+                break;
+            case 3:
+                rotation = 90;
+                break;
+            case 2:
+                rotation = 180;
+                break;
+            case 1:
+                rotation = 270;
+                break;
+        }
+        
 		GL11.glPushMatrix();
+		Minecraft.getMinecraft().renderEngine.func_110577_a(new ResourceLocation("roads", "textures/entities/StreetLamp.png"));
 		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
-		GL11.glRotatef(meta, 0.0F, 1.0F, 0.0F);
+		GL11.glRotatef(rotation, 0.0F, 1.0F, 0.0F);
 		//GL11.glRotatef(((TileEntityBarrierEntity)tile).getRotationPivot()), 0.0F, 1.0F, 0.0F);
 		GL11.glScalef(1.0F, -1F, -1F);
 		this.model.render((Entity)null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
