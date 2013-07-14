@@ -25,6 +25,7 @@ public class TileEntityStreetSignBlock extends BlockContainer {
         this.setHardness(1.0F);
         this.setCreativeTab(Roads.tabRoads);
         this.setLightOpacity(0);
+        this.setBlockBounds(0.25F, 0F, 0.25F, 0.75F, 0.5F, 0.75F);
     }
 
     @Override

@@ -51,7 +51,7 @@ public class CommonProxy {
             GameRegistry.registerBlock(Roads.barrierPole, "barrierPole");
             GameRegistry.registerBlock(Roads.barrierBlock, "barrierBlock");
             GameRegistry.registerBlock(Roads.barrierCorner, "barrierCorner");
-            GameRegistry.registerBlock(Roads.roadSign, "roadSign");
+            //GameRegistry.registerBlock(Roads.roadSign, "roadSign");
             GameRegistry.registerBlock(Roads.roadBarrier, "roadBarrier");
             
             GameRegistry.registerItem(Roads.cementItem, "cementItem");
@@ -173,7 +173,8 @@ public class CommonProxy {
             LanguageRegistry.addName(Roads.barrierPole, "Barrier (Post)");
             LanguageRegistry.addName(Roads.barrierBlock, "Barrier");
             LanguageRegistry.addName(Roads.barrierCorner, "Barrier (Corner)");
-            LanguageRegistry.addName(Roads.roadSign, "Street Sign");
+            //LanguageRegistry.addName(Roads.roadSign, "Street Sign");
+            LanguageRegistry.addName(Roads.roadBarrier, "Road Barrier");
             
             LanguageRegistry.addName(Roads.cementItem, "Cement");
             LanguageRegistry.addName(Roads.cementDustItem, "Cement Dust");
