@@ -12,10 +12,7 @@ import net.minecraft.block.Block;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.ShapedRecipes;
-import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraft.world.World;
 
 public class RoadPainterCraftingManager {
@@ -31,13 +28,13 @@ public class RoadPainterCraftingManager {
 
 		recipes = new ArrayList();
 		this.shapedRecipe(new ItemStack(Roads.roadBlockDoubleYellow, 0), new Object[] {"YY   ", "YY   ", "YYR  ", "YY   ", "YY   ", Character.valueOf('R'), Item.ingotGold, Character.valueOf('Y'), Item.rottenFlesh});
-		this.addShapelessRecipe(new ItemStack(Item.diamond, 0), new Object[] {"F", Character.valueOf('F'), Item.ingotGold});
+		this.addRoadsShapelessRecipe(new ItemStack(Item.diamond, 0), new Object[] {"F", Character.valueOf('F'), Item.ingotGold});
 		
 		Collections.sort(this.recipes, new RoadPainterRecipeSorter(this));
 		System.out.println(this.recipes.size() + " recipes");
 	}
 
-	public ShapedRecipes shapedRecipe(ItemStack par1ItemStack, Object ... par2ArrayOfObj) {
+	public RoadsShapedRecipe shapedRecipe(ItemStack par1ItemStack, Object ... par2ArrayOfObj) {
 		String var3 = "";
 		int var4 = 0;
 		int var5 = 0;
@@ -92,12 +89,12 @@ public class RoadPainterCraftingManager {
 			}
 		}
 
-		ShapedRecipes var17 = new ShapedRecipes(var5, var6, var15, par1ItemStack);
+		RoadsShapedRecipe var17 = new RoadsShapedRecipe(var5, var6, var15, par1ItemStack);
 		this.recipes.add(var17);
 		return var17;
 	}
 
-	public void addShapelessRecipe(ItemStack par1ItemStack, Object ... par2ArrayOfObj) {
+	public void addRoadsShapelessRecipe(ItemStack par1ItemStack, Object ... par2ArrayOfObj) {
 		ArrayList var3 = new ArrayList();
 		Object[] var4 = par2ArrayOfObj;
 		int var5 = par2ArrayOfObj.length;
@@ -117,7 +114,7 @@ public class RoadPainterCraftingManager {
 				var3.add(new ItemStack((Block)var7));
 			}
 		}
-		this.recipes.add(new ShapelessRecipes(par1ItemStack, var3));
+		this.recipes.add(new RoadsShapelessRecipe(par1ItemStack, var3));
 	}
 
 	public ItemStack findMatchingRecipe(InventoryCrafting par1InventoryCrafting, World par2World) {
