@@ -15,8 +15,8 @@ import co.uk.silvania.roads.Roads;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class RoadBlockMiscSingles extends Block {
-    public RoadBlockMiscSingles(int par1) {
+public class RoadBlockDirtCorner extends Block {
+    public RoadBlockDirtCorner(int par1) {
         super(par1, Material.rock);
         this.setStepSound(soundStoneFootstep);
         this.setHardness(1.5F);
@@ -33,11 +33,20 @@ public class RoadBlockMiscSingles extends Block {
 	private Icon[] icons;
 	@SideOnly(Side.CLIENT)
 	private Icon sides;
+	
+	@Override
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityliving, ItemStack itemStack)
+	{
+	    int blockSet = world.getBlockMetadata(x, y, z) / 4;
+	    int direction = MathHelper.floor_double((double)(entityliving.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
+	    int newMeta = (blockSet * 4) + direction;
+	    world.setBlockMetadataWithNotify(x, y, z, newMeta, 0);
+	}
     	
     @SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister iconRegister) {
-    	this.sides = iconRegister.registerIcon("Roads:TarmacPlain");
-		icons = new Icon[7];
+    	this.sides = iconRegister.registerIcon("Roads:roadBlockMiscSingles5");
+		icons = new Icon[16];
 		
 		for(int i = 0; i < icons.length; i++) {
 			icons[i] = iconRegister.registerIcon("Roads:" + (this.getUnlocalizedName().substring(5)) + i);
@@ -48,30 +57,9 @@ public class RoadBlockMiscSingles extends Block {
 	public Icon getIcon(int side, int meta) {
 		if (side == 1) {
 			return icons[meta];	
-		}
-		if (meta == 5 && side == 0) {
-			return Block.dirt.getIcon(side, meta);
-		}
-		if (meta == 5 && side == 2) {
-			return Block.dirt.getIcon(side, meta);
-		}
-		if (meta == 5 && side == 3) {
-			return Block.dirt.getIcon(side, meta);
-		}
-		if (meta == 5 && side == 4) {
-			return Block.dirt.getIcon(side, meta);
-		}
-		if (meta == 5 && side == 5) {
-			return Block.dirt.getIcon(side, meta);
-		}
-		if (meta == 6) {
-			return Block.dirt.getIcon(side, meta);
-		}
-		if (meta == 6 && side == 1) {
-			return Block.dirt.getIcon(side, meta);
-		}
-		
-		return sides;
+		} else
+			return sides;
+
 	}
 
     public int getRenderType() {
@@ -89,8 +77,9 @@ public class RoadBlockMiscSingles extends Block {
     
 	@SideOnly(Side.CLIENT)
 	public void getSubBlocks(int par1, CreativeTabs creativeTabs, List list) {
-		for (int var4 = 0; var4 < 7; ++var4) {
-			list.add(new ItemStack(par1, 1, var4));
-		}
+		list.add(new ItemStack(par1, 1, 0));
+		list.add(new ItemStack(par1, 1, 4));
+		list.add(new ItemStack(par1, 1, 8));
+		list.add(new ItemStack(par1, 1, 12));
 	}
 }

@@ -1,7 +1,6 @@
 package co.uk.silvania.roads.tileentities;
 
 import java.util.ArrayList;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -13,44 +12,68 @@ import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.RecipeFireworks;
+import net.minecraft.item.crafting.RecipesArmor;
+import net.minecraft.item.crafting.RecipesArmorDyes;
+import net.minecraft.item.crafting.RecipesCrafting;
+import net.minecraft.item.crafting.RecipesDyes;
+import net.minecraft.item.crafting.RecipesFood;
+import net.minecraft.item.crafting.RecipesIngots;
+import net.minecraft.item.crafting.RecipesMapCloning;
+import net.minecraft.item.crafting.RecipesMapExtending;
+import net.minecraft.item.crafting.RecipesWeapons;
+import net.minecraft.item.crafting.ShapedRecipes;
+import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraft.world.World;
 
 public class RoadPainterCraftingManager {
-
 	private static final RoadPainterCraftingManager instance = new RoadPainterCraftingManager();
+
 	private List recipes = new ArrayList();
 
-	public static final RoadPainterCraftingManager getInstance() {
+	public static final RoadPainterCraftingManager getInstance()
+	{
 		return instance;
 	}
 
 	private RoadPainterCraftingManager() {
-
-		recipes = new ArrayList();
-		this.shapedRecipe(new ItemStack(Roads.roadBlockDoubleYellow, 0), new Object[] {"YY   ", "YY   ", "YYR  ", "YY   ", "YY   ", Character.valueOf('R'), Item.ingotGold, Character.valueOf('Y'), Item.rottenFlesh});
-		this.addRoadsShapelessRecipe(new ItemStack(Item.diamond, 0), new Object[] {"F", Character.valueOf('F'), Item.ingotGold});
-		
+        ItemStack yellowPaintBlob = new ItemStack(Roads.yellowPaintBlob);
+        ItemStack whitePaintBlob = new ItemStack(Roads.whitePaintBlob);
+        ItemStack yellowPaintCan = new ItemStack(Roads.yellowPaintCan);
+        ItemStack whitePaintCan = new ItemStack(Roads.whitePaintCan);
+        ItemStack roadBlock = new ItemStack(Roads.roadBlockMiscSingles, 0);
+        ItemStack roadBlockDoubleYellowLeft = new ItemStack(Roads.roadBlockDoubleYellow, 0);
+        
+        
+		this.addShapedRecipe(new ItemStack(Roads.roadBlockDoubleYellow, 1, 0), new Object[] {"YY   ", "YY   ", "YYR  ", "YY   ", "YY   ", 'Y', yellowPaintBlob, 'R', roadBlock});
+        this.addShapelessRecipe(new ItemStack(Item.diamond, 1), new Object[] {Item.ingotGold, Item.ingotGold});
 		Collections.sort(this.recipes, new RoadPainterRecipeSorter(this));
 		System.out.println(this.recipes.size() + " recipes");
 	}
 
-	public RoadsShapedRecipe shapedRecipe(ItemStack par1ItemStack, Object ... par2ArrayOfObj) {
+	public RoadsShapedRecipe addShapedRecipe(ItemStack par1ItemStack, Object ... par2ArrayOfObj)
+	{
 		String var3 = "";
 		int var4 = 0;
 		int var5 = 0;
 		int var6 = 0;
-
-		if (par2ArrayOfObj[var4] instanceof String[]) {
+		
+		if (par2ArrayOfObj[var4] instanceof String[])
+		{
 			String[] var7 = (String[])((String[])par2ArrayOfObj[var4++]);
 
-			for (int var8 = 0; var8 < var7.length; ++var8) {
+			for (int var8 = 0; var8 < var7.length; ++var8)
+			{
 				String var9 = var7[var8];
 				++var6;
 				var5 = var9.length();
 				var3 = var3 + var9;
 			}
-		} else {
-			while (par2ArrayOfObj[var4] instanceof String) {
+		}
+		else
+		{
+			while (par2ArrayOfObj[var4] instanceof String)
+			{
 				String var11 = (String)par2ArrayOfObj[var4++];
 				++var6;
 				var5 = var11.length();
@@ -60,110 +83,140 @@ public class RoadPainterCraftingManager {
 
 		HashMap var12;
 
-		for (var12 = new HashMap(); var4 < par2ArrayOfObj.length; var4 += 2) {
+		for (var12 = new HashMap(); var4 < par2ArrayOfObj.length; var4 += 2)
+		{
 			Character var13 = (Character)par2ArrayOfObj[var4];
 			ItemStack var14 = null;
-
-			if (par2ArrayOfObj[var4 + 1] instanceof Item) {
+			
+			if (par2ArrayOfObj[var4 + 1] instanceof Item)
+			{
 				var14 = new ItemStack((Item)par2ArrayOfObj[var4 + 1]);
 			}
-			else if (par2ArrayOfObj[var4 + 1] instanceof Block) {
+			else if (par2ArrayOfObj[var4 + 1] instanceof Block)
+			{
 				var14 = new ItemStack((Block)par2ArrayOfObj[var4 + 1], 1, -1);
 			}
-			else if (par2ArrayOfObj[var4 + 1] instanceof ItemStack) {
+			else if (par2ArrayOfObj[var4 + 1] instanceof ItemStack)
+			{
 				var14 = (ItemStack)par2ArrayOfObj[var4 + 1];
 			}
-
+			
 			var12.put(var13, var14);
 		}
 
 		ItemStack[] var15 = new ItemStack[var5 * var6];
-
-		for (int var16 = 0; var16 < var5 * var6; ++var16) {
+		
+		for (int var16 = 0; var16 < var5 * var6; ++var16)
+		{
 			char var10 = var3.charAt(var16);
-
-			if (var12.containsKey(Character.valueOf(var10))) {
+			
+			if (var12.containsKey(Character.valueOf(var10)))
+			{
 				var15[var16] = ((ItemStack)var12.get(Character.valueOf(var10))).copy();
-			} else {
+			}
+			else
+			{
 				var15[var16] = null;
 			}
-		}
+		}	
 
 		RoadsShapedRecipe var17 = new RoadsShapedRecipe(var5, var6, var15, par1ItemStack);
 		this.recipes.add(var17);
 		return var17;
-	}
+	}	
 
-	public void addRoadsShapelessRecipe(ItemStack par1ItemStack, Object ... par2ArrayOfObj) {
+	public void addShapelessRecipe(ItemStack par1ItemStack, Object ... par2ArrayOfObj)
+	{
 		ArrayList var3 = new ArrayList();
 		Object[] var4 = par2ArrayOfObj;
 		int var5 = par2ArrayOfObj.length;
-
-		for (int var6 = 0; var6 < var5; ++var6) {
+		
+		for (int var6 = 0; var6 < var5; ++var6)
+		{
 			Object var7 = var4[var6];
-                 
-			if (var7 instanceof ItemStack) {
+			
+			if (var7 instanceof ItemStack)
+			{
 				var3.add(((ItemStack)var7).copy());
-			} else if (var7 instanceof Item) {
+			}
+			else if (var7 instanceof Item)
+			{
 				var3.add(new ItemStack((Item)var7));
-			} else {
-				if (!(var7 instanceof Block)) {
+			}
+			else
+			{
+				if (!(var7 instanceof Block))
+				{
 					throw new RuntimeException("Invalid shapeless recipy!");
 				}
-
+				
 				var3.add(new ItemStack((Block)var7));
 			}
-		}
+		}	
+
 		this.recipes.add(new RoadsShapelessRecipe(par1ItemStack, var3));
 	}
 
-	public ItemStack findMatchingRecipe(InventoryCrafting par1InventoryCrafting, World par2World) {
+	public ItemStack findMatchingRecipe(InventoryCrafting par1InventoryCrafting, World par2World)
+	{
 		int var3 = 0;
 		ItemStack var4 = null;
 		ItemStack var5 = null;
 		int var6;
-
-		for (var6 = 0; var6 < par1InventoryCrafting.getSizeInventory(); ++var6) {
+		
+		for (var6 = 0; var6 < par1InventoryCrafting.getSizeInventory(); ++var6)
+		{
 			ItemStack var7 = par1InventoryCrafting.getStackInSlot(var6);
 			
-			if (var7 != null) {
-				if (var3 == 0) {
+			if (var7 != null)
+			{
+				if (var3 == 0)
+				{
 					var4 = var7;
 				}
-
-				if (var3 == 1) {
+				
+				if (var3 == 1)
+				{
 					var5 = var7;
 				}
-
+				
 				++var3;
 			}
 		}
 
-		if (var3 == 2 && var4.itemID == var5.itemID && var4.stackSize == 1 && var5.stackSize == 1 && Item.itemsList[var4.itemID].isRepairable()) {
+		if (var3 == 2 && var4.itemID == var5.itemID && var4.stackSize == 1 && var5.stackSize == 1 && Item.itemsList[var4.itemID].isRepairable())
+		{
 			Item var11 = Item.itemsList[var4.itemID];
 			int var13 = var11.getMaxDamage() - var4.getItemDamageForDisplay();
 			int var8 = var11.getMaxDamage() - var5.getItemDamageForDisplay();
 			int var9 = var13 + var8 + var11.getMaxDamage() * 5 / 100;
 			int var10 = var11.getMaxDamage() - var9;
 			
-			if (var10 < 0) {
+			if (var10 < 0)
+			{
 				var10 = 0;
 			}
 
 			return new ItemStack(var4.itemID, 1, var10);
-		} else {
-			for (var6 = 0; var6 < this.recipes.size(); ++var6) {
+		}
+		else
+		{
+			for (var6 = 0; var6 < this.recipes.size(); ++var6)
+			{
 				IRecipe var12 = (IRecipe)this.recipes.get(var6);
-
-				if (var12.matches(par1InventoryCrafting, par2World)) {
+				
+				if (var12.matches(par1InventoryCrafting, par2World))
+				{
 					return var12.getCraftingResult(par1InventoryCrafting);
 				}
 			}
+
 			return null;
 		}
 	}
 
-	public List getRecipeList() {
+	public List getRecipeList()
+	{
 		return this.recipes;
-	}	
+	}
 }

@@ -31,6 +31,8 @@ public class CommonProxy {
             GameRegistry.registerBlock(Roads.roadBlockSimpleLines, ItemRoadBlockSimpleLines.class, "FlenixRoads" + (Roads.roadBlockSimpleLines.getUnlocalizedName().substring(5)));
             GameRegistry.registerBlock(Roads.roadBlockSideWhiteStripes, ItemRoadBlockSideWhiteStripes.class, "FlenixRoads" + (Roads.roadBlockSideWhiteStripes.getUnlocalizedName().substring(5)));
             GameRegistry.registerBlock(Roads.roadBlockStripes, ItemRoadBlockStripes.class, "FlenixRoads" + (Roads.roadBlockStripes.getUnlocalizedName().substring(5)));
+            GameRegistry.registerBlock(Roads.roadBlockDirt, ItemRoadBlockDirt.class, "FlenixRoads" + (Roads.roadBlockDirt.getUnlocalizedName().substring(5)));
+            GameRegistry.registerBlock(Roads.roadBlockDirtCorner, ItemRoadBlockDirtCorner.class, "FlenixRoads" + (Roads.roadBlockDirtCorner.getUnlocalizedName().substring(5)));
             
             GameRegistry.registerBlock(Roads.sidewalkBlockGrey, ItemSidewalkBlockGrey.class, "FlenixRoads" + (Roads.sidewalkBlockGrey.getUnlocalizedName().substring(5)));
             GameRegistry.registerBlock(Roads.sidewalkBlockLight, ItemSidewalkBlockLight.class, "FlenixRoads" + (Roads.sidewalkBlockLight.getUnlocalizedName().substring(5)));
@@ -43,6 +45,11 @@ public class CommonProxy {
             
             GameRegistry.registerBlock(Roads.powerPole, "powerPole");
             GameRegistry.registerBlock(Roads.powerPoleSmall, "powerPoleSmall");
+            GameRegistry.registerBlock(Roads.powerPoleLarge, "powerPoleLarge");
+            
+            GameRegistry.registerBlock(Roads.blockGag1, "blockGag1");
+            GameRegistry.registerBlock(Roads.blockGag2, "blockGag2");
+            GameRegistry.registerBlock(Roads.blockGag3, "blockGag3");
             
             GameRegistry.registerBlock(Roads.roadPainter, "roadPainter");
             GameRegistry.registerBlock(Roads.lightBollard, "lightBollard");
@@ -59,6 +66,10 @@ public class CommonProxy {
             GameRegistry.registerItem(Roads.limeStonePowderItem, "limeStonePowderItem");
             GameRegistry.registerItem(Roads.limeClayPowderItem, "limeClayPowderItem");
             GameRegistry.registerItem(Roads.tarBucketItem, "tarBucketItem");
+            GameRegistry.registerItem(Roads.whitePaintBlob, "whitePaintBlob");
+            GameRegistry.registerItem(Roads.yellowPaintBlob, "yellowPaintBlob");
+            GameRegistry.registerItem(Roads.whitePaintCan, "whitePaintCan");
+            GameRegistry.registerItem(Roads.yellowPaintCan, "yellowPaintCan");
 
             MinecraftForge.setBlockHarvestLevel(Roads.roadBlockArrows, "pickaxe", 1);
             MinecraftForge.setBlockHarvestLevel(Roads.roadBlockDoubleYellow, "pickaxe", 1);
@@ -111,6 +122,8 @@ public class CommonProxy {
             LanguageRegistry.addName(new ItemStack(Roads.roadBlockMiscSingles, 1, 2), "Tarmac (Yellow Topped)");
             LanguageRegistry.addName(new ItemStack(Roads.roadBlockMiscSingles, 1, 3), "Tarmac (White Cross)");
             LanguageRegistry.addName(new ItemStack(Roads.roadBlockMiscSingles, 1, 4), "Tarmac (Yellow Cross)");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockMiscSingles, 1, 5), "Dirt Track Road");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockMiscSingles, 1, 6), "Dirt Track Road, Dry");
                     		
             LanguageRegistry.addName(new ItemStack(Roads.roadBlockSimpleLines, 1, 0), "Tarmac (White Center)");
             LanguageRegistry.addName(new ItemStack(Roads.roadBlockSimpleLines, 1, 4), "Tarmac (Yellow Center)");
@@ -142,6 +155,16 @@ public class CommonProxy {
             LanguageRegistry.addName(new ItemStack(Roads.sidewalkBlockTile, 1, 8), "Sidewalk Tile (Kerbed, Inner Corner)");
             LanguageRegistry.addName(new ItemStack(Roads.sidewalkBlockTile, 1, 12), "Sidewalk Tile (Kerbed, Outer Corner)");
             
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockDirt, 1, 0), "Dirt, Tyre Treads");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockDirt, 1, 4), "Dirt, Line");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockDirt, 1, 8), "Dirt, Worn");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockDirt, 1, 12), "Dirt, Grassy");
+            
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockDirtCorner, 1, 0), "Dirt, Tyre Treads (Corner)");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockDirtCorner, 1, 4), "Dirt, Line (Corner)");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockDirtCorner, 1, 8), "Dirt, Worn (Corner)");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockDirtCorner, 1, 12), "Dirt, Grassy (Corner)");
+            
             LanguageRegistry.addName(new ItemStack(Roads.roadRamp1, 1, 0), "Tarmac Ramp (Plain)");
             LanguageRegistry.addName(new ItemStack(Roads.roadRamp1, 1, 4), "Tarmac Ramp ()");
             LanguageRegistry.addName(new ItemStack(Roads.roadRamp1, 1, 8), "Tarmac Ramp (White Stripe)");
@@ -162,8 +185,9 @@ public class CommonProxy {
             LanguageRegistry.addName(new ItemStack(Roads.streetSign, 1, 8), "Street Sign (50)");
             LanguageRegistry.addName(new ItemStack(Roads.streetSign, 1, 12), "Street Sign (60)");
             		
-            LanguageRegistry.addName(Roads.powerPole, "Street Pole (Large)");
+            LanguageRegistry.addName(Roads.powerPole, "Street Pole (Medium)");
             LanguageRegistry.addName(Roads.powerPoleSmall, "Street Pole (Small)");
+            LanguageRegistry.addName(Roads.powerPoleLarge, "Street Pole (Large)");
             LanguageRegistry.addName(Roads.roadPainter, "Road Painter");
             LanguageRegistry.addName(Roads.trafficLight, "Traffic Light");
             LanguageRegistry.addName(Roads.lightBollard, "Light Bollard");
@@ -181,6 +205,10 @@ public class CommonProxy {
             LanguageRegistry.addName(Roads.limeStonePowderItem, "Limestone Dust");
             LanguageRegistry.addName(Roads.limeClayPowderItem, "Lime & Clay Dust Mix");
             LanguageRegistry.addName(Roads.tarBucketItem, "Bucket of Tar");
+            LanguageRegistry.addName(Roads.whitePaintBlob, "Paint Blob");
+            LanguageRegistry.addName(Roads.yellowPaintBlob, "Paint Blob");
+            LanguageRegistry.addName(Roads.whitePaintCan, "Paint Can");
+       		LanguageRegistry.addName(Roads.yellowPaintCan, "Paint Can");
         }
         
         public void addRecipes() {

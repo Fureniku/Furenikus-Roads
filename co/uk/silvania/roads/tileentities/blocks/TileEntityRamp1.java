@@ -6,6 +6,7 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -25,7 +26,7 @@ public class TileEntityRamp1 extends BlockContainer {
         this.setHardness(1.0F);
         this.setCreativeTab(Roads.tabRoads);
         this.setLightOpacity(0);
-        this.setBlockBounds(0.0F, -0.2F, 0.0F, 0.0F, -0.125F, 0.0F);
+        this.setBlockBounds(0.0F, -0.2F, 0.0F, 1.0F, -0.175F, 1.0F);
     }
 
     @Override
@@ -50,10 +51,52 @@ public class TileEntityRamp1 extends BlockContainer {
 
     @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityliving, ItemStack itemStack) {
-	    int blockSet = world.getBlockMetadata(x, y, z) / 4;
+    	int meta = world.getBlockMetadata(x, y, z);
+	    int blockSet = meta / 4;
 	    int direction = MathHelper.floor_double((double)(entityliving.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
 	    int newMeta = (blockSet * 4) + direction;
 	    world.setBlockMetadataWithNotify(x, y, z, newMeta, 0);
+	    if (meta == 0) {
+	    	world.setBlock(x + 1, y, z, Roads.blockGag1.blockID);
+	    	world.setBlock(x + 2, y, z, Roads.blockGag2.blockID);
+	    	world.setBlock(x + 3, y, z, Roads.blockGag3.blockID);
+    	} else if (meta == 1) {
+	    	world.setBlock(x - 1, y, z, Roads.blockGag1.blockID);
+	    	world.setBlock(x - 2, y, z, Roads.blockGag2.blockID);
+	    	world.setBlock(x - 3, y, z, Roads.blockGag3.blockID);
+	    } else if (meta == 2) {
+	    	world.setBlock(x, y, z + 1, Roads.blockGag1.blockID);
+	    	world.setBlock(x, y, z + 2, Roads.blockGag2.blockID);
+	    	world.setBlock(x, y, z + 3, Roads.blockGag3.blockID);
+	    } else if (meta == 3) {
+	    	world.setBlock(x, y, z - 1, Roads.blockGag1.blockID);
+	    	world.setBlock(x, y, z - 2, Roads.blockGag2.blockID);
+	    	world.setBlock(x, y, z - 3, Roads.blockGag3.blockID);
+	    }
+    }
+    
+    @Override
+    public void breakBlock(World world, int x, int y, int z, int par5, int par6) {
+    	int meta = world.getBlockMetadata(x, y, z);   
+
+	    world.setBlockToAir(x + 1, y, z);
+	    world.setBlockToAir(x + 2, y, z);
+	    world.setBlockToAir(x + 3, y, z);
+	    /*if (meta == 1) {
+	    	world.setBlockToAir(x - 1, y, z);
+	    	world.setBlockToAir(x - 2, y, z);
+	    	world.setBlockToAir(x - 3, y, z);
+	    }
+	    if (meta == 2) {
+	    	world.setBlockToAir(x, y, z + 1);
+	    	world.setBlockToAir(x, y, z + 2);
+	    	world.setBlockToAir(x, y, z + 3);
+	    }
+	    if (meta == 3) {
+	    	world.setBlockToAir(x, y, z - 1);
+	    	world.setBlockToAir(x, y, z - 2);
+	    	world.setBlockToAir(x, y, z - 3);
+	    }*/
     }
 
     @SideOnly(Side.CLIENT)

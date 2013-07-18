@@ -25,7 +25,7 @@ public class TileEntityRamp2 extends BlockContainer {
         this.setHardness(1.0F);
         this.setCreativeTab(Roads.tabRoads);
         this.setLightOpacity(0);
-        this.setBlockBounds(0.0F, -0.2F, 0.0F, 0.0F, -0.125F, 0.0F);
+        this.setBlockBounds(0.0F, -0.2F, 0.0F, 1.0F, -0.175F, 1.0F);
     }
 
     @Override

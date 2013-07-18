@@ -38,7 +38,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-@Mod(modid="FlenixRoads", name="FlenixRoads", version="0.4.1")
+@Mod(modid="FlenixRoads", name="FlenixRoads", version="0.4.2")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false)
 public class Roads { 
 	
@@ -72,6 +72,8 @@ public class Roads {
 	public static Block roadBlockSimpleLines;
 	public static Block roadBlockSideWhiteStripes;
 	public static Block roadBlockStripes;
+	public static Block roadBlockDirt;
+	public static Block roadBlockDirtCorner;
 	
 	public static Block roadRamp1;
 	public static Block roadRamp2;
@@ -82,6 +84,11 @@ public class Roads {
 	
 	public static Block powerPole;
 	public static Block powerPoleSmall;
+	public static Block powerPoleLarge;
+	
+	public static Block blockGag1;
+	public static Block blockGag2;
+	public static Block blockGag3;
 	
 	public static Block roadPainter;
 	public static Block trafficLight;
@@ -101,6 +108,10 @@ public class Roads {
 	public static Item limeStonePowderItem;
 	public static Item limeClayPowderItem;
 	public static Item tarBucketItem;
+	public static Item whitePaintBlob;
+	public static Item yellowPaintBlob;
+	public static Item whitePaintCan;
+	public static Item yellowPaintCan;
 
 	//And finally the worldgen
 	public static WorldGen worldGen = new WorldGen();
@@ -134,12 +145,19 @@ public class Roads {
     	sidewalkBlockGrey = new SidewalkBlockGrey(config.sidewalkBlockGreyID).setUnlocalizedName("sidewalkBlockGrey");
     	sidewalkBlockLight = new SidewalkBlockLight(config.sidewalkBlockLightID).setUnlocalizedName("sidewalkBlockLight");
     	sidewalkBlockTile = new SidewalkBlockTile(config.sidewalkBlockTileID).setUnlocalizedName("sidewalkBlockTile");
+    	roadBlockDirt = new RoadBlockDirt(config.roadBlockDirtID).setUnlocalizedName("roadBlockDirt");
+    	roadBlockDirtCorner = new RoadBlockDirtCorner(config.roadBlockDirtCornerID).setUnlocalizedName("roadBlockDirtCorner");
     	
     	roadRamp1 = new TileEntityRamp1(config.roadRamp1ID).setUnlocalizedName("roadRamp1");
     	roadRamp2 = new TileEntityRamp2(config.roadRamp2ID).setUnlocalizedName("roadRamp2");
     	
-    	powerPole = new PowerPoleLarge(config.powerPoleID).setUnlocalizedName("powerPole");
+    	powerPole = new PowerPoleMedium(config.powerPoleID).setUnlocalizedName("powerPole");
     	powerPoleSmall = new PowerPoleSmall(config.powerPoleSmallID).setUnlocalizedName("powerPoleSmall");
+    	powerPoleLarge = new PowerPoleLarge(config.powerPoleLargeID).setUnlocalizedName("powerPoleLarge");
+    	
+    	blockGag1 = new BlockGag1(config.blockGag1ID).setUnlocalizedName("blockGag1");
+    	blockGag2 = new BlockGag2(config.blockGag2ID).setUnlocalizedName("blockGag2");
+    	blockGag3 = new BlockGag3(config.blockGag3ID).setUnlocalizedName("blockGag3");
     	
     	
     	roadPainter = new TileEntityRoadPainterBlock(config.roadPainterID).setUnlocalizedName("roadPainter");
@@ -160,6 +178,10 @@ public class Roads {
     	limeStonePowderItem = new LimeStonePowderItem(config.limeStonePowderID).setUnlocalizedName("limeStonePowderItem");
     	limeClayPowderItem = new LimeClayPowderItem(config.limeClayPowderID).setUnlocalizedName("limeClayPowderItem");
     	tarBucketItem = new TarBucketItem(config.tarBucketID).setUnlocalizedName("tarBucketItem");
+    	whitePaintBlob = new WhitePaintBlob(config.whitePaintBlobID).setUnlocalizedName("whitePaintBlob");
+    	yellowPaintBlob = new YellowPaintBlob(config.yellowPaintBlobID).setUnlocalizedName("yellowPaintBlob");
+    	whitePaintCan = new WhitePaintCan(config.whitePaintCanID).setUnlocalizedName("whitePaintCan");
+    	yellowPaintCan = new YellowPaintCan(config.yellowPaintCanID).setUnlocalizedName("yellowPaintCan");
     	
     	//MinecraftForgeClient.registerItemRenderer(trafficLight.blockID, new TrafficLightItemRenderer());
     	
@@ -182,6 +204,8 @@ public class Roads {
             GameRegistry.registerTileEntity(TileEntityBarrierEntity.class, "tileEntityBarrier");
             GameRegistry.registerTileEntity(TileEntityBarrierCornerEntity.class, "tileEntityBarrierCorner");
             GameRegistry.registerTileEntity(TileEntityRoadSignEntity.class, "tileEntityRoadSign");
+            GameRegistry.registerTileEntity(TileEntityRoadSlope1Entity.class, "tileEntityRoadSlope1");
+            GameRegistry.registerTileEntity(TileEntityRoadSlope2Entity.class, "tileEntityRoadSlope2");
             
             //FluidRegistry.registerLiquid(new FluidStack(Roads.roadsTarStill, FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(Roads.tarBucketItem), new ItemStack(Item.bucketEmpty));
             LanguageRegistry.instance().addStringLocalization("itemGroup.tabRoads", "en_US", "Roads");

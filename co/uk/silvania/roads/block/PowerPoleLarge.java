@@ -33,7 +33,7 @@ public class PowerPoleLarge extends Block {
 	public PowerPoleLarge(int id) {
 		super(id, Material.iron);
 		this.setCreativeTab(Roads.tabRoads);
-        this.setBlockBounds(0.45F, 0.0F, 0.45F, 0.55F, 1.0F, 0.55F);
+        this.setBlockBounds(0.425F, 0.0F, 0.425F, 0.575F, 1.0F, 0.575F);
 	}
 	
     public int getRenderType() {

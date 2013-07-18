@@ -14,34 +14,7 @@ public class RoadsConfig {
 	public static int roadsTarStillID;
 	public static int roadsTarFlowingID;
 	public static int generalBlocksID;
-	
-	public static int roadBlockSWS2ID;
-	public static int roadBlockDYSIID;
-	public static int roadBlockDYSOID;
-	public static int roadBlockSYSID;
-	public static int roadBlockSWSID;
-	public static int roadBlockSWCID;
-	public static int roadBlockSYCID;
-	public static int roadBlockWhiteCrossID;
-	public static int roadBlockYellowCrossID;
-	public static int roadBlockWhiteFullID;
-	public static int roadBlockYellowFullID;
-	public static int roadBlockWCID;
-	public static int roadBlockFYSID;
-	public static int roadBlockYCID;
-	public static int roadBlockYACID;
-	public static int roadBlockWACID;
-	public static int roadBlockWSLID;
-	public static int roadBlockWSSLID;
-	public static int roadBlockYSSLID;
-	public static int roadBlockJOID;
-	public static int roadBlockJIID;
-	public static int roadBlockJOLID;
-	public static int roadBlockJILID;
-	public static int roadBlockJOILID;
-	public static int roadBlockJIILID;
-	
-	
+
 	public static int roadBlockArrowsID;
 	public static int roadBlockCornersID;
 	public static int roadBlockDoubleYellowID;
@@ -52,6 +25,8 @@ public class RoadsConfig {
 	public static int roadBlockSimpleLinesID;
 	public static int roadBlockSideWhiteStripesID;
 	public static int roadBlockStripesID;
+	public static int roadBlockDirtID;
+	public static int roadBlockDirtCornerID;
 	
 	public static int sidewalkBlockGreyID;
 	public static int sidewalkBlockLightID;
@@ -62,6 +37,11 @@ public class RoadsConfig {
 	
 	public static int powerPoleID;
 	public static int powerPoleSmallID;
+	public static int powerPoleLargeID;
+	
+	public static int blockGag1ID;
+	public static int blockGag2ID;
+	public static int blockGag3ID;
 	
 	public static int roadPainterID;
 	public static int trafficLightID;
@@ -89,6 +69,10 @@ public class RoadsConfig {
 	public static int limeStonePowderID;
 	public static int limeClayPowderID;
 	public static int tarBucketID;
+	public static int whitePaintBlobID;
+	public static int yellowPaintBlobID;
+	public static int whitePaintCanID;
+	public static int yellowPaintCanID;
 	
 	public static void loadConfig(FMLPreInitializationEvent event) {
 		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
@@ -104,6 +88,7 @@ public class RoadsConfig {
 		roadsTarFlowingID = config.getBlock("Tar Flowing", 801).getInt();
 		powerPoleID = config.getBlock("Power Pole", 807).getInt();
 		powerPoleSmallID = config.getBlock("Power Pole Small", 806).getInt();
+		powerPoleLargeID = config.getBlock("Power Pole Large", 808).getInt();
 		
 		//Road Block IDs
 		roadBlockArrowsID = config.getBlock("Arrows", 812).getInt();
@@ -116,6 +101,8 @@ public class RoadsConfig {
 		roadBlockSimpleLinesID = config.getBlock("Simple Lines", 817).getInt();
 		roadBlockSideWhiteStripesID = config.getBlock("Small White Stripes", 818).getInt();
 		roadBlockStripesID = config.getBlock("Stripes", 819).getInt();
+		roadBlockDirtID = config.getBlock("Dirt", 820).getInt();
+		roadBlockDirtCornerID = config.getBlock("Dirt, Corners", 821).getInt();
 		
 		sidewalkBlockGreyID = config.getBlock("Sidewalk Grey", 827).getInt();
 		sidewalkBlockLightID = config.getBlock("Sidewalk Light", 828).getInt();
@@ -123,6 +110,10 @@ public class RoadsConfig {
 		
 		roadRamp1ID = config.getBlock("Road Ramp 1", 830).getInt();
 		roadRamp2ID = config.getBlock("Road Ramp 2", 831).getInt();
+		
+		blockGag1ID = config.getBlock("IMPORTANT: Do not remove! BG1", 844).getInt();
+		blockGag2ID = config.getBlock("IMPORTANT: Do not remove! BG2", 845).getInt();
+		blockGag3ID = config.getBlock("IMPORTANT: Do not remove! BG3", 846).getInt();
 		
 		roadPainterID = config.getBlock("Road Painter", 832).getInt();
 		trafficLightID = config.getBlock("Traffic Light", 833).getInt();
@@ -143,6 +134,10 @@ public class RoadsConfig {
 		limeStonePowderID = config.getItem("Limestone Dust", 16704).getInt();
 		limeClayPowderID = config.getItem("Lime/Clay Dust", 16703).getInt();
 		tarBucketID = config.getItem("Bucket of Tar", 16702).getInt();
+		whitePaintBlobID = config.getItem("White Paint Blob", 16703).getInt();
+		yellowPaintBlobID = config.getItem("Yellow Paint Blob", 16704).getInt();
+		whitePaintCanID = config.getItem("White Paint Can", 16705).getInt();
+		yellowPaintCanID = config.getItem("Yellow Paint Can", 16706).getInt();
 
 		config.save();
 	}
