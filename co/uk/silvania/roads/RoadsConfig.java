@@ -38,6 +38,9 @@ public class RoadsConfig {
 	public static int powerPoleID;
 	public static int powerPoleSmallID;
 	public static int powerPoleLargeID;
+	public static int powerPoleOnID;
+	public static int powerPoleSmallOnID;
+	public static int powerPoleLargeOnID;
 	
 	public static int blockGag1ID;
 	public static int blockGag2ID;
@@ -89,6 +92,10 @@ public class RoadsConfig {
 		powerPoleID = config.getBlock("Power Pole", 807).getInt();
 		powerPoleSmallID = config.getBlock("Power Pole Small", 806).getInt();
 		powerPoleLargeID = config.getBlock("Power Pole Large", 808).getInt();
+		
+		powerPoleOnID = config.getBlock("Power Pole (On)", 825).getInt();
+		powerPoleSmallOnID = config.getBlock("Power Pole Small (On)", 824).getInt();
+		powerPoleLargeOnID = config.getBlock("Power Pole Large (On)", 826).getInt();
 		
 		//Road Block IDs
 		roadBlockArrowsID = config.getBlock("Arrows", 812).getInt();

@@ -56,19 +56,19 @@ public class TileEntityRamp1 extends BlockContainer {
 	    int direction = MathHelper.floor_double((double)(entityliving.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
 	    int newMeta = (blockSet * 4) + direction;
 	    world.setBlockMetadataWithNotify(x, y, z, newMeta, 0);
-	    if (meta == 0) {
+	    if (newMeta == 1 || newMeta == 5 || newMeta == 9 || newMeta == 13) {
 	    	world.setBlock(x + 1, y, z, Roads.blockGag1.blockID);
 	    	world.setBlock(x + 2, y, z, Roads.blockGag2.blockID);
 	    	world.setBlock(x + 3, y, z, Roads.blockGag3.blockID);
-    	} else if (meta == 1) {
+    	} else if (newMeta == 3 || newMeta == 7 || newMeta == 11 || newMeta == 15) {
 	    	world.setBlock(x - 1, y, z, Roads.blockGag1.blockID);
 	    	world.setBlock(x - 2, y, z, Roads.blockGag2.blockID);
 	    	world.setBlock(x - 3, y, z, Roads.blockGag3.blockID);
-	    } else if (meta == 2) {
+	    } else if (newMeta == 2 || newMeta == 6 || newMeta == 10 || newMeta == 14) {
 	    	world.setBlock(x, y, z + 1, Roads.blockGag1.blockID);
 	    	world.setBlock(x, y, z + 2, Roads.blockGag2.blockID);
 	    	world.setBlock(x, y, z + 3, Roads.blockGag3.blockID);
-	    } else if (meta == 3) {
+	    } else if (newMeta == 0 || newMeta == 4 || newMeta == 8 || newMeta == 12) {
 	    	world.setBlock(x, y, z - 1, Roads.blockGag1.blockID);
 	    	world.setBlock(x, y, z - 2, Roads.blockGag2.blockID);
 	    	world.setBlock(x, y, z - 3, Roads.blockGag3.blockID);
@@ -78,25 +78,26 @@ public class TileEntityRamp1 extends BlockContainer {
     @Override
     public void breakBlock(World world, int x, int y, int z, int par5, int par6) {
     	int meta = world.getBlockMetadata(x, y, z);   
-
-	    world.setBlockToAir(x + 1, y, z);
-	    world.setBlockToAir(x + 2, y, z);
-	    world.setBlockToAir(x + 3, y, z);
-	    /*if (meta == 1) {
+    	if (meta == 1 || meta == 5 || meta == 9 || meta == 13) {
+    		world.setBlockToAir(x + 1, y, z);
+    		world.setBlockToAir(x + 2, y, z);
+    		world.setBlockToAir(x + 3, y, z);
+    	}
+	    if (meta == 3 || meta == 7 || meta == 11 || meta == 15) {
 	    	world.setBlockToAir(x - 1, y, z);
 	    	world.setBlockToAir(x - 2, y, z);
 	    	world.setBlockToAir(x - 3, y, z);
 	    }
-	    if (meta == 2) {
+	    if (meta == 2|| meta == 6 || meta == 10 || meta == 14) {
 	    	world.setBlockToAir(x, y, z + 1);
 	    	world.setBlockToAir(x, y, z + 2);
 	    	world.setBlockToAir(x, y, z + 3);
 	    }
-	    if (meta == 3) {
+	    if (meta == 0 || meta == 4 || meta == 8 || meta == 12) {
 	    	world.setBlockToAir(x, y, z - 1);
 	    	world.setBlockToAir(x, y, z - 2);
 	    	world.setBlockToAir(x, y, z - 3);
-	    }*/
+	    }
     }
 
     @SideOnly(Side.CLIENT)

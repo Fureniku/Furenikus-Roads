@@ -85,6 +85,9 @@ public class Roads {
 	public static Block powerPole;
 	public static Block powerPoleSmall;
 	public static Block powerPoleLarge;
+	public static Block powerPoleOn;
+	public static Block powerPoleSmallOn;
+	public static Block powerPoleLargeOn;
 	
 	public static Block blockGag1;
 	public static Block blockGag2;
@@ -153,7 +156,11 @@ public class Roads {
     	
     	powerPole = new PowerPoleMedium(config.powerPoleID).setUnlocalizedName("powerPole");
     	powerPoleSmall = new PowerPoleSmall(config.powerPoleSmallID).setUnlocalizedName("powerPoleSmall");
-    	powerPoleLarge = new PowerPoleLarge(config.powerPoleLargeID).setUnlocalizedName("powerPoleLarge");
+    	powerPoleLarge = new PowerPoleLarge(config.powerPoleLargeID, false).setUnlocalizedName("powerPoleLarge");
+    	
+    	powerPoleOn = new PowerPoleMedium(config.powerPoleOnID).setUnlocalizedName("powerPoleOn");
+    	powerPoleSmallOn = new PowerPoleSmall(config.powerPoleSmallOnID).setUnlocalizedName("powerPoleSmallOn");
+    	powerPoleLargeOn = new PowerPoleLarge(config.powerPoleLargeOnID, true).setUnlocalizedName("powerPoleLargeOn");
     	
     	blockGag1 = new BlockGag1(config.blockGag1ID).setUnlocalizedName("blockGag1");
     	blockGag2 = new BlockGag2(config.blockGag2ID).setUnlocalizedName("blockGag2");
@@ -222,23 +229,28 @@ public class Roads {
             ItemStack cobbleStoneStack = new ItemStack(Block.cobblestone);
             ItemStack cementItemStack = new ItemStack(Roads.cementItem);
             ItemStack tarBucketStack = new ItemStack(Roads.tarBucketItem);
-            //ItemStack macadamStack = new ItemStack(Roads.macadamBlock);
+            ItemStack macadamStack = new ItemStack(Roads.generalBlocks, 1, 2);
             ItemStack limeStack = new ItemStack (Roads.limeStonePowderItem);
+            ItemStack yellowDye = new ItemStack (Item.dyePowder, 1, 11);
+            ItemStack whiteDye = new ItemStack (Item.dyePowder, 1, 15);
+            ItemStack bucket = new ItemStack (Item.bucketEmpty);
 
             //Shaped Recipes
             GameRegistry.addRecipe(new ItemStack(Roads.cementItem, 4), " c ", " w ", "sss", 'w', waterBucketStack, 's', sandStack, 'c', cementDustStack);
-            //GameRegistry.addRecipe(new ItemStack(Roads.macadamBlock, 8), "xxx", "xyx", "xxx", 'x', cobbleStoneStack, 'y', cementItemStack);
+            GameRegistry.addRecipe(new ItemStack(Roads.generalBlocks, 8, 2), "xxx", "xyx", "xxx", 'x', cobbleStoneStack, 'y', cementItemStack);
             GameRegistry.addRecipe(new ItemStack(Roads.limeStoneBlock), "ll", "ll", 'l', limeStack);
+            GameRegistry.addRecipe(new ItemStack(Roads.yellowPaintCan), "yyy", "yby", "yyy", 'y', yellowDye, 'b', bucket);
+            GameRegistry.addRecipe(new ItemStack(Roads.whitePaintCan), "www", "wbw", "www", 'w', yellowDye, 'b', bucket);
 
             //Shapeless Recipes
-            //GameRegistry.addShapelessRecipe(new ItemStack(Roads.roadBlock), macadamStack, tarBucketStack);
+            GameRegistry.addShapelessRecipe(new ItemStack(Roads.roadBlockMiscSingles, 1, 0), macadamStack, tarBucketStack);
             GameRegistry.addShapelessRecipe(new ItemStack(Roads.limeClayPowderItem), limeStack, clayStack);
+            GameRegistry.addShapelessRecipe(new ItemStack(Roads.yellowPaintBlob, 6, 0), yellowDye);
+            GameRegistry.addShapelessRecipe(new ItemStack(Roads.whitePaintBlob, 6, 0), whiteDye);
 
             //And some smelting!
             GameRegistry.addSmelting(Roads.limeClayPowderItem.itemID, new ItemStack(Roads.cementDustItem), 0.1f);
-            //GameRegistry.addSmelting(Roads.cementItem.itemID, new ItemStack(Roads.cementBlock), 0.2f);
-            
-            //RenderingRegistry.registerBlockHandler(new TileEntityTrafficLightRenderer());
+            GameRegistry.addSmelting(Roads.cementItem.itemID, new ItemStack(Roads.generalBlocks, 1, 1), 0.2f);
         }
 
 

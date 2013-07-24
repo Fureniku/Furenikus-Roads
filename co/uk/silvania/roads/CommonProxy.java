@@ -46,6 +46,9 @@ public class CommonProxy {
             GameRegistry.registerBlock(Roads.powerPole, "powerPole");
             GameRegistry.registerBlock(Roads.powerPoleSmall, "powerPoleSmall");
             GameRegistry.registerBlock(Roads.powerPoleLarge, "powerPoleLarge");
+            GameRegistry.registerBlock(Roads.powerPoleOn, "powerPoleOn");
+            GameRegistry.registerBlock(Roads.powerPoleSmallOn, "powerPoleSmallOn");
+            GameRegistry.registerBlock(Roads.powerPoleLargeOn, "powerPoleLargeOn");
             
             GameRegistry.registerBlock(Roads.blockGag1, "blockGag1");
             GameRegistry.registerBlock(Roads.blockGag2, "blockGag2");
@@ -188,6 +191,10 @@ public class CommonProxy {
             LanguageRegistry.addName(Roads.powerPole, "Street Pole (Medium)");
             LanguageRegistry.addName(Roads.powerPoleSmall, "Street Pole (Small)");
             LanguageRegistry.addName(Roads.powerPoleLarge, "Street Pole (Large)");
+            LanguageRegistry.addName(Roads.powerPoleOn, "Street Pole (Activated, Medium)");
+            LanguageRegistry.addName(Roads.powerPoleSmallOn, "Street Pole (Activated, Small)");
+            LanguageRegistry.addName(Roads.powerPoleLargeOn, "Street Pole (Activated, Large)");
+            
             LanguageRegistry.addName(Roads.roadPainter, "Road Painter");
             LanguageRegistry.addName(Roads.trafficLight, "Traffic Light");
             LanguageRegistry.addName(Roads.lightBollard, "Light Bollard");

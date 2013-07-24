@@ -21,6 +21,27 @@ public class WhitePaintCan extends Item {
 		list.add("White");
 	}
 	
+	@Override
+	public boolean hasContainerItem() {
+		return true;
+	}
+	
+	@Override
+	public boolean doesContainerItemLeaveCraftingGrid(ItemStack item) {
+		return false;
+	}
+	
+	@Override
+	public ItemStack getContainerItemStack(ItemStack item) {
+		item.setItemDamage(item.getItemDamage() + 1);
+		ItemStack bucket = new ItemStack(Item.bucketEmpty);
+		
+		if (item.getItemDamage() > item.getMaxDamage()) {
+			item = bucket;
+		}
+		return item;
+	}
+	
 	public void registerIcons(IconRegister iconRegister) {
 	    itemIcon = iconRegister.registerIcon("Roads:WhitePaintCan");
 	}

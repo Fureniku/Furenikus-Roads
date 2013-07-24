@@ -52,4 +52,8 @@ public class PowerPoleMedium extends Block {
     public void registerIcons(IconRegister iconRegister) {
     	blockIcon = iconRegister.registerIcon("Roads:PowerPole");
     }
+    
+    public void isIndirectlyPowered(World world, int x, int y, int z) {
+    	if (world.isIndirectlyPowered(x, y - 1, z, 0) == true) 
+    }
 }

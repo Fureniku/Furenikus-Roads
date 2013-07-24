@@ -7,6 +7,7 @@ import cpw.mods.fml.common.Mod.Metadata;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
 public class ItemRoadBlockArrows extends ItemBlock {
 
@@ -15,7 +16,7 @@ public class ItemRoadBlockArrows extends ItemBlock {
 		this.setHasSubtypes(true);
 	}
 	
-	public void addInformation(ItemStack itemstack, EntityPlayer player, List list, boolean par4, int meta) {
+	public void addInformation(ItemStack item, EntityPlayer player, List list, boolean bool) {
 		list.add("Arrow");
 	}
 
