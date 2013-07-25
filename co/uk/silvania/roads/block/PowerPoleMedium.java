@@ -24,19 +24,17 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 
 public class PowerPoleMedium extends Block {
+    private final boolean powered;
+    public static int powerValue;
 
-	private Material material;
-	
-	private boolean wiresProvidePower = true;
-    private Set blocksNeedingUpdate = new HashSet();
-	
-	public PowerPoleMedium(int id) {
+	public PowerPoleMedium(int id, boolean par2) {
 		super(id, Material.iron);
+		this.powered = par2;
 		this.setCreativeTab(Roads.tabRoads);
         this.setBlockBounds(0.45F, 0.0F, 0.45F, 0.55F, 1.0F, 0.55F);
-	}
-	
-    public int getRenderType() {
+    }
+
+	public int getRenderType() {
     	return 0;
     }
 
@@ -49,11 +47,57 @@ public class PowerPoleMedium extends Block {
 		return false;
 	}
 	
-    public void registerIcons(IconRegister iconRegister) {
-    	blockIcon = iconRegister.registerIcon("Roads:PowerPole");
+    public int isProvidingWeakPower(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5) {
+    	if (this.powered) {
+    		return 15;
+    	}
+      	return 0;
     }
     
-    public void isIndirectlyPowered(World world, int x, int y, int z) {
-    	if (world.isIndirectlyPowered(x, y - 1, z, 0) == true) 
+    public boolean canProvidePower() {
+   		return true;
+    }
+    
+    
+    public void onBlockAdded(World par1World, int par2, int par3, int par4)
+    {
+        if (!par1World.isRemote)
+        {
+            if (this.powered && !par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
+            {
+                par1World.setBlock(par2, par3, par4, Roads.powerPole.blockID, 0, 2);
+            }
+            else if (!this.powered && par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
+            {
+                par1World.setBlock(par2, par3, par4, Roads.powerPoleOn.blockID, 0, 2);
+            }
+        }
+    }
+
+    public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5)
+    {
+        if (!par1World.isRemote)
+        {
+            if (this.powered && !par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
+            {
+                par1World.setBlock(par2, par3, par4, Roads.powerPole.blockID, 0, 2);
+            }
+            else if (!this.powered && par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
+            {
+                par1World.setBlock(par2, par3, par4, Roads.powerPoleOn.blockID, 0, 2);
+            }
+        }
+    }
+
+    public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
+    {
+        if (!par1World.isRemote && this.powered && !par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
+        {
+            par1World.setBlock(par2, par3, par4, Roads.powerPole.blockID, 0, 2);
+        }
+    }
+
+    public void registerIcons(IconRegister iconRegister) {
+    	blockIcon = iconRegister.registerIcon("Roads:PowerPole");
     }
 }

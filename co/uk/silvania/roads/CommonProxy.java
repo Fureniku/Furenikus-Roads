@@ -33,10 +33,19 @@ public class CommonProxy {
             GameRegistry.registerBlock(Roads.roadBlockStripes, ItemRoadBlockStripes.class, "FlenixRoads" + (Roads.roadBlockStripes.getUnlocalizedName().substring(5)));
             GameRegistry.registerBlock(Roads.roadBlockDirt, ItemRoadBlockDirt.class, "FlenixRoads" + (Roads.roadBlockDirt.getUnlocalizedName().substring(5)));
             GameRegistry.registerBlock(Roads.roadBlockDirtCorner, ItemRoadBlockDirtCorner.class, "FlenixRoads" + (Roads.roadBlockDirtCorner.getUnlocalizedName().substring(5)));
+            GameRegistry.registerBlock(Roads.roadBlockFork, ItemRoadBlockFork.class, "FlenixRoads" + (Roads.roadBlockFork.getUnlocalizedName().substring(5)));
+            GameRegistry.registerBlock(Roads.roadBlockForkB, ItemRoadBlockForkB.class, "FlenixRoads" + (Roads.roadBlockForkB.getUnlocalizedName().substring(5)));
+            GameRegistry.registerBlock(Roads.roadBlockForkC, ItemRoadBlockForkC.class, "FlenixRoads" + (Roads.roadBlockForkC.getUnlocalizedName().substring(5)));
+            GameRegistry.registerBlock(Roads.roadBlockForkD, ItemRoadBlockForkD.class, "FlenixRoads" + (Roads.roadBlockForkD.getUnlocalizedName().substring(5)));
+            GameRegistry.registerBlock(Roads.roadBlockForkE, ItemRoadBlockForkE.class, "FlenixRoads" + (Roads.roadBlockForkE.getUnlocalizedName().substring(5)));
+            GameRegistry.registerBlock(Roads.roadBlockForkF, ItemRoadBlockForkF.class, "FlenixRoads" + (Roads.roadBlockForkF.getUnlocalizedName().substring(5)));
+            GameRegistry.registerBlock(Roads.roadBlockForkG, ItemRoadBlockForkG.class, "FlenixRoads" + (Roads.roadBlockForkG.getUnlocalizedName().substring(5)));
             
             GameRegistry.registerBlock(Roads.sidewalkBlockGrey, ItemSidewalkBlockGrey.class, "FlenixRoads" + (Roads.sidewalkBlockGrey.getUnlocalizedName().substring(5)));
             GameRegistry.registerBlock(Roads.sidewalkBlockLight, ItemSidewalkBlockLight.class, "FlenixRoads" + (Roads.sidewalkBlockLight.getUnlocalizedName().substring(5)));
             GameRegistry.registerBlock(Roads.sidewalkBlockTile, ItemSidewalkBlockTile.class, "FlenixRoads" + (Roads.sidewalkBlockTile.getUnlocalizedName().substring(5)));
+            GameRegistry.registerBlock(Roads.sidewalkBlockTri, ItemSidewalkBlockTri.class, "FlenixRoads" + (Roads.sidewalkBlockTri.getUnlocalizedName().substring(5)));
+            GameRegistry.registerBlock(Roads.sidewalkBlockSides, ItemSidewalkBlockSides.class, "FlenixRoads" + (Roads.sidewalkBlockSides.getUnlocalizedName().substring(5)));
             
             GameRegistry.registerBlock(Roads.roadRamp1, ItemRoadRamp1.class, "FleixRoads" + (Roads.roadRamp1.getUnlocalizedName().substring(5)));
             GameRegistry.registerBlock(Roads.roadRamp2, ItemRoadRamp2.class, "FleixRoads" + (Roads.roadRamp2.getUnlocalizedName().substring(5)));
@@ -158,6 +167,15 @@ public class CommonProxy {
             LanguageRegistry.addName(new ItemStack(Roads.sidewalkBlockTile, 1, 8), "Sidewalk Tile (Kerbed, Inner Corner)");
             LanguageRegistry.addName(new ItemStack(Roads.sidewalkBlockTile, 1, 12), "Sidewalk Tile (Kerbed, Outer Corner)");
             
+            LanguageRegistry.addName(new ItemStack(Roads.sidewalkBlockSides, 1, 0), "Sidewalk Sides, Grey");
+            LanguageRegistry.addName(new ItemStack(Roads.sidewalkBlockSides, 1, 4), "Sidewalk Sides, Light");
+            LanguageRegistry.addName(new ItemStack(Roads.sidewalkBlockSides, 1, 8), "Sidewalk Small Sides, Grey");
+            LanguageRegistry.addName(new ItemStack(Roads.sidewalkBlockSides, 1, 12), "Sidewalk Small Sides, Light");
+            
+            LanguageRegistry.addName(new ItemStack(Roads.sidewalkBlockTri, 1, 0), "Sidewalk Tri-side, Grey");
+            LanguageRegistry.addName(new ItemStack(Roads.sidewalkBlockTri, 1, 4), "Sidewalk Tri-Side, Light");
+            LanguageRegistry.addName(new ItemStack(Roads.sidewalkBlockTri, 1, 8), "Sidewalk Tri-Side, Tile");
+            
             LanguageRegistry.addName(new ItemStack(Roads.roadBlockDirt, 1, 0), "Dirt, Tyre Treads");
             LanguageRegistry.addName(new ItemStack(Roads.roadBlockDirt, 1, 4), "Dirt, Line");
             LanguageRegistry.addName(new ItemStack(Roads.roadBlockDirt, 1, 8), "Dirt, Worn");
@@ -167,6 +185,41 @@ public class CommonProxy {
             LanguageRegistry.addName(new ItemStack(Roads.roadBlockDirtCorner, 1, 4), "Dirt, Line (Corner)");
             LanguageRegistry.addName(new ItemStack(Roads.roadBlockDirtCorner, 1, 8), "Dirt, Worn (Corner)");
             LanguageRegistry.addName(new ItemStack(Roads.roadBlockDirtCorner, 1, 12), "Dirt, Grassy (Corner)");
+            
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockFork, 1, 0), "Road Fork, Base");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockFork, 1, 4), "Road Fork, Base 2");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockFork, 1, 8), "Road Fork, Base Left");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockFork, 1, 12), "Road Fork, Base Right");
+            
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkB, 1, 0), "Road Fork, Left 1");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkB, 1, 4), "Road Fork, Left 2");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkB, 1, 8), "Road Fork, Left 3");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkB, 1, 12), "Road Fork, Left 4");
+            
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkC, 1, 0), "Road Fork, Right 1");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkC, 1, 4), "Road Fork, Right 2");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkC, 1, 8), "Road Fork, Right 3");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkC, 1, 12), "Road Fork, Right 4");
+            
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkD, 1, 0), "Road Fork, Center 1");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkD, 1, 4), "Road Fork, Left Plain");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkD, 1, 8), "Road Fork, Center 2");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkD, 1, 12), "Road Fork, Right Plain");
+            
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkE, 1, 0), "Road Fork, Left Inverted 1");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkE, 1, 4), "Road Fork, Left Inverted 2");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkE, 1, 8), "Road Fork, Left Inverted 3");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkE, 1, 12), "Road Fork, Left Inverted 4");
+            
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkF, 1, 0), "Road Fork, Right Inverted 1");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkF, 1, 4), "Road Fork, Right Inverted 2");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkF, 1, 8), "Road Fork, Right Inverted 3");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkF, 1, 12), "Road Fork, Right Inverted 4");
+            
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkG, 1, 0), "Road Fork, Straight 1");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkG, 1, 4), "Road Fork, Straight 2");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkG, 1, 8), "Road Fork, Straight 3");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkG, 1, 12), "Road Fork, Straight 4");
             
             LanguageRegistry.addName(new ItemStack(Roads.roadRamp1, 1, 0), "Tarmac Ramp (Plain)");
             LanguageRegistry.addName(new ItemStack(Roads.roadRamp1, 1, 4), "Tarmac Ramp ()");

@@ -1,13 +1,17 @@
 package co.uk.silvania.roads.roadblocks;
 
 import java.util.List;
+import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -21,12 +25,19 @@ public class RoadBlockArrows extends Block {
         this.setStepSound(soundStoneFootstep);
         this.setHardness(1.5F);
         this.setCreativeTab(Roads.tabRoads);
-        this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.825F, 1.0F);
+        this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.75F, 1.0F);
     }
     
     public void roadBlockBounds(float par1, float par2, float par3, float par4, float par5, float par6)
     {
         this.setBlockBounds(par1, par2, par3, par4, par5, par6);
+    }
+    
+    public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity)
+    {
+        this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.75F, 1.0F);
+        super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
+        this.setBlockBoundsForItemRender();
     }
     
 	@SideOnly(Side.CLIENT)
@@ -81,5 +92,10 @@ public class RoadBlockArrows extends Block {
 		list.add(new ItemStack(par1, 1, 4));
 		list.add(new ItemStack(par1, 1, 8));
 		list.add(new ItemStack(par1, 1, 12));
+	}
+	
+	public int damageDropped(int i) {
+    	//int meta = world.getBlockMetadata(x, y, z);
+		return i;
 	}
 }

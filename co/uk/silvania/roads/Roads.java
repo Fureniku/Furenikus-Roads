@@ -74,6 +74,13 @@ public class Roads {
 	public static Block roadBlockStripes;
 	public static Block roadBlockDirt;
 	public static Block roadBlockDirtCorner;
+	public static Block roadBlockFork;
+	public static Block roadBlockForkB;
+	public static Block roadBlockForkC;
+	public static Block roadBlockForkD;
+	public static Block roadBlockForkE;
+	public static Block roadBlockForkF;
+	public static Block roadBlockForkG;
 	
 	public static Block roadRamp1;
 	public static Block roadRamp2;
@@ -81,6 +88,8 @@ public class Roads {
 	public static Block sidewalkBlockGrey;
 	public static Block sidewalkBlockLight;
 	public static Block sidewalkBlockTile;
+	public static Block sidewalkBlockTri;
+	public static Block sidewalkBlockSides;
 	
 	public static Block powerPole;
 	public static Block powerPoleSmall;
@@ -148,17 +157,26 @@ public class Roads {
     	sidewalkBlockGrey = new SidewalkBlockGrey(config.sidewalkBlockGreyID).setUnlocalizedName("sidewalkBlockGrey");
     	sidewalkBlockLight = new SidewalkBlockLight(config.sidewalkBlockLightID).setUnlocalizedName("sidewalkBlockLight");
     	sidewalkBlockTile = new SidewalkBlockTile(config.sidewalkBlockTileID).setUnlocalizedName("sidewalkBlockTile");
+    	sidewalkBlockTri = new SidewalkBlockTri(config.sidewalkBlockTriID).setUnlocalizedName("sidewalkBlockTri");
+    	sidewalkBlockSides = new SidewalkBlockSides(config.sidewalkBlockSidesID).setUnlocalizedName("sidewalkBlockSides");
     	roadBlockDirt = new RoadBlockDirt(config.roadBlockDirtID).setUnlocalizedName("roadBlockDirt");
     	roadBlockDirtCorner = new RoadBlockDirtCorner(config.roadBlockDirtCornerID).setUnlocalizedName("roadBlockDirtCorner");
+    	roadBlockFork = new RoadBlockFork(config.roadBlockForkID).setUnlocalizedName("roadBlockFork");
+    	roadBlockForkB = new RoadBlockForkB(config.roadBlockForkBID).setUnlocalizedName("roadBlockForkB");
+    	roadBlockForkC = new RoadBlockForkC(config.roadBlockForkCID).setUnlocalizedName("roadBlockForkC");
+    	roadBlockForkD = new RoadBlockForkD(config.roadBlockForkDID).setUnlocalizedName("roadBlockForkD");
+    	roadBlockForkE = new RoadBlockForkE(config.roadBlockForkEID).setUnlocalizedName("roadBlockForkE");
+    	roadBlockForkF = new RoadBlockForkE(config.roadBlockForkFID).setUnlocalizedName("roadBlockForkF");
+    	roadBlockForkG = new RoadBlockForkE(config.roadBlockForkGID).setUnlocalizedName("roadBlockForkG");
     	
     	roadRamp1 = new TileEntityRamp1(config.roadRamp1ID).setUnlocalizedName("roadRamp1");
     	roadRamp2 = new TileEntityRamp2(config.roadRamp2ID).setUnlocalizedName("roadRamp2");
     	
-    	powerPole = new PowerPoleMedium(config.powerPoleID).setUnlocalizedName("powerPole");
+    	powerPole = new PowerPoleMedium(config.powerPoleID, false).setUnlocalizedName("powerPole");
     	powerPoleSmall = new PowerPoleSmall(config.powerPoleSmallID).setUnlocalizedName("powerPoleSmall");
     	powerPoleLarge = new PowerPoleLarge(config.powerPoleLargeID, false).setUnlocalizedName("powerPoleLarge");
     	
-    	powerPoleOn = new PowerPoleMedium(config.powerPoleOnID).setUnlocalizedName("powerPoleOn");
+    	powerPoleOn = new PowerPoleMedium(config.powerPoleOnID, true).setUnlocalizedName("powerPoleOn");
     	powerPoleSmallOn = new PowerPoleSmall(config.powerPoleSmallOnID).setUnlocalizedName("powerPoleSmallOn");
     	powerPoleLargeOn = new PowerPoleLarge(config.powerPoleLargeOnID, true).setUnlocalizedName("powerPoleLargeOn");
     	

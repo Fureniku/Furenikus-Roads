@@ -9,6 +9,7 @@ import co.uk.silvania.roads.tileentities.entities.*;
 import co.uk.silvania.roads.tileentities.renderers.*;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.registry.EntityRegistry;
 
 public class ClientProxy extends CommonProxy {
         

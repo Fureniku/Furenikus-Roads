@@ -6,8 +6,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -21,7 +23,7 @@ public class RoadBlockMiscSingles extends Block {
         this.setStepSound(soundStoneFootstep);
         this.setHardness(1.5F);
         this.setCreativeTab(Roads.tabRoads);
-        this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.825F, 1.0F);
+        this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.75F, 1.0F);
     }
     
     public void roadBlockBounds(float par1, float par2, float par3, float par4, float par5, float par6)
@@ -43,6 +45,13 @@ public class RoadBlockMiscSingles extends Block {
 			icons[i] = iconRegister.registerIcon("Roads:" + (this.getUnlocalizedName().substring(5)) + i);
 		}
 	}
+    
+    public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity)
+    {
+        this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.75F, 1.0F);
+        super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
+        this.setBlockBoundsForItemRender();
+    }
     
 	@SideOnly(Side.CLIENT)
 	public Icon getIcon(int side, int meta) {

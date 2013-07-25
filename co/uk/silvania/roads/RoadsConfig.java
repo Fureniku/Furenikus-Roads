@@ -27,10 +27,19 @@ public class RoadsConfig {
 	public static int roadBlockStripesID;
 	public static int roadBlockDirtID;
 	public static int roadBlockDirtCornerID;
+	public static int roadBlockForkID;
+	public static int roadBlockForkBID;
+	public static int roadBlockForkCID;
+	public static int roadBlockForkDID;
+	public static int roadBlockForkEID;
+	public static int roadBlockForkFID;
+	public static int roadBlockForkGID;
 	
 	public static int sidewalkBlockGreyID;
 	public static int sidewalkBlockLightID;
 	public static int sidewalkBlockTileID;
+	public static int sidewalkBlockTriID;
+	public static int sidewalkBlockSidesID;
 	
 	public static int roadRamp1ID;
 	public static int roadRamp2ID;
@@ -110,10 +119,19 @@ public class RoadsConfig {
 		roadBlockStripesID = config.getBlock("Stripes", 819).getInt();
 		roadBlockDirtID = config.getBlock("Dirt", 820).getInt();
 		roadBlockDirtCornerID = config.getBlock("Dirt, Corners", 821).getInt();
+		roadBlockForkID = config.getBlock("Fork", 847).getInt();
+		roadBlockForkBID = config.getBlock("Fork B", 848).getInt();
+		roadBlockForkCID = config.getBlock("Fork C", 849).getInt();
+		roadBlockForkDID = config.getBlock("Fork D", 850).getInt();
+		roadBlockForkEID = config.getBlock("Fork E", 851).getInt();
+		roadBlockForkFID = config.getBlock("Fork F", 852).getInt();
+		roadBlockForkGID = config.getBlock("Fork G", 853).getInt();
 		
 		sidewalkBlockGreyID = config.getBlock("Sidewalk Grey", 827).getInt();
 		sidewalkBlockLightID = config.getBlock("Sidewalk Light", 828).getInt();
 		sidewalkBlockTileID = config.getBlock("Sidewalk Tiled", 829).getInt();
+		sidewalkBlockTriID = config.getBlock("Sidewalk Tri-point", 823).getInt();
+		sidewalkBlockSidesID = config.getBlock("Sidewalk Sides", 822).getInt();
 		
 		roadRamp1ID = config.getBlock("Road Ramp 1", 830).getInt();
 		roadRamp2ID = config.getBlock("Road Ramp 2", 831).getInt();
