@@ -8,33 +8,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-public class ItemRoadBlockForkC extends ItemBlock {
+public class ItemRoadRamp4 extends ItemBlock {
 
-	public ItemRoadBlockForkC(int par1) {
+	public ItemRoadRamp4(int par1) {
 		super(par1);
 		this.setHasSubtypes(true);
-	}
-	
-	public void addInformation(ItemStack item, EntityPlayer player, List list, boolean bool) {
-		switch (item.getItemDamage()) {
-			case 0: {
-				list.add("Stage 1");
-				break;
-			}
-			case 4: {
-				list.add("Stage 2");
-				break;
-			}
-			case 8: {
-				list.add("Stage 3");
-				break;
-			}
-			case 12: {
-				list.add("Stage 4");
-				break;
-			}
-			default: list.add("");
-		}
 	}
 
 	public String getUnlocalizedName(ItemStack itemstack) {
@@ -91,18 +69,6 @@ public class ItemRoadBlockForkC extends ItemBlock {
 			}
 			case 12: {
 				name = "12";
-				break;
-			}
-			case 13: {
-				name = "13";
-				break;
-			}
-			case 14: {
-				name = "14";
-				break;
-			}
-			case 15: {
-				name = "15";
 				break;
 			}
 			default: name = "broken";

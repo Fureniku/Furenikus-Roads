@@ -14,23 +14,23 @@ import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import co.uk.silvania.roads.Roads;
-import co.uk.silvania.roads.tileentities.entities.TileEntityRoadSlope2Entity;
+import co.uk.silvania.roads.tileentities.entities.TileEntityRoadSlope5Entity;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class TileEntityRamp2 extends BlockContainer {
+public class TileEntityRamp5 extends BlockContainer {
 
-    public TileEntityRamp2(int id) {
+    public TileEntityRamp5(int id) {
         super(id, Material.rock);
         this.setHardness(1.0F);
         this.setCreativeTab(Roads.tabRoads);
         this.setLightOpacity(0);
-        this.setBlockBounds(0.0F, -0.25F, 0.0F, 1.0F, -0.24F, 1.0F);
+        this.setBlockBounds(0.0F, -0.25F, 0.0F, 1.0F, 0.75F, 1.0F);
     }
 
     @Override
     public TileEntity createNewTileEntity(World world) {
-        return new TileEntityRoadSlope2Entity();
+        return new TileEntityRoadSlope5Entity();
     }
 
     @Override
@@ -54,48 +54,6 @@ public class TileEntityRamp2 extends BlockContainer {
 	    int direction = MathHelper.floor_double((double)(entityliving.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
 	    int newMeta = (blockSet * 4) + direction;
 	    world.setBlockMetadataWithNotify(x, y, z, newMeta, 0);
-	    if (newMeta == 1 || newMeta == 5 || newMeta == 9 || newMeta == 13) {
-	    	world.setBlock(x + 1, y, z, Roads.blockGag1.blockID);
-	    	world.setBlock(x + 2, y, z, Roads.blockGag2.blockID);
-	    	world.setBlock(x + 3, y, z, Roads.blockGag3.blockID);
-    	} else if (newMeta == 3 || newMeta == 7 || newMeta == 11 || newMeta == 15) {
-	    	world.setBlock(x - 1, y, z, Roads.blockGag1.blockID);
-	    	world.setBlock(x - 2, y, z, Roads.blockGag2.blockID);
-	    	world.setBlock(x - 3, y, z, Roads.blockGag3.blockID);
-	    } else if (newMeta == 2 || newMeta == 6 || newMeta == 10 || newMeta == 14) {
-	    	world.setBlock(x, y, z + 1, Roads.blockGag1.blockID);
-	    	world.setBlock(x, y, z + 2, Roads.blockGag2.blockID);
-	    	world.setBlock(x, y, z + 3, Roads.blockGag3.blockID);
-	    } else if (newMeta == 0 || newMeta == 4 || newMeta == 8 || newMeta == 12) {
-	    	world.setBlock(x, y, z - 1, Roads.blockGag1.blockID);
-	    	world.setBlock(x, y, z - 2, Roads.blockGag2.blockID);
-	    	world.setBlock(x, y, z - 3, Roads.blockGag3.blockID);
-	    }
-    }
-    
-    @Override
-    public void breakBlock(World world, int x, int y, int z, int par5, int par6) {
-    	int meta = world.getBlockMetadata(x, y, z);   
-    	if (meta == 1 || meta == 5 || meta == 9 || meta == 13) {
-    		world.setBlockToAir(x + 1, y, z);
-    		world.setBlockToAir(x + 2, y, z);
-    		world.setBlockToAir(x + 3, y, z);
-    	}
-	    if (meta == 3 || meta == 7 || meta == 11 || meta == 15) {
-	    	world.setBlockToAir(x - 1, y, z);
-	    	world.setBlockToAir(x - 2, y, z);
-	    	world.setBlockToAir(x - 3, y, z);
-	    }
-	    if (meta == 2|| meta == 6 || meta == 10 || meta == 14) {
-	    	world.setBlockToAir(x, y, z + 1);
-	    	world.setBlockToAir(x, y, z + 2);
-	    	world.setBlockToAir(x, y, z + 3);
-	    }
-	    if (meta == 0 || meta == 4 || meta == 8 || meta == 12) {
-	    	world.setBlockToAir(x, y, z - 1);
-	    	world.setBlockToAir(x, y, z - 2);
-	    	world.setBlockToAir(x, y, z - 3);
-	    }
     }
     @SideOnly(Side.CLIENT)
     private Icon[] icons;

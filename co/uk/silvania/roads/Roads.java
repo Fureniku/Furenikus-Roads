@@ -84,6 +84,10 @@ public class Roads {
 	
 	public static Block roadRamp1;
 	public static Block roadRamp2;
+	public static Block roadRamp3;
+	public static Block roadRamp4;
+	public static Block roadRamp5;
+	public static Block roadRamp6;
 	
 	public static Block sidewalkBlockGrey;
 	public static Block sidewalkBlockLight;
@@ -171,6 +175,11 @@ public class Roads {
     	
     	roadRamp1 = new TileEntityRamp1(config.roadRamp1ID).setUnlocalizedName("roadRamp1");
     	roadRamp2 = new TileEntityRamp2(config.roadRamp2ID).setUnlocalizedName("roadRamp2");
+    	roadRamp3 = new TileEntityRamp3(config.roadRamp3ID).setUnlocalizedName("roadRamp3");
+    	roadRamp4 = new TileEntityRamp4(config.roadRamp4ID).setUnlocalizedName("roadRamp4");
+    	roadRamp5 = new TileEntityRamp5(config.roadRamp5ID).setUnlocalizedName("roadRamp5");
+    	roadRamp6 = new TileEntityRamp6(config.roadRamp6ID).setUnlocalizedName("roadRamp6");
+    	
     	
     	powerPole = new PowerPoleMedium(config.powerPoleID, false).setUnlocalizedName("powerPole");
     	powerPoleSmall = new PowerPoleSmall(config.powerPoleSmallID).setUnlocalizedName("powerPoleSmall");

@@ -15,6 +15,30 @@ public class ItemRoadBlockJunctionIn extends ItemBlock {
 		this.setHasSubtypes(true);
 	}
 
+	public void addInformation(ItemStack item, EntityPlayer player, List list, boolean bool) {
+		switch (item.getItemDamage()) {
+			case 0: {
+				list.add("In");
+				break;
+			}
+			case 4: {
+				list.add("In, Lined");
+				break;
+			}
+			case 8: {
+				list.add("In, Lined");
+				list.add("Inverted");
+				break;
+			}
+			case 12: {
+				list.add("Center");
+				list.add("(Left Inversion)");
+				break;
+			}
+			default: list.add("");
+		}
+	}
+	
 	public String getUnlocalizedName(ItemStack itemstack) {
 
 		String name = "";

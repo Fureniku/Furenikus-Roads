@@ -15,6 +15,32 @@ public class ItemRoadBlockCornerB extends ItemBlock {
 		this.setHasSubtypes(true);
 	}
 	
+	public void addInformation(ItemStack item, EntityPlayer player, List list, boolean bool) {
+		switch (item.getItemDamage()) {
+			case 0: {
+				list.add("Corner");
+				list.add("White");
+				break;
+			}
+			case 4: {
+				list.add("Corner (Alternate)");
+				list.add("White");
+				break;
+			}
+			case 8: {
+				list.add("Corner");
+				list.add("Yellow");
+				break;
+			}
+			case 12: {
+				list.add("Corner (Alternate)");
+				list.add("Yellow");
+				break;
+			}
+			default: list.add("");
+		}
+	}
+	
 	public void addInformation(ItemStack itemstack, EntityPlayer player, List list, boolean par4, int meta) {
 		list.add("Arrow");
 	}

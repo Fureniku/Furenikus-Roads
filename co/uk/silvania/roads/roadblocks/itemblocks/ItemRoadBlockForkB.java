@@ -14,6 +14,28 @@ public class ItemRoadBlockForkB extends ItemBlock {
 		super(par1);
 		this.setHasSubtypes(true);
 	}
+	
+	public void addInformation(ItemStack item, EntityPlayer player, List list, boolean bool) {
+		switch (item.getItemDamage()) {
+			case 0: {
+				list.add("Stage 1");
+				break;
+			}
+			case 4: {
+				list.add("Stage 2");
+				break;
+			}
+			case 8: {
+				list.add("Stage 3");
+				break;
+			}
+			case 12: {
+				list.add("Stage 4");
+				break;
+			}
+			default: list.add("");
+		}
+	}
 
 	public String getUnlocalizedName(ItemStack itemstack) {
 

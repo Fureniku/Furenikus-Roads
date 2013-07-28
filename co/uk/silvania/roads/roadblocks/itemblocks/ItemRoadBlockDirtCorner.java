@@ -14,6 +14,28 @@ public class ItemRoadBlockDirtCorner extends ItemBlock {
 		super(par1);
 		this.setHasSubtypes(true);
 	}
+	
+	public void addInformation(ItemStack item, EntityPlayer player, List list, boolean bool) {
+		switch (item.getItemDamage()) {
+			case 0: {
+				list.add("Tyre Tread, Corner");
+				break;
+			}
+			case 4: {
+				list.add("Line, Corner");
+				break;
+			}
+			case 8: {
+				list.add("Worn, Corner");
+				break;
+			}
+			case 12: {
+				list.add("Grassy, Corner");
+				break;
+			}
+			default: list.add("");
+		}
+	}
 
 	public String getUnlocalizedName(ItemStack itemstack) {
 

@@ -17,7 +17,25 @@ public class ItemRoadBlockArrows extends ItemBlock {
 	}
 	
 	public void addInformation(ItemStack item, EntityPlayer player, List list, boolean bool) {
-		list.add("Arrow");
+		switch (item.getItemDamage()) {
+			case 0: {
+				list.add("Arrow (Forward)");
+				break;
+			}
+			case 4: {
+				list.add("Arrow (Left)");
+				break;
+			}
+			case 8: {
+				list.add("Arrow (Right)");
+				break;
+			}
+			case 12: {
+				list.add("Arrow Line");
+				break;
+			}
+			default: list.add("");
+		}
 	}
 
 	public String getUnlocalizedName(ItemStack itemstack) {

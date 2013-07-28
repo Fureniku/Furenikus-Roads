@@ -47,8 +47,13 @@ public class CommonProxy {
             GameRegistry.registerBlock(Roads.sidewalkBlockTri, ItemSidewalkBlockTri.class, "FlenixRoads" + (Roads.sidewalkBlockTri.getUnlocalizedName().substring(5)));
             GameRegistry.registerBlock(Roads.sidewalkBlockSides, ItemSidewalkBlockSides.class, "FlenixRoads" + (Roads.sidewalkBlockSides.getUnlocalizedName().substring(5)));
             
-            GameRegistry.registerBlock(Roads.roadRamp1, ItemRoadRamp1.class, "FleixRoads" + (Roads.roadRamp1.getUnlocalizedName().substring(5)));
-            GameRegistry.registerBlock(Roads.roadRamp2, ItemRoadRamp2.class, "FleixRoads" + (Roads.roadRamp2.getUnlocalizedName().substring(5)));
+            GameRegistry.registerBlock(Roads.roadRamp1, ItemRoadRamp1.class, "FlenixRoads" + (Roads.roadRamp1.getUnlocalizedName().substring(5)));
+            GameRegistry.registerBlock(Roads.roadRamp2, ItemRoadRamp2.class, "FlenixRoads" + (Roads.roadRamp2.getUnlocalizedName().substring(5)));
+            GameRegistry.registerBlock(Roads.roadRamp3, ItemRoadRamp3.class, "FlenixRoads" + (Roads.roadRamp3.getUnlocalizedName().substring(5)));
+            GameRegistry.registerBlock(Roads.roadRamp4, ItemRoadRamp4.class, "FlenixRoads" + (Roads.roadRamp4.getUnlocalizedName().substring(5)));
+            GameRegistry.registerBlock(Roads.roadRamp5, ItemRoadRamp5.class, "FlenixRoads" + (Roads.roadRamp5.getUnlocalizedName().substring(5)));
+            GameRegistry.registerBlock(Roads.roadRamp6, ItemRoadRamp6.class, "FlenixRoads" + (Roads.roadRamp6.getUnlocalizedName().substring(5)));
+            
             GameRegistry.registerBlock(Roads.streetSign, ItemStreetSign.class, "FlenixRoads" + (Roads.streetSign.getUnlocalizedName().substring(5)));
             GameRegistry.registerBlock(Roads.trafficLight, ItemTrafficLight.class, "FlenixRoads" + (Roads.trafficLight.getUnlocalizedName().substring(5)));
             
@@ -98,59 +103,62 @@ public class CommonProxy {
             LanguageRegistry.addName(new ItemStack(Roads.generalBlocks, 1, 2), "Macadam");
             LanguageRegistry.addName(new ItemStack(Roads.generalBlocks, 1, 3), "Hardened Tar");
             LanguageRegistry.addName(new ItemStack(Roads.generalBlocks, 1, 4), "Concrete");
+            LanguageRegistry.addName(new ItemStack(Roads.generalBlocks, 1, 5), "Concrete, Old");
+            LanguageRegistry.addName(new ItemStack(Roads.generalBlocks, 1, 6), "Sidewalk Light Square");
+            LanguageRegistry.addName(new ItemStack(Roads.generalBlocks, 1, 7), "Sidewalk Grey Square");
             
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockArrows, 1, 0), "Tarmac (Arrow, Straight)");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockArrows, 1, 4), "Tarmac (Arrow, Left)");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockArrows, 1, 8), "Tarmac (Arrow, Right)");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockArrows, 1, 12), "Tarmac (Arrow, Line)");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockArrows, 1, 0), "Tarmac");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockArrows, 1, 4), "Tarmac");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockArrows, 1, 8), "Tarmac");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockArrows, 1, 12), "Tarmac");
             
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockCorners, 1, 0), "Tarmac (Double Yellow Corner Large)");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockCorners, 1, 4), "Tarmac (Double Yellow Corner Small)");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockCorners, 1, 8), "Tarmac (Inverted Diagonal White Stripe)");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockCorners, 1, 12), "Tarmac (Inverted Diagonal Yellow Stripe)");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockCorners, 1, 0), "Tarmac");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockCorners, 1, 4), "Tarmac");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockCorners, 1, 8), "Tarmac");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockCorners, 1, 12), "Tarmac");
             
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockDoubleYellow, 1, 0), "Tarmac (Double Yellow Stripes)");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockDoubleYellow, 1, 4), "Tarmac (Double Yellow End, Left)");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockDoubleYellow, 1, 8), "Tarmac (Double Yellow End, Right");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockDoubleYellow, 1, 12), "Tarmac (Double Yellow Center)");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockDoubleYellow, 1, 0), "Tarmac");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockDoubleYellow, 1, 4), "Tarmac");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockDoubleYellow, 1, 8), "Tarmac");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockDoubleYellow, 1, 12), "Tarmac");
             
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockCornerB, 1, 0), "Tarmac (White Corner)");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockCornerB, 1, 4), "Tarmac (White Alternate Corner)");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockCornerB, 1, 8), "Tarmac (Yellow Corner)");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockCornerB, 1, 12), "Tarmac (Yellow Alternate Corner)");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockCornerB, 1, 0), "Tarmac");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockCornerB, 1, 4), "Tarmac");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockCornerB, 1, 8), "Tarmac");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockCornerB, 1, 12), "Tarmac");
             
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockJunctionIn, 1, 0), "Tarmac (Junction In)");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockJunctionIn, 1, 4), "Tarmac (Junction In, Line)");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockJunctionIn, 1, 8), "Tarmac (Junction In, Line Inverted)");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockJunctionIn, 1, 12), "Tarmac (Junction Center Left)");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockJunctionIn, 1, 0), "Tarmac");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockJunctionIn, 1, 4), "Tarmac");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockJunctionIn, 1, 8), "Tarmac");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockJunctionIn, 1, 12), "Tarmac");
              
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockJunctionOut, 1, 0), "Tarmac (Junction Out)");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockJunctionOut, 1, 4), "Tarmac (Junction Out, Line)");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockJunctionOut, 1, 8), "Tarmac (Junction Out, Line Inverted)");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockJunctionOut, 1, 12), "Tarmac (Junction Center Right)");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockJunctionOut, 1, 0), "Tarmac");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockJunctionOut, 1, 4), "Tarmac");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockJunctionOut, 1, 8), "Tarmac");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockJunctionOut, 1, 12), "Tarmac");
             
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockMiscSingles, 1, 0), "Tarmac (Plain)");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockMiscSingles, 1, 1), "Tarmac (White Topped)");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockMiscSingles, 1, 2), "Tarmac (Yellow Topped)");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockMiscSingles, 1, 3), "Tarmac (White Cross)");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockMiscSingles, 1, 4), "Tarmac (Yellow Cross)");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockMiscSingles, 1, 0), "Tarmac");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockMiscSingles, 1, 1), "Tarmac");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockMiscSingles, 1, 2), "Tarmac");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockMiscSingles, 1, 3), "Tarmac");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockMiscSingles, 1, 4), "Tarmac");
             LanguageRegistry.addName(new ItemStack(Roads.roadBlockMiscSingles, 1, 5), "Dirt Track Road");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockMiscSingles, 1, 6), "Dirt Track Road, Dry");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockMiscSingles, 1, 6), "Dirt Track Road");
                     		
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockSimpleLines, 1, 0), "Tarmac (White Center)");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockSimpleLines, 1, 4), "Tarmac (Yellow Center)");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockSimpleLines, 1, 8), "Tarmac (White Diagonal)");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockSimpleLines, 1, 12), "Tarmac (Yellow Diagonal)");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockSimpleLines, 1, 0), "Tarmac");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockSimpleLines, 1, 4), "Tarmac");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockSimpleLines, 1, 8), "Tarmac");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockSimpleLines, 1, 12), "Tarmac");
             		
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockSideWhiteStripes, 1, 0), "Tarmac (White Small Stripe, Side)");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockSideWhiteStripes, 1, 4), "Tarmac (White Small Stripe)");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockSideWhiteStripes, 1, 8), "Tarmac (Yellow Small Stripe, Side)");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockSideWhiteStripes, 1, 12), "Tarmac (Yellow Small Stripe)");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockSideWhiteStripes, 1, 0), "Tarmac");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockSideWhiteStripes, 1, 4), "Tarmac");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockSideWhiteStripes, 1, 8), "Tarmac");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockSideWhiteStripes, 1, 12), "Tarmac");
                                             		
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockStripes, 1, 0), "Tarmac (White Side)");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockStripes, 1, 4), "Tarmac (White Far Side)");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockStripes, 1, 8), "Tarmac (Yellow Side)");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockStripes, 1, 12), "Tarmac (Yellow Far Side)");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockStripes, 1, 0), "Tarmac");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockStripes, 1, 4), "Tarmac");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockStripes, 1, 8), "Tarmac");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockStripes, 1, 12), "Tarmac");
             
             LanguageRegistry.addName(new ItemStack(Roads.sidewalkBlockGrey, 1, 0), "Sidewalk Grey");
             LanguageRegistry.addName(new ItemStack(Roads.sidewalkBlockGrey, 1, 4), "Sidewalk Grey (Kerbed)");
@@ -176,55 +184,55 @@ public class CommonProxy {
             LanguageRegistry.addName(new ItemStack(Roads.sidewalkBlockTri, 1, 4), "Sidewalk Tri-Side, Light");
             LanguageRegistry.addName(new ItemStack(Roads.sidewalkBlockTri, 1, 8), "Sidewalk Tri-Side, Tile");
             
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockDirt, 1, 0), "Dirt, Tyre Treads");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockDirt, 1, 4), "Dirt, Line");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockDirt, 1, 8), "Dirt, Worn");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockDirt, 1, 12), "Dirt, Grassy");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockDirt, 1, 0), "Dirt Track Road");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockDirt, 1, 4), "Dirt Track Road");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockDirt, 1, 8), "Dirt Track Road");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockDirt, 1, 12), "Dirt Track Road");
             
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockDirtCorner, 1, 0), "Dirt, Tyre Treads (Corner)");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockDirtCorner, 1, 4), "Dirt, Line (Corner)");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockDirtCorner, 1, 8), "Dirt, Worn (Corner)");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockDirtCorner, 1, 12), "Dirt, Grassy (Corner)");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockDirtCorner, 1, 0), "Dirt Track Road");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockDirtCorner, 1, 4), "Dirt Track Road");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockDirtCorner, 1, 8), "Dirt Track Road");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockDirtCorner, 1, 12), "Dirt Track Road");
             
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockFork, 1, 0), "Road Fork, Base");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockFork, 1, 4), "Road Fork, Base 2");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockFork, 1, 8), "Road Fork, Base Left");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockFork, 1, 12), "Road Fork, Base Right");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockFork, 1, 0), "Tarmac, Fork");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockFork, 1, 4), "Tarmac, Fork");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockFork, 1, 8), "Tarmac, Fork");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockFork, 1, 12), "Tarmac, Fork");
             
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkB, 1, 0), "Road Fork, Left 1");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkB, 1, 4), "Road Fork, Left 2");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkB, 1, 8), "Road Fork, Left 3");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkB, 1, 12), "Road Fork, Left 4");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkB, 1, 0), "Tarmac, Fork");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkB, 1, 4), "Tarmac, Fork");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkB, 1, 8), "Tarmac, Fork");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkB, 1, 12), "Tarmac, Fork");
             
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkC, 1, 0), "Road Fork, Right 1");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkC, 1, 4), "Road Fork, Right 2");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkC, 1, 8), "Road Fork, Right 3");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkC, 1, 12), "Road Fork, Right 4");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkC, 1, 0), "Tarmac, Fork");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkC, 1, 4), "Tarmac, Fork");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkC, 1, 8), "Tarmac, Fork");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkC, 1, 12), "Tarmac, Fork");
             
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkD, 1, 0), "Road Fork, Center 1");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkD, 1, 4), "Road Fork, Left Plain");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkD, 1, 8), "Road Fork, Center 2");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkD, 1, 12), "Road Fork, Right Plain");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkD, 1, 0), "Tarmac, Fork");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkD, 1, 4), "Tarmac, Fork");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkD, 1, 8), "Tarmac, Fork");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkD, 1, 12), "Tarmac, Fork");
             
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkE, 1, 0), "Road Fork, Left Inverted 1");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkE, 1, 4), "Road Fork, Left Inverted 2");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkE, 1, 8), "Road Fork, Left Inverted 3");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkE, 1, 12), "Road Fork, Left Inverted 4");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkE, 1, 0), "Tarmac, Fork");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkE, 1, 4), "Tarmac, Fork");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkE, 1, 8), "Tarmac, Fork");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkE, 1, 12), "Tarmac, Fork");
             
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkF, 1, 0), "Road Fork, Right Inverted 1");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkF, 1, 4), "Road Fork, Right Inverted 2");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkF, 1, 8), "Road Fork, Right Inverted 3");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkF, 1, 12), "Road Fork, Right Inverted 4");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkF, 1, 0), "Tarmac, Fork");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkF, 1, 4), "Tarmac, Fork");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkF, 1, 8), "Tarmac, Fork");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkF, 1, 12), "Tarmac, Fork");
             
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkG, 1, 0), "Road Fork, Straight 1");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkG, 1, 4), "Road Fork, Straight 2");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkG, 1, 8), "Road Fork, Straight 3");
-            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkG, 1, 12), "Road Fork, Straight 4");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkG, 1, 0), "Tarmac, Fork");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkG, 1, 4), "Tarmac, Fork");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkG, 1, 8), "Tarmac, Fork");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkG, 1, 12), "Tarmac, Fork");
             
             LanguageRegistry.addName(new ItemStack(Roads.roadRamp1, 1, 0), "Tarmac Ramp (Plain)");
-            LanguageRegistry.addName(new ItemStack(Roads.roadRamp1, 1, 4), "Tarmac Ramp ()");
+            LanguageRegistry.addName(new ItemStack(Roads.roadRamp1, 1, 4), "Tarmac Ramp");
             LanguageRegistry.addName(new ItemStack(Roads.roadRamp1, 1, 8), "Tarmac Ramp (White Stripe)");
-            LanguageRegistry.addName(new ItemStack(Roads.roadRamp1, 1, 12), "Tarmac Ramp ()");
+            LanguageRegistry.addName(new ItemStack(Roads.roadRamp1, 1, 12), "Tarmac Ramp");
             								
             LanguageRegistry.addName(new ItemStack(Roads.roadRamp2, 1, 0), "Tarmac Ramp (Double Yellow Left)");
             LanguageRegistry.addName(new ItemStack(Roads.roadRamp2, 1, 4), "Tarmac Ramp (Double Yellow Right)");

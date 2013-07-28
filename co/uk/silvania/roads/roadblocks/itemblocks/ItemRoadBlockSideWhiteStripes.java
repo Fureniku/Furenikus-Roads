@@ -14,6 +14,30 @@ public class ItemRoadBlockSideWhiteStripes extends ItemBlock {
 		super(par1);
 		this.setHasSubtypes(true);
 	}
+	
+	public void addInformation(ItemStack item, EntityPlayer player, List list, boolean bool) {
+		switch (item.getItemDamage()) {
+			case 0: {
+				list.add("White Small Stripe");
+				list.add("Side");
+				break;
+			}
+			case 4: {
+				list.add("White Small Stripe");
+				break;
+			}
+			case 8: {
+				list.add("Yellow Small Stripe");
+				list.add("Side");
+				break;
+			}
+			case 12: {
+				list.add("Yellow Small Stripe");
+				break;
+			}
+			default: list.add("");
+		}
+	}
 
 	public String getUnlocalizedName(ItemStack itemstack) {
 

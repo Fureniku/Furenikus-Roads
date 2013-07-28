@@ -14,6 +14,36 @@ public class ItemRoadBlockMiscSingles extends ItemBlock {
 		super(par1);
 		this.setHasSubtypes(true);
 	}
+	
+	public void addInformation(ItemStack item, EntityPlayer player, List list, boolean bool) {
+		switch (item.getItemDamage()) {
+			case 0: {
+				list.add("Plain");
+				break;
+			}
+			case 1: {
+				list.add("White Topped");
+				break;
+			}
+			case 2: {
+				list.add("Yellow Topped");
+				break;
+			}
+			case 3: {
+				list.add("White Cross");
+				break;
+			}
+			case 4: {
+				list.add("Yellow Cross");
+				break;
+			}
+			case 6: {
+				list.add("Dry");
+				break;
+			}
+			default: list.add("");
+		}
+	}
 
 	public String getUnlocalizedName(ItemStack itemstack) {
 

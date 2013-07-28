@@ -283,4 +283,18 @@ public class SidewalkBlockSides extends Block {
 		list.add(new ItemStack(par1, 1, 4));
 		list.add(new ItemStack(par1, 1, 8));
 	}
+
+    @Override
+    public int damageDropped(int meta) {
+    	if (meta == 0 || meta == 1 || meta == 2 || meta == 3) {
+    		return 0;
+    	}
+    	if (meta == 4 || meta == 5 || meta == 6 || meta == 7) {
+    		return 4;
+    	}
+    	if (meta == 8 || meta == 9 || meta == 10 || meta == 11) {
+    		return 8;
+    	} else
+    		return 12;
+    }
 }

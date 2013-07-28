@@ -43,6 +43,10 @@ public class RoadsConfig {
 	
 	public static int roadRamp1ID;
 	public static int roadRamp2ID;
+	public static int roadRamp3ID;
+	public static int roadRamp4ID;
+	public static int roadRamp5ID;
+	public static int roadRamp6ID;
 	
 	public static int powerPoleID;
 	public static int powerPoleSmallID;
@@ -133,8 +137,12 @@ public class RoadsConfig {
 		sidewalkBlockTriID = config.getBlock("Sidewalk Tri-point", 823).getInt();
 		sidewalkBlockSidesID = config.getBlock("Sidewalk Sides", 822).getInt();
 		
-		roadRamp1ID = config.getBlock("Road Ramp 1", 830).getInt();
-		roadRamp2ID = config.getBlock("Road Ramp 2", 831).getInt();
+		roadRamp1ID = config.getBlock("Road Ramp 1", 854).getInt();
+		roadRamp2ID = config.getBlock("Road Ramp 2", 855).getInt();
+		roadRamp3ID = config.getBlock("Road Ramp 3", 856).getInt();
+		roadRamp4ID = config.getBlock("Road Ramp 4", 857).getInt();
+		roadRamp5ID = config.getBlock("Road Ramp 5", 858).getInt();
+		roadRamp6ID = config.getBlock("Road Ramp 6", 859).getInt();
 		
 		blockGag1ID = config.getBlock("IMPORTANT: Do not remove! BG1", 844).getInt();
 		blockGag2ID = config.getBlock("IMPORTANT: Do not remove! BG2", 845).getInt();

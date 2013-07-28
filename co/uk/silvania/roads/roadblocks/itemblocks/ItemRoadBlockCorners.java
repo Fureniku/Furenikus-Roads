@@ -14,6 +14,30 @@ public class ItemRoadBlockCorners extends ItemBlock {
 		super(par1);
 		this.setHasSubtypes(true);
 	}
+	
+	public void addInformation(ItemStack item, EntityPlayer player, List list, boolean bool) {
+		switch (item.getItemDamage()) {
+			case 0: {
+				list.add("Double Yellow Corner, Large");
+				break;
+			}
+			case 4: {
+				list.add("Double Yellow Corner, Small");
+				break;
+			}
+			case 8: {
+				list.add("Inverted Diagonal Line");
+				list.add("White");
+				break;
+			}
+			case 12: {
+				list.add("Inverted Diagonal Line");
+				list.add("Yellow");
+				break;
+			}
+			default: list.add("");
+		}
+	}
 
 	public String getUnlocalizedName(ItemStack itemstack) {
 
