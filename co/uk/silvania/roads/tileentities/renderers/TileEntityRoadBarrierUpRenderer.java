@@ -24,12 +24,12 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 
-public class TileEntityRoadBarrierRenderer extends TileEntitySpecialRenderer {
+public class TileEntityRoadBarrierUpRenderer extends TileEntitySpecialRenderer {
 	
-	private final BarrierVerticalModel model;
+	private final BarrierHorizontalModel model;
 		
-	public TileEntityRoadBarrierRenderer() {
-		this.model = new BarrierVerticalModel();
+	public TileEntityRoadBarrierUpRenderer() {
+		this.model = new BarrierHorizontalModel();
 	}
 	
     @Override

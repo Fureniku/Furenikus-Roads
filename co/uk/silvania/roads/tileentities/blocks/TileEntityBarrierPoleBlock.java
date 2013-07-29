@@ -9,6 +9,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -62,5 +63,11 @@ public class TileEntityBarrierPoleBlock extends BlockContainer {
     	else
     		setBlockBounds(0.0F, 0.0F, 0.0F, 0.125F, 0.75F, 1.0F);
     }
+    
+    public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
+    {
+        this.setBlockBoundsBasedOnState(par1World, par2, par3, par4);
+        return super.getCollisionBoundingBoxFromPool(par1World, par2, par3, par4);
+    }	
 	
 }

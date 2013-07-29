@@ -94,6 +94,7 @@ public class Roads {
 	public static Block sidewalkBlockTile;
 	public static Block sidewalkBlockTri;
 	public static Block sidewalkBlockSides;
+	public static Block kerbBlock;
 	
 	public static Block powerPole;
 	public static Block powerPoleSmall;
@@ -101,10 +102,12 @@ public class Roads {
 	public static Block powerPoleOn;
 	public static Block powerPoleSmallOn;
 	public static Block powerPoleLargeOn;
-	
+		
 	public static Block blockGag1;
 	public static Block blockGag2;
 	public static Block blockGag3;
+	public static Block blockGag4;
+	public static Block blockGag5;
 	
 	public static Block roadPainter;
 	public static Block trafficLight;
@@ -117,6 +120,7 @@ public class Roads {
 	public static Block barrierCorner;
 	//public static Block roadSign;
 	public static Block roadBarrier;
+	public static Block roadBarrierUp;
 	
 	//Items Start Here
 	public static Item cementItem;
@@ -128,6 +132,7 @@ public class Roads {
 	public static Item yellowPaintBlob;
 	public static Item whitePaintCan;
 	public static Item yellowPaintCan;
+	public static Item blankSign;
 
 	//And finally the worldgen
 	public static WorldGen worldGen = new WorldGen();
@@ -158,11 +163,6 @@ public class Roads {
     	roadBlockSimpleLines = new RoadBlockSimpleLines(config.roadBlockSimpleLinesID).setUnlocalizedName("roadBlockSimpleLines");
     	roadBlockSideWhiteStripes = new RoadBlockSideWhiteStripes(config.roadBlockSideWhiteStripesID).setUnlocalizedName("roadBlockSideWhiteStripes");
     	roadBlockStripes = new RoadBlockStripes(config.roadBlockStripesID).setUnlocalizedName("roadBlockStripes");
-    	sidewalkBlockGrey = new SidewalkBlockGrey(config.sidewalkBlockGreyID).setUnlocalizedName("sidewalkBlockGrey");
-    	sidewalkBlockLight = new SidewalkBlockLight(config.sidewalkBlockLightID).setUnlocalizedName("sidewalkBlockLight");
-    	sidewalkBlockTile = new SidewalkBlockTile(config.sidewalkBlockTileID).setUnlocalizedName("sidewalkBlockTile");
-    	sidewalkBlockTri = new SidewalkBlockTri(config.sidewalkBlockTriID).setUnlocalizedName("sidewalkBlockTri");
-    	sidewalkBlockSides = new SidewalkBlockSides(config.sidewalkBlockSidesID).setUnlocalizedName("sidewalkBlockSides");
     	roadBlockDirt = new RoadBlockDirt(config.roadBlockDirtID).setUnlocalizedName("roadBlockDirt");
     	roadBlockDirtCorner = new RoadBlockDirtCorner(config.roadBlockDirtCornerID).setUnlocalizedName("roadBlockDirtCorner");
     	roadBlockFork = new RoadBlockFork(config.roadBlockForkID).setUnlocalizedName("roadBlockFork");
@@ -172,6 +172,13 @@ public class Roads {
     	roadBlockForkE = new RoadBlockForkE(config.roadBlockForkEID).setUnlocalizedName("roadBlockForkE");
     	roadBlockForkF = new RoadBlockForkE(config.roadBlockForkFID).setUnlocalizedName("roadBlockForkF");
     	roadBlockForkG = new RoadBlockForkE(config.roadBlockForkGID).setUnlocalizedName("roadBlockForkG");
+    	
+    	sidewalkBlockGrey = new SidewalkBlockGrey(config.sidewalkBlockGreyID).setUnlocalizedName("sidewalkBlockGrey");
+    	sidewalkBlockLight = new SidewalkBlockLight(config.sidewalkBlockLightID).setUnlocalizedName("sidewalkBlockLight");
+    	sidewalkBlockTile = new SidewalkBlockTile(config.sidewalkBlockTileID).setUnlocalizedName("sidewalkBlockTile");
+    	sidewalkBlockTri = new SidewalkBlockTri(config.sidewalkBlockTriID).setUnlocalizedName("sidewalkBlockTri");
+    	sidewalkBlockSides = new SidewalkBlockSides(config.sidewalkBlockSidesID).setUnlocalizedName("sidewalkBlockSides");
+    	kerbBlock = new KerbBlock(config.kerbBlockID).setUnlocalizedName("kerbBlock");
     	
     	roadRamp1 = new TileEntityRamp1(config.roadRamp1ID).setUnlocalizedName("roadRamp1");
     	roadRamp2 = new TileEntityRamp2(config.roadRamp2ID).setUnlocalizedName("roadRamp2");
@@ -192,6 +199,8 @@ public class Roads {
     	blockGag1 = new BlockGag1(config.blockGag1ID).setUnlocalizedName("blockGag1");
     	blockGag2 = new BlockGag2(config.blockGag2ID).setUnlocalizedName("blockGag2");
     	blockGag3 = new BlockGag3(config.blockGag3ID).setUnlocalizedName("blockGag3");
+    	blockGag4 = new BlockGag4(config.blockGag4ID).setUnlocalizedName("blockGag4");
+    	blockGag5 = new BlockGag5(config.blockGag5ID).setUnlocalizedName("blockGag5");
     	
     	
     	roadPainter = new TileEntityRoadPainterBlock(config.roadPainterID).setUnlocalizedName("roadPainter");
@@ -204,7 +213,8 @@ public class Roads {
     	barrierBlock = new TileEntityBarrierBlock(config.barrierBlockID).setUnlocalizedName("barrierBlock");
     	barrierCorner = new TileEntityBarrierCornerBlock(config.barrierCornerID).setUnlocalizedName("barrierCorner");
     	//roadSign = new TileEntityRoadSignBlock(config.roadSignID, TileEntityRoadSignEntity.class, true).setUnlocalizedName("roadSign");
-    	roadBarrier = new TileEntityRoadBarrierBlock(config.roadBarrierID).setUnlocalizedName("roadBarrier");
+    	roadBarrier = new TileEntityRoadBarrierBlock(config.roadBarrierID, false).setUnlocalizedName("roadBarrier");
+    	roadBarrierUp = new TileEntityRoadBarrierBlock(config.roadBarrierUpID, true).setUnlocalizedName("roadBarrierUp");
 
     	
     	cementItem = new CementItem(config.cementItemID).setUnlocalizedName("cementItem");
@@ -216,6 +226,7 @@ public class Roads {
     	yellowPaintBlob = new YellowPaintBlob(config.yellowPaintBlobID).setUnlocalizedName("yellowPaintBlob");
     	whitePaintCan = new WhitePaintCan(config.whitePaintCanID).setUnlocalizedName("whitePaintCan");
     	yellowPaintCan = new YellowPaintCan(config.yellowPaintCanID).setUnlocalizedName("yellowPaintCan");
+    	blankSign = new BlankSign(config.blankSignID).setUnlocalizedName("blankSign");
     	
     	//MinecraftForgeClient.registerItemRenderer(trafficLight.blockID, new TrafficLightItemRenderer());
     	
@@ -257,27 +268,68 @@ public class Roads {
             ItemStack cementItemStack = new ItemStack(Roads.cementItem);
             ItemStack tarBucketStack = new ItemStack(Roads.tarBucketItem);
             ItemStack macadamStack = new ItemStack(Roads.generalBlocks, 1, 2);
-            ItemStack limeStack = new ItemStack (Roads.limeStonePowderItem);
-            ItemStack yellowDye = new ItemStack (Item.dyePowder, 1, 11);
-            ItemStack whiteDye = new ItemStack (Item.dyePowder, 1, 15);
-            ItemStack bucket = new ItemStack (Item.bucketEmpty);
-
+            ItemStack limeStack = new ItemStack(Roads.limeStonePowderItem);
+            ItemStack yellowDye = new ItemStack(Item.dyePowder, 1, 11);
+            ItemStack whiteDye = new ItemStack(Item.dyePowder, 1, 15);
+            ItemStack bucket = new ItemStack(Item.bucketEmpty);
+            ItemStack workBench = new ItemStack(Block.workbench);
+            ItemStack ironIngot = new ItemStack(Item.ingotIron);
+            ItemStack furnace = new ItemStack(Block.furnaceIdle);
+            ItemStack roadBlock = new ItemStack(Roads.roadBlockMiscSingles, 1, 0);
+            ItemStack smallPole = new ItemStack(Roads.powerPoleSmall);
+            ItemStack medPole = new ItemStack(Roads.powerPole);
+            ItemStack largePole = new ItemStack(Roads.powerPoleLarge);
+            ItemStack dryDirt = new ItemStack(Roads.roadBlockMiscSingles, 1, 6);
+            ItemStack dirtBlock = new ItemStack(Block.dirt);
+            ItemStack redDye = new ItemStack(Item.dyePowder, 1, 1);
+            ItemStack greenDye = new ItemStack(Item.dyePowder, 1, 2);
+            ItemStack glowstoneDust = new ItemStack(Item.glowstone);
+            ItemStack streetLight = new ItemStack(Roads.streetLamp1);
+            ItemStack roadBarrier = new ItemStack(Roads.barrierBlock, 1, 0);
+            ItemStack redstoneDust = new ItemStack(Item.redstone);
+            ItemStack redstoneLamp = new ItemStack(Block.redstoneLampIdle);
+            ItemStack blueDye = new ItemStack(Item.dyePowder, 1, 4);
+            ItemStack blackDye = new ItemStack(Item.dyePowder, 1, 0);
+            ItemStack blankSign = new ItemStack(Roads.blankSign);
+            ItemStack slab = new ItemStack(Block.stoneSingleSlab);
+            
             //Shaped Recipes
             GameRegistry.addRecipe(new ItemStack(Roads.cementItem, 4), " c ", " w ", "sss", 'w', waterBucketStack, 's', sandStack, 'c', cementDustStack);
             GameRegistry.addRecipe(new ItemStack(Roads.generalBlocks, 8, 2), "xxx", "xyx", "xxx", 'x', cobbleStoneStack, 'y', cementItemStack);
             GameRegistry.addRecipe(new ItemStack(Roads.limeStoneBlock), "ll", "ll", 'l', limeStack);
             GameRegistry.addRecipe(new ItemStack(Roads.yellowPaintCan), "yyy", "yby", "yyy", 'y', yellowDye, 'b', bucket);
             GameRegistry.addRecipe(new ItemStack(Roads.whitePaintCan), "www", "wbw", "www", 'w', yellowDye, 'b', bucket);
-
+            GameRegistry.addRecipe(new ItemStack(Roads.roadPainter), "ifi", "fwf", "iii", 'w', workBench, 'i', ironIngot, 'f', furnace);
+            GameRegistry.addRecipe(smallPole, "i", "i", "i", 'i', ironIngot);
+            GameRegistry.addRecipe(medPole, "s", "s", "s", 's', smallPole);
+            GameRegistry.addRecipe(largePole, "m", "m", "m", 'm', medPole);
+            GameRegistry.addRecipe(new ItemStack(Roads.roadBlockMiscSingles, 3, 6), "ddd", 'd', dirtBlock);
+            GameRegistry.addRecipe(new ItemStack(Roads.roadBlockMiscSingles, 8, 5), "ddd", "dwd", "ddd", 'd', dryDirt, 'w', waterBucketStack);
+            GameRegistry.addRecipe(new ItemStack(Roads.roadRamp1, 1, 0), "rrr", 'r', roadBlock);
+            GameRegistry.addRecipe(new ItemStack(Roads.trafficLight), "iri", "dyd", "igi", 'i', ironIngot, 'r', redDye, 'd', glowstoneDust, 'y', yellowDye, 'g', greenDye);
+            GameRegistry.addRecipe(new ItemStack(Roads.lightBollard), " b ", "wlw", "yly", 'l', redstoneLamp, 'b', blueDye, 'w', whiteDye, 'y', yellowDye);
+            GameRegistry.addRecipe(streetLight, "iii", "grg", "iii", 'i', ironIngot, 'g', glowstoneDust, 'r', redstoneDust);
+            GameRegistry.addRecipe(new ItemStack(Roads.streetSign, 1, 0), "bbb", "s", "", 's', blankSign, 'b', blackDye);
+            GameRegistry.addRecipe(new ItemStack(Roads.streetSign, 1, 4), " b ", "bsb", " b ", 's', blankSign, 'b', blackDye);
+            GameRegistry.addRecipe(new ItemStack(Roads.streetSign, 1, 8), "b b", "bsb", " b ", 's', blankSign, 'b', blackDye );
+            GameRegistry.addRecipe(new ItemStack(Roads.streetSign, 1, 12), "bbb", " s ", "bbb", 's', blankSign, 'b', blackDye );
+            GameRegistry.addRecipe(new ItemStack(Roads.barrierBlock), "   ", "iii", "   ", 'i', ironIngot);
+            GameRegistry.addRecipe(new ItemStack(Roads.barrierPole), "   ", "iii", " i ", 'i', ironIngot);
+            GameRegistry.addRecipe(new ItemStack(Roads.barrierCorner), " b", "b ", 'b', roadBarrier);
+            
             //Shapeless Recipes
-            GameRegistry.addShapelessRecipe(new ItemStack(Roads.roadBlockMiscSingles, 1, 0), macadamStack, tarBucketStack);
+            GameRegistry.addShapelessRecipe(new ItemStack(Roads.roadBlockMiscSingles, 8, 0), macadamStack, macadamStack, macadamStack, macadamStack, macadamStack, macadamStack, macadamStack, macadamStack, tarBucketStack);
             GameRegistry.addShapelessRecipe(new ItemStack(Roads.limeClayPowderItem), limeStack, clayStack);
             GameRegistry.addShapelessRecipe(new ItemStack(Roads.yellowPaintBlob, 6, 0), yellowDye);
             GameRegistry.addShapelessRecipe(new ItemStack(Roads.whitePaintBlob, 6, 0), whiteDye);
-
+            GameRegistry.addShapelessRecipe(new ItemStack(Roads.generalBlocks, 1, 0), roadBlock, roadBlock);
+            GameRegistry.addShapelessRecipe(new ItemStack(Roads.generalBlocks, 8, 4), cementDustStack, cementDustStack, cementDustStack, cementDustStack, cementDustStack, cementDustStack, cementDustStack, cementDustStack, waterBucketStack);
+            GameRegistry.addShapelessRecipe(new ItemStack(Roads.streetLamp2), streetLight, streetLight);
+            GameRegistry.addShapelessRecipe(new ItemStack(Roads.kerbBlock), slab);
+            
             //And some smelting!
-            GameRegistry.addSmelting(Roads.limeClayPowderItem.itemID, new ItemStack(Roads.cementDustItem), 0.1f);
-            GameRegistry.addSmelting(Roads.cementItem.itemID, new ItemStack(Roads.generalBlocks, 1, 1), 0.2f);
+            GameRegistry.addSmelting(Roads.limeClayPowderItem.itemID, new ItemStack(Roads.cementDustItem), 0.1F);
+            GameRegistry.addSmelting(Roads.cementItem.itemID, new ItemStack(Roads.generalBlocks, 1, 1), 0.2F);
         }
 
 

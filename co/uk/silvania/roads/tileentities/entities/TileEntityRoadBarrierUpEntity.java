@@ -5,7 +5,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 
-public class TileEntityRoadSlope1Entity extends TileEntity {
+public class TileEntityRoadBarrierUpEntity extends TileEntity {
 	
 	@SideOnly(Side.CLIENT)
     public AxisAlignedBB getRenderBoundingBox() {

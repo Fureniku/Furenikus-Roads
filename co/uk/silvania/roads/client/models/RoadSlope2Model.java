@@ -17,13 +17,13 @@ public class RoadSlope2Model extends ModelBase
     
       Shape3 = new ModelRenderer(this, 0, 0);
       Shape3.addBox(-8F, 0F, 0F, 16, 18, 1);
-      Shape3.setRotationPoint(0F, 16F, 8F);
+      Shape3.setRotationPoint(0F, 20F, 8F);
       Shape3.setTextureSize(32, 64);
       Shape3.mirror = true;
       setRotation(Shape3, -1.11352F, 0F, 0F);
       Shape4 = new ModelRenderer(this, 0, 19);
       Shape4.addBox(-8F, 0F, 0F, 16, 18, 1);
-      Shape4.setRotationPoint(0F, 8F, 24F);
+      Shape4.setRotationPoint(0F, 12F, 24F);
       Shape4.setTextureSize(32, 64);
       Shape4.mirror = true;
       setRotation(Shape4, -1.11352F, 0F, 0F);

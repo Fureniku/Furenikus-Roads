@@ -46,6 +46,7 @@ public class CommonProxy {
             GameRegistry.registerBlock(Roads.sidewalkBlockTile, ItemSidewalkBlockTile.class, "FlenixRoads" + (Roads.sidewalkBlockTile.getUnlocalizedName().substring(5)));
             GameRegistry.registerBlock(Roads.sidewalkBlockTri, ItemSidewalkBlockTri.class, "FlenixRoads" + (Roads.sidewalkBlockTri.getUnlocalizedName().substring(5)));
             GameRegistry.registerBlock(Roads.sidewalkBlockSides, ItemSidewalkBlockSides.class, "FlenixRoads" + (Roads.sidewalkBlockSides.getUnlocalizedName().substring(5)));
+            GameRegistry.registerBlock(Roads.kerbBlock, "kerbBlock");
             
             GameRegistry.registerBlock(Roads.roadRamp1, ItemRoadRamp1.class, "FlenixRoads" + (Roads.roadRamp1.getUnlocalizedName().substring(5)));
             GameRegistry.registerBlock(Roads.roadRamp2, ItemRoadRamp2.class, "FlenixRoads" + (Roads.roadRamp2.getUnlocalizedName().substring(5)));
@@ -67,6 +68,8 @@ public class CommonProxy {
             GameRegistry.registerBlock(Roads.blockGag1, "blockGag1");
             GameRegistry.registerBlock(Roads.blockGag2, "blockGag2");
             GameRegistry.registerBlock(Roads.blockGag3, "blockGag3");
+            GameRegistry.registerBlock(Roads.blockGag4, "blockGag4");
+            GameRegistry.registerBlock(Roads.blockGag5, "blockGag5");
             
             GameRegistry.registerBlock(Roads.roadPainter, "roadPainter");
             GameRegistry.registerBlock(Roads.lightBollard, "lightBollard");
@@ -77,6 +80,7 @@ public class CommonProxy {
             GameRegistry.registerBlock(Roads.barrierCorner, "barrierCorner");
             //GameRegistry.registerBlock(Roads.roadSign, "roadSign");
             GameRegistry.registerBlock(Roads.roadBarrier, "roadBarrier");
+            GameRegistry.registerBlock(Roads.roadBarrierUp, "roadBarrierUp");
             
             GameRegistry.registerItem(Roads.cementItem, "cementItem");
             GameRegistry.registerItem(Roads.cementDustItem, "cementDustItem");
@@ -87,6 +91,7 @@ public class CommonProxy {
             GameRegistry.registerItem(Roads.yellowPaintBlob, "yellowPaintBlob");
             GameRegistry.registerItem(Roads.whitePaintCan, "whitePaintCan");
             GameRegistry.registerItem(Roads.yellowPaintCan, "yellowPaintCan");
+            GameRegistry.registerItem(Roads.blankSign, "blankSign");
 
             MinecraftForge.setBlockHarvestLevel(Roads.roadBlockArrows, "pickaxe", 1);
             MinecraftForge.setBlockHarvestLevel(Roads.roadBlockDoubleYellow, "pickaxe", 1);
@@ -277,6 +282,7 @@ public class CommonProxy {
             LanguageRegistry.addName(Roads.yellowPaintBlob, "Paint Blob");
             LanguageRegistry.addName(Roads.whitePaintCan, "Paint Can");
        		LanguageRegistry.addName(Roads.yellowPaintCan, "Paint Can");
+       		LanguageRegistry.addName(Roads.blankSign, "Blank Sign");
         }
         
         public void addRecipes() {

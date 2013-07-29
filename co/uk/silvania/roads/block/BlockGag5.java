@@ -4,12 +4,12 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 
-public class BlockGag2 extends Block {
+public class BlockGag5 extends Block {
 
-	public BlockGag2(int id) {
+	public BlockGag5(int id) {
 		super(id, Material.rock);
 		this.setBlockUnbreakable();
-		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.25F, 1.0F);
+		this.setBlockBounds(0.4F, 0.0F, 0.0F, 0.6F, 0.8F, 1.0F);
 	}
 	
 	public boolean renderAsNormalBlock() {
@@ -21,7 +21,7 @@ public class BlockGag2 extends Block {
 	}
 	
 	public void registerIcons(IconRegister iconRegister) {
-		blockIcon = iconRegister.registerIcon("Roads:generalBlocks0");
+		blockIcon = iconRegister.registerIcon("Roads:trans");
 	}
 
 }

@@ -34,11 +34,6 @@ public class TileEntityTrafficLightBlock extends BlockContainer {
     }
 
     @Override
-    public int getRenderType() {
-        return -1;
-    }
-
-    @Override
     public boolean isOpaqueCube() {
         return false;
     }

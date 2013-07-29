@@ -9,7 +9,7 @@ public class BlockGag3 extends Block {
 	public BlockGag3(int id) {
 		super(id, Material.rock);
 		this.setBlockUnbreakable();
-		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.575F, 1.0F);
+		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.5F, 1.0F);
 	}
 	
 	public boolean renderAsNormalBlock() {

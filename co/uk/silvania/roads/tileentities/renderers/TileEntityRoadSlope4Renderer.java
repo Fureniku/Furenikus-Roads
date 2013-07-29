@@ -41,16 +41,16 @@ public class TileEntityRoadSlope4Renderer extends TileEntitySpecialRenderer {
         GL11.glPushMatrix();
         int i = te.getBlockMetadata();
         if (i == 0 || i == 1 || i == 2 || i == 3) {
-            Minecraft.getMinecraft().renderEngine.func_110577_a(new ResourceLocation("roads", "textures/entities/slope2dysleft.png"));
+            Minecraft.getMinecraft().renderEngine.func_110577_a(new ResourceLocation("roads", "textures/entities/slope4dysleft.png"));
         }
         if (i == 4 || i == 5 || i == 6 || i == 7) {
-            Minecraft.getMinecraft().renderEngine.func_110577_a(new ResourceLocation("roads", "textures/entities/slope2dysright.png"));
+            Minecraft.getMinecraft().renderEngine.func_110577_a(new ResourceLocation("roads", "textures/entities/slope4dysright.png"));
         }
         if (i == 8 || i == 9 || i == 10 || i == 11) {
-            Minecraft.getMinecraft().renderEngine.func_110577_a(new ResourceLocation("roads", "textures/entities/slope2whitestripeleft.png"));
+            Minecraft.getMinecraft().renderEngine.func_110577_a(new ResourceLocation("roads", "textures/entities/slope4whitestripeleft.png"));
         }
         if (i == 12 || i == 13 || i == 14 || i == 15) {
-            Minecraft.getMinecraft().renderEngine.func_110577_a(new ResourceLocation("roads", "textures/entities/slope2whitestriperight.png"));
+            Minecraft.getMinecraft().renderEngine.func_110577_a(new ResourceLocation("roads", "textures/entities/slope4whitestriperight.png"));
         }
         GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
         GL11.glRotatef(rotation, 0.0F, 1.0F, 0.0F);

@@ -9,6 +9,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -50,4 +51,10 @@ public class TileEntityBarrierCornerBlock extends BlockContainer {
         int l = MathHelper.floor_double((double)(par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
         par1World.setBlockMetadataWithNotify(par2, par3, par4, l, 2);
     }
+
+    public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
+    {
+        this.setBlockBoundsBasedOnState(par1World, par2, par3, par4);
+        return super.getCollisionBoundingBoxFromPool(par1World, par2, par3, par4);
+    }	
 }

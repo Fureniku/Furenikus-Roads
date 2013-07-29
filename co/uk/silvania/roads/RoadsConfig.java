@@ -40,6 +40,7 @@ public class RoadsConfig {
 	public static int sidewalkBlockTileID;
 	public static int sidewalkBlockTriID;
 	public static int sidewalkBlockSidesID;
+	public static int kerbBlockID;
 	
 	public static int roadRamp1ID;
 	public static int roadRamp2ID;
@@ -58,6 +59,8 @@ public class RoadsConfig {
 	public static int blockGag1ID;
 	public static int blockGag2ID;
 	public static int blockGag3ID;
+	public static int blockGag4ID;
+	public static int blockGag5ID;
 	
 	public static int roadPainterID;
 	public static int trafficLightID;
@@ -79,6 +82,7 @@ public class RoadsConfig {
 	public static int roadSlope8ID;
 	public static int roadSignID;
 	public static int roadBarrierID;
+	public static int roadBarrierUpID;
 	
 	public static int cementItemID;
 	public static int cementDustID;
@@ -89,6 +93,7 @@ public class RoadsConfig {
 	public static int yellowPaintBlobID;
 	public static int whitePaintCanID;
 	public static int yellowPaintCanID;
+	public static int blankSignID;
 	
 	public static void loadConfig(FMLPreInitializationEvent event) {
 		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
@@ -136,6 +141,7 @@ public class RoadsConfig {
 		sidewalkBlockTileID = config.getBlock("Sidewalk Tiled", 829).getInt();
 		sidewalkBlockTriID = config.getBlock("Sidewalk Tri-point", 823).getInt();
 		sidewalkBlockSidesID = config.getBlock("Sidewalk Sides", 822).getInt();
+		kerbBlockID = config.getBlock("Kerb Block", 830).getInt();
 		
 		roadRamp1ID = config.getBlock("Road Ramp 1", 854).getInt();
 		roadRamp2ID = config.getBlock("Road Ramp 2", 855).getInt();
@@ -147,6 +153,8 @@ public class RoadsConfig {
 		blockGag1ID = config.getBlock("IMPORTANT: Do not remove! BG1", 844).getInt();
 		blockGag2ID = config.getBlock("IMPORTANT: Do not remove! BG2", 845).getInt();
 		blockGag3ID = config.getBlock("IMPORTANT: Do not remove! BG3", 846).getInt();
+		blockGag4ID = config.getBlock("IMPORTANT: Do not remove! BG4", 860).getInt();
+		blockGag5ID = config.getBlock("IMPORTANT: Do not remove! BG5", 861).getInt();
 		
 		roadPainterID = config.getBlock("Road Painter", 832).getInt();
 		trafficLightID = config.getBlock("Traffic Light", 833).getInt();
@@ -158,8 +166,9 @@ public class RoadsConfig {
 		barrierPoleID = config.getBlock("Barrier (Post)", 839).getInt();
 		barrierBlockID = config.getBlock("Barrier", 840).getInt();
 		barrierCornerID = config.getBlock("Barrier (Corner)", 841).getInt();
-		roadSignID = config.getBlock("Road Sign", 842).getInt();
+		roadSignID = config.getBlock("Road Sign", 831).getInt();
 		roadBarrierID = config.getBlock("Road Barrier", 843).getInt();
+		roadBarrierUpID = config.getBlock("Road Barrier Up", 842).getInt();
 
 		//Item IDs
 		cementItemID = config.getItem("Cement", 16700).getInt();
@@ -167,10 +176,11 @@ public class RoadsConfig {
 		limeStonePowderID = config.getItem("Limestone Dust", 16704).getInt();
 		limeClayPowderID = config.getItem("Lime/Clay Dust", 16703).getInt();
 		tarBucketID = config.getItem("Bucket of Tar", 16702).getInt();
-		whitePaintBlobID = config.getItem("White Paint Blob", 16703).getInt();
-		yellowPaintBlobID = config.getItem("Yellow Paint Blob", 16704).getInt();
+		whitePaintBlobID = config.getItem("White Paint Blob", 16707).getInt();
+		yellowPaintBlobID = config.getItem("Yellow Paint Blob", 16708).getInt();
 		whitePaintCanID = config.getItem("White Paint Can", 16705).getInt();
 		yellowPaintCanID = config.getItem("Yellow Paint Can", 16706).getInt();
+		blankSignID = config.getItem("Blank Sign", 16709).getInt();
 
 		config.save();
 	}
