@@ -7,31 +7,31 @@ import net.minecraftforge.event.Event.Result;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 
-public class TarBucketHandler
-	{
-		@ForgeSubscribe
-		public void onBucketFill(FillBucketEvent event)
-		{
+public class TarBucketHandler {
 
-			  ItemStack result = fillCustomBucket(event.world, event.target);
+	@ForgeSubscribe
+	public void onBucketFill(FillBucketEvent event) {
 
-			  if (result == null)
-			   return;
+		ItemStack result = fillCustomBucket(event.world, event.target);
 
-			  event.result = result;
-			  event.setResult(Result.ALLOW);
-			 }
+		if (result == null)
+			return;
 
-			 public ItemStack fillCustomBucket(World world, MovingObjectPosition pos)
-			 {
-			  int blockID = world.getBlockId(pos.blockX, pos.blockY, pos.blockZ);
+		event.result = result;
+		event.setResult(Result.ALLOW);
+	}
 
-			  if (blockID == Roads.roadsTarStill.blockID || blockID == Roads.roadsTarFlowing.blockID) {
-				  world.setBlock(pos.blockX, pos.blockY, pos.blockZ, 0);
-				  	return new ItemStack(Roads.tarBucketItem);
-			  	}
-			  	else
-			  		return null;
-			 }
+	public ItemStack fillCustomBucket(World world, MovingObjectPosition pos) {
 
-		}
+		int blockID = world.getBlockId(pos.blockX, pos.blockY, pos.blockZ);
+
+		if ((blockID == Roads.roadsTarStill.blockID || blockID == Roads.roadsTarFlowing.blockID)
+				&& world.getBlockMetadata(pos.blockX, pos.blockY, pos.blockZ) == 0) {
+
+			world.setBlock(pos.blockX, pos.blockY, pos.blockZ, 0);
+
+			return new ItemStack(Roads.tarBucketItem);
+		} else
+			return null;
+	}
+}

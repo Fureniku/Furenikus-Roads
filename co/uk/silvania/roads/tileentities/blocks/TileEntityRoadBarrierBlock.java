@@ -52,10 +52,6 @@ public class TileEntityRoadBarrierBlock extends BlockContainer {
         }
     }
 
-    /**
-     * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
-     * their own) Args: x, y, z, neighbor blockID
-     */
     public void onNeighborBlockChange(World world, int x, int y, int z, int par5) {
     	int meta = world.getBlockMetadata(x, y, z);
         if (!world.isRemote)
@@ -63,6 +59,7 @@ public class TileEntityRoadBarrierBlock extends BlockContainer {
             if (this.powered && !world.isBlockIndirectlyGettingPowered(x, y, z))
             {
                 world.scheduleBlockUpdate(x, y, z, this.blockID, 4);
+                world.setBlockMetadataWithNotify(x, y, z, 0, meta);
             	if (meta == 1) {
             		world.setBlockToAir(x, y, z + 1);
             		world.setBlockToAir(x, y, z + 2);
@@ -88,6 +85,7 @@ public class TileEntityRoadBarrierBlock extends BlockContainer {
             else if (!this.powered && world.isBlockIndirectlyGettingPowered(x, y, z))
             {
                 world.setBlock(x, y, z, Roads.roadBarrierUp.blockID, 0, 2);
+                world.setBlockMetadataWithNotify(x, y, z, 0, meta);
             	if (meta == 1) {
         	    	world.setBlock(x, y, z + 1, Roads.blockGag5.blockID);
         	    	world.setBlock(x, y, z + 2, Roads.blockGag5.blockID);
@@ -109,19 +107,15 @@ public class TileEntityRoadBarrierBlock extends BlockContainer {
         }
     }
 
-    /**
-     * Ticks the block if it's been scheduled
-     */
-    public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
-    {
-        if (!par1World.isRemote && this.powered && !par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
-        {
-            par1World.setBlock(par2, par3, par4, Roads.roadBarrier.blockID, 0, 2);
+    public void updateTick(World world, int x, int y, int z, Random random) {
+    	int meta = world.getBlockMetadata(x, y, z);
+        if (!world.isRemote && this.powered && !world.isBlockIndirectlyGettingPowered(x, y, z)) {
+            world.setBlock(x, y, z, Roads.roadBarrier.blockID, 0, 2);
+            world.setBlockMetadataWithNotify(x, y, z, 0, meta);
         }
     }
 
-    public int idDropped(int par1, Random par2Random, int par3)
-    {
+    public int idDropped(int par1, Random par2Random, int par3) {
         return Roads.roadBarrier.blockID;
     }
 
@@ -163,7 +157,7 @@ public class TileEntityRoadBarrierBlock extends BlockContainer {
         return super.getCollisionBoundingBoxFromPool(par1World, par2, par3, par4);
     }	
 	
-    public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
+    /*public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
     {
         int l = par1IBlockAccess.getBlockMetadata(par2, par3, par4) & 7;
 
@@ -182,14 +176,14 @@ public class TileEntityRoadBarrierBlock extends BlockContainer {
             case 3:
                 this.setBlockBounds(0.15F, 0.0F, 0.0F, 0.4F, 0.8F, 1.0F);
         }
-    }
+    }*/
     
 	
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
         int l = MathHelper.floor_double((double)(par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
         world.setBlockMetadataWithNotify(x, y, z, l, 2);
         int meta = world.getBlockMetadata(x, y, z);
-    	if (!this.powered && meta == 1) {
+    	/*if (!this.powered && meta == 1) {
 	    	world.setBlock(x, y, z + 1, Roads.blockGag5.blockID);
 	    	world.setBlock(x, y, z + 2, Roads.blockGag5.blockID);
 	    	world.setBlock(x, y, z + 3, Roads.blockGag5.blockID);
@@ -205,7 +199,7 @@ public class TileEntityRoadBarrierBlock extends BlockContainer {
 	    	world.setBlock(x + 1, y, z, Roads.blockGag4.blockID);
 	    	world.setBlock(x + 2, y, z, Roads.blockGag4.blockID);
 	    	world.setBlock(x + 3, y, z, Roads.blockGag4.blockID);
-	    }
+	    }*/
     }
     
     @Override

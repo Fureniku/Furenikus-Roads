@@ -41,7 +41,6 @@ public class ItemRoadBlockMiscSingles extends ItemBlock {
 				list.add("Dry");
 				break;
 			}
-			default: list.add("");
 		}
 	}
 

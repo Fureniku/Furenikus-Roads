@@ -234,15 +234,36 @@ public class CommonProxy {
             LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkG, 1, 8), "Tarmac, Fork");
             LanguageRegistry.addName(new ItemStack(Roads.roadBlockForkG, 1, 12), "Tarmac, Fork");
             
-            LanguageRegistry.addName(new ItemStack(Roads.roadRamp1, 1, 0), "Tarmac Ramp (Plain)");
-            LanguageRegistry.addName(new ItemStack(Roads.roadRamp1, 1, 4), "Tarmac Ramp");
-            LanguageRegistry.addName(new ItemStack(Roads.roadRamp1, 1, 8), "Tarmac Ramp (White Stripe)");
-            LanguageRegistry.addName(new ItemStack(Roads.roadRamp1, 1, 12), "Tarmac Ramp");
+            LanguageRegistry.addName(new ItemStack(Roads.roadRamp1, 1, 0), "Tarmac Ramp (4)");
+            LanguageRegistry.addName(new ItemStack(Roads.roadRamp1, 1, 4), "Tarmac Ramp (4)");
+            LanguageRegistry.addName(new ItemStack(Roads.roadRamp1, 1, 8), "Tarmac Ramp (4)");
+            LanguageRegistry.addName(new ItemStack(Roads.roadRamp1, 1, 12), "Tarmac Ramp (4)");
             								
-            LanguageRegistry.addName(new ItemStack(Roads.roadRamp2, 1, 0), "Tarmac Ramp (Double Yellow Left)");
-            LanguageRegistry.addName(new ItemStack(Roads.roadRamp2, 1, 4), "Tarmac Ramp (Double Yellow Right)");
-            LanguageRegistry.addName(new ItemStack(Roads.roadRamp2, 1, 8), "Tarmac Ramp (White Stripe Left)");
-            LanguageRegistry.addName(new ItemStack(Roads.roadRamp2, 1, 12), "Tarmac Ramp (White Stripe Right)");
+            LanguageRegistry.addName(new ItemStack(Roads.roadRamp2, 1, 0), "Tarmac Ramp (4)");
+            LanguageRegistry.addName(new ItemStack(Roads.roadRamp2, 1, 4), "Tarmac Ramp (4)");
+            LanguageRegistry.addName(new ItemStack(Roads.roadRamp2, 1, 8), "Tarmac Ramp (4)");
+            LanguageRegistry.addName(new ItemStack(Roads.roadRamp2, 1, 12), "Tarmac Ramp (4)");
+            
+            LanguageRegistry.addName(new ItemStack(Roads.roadRamp3, 1, 0), "Tarmac Ramp (2)");
+            LanguageRegistry.addName(new ItemStack(Roads.roadRamp3, 1, 4), "Tarmac Ramp (2)");
+            LanguageRegistry.addName(new ItemStack(Roads.roadRamp3, 1, 8), "Tarmac Ramp (2)");
+            LanguageRegistry.addName(new ItemStack(Roads.roadRamp3, 1, 12), "Tarmac Ramp (2)");
+            
+            LanguageRegistry.addName(new ItemStack(Roads.roadRamp4, 1, 0), "Tarmac Ramp (2)");
+            LanguageRegistry.addName(new ItemStack(Roads.roadRamp4, 1, 4), "Tarmac Ramp (2)");
+            LanguageRegistry.addName(new ItemStack(Roads.roadRamp4, 1, 8), "Tarmac Ramp (2)");
+            LanguageRegistry.addName(new ItemStack(Roads.roadRamp4, 1, 12), "Tarmac Ramp (2)");
+            
+            LanguageRegistry.addName(new ItemStack(Roads.roadRamp5, 1, 0), "Tarmac Ramp (1)");
+            LanguageRegistry.addName(new ItemStack(Roads.roadRamp5, 1, 4), "Tarmac Ramp (1)");
+            LanguageRegistry.addName(new ItemStack(Roads.roadRamp5, 1, 8), "Tarmac Ramp (1)");
+            LanguageRegistry.addName(new ItemStack(Roads.roadRamp5, 1, 12), "Tarmac Ramp (1)");
+            
+            LanguageRegistry.addName(new ItemStack(Roads.roadRamp6, 1, 0), "Tarmac Ramp (1)");
+            LanguageRegistry.addName(new ItemStack(Roads.roadRamp6, 1, 4), "Tarmac Ramp (1)");
+            LanguageRegistry.addName(new ItemStack(Roads.roadRamp6, 1, 8), "Tarmac Ramp (1)");
+            LanguageRegistry.addName(new ItemStack(Roads.roadRamp6, 1, 12), "Tarmac Ramp (1)");
+            
             
             LanguageRegistry.addName(new ItemStack(Roads.trafficLight, 1, 0), "Traffic Light (Red)");
             LanguageRegistry.addName(new ItemStack(Roads.trafficLight, 1, 4), "Traffic Light (Green)");

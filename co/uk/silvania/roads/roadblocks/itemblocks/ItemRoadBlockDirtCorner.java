@@ -33,7 +33,6 @@ public class ItemRoadBlockDirtCorner extends ItemBlock {
 				list.add("Grassy, Corner");
 				break;
 			}
-			default: list.add("");
 		}
 	}
 

@@ -14,6 +14,27 @@ public class ItemRoadRamp5 extends ItemBlock {
 		super(par1);
 		this.setHasSubtypes(true);
 	}
+	
+	public void addInformation(ItemStack item, EntityPlayer player, List list, boolean bool) {
+		switch (item.getItemDamage()) {
+			case 0: {
+				list.add("Plain");
+				break;
+			}
+			case 4: {
+				list.add("Empty");
+				break;
+			}
+			case 8: {
+				list.add("White Stripe");
+				break;
+			}
+			case 12: {
+				list.add("Empty");
+				break;
+			}
+		}
+	}
 
 	public String getUnlocalizedName(ItemStack itemstack) {
 

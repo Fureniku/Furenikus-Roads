@@ -11,15 +11,15 @@ public class RoadSlope3Model extends ModelBase
   
   public RoadSlope3Model()
   {
-    textureWidth = 32;
-    textureHeight = 64;
-    
+    textureWidth = 64;
+    textureHeight = 32;
+      
       Shape1 = new ModelRenderer(this, 0, 0);
-      Shape1.addBox(-8F, 0F, 0F, 16, 18, 1);
-      Shape1.setRotationPoint(0F, 16F, 8F);
-      Shape1.setTextureSize(32, 64);
+      Shape1.addBox(-8F, 0F, 0F, 16, 23, 1);
+      Shape1.setRotationPoint(0F, 12F, 8F);
+      Shape1.setTextureSize(64, 32);
       Shape1.mirror = true;
-      setRotation(Shape1, -1.11352F, 0F, 0F);
+      setRotation(Shape1, -0.7913148F, 0F, 0F);
   }
   
   public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)

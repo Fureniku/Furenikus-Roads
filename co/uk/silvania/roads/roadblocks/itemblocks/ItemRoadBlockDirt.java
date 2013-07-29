@@ -33,7 +33,6 @@ public class ItemRoadBlockDirt extends ItemBlock {
 				list.add("Grassy");
 				break;
 			}
-			default: list.add("");
 		}
 	}
 

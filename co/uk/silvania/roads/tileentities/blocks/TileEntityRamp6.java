@@ -56,23 +56,10 @@ public class TileEntityRamp6 extends BlockContainer {
 	    world.setBlockMetadataWithNotify(x, y, z, newMeta, 0);
     }
     
-    @SideOnly(Side.CLIENT)
-    private Icon[] icons;
-
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister iconRegister) {
-        icons = new Icon[16];
-
-        for (int i = 0; i < icons.length; i++) {
-            icons[i] = iconRegister.registerIcon("Roads:" + this.getUnlocalizedName().substring(5) + i);
-        }
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public Icon getIcon(int par1, int par2) {
-        return icons[par2];
+        blockIcon = iconRegister.registerIcon("Roads:roadRamp4");
     }
 
     @SideOnly(Side.CLIENT)

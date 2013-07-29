@@ -42,6 +42,11 @@ public class TileEntityTrafficLightBlock extends BlockContainer {
     public boolean renderAsNormalBlock() {
         return false;
     }
+    
+    @Override
+    public int getRenderType() {
+        return -1;
+    }
 
     @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityliving, ItemStack itemStack) {
