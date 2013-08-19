@@ -264,19 +264,6 @@ public class SidewalkBlockSides extends Block {
 		return icons[0];
 	}
 
-    public int getRenderType() {
-    	return 0;
-    }
-
-    public boolean isOpaqueCube()
-    {
-        return false;
-    }
-    
-	public boolean renderAsNormalBlock() {
-		return false;
-	}
-    
 	@SideOnly(Side.CLIENT)
 	public void getSubBlocks(int par1, CreativeTabs creativeTabs, List list) {
 		list.add(new ItemStack(par1, 1, 0));

@@ -144,20 +144,6 @@ public class SidewalkBlockTile extends Block {
         	return icons[11];
         } else 
 			return icons[0];
-
-	}
-
-    public int getRenderType() {
-    	return 0;
-    }
-
-    public boolean isOpaqueCube()
-    {
-        return false;
-    }
-    
-	public boolean renderAsNormalBlock() {
-		return false;
 	}
     
 	@SideOnly(Side.CLIENT)

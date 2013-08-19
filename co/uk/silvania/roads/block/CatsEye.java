@@ -14,7 +14,7 @@ public class CatsEye extends Block {
 		super(id, Material.glass);
 		this.setStepSound(Block.soundStoneFootstep);
 		this.setCreativeTab(Roads.tabRoads);
-        this.setBlockBounds(0.4F, -0.175F, 0.4F, 0.6F, -0.125F, 0.6F);
+        this.setBlockBounds(0.4F, -0.25F, 0.4F, 0.6F, -0.2F, 0.6F);
         this.setLightValue(0.5F);
 	}
 	

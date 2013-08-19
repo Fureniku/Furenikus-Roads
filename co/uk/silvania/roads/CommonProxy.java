@@ -55,6 +55,8 @@ public class CommonProxy {
             GameRegistry.registerBlock(Roads.roadRamp5, ItemRoadRamp5.class, "FlenixRoads" + (Roads.roadRamp5.getUnlocalizedName().substring(5)));
             GameRegistry.registerBlock(Roads.roadRamp6, ItemRoadRamp6.class, "FlenixRoads" + (Roads.roadRamp6.getUnlocalizedName().substring(5)));
             
+            GameRegistry.registerBlock(Roads.roadRampy5, "roadRampy5");
+            
             GameRegistry.registerBlock(Roads.streetSign, ItemStreetSign.class, "FlenixRoads" + (Roads.streetSign.getUnlocalizedName().substring(5)));
             GameRegistry.registerBlock(Roads.trafficLight, ItemTrafficLight.class, "FlenixRoads" + (Roads.trafficLight.getUnlocalizedName().substring(5)));
             
@@ -307,6 +309,8 @@ public class CommonProxy {
         }
         
         public void addRecipes() {
-        	
         }
+
+		public void registerRenderers() {
+		}
 }

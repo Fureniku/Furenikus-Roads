@@ -21,8 +21,7 @@ public class TileEntityTrafficLightRenderer extends TileEntitySpecialRenderer {
     }
 
     @Override
-    public void renderTileEntityAt(TileEntity te, double x, double y, double z,
-            float scale) {
+    public void renderTileEntityAt(TileEntity te, double x, double y, double z, float scale) {
         int rotation = 180;
         switch (te.getBlockMetadata() % 4) {
             case 0:

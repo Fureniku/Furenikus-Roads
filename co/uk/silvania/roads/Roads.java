@@ -1,6 +1,7 @@
 package co.uk.silvania.roads;
 
 import co.uk.silvania.roads.block.*;
+import co.uk.silvania.roads.block.tess.RoadRamp5;
 import co.uk.silvania.roads.item.*;
 import co.uk.silvania.roads.liquid.*;
 import co.uk.silvania.roads.roadblocks.*;
@@ -38,7 +39,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-@Mod(modid="FlenixRoads", name="FlenixRoads", version="0.4.2")
+@Mod(modid="FlenixRoads", name="FlenixRoads", version="0.5.0")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false)
 public class Roads { 
 	
@@ -145,6 +146,8 @@ public class Roads {
     	NetworkRegistry.instance().registerGuiHandler(this, roadsGuiHandler);
     	
     	RoadsConfig.loadConfig(event); 
+    	
+    	//if (PlayerHandler.getBannedPlayers().contains(player.username)) player.kick();
 
     	limeStoneBlock = new LimeStoneBlock(config.limeStoneBlockID).setUnlocalizedName("limeStoneBlock");
     	catsEye = new CatsEye(config.catsEyeID).setUnlocalizedName("catsEye");
@@ -231,10 +234,13 @@ public class Roads {
     	//MinecraftForgeClient.registerItemRenderer(trafficLight.blockID, new TrafficLightItemRenderer());
     	MinecraftForge.EVENT_BUS.register(new TarBucketHandler());
         }
+    
+    public static Block roadRampy5 = new RoadRamp5(249).setUnlocalizedName("roadRampy5");
                
     @EventHandler
     public void load(FMLInitializationEvent event) {
             proxy.registerRenderThings();
+            proxy.registerRenderers();
             
             proxy.registerBlocks();
             proxy.addNames();
@@ -323,7 +329,7 @@ public class Roads {
             GameRegistry.addRecipe(new ItemStack(Roads.trafficLight), "iri", "dyd", "igi", 'i', ironIngot, 'r', redDye, 'd', glowstoneDust, 'y', yellowDye, 'g', greenDye);
             GameRegistry.addRecipe(new ItemStack(Roads.lightBollard), " b ", "wlw", "yly", 'l', redstoneLamp, 'b', blueDye, 'w', whiteDye, 'y', yellowDye);
             GameRegistry.addRecipe(streetLight, "iii", "grg", "iii", 'i', ironIngot, 'g', glowstoneDust, 'r', redstoneDust);
-            GameRegistry.addRecipe(new ItemStack(Roads.streetSign, 1, 0), "bbb", "s", "", 's', blankSign, 'b', blackDye);
+            GameRegistry.addRecipe(new ItemStack(Roads.streetSign, 1, 0), "bbb", " s ", "   ", 's', blankSign, 'b', blackDye);
             GameRegistry.addRecipe(new ItemStack(Roads.streetSign, 1, 4), " b ", "bsb", " b ", 's', blankSign, 'b', blackDye);
             GameRegistry.addRecipe(new ItemStack(Roads.streetSign, 1, 8), "b b", "bsb", " b ", 's', blankSign, 'b', blackDye);
             GameRegistry.addRecipe(new ItemStack(Roads.streetSign, 1, 12), "bbb", " s ", "bbb", 's', blankSign, 'b', blackDye);

@@ -14,6 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class TileEntityStreetLamp1Block extends BlockContainer {
@@ -34,9 +35,20 @@ public class TileEntityStreetLamp1Block extends BlockContainer {
 		return new TileEntityStreetLamp1Entity();
 	}
 	
-    public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity) {
-    	this.setBlockBounds(-0.4F, 0.0F, 0.4F, 0.6F, 0.2F, 0.6F);
-    	super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
+	public void setBlockBoundsBasedOnState(IBlockAccess block, int x, int y, int z) {
+		int meta = block.getBlockMetadata(x, y, z);
+    	if (meta == 0) {
+        	this.setBlockBounds(-0.4F, 0.0F, 0.4F, 0.6F, 0.2F, 0.6F);
+    	} else if (meta == 1) {
+        	this.setBlockBounds(0.4F, 0.0F, -0.4F, 0.6F, 0.2F, 0.6F);
+    	} else if (meta == 2) {
+        	this.setBlockBounds(0.4F, 0.0F, 0.4F, 1.4F, 0.2F, 0.6F);
+    	} else
+        	this.setBlockBounds(0.4F, 0.0F, 0.4F, 0.6F, 0.2F, 1.4F);
+	}
+	
+    public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB axis, List list, Entity entity) {
+       	super.addCollisionBoxesToList(world, x, y, z, axis, list, entity);
     }
 	
 	@Override

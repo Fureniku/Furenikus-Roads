@@ -14,11 +14,14 @@ import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import co.uk.silvania.roads.Roads;
+import co.uk.silvania.roads.client.RenderIds;
 import co.uk.silvania.roads.tileentities.entities.TileEntityTrafficLightEntity;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class TileEntityTrafficLightBlock extends BlockContainer {
+	
+	public static int newMeta;
 
     public TileEntityTrafficLightBlock(int id) {
         super(id, Material.iron);
