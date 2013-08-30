@@ -82,6 +82,7 @@ public class Roads {
 	public static Block roadBlockForkE;
 	public static Block roadBlockForkF;
 	public static Block roadBlockForkG;
+	public static Block roadBlockCenterCorner;
 	
 	public static Block roadRamp1;
 	public static Block roadRamp2;
@@ -175,6 +176,7 @@ public class Roads {
     	roadBlockForkE = new RoadBlockForkE(config.roadBlockForkEID).setUnlocalizedName("roadBlockForkE");
     	roadBlockForkF = new RoadBlockForkE(config.roadBlockForkFID).setUnlocalizedName("roadBlockForkF");
     	roadBlockForkG = new RoadBlockForkE(config.roadBlockForkGID).setUnlocalizedName("roadBlockForkG");
+    	roadBlockCenterCorner = new RoadBlockCenterCorner(config.roadBlockCenterCornerID).setUnlocalizedName("roadBlockCenterCorner");
     	
     	sidewalkBlockGrey = new SidewalkBlockGrey(config.sidewalkBlockGreyID).setUnlocalizedName("sidewalkBlockGrey");
     	sidewalkBlockLight = new SidewalkBlockLight(config.sidewalkBlockLightID).setUnlocalizedName("sidewalkBlockLight");

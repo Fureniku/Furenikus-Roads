@@ -34,6 +34,7 @@ public class RoadsConfig {
 	public static int roadBlockForkEID;
 	public static int roadBlockForkFID;
 	public static int roadBlockForkGID;
+	public static int roadBlockCenterCornerID;
 	
 	public static int sidewalkBlockGreyID;
 	public static int sidewalkBlockLightID;
@@ -135,6 +136,7 @@ public class RoadsConfig {
 		roadBlockForkEID = config.getBlock("Fork E", 851).getInt();
 		roadBlockForkFID = config.getBlock("Fork F", 852).getInt();
 		roadBlockForkGID = config.getBlock("Fork G", 853).getInt();
+		roadBlockCenterCornerID = config.getBlock("Center Corners", 862).getInt();
 		
 		sidewalkBlockGreyID = config.getBlock("Sidewalk Grey", 827).getInt();
 		sidewalkBlockLightID = config.getBlock("Sidewalk Light", 828).getInt();

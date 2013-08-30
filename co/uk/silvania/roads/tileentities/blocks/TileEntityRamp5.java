@@ -22,13 +22,11 @@ import co.uk.silvania.roads.tileentities.entities.TileEntityRoadSlope5Entity;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class TileEntityRamp5 extends BlockStairs {
+public class TileEntityRamp5 extends Block {
 	
-    private final static Block reqBlock;
 
     public TileEntityRamp5(int id) {
-        super(id, reqBlock, id);
-        this.reqBlock
+        super(id, Material.rock);
         this.setHardness(1.0F);
         this.setCreativeTab(Roads.tabRoads);
         this.setLightOpacity(0);
