@@ -12,6 +12,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.ColorizerGrass;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import co.uk.silvania.roads.Roads;
 import cpw.mods.fml.relauncher.Side;
@@ -39,7 +41,7 @@ public class RoadBlockMiscSingles extends Block {
     @SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister iconRegister) {
     	this.sides = iconRegister.registerIcon("Roads:TarmacPlain");
-		icons = new Icon[7];
+		icons = new Icon[14];
 		
 		for(int i = 0; i < icons.length; i++) {
 			icons[i] = iconRegister.registerIcon("Roads:" + (this.getUnlocalizedName().substring(5)) + i);
@@ -53,11 +55,31 @@ public class RoadBlockMiscSingles extends Block {
         this.setBlockBoundsForItemRender();
     }
     
+    //method used for biome-based grass colouring
+    @SideOnly(Side.CLIENT)
+    public int colorMultiplier(IBlockAccess block, int x, int y, int z) {
+    	int meta = block.getBlockMetadata(x, y, z);
+    	if (meta == 7) {
+	        int l = 0;
+	        int i1 = 0;
+	        int j1 = 0;
+	
+	        for (int k1 = -1; k1 <= 1; ++k1) {
+	            for (int l1 = -1; l1 <= 1; ++l1) {
+	                int i2 = block.getBiomeGenForCoords(x + l1, z + k1).getBiomeGrassColor();
+	                l += (i2 & 16711680) >> 16;
+	                i1 += (i2 & 65280) >> 8;
+	                j1 += i2 & 255;
+	            }
+	        }
+	
+	        return (l / 9 & 255) << 16 | (i1 / 9 & 255) << 8 | j1 / 9 & 255;
+    	}
+		return 0xFFFFFF;
+    }
+    
 	@SideOnly(Side.CLIENT)
 	public Icon getIcon(int side, int meta) {
-		if (side == 1) {
-			return icons[meta];	
-		}
 		if (meta == 5 && side == 0) {
 			return Block.dirt.getIcon(side, meta);
 		}
@@ -79,6 +101,39 @@ public class RoadBlockMiscSingles extends Block {
 		if (meta == 6 && side == 1) {
 			return Block.dirt.getIcon(side, meta);
 		}
+		if (meta == 7) {
+			return Block.grass.getIcon(1,meta);
+		}
+		if (meta == 7 && side == 0) {
+			return Block.grass.getIcon(1, meta);
+		}
+		if (meta == 7 && side == 1) {
+			return Block.grass.getIcon(1, meta);
+		}
+		if (meta == 8) {
+			return Block.stone.getIcon(side, meta);
+		}
+		if (meta == 8 && side == 0) {
+			return Block.stone.getIcon(side, meta);
+		}
+		if (meta == 9) {
+			return Block.cobblestone.getIcon(side, meta);
+		}
+		if (meta == 10) {
+			return Block.sand.getIcon(side, meta);
+		}
+		if (meta == 11) {
+			return Block.gravel.getIcon(side, meta);
+		}
+		if (meta == 12) {
+			return Block.stoneBrick.getIcon(side, 0);
+		}
+		if (meta == 13) {
+			return Block.planks.getIcon(side, 0);
+		}
+		if (side == 1) {
+			return icons[meta];	
+		}
 		
 		return sides;
 	}
@@ -98,7 +153,7 @@ public class RoadBlockMiscSingles extends Block {
     
 	@SideOnly(Side.CLIENT)
 	public void getSubBlocks(int par1, CreativeTabs creativeTabs, List list) {
-		for (int var4 = 0; var4 < 7; ++var4) {
+		for (int var4 = 0; var4 < 14; ++var4) {
 			list.add(new ItemStack(par1, 1, var4));
 		}
 	}

@@ -2,28 +2,23 @@ package co.uk.silvania.roads.tileentities.blocks;
 
 import java.util.List;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockStairs;
+import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import co.uk.silvania.roads.Roads;
-import co.uk.silvania.roads.client.ClientProxy;
 import co.uk.silvania.roads.tileentities.entities.TileEntityRoadSlope5Entity;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class TileEntityRamp5 extends Block {
-	
+public class TileEntityRamp5 extends BlockContainer {
 
     public TileEntityRamp5(int id) {
         super(id, Material.rock);
@@ -32,14 +27,16 @@ public class TileEntityRamp5 extends Block {
         this.setLightOpacity(0);
         this.setBlockBounds(0.0F, -0.25F, 0.0F, 1.0F, 0.75F, 1.0F);
     }
-    
-	@SideOnly(Side.CLIENT)
-	private Icon top;
 
-	@Override
-	public int getRenderType() {
-		return ClientProxy.RoadsRampShortRenderID;
-	}
+    @Override
+    public TileEntity createNewTileEntity(World world) {
+        return new TileEntityRoadSlope5Entity();
+    }
+
+    @Override
+    public int getRenderType() {
+        return -1;
+    }
 
     @Override
     public boolean isOpaqueCube() {
@@ -62,18 +59,8 @@ public class TileEntityRamp5 extends Block {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister iconRegister) {
-        blockIcon = iconRegister.registerIcon("Roads:roadBlockMiscSingles0");
-    	top = iconRegister.registerIcon("Roads:roadBlockArrows0");
+        blockIcon = iconRegister.registerIcon("Roads:roadRamp3");
     }
-        
-	@SideOnly(Side.CLIENT)
-	public Icon getIcon(int side, int meta) {
-		if (side == 1) {
-			return top;	
-		} else
-			return blockIcon;
-
-	}
 
     @SideOnly(Side.CLIENT)
     public void getSubBlocks(int par1, CreativeTabs creativeTabs, List list) {

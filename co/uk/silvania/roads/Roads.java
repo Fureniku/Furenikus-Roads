@@ -83,6 +83,16 @@ public class Roads {
 	public static Block roadBlockForkF;
 	public static Block roadBlockForkG;
 	public static Block roadBlockCenterCorner;
+	public static Block roadBlockLettersABCD;
+	public static Block roadBlockLettersEFGH;
+	public static Block roadBlockLettersIJKL;
+	public static Block roadBlockLettersMNOP;
+	public static Block roadBlockLettersQRST;
+	public static Block roadBlockLettersUVWX;
+	public static Block roadBlockLettersYZ01;
+	public static Block roadBlockLetters2345;
+	public static Block roadBlockLetters6789;
+	public static Block roadBlockLettersMisc;
 	
 	public static Block roadRamp1;
 	public static Block roadRamp2;
@@ -178,6 +188,17 @@ public class Roads {
     	roadBlockForkG = new RoadBlockForkE(config.roadBlockForkGID).setUnlocalizedName("roadBlockForkG");
     	roadBlockCenterCorner = new RoadBlockCenterCorner(config.roadBlockCenterCornerID).setUnlocalizedName("roadBlockCenterCorner");
     	
+    	roadBlockLettersABCD = new RoadBlockLetters(config.roadBlockLettersABCDID).setUnlocalizedName("roadBlockLettersABCD");
+    	roadBlockLettersEFGH = new RoadBlockLetters(config.roadBlockLettersEFGHID).setUnlocalizedName("roadBlockLettersEFGH");
+    	roadBlockLettersIJKL = new RoadBlockLetters(config.roadBlockLettersIJKLID).setUnlocalizedName("roadBlockLettersIJKL");
+    	roadBlockLettersMNOP = new RoadBlockLetters(config.roadBlockLettersMNOPID).setUnlocalizedName("roadBlockLettersMNOP");
+    	roadBlockLettersQRST = new RoadBlockLetters(config.roadBlockLettersQRSTID).setUnlocalizedName("roadBlockLettersQRST");
+    	roadBlockLettersUVWX = new RoadBlockLetters(config.roadBlockLettersUVWXID).setUnlocalizedName("roadBlockLettersUVWX");
+    	roadBlockLettersYZ01 = new RoadBlockLetters(config.roadBlockLettersYZ01ID).setUnlocalizedName("roadBlockLettersYZ01");
+    	roadBlockLetters2345 = new RoadBlockLetters(config.roadBlockLetters2345ID).setUnlocalizedName("roadBlockLetters2345");
+    	roadBlockLetters6789 = new RoadBlockLetters(config.roadBlockLetters6789ID).setUnlocalizedName("roadBlockLetters6789");
+    	roadBlockLettersMisc = new RoadBlockLetters(config.roadBlockLettersMiscID).setUnlocalizedName("roadBlockLettersMisc");
+    	
     	sidewalkBlockGrey = new SidewalkBlockGrey(config.sidewalkBlockGreyID).setUnlocalizedName("sidewalkBlockGrey");
     	sidewalkBlockLight = new SidewalkBlockLight(config.sidewalkBlockLightID).setUnlocalizedName("sidewalkBlockLight");
     	sidewalkBlockTile = new SidewalkBlockTile(config.sidewalkBlockTileID).setUnlocalizedName("sidewalkBlockTile");
@@ -237,7 +258,7 @@ public class Roads {
     	MinecraftForge.EVENT_BUS.register(new TarBucketHandler());
         }
     
-    public static Block roadRampy5 = new RoadRamp5(249).setUnlocalizedName("roadRampy5");
+    //public static Block roadRampy5 = new RoadRamp5(249).setUnlocalizedName("roadRampy5");
                
     @EventHandler
     public void load(FMLInitializationEvent event) {

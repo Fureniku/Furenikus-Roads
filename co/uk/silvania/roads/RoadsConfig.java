@@ -35,6 +35,16 @@ public class RoadsConfig {
 	public static int roadBlockForkFID;
 	public static int roadBlockForkGID;
 	public static int roadBlockCenterCornerID;
+	public static int roadBlockLettersABCDID;
+	public static int roadBlockLettersEFGHID;
+	public static int roadBlockLettersIJKLID;
+	public static int roadBlockLettersMNOPID;
+	public static int roadBlockLettersQRSTID;
+	public static int roadBlockLettersUVWXID;
+	public static int roadBlockLettersYZ01ID;
+	public static int roadBlockLetters2345ID;
+	public static int roadBlockLetters6789ID;
+	public static int roadBlockLettersMiscID;
 	
 	public static int sidewalkBlockGreyID;
 	public static int sidewalkBlockLightID;
@@ -137,6 +147,17 @@ public class RoadsConfig {
 		roadBlockForkFID = config.getBlock("Fork F", 852).getInt();
 		roadBlockForkGID = config.getBlock("Fork G", 853).getInt();
 		roadBlockCenterCornerID = config.getBlock("Center Corners", 862).getInt();
+		
+		roadBlockLettersABCDID = config.getBlock("Letters 1", 863).getInt();
+		roadBlockLettersEFGHID = config.getBlock("Letters 2", 864).getInt();
+		roadBlockLettersIJKLID = config.getBlock("Letters 3", 865).getInt();
+		roadBlockLettersMNOPID = config.getBlock("Letters 4", 866).getInt();
+		roadBlockLettersQRSTID = config.getBlock("Letters 5", 867).getInt();
+		roadBlockLettersUVWXID = config.getBlock("Letters 6", 868).getInt();
+		roadBlockLettersYZ01ID = config.getBlock("Letters 7", 869).getInt();
+		roadBlockLetters2345ID = config.getBlock("Letters 8", 870).getInt();
+		roadBlockLetters6789ID = config.getBlock("Letters 9", 871).getInt();
+		roadBlockLettersMiscID = config.getBlock("Letters 10", 872).getInt();
 		
 		sidewalkBlockGreyID = config.getBlock("Sidewalk Grey", 827).getInt();
 		sidewalkBlockLightID = config.getBlock("Sidewalk Light", 828).getInt();

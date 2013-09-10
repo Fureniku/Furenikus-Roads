@@ -41,6 +41,9 @@ public class ItemRoadBlockMiscSingles extends ItemBlock {
 				list.add("Dry");
 				break;
 			}
+			case 7: {
+				break;
+			}
 		}
 	}
 
@@ -98,6 +101,18 @@ public class ItemRoadBlockMiscSingles extends ItemBlock {
 			}
 			case 12: {
 				name = "12";
+				break;
+			}
+			case 13: {
+				name = "13";
+				break;
+			}
+			case 14: {
+				name = "14";
+				break;
+			}
+			case 15: {
+				name = "15";
 				break;
 			}
 			default: name = "broken";

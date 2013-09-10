@@ -12,8 +12,7 @@ public class RoadSlopeModel extends ModelBase
     ModelRenderer Section3;
     ModelRenderer Section4;
   
-  public RoadSlopeModel()
-  {
+  public RoadSlopeModel() {
     textureWidth = 16;
     textureHeight = 128;
     

@@ -44,13 +44,13 @@ public class TileEntityRoadSlope5Renderer extends TileEntitySpecialRenderer {
             Minecraft.getMinecraft().renderEngine.func_110577_a(new ResourceLocation("roads", "textures/entities/slope5plain.png"));
         }
         if (i == 4 || i == 5 || i == 6 || i == 7) {
-            Minecraft.getMinecraft().renderEngine.func_110577_a(new ResourceLocation("roads", "textures/entities/slope5plain.png"));
+            Minecraft.getMinecraft().renderEngine.func_110577_a(new ResourceLocation("roads", "textures/entities/slope5whitefarleft.png"));
         }
         if (i == 8 || i == 9 || i == 10 || i == 11) {
             Minecraft.getMinecraft().renderEngine.func_110577_a(new ResourceLocation("roads", "textures/entities/slope5whitestripe.png"));
         }
         if (i == 12 || i == 13 || i == 14 || i == 15) {
-            Minecraft.getMinecraft().renderEngine.func_110577_a(new ResourceLocation("roads", "textures/entities/slope5plain.png"));
+            Minecraft.getMinecraft().renderEngine.func_110577_a(new ResourceLocation("roads", "textures/entities/slope5whitefarright.png"));
         }
         GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
         GL11.glRotatef(rotation, 0.0F, 1.0F, 0.0F);

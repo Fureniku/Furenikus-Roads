@@ -47,8 +47,8 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForgeClient.registerItemRenderer(Roads.streetSign.blockID, new StreetSignItemRenderer());
     }
 	
-	public void registerRenderers() {
+	/*public void registerRenderers() {
 		RoadsRampShortRenderID = RenderingRegistry.getNextAvailableRenderId();
 		RenderingRegistry.registerBlockHandler(RoadsRampShortRenderID, new ShortRampRenderer());
-	}
+	}*/
 }
