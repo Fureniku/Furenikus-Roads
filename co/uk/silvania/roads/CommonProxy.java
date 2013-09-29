@@ -25,6 +25,7 @@ public class CommonProxy {
             GameRegistry.registerBlock(Roads.roadBlockCorners, ItemRoadBlockCorners.class, "FlenixRoads" + (Roads.roadBlockCorners.getUnlocalizedName().substring(5)));
             GameRegistry.registerBlock(Roads.roadBlockDoubleYellow, ItemRoadBlockDoubleYellow.class, "FlenixRoads" + (Roads.roadBlockDoubleYellow.getUnlocalizedName().substring(5)));
             GameRegistry.registerBlock(Roads.roadBlockCornerB, ItemRoadBlockCornerB.class, "FlenixRoads" + (Roads.roadBlockCornerB.getUnlocalizedName().substring(5)));
+            GameRegistry.registerBlock(Roads.roadBlockCornerC, ItemRoadBlockCornerC.class, "FlenixRoads" + (Roads.roadBlockCornerC.getUnlocalizedName().substring(5)));
             GameRegistry.registerBlock(Roads.roadBlockJunctionIn, ItemRoadBlockJunctionIn.class, "FlenixRoads" + (Roads.roadBlockJunctionIn.getUnlocalizedName().substring(5)));
             GameRegistry.registerBlock(Roads.roadBlockJunctionOut, ItemRoadBlockJunctionOut.class, "FlenixRoads" + (Roads.roadBlockJunctionOut.getUnlocalizedName().substring(5)));
             GameRegistry.registerBlock(Roads.roadBlockMiscSingles, ItemRoadBlockMiscSingles.class, "FlenixRoads" + (Roads.roadBlockMiscSingles.getUnlocalizedName().substring(5)));
@@ -145,6 +146,11 @@ public class CommonProxy {
             LanguageRegistry.addName(new ItemStack(Roads.roadBlockCornerB, 1, 8), "Tarmac");
             LanguageRegistry.addName(new ItemStack(Roads.roadBlockCornerB, 1, 12), "Tarmac");
             
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockCornerC, 1, 0), "Tarmac");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockCornerC, 1, 4), "Tarmac");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockCornerC, 1, 8), "Tarmac");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockCornerC, 1, 12), "Tarmac");
+            
             LanguageRegistry.addName(new ItemStack(Roads.roadBlockJunctionIn, 1, 0), "Tarmac");
             LanguageRegistry.addName(new ItemStack(Roads.roadBlockJunctionIn, 1, 4), "Tarmac");
             LanguageRegistry.addName(new ItemStack(Roads.roadBlockJunctionIn, 1, 8), "Tarmac");
@@ -164,6 +170,13 @@ public class CommonProxy {
             LanguageRegistry.addName(new ItemStack(Roads.roadBlockMiscSingles, 1, 6), "Dirt Track Road");
             LanguageRegistry.addName(new ItemStack(Roads.roadBlockMiscSingles, 1, 7), "Lowered Grass");
             LanguageRegistry.addName(new ItemStack(Roads.roadBlockMiscSingles, 1, 8), "Lowered Stone");
+            LanguageRegistry.addName(new ItemStack(Roads.roadBlockMiscSingles, 1, 9), "Lowered Cobblestone");
+       		LanguageRegistry.addName(new ItemStack(Roads.roadBlockMiscSingles, 1, 10), "Lowered Sand");
+       		LanguageRegistry.addName(new ItemStack(Roads.roadBlockMiscSingles, 1, 11), "Lowered Gravel");
+       		LanguageRegistry.addName(new ItemStack(Roads.roadBlockMiscSingles, 1, 12), "Lowered Stone Brick");
+       		LanguageRegistry.addName(new ItemStack(Roads.roadBlockMiscSingles, 1, 13), "Lowered Planks");
+       		LanguageRegistry.addName(new ItemStack(Roads.roadBlockMiscSingles, 1, 14), "Lowered Concrete");
+       		LanguageRegistry.addName(new ItemStack(Roads.roadBlockMiscSingles, 1, 15), "Lowered Black & Purple Thingy");
                     		
             LanguageRegistry.addName(new ItemStack(Roads.roadBlockSimpleLines, 1, 0), "Tarmac");
             LanguageRegistry.addName(new ItemStack(Roads.roadBlockSimpleLines, 1, 4), "Tarmac");

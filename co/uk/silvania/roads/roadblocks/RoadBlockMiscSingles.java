@@ -41,7 +41,7 @@ public class RoadBlockMiscSingles extends Block {
     @SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister iconRegister) {
     	this.sides = iconRegister.registerIcon("Roads:TarmacPlain");
-		icons = new Icon[14];
+		icons = new Icon[16];
 		
 		for(int i = 0; i < icons.length; i++) {
 			icons[i] = iconRegister.registerIcon("Roads:" + (this.getUnlocalizedName().substring(5)) + i);
@@ -98,22 +98,10 @@ public class RoadBlockMiscSingles extends Block {
 		if (meta == 6) {
 			return Block.dirt.getIcon(side, meta);
 		}
-		if (meta == 6 && side == 1) {
-			return Block.dirt.getIcon(side, meta);
-		}
 		if (meta == 7) {
 			return Block.grass.getIcon(1,meta);
 		}
-		if (meta == 7 && side == 0) {
-			return Block.grass.getIcon(1, meta);
-		}
-		if (meta == 7 && side == 1) {
-			return Block.grass.getIcon(1, meta);
-		}
 		if (meta == 8) {
-			return Block.stone.getIcon(side, meta);
-		}
-		if (meta == 8 && side == 0) {
 			return Block.stone.getIcon(side, meta);
 		}
 		if (meta == 9) {
@@ -130,6 +118,12 @@ public class RoadBlockMiscSingles extends Block {
 		}
 		if (meta == 13) {
 			return Block.planks.getIcon(side, 0);
+		}
+		if (meta == 14) {
+			return Roads.generalBlocks.getIcon(side, 4);
+		}
+		if (meta == 15) {
+			
 		}
 		if (side == 1) {
 			return icons[meta];	
@@ -153,7 +147,7 @@ public class RoadBlockMiscSingles extends Block {
     
 	@SideOnly(Side.CLIENT)
 	public void getSubBlocks(int par1, CreativeTabs creativeTabs, List list) {
-		for (int var4 = 0; var4 < 14; ++var4) {
+		for (int var4 = 0; var4 < 16; ++var4) {
 			list.add(new ItemStack(par1, 1, var4));
 		}
 	}

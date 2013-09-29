@@ -8,9 +8,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-public class ItemRoadBlockStripes extends ItemBlock {
+public class ItemRoadBlockCornerC extends ItemBlock {
 
-	public ItemRoadBlockStripes(int par1) {
+	public ItemRoadBlockCornerC(int par1) {
 		super(par1);
 		this.setHasSubtypes(true);
 	}
@@ -18,23 +18,31 @@ public class ItemRoadBlockStripes extends ItemBlock {
 	public void addInformation(ItemStack item, EntityPlayer player, List list, boolean bool) {
 		switch (item.getItemDamage()) {
 			case 0: {
-				list.add("White Side");
+				list.add("Corner");
+				list.add("White");
 				break;
 			}
 			case 4: {
-				list.add("White Far Side");
+				list.add("Corner");
+				list.add("Yellow");
 				break;
 			}
 			case 8: {
-				list.add("Yellow Side");
+				list.add("Corner (Alternative)");
+				list.add("White");
 				break;
 			}
 			case 12: {
-				list.add("Yellow Far Side");
+				list.add("Corner (Alternate)");
+				list.add("Yellow");
 				break;
 			}
 			default: list.add("");
 		}
+	}
+	
+	public void addInformation(ItemStack itemstack, EntityPlayer player, List list, boolean par4, int meta) {
+		list.add("Arrow");
 	}
 
 	public String getUnlocalizedName(ItemStack itemstack) {

@@ -19,6 +19,7 @@ public class RoadsConfig {
 	public static int roadBlockCornersID;
 	public static int roadBlockDoubleYellowID;
 	public static int roadBlockCornerBID;
+	public static int roadBlockCornerCID;
 	public static int roadBlockJunctionInID;
 	public static int roadBlockJunctionOutID;
 	public static int roadBlockMiscSinglesID;
@@ -131,6 +132,7 @@ public class RoadsConfig {
 		roadBlockDoubleYellowID = config.getBlock("Double Yellows", 810).getInt();
 		roadBlockCornersID = config.getBlock("Corners", 811).getInt();
 		roadBlockCornerBID = config.getBlock("Diagonal Inverted", 813).getInt();
+		roadBlockCornerCID = config.getBlock("Inner Corners", 873).getInt();
 		roadBlockJunctionInID = config.getBlock("Junction In", 814).getInt();
 		roadBlockJunctionOutID = config.getBlock("Junction Out", 815).getInt();
 		roadBlockMiscSinglesID = config.getBlock("Misc Singles", 816).getInt();

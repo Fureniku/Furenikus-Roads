@@ -67,6 +67,7 @@ public class Roads {
 	public static Block roadBlockCorners;
 	public static Block roadBlockDoubleYellow;
 	public static Block roadBlockCornerB;
+	public static Block roadBlockCornerC;
 	public static Block roadBlockJunctionIn;
 	public static Block roadBlockJunctionOut;
 	public static Block roadBlockMiscSingles;
@@ -171,6 +172,7 @@ public class Roads {
     	roadBlockDoubleYellow = new RoadBlockDoubleYellow(config.roadBlockDoubleYellowID).setUnlocalizedName("roadBlockDoubleYellow");
     	roadBlockCorners = new RoadBlockCorners(config.roadBlockCornersID).setUnlocalizedName("roadBlockCorners");
     	roadBlockCornerB = new RoadBlockCornerB(config.roadBlockCornerBID).setUnlocalizedName("roadBlockCornerB");
+    	roadBlockCornerC = new RoadBlockCorners(config.roadBlockCornerCID).setUnlocalizedName("roadBlockCornerC");
     	roadBlockJunctionIn = new RoadBlockJunctionIn(config.roadBlockJunctionInID).setUnlocalizedName("roadBlockJunctionIn");
     	roadBlockJunctionOut = new RoadBlockJunctionOut(config.roadBlockJunctionOutID).setUnlocalizedName("roadBlockJunctionOut");
     	roadBlockMiscSingles = new RoadBlockMiscSingles(config.roadBlockMiscSinglesID).setUnlocalizedName("roadBlockMiscSingles");

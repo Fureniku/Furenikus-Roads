@@ -71,6 +71,18 @@ public class ItemTrafficLight extends ItemBlock {
 				name = "12";
 				break;
 			}
+			case 13: {
+				name = "13";
+				break;
+			}
+			case 14: {
+				name = "14";
+				break;
+			}
+			case 15: {
+				name = "15";
+				break;
+			}
 			default: name = "broken";
 		}
 		return getUnlocalizedName() + "." + name;

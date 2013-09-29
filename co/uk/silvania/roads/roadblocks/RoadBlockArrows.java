@@ -38,6 +38,7 @@ public class RoadBlockArrows extends Block {
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.75F, 1.0F);
         super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
         this.setBlockBoundsForItemRender();
+        this.setLightOpacity(0);
     }
     
 	@SideOnly(Side.CLIENT)
@@ -83,7 +84,7 @@ public class RoadBlockArrows extends Block {
     }
     
 	public boolean renderAsNormalBlock() {
-		return false;
+		return true;
 	}
     
 	@SideOnly(Side.CLIENT)
