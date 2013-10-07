@@ -30,7 +30,7 @@ public class GuiRoadPainter extends GuiContainer {
         protected void drawGuiContainerBackgroundLayer(float par1, int par2,
                         int par3) {
                 GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        		Minecraft.getMinecraft().renderEngine.func_110577_a(new ResourceLocation("roads", "textures/gui/roadpaintergui.png"));
+        		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("roads", "textures/gui/roadpaintergui.png"));
                 int x = (width - xSize) / 2;
                 int y = (height - ySize) / 2;
                 this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);

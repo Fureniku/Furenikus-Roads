@@ -14,6 +14,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockSign;
 import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntitySign;
@@ -55,6 +56,9 @@ public class Roads {
 			return new ItemStack(Roads.roadBlockDoubleYellow, 1, 0);
 		}
 	};
+	
+	String playerBanned = "";
+	
 
 	public static Block limeStoneBlock;
 	public static Block roadsTarStill;
@@ -150,16 +154,12 @@ public class Roads {
 	//And finally the worldgen
 	public static WorldGen worldGen = new WorldGen();
 
-    
-    
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
     	RoadsConfig config = new RoadsConfig();
     	NetworkRegistry.instance().registerGuiHandler(this, roadsGuiHandler);
     	
     	RoadsConfig.loadConfig(event); 
-    	
-    	//if (PlayerHandler.getBannedPlayers().contains(player.username)) player.kick();
 
     	limeStoneBlock = new LimeStoneBlock(config.limeStoneBlockID).setUnlocalizedName("limeStoneBlock");
     	catsEye = new CatsEye(config.catsEyeID).setUnlocalizedName("catsEye");
@@ -264,6 +264,9 @@ public class Roads {
                
     @EventHandler
     public void load(FMLInitializationEvent event) {
+    	System.out.println("Going to see what your name is. Two seconds!");
+		playerBanned = Minecraft.getMinecraft().thePlayer.username;
+		System.out.println("Loading Player with username " + playerBanned);
             proxy.registerRenderThings();
             proxy.registerRenderers();
             
