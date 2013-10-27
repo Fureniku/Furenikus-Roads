@@ -1,6 +1,7 @@
 package co.uk.silvania.roads.roadblocks;
 
 import java.util.List;
+import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -8,6 +9,7 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
@@ -17,8 +19,8 @@ import co.uk.silvania.roads.Roads;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class RoadBlockForkD extends Block {
-    public RoadBlockForkD(int par1) {
+public class RoadBlock extends Block {
+    public RoadBlock(int par1) {
         super(par1, Material.rock);
         this.setStepSound(soundStoneFootstep);
         this.setHardness(1.5F);
@@ -36,6 +38,7 @@ public class RoadBlockForkD extends Block {
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.75F, 1.0F);
         super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
         this.setBlockBoundsForItemRender();
+        this.setLightOpacity(0);
     }
     
 	@SideOnly(Side.CLIENT)
@@ -75,8 +78,7 @@ public class RoadBlockForkD extends Block {
     	return 0;
     }
 
-    public boolean isOpaqueCube()
-    {
+    public boolean isOpaqueCube() {
         return false;
     }
     
@@ -91,7 +93,7 @@ public class RoadBlockForkD extends Block {
 		list.add(new ItemStack(par1, 1, 8));
 		list.add(new ItemStack(par1, 1, 12));
 	}
-
+	
     @Override
     public int damageDropped(int meta) {
     	if (meta == 0 || meta == 1 || meta == 2 || meta == 3) {

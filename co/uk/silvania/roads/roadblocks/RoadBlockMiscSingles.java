@@ -136,8 +136,7 @@ public class RoadBlockMiscSingles extends Block {
     	return 0;
     }
 
-    public boolean isOpaqueCube()
-    {
+    public boolean isOpaqueCube() {
         return false;
     }
     

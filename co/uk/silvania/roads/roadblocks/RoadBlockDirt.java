@@ -19,7 +19,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class RoadBlockDirt extends Block {
     public RoadBlockDirt(int par1) {
-        super(par1, Material.rock);
+        super(par1, Material.ground);
         this.setStepSound(soundStoneFootstep);
         this.setHardness(1.5F);
         this.setCreativeTab(Roads.tabRoads);

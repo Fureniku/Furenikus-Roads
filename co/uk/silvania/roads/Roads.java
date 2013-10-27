@@ -18,6 +18,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntitySign;
+import net.minecraft.util.Session;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
@@ -40,10 +41,10 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-@Mod(modid="FlenixRoads", name="FlenixRoads", version="0.5.0")
+@Mod(modid="FlenixRoads", name="FlenixRoads", version="0.5.1")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false)
-public class Roads { 
-	
+public class Roads {
+
     @Instance("FlenixRoads")
     public static Roads instance;
     public static GuiHandler roadsGuiHandler = new GuiHandler();
@@ -57,9 +58,6 @@ public class Roads {
 		}
 	};
 	
-	String playerBanned = "";
-	
-
 	public static Block limeStoneBlock;
 	public static Block roadsTarStill;
 	public static Block roadsTarFlowing;
@@ -161,45 +159,45 @@ public class Roads {
     	
     	RoadsConfig.loadConfig(event); 
 
-    	limeStoneBlock = new LimeStoneBlock(config.limeStoneBlockID).setUnlocalizedName("limeStoneBlock");
+		limeStoneBlock = new LimeStoneBlock(config.limeStoneBlockID).setUnlocalizedName("limeStoneBlock");
     	catsEye = new CatsEye(config.catsEyeID).setUnlocalizedName("catsEye");
     	catsEyeSide = new CatsEyeSide(config.catsEyeSideID).setUnlocalizedName("catsEyeSide");
     	roadsTarStill = new StillTarBlock(config.roadsTarStillID).setUnlocalizedName("roadsTarStill");
     	roadsTarFlowing = new FlowingTarBlock(config.roadsTarFlowingID).setUnlocalizedName("roadsTarFlowing");
     	generalBlocks = new GeneralBlocks(config.generalBlocksID).setUnlocalizedName("generalBlocks");
 
-    	roadBlockArrows = new RoadBlockArrows(config.roadBlockArrowsID).setUnlocalizedName("roadBlockArrows");
-    	roadBlockDoubleYellow = new RoadBlockDoubleYellow(config.roadBlockDoubleYellowID).setUnlocalizedName("roadBlockDoubleYellow");
-    	roadBlockCorners = new RoadBlockCorners(config.roadBlockCornersID).setUnlocalizedName("roadBlockCorners");
-    	roadBlockCornerB = new RoadBlockCornerB(config.roadBlockCornerBID).setUnlocalizedName("roadBlockCornerB");
-    	roadBlockCornerC = new RoadBlockCorners(config.roadBlockCornerCID).setUnlocalizedName("roadBlockCornerC");
-    	roadBlockJunctionIn = new RoadBlockJunctionIn(config.roadBlockJunctionInID).setUnlocalizedName("roadBlockJunctionIn");
-    	roadBlockJunctionOut = new RoadBlockJunctionOut(config.roadBlockJunctionOutID).setUnlocalizedName("roadBlockJunctionOut");
+    	roadBlockArrows = new RoadBlock(config.roadBlockArrowsID).setUnlocalizedName("roadBlockArrows");
+    	roadBlockDoubleYellow = new RoadBlock(config.roadBlockDoubleYellowID).setUnlocalizedName("roadBlockDoubleYellow");
+    	roadBlockCorners = new RoadBlock(config.roadBlockCornersID).setUnlocalizedName("roadBlockCorners");
+    	roadBlockCornerB = new RoadBlock(config.roadBlockCornerBID).setUnlocalizedName("roadBlockCornerB");
+    	roadBlockCornerC = new RoadBlock(config.roadBlockCornerCID).setUnlocalizedName("roadBlockCornerC");
+    	roadBlockJunctionIn = new RoadBlock(config.roadBlockJunctionInID).setUnlocalizedName("roadBlockJunctionIn");
+    	roadBlockJunctionOut = new RoadBlock(config.roadBlockJunctionOutID).setUnlocalizedName("roadBlockJunctionOut");
     	roadBlockMiscSingles = new RoadBlockMiscSingles(config.roadBlockMiscSinglesID).setUnlocalizedName("roadBlockMiscSingles");
-    	roadBlockSimpleLines = new RoadBlockSimpleLines(config.roadBlockSimpleLinesID).setUnlocalizedName("roadBlockSimpleLines");
-    	roadBlockSideWhiteStripes = new RoadBlockSideWhiteStripes(config.roadBlockSideWhiteStripesID).setUnlocalizedName("roadBlockSideWhiteStripes");
-    	roadBlockStripes = new RoadBlockStripes(config.roadBlockStripesID).setUnlocalizedName("roadBlockStripes");
+    	roadBlockSimpleLines = new RoadBlock(config.roadBlockSimpleLinesID).setUnlocalizedName("roadBlockSimpleLines");
+    	roadBlockSideWhiteStripes = new RoadBlock(config.roadBlockSideWhiteStripesID).setUnlocalizedName("roadBlockSideWhiteStripes");
+    	roadBlockStripes = new RoadBlock(config.roadBlockStripesID).setUnlocalizedName("roadBlockStripes");
     	roadBlockDirt = new RoadBlockDirt(config.roadBlockDirtID).setUnlocalizedName("roadBlockDirt");
-    	roadBlockDirtCorner = new RoadBlockDirtCorner(config.roadBlockDirtCornerID).setUnlocalizedName("roadBlockDirtCorner");
-    	roadBlockFork = new RoadBlockFork(config.roadBlockForkID).setUnlocalizedName("roadBlockFork");
-    	roadBlockForkB = new RoadBlockForkB(config.roadBlockForkBID).setUnlocalizedName("roadBlockForkB");
-    	roadBlockForkC = new RoadBlockForkC(config.roadBlockForkCID).setUnlocalizedName("roadBlockForkC");
-    	roadBlockForkD = new RoadBlockForkD(config.roadBlockForkDID).setUnlocalizedName("roadBlockForkD");
-    	roadBlockForkE = new RoadBlockForkE(config.roadBlockForkEID).setUnlocalizedName("roadBlockForkE");
-    	roadBlockForkF = new RoadBlockForkE(config.roadBlockForkFID).setUnlocalizedName("roadBlockForkF");
-    	roadBlockForkG = new RoadBlockForkE(config.roadBlockForkGID).setUnlocalizedName("roadBlockForkG");
-    	roadBlockCenterCorner = new RoadBlockCenterCorner(config.roadBlockCenterCornerID).setUnlocalizedName("roadBlockCenterCorner");
+    	roadBlockDirtCorner = new RoadBlockDirt(config.roadBlockDirtCornerID).setUnlocalizedName("roadBlockDirtCorner");
+    	roadBlockFork = new RoadBlock(config.roadBlockForkID).setUnlocalizedName("roadBlockFork");
+    	roadBlockForkB = new RoadBlock(config.roadBlockForkBID).setUnlocalizedName("roadBlockForkB");
+    	roadBlockForkC = new RoadBlock(config.roadBlockForkCID).setUnlocalizedName("roadBlockForkC");
+    	roadBlockForkD = new RoadBlock(config.roadBlockForkDID).setUnlocalizedName("roadBlockForkD");
+    	roadBlockForkE = new RoadBlock(config.roadBlockForkEID).setUnlocalizedName("roadBlockForkE");
+    	roadBlockForkF = new RoadBlock(config.roadBlockForkFID).setUnlocalizedName("roadBlockForkF");
+    	roadBlockForkG = new RoadBlock(config.roadBlockForkGID).setUnlocalizedName("roadBlockForkG");
+    	roadBlockCenterCorner = new RoadBlock(config.roadBlockCenterCornerID).setUnlocalizedName("roadBlockCenterCorner");
     	
-    	roadBlockLettersABCD = new RoadBlockLetters(config.roadBlockLettersABCDID).setUnlocalizedName("roadBlockLettersABCD");
-    	roadBlockLettersEFGH = new RoadBlockLetters(config.roadBlockLettersEFGHID).setUnlocalizedName("roadBlockLettersEFGH");
-    	roadBlockLettersIJKL = new RoadBlockLetters(config.roadBlockLettersIJKLID).setUnlocalizedName("roadBlockLettersIJKL");
-    	roadBlockLettersMNOP = new RoadBlockLetters(config.roadBlockLettersMNOPID).setUnlocalizedName("roadBlockLettersMNOP");
-    	roadBlockLettersQRST = new RoadBlockLetters(config.roadBlockLettersQRSTID).setUnlocalizedName("roadBlockLettersQRST");
-    	roadBlockLettersUVWX = new RoadBlockLetters(config.roadBlockLettersUVWXID).setUnlocalizedName("roadBlockLettersUVWX");
-    	roadBlockLettersYZ01 = new RoadBlockLetters(config.roadBlockLettersYZ01ID).setUnlocalizedName("roadBlockLettersYZ01");
-    	roadBlockLetters2345 = new RoadBlockLetters(config.roadBlockLetters2345ID).setUnlocalizedName("roadBlockLetters2345");
-    	roadBlockLetters6789 = new RoadBlockLetters(config.roadBlockLetters6789ID).setUnlocalizedName("roadBlockLetters6789");
-    	roadBlockLettersMisc = new RoadBlockLetters(config.roadBlockLettersMiscID).setUnlocalizedName("roadBlockLettersMisc");
+    	roadBlockLettersABCD = new RoadBlock(config.roadBlockLettersABCDID).setUnlocalizedName("roadBlockLettersABCD");
+    	roadBlockLettersEFGH = new RoadBlock(config.roadBlockLettersEFGHID).setUnlocalizedName("roadBlockLettersEFGH");
+    	roadBlockLettersIJKL = new RoadBlock(config.roadBlockLettersIJKLID).setUnlocalizedName("roadBlockLettersIJKL");
+    	roadBlockLettersMNOP = new RoadBlock(config.roadBlockLettersMNOPID).setUnlocalizedName("roadBlockLettersMNOP");
+    	roadBlockLettersQRST = new RoadBlock(config.roadBlockLettersQRSTID).setUnlocalizedName("roadBlockLettersQRST");
+    	roadBlockLettersUVWX = new RoadBlock(config.roadBlockLettersUVWXID).setUnlocalizedName("roadBlockLettersUVWX");
+    	roadBlockLettersYZ01 = new RoadBlock(config.roadBlockLettersYZ01ID).setUnlocalizedName("roadBlockLettersYZ01");
+    	roadBlockLetters2345 = new RoadBlock(config.roadBlockLetters2345ID).setUnlocalizedName("roadBlockLetters2345");
+    	roadBlockLetters6789 = new RoadBlock(config.roadBlockLetters6789ID).setUnlocalizedName("roadBlockLetters6789");
+    	roadBlockLettersMisc = new RoadBlock(config.roadBlockLettersMiscID).setUnlocalizedName("roadBlockLettersMisc");
     	
     	sidewalkBlockGrey = new SidewalkBlockGrey(config.sidewalkBlockGreyID).setUnlocalizedName("sidewalkBlockGrey");
     	sidewalkBlockLight = new SidewalkBlockLight(config.sidewalkBlockLightID).setUnlocalizedName("sidewalkBlockLight");
@@ -258,20 +256,31 @@ public class Roads {
     	
     	//MinecraftForgeClient.registerItemRenderer(trafficLight.blockID, new TrafficLightItemRenderer());
     	MinecraftForge.EVENT_BUS.register(new TarBucketHandler());
-        }
+    }
     
     //public static Block roadRampy5 = new RoadRamp5(249).setUnlocalizedName("roadRampy5");
                
     @EventHandler
     public void load(FMLInitializationEvent event) {
-    	System.out.println("Going to see what your name is. Two seconds!");
-		playerBanned = Minecraft.getMinecraft().thePlayer.username;
-		System.out.println("Loading Player with username " + playerBanned);
+    	if (proxy.banCheck() == true) {
+       		System.out.println("*** IMPORTANT! READ THIS ***");
+       		System.out.println("*** IMPORTANT! READ THIS ***");
+       		System.out.println("*** IMPORTANT! READ THIS ***");
+       		System.out.println("My anti-griefer code has detected you are a griefer, or have somehow negatively impacted my mods.");
+       		System.out.println("Due to this, the mod's blocks will no longer load for you.");
+       		System.out.println("Upon loading your world, any of my mods blocks will be permanantely removed.");
+       		System.out.println("You brought this upon yourself, it's entirely your fault. Enjoy!");
+       		System.out.println("*** IMPORTANT! READ THIS ***");
+       		System.out.println("*** IMPORTANT! READ THIS ***");
+       		System.out.println("*** IMPORTANT! READ THIS ***");
+    	} else {
+    		System.out.println("Yes! They have been a good player. Let's load the mod for them :)");
             proxy.registerRenderThings();
             proxy.registerRenderers();
             
             proxy.registerBlocks();
             proxy.addNames();
+    	}
             
             GameRegistry.registerTileEntity(TileEntityTrafficLightEntity.class, "tileEntityTrafficLight");
             GameRegistry.registerTileEntity(TileEntityLightBollardEntity.class, "tileEntityLightBollard");
@@ -409,7 +418,7 @@ public class Roads {
 
 		@EventHandler
         public void postInit(FMLPostInitializationEvent event) {
-			
+    		
 			int roadsRenderID = RenderingRegistry.getNextAvailableRenderId();
                 // Stub Method
         		}

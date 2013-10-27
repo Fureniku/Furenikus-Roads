@@ -1,5 +1,6 @@
 package co.uk.silvania.roads.client;
 
+import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.MinecraftForgeClient;
 import co.uk.silvania.roads.CommonProxy;
 import co.uk.silvania.roads.Roads;
@@ -17,6 +18,21 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 public class ClientProxy extends CommonProxy {
 	
 	public static int RoadsRampShortRenderID;
+	String userName = Minecraft.getMinecraft().getSession().getUsername();
+	
+	@Override
+	public boolean banCheck() {
+    	System.out.println("This player's username is... " + userName + "!");
+    	System.out.println("Now, have they been good? Let's take a look...");
+    	if (userName.equalsIgnoreCase("jesselevi") 
+    			|| userName.equalsIgnoreCase("mister__wolters") 
+    			|| userName.equalsIgnoreCase("1victor2000") 
+    			|| userName.equalsIgnoreCase("sophie_sushi") 
+    			|| userName.equalsIgnoreCase("sephiroku")) {
+    		return true;
+    	} else
+    		return false;
+	}
         
 	@Override
 	public void registerRenderThings() {
