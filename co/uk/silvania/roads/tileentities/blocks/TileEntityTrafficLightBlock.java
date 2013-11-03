@@ -2,6 +2,7 @@ package co.uk.silvania.roads.tileentities.blocks;
 
 import java.util.List;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -22,6 +23,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class TileEntityTrafficLightBlock extends BlockContainer {
 	
 	public static int newMeta;
+	
+	String powerState = "";
 
     public TileEntityTrafficLightBlock(int id) {
         super(id, Material.iron);
@@ -31,6 +34,24 @@ public class TileEntityTrafficLightBlock extends BlockContainer {
         this.setBlockBounds(0.35F, 0.0F, 0.35F, 0.65F, 0.9F, 0.65F);
     }
 
+    public void onNeighborBlockChange(World world, int x, int y, int z, int blockId) {
+    	TileEntityTrafficLightEntity tileEntity = (TileEntityTrafficLightEntity)world.getBlockTileEntity(x, y, z);
+    	int meta;
+    	meta = world.getBlockMetadata(x, y, z);
+		if(tileEntity != null) {
+			if (world.isBlockIndirectlyGettingPowered(x, y, z)) {
+				tileEntity.isPowered = true;
+				System.out.println("It's getting powered!");
+				//These printlns report correctly. This one is shown when power is activated to the block
+			} else {
+				tileEntity.isPowered = false;
+				System.out.println("It's not getting powered.");
+				//And this one comes on when the power is removed in any way. So, the physical power isn't the issue...
+			}
+		}
+    }
+    
+    
     @Override
     public TileEntity createNewTileEntity(World world) {
         return new TileEntityTrafficLightEntity();

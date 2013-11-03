@@ -5,11 +5,14 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
 
 import co.uk.silvania.roads.client.models.RoadSlopeModel;
 import co.uk.silvania.roads.client.models.TrafficLightModel;
+import co.uk.silvania.roads.tileentities.blocks.TileEntityTrafficLightBlock;
+import co.uk.silvania.roads.tileentities.entities.TileEntityTrafficLightEntity;
 
 
 public class TileEntityTrafficLightRenderer extends TileEntitySpecialRenderer {
@@ -40,22 +43,21 @@ public class TileEntityTrafficLightRenderer extends TileEntitySpecialRenderer {
 
         GL11.glPushMatrix();
         int i = te.getBlockMetadata();
-        if (i == 0 || i == 1 || i == 2 || i == 3) {
-            Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("roads", "textures/entities/TrafficLightRed.png"));
+        
+        TileEntityTrafficLightEntity TileEntityStoplight = (TileEntityTrafficLightEntity) te;
+        if (((TileEntityTrafficLightEntity) te).isPowered == false) {
+        	Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("roads", "textures/entities/TrafficLightGreen.png"));
         }
-        if (i == 4 || i == 5 || i == 6 || i == 7) {
-            Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("roads", "textures/entities/TrafficLightGreen.png"));
-        }
-        if (i == 8 || i == 9 || i == 10 || i == 11) {
-            Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("roads", "textures/entities/TrafficLightRedAmber.png"));
-        }
-        if (i == 12 || i == 13 || i == 14 || i == 15) {
-            Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("roads", "textures/entities/TrafficLightAmber.png"));
-        }
+        else if (((TileEntityTrafficLightEntity) te).isPowered == true) {
+        	Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("roads", "textures/entities/TrafficLightRed.png"));
+        } else
+        	System.out.println("Time to cry in the corner.");
+            
         GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
         GL11.glRotatef(rotation, 0.0F, 1.0F, 0.0F);
         GL11.glScalef(1.0F, -1F, -1F);
         model.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
         GL11.glPopMatrix();
+    	//}
     }
 }
