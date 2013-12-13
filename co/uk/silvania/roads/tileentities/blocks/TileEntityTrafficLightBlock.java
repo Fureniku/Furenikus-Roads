@@ -100,22 +100,17 @@ public class TileEntityTrafficLightBlock extends BlockContainer {
     @SideOnly(Side.CLIENT)
     public Icon getIcon(int par1, int meta) {
 		if (meta == 0) {
-			//System.out.println("Red!");
 			return red;	
         }
 		if (meta == 4) {
-			//System.out.println("Green!");
         	return green;
         }
 		if (meta == 8) {
-			//System.out.println("Red/Amber!");
         	return redamber;
         }
 		if (meta == 12) {
-			//System.out.println("Amber!!");
         	return amber;
         }
-		System.out.println("Nothin'!");
 		return amber;	
     }
 

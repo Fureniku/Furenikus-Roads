@@ -1,11 +1,15 @@
 package co.uk.silvania.roads.client;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.ModelMinecart;
 import net.minecraftforge.client.MinecraftForgeClient;
 import co.uk.silvania.roads.CommonProxy;
 import co.uk.silvania.roads.Roads;
 import co.uk.silvania.roads.RoadsConfig;
 import co.uk.silvania.roads.block.tess.renderers.ShortRampRenderer;
+import co.uk.silvania.roads.client.models.TrafficLightModel;
+import co.uk.silvania.roads.entity.EntityBasicCar;
+import co.uk.silvania.roads.client.vehicles.RenderBasicCar;
 import co.uk.silvania.roads.tileentities.*;
 import co.uk.silvania.roads.tileentities.blocks.TileEntityRamp1;
 import co.uk.silvania.roads.tileentities.entities.*;
@@ -28,7 +32,9 @@ public class ClientProxy extends CommonProxy {
     			|| userName.equalsIgnoreCase("mister__wolters") 
     			|| userName.equalsIgnoreCase("1victor2000") 
     			|| userName.equalsIgnoreCase("sophie_sushi") 
-    			|| userName.equalsIgnoreCase("sephiroku")) {
+    			|| userName.equalsIgnoreCase("sephiroku")
+    			|| userName.equalsIgnoreCase("Amaxter")
+    			|| userName.equalsIgnoreCase("majorTAYLOR")) {
     		return true;
     	} else
     		return false;
@@ -36,6 +42,7 @@ public class ClientProxy extends CommonProxy {
         
 	@Override
 	public void registerRenderThings() {
+		RenderingRegistry.registerEntityRenderingHandler(EntityBasicCar.class, new RenderBasicCar());
         	
     	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTrafficLightEntity.class, new TileEntityTrafficLightRenderer());
     	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityLightBollardEntity.class, new TileEntityLightBollardRenderer());

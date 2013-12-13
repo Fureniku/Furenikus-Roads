@@ -1,12 +1,20 @@
 package co.uk.silvania.roads.block;
 
+import static net.minecraftforge.common.ForgeDirection.EAST;
+import static net.minecraftforge.common.ForgeDirection.NORTH;
+import static net.minecraftforge.common.ForgeDirection.SOUTH;
+import static net.minecraftforge.common.ForgeDirection.WEST;
 import co.uk.silvania.roads.Roads;
+import co.uk.silvania.roads.roadblocks.RoadBlock;
+import co.uk.silvania.roads.roadblocks.RoadBlockMiscSingles;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
+import net.minecraft.world.World;
 
 public class CatsEye extends Block {
 
@@ -15,8 +23,19 @@ public class CatsEye extends Block {
 		this.setStepSound(Block.soundStoneFootstep);
 		this.setCreativeTab(Roads.tabRoads);
         this.setBlockBounds(0.4F, -0.25F, 0.4F, 0.6F, -0.2F, 0.6F);
-        this.setLightValue(0.5F);
 	}
+	
+    public boolean canPlaceBlockAt(World world, int x, int y, int z) {
+    	int block = world.getBlockId(x, y - 1, z);
+    	if (Block.blocksList[block] instanceof RoadBlock || Block.blocksList[block] instanceof RoadBlockMiscSingles) {
+    		return true;
+    	} else
+    		return false;
+    }
+	
+    public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
+        return null;
+    }
 	
 	@SideOnly(Side.CLIENT)
 	private Icon side1;

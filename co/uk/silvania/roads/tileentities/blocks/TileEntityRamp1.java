@@ -77,7 +77,7 @@ public class TileEntityRamp1 extends BlockContainer {
     
     @Override
     public void breakBlock(World world, int x, int y, int z, int par5, int par6) {
-    	int meta = world.getBlockMetadata(x, y, z);   
+    	int meta = world.getBlockMetadata(x, y, z);
     	if (meta == 1 || meta == 5 || meta == 9 || meta == 13) {
     		world.setBlockToAir(x + 1, y, z);
     		world.setBlockToAir(x + 2, y, z);

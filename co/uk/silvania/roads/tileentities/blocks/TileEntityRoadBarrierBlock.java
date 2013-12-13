@@ -23,6 +23,7 @@ import net.minecraft.world.World;
 
 public class TileEntityRoadBarrierBlock extends BlockContainer {
     public final boolean powered;
+    String direction = "";
 	
 	public TileEntityRoadBarrierBlock(int id, boolean par2) {
 		super(id, Material.iron);
@@ -51,8 +52,25 @@ public class TileEntityRoadBarrierBlock extends BlockContainer {
             }
         }
     }
-
+    
     public void onNeighborBlockChange(World world, int x, int y, int z, int par5) {
+    	int meta = world.getBlockMetadata(x, y, z);
+        if (!world.isRemote) {
+        	//UNPOWERED STATE
+            if (this.powered && !world.isBlockIndirectlyGettingPowered(x, y, z)) {
+    	    	System.out.println("This is point A; the block is NOT powered.");
+            }
+            
+            //POWERED STATE
+            else if (!this.powered && world.isBlockIndirectlyGettingPowered(x, y, z)) {
+
+    	    	System.out.println("This is point B.");
+        	    }
+            }
+        }
+    /**/
+    
+    /*public void onNeighborBlockChange(World world, int x, int y, int z, int par5) {
     	int meta = world.getBlockMetadata(x, y, z);
         if (!world.isRemote)
         {
@@ -60,36 +78,46 @@ public class TileEntityRoadBarrierBlock extends BlockContainer {
             {
                 world.scheduleBlockUpdate(x, y, z, this.blockID, 4);
                 world.setBlockMetadataWithNotify(x, y, z, 0, meta);
+    	    	world.setBlock(x, y + 1, z, Roads.blockGag5.blockID);
+    	    	world.setBlock(x, y + 2, z, Roads.blockGag5.blockID);
+    	    	world.setBlock(x, y + 3, z, Roads.blockGag5.blockID);
+    	    	System.out.println("IDGAF what the meta is (it's " + meta + " by the way), I'm setting the three blocks above to gag!");
+                
             	if (meta == 1) {
             		world.setBlockToAir(x, y, z + 1);
             		world.setBlockToAir(x, y, z + 2);
             		world.setBlockToAir(x, y, z + 3);
+            		System.out.println("Meta is " + meta + " so I'll set Z+ to air.");
             	}
         	    if (meta == 3) {
         	    	world.setBlockToAir(x, y, z - 1);
         	    	world.setBlockToAir(x, y, z - 2);
         	    	world.setBlockToAir(x, y, z - 3);
+        	    	System.out.println("Meta is " + meta + " so I'll set Z- to air.");
         	    }
         	    if (meta == 2) {
-        	    	world.setBlockToAir(x - 1, y, z + 1);
-        	    	world.setBlockToAir(x - 2, y, z + 2);
-        	    	world.setBlockToAir(x - 3, y, z + 3);
+        	    	world.setBlockToAir(x - 1, y, z);
+        	    	world.setBlockToAir(x - 2, y, z);
+        	    	world.setBlockToAir(x - 3, y, z);
+        	    	System.out.println("Meta is " + meta + " so I'll set X- to air.");
         	    }
         	    if (meta == 0) {
         	    	world.setBlockToAir(x + 1, y, z);
         	    	world.setBlockToAir(x + 2, y, z);
         	    	world.setBlockToAir(x + 3, y, z);
+        	    	System.out.println("Meta is " + meta + " so I'll set X+ to air.");
         	    }
                 
             }
             else if (!this.powered && world.isBlockIndirectlyGettingPowered(x, y, z))
             {
-                world.setBlock(x, y, z, Roads.roadBarrierUp.blockID, 0, 2);
                 world.setBlockMetadataWithNotify(x, y, z, 0, meta);
             	if (meta == 1) {
-        	    	world.setBlock(x, y, z + 1, Roads.blockGag5.blockID);
-        	    	world.setBlock(x, y, z + 2, Roads.blockGag5.blockID);
-        	    	world.setBlock(x, y, z + 3, Roads.blockGag5.blockID);
+            		if (world.isAirBlock(x, y, z + 1)) {
+	        	    	world.setBlock(x, y, z + 1, Roads.blockGag5.blockID);
+	        	    	world.setBlock(x, y, z + 2, Roads.blockGag5.blockID);
+	        	    	world.setBlock(x, y, z + 3, Roads.blockGag5.blockID);
+            		}
             	} else if (meta == 3) {
         	    	world.setBlock(x, y, z - 1, Roads.blockGag5.blockID);
         	    	world.setBlock(x, y, z - 2, Roads.blockGag5.blockID);
@@ -105,7 +133,7 @@ public class TileEntityRoadBarrierBlock extends BlockContainer {
         	    }
             }
         }
-    }
+    }/**/
 
     public void updateTick(World world, int x, int y, int z, Random random) {
     	int meta = world.getBlockMetadata(x, y, z);
@@ -183,6 +211,27 @@ public class TileEntityRoadBarrierBlock extends BlockContainer {
         int l = MathHelper.floor_double((double)(par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
         world.setBlockMetadataWithNotify(x, y, z, l, 2);
         int meta = world.getBlockMetadata(x, y, z);
+        if (meta == 0) {
+        	System.out.println("Meta is ZERO, so direction is EAST");
+        	String direction = "east";
+        	System.out.println("To confirm that, it's direction is now " + direction + " and the meta is " + meta + ".");
+        } else if (meta == 1) {
+        	System.out.println("Meta is ONE, so direction is SOUTH");
+        	String direction = "south";
+        	System.out.println("To confirm that, it's direction is now " + direction + " and the meta is " + meta + ".");
+        } else if (meta == 2) {
+        	System.out.println("Meta is TWO, so direction is WEST");
+        	String direction = "west";
+        	System.out.println("To confirm that, it's direction is now " + direction + " and the meta is " + meta + ".");
+        } else if (meta == 3) {
+        	System.out.println("Meta is THREE, so direction is NORTH");
+        	String direction = "north";
+        	System.out.println("To confirm that, it's direction is now " + direction + " and the meta is " + meta + ".");
+        } else {
+        	System.out.println("Meta is 4 or higher...");
+        	String direction = "broken";
+        }
+        
     	/*if (!this.powered && meta == 1) {
 	    	world.setBlock(x, y, z + 1, Roads.blockGag5.blockID);
 	    	world.setBlock(x, y, z + 2, Roads.blockGag5.blockID);

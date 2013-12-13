@@ -18,6 +18,8 @@ import co.uk.silvania.roads.block.LimeStoneBlock;
 import co.uk.silvania.roads.block.PowerPoleLarge;
 import co.uk.silvania.roads.block.PowerPoleMedium;
 import co.uk.silvania.roads.block.PowerPoleSmall;
+import co.uk.silvania.roads.entity.Entities;
+import co.uk.silvania.roads.entity.ItemBasicCar;
 import co.uk.silvania.roads.item.BlankSign;
 import co.uk.silvania.roads.item.CementDustItem;
 import co.uk.silvania.roads.item.CementItem;
@@ -87,9 +89,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 @Mod(modid="FlenixRoads", name="FlenixRoads", version="0.5.1")
-@NetworkMod(clientSideRequired=true, serverSideRequired=false,
-		clientPacketHandlerSpec = @SidedPacketHandler(channels={"FRoadsPackets"}, packetHandler = ClientPacketHandler.class),
-		serverPacketHandlerSpec = @SidedPacketHandler(channels={"FRoadsPackets"}, packetHandler = ServerPacketHandler.class))
+@NetworkMod(channels = {"FRoadsPackets"}, clientSideRequired=true, serverSideRequired=false, packetHandler = PacketHandler.class)
 public class Roads {
 
     @Instance("FlenixRoads")
@@ -182,7 +182,7 @@ public class Roads {
 	public static Block barrierCorner;
 	//public static Block roadSign;
 	public static Block roadBarrier;
-	public static Block roadBarrierUp;
+	//public static Block roadBarrierUp;
 	
 	//Items Start Here
 	public static Item cementItem;
@@ -195,6 +195,7 @@ public class Roads {
 	public static Item whitePaintCan;
 	public static Item yellowPaintCan;
 	public static Item blankSign;
+	public static Item spawnerWand;
 
 	//And finally the worldgen
 	public static WorldGen worldGen = new WorldGen();
@@ -287,7 +288,7 @@ public class Roads {
     	barrierCorner = new TileEntityBarrierCornerBlock(config.barrierCornerID).setUnlocalizedName("barrierCorner");
     	//roadSign = new TileEntityRoadSignBlock(config.roadSignID, TileEntityRoadSignEntity.class, true).setUnlocalizedName("roadSign");
     	roadBarrier = new TileEntityRoadBarrierBlock(config.roadBarrierID, false).setUnlocalizedName("roadBarrier");
-    	roadBarrierUp = new TileEntityRoadBarrierBlock(config.roadBarrierUpID, true).setUnlocalizedName("roadBarrierUp");
+    	//roadBarrierUp = new TileEntityRoadBarrierBlock(config.roadBarrierUpID, true).setUnlocalizedName("roadBarrierUp");
 
     	
     	cementItem = new CementItem(config.cementItemID).setUnlocalizedName("cementItem");
@@ -300,6 +301,7 @@ public class Roads {
     	whitePaintCan = new WhitePaintCan(config.whitePaintCanID).setUnlocalizedName("whitePaintCan");
     	yellowPaintCan = new YellowPaintCan(config.yellowPaintCanID).setUnlocalizedName("yellowPaintCan");
     	blankSign = new BlankSign(config.blankSignID).setUnlocalizedName("blankSign");
+    	spawnerWand = new ItemBasicCar(20000).setUnlocalizedName("spawnerWand");
     	
     	//MinecraftForgeClient.registerItemRenderer(trafficLight.blockID, new TrafficLightItemRenderer());
     	MinecraftForge.EVENT_BUS.register(new TarBucketHandler());
@@ -327,6 +329,7 @@ public class Roads {
             
             proxy.registerBlocks();
             proxy.addNames();
+            Entities.init();
     	}
             
             GameRegistry.registerTileEntity(TileEntityTrafficLightEntity.class, "tileEntityTrafficLight");

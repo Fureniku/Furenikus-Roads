@@ -97,7 +97,7 @@ public class CommonProxy {
         GameRegistry.registerBlock(Roads.barrierCorner, "barrierCorner");
         //GameRegistry.registerBlock(Roads.roadSign, "roadSign");
         GameRegistry.registerBlock(Roads.roadBarrier, "roadBarrier");
-        GameRegistry.registerBlock(Roads.roadBarrierUp, "roadBarrierUp");
+        //GameRegistry.registerBlock(Roads.roadBarrierUp, "roadBarrierUp");
         
         GameRegistry.registerItem(Roads.cementItem, "cementItem");
         GameRegistry.registerItem(Roads.cementDustItem, "cementDustItem");
@@ -109,6 +109,7 @@ public class CommonProxy {
         GameRegistry.registerItem(Roads.whitePaintCan, "whitePaintCan");
         GameRegistry.registerItem(Roads.yellowPaintCan, "yellowPaintCan");
         GameRegistry.registerItem(Roads.blankSign, "blankSign");
+        GameRegistry.registerItem(Roads.spawnerWand, "spawnerWand");
 
         MinecraftForge.setBlockHarvestLevel(Roads.roadBlockArrows, "pickaxe", 1);
         MinecraftForge.setBlockHarvestLevel(Roads.roadBlockDoubleYellow, "pickaxe", 1);
@@ -128,6 +129,14 @@ public class CommonProxy {
         LanguageRegistry.addName(new ItemStack(Roads.generalBlocks, 1, 5), "Concrete, Old");
         LanguageRegistry.addName(new ItemStack(Roads.generalBlocks, 1, 6), "Sidewalk Light Square");
         LanguageRegistry.addName(new ItemStack(Roads.generalBlocks, 1, 7), "Sidewalk Grey Square");
+        LanguageRegistry.addName(new ItemStack(Roads.generalBlocks, 1, 8), "Fuel Station Roof 1");
+        LanguageRegistry.addName(new ItemStack(Roads.generalBlocks, 1, 9), "Fuel Station Roof 2");
+        LanguageRegistry.addName(new ItemStack(Roads.generalBlocks, 1, 10), "Fuel Station Roof 3");
+        LanguageRegistry.addName(new ItemStack(Roads.generalBlocks, 1, 11), "Fuel Station Roof 4");
+        LanguageRegistry.addName(new ItemStack(Roads.generalBlocks, 1, 12), "Fuel Station Roof Plain");
+        LanguageRegistry.addName(new ItemStack(Roads.generalBlocks, 1, 13), "Desert Sand");
+        LanguageRegistry.addName(new ItemStack(Roads.generalBlocks, 1, 14), "Dark Brick 1");
+        LanguageRegistry.addName(new ItemStack(Roads.generalBlocks, 1, 15), "Dark Brick 2");
         
         LanguageRegistry.addName(new ItemStack(Roads.roadBlockArrows, 1, 0), "Tarmac");
         LanguageRegistry.addName(new ItemStack(Roads.roadBlockArrows, 1, 4), "Tarmac");
@@ -390,6 +399,8 @@ public class CommonProxy {
         LanguageRegistry.addName(Roads.whitePaintCan, "Paint Can");
    		LanguageRegistry.addName(Roads.yellowPaintCan, "Paint Can");
    		LanguageRegistry.addName(Roads.blankSign, "Blank Sign");
+   		
+   		LanguageRegistry.addName(Roads.spawnerWand, "Car");
     }
     
     public void addRecipes() {
