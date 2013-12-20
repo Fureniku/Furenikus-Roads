@@ -8,6 +8,7 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
+import co.uk.silvania.roads.Roads;
 import co.uk.silvania.roads.client.models.RoadSlope2Model;
 
 
@@ -41,16 +42,16 @@ public class TileEntityRoadSlope3Renderer extends TileEntitySpecialRenderer {
         GL11.glPushMatrix();
         int i = te.getBlockMetadata();
         if (i == 0 || i == 1 || i == 2 || i == 3) {
-            Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("roads", "textures/entities/slope3plain.png"));
+            Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(Roads.modid, "textures/entities/slope3plain.png"));
         }
         if (i == 4 || i == 5 || i == 6 || i == 7) {
-            Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("roads", "textures/entities/slope3whitefarleft.png"));
+            Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(Roads.modid, "textures/entities/slope3whitefarleft.png"));
         }
         if (i == 8 || i == 9 || i == 10 || i == 11) {
-            Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("roads", "textures/entities/slope3whitestripe.png"));
+            Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(Roads.modid, "textures/entities/slope3whitestripe.png"));
         }
         if (i == 12 || i == 13 || i == 14 || i == 15) {
-            Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("roads", "textures/entities/slope3whitefarright.png"));
+            Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(Roads.modid, "textures/entities/slope3whitefarright.png"));
         }
         GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
         GL11.glRotatef(rotation, 0.0F, 1.0F, 0.0F);

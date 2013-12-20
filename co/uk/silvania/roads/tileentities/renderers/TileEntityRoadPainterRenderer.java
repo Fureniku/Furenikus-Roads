@@ -53,7 +53,7 @@ public class TileEntityRoadPainterRenderer extends TileEntitySpecialRenderer {
         }
 		
 		GL11.glPushMatrix();
-		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("roads", "textures/entities/RoadPainter.png"));
+		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(Roads.modid, "textures/entities/RoadPainter.png"));
 		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
 		GL11.glRotatef(rotation, 0.0F, 1.0F, 0.0F);
 		//GL11.glRotatef(((TileEntityBarrierEntity)tile).getRotationPivot()), 0.0F, 1.0F, 0.0F);

@@ -40,11 +40,11 @@ public class RoadBlockMiscSingles extends Block {
     	
     @SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister iconRegister) {
-    	this.sides = iconRegister.registerIcon("Roads:TarmacPlain");
+    	this.sides = iconRegister.registerIcon(Roads.modid + ":TarmacPlain");
 		icons = new Icon[16];
 		
 		for(int i = 0; i < icons.length; i++) {
-			icons[i] = iconRegister.registerIcon("Roads:" + (this.getUnlocalizedName().substring(5)) + i);
+			icons[i] = iconRegister.registerIcon(Roads.modid + ":" + (this.getUnlocalizedName().substring(5)) + i);
 		}
 	}
     

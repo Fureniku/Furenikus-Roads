@@ -14,6 +14,7 @@ import net.minecraftforge.common.ForgeDirection;
 import org.lwjgl.opengl.GL11;
 
 import co.uk.silvania.roads.NBTConfig;
+import co.uk.silvania.roads.Roads;
 import co.uk.silvania.roads.client.models.RoadSlopeModel;
 import co.uk.silvania.roads.client.models.TrafficLightModel;
 import co.uk.silvania.roads.tileentities.blocks.TileEntityTrafficLightBlock;
@@ -60,9 +61,9 @@ public class TileEntityTrafficLightRenderer extends TileEntitySpecialRenderer {
         	trafficLight.readFromNBT(nbt);
         	System.out.println("Reading NBT value render-side. Right now, it's " + nbt.getString("hasPower"));
         	if (nbt.getString("hasPower").equals("powered")) {
-        		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("roads", "textures/entities/TrafficLightGreen.png"));
+        		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(Roads.modid, "textures/entities/TrafficLightGreen.png"));
         	} else {
-        		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("roads", "textures/entities/TrafficLightRed.png"));
+        		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(Roads.modid, "textures/entities/TrafficLightRed.png"));
         	}
         }
             

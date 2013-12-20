@@ -56,15 +56,15 @@ public class SidewalkBlockSides extends Block {
 		icons = new Icon[16];
 		
 		for(int i = 0; i < icons.length; i++) {
-			icons[i] = iconRegister.registerIcon("Roads:" + (this.getUnlocalizedName().substring(5)) + i);
-			side1 = iconRegister.registerIcon("Roads:sidewalkBlockGrey0");
-			sidekerbed1 = iconRegister.registerIcon("Roads:sidewalkBlockGrey4");
-			side2 = iconRegister.registerIcon("Roads:sidewalkBlockLight0");
-			sidekerbed2 = iconRegister.registerIcon("Roads:sidewalkBlockLight4");
-			sidesmall1 = iconRegister.registerIcon("Roads:sidewalkBlockGrey8");
-			sidesmall2 = iconRegister.registerIcon("Roads:sidewalkBlockGrey11");
-			sidesmall3 = iconRegister.registerIcon("Roads:sidewalkBlockLight8");
-			sidesmall4 = iconRegister.registerIcon("Roads:sidewalkBlockLight11");
+			icons[i] = iconRegister.registerIcon(Roads.modid + ":" + (this.getUnlocalizedName().substring(5)) + i);
+			side1 = iconRegister.registerIcon(Roads.modid + ":sidewalkBlockGrey0");
+			sidekerbed1 = iconRegister.registerIcon(Roads.modid + ":sidewalkBlockGrey4");
+			side2 = iconRegister.registerIcon(Roads.modid + ":sidewalkBlockLight0");
+			sidekerbed2 = iconRegister.registerIcon(Roads.modid + ":sidewalkBlockLight4");
+			sidesmall1 = iconRegister.registerIcon(Roads.modid + ":sidewalkBlockGrey8");
+			sidesmall2 = iconRegister.registerIcon(Roads.modid + ":sidewalkBlockGrey11");
+			sidesmall3 = iconRegister.registerIcon(Roads.modid + ":sidewalkBlockLight8");
+			sidesmall4 = iconRegister.registerIcon(Roads.modid + ":sidewalkBlockLight11");
 		}
 	}
     

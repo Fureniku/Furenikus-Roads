@@ -1,5 +1,6 @@
 package co.uk.silvania.roads.block;
 
+import co.uk.silvania.roads.Roads;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -21,6 +22,6 @@ public class BlockGag4 extends Block {
 	}
 	
 	public void registerIcons(IconRegister iconRegister) {
-		blockIcon = iconRegister.registerIcon("Roads:trans");
+		blockIcon = iconRegister.registerIcon(Roads.modid + ":trans");
 	}
 }

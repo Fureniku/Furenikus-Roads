@@ -98,6 +98,6 @@ public class PowerPoleMedium extends Block {
     }
 
     public void registerIcons(IconRegister iconRegister) {
-    	blockIcon = iconRegister.registerIcon("Roads:PowerPole");
+    	blockIcon = iconRegister.registerIcon(Roads.modid + ":PowerPole");
     }
 }

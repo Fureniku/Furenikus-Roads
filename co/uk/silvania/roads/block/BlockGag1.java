@@ -1,5 +1,6 @@
 package co.uk.silvania.roads.block;
 
+import co.uk.silvania.roads.Roads;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -22,7 +23,7 @@ public class BlockGag1 extends Block {
 	}
 	
 	public void registerIcons(IconRegister iconRegister) {
-		blockIcon = iconRegister.registerIcon("Roads:generalBlocks0");
+		blockIcon = iconRegister.registerIcon(Roads.modid + ":generalBlocks0");
 	}
 
 }

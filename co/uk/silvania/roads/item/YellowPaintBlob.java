@@ -21,7 +21,7 @@ public class YellowPaintBlob extends Item {
 	}
 	
 	public void registerIcons(IconRegister iconRegister) {
-	    itemIcon = iconRegister.registerIcon("Roads:YellowPaintBlob");
+	    itemIcon = iconRegister.registerIcon(Roads.modid + ":YellowPaintBlob");
 	}
 
 }

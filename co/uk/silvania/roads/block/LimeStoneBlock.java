@@ -19,7 +19,7 @@ public class LimeStoneBlock extends Block {
 	}
     
 	public void registerIcons(IconRegister iconRegister) {
-		blockIcon = iconRegister.registerIcon("roads:LimeStone");
+		blockIcon = iconRegister.registerIcon(Roads.modid + ":LimeStone");
 	}
     
     public int idDropped(int par1, Random random, int par2) {

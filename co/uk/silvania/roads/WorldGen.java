@@ -48,6 +48,12 @@ public class WorldGen implements IWorldGenerator {
 				(new WorldGenLakesRoads(Roads.roadsTarFlowing.blockID)).generate(world, random, xCoord, yCoord, zCoord);
 			}
 		}
+		for(int i = 0; i < 1; i++) {
+			int xCoord = chunkX + random.nextInt(16);
+			int yCoord = random.nextInt(32);
+			int zCoord = chunkZ + random.nextInt(16);
+			(new WorldGenLakesRoads(Roads.roadsOilFlowing.blockID)).generate(world, random, xCoord, yCoord, zCoord);
+		}
 	}
     
 	private void generateNether(World world, Random random, int chunkX, int chunkZ){

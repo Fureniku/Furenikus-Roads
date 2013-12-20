@@ -31,8 +31,7 @@ public class TileEntityStreetLamp2Renderer extends TileEntitySpecialRenderer {
 	}
 	
     @Override
-    public void renderTileEntityAt(TileEntity te, double x, double y, double z,
-            float scale) {
+    public void renderTileEntityAt(TileEntity te, double x, double y, double z, float scale) {
         int rotation = 180;
         switch (te.getBlockMetadata() % 4) {
             case 0:
@@ -50,7 +49,7 @@ public class TileEntityStreetLamp2Renderer extends TileEntitySpecialRenderer {
         }
         
 		GL11.glPushMatrix();
-		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("roads", "textures/entities/StreetLamp.png"));
+		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(Roads.modid, "textures/entities/StreetLamp.png"));
 		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
 		GL11.glRotatef(rotation, 0.0F, 1.0F, 0.0F);
 		//GL11.glRotatef(((TileEntityBarrierEntity)tile).getRotationPivot()), 0.0F, 1.0F, 0.0F);

@@ -61,6 +61,6 @@ public class KerbBlock extends Block {
     }
     
     public void registerIcons(IconRegister iconRegister) {
-    	blockIcon = iconRegister.registerIcon("Roads:sidewalkBlockLight0");
+    	blockIcon = iconRegister.registerIcon(Roads.modid + ":sidewalkBlockLight0");
     }
 }

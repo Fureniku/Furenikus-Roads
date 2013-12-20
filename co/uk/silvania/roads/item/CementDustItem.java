@@ -14,6 +14,6 @@ public class CementDustItem extends Item {
 		this.setCreativeTab(Roads.tabRoads);
 	}
 	public void registerIcons(IconRegister iconRegister) {
-	    itemIcon = iconRegister.registerIcon("Roads:CementDust");
+	    itemIcon = iconRegister.registerIcon(Roads.modid + ":CementDust");
 	}
 }

@@ -40,10 +40,10 @@ public class GeneralBlocks extends Block {
 	public void registerIcons(IconRegister iconRegister) {
 		icons = new Icon[16];
 		for(int i = 0; i < icons.length; i++) {
-			icons[i] = iconRegister.registerIcon("Roads:" + (this.getUnlocalizedName().substring(5)) + i);
+			icons[i] = iconRegister.registerIcon(Roads.modid + ":" + (this.getUnlocalizedName().substring(5)) + i);
 		}
-		iconTop = iconRegister.registerIcon("Roads:" + (this.getUnlocalizedName().substring(5)) + "Top");
-		iconBase = iconRegister.registerIcon("Roads:" + (this.getUnlocalizedName().substring(5)) + "Base");
+		iconTop = iconRegister.registerIcon(Roads.modid + ":" + (this.getUnlocalizedName().substring(5)) + "Top");
+		iconBase = iconRegister.registerIcon(Roads.modid + ":" + (this.getUnlocalizedName().substring(5)) + "Base");
 	}
     
 	@SideOnly(Side.CLIENT)

@@ -38,7 +38,7 @@ public class YellowPaintCan extends Item {
 	}
 	
 	public void registerIcons(IconRegister iconRegister) {
-	    itemIcon = iconRegister.registerIcon("Roads:YellowPaintCan");
+	    itemIcon = iconRegister.registerIcon(Roads.modid + ":YellowPaintCan");
 	}
 
 }

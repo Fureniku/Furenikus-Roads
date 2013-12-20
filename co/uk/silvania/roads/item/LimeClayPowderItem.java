@@ -13,7 +13,7 @@ public class LimeClayPowderItem extends Item {
 		this.setCreativeTab(Roads.tabRoads);
 	}
 	public void registerIcons(IconRegister iconRegister) {
-	    itemIcon = iconRegister.registerIcon("Roads:LimeClayPowder");
+	    itemIcon = iconRegister.registerIcon(Roads.modid + ":LimeClayPowder");
 	}
 }
 

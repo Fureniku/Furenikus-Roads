@@ -1,4 +1,4 @@
-package co.uk.silvania.roads.item;
+package co.uk.silvania.roads.liquid;
 
 import co.uk.silvania.roads.CommonProxy;
 import co.uk.silvania.roads.Roads;
@@ -8,19 +8,19 @@ import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class TarBucketItem extends ItemBucket {
+public class OilBucketItem extends ItemBucket {
 	
-    public TarBucketItem(int id) {
-        super(id, Roads.roadsTarFlowing.blockID);
+    public OilBucketItem(int id) {
+        super(id, Roads.roadsOilFlowing.blockID);
         this.setCreativeTab(Roads.tabRoads);
         this.setMaxStackSize(1);
-
     }
+    
     public ItemStack fillCustomBucket(World w, int i, int j, int k) {
     		return null;
     }
     
     public void registerIcons(IconRegister iconRegister) {
-    	itemIcon = iconRegister.registerIcon("Roads:TarBucket");
+    	itemIcon = iconRegister.registerIcon(Roads.modid + ":oilBucket");
     }
 }

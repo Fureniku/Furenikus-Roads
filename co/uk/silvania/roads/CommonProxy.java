@@ -20,6 +20,14 @@ public class CommonProxy {
         GameRegistry.registerBlock(Roads.limeStoneBlock, "limeStoneBlock");
         GameRegistry.registerBlock(Roads.roadsTarStill, "roadsTarStill");
         GameRegistry.registerBlock(Roads.roadsTarFlowing, "roadsTarFlowing");
+        GameRegistry.registerBlock(Roads.roadsOilFlowing, "roadsOilFlowing");
+        GameRegistry.registerBlock(Roads.roadsOilStill, "roadsOilStill");
+        GameRegistry.registerBlock(Roads.roadsPetrolFlowing, "roadsPetrolFlowing");
+        GameRegistry.registerBlock(Roads.roadsPetrolStill, "roadsPetrolStill");
+        GameRegistry.registerBlock(Roads.roadsDieselFlowing, "roadsDieselFlowing");
+        GameRegistry.registerBlock(Roads.roadsDieselStill, "roadsDieselStill");
+        GameRegistry.registerBlock(Roads.roadsRedDieselFlowing, "roadsRedDieselFlowing");
+        GameRegistry.registerBlock(Roads.roadsRedDieselStill, "roadsRedDieselStill");
         GameRegistry.registerBlock(Roads.catsEye, "catsEye");
         GameRegistry.registerBlock(Roads.catsEyeSide, "catsEyeSide");
         GameRegistry.registerBlock(Roads.generalBlocks, ItemGeneralBlocks.class, "FlenixRoads" + (Roads.generalBlocks.getUnlocalizedName().substring(5)));
@@ -104,6 +112,10 @@ public class CommonProxy {
         GameRegistry.registerItem(Roads.limeStonePowderItem, "limeStonePowderItem");
         GameRegistry.registerItem(Roads.limeClayPowderItem, "limeClayPowderItem");
         GameRegistry.registerItem(Roads.tarBucketItem, "tarBucketItem");
+        GameRegistry.registerItem(Roads.oilBucketItem, "oilBucketItem");
+        GameRegistry.registerItem(Roads.petrolBucketItem, "petrolBucketItem");
+        GameRegistry.registerItem(Roads.dieselBucketItem, "dieselBucketItem");
+        GameRegistry.registerItem(Roads.redDieselBucketItem, "redDieselBucketItem");
         GameRegistry.registerItem(Roads.whitePaintBlob, "whitePaintBlob");
         GameRegistry.registerItem(Roads.yellowPaintBlob, "yellowPaintBlob");
         GameRegistry.registerItem(Roads.whitePaintCan, "whitePaintCan");
@@ -118,6 +130,10 @@ public class CommonProxy {
     public void addNames() {
     	LanguageRegistry.addName(Roads.limeStoneBlock, "Limestone");
         LanguageRegistry.addName(Roads.roadsTarFlowing, "Tar");
+        LanguageRegistry.addName(Roads.roadsOilFlowing, "Oil");
+        LanguageRegistry.addName(Roads.roadsPetrolFlowing, "Petrol");
+        LanguageRegistry.addName(Roads.roadsDieselFlowing, "Diesel");
+        LanguageRegistry.addName(Roads.roadsRedDieselFlowing, "Red Diesel");
         LanguageRegistry.addName(Roads.catsEye, "Cat's Eye");
         LanguageRegistry.addName(Roads.catsEyeSide, "Cat's Eye (Side)");
         
@@ -394,6 +410,10 @@ public class CommonProxy {
         LanguageRegistry.addName(Roads.limeStonePowderItem, "Limestone Dust");
         LanguageRegistry.addName(Roads.limeClayPowderItem, "Lime & Clay Dust Mix");
         LanguageRegistry.addName(Roads.tarBucketItem, "Bucket of Tar");
+        LanguageRegistry.addName(Roads.oilBucketItem, "Bucket of Oil");
+        LanguageRegistry.addName(Roads.petrolBucketItem, "Bucket of Petrol");
+        LanguageRegistry.addName(Roads.dieselBucketItem, "Bucket of Diesel");
+        LanguageRegistry.addName(Roads.redDieselBucketItem, "Bucket of Red Diesel");
         LanguageRegistry.addName(Roads.whitePaintBlob, "Paint Blob");
         LanguageRegistry.addName(Roads.yellowPaintBlob, "Paint Blob");
         LanguageRegistry.addName(Roads.whitePaintCan, "Paint Can");

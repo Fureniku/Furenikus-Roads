@@ -5,75 +5,14 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
-import co.uk.silvania.roads.block.BlockGag1;
-import co.uk.silvania.roads.block.BlockGag2;
-import co.uk.silvania.roads.block.BlockGag3;
-import co.uk.silvania.roads.block.BlockGag4;
-import co.uk.silvania.roads.block.BlockGag5;
-import co.uk.silvania.roads.block.CatsEye;
-import co.uk.silvania.roads.block.CatsEyeSide;
-import co.uk.silvania.roads.block.GeneralBlocks;
-import co.uk.silvania.roads.block.KerbBlock;
-import co.uk.silvania.roads.block.LimeStoneBlock;
-import co.uk.silvania.roads.block.PowerPoleLarge;
-import co.uk.silvania.roads.block.PowerPoleMedium;
-import co.uk.silvania.roads.block.PowerPoleSmall;
+import co.uk.silvania.roads.block.*;
 import co.uk.silvania.roads.entity.Entities;
 import co.uk.silvania.roads.entity.ItemBasicCar;
-import co.uk.silvania.roads.item.BlankSign;
-import co.uk.silvania.roads.item.CementDustItem;
-import co.uk.silvania.roads.item.CementItem;
-import co.uk.silvania.roads.item.LimeClayPowderItem;
-import co.uk.silvania.roads.item.LimeStonePowderItem;
-import co.uk.silvania.roads.item.TarBucketItem;
-import co.uk.silvania.roads.item.WhitePaintBlob;
-import co.uk.silvania.roads.item.WhitePaintCan;
-import co.uk.silvania.roads.item.YellowPaintBlob;
-import co.uk.silvania.roads.item.YellowPaintCan;
-import co.uk.silvania.roads.liquid.FlowingTarBlock;
-import co.uk.silvania.roads.liquid.StillTarBlock;
-import co.uk.silvania.roads.roadblocks.RoadBlock;
-import co.uk.silvania.roads.roadblocks.RoadBlockDirt;
-import co.uk.silvania.roads.roadblocks.RoadBlockMiscSingles;
-import co.uk.silvania.roads.roadblocks.SidewalkBlockGrey;
-import co.uk.silvania.roads.roadblocks.SidewalkBlockLight;
-import co.uk.silvania.roads.roadblocks.SidewalkBlockSides;
-import co.uk.silvania.roads.roadblocks.SidewalkBlockTile;
-import co.uk.silvania.roads.roadblocks.SidewalkBlockTri;
-import co.uk.silvania.roads.tileentities.blocks.TileEntityBarrierBlock;
-import co.uk.silvania.roads.tileentities.blocks.TileEntityBarrierCornerBlock;
-import co.uk.silvania.roads.tileentities.blocks.TileEntityBarrierPoleBlock;
-import co.uk.silvania.roads.tileentities.blocks.TileEntityLightBollardBlock;
-import co.uk.silvania.roads.tileentities.blocks.TileEntityRamp1;
-import co.uk.silvania.roads.tileentities.blocks.TileEntityRamp2;
-import co.uk.silvania.roads.tileentities.blocks.TileEntityRamp3;
-import co.uk.silvania.roads.tileentities.blocks.TileEntityRamp4;
-import co.uk.silvania.roads.tileentities.blocks.TileEntityRamp5;
-import co.uk.silvania.roads.tileentities.blocks.TileEntityRamp6;
-import co.uk.silvania.roads.tileentities.blocks.TileEntityRoadBarrierBlock;
-import co.uk.silvania.roads.tileentities.blocks.TileEntityRoadPainterBlock;
-import co.uk.silvania.roads.tileentities.blocks.TileEntityStreetLamp1Block;
-import co.uk.silvania.roads.tileentities.blocks.TileEntityStreetLamp2Block;
-import co.uk.silvania.roads.tileentities.blocks.TileEntityStreetSignBlock;
-import co.uk.silvania.roads.tileentities.blocks.TileEntityTrafficLightBlock;
-import co.uk.silvania.roads.tileentities.entities.TileEntityBarrierCornerEntity;
-import co.uk.silvania.roads.tileentities.entities.TileEntityBarrierEntity;
-import co.uk.silvania.roads.tileentities.entities.TileEntityBarrierPoleEntity;
-import co.uk.silvania.roads.tileentities.entities.TileEntityLightBollardEntity;
-import co.uk.silvania.roads.tileentities.entities.TileEntityRoadBarrierEntity;
-import co.uk.silvania.roads.tileentities.entities.TileEntityRoadBarrierUpEntity;
-import co.uk.silvania.roads.tileentities.entities.TileEntityRoadPainterEntity;
-import co.uk.silvania.roads.tileentities.entities.TileEntityRoadSignEntity;
-import co.uk.silvania.roads.tileentities.entities.TileEntityRoadSlope1Entity;
-import co.uk.silvania.roads.tileentities.entities.TileEntityRoadSlope2Entity;
-import co.uk.silvania.roads.tileentities.entities.TileEntityRoadSlope3Entity;
-import co.uk.silvania.roads.tileentities.entities.TileEntityRoadSlope4Entity;
-import co.uk.silvania.roads.tileentities.entities.TileEntityRoadSlope5Entity;
-import co.uk.silvania.roads.tileentities.entities.TileEntityRoadSlope6Entity;
-import co.uk.silvania.roads.tileentities.entities.TileEntityStreetLamp1Entity;
-import co.uk.silvania.roads.tileentities.entities.TileEntityStreetLamp2Entity;
-import co.uk.silvania.roads.tileentities.entities.TileEntityStreetSignEntity;
-import co.uk.silvania.roads.tileentities.entities.TileEntityTrafficLightEntity;
+import co.uk.silvania.roads.item.*;
+import co.uk.silvania.roads.liquid.*;
+import co.uk.silvania.roads.roadblocks.*;
+import co.uk.silvania.roads.tileentities.blocks.*;
+import co.uk.silvania.roads.tileentities.entities.*;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -88,9 +27,11 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod(modid="FlenixRoads", name="FlenixRoads", version="0.5.1")
+@Mod(modid=Roads.modid, name="FlenixRoads", version="0.5.1")
 @NetworkMod(channels = {"FRoadsPackets"}, clientSideRequired=true, serverSideRequired=false, packetHandler = PacketHandler.class)
 public class Roads {
+	
+	public static final String modid = "FlenixRoads";
 
     @Instance("FlenixRoads")
     public static Roads instance;
@@ -108,6 +49,14 @@ public class Roads {
 	public static Block limeStoneBlock;
 	public static Block roadsTarStill;
 	public static Block roadsTarFlowing;
+	public static Block roadsOilStill;
+	public static Block roadsOilFlowing;
+	public static Block roadsPetrolStill;
+	public static Block roadsPetrolFlowing;
+	public static Block roadsDieselStill;
+	public static Block roadsDieselFlowing;
+	public static Block roadsRedDieselStill;
+	public static Block roadsRedDieselFlowing;
 	public static Block catsEye;
 	public static Block catsEyeSide;
 	public static Block generalBlocks;
@@ -190,6 +139,10 @@ public class Roads {
 	public static Item limeStonePowderItem;
 	public static Item limeClayPowderItem;
 	public static Item tarBucketItem;
+	public static Item oilBucketItem;
+	public static Item petrolBucketItem;
+	public static Item dieselBucketItem;
+	public static Item redDieselBucketItem;
 	public static Item whitePaintBlob;
 	public static Item yellowPaintBlob;
 	public static Item whitePaintCan;
@@ -212,6 +165,14 @@ public class Roads {
     	catsEyeSide = new CatsEyeSide(config.catsEyeSideID).setUnlocalizedName("catsEyeSide");
     	roadsTarStill = new StillTarBlock(config.roadsTarStillID).setUnlocalizedName("roadsTarStill");
     	roadsTarFlowing = new FlowingTarBlock(config.roadsTarFlowingID).setUnlocalizedName("roadsTarFlowing");
+    	roadsOilStill = new StillOilBlock(config.roadsOilStillID).setUnlocalizedName("roadsOilStill");
+    	roadsOilFlowing = new FlowingOilBlock(config.roadsOilFlowingID).setUnlocalizedName("roadsOilFlowing");
+    	roadsPetrolStill = new StillPetrolBlock(config.roadsPetrolStillID).setUnlocalizedName("roadsPetrolStill");
+    	roadsPetrolFlowing = new FlowingPetrolBlock(config.roadsPetrolFlowingID).setUnlocalizedName("roadsPetrolFlowing");
+    	roadsDieselStill = new StillDieselBlock(config.roadsDieselStillID).setUnlocalizedName("roadsDieselStill");
+    	roadsDieselFlowing = new FlowingDieselBlock(config.roadsDieselFlowingID).setUnlocalizedName("roadsDieselFlowing");
+    	roadsRedDieselStill = new StillRedDieselBlock(config.roadsRedDieselStillID).setUnlocalizedName("roadsRedDieselStill");
+    	roadsRedDieselFlowing = new FlowingRedDieselBlock(config.roadsRedDieselFlowingID).setUnlocalizedName("roadsRedDieselFlowing");
     	generalBlocks = new GeneralBlocks(config.generalBlocksID).setUnlocalizedName("generalBlocks");
 
     	roadBlockArrows = new RoadBlock(config.roadBlockArrowsID).setUnlocalizedName("roadBlockArrows");
@@ -296,6 +257,10 @@ public class Roads {
     	limeStonePowderItem = new LimeStonePowderItem(config.limeStonePowderID).setUnlocalizedName("limeStonePowderItem");
     	limeClayPowderItem = new LimeClayPowderItem(config.limeClayPowderID).setUnlocalizedName("limeClayPowderItem");
     	tarBucketItem = new TarBucketItem(config.tarBucketID).setUnlocalizedName("tarBucketItem");
+    	oilBucketItem = new OilBucketItem(config.oilBucketID).setUnlocalizedName("oilBucketItem");
+    	petrolBucketItem = new PetrolBucketItem(config.petrolBucketID).setUnlocalizedName("petrolBucketItem");
+    	dieselBucketItem = new DieselBucketItem(config.dieselBucketID).setUnlocalizedName("dieselBucketItem");
+    	redDieselBucketItem = new RedDieselBucketItem(config.redDieselBucketID).setUnlocalizedName("redDieselBucketItem");
     	whitePaintBlob = new WhitePaintBlob(config.whitePaintBlobID).setUnlocalizedName("whitePaintBlob");
     	yellowPaintBlob = new YellowPaintBlob(config.yellowPaintBlobID).setUnlocalizedName("yellowPaintBlob");
     	whitePaintCan = new WhitePaintCan(config.whitePaintCanID).setUnlocalizedName("whitePaintCan");
@@ -305,6 +270,10 @@ public class Roads {
     	
     	//MinecraftForgeClient.registerItemRenderer(trafficLight.blockID, new TrafficLightItemRenderer());
     	MinecraftForge.EVENT_BUS.register(new TarBucketHandler());
+    	MinecraftForge.EVENT_BUS.register(new RedDieselBucketHandler());
+    	MinecraftForge.EVENT_BUS.register(new OilBucketHandler());
+    	MinecraftForge.EVENT_BUS.register(new PetrolBucketHandler());
+    	MinecraftForge.EVENT_BUS.register(new DieselBucketHandler());
     }
     
     //public static Block roadRampy5 = new RoadRamp5(249).setUnlocalizedName("roadRampy5");
@@ -351,7 +320,6 @@ public class Roads {
             GameRegistry.registerTileEntity(TileEntityRoadBarrierEntity.class, "tileEntityRoadBarrier");
             GameRegistry.registerTileEntity(TileEntityRoadBarrierUpEntity.class, "tileEntityRoadBarrierUp");
             
-            //FluidRegistry.registerLiquid(new FluidStack(Roads.roadsTarStill, FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(Roads.tarBucketItem), new ItemStack(Item.bucketEmpty));
             LanguageRegistry.instance().addStringLocalization("itemGroup.tabRoads", "en_US", "Roads");
 
             //Setup the world generator

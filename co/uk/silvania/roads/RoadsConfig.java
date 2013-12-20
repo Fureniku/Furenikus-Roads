@@ -13,6 +13,14 @@ public class RoadsConfig {
 	public static int catsEyeSideID;
 	public static int roadsTarStillID;
 	public static int roadsTarFlowingID;
+	public static int roadsOilStillID;
+	public static int roadsOilFlowingID;
+	public static int roadsPetrolStillID;
+	public static int roadsPetrolFlowingID;
+	public static int roadsDieselStillID;
+	public static int roadsDieselFlowingID;
+	public static int roadsRedDieselStillID;
+	public static int roadsRedDieselFlowingID;
 	public static int generalBlocksID;
 
 	public static int roadBlockArrowsID;
@@ -100,7 +108,13 @@ public class RoadsConfig {
 	public static int cementDustID;
 	public static int limeStonePowderID;
 	public static int limeClayPowderID;
+	
 	public static int tarBucketID;
+	public static int oilBucketID;
+	public static int petrolBucketID;
+	public static int dieselBucketID;
+	public static int redDieselBucketID;
+	
 	public static int whitePaintBlobID;
 	public static int yellowPaintBlobID;
 	public static int whitePaintCanID;
@@ -117,8 +131,19 @@ public class RoadsConfig {
 		limeStoneBlockID = config.getBlock("Limestone", 803).getInt();
 		catsEyeID = config.getBlock("Cat's Eye", 804).getInt();
 		catsEyeSideID = config.getBlock("Cat's Eye Side", 805).getInt();
+		
 		roadsTarStillID = config.getBlock("Tar Still", 802).getInt();
 		roadsTarFlowingID = config.getBlock("Tar Flowing", 801).getInt();
+		roadsOilStillID = config.getBlock("Oil Still", 881).getInt();
+		roadsOilFlowingID = config.getBlock("Oil Flowing", 880).getInt();
+		roadsPetrolStillID = config.getBlock("Petrol Still", 883).getInt();
+		roadsPetrolFlowingID = config.getBlock("Petrol Flowing", 882).getInt();
+		roadsDieselStillID = config.getBlock("Diesel Still",  885).getInt();
+		roadsDieselFlowingID = config.getBlock("Diesel Flowing", 884).getInt();
+		roadsRedDieselStillID = config.getBlock("Red Diesel Still",  887).getInt();
+		roadsRedDieselFlowingID = config.getBlock("Red Diesel Flowing", 886).getInt();
+		
+		
 		powerPoleID = config.getBlock("Power Pole", 807).getInt();
 		powerPoleSmallID = config.getBlock("Power Pole Small", 806).getInt();
 		powerPoleLargeID = config.getBlock("Power Pole Large", 808).getInt();
@@ -206,6 +231,10 @@ public class RoadsConfig {
 		whitePaintCanID = config.getItem("White Paint Can", 16705).getInt();
 		yellowPaintCanID = config.getItem("Yellow Paint Can", 16706).getInt();
 		blankSignID = config.getItem("Blank Sign", 16709).getInt();
+		oilBucketID = config.getItem("Bucket of Oil", 16710).getInt();
+		petrolBucketID = config.getItem("Bucket of Petrol", 16711).getInt();
+		dieselBucketID = config.getItem("Bucket of Diesel", 16712).getInt();
+		redDieselBucketID = config.getItem("Bucket of Red Diesel", 16713).getInt();
 
 		config.save();
 	}

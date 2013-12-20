@@ -38,7 +38,7 @@ public class CatsEyeSide extends Block {
     }
     
     public void registerIcons(IconRegister iconRegister) {
-    	blockIcon = iconRegister.registerIcon("roads:CatsEyeTop");
+    	blockIcon = iconRegister.registerIcon(Roads.modid + ":CatsEyeTop");
     }
     
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving entity, ItemStack itemStack) {

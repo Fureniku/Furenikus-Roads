@@ -43,7 +43,7 @@ public class WhitePaintCan extends Item {
 	}
 	
 	public void registerIcons(IconRegister iconRegister) {
-	    itemIcon = iconRegister.registerIcon("Roads:WhitePaintCan");
+	    itemIcon = iconRegister.registerIcon(Roads.modid + ":WhitePaintCan");
 	}
 
 }

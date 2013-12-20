@@ -15,6 +15,6 @@ public class BlankSign extends Item {
     }
 
 	public void registerIcons(IconRegister iconRegister) {
-        itemIcon = iconRegister.registerIcon("Roads:BlankSign");
+        itemIcon = iconRegister.registerIcon(Roads.modid + ":BlankSign");
     }
 }

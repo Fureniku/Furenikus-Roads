@@ -58,7 +58,7 @@ public class PowerPoleLarge extends Block {
 	}
 	
     public void registerIcons(IconRegister iconRegister) {
-    	blockIcon = iconRegister.registerIcon("Roads:PowerPole");
+    	blockIcon = iconRegister.registerIcon(Roads.modid + ":PowerPole");
     }
     
     /** Whether the redstone torch is currently active or not. */
