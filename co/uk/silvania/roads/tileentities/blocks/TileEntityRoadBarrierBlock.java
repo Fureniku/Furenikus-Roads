@@ -209,6 +209,9 @@ public class TileEntityRoadBarrierBlock extends BlockContainer {
 	
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
         int l = MathHelper.floor_double((double)(par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
+        System.out.println("Angle is L");
+        //To store rotation in the tile entity, call the TE here and save L as an int. Read that back instead of the metadata.
+        //Simples!
         world.setBlockMetadataWithNotify(x, y, z, l, 2);
         int meta = world.getBlockMetadata(x, y, z);
         if (meta == 0) {
