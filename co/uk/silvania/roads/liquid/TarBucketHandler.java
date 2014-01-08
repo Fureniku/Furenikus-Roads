@@ -21,7 +21,7 @@ public class TarBucketHandler {
 
 	public ItemStack fillCustomBucket(World world, MovingObjectPosition pos) {
 		int blockID = world.getBlockId(pos.blockX, pos.blockY, pos.blockZ);
-		if ((blockID == Roads.roadsTarStill.blockID || blockID == Roads.roadsTarFlowing.blockID) && world.getBlockMetadata(pos.blockX, pos.blockY, pos.blockZ) == 0) {
+		if ((blockID == Roads.tarBlock.blockID) && world.getBlockMetadata(pos.blockX, pos.blockY, pos.blockZ) == 0) {
 			world.setBlock(pos.blockX, pos.blockY, pos.blockZ, 0);
 			return new ItemStack(Roads.tarBucketItem);
 		} else

@@ -104,7 +104,7 @@ public class WorldGenLakesRoads extends WorldGenerator {
                 }
             }
 
-            if (Block.blocksList[this.blockIndex] == Roads.roadsTarFlowing) {
+            if (Block.blocksList[this.blockIndex] == Roads.tarBlock) {
                 for (i1 = 0; i1 < 16; ++i1) {
                     for (j2 = 0; j2 < 16; ++j2) {
                         byte b0 = 4;

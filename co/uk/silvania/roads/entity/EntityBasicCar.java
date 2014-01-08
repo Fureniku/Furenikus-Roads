@@ -100,6 +100,7 @@ public class EntityBasicCar extends Entity implements IEntityAdditionalSpawnData
 		boolean pressedForward = Minecraft.getMinecraft().gameSettings.keyBindForward.isPressed();
 		
 		if (pressedForward && !lastPressedState && riddenByEntity == Minecraft.getMinecraft().thePlayer) {
+			System.out.println("Blah" + this);
 			PacketHandler.sendCarMovePacket(this);
 		}
 		

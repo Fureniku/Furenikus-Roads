@@ -54,7 +54,7 @@ public class RoadBlockDirt extends Block {
     	
     @SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister iconRegister) {
-    	this.sides = iconRegister.registerIcon("Roads:roadBlockMiscSingles5");
+    	this.sides = iconRegister.registerIcon(Roads.modid + ":roadBlockMiscSingles5");
 		icons = new Icon[16];
 		
 		for(int i = 0; i < icons.length; i++) {

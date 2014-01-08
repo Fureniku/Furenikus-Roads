@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 public class TarBucketItem extends ItemBucket {
 	
     public TarBucketItem(int id) {
-        super(id, Roads.roadsTarFlowing.blockID);
+        super(id, Roads.tarBlock.blockID);
         this.setCreativeTab(Roads.tabRoads);
         this.setMaxStackSize(1);
     }

@@ -61,9 +61,9 @@ public class TileEntityTrafficLightRenderer extends TileEntitySpecialRenderer {
         	trafficLight.readFromNBT(nbt);
         	System.out.println("Reading NBT value render-side. Right now, it's " + nbt.getString("hasPower"));
         	if (nbt.getString("hasPower").equals("powered")) {
-        		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(Roads.modid, "textures/entities/TrafficLightGreen.png"));
+        		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("flenixroads", "textures/entities/TrafficLightGreen.png"));
         	} else {
-        		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(Roads.modid, "textures/entities/TrafficLightRed.png"));
+        		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("flenixroads", "textures/entities/TrafficLightRed.png"));
         	}
         }
             

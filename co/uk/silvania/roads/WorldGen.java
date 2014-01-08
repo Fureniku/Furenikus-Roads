@@ -45,22 +45,14 @@ public class WorldGen implements IWorldGenerator {
 				int xCoord = chunkX + random.nextInt(16);
 				int yCoord = random.nextInt(80);
 				int zCoord = chunkZ + random.nextInt(16);
-				(new WorldGenLakesRoads(Roads.roadsTarFlowing.blockID)).generate(world, random, xCoord, yCoord, zCoord);
-			}
-		}
-		if (!(biome == BiomeGenBase.ocean)) {
-			for(int i = 0; i < 1; i++) {
-				int xCoord = chunkX + random.nextInt(16);
-				int yCoord = random.nextInt(32);
-				int zCoord = chunkZ + random.nextInt(16);
-				(new WorldGenLakesRoads(Roads.roadsOilFlowing.blockID)).generate(world, random, xCoord, yCoord, zCoord);
+				(new WorldGenLakesRoads(Roads.tarBlock.blockID)).generate(world, random, xCoord, yCoord, zCoord);
 			}
 		} else {
 			for(int i = 0; i < 1; i++) {
 				int xCoord = chunkX + random.nextInt(16);
 				int yCoord = random.nextInt(32);
 				int zCoord = chunkZ + random.nextInt(16);
-				(new WorldGenLakesRoads(Roads.roadsOilFlowing.blockID)).generate(world, random, xCoord, yCoord, zCoord);
+				(new WorldGenLakesRoads(Roads.tarBlock.blockID)).generate(world, random, xCoord, yCoord, zCoord);
 			}
 		}
 	}

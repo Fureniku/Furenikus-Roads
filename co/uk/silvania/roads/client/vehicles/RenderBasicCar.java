@@ -16,8 +16,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderBasicCar extends Render {
-    private static final ResourceLocation texture = new ResourceLocation(Roads.modid, "textures/vehicles/BasicCar.png");
-	private static final ResourceLocation chargedTexture = new ResourceLocation(Roads.modid, "textures/vehicles/BasicCar_red.png");
+    private static final ResourceLocation texture = new ResourceLocation("flenixroads", "textures/vehicles/BasicCar.png");
+	private static final ResourceLocation chargedTexture = new ResourceLocation("flenixroads", "textures/vehicles/BasicCar_red.png");
 
     protected ModelBasicCar model;
 

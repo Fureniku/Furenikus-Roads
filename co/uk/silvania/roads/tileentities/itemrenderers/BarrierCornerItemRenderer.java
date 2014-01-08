@@ -63,7 +63,7 @@ public class BarrierCornerItemRenderer implements IItemRenderer {
         GL11.glTranslatef(x + 1, y + 3, z - 1);
         GL11.glRotatef(0F, 0.0F, 0.0F, 0.0F);
         GL11.glScalef(scale, -scale, -scale);
-        Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(Roads.modid, "textures/entities/Barrier.png"));
+        Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("flenixroads", "textures/entities/Barrier.png"));
         model.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();

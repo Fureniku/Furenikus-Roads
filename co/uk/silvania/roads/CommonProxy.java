@@ -3,8 +3,11 @@ package co.uk.silvania.roads;
 import co.uk.silvania.roads.block.ItemGeneralBlocks;
 import co.uk.silvania.roads.roadblocks.itemblocks.*;
 import co.uk.silvania.roads.tileentities.entities.TileEntityTrafficLightEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
@@ -17,17 +20,9 @@ public class CommonProxy {
     public void registerRenderThings() {}
     
     public void registerBlocks() {
+    	GameRegistry.registerBlock(Roads.tarBlock, "tarBlock");
+    	
         GameRegistry.registerBlock(Roads.limeStoneBlock, "limeStoneBlock");
-        GameRegistry.registerBlock(Roads.roadsTarStill, "roadsTarStill");
-        GameRegistry.registerBlock(Roads.roadsTarFlowing, "roadsTarFlowing");
-        GameRegistry.registerBlock(Roads.roadsOilFlowing, "roadsOilFlowing");
-        GameRegistry.registerBlock(Roads.roadsOilStill, "roadsOilStill");
-        GameRegistry.registerBlock(Roads.roadsPetrolFlowing, "roadsPetrolFlowing");
-        GameRegistry.registerBlock(Roads.roadsPetrolStill, "roadsPetrolStill");
-        GameRegistry.registerBlock(Roads.roadsDieselFlowing, "roadsDieselFlowing");
-        GameRegistry.registerBlock(Roads.roadsDieselStill, "roadsDieselStill");
-        GameRegistry.registerBlock(Roads.roadsRedDieselFlowing, "roadsRedDieselFlowing");
-        GameRegistry.registerBlock(Roads.roadsRedDieselStill, "roadsRedDieselStill");
         GameRegistry.registerBlock(Roads.catsEye, "catsEye");
         GameRegistry.registerBlock(Roads.catsEyeSide, "catsEyeSide");
         GameRegistry.registerBlock(Roads.generalBlocks, ItemGeneralBlocks.class, "FlenixRoads" + (Roads.generalBlocks.getUnlocalizedName().substring(5)));
@@ -112,30 +107,25 @@ public class CommonProxy {
         GameRegistry.registerItem(Roads.limeStonePowderItem, "limeStonePowderItem");
         GameRegistry.registerItem(Roads.limeClayPowderItem, "limeClayPowderItem");
         GameRegistry.registerItem(Roads.tarBucketItem, "tarBucketItem");
-        GameRegistry.registerItem(Roads.oilBucketItem, "oilBucketItem");
-        GameRegistry.registerItem(Roads.petrolBucketItem, "petrolBucketItem");
-        GameRegistry.registerItem(Roads.dieselBucketItem, "dieselBucketItem");
-        GameRegistry.registerItem(Roads.redDieselBucketItem, "redDieselBucketItem");
         GameRegistry.registerItem(Roads.whitePaintBlob, "whitePaintBlob");
         GameRegistry.registerItem(Roads.yellowPaintBlob, "yellowPaintBlob");
         GameRegistry.registerItem(Roads.whitePaintCan, "whitePaintCan");
         GameRegistry.registerItem(Roads.yellowPaintCan, "yellowPaintCan");
         GameRegistry.registerItem(Roads.blankSign, "blankSign");
-        GameRegistry.registerItem(Roads.spawnerWand, "spawnerWand");
-
+        //GameRegistry.registerItem(Roads.carItem, "spawnerWand");
+        
+        FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluidStack("tar", FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(Roads.tarBucketItem), new ItemStack(Item.bucketEmpty));
+                
         MinecraftForge.setBlockHarvestLevel(Roads.roadBlockArrows, "pickaxe", 1);
         MinecraftForge.setBlockHarvestLevel(Roads.roadBlockDoubleYellow, "pickaxe", 1);
     }
     
     public void addNames() {
     	LanguageRegistry.addName(Roads.limeStoneBlock, "Limestone");
-        LanguageRegistry.addName(Roads.roadsTarFlowing, "Tar");
-        LanguageRegistry.addName(Roads.roadsOilFlowing, "Oil");
-        LanguageRegistry.addName(Roads.roadsPetrolFlowing, "Petrol");
-        LanguageRegistry.addName(Roads.roadsDieselFlowing, "Diesel");
-        LanguageRegistry.addName(Roads.roadsRedDieselFlowing, "Red Diesel");
         LanguageRegistry.addName(Roads.catsEye, "Cat's Eye");
         LanguageRegistry.addName(Roads.catsEyeSide, "Cat's Eye (Side)");
+        
+    	LanguageRegistry.addName(Roads.tarBlock, "Tar");
         
         LanguageRegistry.addName(new ItemStack(Roads.generalBlocks, 1, 0), "Tarmac");
         LanguageRegistry.addName(new ItemStack(Roads.generalBlocks, 1, 1), "Cement");
@@ -410,17 +400,13 @@ public class CommonProxy {
         LanguageRegistry.addName(Roads.limeStonePowderItem, "Limestone Dust");
         LanguageRegistry.addName(Roads.limeClayPowderItem, "Lime & Clay Dust Mix");
         LanguageRegistry.addName(Roads.tarBucketItem, "Bucket of Tar");
-        LanguageRegistry.addName(Roads.oilBucketItem, "Bucket of Oil");
-        LanguageRegistry.addName(Roads.petrolBucketItem, "Bucket of Petrol");
-        LanguageRegistry.addName(Roads.dieselBucketItem, "Bucket of Diesel");
-        LanguageRegistry.addName(Roads.redDieselBucketItem, "Bucket of Red Diesel");
         LanguageRegistry.addName(Roads.whitePaintBlob, "Paint Blob");
         LanguageRegistry.addName(Roads.yellowPaintBlob, "Paint Blob");
         LanguageRegistry.addName(Roads.whitePaintCan, "Paint Can");
    		LanguageRegistry.addName(Roads.yellowPaintCan, "Paint Can");
    		LanguageRegistry.addName(Roads.blankSign, "Blank Sign");
    		
-   		LanguageRegistry.addName(Roads.spawnerWand, "Car");
+   		//LanguageRegistry.addName(Roads.carItem, "Car");
     }
     
     public void addRecipes() {

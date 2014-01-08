@@ -1,10 +1,15 @@
 package co.uk.silvania.roads;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.ForgeSubscribe;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 import co.uk.silvania.roads.block.*;
 import co.uk.silvania.roads.entity.Entities;
 import co.uk.silvania.roads.entity.ItemBasicCar;
@@ -27,7 +32,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod(modid=Roads.modid, name="FlenixRoads", version="0.5.1")
+@Mod(modid=Roads.modid, name="FlenixRoads", version="0.5.2")
 @NetworkMod(channels = {"FRoadsPackets"}, clientSideRequired=true, serverSideRequired=false, packetHandler = PacketHandler.class)
 public class Roads {
 	
@@ -47,16 +52,6 @@ public class Roads {
 	};
 	
 	public static Block limeStoneBlock;
-	public static Block roadsTarStill;
-	public static Block roadsTarFlowing;
-	public static Block roadsOilStill;
-	public static Block roadsOilFlowing;
-	public static Block roadsPetrolStill;
-	public static Block roadsPetrolFlowing;
-	public static Block roadsDieselStill;
-	public static Block roadsDieselFlowing;
-	public static Block roadsRedDieselStill;
-	public static Block roadsRedDieselFlowing;
 	public static Block catsEye;
 	public static Block catsEyeSide;
 	public static Block generalBlocks;
@@ -133,22 +128,21 @@ public class Roads {
 	public static Block roadBarrier;
 	//public static Block roadBarrierUp;
 	
+	public static Fluid tarFluid;
+	public static Block tarBlock;
+	
 	//Items Start Here
 	public static Item cementItem;
 	public static Item cementDustItem;
 	public static Item limeStonePowderItem;
 	public static Item limeClayPowderItem;
 	public static Item tarBucketItem;
-	public static Item oilBucketItem;
-	public static Item petrolBucketItem;
-	public static Item dieselBucketItem;
-	public static Item redDieselBucketItem;
 	public static Item whitePaintBlob;
 	public static Item yellowPaintBlob;
 	public static Item whitePaintCan;
 	public static Item yellowPaintCan;
 	public static Item blankSign;
-	public static Item spawnerWand;
+	//public static Item carItem;
 
 	//And finally the worldgen
 	public static WorldGen worldGen = new WorldGen();
@@ -159,20 +153,14 @@ public class Roads {
     	NetworkRegistry.instance().registerGuiHandler(this, roadsGuiHandler);
     	
     	RoadsConfig.loadConfig(event); 
+    	
+    	tarFluid = new Fluid("tar").setBlockID(config.roadsTarFlowingID).setUnlocalizedName("tarFluid");
+    	FluidRegistry.registerFluid(Roads.tarFluid);
+    	tarBlock = new BlockTar(config.roadsTarFlowingID, tarFluid);
 
 		limeStoneBlock = new LimeStoneBlock(config.limeStoneBlockID).setUnlocalizedName("limeStoneBlock");
     	catsEye = new CatsEye(config.catsEyeID).setUnlocalizedName("catsEye");
     	catsEyeSide = new CatsEyeSide(config.catsEyeSideID).setUnlocalizedName("catsEyeSide");
-    	roadsTarStill = new StillTarBlock(config.roadsTarStillID).setUnlocalizedName("roadsTarStill");
-    	roadsTarFlowing = new FlowingTarBlock(config.roadsTarFlowingID).setUnlocalizedName("roadsTarFlowing");
-    	roadsOilStill = new StillOilBlock(config.roadsOilStillID).setUnlocalizedName("roadsOilStill");
-    	roadsOilFlowing = new FlowingOilBlock(config.roadsOilFlowingID).setUnlocalizedName("roadsOilFlowing");
-    	roadsPetrolStill = new StillPetrolBlock(config.roadsPetrolStillID).setUnlocalizedName("roadsPetrolStill");
-    	roadsPetrolFlowing = new FlowingPetrolBlock(config.roadsPetrolFlowingID).setUnlocalizedName("roadsPetrolFlowing");
-    	roadsDieselStill = new StillDieselBlock(config.roadsDieselStillID).setUnlocalizedName("roadsDieselStill");
-    	roadsDieselFlowing = new FlowingDieselBlock(config.roadsDieselFlowingID).setUnlocalizedName("roadsDieselFlowing");
-    	roadsRedDieselStill = new StillRedDieselBlock(config.roadsRedDieselStillID).setUnlocalizedName("roadsRedDieselStill");
-    	roadsRedDieselFlowing = new FlowingRedDieselBlock(config.roadsRedDieselFlowingID).setUnlocalizedName("roadsRedDieselFlowing");
     	generalBlocks = new GeneralBlocks(config.generalBlocksID).setUnlocalizedName("generalBlocks");
 
     	roadBlockArrows = new RoadBlock(config.roadBlockArrowsID).setUnlocalizedName("roadBlockArrows");
@@ -257,23 +245,15 @@ public class Roads {
     	limeStonePowderItem = new LimeStonePowderItem(config.limeStonePowderID).setUnlocalizedName("limeStonePowderItem");
     	limeClayPowderItem = new LimeClayPowderItem(config.limeClayPowderID).setUnlocalizedName("limeClayPowderItem");
     	tarBucketItem = new TarBucketItem(config.tarBucketID).setUnlocalizedName("tarBucketItem");
-    	oilBucketItem = new OilBucketItem(config.oilBucketID).setUnlocalizedName("oilBucketItem");
-    	petrolBucketItem = new PetrolBucketItem(config.petrolBucketID).setUnlocalizedName("petrolBucketItem");
-    	dieselBucketItem = new DieselBucketItem(config.dieselBucketID).setUnlocalizedName("dieselBucketItem");
-    	redDieselBucketItem = new RedDieselBucketItem(config.redDieselBucketID).setUnlocalizedName("redDieselBucketItem");
     	whitePaintBlob = new WhitePaintBlob(config.whitePaintBlobID).setUnlocalizedName("whitePaintBlob");
     	yellowPaintBlob = new YellowPaintBlob(config.yellowPaintBlobID).setUnlocalizedName("yellowPaintBlob");
     	whitePaintCan = new WhitePaintCan(config.whitePaintCanID).setUnlocalizedName("whitePaintCan");
     	yellowPaintCan = new YellowPaintCan(config.yellowPaintCanID).setUnlocalizedName("yellowPaintCan");
     	blankSign = new BlankSign(config.blankSignID).setUnlocalizedName("blankSign");
-    	spawnerWand = new ItemBasicCar(20000).setUnlocalizedName("spawnerWand");
+    	//carItem = new ItemBasicCar(20000).setUnlocalizedName("spawnerWand");
     	
     	//MinecraftForgeClient.registerItemRenderer(trafficLight.blockID, new TrafficLightItemRenderer());
     	MinecraftForge.EVENT_BUS.register(new TarBucketHandler());
-    	MinecraftForge.EVENT_BUS.register(new RedDieselBucketHandler());
-    	MinecraftForge.EVENT_BUS.register(new OilBucketHandler());
-    	MinecraftForge.EVENT_BUS.register(new PetrolBucketHandler());
-    	MinecraftForge.EVENT_BUS.register(new DieselBucketHandler());
     }
     
     //public static Block roadRampy5 = new RoadRamp5(249).setUnlocalizedName("roadRampy5");
@@ -432,6 +412,12 @@ public class Roads {
             GameRegistry.addSmelting(Roads.cementItem.itemID, new ItemStack(Roads.generalBlocks, 1, 1), 0.2F);
             GameRegistry.addSmelting(Roads.tarBucketItem.itemID, new ItemStack(Roads.generalBlocks, 1, 3), 0.2F);
         }
+    
+    @ForgeSubscribe
+	public void postStitch(TextureStitchEvent.Post event) {
+    	System.out.println("Registering FlenixRoads Tar Texture for tank usage");
+    	tarFluid.setIcons(tarBlock.getBlockTextureFromSide(0), tarBlock.getBlockTextureFromSide(1));
+    }
 
 
 		@EventHandler
