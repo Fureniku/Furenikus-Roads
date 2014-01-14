@@ -1,5 +1,7 @@
 package co.uk.silvania.roads;
 
+import java.io.File;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -32,8 +34,13 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
+<<<<<<< HEAD
 @Mod(modid=Roads.modid, name="FlenixRoads", version="0.5.2")
 @NetworkMod(channels = {"FRoadsPackets"}, clientSideRequired=true, serverSideRequired=false, packetHandler = PacketHandler.class)
+=======
+@Mod(modid=Roads.modid, name="FlenixRoads", dependencies="required-after:flenixcities", version="0.5.3")
+@NetworkMod(channels = {"FRoadsPackets", "FRRedstone"}, clientSideRequired=true, serverSideRequired=false, packetHandler = PacketHandler.class)
+>>>>>>> Various cleanups
 public class Roads {
 	
 	public static final String modid = "FlenixRoads";
@@ -73,8 +80,6 @@ public class Roads {
 	public static Block roadBlockForkB;
 	public static Block roadBlockForkC;
 	public static Block roadBlockForkD;
-	public static Block roadBlockForkE;
-	public static Block roadBlockForkF;
 	public static Block roadBlockForkG;
 	public static Block roadBlockCenterCorner;
 	public static Block roadBlockLettersABCD;
@@ -149,12 +154,45 @@ public class Roads {
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+    	File cfgfile = new File(event.getModConfigurationDirectory(), "FlenixRoads");
+    	System.out.println("Checking to see if you're illegally using Technic...");
+    	if (cfgfile.getAbsolutePath().toLowerCase().contains(".technic")) {
+    		if (cfgfile.getAbsolutePath().toLowerCase().contains("lifemmo")) {
+    			System.out.println("Technic has been detected!");
+    			System.out.println("Ah, but I see you're using LifeMMO. In that case, an agreement has been reached. Carry on.");
+    		} else if (cfgfile.getAbsolutePath().toLowerCase().contains("")) {
+    			System.out.println("Technic has been detected!");
+    			System.out.println("Ah, but I see you're using GMC. In that case, an agreement has been reached. Carry on.");
+    		} else {
+    			System.out.println("##########################################################");
+    			System.out.println("##########################################################");
+    			System.out.println("##########################################################");
+	    		System.out.println("Technic has been detected!");
+	    		System.out.println("First, I'd like to thank Gregorius Techneticies for kindly sharing this code with me");
+	    		System.out.println("I have decided to block use of Technic due to the Technic Communities horrible approach to us modders");
+	    		System.out.println("If such a time comes that they treat us with just a TINY bit of respect, I'll remove this code.");
+	    		System.out.println("Until then, Technic is not allowed. Please use FTB or AtLauncher - both are much better anyway.");
+	    		System.out.println("www.feed-the-beast.org - www.atlauncher.com");
+	    		System.out.println("If you wish to discuss using my mods in Technic, please email me as below.");
+	    		System.out.println("I DO let people who ask nicely use it, and my code allows for that; LifeMMO is a perfect example.");
+	    		System.out.println("");
+	    		System.out.println("Yours, Flenix (flenix@silvania.co.uk)");
+	    		System.out.println("##########################################################");
+	    		System.out.println("##########################################################");
+	    		System.out.println("##########################################################");
+	    		return;
+    		}
+    	}
     	RoadsConfig config = new RoadsConfig();
     	NetworkRegistry.instance().registerGuiHandler(this, roadsGuiHandler);
     	
     	RoadsConfig.loadConfig(event); 
     	
+<<<<<<< HEAD
     	tarFluid = new Fluid("tar").setBlockID(config.roadsTarFlowingID).setUnlocalizedName("tarFluid");
+=======
+    	tarFluid = new Fluid("tar").setBlockID(config.roadsTarFlowingID).setViscosity(1000000).setUnlocalizedName("tarFluid");
+>>>>>>> Various cleanups
     	FluidRegistry.registerFluid(Roads.tarFluid);
     	tarBlock = new BlockTar(config.roadsTarFlowingID, tarFluid);
 
@@ -180,8 +218,6 @@ public class Roads {
     	roadBlockForkB = new RoadBlock(config.roadBlockForkBID).setUnlocalizedName("roadBlockForkB");
     	roadBlockForkC = new RoadBlock(config.roadBlockForkCID).setUnlocalizedName("roadBlockForkC");
     	roadBlockForkD = new RoadBlock(config.roadBlockForkDID).setUnlocalizedName("roadBlockForkD");
-    	roadBlockForkE = new RoadBlock(config.roadBlockForkEID).setUnlocalizedName("roadBlockForkE");
-    	roadBlockForkF = new RoadBlock(config.roadBlockForkFID).setUnlocalizedName("roadBlockForkF");
     	roadBlockForkG = new RoadBlock(config.roadBlockForkGID).setUnlocalizedName("roadBlockForkG");
     	roadBlockCenterCorner = new RoadBlock(config.roadBlockCenterCornerID).setUnlocalizedName("roadBlockCenterCorner");
     	
@@ -313,7 +349,7 @@ public class Roads {
             ItemStack cementDustStack = new ItemStack(Roads.cementDustItem);
             ItemStack cobbleStoneStack = new ItemStack(Block.cobblestone);
             ItemStack cementItemStack = new ItemStack(Roads.cementItem);
-            ItemStack tarBucketStack = new ItemStack(Roads.tarBucketItem);
+            ItemStack tarBucketStack = new ItemStack((Roads.tarBucketItem).setContainerItem(Item.bucketEmpty));
             ItemStack macadamStack = new ItemStack(Roads.generalBlocks, 1, 2);
             ItemStack limeStack = new ItemStack(Roads.limeStonePowderItem);
             ItemStack yellowDye = new ItemStack(Item.dyePowder, 1, 11);
@@ -405,12 +441,14 @@ public class Roads {
             GameRegistry.addShapelessRecipe(new ItemStack(Roads.sidewalkBlockLight), whiteDye, concreteOld);
             GameRegistry.addShapelessRecipe(new ItemStack(Roads.sidewalkBlockTile), whiteDye, blackDye, concreteOld);
             GameRegistry.addShapelessRecipe(new ItemStack(Roads.generalBlocks, 1, 5), concrete, waterBucketStack);
-            GameRegistry.addShapelessRecipe(new ItemStack(Roads.generalBlocks, 1, 4), cementBlock, sandStack, waterBucketStack, cobbleStoneStack);
+            GameRegistry.addShapelessRecipe(new ItemStack(Roads.generalBlocks, 4, 4), cementBlock, sandStack, waterBucketStack, cobbleStoneStack);
             
             //And some smelting!
             GameRegistry.addSmelting(Roads.limeClayPowderItem.itemID, new ItemStack(Roads.cementDustItem), 0.1F);
             GameRegistry.addSmelting(Roads.cementItem.itemID, new ItemStack(Roads.generalBlocks, 1, 1), 0.2F);
             GameRegistry.addSmelting(Roads.tarBucketItem.itemID, new ItemStack(Roads.generalBlocks, 1, 3), 0.2F);
+            
+            MinecraftForge.EVENT_BUS.register(new EventListener());
         }
     
     @ForgeSubscribe
@@ -420,10 +458,9 @@ public class Roads {
     }
 
 
-		@EventHandler
-        public void postInit(FMLPostInitializationEvent event) {
-    		
-			int roadsRenderID = RenderingRegistry.getNextAvailableRenderId();
-                // Stub Method
-        		}
-		};
+	@EventHandler
+    public void postInit(FMLPostInitializationEvent event) {
+		int roadsRenderID = RenderingRegistry.getNextAvailableRenderId();
+            // Stub Method
+    }
+};

@@ -42,10 +42,6 @@ public class TileEntityBarrierCornerBlock extends BlockContainer {
 		return false;
 	}
 	
-	public void registerIcons(IconRegister icon) {
-		this.blockIcon = icon.registerIcon("Roads:barrierpole");
-	}
-	
     public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)
     {
         int l = MathHelper.floor_double((double)(par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;

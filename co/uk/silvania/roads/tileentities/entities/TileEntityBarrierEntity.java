@@ -11,5 +11,4 @@ public class TileEntityBarrierEntity extends TileEntity {
     public AxisAlignedBB getRenderBoundingBox() {
             return AxisAlignedBB.getAABBPool().getAABB(this.xCoord - 2, this.yCoord - 2, this.zCoord - 2, this.xCoord + 2, this.yCoord + 2, this.zCoord + 2);
     }
-
 }

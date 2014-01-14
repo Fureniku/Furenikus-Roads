@@ -8,9 +8,7 @@ import net.minecraft.util.AxisAlignedBB;
 public class TileEntityRoadSlope5Entity extends TileEntity {
 	
 	@SideOnly(Side.CLIENT)
-    public AxisAlignedBB getRenderBoundingBox()
-    {
-            return AxisAlignedBB.getAABBPool().getAABB(this.xCoord - 5, this.yCoord - 5, this.zCoord - 5, this.xCoord + 5, this.yCoord + 5, this.zCoord + 5);
+    public AxisAlignedBB getRenderBoundingBox() {
+            return AxisAlignedBB.getAABBPool().getAABB(this.xCoord - 10, this.yCoord - 10, this.zCoord - 10, this.xCoord + 10, this.yCoord + 10, this.zCoord + 10);
     }
-
 }

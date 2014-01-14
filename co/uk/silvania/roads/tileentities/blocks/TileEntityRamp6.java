@@ -59,7 +59,7 @@ public class TileEntityRamp6 extends BlockContainer {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister iconRegister) {
-        blockIcon = iconRegister.registerIcon("Roads:roadRamp3");
+        blockIcon = iconRegister.registerIcon("flenixroads:roadramp3");
     }
 
     @SideOnly(Side.CLIENT)

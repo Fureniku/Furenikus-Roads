@@ -112,10 +112,4 @@ public class TileEntityRoadPainterBlock extends BlockContainer {
     	else
     		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.6F, 1.0F);
     }
-      
-	
-	public void registerIcons(IconRegister icon) {
-		this.blockIcon = icon.registerIcon("Roads:CementBlock");
-	}
-
 }

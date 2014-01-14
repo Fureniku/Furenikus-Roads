@@ -57,7 +57,7 @@ public class SidewalkBlockTri extends Block {
 	public void registerIcons(IconRegister iconRegister) {
 		icons = new Icon[16];
 		
-		for(int i = 0; i < icons.length; i++) {
+		for(int i = 0; i < 12; i++) {
 			icons[i] = iconRegister.registerIcon(Roads.modid + ":" + (this.getUnlocalizedName().substring(5)) + i);
 			side1 = iconRegister.registerIcon(Roads.modid + ":sidewalkBlockGrey0");
 			sidekerbed1 = iconRegister.registerIcon(Roads.modid + ":sidewalkBlockGrey4");

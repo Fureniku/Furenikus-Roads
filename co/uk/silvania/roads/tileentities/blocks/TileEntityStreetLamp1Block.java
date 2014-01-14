@@ -66,7 +66,7 @@ public class TileEntityStreetLamp1Block extends BlockContainer {
 	}
 	
 	public void registerIcons(IconRegister icon) {
-		this.blockIcon = icon.registerIcon("Roads:light");
+		this.blockIcon = icon.registerIcon("flenixroads:light");
 	}
 	
     public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)

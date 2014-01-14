@@ -176,7 +176,7 @@ public class TileEntityRoadBarrierBlock extends BlockContainer {
 	}
 	
 	public void registerIcons(IconRegister icon) {
-		this.blockIcon = icon.registerIcon("Roads:barrierIcon");
+		this.blockIcon = icon.registerIcon("flenixroads:barrierIcon");
 	}
 	
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)

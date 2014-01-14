@@ -51,6 +51,25 @@ public class TileEntityTrafficLightBlock extends BlockContainer {
 		}
     }
     
+    @Override
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int i, float j, float k, float l) {
+    	if (!world.isRemote) {
+    		TileEntityTrafficLightEntity tileEntity = (TileEntityTrafficLightEntity)world.getBlockTileEntity(x, y, z);
+    		
+    		if (world.isBlockIndirectlyGettingPowered(x, y, z)) {
+				tileEntity.isPowered = true;
+				System.out.println("It's getting powered!");
+			} else {
+				tileEntity.isPowered = false;
+				System.out.println("It's not getting powered.");
+			}
+
+    		System.out.println("Powered state: " + tileEntity.isPowered);
+    		tileEntity.sendRedstonePacketToClient();
+    	}
+    	return true;
+    }
+    
     
     @Override
     public TileEntity createNewTileEntity(World world) {
@@ -91,10 +110,10 @@ public class TileEntityTrafficLightBlock extends BlockContainer {
 
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister iconRegister) {
-        red = iconRegister.registerIcon("Roads:trafficLight0");
-        green = iconRegister.registerIcon("Roads:trafficLight4");
-        redamber = iconRegister.registerIcon("Roads:trafficLight8");
-        amber = iconRegister.registerIcon("Roads:trafficLight12");
+        red = iconRegister.registerIcon("flenixroads:trafficLight0");
+        green = iconRegister.registerIcon("flenixroads:trafficLight4");
+        redamber = iconRegister.registerIcon("flenixroads:trafficLight8");
+        amber = iconRegister.registerIcon("flenixroads:trafficLight12");
     }
 
     @SideOnly(Side.CLIENT)

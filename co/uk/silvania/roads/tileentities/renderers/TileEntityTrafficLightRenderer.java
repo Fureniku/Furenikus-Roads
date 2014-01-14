@@ -24,6 +24,7 @@ import co.uk.silvania.roads.tileentities.entities.TileEntityTrafficLightEntity;
 public class TileEntityTrafficLightRenderer extends TileEntitySpecialRenderer {
 
     private TrafficLightModel model;
+    public static boolean powered;
 
     public TileEntityTrafficLightRenderer() {
         model = new TrafficLightModel();
@@ -56,6 +57,7 @@ public class TileEntityTrafficLightRenderer extends TileEntitySpecialRenderer {
         
         if (te instanceof TileEntityTrafficLightEntity) {
         	World world = Minecraft.getMinecraft().theWorld;
+<<<<<<< HEAD
         	TileEntityTrafficLightEntity trafficLight = (TileEntityTrafficLightEntity) te;
         	NBTTagCompound nbt = NBTConfig.getTagCompoundInFile(NBTConfig.getWorldConfig(world));
         	trafficLight.readFromNBT(nbt);
@@ -63,6 +65,17 @@ public class TileEntityTrafficLightRenderer extends TileEntitySpecialRenderer {
         	if (nbt.getString("hasPower").equals("powered")) {
         		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("flenixroads", "textures/entities/TrafficLightGreen.png"));
         	} else {
+=======
+        	//TileEntityTrafficLightEntity trafficLight = (TileEntityTrafficLightEntity) te;
+        	//NBTTagCompound nbt = NBTConfig.getTagCompoundInFile(NBTConfig.getWorldConfig(world));
+        	//trafficLight.readFromNBT(nbt);
+        	//System.out.println("Checking power state: " + powered);
+        	if (powered == true) {
+        		System.out.println("Powered True Render");
+        		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("flenixroads", "textures/entities/TrafficLightGreen.png"));
+        	} else {
+        		//System.out.println("Powered False Render");
+>>>>>>> Various cleanups
         		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("flenixroads", "textures/entities/TrafficLightRed.png"));
         	}
         }

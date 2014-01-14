@@ -44,12 +44,7 @@ public class TileEntityBarrierBlock extends BlockContainer {
 		return false;
 	}
 	
-	public void registerIcons(IconRegister icon) {
-		this.blockIcon = icon.registerIcon("Roads:barrier");
-	}
-	
-    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)
-    {
+    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
         int l = MathHelper.floor_double((double)(par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
         par1World.setBlockMetadataWithNotify(par2, par3, par4, l, 2);
     }

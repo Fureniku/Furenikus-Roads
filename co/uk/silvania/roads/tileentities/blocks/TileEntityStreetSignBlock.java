@@ -78,7 +78,7 @@ public class TileEntityStreetSignBlock extends BlockContainer {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister iconRegister) {
-    	blockIcon = iconRegister.registerIcon("Roads:streetSign30");
+    	blockIcon = iconRegister.registerIcon("flenixroads:streetSign30");
     }
 
     @SideOnly(Side.CLIENT)

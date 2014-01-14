@@ -2,6 +2,11 @@ package co.uk.silvania.roads.liquid;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
+<<<<<<< HEAD
+=======
+import net.minecraft.entity.Entity;
+import net.minecraft.util.DamageSource;
+>>>>>>> Various cleanups
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -17,7 +22,10 @@ public class BlockTar extends BlockFluidClassic {
 		super(id, fluid, Material.water);
 		this.setDensity(2025);
 		this.setTemperature(425);
+<<<<<<< HEAD
 		//this.setViscosity(1);
+=======
+>>>>>>> Various cleanups
 	}
 	
 	@SideOnly(Side.CLIENT)
@@ -30,6 +38,17 @@ public class BlockTar extends BlockFluidClassic {
 		return (side == 0 || side == 1) ? stillIcon : flowingIcon;
 	}
 	
+<<<<<<< HEAD
+=======
+    @Override
+    public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) {
+    	entity.motionX *= 0.05D;
+        entity.motionY *= 0.01D;
+        entity.motionZ *= 0.05D;
+        entity.attackEntityFrom(DamageSource.onFire, 1.0F);
+    }
+	
+>>>>>>> Various cleanups
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IconRegister icon) {
