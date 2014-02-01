@@ -22,7 +22,6 @@ public class CatsEyeSide extends Block {
 		super(id, Material.glass);
 		this.setStepSound(Block.soundStoneFootstep);
 		this.setCreativeTab(Roads.tabRoads);
-        this.setBlockBounds(0.4F, -0.25F, 0.4F, 0.6F, -0.2F, 0.6F);
 	}
 	
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
