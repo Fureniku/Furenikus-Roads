@@ -65,7 +65,6 @@ public class TileEntityTrafficLightBlock extends BlockContainer {
 			}
 
     		System.out.println("Powered state: " + tileEntity.isPowered);
-    		tileEntity.sendRedstonePacketToClient();
     	}
     	return true;
     }

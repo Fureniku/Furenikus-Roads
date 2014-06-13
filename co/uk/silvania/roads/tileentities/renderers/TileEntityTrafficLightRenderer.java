@@ -26,6 +26,8 @@ public class TileEntityTrafficLightRenderer extends TileEntitySpecialRenderer {
     private TrafficLightModel model;
     public static boolean powered;
 
+    private TileEntityTrafficLightEntity trafficLightEntity;
+    
     public TileEntityTrafficLightRenderer() {
         model = new TrafficLightModel();
     }
@@ -37,6 +39,10 @@ public class TileEntityTrafficLightRenderer extends TileEntitySpecialRenderer {
     @Override
     public void renderTileEntityAt(TileEntity te, double x, double y, double z, float scale) {
         int rotation = 180;
+        
+        trafficLightEntity = (TileEntityTrafficLightEntity) te;
+        boolean power = this.trafficLightEntity.isPowered;
+        
         switch (te.getBlockMetadata() % 4) {
             case 0:
                 rotation = 0;
@@ -55,29 +61,13 @@ public class TileEntityTrafficLightRenderer extends TileEntitySpecialRenderer {
         GL11.glPushMatrix();
         int i = te.getBlockMetadata();
         
-        if (te instanceof TileEntityTrafficLightEntity) {
-        	World world = Minecraft.getMinecraft().theWorld;
-<<<<<<< HEAD
-        	TileEntityTrafficLightEntity trafficLight = (TileEntityTrafficLightEntity) te;
-        	NBTTagCompound nbt = NBTConfig.getTagCompoundInFile(NBTConfig.getWorldConfig(world));
-        	trafficLight.readFromNBT(nbt);
-        	System.out.println("Reading NBT value render-side. Right now, it's " + nbt.getString("hasPower"));
-        	if (nbt.getString("hasPower").equals("powered")) {
-        		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("flenixroads", "textures/entities/TrafficLightGreen.png"));
-        	} else {
-=======
-        	//TileEntityTrafficLightEntity trafficLight = (TileEntityTrafficLightEntity) te;
-        	//NBTTagCompound nbt = NBTConfig.getTagCompoundInFile(NBTConfig.getWorldConfig(world));
-        	//trafficLight.readFromNBT(nbt);
-        	//System.out.println("Checking power state: " + powered);
-        	if (powered == true) {
-        		System.out.println("Powered True Render");
-        		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("flenixroads", "textures/entities/TrafficLightGreen.png"));
-        	} else {
-        		//System.out.println("Powered False Render");
->>>>>>> Various cleanups
-        		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("flenixroads", "textures/entities/TrafficLightRed.png"));
-        	}
+
+    	if (power == true) {
+    		System.out.println("Powered: " + power);
+    		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("flenixroads", "textures/entities/TrafficLightGreen.png"));
+    	} else {
+    		System.out.println("Powered: " + power);
+    		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("flenixroads", "textures/entities/TrafficLightRed.png"));
         }
             
         GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);

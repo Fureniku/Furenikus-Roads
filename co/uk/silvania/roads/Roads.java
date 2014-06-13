@@ -34,13 +34,10 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-<<<<<<< HEAD
-@Mod(modid=Roads.modid, name="FlenixRoads", version="0.5.2")
-@NetworkMod(channels = {"FRoadsPackets"}, clientSideRequired=true, serverSideRequired=false, packetHandler = PacketHandler.class)
-=======
-@Mod(modid=Roads.modid, name="FlenixRoads", dependencies="required-after:flenixcities", version="0.5.3")
+
+@Mod(modid=Roads.modid, name="FlenixRoads", dependencies="required-after:flenixcities", version="0.5.4")
 @NetworkMod(channels = {"FRoadsPackets", "FRRedstone"}, clientSideRequired=true, serverSideRequired=false, packetHandler = PacketHandler.class)
->>>>>>> Various cleanups
+
 public class Roads {
 	
 	public static final String modid = "FlenixRoads";
@@ -188,11 +185,8 @@ public class Roads {
     	
     	RoadsConfig.loadConfig(event); 
     	
-<<<<<<< HEAD
-    	tarFluid = new Fluid("tar").setBlockID(config.roadsTarFlowingID).setUnlocalizedName("tarFluid");
-=======
+
     	tarFluid = new Fluid("tar").setBlockID(config.roadsTarFlowingID).setViscosity(1000000).setUnlocalizedName("tarFluid");
->>>>>>> Various cleanups
     	FluidRegistry.registerFluid(Roads.tarFluid);
     	tarBlock = new BlockTar(config.roadsTarFlowingID, tarFluid);
 
@@ -345,7 +339,7 @@ public class Roads {
             //First, register the blocks and items we'll use.
             ItemStack clayStack = new ItemStack(Item.clay);
             ItemStack sandStack = new ItemStack(Block.sand);
-            ItemStack waterBucketStack = new ItemStack(Item.bucketWater);
+            ItemStack waterBucketStack = new ItemStack((Item.bucketWater).setContainerItem(Item.bucketEmpty));
             ItemStack cementDustStack = new ItemStack(Roads.cementDustItem);
             ItemStack cobbleStoneStack = new ItemStack(Block.cobblestone);
             ItemStack cementItemStack = new ItemStack(Roads.cementItem);
