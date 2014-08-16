@@ -11,4 +11,16 @@
 /mcpmod.info
 /Start.java
 
+
+/.gradle
+/.settings
+/bin/
+/build/
+/eclipse
+
+/.classpath
+/.project
+*.txt
 *.bat
+*.sh
+*.lzma
