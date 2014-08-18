@@ -1,6 +1,7 @@
 package co.uk.silvania.roads;
 
 import co.uk.silvania.roads.blocks.FRBlocks;
+import co.uk.silvania.roads.items.FRItems;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -34,6 +35,7 @@ public class FlenixRoads {
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		FRBlocks.init();
+		FRItems.init();
 	}
 	
 	@EventHandler
