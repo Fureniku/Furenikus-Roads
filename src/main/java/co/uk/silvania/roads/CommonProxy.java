@@ -2,6 +2,7 @@ package co.uk.silvania.roads;
 
 import co.uk.silvania.roads.blocks.FRBlocks;
 import co.uk.silvania.roads.blocks.RoadItemBlock;
+import co.uk.silvania.roads.items.FRItems;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class CommonProxy {
@@ -19,7 +20,8 @@ public class CommonProxy {
 	}
 	
 	public void registerItems() {
-		//GameRegistry.registerItem(FRItems.tarmacCutter, "tarmacCutter");
+		GameRegistry.registerItem(FRItems.tarmacCutter, "tarmacCutter");
+		GameRegistry.registerItem(FRItems.impactWrench, "impactWrench");
 	}
 	
 	public void registerRenderers() {

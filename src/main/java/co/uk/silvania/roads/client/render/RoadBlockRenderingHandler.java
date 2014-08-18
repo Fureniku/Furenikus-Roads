@@ -75,7 +75,7 @@ public class RoadBlockRenderingHandler implements ISimpleBlockRenderingHandler {
         if (world.getBlock(x+1, y+yH, z+1) instanceof RoadBlock) { se = quadHeight(world.getBlockMetadata(x+1, y+yH, z+1));} else { se = a;}
         if (world.getBlock(x,   y+yH, z+1) instanceof RoadBlock) { s  = quadHeight(world.getBlockMetadata(x  , y+yH, z+1));} else { s  = a;}
         if (world.getBlock(x-1, y+yH, z+1) instanceof RoadBlock) { sw = quadHeight(world.getBlockMetadata(x-1, y+yH, z+1));} else { sw = a;}
-        if (world.getBlock(x-1, y+yH, z)   instanceof RoadBlock) { System.out.println("WEST SIDE BRUV");w  = quadHeight(world.getBlockMetadata(x-1, y+yH, z  ));} else { w  = a;}
+        if (world.getBlock(x-1, y+yH, z)   instanceof RoadBlock) { /*System.out.println("WEST SIDE BRUV");*/w  = quadHeight(world.getBlockMetadata(x-1, y+yH, z  ));} else { w  = a;}
         if (world.getBlock(x-1, y+yH, z-1) instanceof RoadBlock) { nw = quadHeight(world.getBlockMetadata(x-1, y+yH, z-1));} else { nw = a;}
         
         //Create a boolean as to whether there's a valid connection on each of the 8 sides.
@@ -122,8 +122,8 @@ public class RoadBlockRenderingHandler implements ISimpleBlockRenderingHandler {
         	col = 240;
         }
         
-        System.out.println("SWB: " + swB + ", SB: " + sB + ", WB: " + wB);
-        System.out.println("NE: " + neQ + ", SE: " + seQ + ", SW: " + swQ + ", NW: " + nwQ);
+        //System.out.println("SWB: " + swB + ", SB: " + sB + ", WB: " + wB);
+        //System.out.println("NE: " + neQ + ", SE: " + seQ + ", SW: " + swQ + ", NW: " + nwQ);
         
         //Now, we actually render each face.
         //Each face needs the colour setting, and then four vertex.

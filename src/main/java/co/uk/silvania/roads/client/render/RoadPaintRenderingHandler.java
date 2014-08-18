@@ -109,8 +109,8 @@ public class RoadPaintRenderingHandler implements ISimpleBlockRenderingHandler {
         	col = 240;
         }
         
-        System.out.println("SWB: " + swB + ", SB: " + sB + ", WB: " + wB);
-        System.out.println("NE: " + neQ + ", SE: " + seQ + ", SW: " + swQ + ", NW: " + nwQ);
+        //System.out.println("SWB: " + swB + ", SB: " + sB + ", WB: " + wB);
+        //System.out.println("NE: " + neQ + ", SE: " + seQ + ", SW: " + swQ + ", NW: " + nwQ);
         
         //Now, we actually render each face.
         //Each face needs the colour setting, and then four vertex.
