@@ -32,7 +32,7 @@ public class RoadBlockCT extends RoadBlock {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public IIcon getIcon(int side, int meta) {
-		return icons[meta];
+		return icons[15];
 	}
 	
 	@Override
@@ -54,16 +54,14 @@ public class RoadBlockCT extends RoadBlock {
 		return meta;
 	}
 	
-    public boolean shouldConnectToBlock (IBlockAccess block, int x, int y, int z, Block ctBlock, int ctMeta)
-    {
-        return ctBlock == block.getBlock(x, y, z);
+    public boolean shouldConnectToBlock (IBlockAccess block, int x, int y, int z, Block ctBlock, int ctMeta) {
+        return ctBlock == this;
     }
 	
     public IIcon getConnectedBlockTexture (IBlockAccess block, int x, int y, int z, int side, IIcon[] icons) {
         boolean connectUp = false, connectDown = false, connectLeft = false, connectRight = false;
 
-        switch (side) {           
-        case 1:
+        if (side == 1) {
             if (shouldConnectToBlock(block, x, y, z, block.getBlock(x - 1, y, z), block.getBlockMetadata(x - 1, y, z))) {
                 connectDown = true;
             }
@@ -113,7 +111,6 @@ public class RoadBlockCT extends RoadBlock {
             } else if (!connectUp || !connectDown || !connectLeft || !connectRight) {
             	return icons[0];
             }
-            break;
         }
         return icons[15];
     }
