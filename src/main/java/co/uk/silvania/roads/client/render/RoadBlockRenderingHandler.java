@@ -58,25 +58,46 @@ public class RoadBlockRenderingHandler implements ISimpleBlockRenderingHandler {
         double sw = quadHeight(world.getBlockMetadata(x-1, y, z+1));
         double w  = quadHeight(world.getBlockMetadata(x-1, y, z  ));
         double nw = quadHeight(world.getBlockMetadata(x-1, y, z-1));
-        
 
-        
         //If the block is max height, it should check the blocks ABOVE to continue a ramp to the next level. As blocks always go up, it makes
-        //no sense to check things on it's own level, because it'll never go up there. Value is short for "Y Height"
-        int yH = 0;
-        if (world.getBlockMetadata(x, y, z) == 15) {
-        	yH = 1;
-        }
+        //no sense to check things on it's own level, because it'll never go up there. Value is short for "Compass Y Height"
+        int nyH = 0;
+        int neyH = 0;
+        int eyH = 0;
+        int seyH = 0;
+        int syH = 0;
+        int swyH = 0;
+        int wyH = 0;
+        int nwyH = 0;
+        
+        //Also check whether it is (or isn't) a road block at all. Value is "compass true".
+        boolean nt  = world.getBlock(x,   y, z-1) instanceof RoadBlock && world.getBlockMetadata(x, y, z) == 15;
+        boolean net = world.getBlock(x+1, y, z-1) instanceof RoadBlock && world.getBlockMetadata(x, y, z) == 15;;
+        boolean et  = world.getBlock(x+1, y, z)   instanceof RoadBlock && world.getBlockMetadata(x, y, z) == 15;;
+        boolean set = world.getBlock(x+1, y, z+1) instanceof RoadBlock && world.getBlockMetadata(x, y, z) == 15;;
+        boolean st  = world.getBlock(x,   y, z+1) instanceof RoadBlock && world.getBlockMetadata(x, y, z) == 15;;
+        boolean swt = world.getBlock(x-1, y, z+1) instanceof RoadBlock && world.getBlockMetadata(x, y, z) == 15;;
+        boolean wt  = world.getBlock(x-1, y, z)   instanceof RoadBlock && world.getBlockMetadata(x, y, z) == 15;;
+        boolean nwt = world.getBlock(x-1, y, z-1) instanceof RoadBlock && world.getBlockMetadata(x, y, z) == 15;;
+        
+        if (nt  || !(world.getBlock(x,   y, z-1) instanceof RoadBlock)) { nyH = 1;}
+        if (net || !(world.getBlock(x+1, y, z-1) instanceof RoadBlock)) { neyH = 1;}
+        if (et  || !(world.getBlock(x+1, y, z)   instanceof RoadBlock)) { eyH = 1;}
+        if (set || !(world.getBlock(x+1, y, z+1) instanceof RoadBlock)) { seyH = 1;}
+        if (st  || !(world.getBlock(x,   y, z+1) instanceof RoadBlock)) { syH = 1;}
+        if (swt || !(world.getBlock(x-1, y, z+1) instanceof RoadBlock)) { swyH = 1;}
+        if (wt  || !(world.getBlock(x-1, y, z)   instanceof RoadBlock)) { wyH = 1;}
+        if (nwt || !(world.getBlock(x-1, y, z-1) instanceof RoadBlock)) { nwyH = 1;}
         
         //Check if each of the 8 points to connect are actually a roadblock.
-        if (world.getBlock(x,   y+yH, z-1) instanceof RoadBlock) { n  = quadHeight(world.getBlockMetadata(x  , y+yH, z-1));} else { n  = a;}
-        if (world.getBlock(x+1, y+yH, z-1) instanceof RoadBlock) { ne = quadHeight(world.getBlockMetadata(x+1, y+yH, z-1));} else { ne = a;}
-        if (world.getBlock(x+1, y+yH, z)   instanceof RoadBlock) { e  = quadHeight(world.getBlockMetadata(x+1, y+yH, z  ));} else { e  = a;}
-        if (world.getBlock(x+1, y+yH, z+1) instanceof RoadBlock) { se = quadHeight(world.getBlockMetadata(x+1, y+yH, z+1));} else { se = a;}
-        if (world.getBlock(x,   y+yH, z+1) instanceof RoadBlock) { s  = quadHeight(world.getBlockMetadata(x  , y+yH, z+1));} else { s  = a;}
-        if (world.getBlock(x-1, y+yH, z+1) instanceof RoadBlock) { sw = quadHeight(world.getBlockMetadata(x-1, y+yH, z+1));} else { sw = a;}
-        if (world.getBlock(x-1, y+yH, z)   instanceof RoadBlock) { /*System.out.println("WEST SIDE BRUV");*/w  = quadHeight(world.getBlockMetadata(x-1, y+yH, z  ));} else { w  = a;}
-        if (world.getBlock(x-1, y+yH, z-1) instanceof RoadBlock) { nw = quadHeight(world.getBlockMetadata(x-1, y+yH, z-1));} else { nw = a;}
+        if (world.getBlock(x,   y+nyH, z-1)  instanceof RoadBlock) { n  = quadHeight(world.getBlockMetadata(x  , y+nyH, z-1));} else { n  = a;}
+        if (world.getBlock(x+1, y+neyH, z-1) instanceof RoadBlock) { ne = quadHeight(world.getBlockMetadata(x+1, y+neyH, z-1));} else { ne = a;}
+        if (world.getBlock(x+1, y+eyH, z)    instanceof RoadBlock) { e  = quadHeight(world.getBlockMetadata(x+1, y+eyH, z  ));} else { e  = a;}
+        if (world.getBlock(x+1, y+seyH, z+1) instanceof RoadBlock) { se = quadHeight(world.getBlockMetadata(x+1, y+seyH, z+1));} else { se = a;}
+        if (world.getBlock(x,   y+syH, z+1)  instanceof RoadBlock) { s  = quadHeight(world.getBlockMetadata(x  , y+syH, z+1));} else { s  = a;}
+        if (world.getBlock(x-1, y+swyH, z+1) instanceof RoadBlock) { sw = quadHeight(world.getBlockMetadata(x-1, y+swyH, z+1));} else { sw = a;}
+        if (world.getBlock(x-1, y+wyH, z)    instanceof RoadBlock) { w  = quadHeight(world.getBlockMetadata(x-1, y+wyH, z  ));} else { w  = a;}
+        if (world.getBlock(x-1, y+nwyH, z-1) instanceof RoadBlock) { nw = quadHeight(world.getBlockMetadata(x-1, y+nwyH, z-1));} else { nw = a;}
         
         //Create a boolean as to whether there's a valid connection on each of the 8 sides.
         //Check if each side is HIGHER than the current block. We only go up, never down.
