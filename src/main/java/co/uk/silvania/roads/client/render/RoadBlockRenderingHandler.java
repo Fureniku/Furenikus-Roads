@@ -72,13 +72,13 @@ public class RoadBlockRenderingHandler implements ISimpleBlockRenderingHandler {
         
         //Also check whether it is (or isn't) a road block at all. Value is "compass true".
         boolean nt  = world.getBlock(x,   y, z-1) instanceof RoadBlock && world.getBlockMetadata(x, y, z) == 15;
-        boolean net = world.getBlock(x+1, y, z-1) instanceof RoadBlock && world.getBlockMetadata(x, y, z) == 15;;
-        boolean et  = world.getBlock(x+1, y, z)   instanceof RoadBlock && world.getBlockMetadata(x, y, z) == 15;;
-        boolean set = world.getBlock(x+1, y, z+1) instanceof RoadBlock && world.getBlockMetadata(x, y, z) == 15;;
-        boolean st  = world.getBlock(x,   y, z+1) instanceof RoadBlock && world.getBlockMetadata(x, y, z) == 15;;
-        boolean swt = world.getBlock(x-1, y, z+1) instanceof RoadBlock && world.getBlockMetadata(x, y, z) == 15;;
-        boolean wt  = world.getBlock(x-1, y, z)   instanceof RoadBlock && world.getBlockMetadata(x, y, z) == 15;;
-        boolean nwt = world.getBlock(x-1, y, z-1) instanceof RoadBlock && world.getBlockMetadata(x, y, z) == 15;;
+        boolean net = world.getBlock(x+1, y, z-1) instanceof RoadBlock && world.getBlockMetadata(x, y, z) == 15;
+        boolean et  = world.getBlock(x+1, y, z)   instanceof RoadBlock && world.getBlockMetadata(x, y, z) == 15;
+        boolean set = world.getBlock(x+1, y, z+1) instanceof RoadBlock && world.getBlockMetadata(x, y, z) == 15;
+        boolean st  = world.getBlock(x,   y, z+1) instanceof RoadBlock && world.getBlockMetadata(x, y, z) == 15;
+        boolean swt = world.getBlock(x-1, y, z+1) instanceof RoadBlock && world.getBlockMetadata(x, y, z) == 15;
+        boolean wt  = world.getBlock(x-1, y, z)   instanceof RoadBlock && world.getBlockMetadata(x, y, z) == 15;
+        boolean nwt = world.getBlock(x-1, y, z-1) instanceof RoadBlock && world.getBlockMetadata(x, y, z) == 15;
         
         if (nt  || !(world.getBlock(x,   y, z-1) instanceof RoadBlock)) { nyH = 1;}
         if (net || !(world.getBlock(x+1, y, z-1) instanceof RoadBlock)) { neyH = 1;}
@@ -143,6 +143,18 @@ public class RoadBlockRenderingHandler implements ISimpleBlockRenderingHandler {
         	col = 240;
         }
         
+        //If we've got superheights (where the quad should extend higher than 1.0), calculate and apply them here.
+        //Value is "compass, quad, y height"
+        int nwQyH = 0;
+        int swQyH = 0;
+        int seQyH = 0;
+        int neQyH = 0;
+        
+        if (nyH == 1 || wyH == 1) {nwQyH = 1;}
+        if (syH == 1 || wyH == 1) {swQyH = 1;}
+        if (syH == 1 || eyH == 1) {seQyH = 1;}
+        if (nyH == 1 || eyH == 1) {neQyH = 1;}
+
         //System.out.println("SWB: " + swB + ", SB: " + sB + ", WB: " + wB);
         //System.out.println("NE: " + neQ + ", SE: " + seQ + ", SW: " + swQ + ", NW: " + nwQ);
         
@@ -151,10 +163,10 @@ public class RoadBlockRenderingHandler implements ISimpleBlockRenderingHandler {
         //Colour is required as it's reduced for sides and bottom, to give a false effect of "shading" which is surprisingly very important.
         //Top Side
         tess.setColorOpaque(col, col, col);
-        tess.addVertexWithUV(x,   y+nwQ, z,   u1, v1); //NW
-        tess.addVertexWithUV(x,   y+swQ, z+1, u1, v0); //SW
-        tess.addVertexWithUV(x+1, y+seQ, z+1, u0, v0); //SE
-        tess.addVertexWithUV(x+1, y+neQ, z,   u0, v1); //NE
+        tess.addVertexWithUV(x,   y+nwQ+nwQyH, z,   u1, v1); //NW
+        tess.addVertexWithUV(x,   y+swQ+swQyH, z+1, u1, v0); //SW
+        tess.addVertexWithUV(x+1, y+seQ+seQyH, z+1, u0, v0); //SE
+        tess.addVertexWithUV(x+1, y+neQ+neQyH, z,   u0, v1); //NE
         
         //North Side
         tess.setColorOpaque(204, 204, 204);
