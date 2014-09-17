@@ -1,6 +1,6 @@
 package co.uk.silvania.roads.client.render;
 
-import co.uk.silvania.roads.blocks.RoadBlock;
+import co.uk.silvania.roads.blocks.NonRoadBlock;
 import co.uk.silvania.roads.client.ClientProxy;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
@@ -9,7 +9,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
-public class RoadBlockRenderingHandler implements ISimpleBlockRenderingHandler {
+public class NonRoadBlockRenderingHandler implements ISimpleBlockRenderingHandler {
 	Tessellator tess;
 	
 	@Override
@@ -32,20 +32,21 @@ public class RoadBlockRenderingHandler implements ISimpleBlockRenderingHandler {
         IIcon icon;
         IIcon icon1;
 
-        int meta = renderer.blockAccess.getBlockMetadata(x, y, z);
-        icon = block.getIcon(0, meta);
-        icon1 = block.getIcon(0, meta);
+        //int meta = renderer.blockAccess.getBlockMetadata(x, y, z);
+        icon = block.getIcon(renderer.blockAccess, x, y, z, 1);
+        icon1 = block.getIcon(renderer.blockAccess, x, y, z, 0);
 
         double u0 = (double)icon.getMinU();
         double u1 = (double)icon.getMaxU();
         
-        icon.getMinU();
-        icon.getMaxU();
         double v0 = (double)icon.getMinV();
         double v1 = (double)icon.getMaxV();
         
-        icon1.getMinV();
-        icon1.getMaxV();
+        double u0_2 = (double)icon1.getMinU();
+        double u1_2 = (double)icon1.getMaxU();
+        
+        double v0_2 = (double)icon1.getMinV();
+        double v1_2 = (double)icon1.getMaxV();
         
         //Initial height values. Quad Height method simply gets the height from meta via quick calculation (more reliable than checking bounding box size, for some reason)
         //Value is compass.
@@ -74,14 +75,14 @@ public class RoadBlockRenderingHandler implements ISimpleBlockRenderingHandler {
         //This currently only checks the block next to it, and if there's a block there then it adds full.
         //should check block ABOVE the block next to it, and add the correct amount.
         //double not boolean, y+1, meta to get value. boom.
-        if (world.getBlock(x,   y+1, z-1) instanceof RoadBlock) { nt  = quadHeight(world.getBlockMetadata(x,   y+1, z-1)) + offset;}
-        if (world.getBlock(x+1, y+1, z-1) instanceof RoadBlock) { net = quadHeight(world.getBlockMetadata(x+1, y+1, z-1)) + offset;}
-        if (world.getBlock(x+1, y+1, z)   instanceof RoadBlock) { et  = quadHeight(world.getBlockMetadata(x+1, y+1, z  )) + offset;}
-        if (world.getBlock(x+1, y+1, z+1) instanceof RoadBlock) { set = quadHeight(world.getBlockMetadata(x+1, y+1, z+1)) + offset;}
-        if (world.getBlock(x,   y+1, z+1) instanceof RoadBlock) { st  = quadHeight(world.getBlockMetadata(x,   y+1, z+1)) + offset;}
-        if (world.getBlock(x-1, y+1, z+1) instanceof RoadBlock) { swt = quadHeight(world.getBlockMetadata(x-1, y+1, z+1)) + offset;}
-        if (world.getBlock(x-1, y+1, z)   instanceof RoadBlock) { wt  = quadHeight(world.getBlockMetadata(x-1, y+1, z  )) + offset;}
-        if (world.getBlock(x-1, y+1, z-1) instanceof RoadBlock) { nwt = quadHeight(world.getBlockMetadata(x-1, y+1, z-1)) + offset;}
+        if (world.getBlock(x,   y+1, z-1) instanceof NonRoadBlock) { nt  = quadHeight(world.getBlockMetadata(x,   y+1, z-1)) + offset;}
+        if (world.getBlock(x+1, y+1, z-1) instanceof NonRoadBlock) { net = quadHeight(world.getBlockMetadata(x+1, y+1, z-1)) + offset;}
+        if (world.getBlock(x+1, y+1, z)   instanceof NonRoadBlock) { et  = quadHeight(world.getBlockMetadata(x+1, y+1, z  )) + offset;}
+        if (world.getBlock(x+1, y+1, z+1) instanceof NonRoadBlock) { set = quadHeight(world.getBlockMetadata(x+1, y+1, z+1)) + offset;}
+        if (world.getBlock(x,   y+1, z+1) instanceof NonRoadBlock) { st  = quadHeight(world.getBlockMetadata(x,   y+1, z+1)) + offset;}
+        if (world.getBlock(x-1, y+1, z+1) instanceof NonRoadBlock) { swt = quadHeight(world.getBlockMetadata(x-1, y+1, z+1)) + offset;}
+        if (world.getBlock(x-1, y+1, z)   instanceof NonRoadBlock) { wt  = quadHeight(world.getBlockMetadata(x-1, y+1, z  )) + offset;}
+        if (world.getBlock(x-1, y+1, z-1) instanceof NonRoadBlock) { nwt = quadHeight(world.getBlockMetadata(x-1, y+1, z-1)) + offset;}
                 
         double nQh = 0;
         double neQh = 0;
@@ -92,23 +93,23 @@ public class RoadBlockRenderingHandler implements ISimpleBlockRenderingHandler {
         double wQh = 0;
         double nwQh = 0;
         
-        if (world.getBlock(x,   y, z-1) instanceof RoadBlock) { nQh  = quadHeight(world.getBlockMetadata(x,   y, z-1)); } else if (!(world.isAirBlock(x,   y, z-1))) { nQh  = 1;}
-        if (world.getBlock(x+1, y, z-1) instanceof RoadBlock) { neQh = quadHeight(world.getBlockMetadata(x+1, y, z-1)); } else if (!(world.isAirBlock(x+1, y, z-1))) { neQh = 1;}
-        if (world.getBlock(x+1, y, z)   instanceof RoadBlock) { eQh  = quadHeight(world.getBlockMetadata(x+1, y, z));   } else if (!(world.isAirBlock(x+1, y, z)))   { eQh  = 1;}
-        if (world.getBlock(x+1, y, z+1) instanceof RoadBlock) { seQh = quadHeight(world.getBlockMetadata(x+1, y, z+1)); } else if (!(world.isAirBlock(x+1, y, z+1))) { seQh = 1;}
-        if (world.getBlock(x,   y, z+1) instanceof RoadBlock) { sQh  = quadHeight(world.getBlockMetadata(x,   y, z+1)); } else if (!(world.isAirBlock(x,   y, z+1))) { sQh  = 1;}
-        if (world.getBlock(x-1, y, z+1) instanceof RoadBlock) { swQh = quadHeight(world.getBlockMetadata(x-1, y, z+1)); } else if (!(world.isAirBlock(x-1, y, z+1))) { swQh = 1;}
-        if (world.getBlock(x-1, y, z)   instanceof RoadBlock) { wQh  = quadHeight(world.getBlockMetadata(x-1, y, z));   } else if (!(world.isAirBlock(x-1, y, z)))   { wQh  = 1;}
-        if (world.getBlock(x-1, y, z-1) instanceof RoadBlock) { nwQh = quadHeight(world.getBlockMetadata(x-1, y, z-1)); } else if (!(world.isAirBlock(x-1, y, z-1))) { nwQh = 1;}
+        if (world.getBlock(x,   y, z-1) instanceof NonRoadBlock) { nQh  = quadHeight(world.getBlockMetadata(x,   y, z-1)); } else if (!(world.isAirBlock(x,   y, z-1))) { nQh  = 1;}
+        if (world.getBlock(x+1, y, z-1) instanceof NonRoadBlock) { neQh = quadHeight(world.getBlockMetadata(x+1, y, z-1)); } else if (!(world.isAirBlock(x+1, y, z-1))) { neQh = 1;}
+        if (world.getBlock(x+1, y, z)   instanceof NonRoadBlock) { eQh  = quadHeight(world.getBlockMetadata(x+1, y, z));   } else if (!(world.isAirBlock(x+1, y, z)))   { eQh  = 1;}
+        if (world.getBlock(x+1, y, z+1) instanceof NonRoadBlock) { seQh = quadHeight(world.getBlockMetadata(x+1, y, z+1)); } else if (!(world.isAirBlock(x+1, y, z+1))) { seQh = 1;}
+        if (world.getBlock(x,   y, z+1) instanceof NonRoadBlock) { sQh  = quadHeight(world.getBlockMetadata(x,   y, z+1)); } else if (!(world.isAirBlock(x,   y, z+1))) { sQh  = 1;}
+        if (world.getBlock(x-1, y, z+1) instanceof NonRoadBlock) { swQh = quadHeight(world.getBlockMetadata(x-1, y, z+1)); } else if (!(world.isAirBlock(x-1, y, z+1))) { swQh = 1;}
+        if (world.getBlock(x-1, y, z)   instanceof NonRoadBlock) { wQh  = quadHeight(world.getBlockMetadata(x-1, y, z));   } else if (!(world.isAirBlock(x-1, y, z)))   { wQh  = 1;}
+        if (world.getBlock(x-1, y, z-1) instanceof NonRoadBlock) { nwQh = quadHeight(world.getBlockMetadata(x-1, y, z-1)); } else if (!(world.isAirBlock(x-1, y, z-1))) { nwQh = 1;}
         
-        if ((world.getBlock(x,   y, z-1) instanceof RoadBlock) || (nt > 0))  { n  = nQh  + nt;}  else { n  = a;} //TODO this one!
-        if ((world.getBlock(x+1, y, z-1) instanceof RoadBlock) || (net > 0)) { ne = neQh + net;} else { ne = a;}
-        if ((world.getBlock(x+1, y, z)   instanceof RoadBlock) || (et > 0))  { e  = eQh  + et;}  else { e  = a;}
-        if ((world.getBlock(x+1, y, z+1) instanceof RoadBlock) || (set > 0)) { se = seQh + set;} else { se = a;}
-        if ((world.getBlock(x,   y, z+1) instanceof RoadBlock) || (st > 0))  { s  = sQh  + st;}  else { s  = a;}
-        if ((world.getBlock(x-1, y, z+1) instanceof RoadBlock) || (swt > 0)) { sw = swQh + swt;} else { sw = a;}
-        if ((world.getBlock(x-1, y, z)   instanceof RoadBlock) || (wt > 0))  { w  = wQh  + wt;}  else { w  = a;}
-        if ((world.getBlock(x-1, y, z-1) instanceof RoadBlock) || (nwt > 0)) { nw = nwQh + nwt;} else { nw = a;}
+        if ((world.getBlock(x,   y, z-1) instanceof NonRoadBlock) || (nt > 0))  { n  = nQh  + nt;}  else { n  = a;} //TODO this one!
+        if ((world.getBlock(x+1, y, z-1) instanceof NonRoadBlock) || (net > 0)) { ne = neQh + net;} else { ne = a;}
+        if ((world.getBlock(x+1, y, z)   instanceof NonRoadBlock) || (et > 0))  { e  = eQh  + et;}  else { e  = a;}
+        if ((world.getBlock(x+1, y, z+1) instanceof NonRoadBlock) || (set > 0)) { se = seQh + set;} else { se = a;}
+        if ((world.getBlock(x,   y, z+1) instanceof NonRoadBlock) || (st > 0))  { s  = sQh  + st;}  else { s  = a;}
+        if ((world.getBlock(x-1, y, z+1) instanceof NonRoadBlock) || (swt > 0)) { sw = swQh + swt;} else { sw = a;}
+        if ((world.getBlock(x-1, y, z)   instanceof NonRoadBlock) || (wt > 0))  { w  = wQh  + wt;}  else { w  = a;}
+        if ((world.getBlock(x-1, y, z-1) instanceof NonRoadBlock) || (nwt > 0)) { nw = nwQh + nwt;} else { nw = a;}
         
         //Create a boolean as to whether there's a valid connection on each of the 8 sides.
         //Check if each side is HIGHER than the current block. We only go up, never down.
@@ -169,38 +170,38 @@ public class RoadBlockRenderingHandler implements ISimpleBlockRenderingHandler {
         
         //North Side
         tess.setColorOpaque(204, 204, 204);
-        tess.addVertexWithUV(x+1, y+e, z, u1, v1);
-        tess.addVertexWithUV(x+1, y,   z, u1, v0);
-        tess.addVertexWithUV(x,   y,   z, u0, v0);
-        tess.addVertexWithUV(x,   y+w, z, u0, v1);
+        tess.addVertexWithUV(x+1, y+e, z, u1_2, v1_2);
+        tess.addVertexWithUV(x+1, y,   z, u1_2, v0_2);
+        tess.addVertexWithUV(x,   y,   z, u0_2, v0_2);
+        tess.addVertexWithUV(x,   y+w, z, u0_2, v1_2);
         
         //East Side
         tess.setColorOpaque(153, 153, 155);
-        tess.addVertexWithUV(x+1, y+s, z+1, u1, v1);
-        tess.addVertexWithUV(x+1, y,   z+1, u1, v0);
-        tess.addVertexWithUV(x+1, y,   z,   u0, v0);
-        tess.addVertexWithUV(x+1, y+n, z,   u0, v1);
+        tess.addVertexWithUV(x+1, y+s, z+1, u1_2, v1_2);
+        tess.addVertexWithUV(x+1, y,   z+1, u1_2, v0_2);
+        tess.addVertexWithUV(x+1, y,   z,   u0_2, v0_2);
+        tess.addVertexWithUV(x+1, y+n, z,   u0_2, v1_2);
         
         //South Side
         tess.setColorOpaque(204, 204, 204);
-        tess.addVertexWithUV(x,   y+w, z+1, u1, v1);
-        tess.addVertexWithUV(x,   y,   z+1, u1, v0);
-        tess.addVertexWithUV(x+1, y,   z+1, u0, v0);
-        tess.addVertexWithUV(x+1, y+e, z+1, u0, v1);
+        tess.addVertexWithUV(x,   y+w, z+1, u1_2, v1_2);
+        tess.addVertexWithUV(x,   y,   z+1, u1_2, v0_2);
+        tess.addVertexWithUV(x+1, y,   z+1, u0_2, v0_2);
+        tess.addVertexWithUV(x+1, y+e, z+1, u0_2, v1_2);
 
         //West Side
         tess.setColorOpaque(153, 153, 155);
-        tess.addVertexWithUV(x,   y+n, z,   u1, v1);
-        tess.addVertexWithUV(x,   y,   z,   u1, v0);
-        tess.addVertexWithUV(x,   y,   z+1, u0, v0);
-        tess.addVertexWithUV(x,   y+s, z+1, u0, v1);
+        tess.addVertexWithUV(x,   y+n, z,   u1_2, v1_2);
+        tess.addVertexWithUV(x,   y,   z,   u1_2, v0_2);
+        tess.addVertexWithUV(x,   y,   z+1, u0_2, v0_2);
+        tess.addVertexWithUV(x,   y+s, z+1, u0_2, v1_2);
 
         //Bottom Side
         tess.setColorOpaque(127, 127, 127);
-        tess.addVertexWithUV(x,   y,   z+1, u1, v1);
-        tess.addVertexWithUV(x,   y,   z, u1, v0);
-        tess.addVertexWithUV(x+1, y,   z, u0, v0);
-        tess.addVertexWithUV(x+1, y,   z+1, u0, v1);
+        tess.addVertexWithUV(x,   y,   z+1, u1_2, v1_2);
+        tess.addVertexWithUV(x,   y,   z, u1_2, v0_2);
+        tess.addVertexWithUV(x+1, y,   z, u0_2, v0_2);
+        tess.addVertexWithUV(x+1, y,   z+1, u0_2, v1_2);
 		return true;
 	}
 

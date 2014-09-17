@@ -38,7 +38,7 @@ public class FRBlocks {
 	public static void roadBlocks() {
 		roadBlockBase1 = new RoadBlock().setBlockName("roadBlockBase1");
 		
-		sidewalk1 = new RoadBlockCT().setBlockName("sidewalk1");
+		sidewalk1 = new NonRoadBlockCT().setBlockName("sidewalk1");
 		
 		streetBlocks1 = new RoadBlock().setBlockName("streetBlocks1");
 		streetBlocks2 = new RoadBlock().setBlockName("streetBlocks2");
