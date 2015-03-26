@@ -38,7 +38,7 @@ public class LineBlock extends Block {
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block block) {
 		if (!(world.getBlock(x, y-1, z) instanceof RoadBlock)) {
-			System.out.println("Should break");
+			//System.out.println("Should break");
 			world.setBlockToAir(x, y, z);
 		}
 	}
@@ -125,9 +125,9 @@ public class LineBlock extends Block {
 		} else if (direction == 3) {
 			direction = 1;
 		}
-		System.out.println("direction: " + direction);
+		//System.out.println("direction: " + direction);
 		int newMeta = (blockSet * 4) + direction;
-		System.out.println("Meta: " + newMeta);
+		//System.out.println("Meta: " + newMeta);
 		world.setBlockMetadataWithNotify(x, y, z, newMeta, 0);
 	}
 	
@@ -169,7 +169,7 @@ public class LineBlock extends Block {
             	lmeta = meta;
             }
 
-            System.out.println("Current Connections: Up: " + connectUp + ", Down: " + connectDown + ", Left: " + connectLeft + ", Right: " + connectRight);
+            //System.out.println("Current Connections: Up: " + connectUp + ", Down: " + connectDown + ", Left: " + connectLeft + ", Right: " + connectRight);
             
             if (connectUp && connectDown && connectLeft && connectRight) {
                 return ctIcons0[8 + smeta];
