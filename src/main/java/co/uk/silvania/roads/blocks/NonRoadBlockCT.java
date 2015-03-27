@@ -21,7 +21,7 @@ public class NonRoadBlockCT extends NonRoadBlock {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerBlockIcons(IIconRegister iconRegister) {
-		icons = new IIcon[16];
+		icons = new IIcon[24];
 		for (int i = 0; i < icons.length; i++) {
 			icons[i] = iconRegister.registerIcon(FlenixRoads.modid + ":" + (this.getUnlocalizedName().substring(5)) + "_" + i);
 		}
