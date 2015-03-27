@@ -30,7 +30,7 @@ public class NonRoadBlockCT extends NonRoadBlock {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public IIcon getIcon(int side, int meta) {
-		return icons[15];
+		return icons[23];
 	}
 	
 	@Override
@@ -57,23 +57,88 @@ public class NonRoadBlockCT extends NonRoadBlock {
     }
 	
     public IIcon getConnectedBlockTexture (IBlockAccess block, int x, int y, int z, int side, IIcon[] icons) {
-        boolean connectUp = false, connectDown = false, connectLeft = false, connectRight = false;
+        boolean connectUp = false, connectDown = false, connectLeft = false, connectRight = false, 
+        		connectLeftUp = false, connectRightUp = false, connectLeftDown = false, connectRightDown = false,
+        		connectLeftUpDown = false, connectRightUpDown = false, connectUpLeftRight = false, connectDownLeftRight = false;
 
         if (side == 1) {
-            if (shouldConnectToBlock(block, x, y, z, block.getBlock(x - 1, y, z), block.getBlockMetadata(x - 1, y, z))) {
+            //Down
+        	if (shouldConnectToBlock(block, x, y, z, block.getBlock(x - 1, y, z), block.getBlockMetadata(x - 1, y, z))) {
                 connectDown = true;
             }
-
+        	
+        	//Up
             if (shouldConnectToBlock(block, x, y, z, block.getBlock(x + 1, y, z), block.getBlockMetadata(x + 1, y, z))) {
                 connectUp = true;
             }
-
+            
+            //Left
             if (shouldConnectToBlock(block, x, y, z, block.getBlock(x, y, z - 1), block.getBlockMetadata(x, y, z - 1))) {
                 connectLeft = true;
             }
 
+            //Right
             if (shouldConnectToBlock(block, x, y, z, block.getBlock(x, y, z + 1), block.getBlockMetadata(x, y, z + 1))) {
                 connectRight = true;
+            }
+            
+            //Up-Left
+            if ((shouldConnectToBlock(block, x, y, z, block.getBlock(x + 1, y, z), block.getBlockMetadata(x + 1, y, z))) 
+            		&& (shouldConnectToBlock(block, x, y, z, block.getBlock(x, y, z - 1), block.getBlockMetadata(x, y, z - 1)))) {
+            	connectLeftUp = true;
+            }
+            
+            //Up-Right
+            if ((shouldConnectToBlock(block, x, y, z, block.getBlock(x + 1, y, z), block.getBlockMetadata(x + 1, y, z))) 
+            		&& (shouldConnectToBlock(block, x, y, z, block.getBlock(x, y, z + 1), block.getBlockMetadata(x, y, z + 1)))) {
+            	connectRightUp = true;
+            }
+            
+            //Down-Left
+            if ((shouldConnectToBlock(block, x, y, z, block.getBlock(x - 1, y, z), block.getBlockMetadata(x - 1, y, z))) 
+            		&& (shouldConnectToBlock(block, x, y, z, block.getBlock(x, y, z - 1), block.getBlockMetadata(x, y, z - 1)))) {
+            	connectLeftDown = true;
+            }
+            
+            //Down-Right
+            if ((shouldConnectToBlock(block, x, y, z, block.getBlock(x + 1, y, z), block.getBlockMetadata(x + 1, y, z))) 
+            		&& (shouldConnectToBlock(block, x, y, z, block.getBlock(x, y, z + 1), block.getBlockMetadata(x, y, z + 1)))) {
+            	connectRightDown = true;
+            }
+            
+            //Left Up/Down
+            if ((shouldConnectToBlock(block, x, y, z, block.getBlock(x, y, z - 1), block.getBlockMetadata(x, y, z - 1))) 
+            		&& (shouldConnectToBlock(block, x, y, z, block.getBlock(x + 1, y, z), block.getBlockMetadata(x + 1, y, z)))
+            		&& (shouldConnectToBlock(block, x, y, z, block.getBlock(x - 1, y, z), block.getBlockMetadata(x - 1, y, z)))) {
+            	connectLeftUpDown = true;
+            }
+            
+            //Right Up/Down
+            if ((shouldConnectToBlock(block, x, y, z, block.getBlock(x, y, z + 1), block.getBlockMetadata(x, y, z + 1))) 
+            		&& (shouldConnectToBlock(block, x, y, z, block.getBlock(x + 1, y, z), block.getBlockMetadata(x + 1, y, z)))
+            		&& (shouldConnectToBlock(block, x, y, z, block.getBlock(x - 1, y, z), block.getBlockMetadata(x - 1, y, z)))) {
+            	connectRightUpDown = true;
+            }
+            
+            //Upper Left/Right
+            if ((shouldConnectToBlock(block, x, y, z, block.getBlock(x + 1, y, z), block.getBlockMetadata(x + 1, y, z))) 
+            		&& (shouldConnectToBlock(block, x, y, z, block.getBlock(x, y, z - 1), block.getBlockMetadata(x, y, z - 1)))
+            		&& (shouldConnectToBlock(block, x, y, z, block.getBlock(x, y, z + 1), block.getBlockMetadata(x, y, z + 1)))) {
+            	connectUpLeftRight = true;
+            }
+            
+            //Lower Left/Right
+            if ((shouldConnectToBlock(block, x, y, z, block.getBlock(x - 1, y, z), block.getBlockMetadata(x - 1, y, z))) 
+            		&& (shouldConnectToBlock(block, x, y, z, block.getBlock(x, y, z - 1), block.getBlockMetadata(x, y, z - 1)))
+            		&& (shouldConnectToBlock(block, x, y, z, block.getBlock(x, y, z + 1), block.getBlockMetadata(x, y, z + 1)))) {
+            	connectDownLeftRight = true;
+            }
+            
+            
+            //Failsafe
+            boolean microConnection = false;
+            if (connectLeftUp || connectRightUp || connectLeftDown || connectRightDown || connectLeftUpDown || connectRightUpDown || connectUpLeftRight || connectDownLeftRight) {
+            	microConnection = true;
             }
 
             if (connectUp && connectDown && connectLeft && connectRight) {
@@ -98,14 +163,30 @@ public class NonRoadBlockCT extends NonRoadBlock {
                 return icons[7];
             } else if (connectUp && connectRight) {
                 return icons[9];
-            } else if (connectDown) {
-                return icons[3];
-            } else if (connectUp) {
-                return icons[4];
-            } else if (connectLeft) {
-                return icons[2];
-            } else if (connectRight) {
-                return icons[1];
+            } else if (connectDown && !microConnection) {
+                return icons[3]; //Points left, empty is right
+            } else if (connectUp && !microConnection) {
+                return icons[4]; //Points right, empty is left
+            } else if (connectLeft && !microConnection) {
+                return icons[2]; //Points up, empty is down
+            } else if (connectRight && !microConnection) {
+                return icons[1]; //Points down, empty is up
+            } else if (connectLeftUpDown) {
+            	return icons[22];
+            } else if (connectRightUpDown) {
+            	return icons[20];
+            } else if (connectUpLeftRight) {
+            	return icons[23];
+            } else if (connectDownLeftRight) {
+            	return icons[21];
+            } else if (connectLeftUp) {
+            	return icons[16];
+            } else if (connectRightUp) {
+            	return icons[17];
+            } else if (connectLeftDown) {
+            	return icons[19];
+            } else if (connectRightDown) {
+            	return icons[18];
             } else if (!connectUp || !connectDown || !connectLeft || !connectRight) {
             	return icons[0];
             }

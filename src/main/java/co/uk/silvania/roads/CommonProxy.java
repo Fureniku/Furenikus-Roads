@@ -18,6 +18,8 @@ public class CommonProxy {
 	public void registerBlocks() {
 		GameRegistry.registerBlock(FRBlocks.roadBlockBase1, RoadItemBlock.class, "roadblockBase1");
 		GameRegistry.registerBlock(FRBlocks.lineBlock1, RoadItemBlock.class, "lineBlock1");
+		GameRegistry.registerBlock(FRBlocks.lineBlock2, RoadItemBlock.class, "lineBlock2");
+		GameRegistry.registerBlock(FRBlocks.lineBlock3, RoadItemBlock.class, "lineBlock3");
 		
 		GameRegistry.registerBlock(FRBlocks.sidewalk1, RoadItemBlock.class, "sidewalk1");
 

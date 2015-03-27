@@ -30,6 +30,8 @@ public class FRBlocks {
 	public static Block streetBlocks15;
 	
 	public static Block lineBlock1;
+	public static Block lineBlock2;
+	public static Block lineBlock3;
 	
 	public static void init() {
 		roadBlocks();
@@ -40,23 +42,25 @@ public class FRBlocks {
 		
 		sidewalk1 = new NonRoadBlockCT().setBlockName("sidewalk1");
 		
-		streetBlocks1 = new RoadBlock().setBlockName("streetBlocks1");
-		streetBlocks2 = new RoadBlock().setBlockName("streetBlocks2");
-		streetBlocks3 = new RoadBlock().setBlockName("streetBlocks3");
-		streetBlocks4 = new RoadBlock().setBlockName("streetBlocks4");
-		streetBlocks5 = new RoadBlock().setBlockName("streetBlocks5");
-		streetBlocks6 = new RoadBlock().setBlockName("streetBlocks6");
-		streetBlocks7 = new RoadBlock().setBlockName("streetBlocks7");
-		streetBlocks8 = new RoadBlock().setBlockName("streetBlocks8");
-		streetBlocks9 = new RoadBlock().setBlockName("streetBlocks9");
-		streetBlocks10 = new RoadBlock().setBlockName("streetBlocks10");
-		streetBlocks11 = new RoadBlock().setBlockName("streetBlocks11");
-		streetBlocks12 = new RoadBlock().setBlockName("streetBlocks12");
-		streetBlocks13 = new RoadBlock().setBlockName("streetBlocks13");
-		streetBlocks14 = new RoadBlock().setBlockName("streetBlocks14");
-		streetBlocks15 = new RoadBlock().setBlockName("streetBlocks15");
+		streetBlocks1 = new SimpleBlock().setBlockName("streetBlocks1");
+		streetBlocks2 = new SimpleBlock().setBlockName("streetBlocks2");
+		streetBlocks3 = new SimpleBlock().setBlockName("streetBlocks3");
+		streetBlocks4 = new SimpleBlock().setBlockName("streetBlocks4");
+		streetBlocks5 = new SimpleBlock().setBlockName("streetBlocks5");
+		streetBlocks6 = new SimpleBlock().setBlockName("streetBlocks6");
+		streetBlocks7 = new SimpleBlock().setBlockName("streetBlocks7");
+		streetBlocks8 = new SimpleBlock().setBlockName("streetBlocks8");
+		streetBlocks9 = new SimpleBlock().setBlockName("streetBlocks9");
+		streetBlocks10 = new SimpleBlock().setBlockName("streetBlocks10");
+		streetBlocks11 = new SimpleBlock().setBlockName("streetBlocks11");
+		streetBlocks12 = new SimpleBlock().setBlockName("streetBlocks12");
+		streetBlocks13 = new SimpleBlock().setBlockName("streetBlocks13");
+		streetBlocks14 = new SimpleBlock().setBlockName("streetBlocks14");
+		streetBlocks15 = new SimpleBlock().setBlockName("streetBlocks15");
 		
 		lineBlock1 = new LineBlock().setBlockName("lineBlock1");
+		lineBlock2 = new LineBlock().setBlockName("lineBlock2");
+		lineBlock3 = new LineBlock().setBlockName("lineBlock3");
 	}
 
 }
