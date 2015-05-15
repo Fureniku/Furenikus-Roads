@@ -3,6 +3,8 @@ package co.uk.silvania.roads.items;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
 import co.uk.silvania.roads.FlenixRoads;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class TarmacCutter extends Item {
 	
@@ -10,9 +12,9 @@ public class TarmacCutter extends Item {
 		this.setCreativeTab(FlenixRoads.tabRoads);
 	}
 	
-	@Override
-	public void registerIcons(IIconRegister icon) {
-		icon.registerIcon(FlenixRoads.modid + ":" + this.getUnlocalizedName().substring(5));
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IIconRegister iconRegister) {
+		itemIcon = iconRegister.registerIcon(FlenixRoads.modid + ":" + (this.getUnlocalizedName().substring(5)));
 	}
 
 }

@@ -51,7 +51,10 @@ public class RoadBlock extends Block {
 				System.out.println("Meta: " + meta);
 				if (player.getHeldItem().getItem() == FRItems.tarmacCutter) {
 	        		System.out.println("Using tarmac cutter");
-					world.setBlockMetadataWithNotify(x, y, z, meta - 1, 3);
+	        		int newMeta = meta--;
+	        		System.out.println("Meta is now: " + newMeta);
+					world.setBlockMetadataWithNotify(x, y, z, newMeta - 1, 3);
+					System.out.println("And to confirm: " + world.getBlockMetadata(x, y, z));
 				}
 			}
         }		
