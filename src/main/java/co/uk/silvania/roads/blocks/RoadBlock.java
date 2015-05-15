@@ -44,16 +44,16 @@ public class RoadBlock extends Block {
 				System.out.println("Meta: " + meta);
 	        	if (player.getHeldItem().getItem() == FRItems.impactWrench) {
 	        		System.out.println("Using impact wrench");
-	        		world.setBlockMetadataWithNotify(x, y, z, meta + 1, 3);
+	        		world.setBlockMetadataWithNotify(x, y, z, 8, 3);
 	        	}
 	        }
 			if (meta < 15) {
 				System.out.println("Meta: " + meta);
 				if (player.getHeldItem().getItem() == FRItems.tarmacCutter) {
 	        		System.out.println("Using tarmac cutter");
-	        		int newMeta = meta--;
+	        		int newMeta = meta - 1;
 	        		System.out.println("Meta is now: " + newMeta);
-					world.setBlockMetadataWithNotify(x, y, z, newMeta - 1, 3);
+					world.setBlockMetadataWithNotify(x, y, z, newMeta, 3);
 					System.out.println("And to confirm: " + world.getBlockMetadata(x, y, z));
 				}
 			}

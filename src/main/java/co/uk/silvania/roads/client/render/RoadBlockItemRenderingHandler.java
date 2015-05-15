@@ -1,5 +1,6 @@
 package co.uk.silvania.roads.client.render;
 
+import co.uk.silvania.roads.blocks.FRBlocks;
 import co.uk.silvania.roads.blocks.RoadBlock;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.item.ItemStack;
@@ -21,19 +22,14 @@ public class RoadBlockItemRenderingHandler implements IItemRenderer {
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
         Tessellator tess = Tessellator.instance;
-        //tess.setBrightness(block.getMixedBrightnessForBlock(renderer.blockAccess, x, y, z));
-        
-        //float f = 0.8F;
-        //int c = block.colorMultiplier(renderer.blockAccess, x, y, z);
-        //float f1 = (float)(c >> 16 & 255) / 255.0F;
-        //float f2 = (float)(c >> 8 & 255) / 255.0F;
-        //float f3 = (float)(c & 255) / 255.0F;
+        tess.setBrightness(1);
 
-        //tess.setColorOpaque_F(f * f1, f * f2, f * f3);
+
+        tess.setColorOpaque_F(0.8F, 0.8F, 0.8F);
         IIcon icon;
 
         int meta = item.getItemDamage();
-        icon = item.getIconIndex();
+        icon = FRBlocks.roadBlockBase1.getIcon(0, 0);
 
         double u0 = (double)icon.getMinU();
         double u1 = (double)icon.getMaxU();
