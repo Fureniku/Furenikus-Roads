@@ -19,7 +19,7 @@ public class RoadItemBlock extends ItemBlock {
 	@SideOnly(Side.CLIENT)
 	@Override
     public void addInformation(ItemStack item, EntityPlayer player, List list, boolean bool) {
-		list.add("Height: " + (this.getDamage(item) - 1) + " / 16");
+		list.add("Height: " + (this.getDamage(item) + 1) + " / 16");
 	}
 
 	@Override

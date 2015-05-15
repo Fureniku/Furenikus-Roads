@@ -38,22 +38,23 @@ public class RoadBlock extends Block {
 	
 	@Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int p_149727_6_, float p_149727_7_, float p_149727_8_, float p_149727_9_) {
-        int meta = world.getBlockMetadata(x, y, z);
-		if (meta > 0) {
-			System.out.println("Meta: " + meta);
-        	if (player.getHeldItem().getItem() == FRItems.impactWrench) {
-        		System.out.println("Using impact wrench");
-        		world.setBlockMetadataWithNotify(x, y, z, meta - 1, 3);
-        	}
-        }
-		if (meta < 16) {
-			System.out.println("Meta: " + meta);
-			if (player.getHeldItem().getItem() == FRItems.tarmacCutter) {
-        		System.out.println("Using tarmac cutter");
-				world.setBlockMetadataWithNotify(x, y, z, meta + 1, 3);
+        if (!world.isRemote) {
+			int meta = world.getBlockMetadata(x, y, z);
+			if (meta > 1) {
+				System.out.println("Meta: " + meta);
+	        	if (player.getHeldItem().getItem() == FRItems.impactWrench) {
+	        		System.out.println("Using impact wrench");
+	        		world.setBlockMetadataWithNotify(x, y, z, meta + 1, 3);
+	        	}
+	        }
+			if (meta < 15) {
+				System.out.println("Meta: " + meta);
+				if (player.getHeldItem().getItem() == FRItems.tarmacCutter) {
+	        		System.out.println("Using tarmac cutter");
+					world.setBlockMetadataWithNotify(x, y, z, meta - 1, 3);
+				}
 			}
-		}
-		
+        }		
 		return false;
     }
 	
