@@ -13,6 +13,7 @@ public class FRItems {
 	}
 	
 	public static void tools() {
+		pneumaticDrill = new PneumaticDrill().setUnlocalizedName("pneumaticDrill");
 		tarmacCutter = new TarmacCutter().setUnlocalizedName("tarmacCutter");
 		impactWrench = new ImpactWrench().setUnlocalizedName("impactWrench");
 	}
