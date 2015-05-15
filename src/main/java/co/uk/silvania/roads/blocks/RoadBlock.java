@@ -7,6 +7,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
@@ -55,11 +56,14 @@ public class RoadBlock extends Block {
         if (!world.isRemote) {
 			int meta = world.getBlockMetadata(x, y, z);
 			if (meta >= 0 && meta < 15) {
-				System.out.println("Meta: " + meta);
 	        	if (player.getHeldItem().getItem() == FRItems.impactWrench) {
-	        		if (player.inventory.hasItem(FRItems.tarmacFragments));
+	        		if (player.inventory.hasItem(FRItems.tarmacFragments)) {
 	        			world.setBlockMetadataWithNotify(x, y, z, meta + 1, 3);
 	        			player.inventory.consumeInventoryItem(FRItems.tarmacFragments);
+	        			EntityPlayerMP plyr = (EntityPlayerMP) player;
+	        			plyr.sendContainerToPlayer(plyr.inventoryContainer);
+	        			
+	        		}
 	        	}
 	        }
         }		
