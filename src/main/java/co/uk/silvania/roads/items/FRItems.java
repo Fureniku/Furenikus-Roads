@@ -7,6 +7,7 @@ public class FRItems {
 	public static Item pneumaticDrill;
 	public static Item tarmacCutter;
 	public static Item impactWrench;
+	public static Item tarmacFragments;
 	
 	public static void init() {
 		tools();
@@ -16,6 +17,7 @@ public class FRItems {
 		pneumaticDrill = new PneumaticDrill().setUnlocalizedName("pneumaticDrill");
 		tarmacCutter = new TarmacCutter().setUnlocalizedName("tarmacCutter");
 		impactWrench = new ImpactWrench().setUnlocalizedName("impactWrench");
+		tarmacFragments = new GenericItems().setUnlocalizedName("tarmacFragments");
 	}
 
 }

@@ -1,6 +1,7 @@
 package co.uk.silvania.roads.client;
 
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.MinecraftForgeClient;
 import co.uk.silvania.roads.CommonProxy;
@@ -26,7 +27,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerBlockHandler(roadBlockRenderID, new RoadBlockRenderingHandler());
 		RenderingRegistry.registerBlockHandler(nonRoadBlockRenderID, new NonRoadBlockRenderingHandler());
 		RenderingRegistry.registerBlockHandler(roadPaintRenderID, new RoadPaintRenderingHandler());
-		MinecraftForgeClient.registerItemRenderer(new ItemStack(FRBlocks.roadBlockBase1).getItem(), new RoadBlockItemRenderingHandler());
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(FRBlocks.roadBlockBase1), new RoadBlockItemRenderingHandler());
 	}
 
 }
