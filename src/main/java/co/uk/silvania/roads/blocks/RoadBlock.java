@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
@@ -13,6 +14,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import co.uk.silvania.roads.FlenixRoads;
 import co.uk.silvania.roads.client.ClientProxy;
+import co.uk.silvania.roads.items.FRItems;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -34,7 +36,7 @@ public class RoadBlock extends Block {
 		this.setBlockBoundsForItemRender();
 	}
 	
-	/*@Override
+	@Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int p_149727_6_, float p_149727_7_, float p_149727_8_, float p_149727_9_) {
         int meta = world.getBlockMetadata(x, y, z);
 		if (meta > 0) {
@@ -53,7 +55,7 @@ public class RoadBlock extends Block {
 		}
 		
 		return false;
-    }*/
+    }
 	
 	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {

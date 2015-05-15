@@ -41,6 +41,7 @@ public class CommonProxy {
 	}
 	
 	public void registerItems() {
+		GameRegistry.registerItem(FRItems.pneumaticDrill, "pneumaticDrill");
 		GameRegistry.registerItem(FRItems.tarmacCutter, "tarmacCutter");
 		GameRegistry.registerItem(FRItems.impactWrench, "impactWrench");
 	}

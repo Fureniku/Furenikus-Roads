@@ -1,0 +1,8 @@
+tile.roadBlockBase1.name=Tarmac Road
+tile.sidewalk1.name=Light Grey Sidewalk
+
+tile.lineBlock1=White Single Line Road Paint
+
+item.tarmacCutter.name=Tarmac Cutter
+item.tarmacFragments.name=Tarmac Fragments
+item.impactWrench.name=Impact Wrench
