@@ -27,7 +27,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerBlockHandler(roadBlockRenderID, new RoadBlockRenderingHandler());
 		RenderingRegistry.registerBlockHandler(nonRoadBlockRenderID, new NonRoadBlockRenderingHandler());
 		RenderingRegistry.registerBlockHandler(roadPaintRenderID, new RoadPaintRenderingHandler());
-		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(FRBlocks.roadBlockBase1), new RoadBlockItemRenderingHandler());
+		//MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(FRBlocks.roadBlockBase1), new RoadBlockItemRenderingHandler());
 	}
 
 }
