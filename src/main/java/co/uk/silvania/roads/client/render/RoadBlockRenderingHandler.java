@@ -29,9 +29,11 @@ public class RoadBlockRenderingHandler implements ISimpleBlockRenderingHandler {
         double v0 = (double)icon.getMinV();
         double v1 = (double)icon.getMaxV();
         
+        final float FACE_XZ_NORMAL = 0.8944F;
+        final float FACE_Y_NORMAL  = 0.4472F;
         
-        //Initial height values. Quad Height method simply gets the height from meta via quick calculation (more reliable than checking bounding box size, for some reason)
-        //Value is compass.
+        
+        //The height of the block. Drawn from metadata, which is more reliable than trying to pull it from the bounding box.
         double a  = quadHeight(meta); //Current block
         
         //Now, we actually render each face.
@@ -39,6 +41,7 @@ public class RoadBlockRenderingHandler implements ISimpleBlockRenderingHandler {
         //Colour is required as it's reduced for sides and bottom, to give a false effect of "shading" which is surprisingly very important.
         //Top Side
         tess.startDrawingQuads();
+        tess.setNormal(0.0F, 1.0F, 0.0F);
         tess.addVertexWithUV(0, a, 0, u1, v1); //NW
         tess.addVertexWithUV(0, a, 1, u1, v0); //SW
         tess.addVertexWithUV(1, a, 1, u0, v0); //SE
@@ -47,7 +50,7 @@ public class RoadBlockRenderingHandler implements ISimpleBlockRenderingHandler {
         
         //North Side
         tess.startDrawingQuads();
-        tess.setColorOpaque(204, 204, 204);
+        tess.setNormal(0.0F, FACE_Y_NORMAL, -FACE_XZ_NORMAL);
         tess.addVertexWithUV(1, a, 0, u1, v1);
         tess.addVertexWithUV(1, 0, 0, u1, v0);
         tess.addVertexWithUV(0, 0, 0, u0, v0);
@@ -56,7 +59,7 @@ public class RoadBlockRenderingHandler implements ISimpleBlockRenderingHandler {
         
         //East Side
         tess.startDrawingQuads();
-        tess.setColorOpaque(153, 153, 155);
+        tess.setNormal(FACE_XZ_NORMAL, FACE_Y_NORMAL, 0.0F);
         tess.addVertexWithUV(1, a, 1, u1, v1);
         tess.addVertexWithUV(1, 0, 1, u1, v0);
         tess.addVertexWithUV(1, 0, 0, u0, v0);
@@ -65,7 +68,7 @@ public class RoadBlockRenderingHandler implements ISimpleBlockRenderingHandler {
         
         //South Side
         tess.startDrawingQuads();
-        tess.setColorOpaque(204, 204, 204);
+        tess.setNormal(0.0F, FACE_Y_NORMAL, FACE_XZ_NORMAL);
         tess.addVertexWithUV(0, a, 1, u1, v1);
         tess.addVertexWithUV(0, 0, 1, u1, v0);
         tess.addVertexWithUV(1, 0, 1, u0, v0);
@@ -74,7 +77,7 @@ public class RoadBlockRenderingHandler implements ISimpleBlockRenderingHandler {
 
         //West Side
         tess.startDrawingQuads();
-        tess.setColorOpaque(153, 153, 155);
+        tess.setNormal(-FACE_XZ_NORMAL, FACE_Y_NORMAL, 0.0F);
         tess.addVertexWithUV(0, a, 0, u1, v1);
         tess.addVertexWithUV(0, 0, 0, u1, v0);
         tess.addVertexWithUV(0, 0, 1, u0, v0);
@@ -83,7 +86,7 @@ public class RoadBlockRenderingHandler implements ISimpleBlockRenderingHandler {
 
         //Bottom Side
         tess.startDrawingQuads();
-        tess.setColorOpaque(127, 127, 127);
+        tess.setNormal(0.0F, -1.0F, 0.0F);
         tess.addVertexWithUV(0, 0, 1, u1, v1);
         tess.addVertexWithUV(0, 0, 0, u1, v0);
         tess.addVertexWithUV(1, 0, 0, u0, v0);
