@@ -61,6 +61,9 @@ public class RoadBlock extends Block {
 	        			//Raise block by 1/16th
 	        			world.setBlockMetadataWithNotify(x, y, z, meta + 1, 3);
 	        			player.inventory.consumeInventoryItem(FRItems.tarmacFragments);
+	        	        //Update client-side inventory
+	        	        EntityPlayerMP plyr = (EntityPlayerMP) player;
+	        			plyr.sendContainerToPlayer(plyr.inventoryContainer);
 	        		}
 	        	} else if (meta == 15) {
 	        		if (player.getHeldItem().getItem() == FRItems.impactWrench) {
@@ -68,14 +71,13 @@ public class RoadBlock extends Block {
 	        				//Create a new lowest-level tarmac block on Y+1
 	        				world.setBlock(x, y+1, z, this, 0, 3);
 	        				player.inventory.consumeInventoryItem(FRItems.tarmacFragments);
+	        		        EntityPlayerMP plyr = (EntityPlayerMP) player;
+	        				plyr.sendContainerToPlayer(plyr.inventoryContainer);
 	        			}
 	        		}
 	        	}
 	        }
         }
-        //Update client-side inventory
-        EntityPlayerMP plyr = (EntityPlayerMP) player;
-		plyr.sendContainerToPlayer(plyr.inventoryContainer);
 		return false;
     }
 	
