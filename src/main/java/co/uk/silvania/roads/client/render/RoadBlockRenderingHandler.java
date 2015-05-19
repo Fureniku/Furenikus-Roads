@@ -39,66 +39,85 @@ public class RoadBlockRenderingHandler implements ISimpleBlockRenderingHandler {
         int x = 0;
         int y = 0;
         int z = 0;
+        
+        final float FACE_XZ_NORMAL = 0.8944F;
+        final float FACE_Y_NORMAL = 0.4472F;
 
         
         //Now, we actually render each face.
         //Each face needs the colour setting, and then four vertex.
         //Colour is required as it's reduced for sides and bottom, to give a false effect of "shading" which is surprisingly very important.
         //Top Side
+        tess.startDrawingQuads();
+        tess.setNormal(0.0F, 1.0F, 0.0F);
         tess.addVertexWithUV(x,   a, z,   u1, v1); //NW
         tess.addVertexWithUV(x,   a, z+1, u1, v0); //SW
         tess.addVertexWithUV(x+1, a, z+1, u0, v0); //SE
         tess.addVertexWithUV(x+1, a, z,   u0, v1); //NE
+        tess.draw();
         
         //North Side
-        tess.setColorOpaque(204, 204, 204);
+        tess.startDrawingQuads();
+        tess.setNormal(0.0F, FACE_Y_NORMAL, -FACE_XZ_NORMAL);
         tess.addVertexWithUV(x+1, y+a, z, u1, v1);
         tess.addVertexWithUV(x+1, y,   z, u1, v0);
         tess.addVertexWithUV(x,   y,   z, u0, v0);
         tess.addVertexWithUV(x,   y+a, z, u0, v1);
+        tess.draw();
         
         //East Side
-        tess.setColorOpaque(153, 153, 155);
+        tess.startDrawingQuads();
+        tess.setNormal(FACE_XZ_NORMAL, FACE_Y_NORMAL, 0.0F);
         tess.addVertexWithUV(x+1, y+a, z+1, u1, v1);
         tess.addVertexWithUV(x+1, y,   z+1, u1, v0);
         tess.addVertexWithUV(x+1, y,   z,   u0, v0);
         tess.addVertexWithUV(x+1, y+a, z,   u0, v1);
+        tess.draw();
         
         //South Side
-        tess.setColorOpaque(204, 204, 204);
+        tess.startDrawingQuads();
+        tess.setNormal(0.0F, FACE_Y_NORMAL, FACE_XZ_NORMAL);
         tess.addVertexWithUV(x,   y+a, z+1, u1, v1);
         tess.addVertexWithUV(x,   y,   z+1, u1, v0);
         tess.addVertexWithUV(x+1, y,   z+1, u0, v0);
         tess.addVertexWithUV(x+1, y+a, z+1, u0, v1);
+        tess.draw();
 
         //West Side
-        tess.setColorOpaque(153, 153, 155);
+        tess.startDrawingQuads();
+        tess.setNormal(-FACE_XZ_NORMAL, FACE_Y_NORMAL, 0.0F);
         tess.addVertexWithUV(x,   y+a, z,   u1, v1);
         tess.addVertexWithUV(x,   y,   z,   u1, v0);
         tess.addVertexWithUV(x,   y,   z+1, u0, v0);
         tess.addVertexWithUV(x,   y+a, z+1, u0, v1);
+        tess.draw();
 
         //Bottom Side
-        tess.setColorOpaque(127, 127, 127);
+        tess.startDrawingQuads();
+        tess.setNormal(0.0F, -1.0F, 0.0F);
         tess.addVertexWithUV(x,   y,   z+1, u1, v1);
         tess.addVertexWithUV(x,   y,   z, u1, v0);
         tess.addVertexWithUV(x+1, y,   z, u0, v0);
         tess.addVertexWithUV(x+1, y,   z+1, u0, v1);
+        tess.draw();
 	}
 
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
-		renderer.blockAccess.getHeight();
+		//renderer.blockAccess.getHeight();
         tess = Tessellator.instance;
-        tess.setBrightness(block.getMixedBrightnessForBlock(renderer.blockAccess, x, y, z));
+        tess.setBrightness(block.getMixedBrightnessForBlock(world, x, y, z));
         
-        float f = 0.8F;
+        /*float f = 0.8F;
         int c = block.colorMultiplier(renderer.blockAccess, x, y, z);
         float f1 = (float)(c >> 16 & 255) / 255.0F;
         float f2 = (float)(c >> 8 & 255) / 255.0F;
-        float f3 = (float)(c & 255) / 255.0F;
+        float f3 = (float)(c & 255) / 255.0F;*/
 
-        tess.setColorOpaque_F(f * f1, f * f2, f * f3);
+        tess.setColorOpaque_F(1.0F, 1.0F, 1.0F);
+        final float FACE_XZ_NORMAL = 0.8944F;
+        final float FACE_Y_NORMAL = 0.4472F;
+        
         IIcon icon;
         IIcon icon1;
 
@@ -231,42 +250,55 @@ public class RoadBlockRenderingHandler implements ISimpleBlockRenderingHandler {
         //Each face needs the colour setting, and then four vertex.
         //Colour is required as it's reduced for sides and bottom, to give a false effect of "shading" which is surprisingly very important.
         //Top Side
-        tess.setColorOpaque(col, col, col);
+        //tess.setColorOpaque(col, col, col);
+        tess.setNormal(0.0F, 1.0F, 0.0F);//TODO
         tess.addVertexWithUV(x,   y+nwQ, z,   u1, v1); //NW
         tess.addVertexWithUV(x,   y+swQ, z+1, u1, v0); //SW
         tess.addVertexWithUV(x+1, y+seQ, z+1, u0, v0); //SE
         tess.addVertexWithUV(x+1, y+neQ, z,   u0, v1); //NE
+        tess.draw();
         
         //North Side
-        tess.setColorOpaque(204, 204, 204);
+        tess.startDrawingQuads();
+        tess.setNormal(0.0F, FACE_Y_NORMAL, -FACE_XZ_NORMAL);
         tess.addVertexWithUV(x+1, y+e, z, u1, v1);
         tess.addVertexWithUV(x+1, y,   z, u1, v0);
         tess.addVertexWithUV(x,   y,   z, u0, v0);
         tess.addVertexWithUV(x,   y+w, z, u0, v1);
+        tess.draw();
         
         //East Side
-        tess.setColorOpaque(153, 153, 155);
+        tess.startDrawingQuads();
+        tess.setNormal(FACE_XZ_NORMAL, FACE_Y_NORMAL, 0.0F);
         tess.addVertexWithUV(x+1, y+s, z+1, u1, v1);
         tess.addVertexWithUV(x+1, y,   z+1, u1, v0);
         tess.addVertexWithUV(x+1, y,   z,   u0, v0);
         tess.addVertexWithUV(x+1, y+n, z,   u0, v1);
+        tess.draw();
         
         //South Side
-        tess.setColorOpaque(204, 204, 204);
+        tess.startDrawingQuads();
+        //tess.setColorOpaque(204, 204, 204);
+        tess.setNormal(0.0F, FACE_Y_NORMAL, FACE_XZ_NORMAL);
         tess.addVertexWithUV(x,   y+w, z+1, u1, v1);
         tess.addVertexWithUV(x,   y,   z+1, u1, v0);
         tess.addVertexWithUV(x+1, y,   z+1, u0, v0);
         tess.addVertexWithUV(x+1, y+e, z+1, u0, v1);
-
+        tess.draw();
+        
         //West Side
-        tess.setColorOpaque(153, 153, 155);
+        tess.startDrawingQuads();
+        tess.setNormal(-FACE_XZ_NORMAL, FACE_Y_NORMAL, 0.0F);
         tess.addVertexWithUV(x,   y+n, z,   u1, v1);
         tess.addVertexWithUV(x,   y,   z,   u1, v0);
         tess.addVertexWithUV(x,   y,   z+1, u0, v0);
         tess.addVertexWithUV(x,   y+s, z+1, u0, v1);
+        tess.draw();
 
         //Bottom Side
-        tess.setColorOpaque(127, 127, 127);
+        tess.startDrawingQuads();
+        //tess.setColorOpaque(127, 127, 127);
+        tess.setNormal(0.0F, -1.0F, 0.0F);
         tess.addVertexWithUV(x,   y,   z+1, u1, v1);
         tess.addVertexWithUV(x,   y,   z, u1, v0);
         tess.addVertexWithUV(x+1, y,   z, u0, v0);
