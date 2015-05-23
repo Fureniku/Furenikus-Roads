@@ -109,23 +109,14 @@ public class RoadBlockRenderingHandler implements ISimpleBlockRenderingHandler {
         float f3 = (float)(c & 255) / 255.0F;
 
         tess.setColorOpaque_F(f * f1, f * f2, f * f3);
-        IIcon icon;
-        IIcon icon1;
-
+        
         int meta = renderer.blockAccess.getBlockMetadata(x, y, z);
-        icon = block.getIcon(0, meta);
-        icon1 = block.getIcon(0, meta);
+        IIcon icon = block.getIcon(0, meta);
 
         double u0 = (double)icon.getMinU();
         double u1 = (double)icon.getMaxU();
-        
-        icon.getMinU();
-        icon.getMaxU();
         double v0 = (double)icon.getMinV();
         double v1 = (double)icon.getMaxV();
-        
-        icon1.getMinV();
-        icon1.getMaxV();
         
         //Initial height values. Quad Height method simply gets the height from meta via quick calculation (more reliable than checking bounding box size, for some reason)
         //Value is compass.
