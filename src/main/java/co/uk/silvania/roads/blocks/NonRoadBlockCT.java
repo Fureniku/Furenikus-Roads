@@ -52,7 +52,12 @@ public class NonRoadBlockCT extends NonRoadBlock {
 		return meta;
 	}
 	
-    public boolean shouldConnectToBlock (IBlockAccess block, int x, int y, int z, Block ctBlock, int ctMeta) {
+    public boolean shouldConnectToBlock (IBlockAccess block, int x, int y, int z, Block ctBlock, Block aboveBlock, Block belowBlock) {
+    	if (aboveBlock == this) {
+    		return true;
+    	} else if (belowBlock == this) {
+    		return true;
+    	}
         return ctBlock == this;
     }
 	
@@ -63,74 +68,62 @@ public class NonRoadBlockCT extends NonRoadBlock {
 
         if (side == 1) {
             //Down
-        	if (shouldConnectToBlock(block, x, y, z, block.getBlock(x - 1, y, z), block.getBlockMetadata(x - 1, y, z))) {
+        	if (shouldConnectToBlock(block, x, y, z, block.getBlock(x - 1, y, z), block.getBlock(x - 1, y + 1, z), block.getBlock(x - 1, y - 1, z))) {
                 connectDown = true;
             }
         	
         	//Up
-            if (shouldConnectToBlock(block, x, y, z, block.getBlock(x + 1, y, z), block.getBlockMetadata(x + 1, y, z))) {
+            if (shouldConnectToBlock(block, x, y, z, block.getBlock(x + 1, y, z), block.getBlock(x + 1, y + 1, z), block.getBlock(x + 1, y - 1, z))) {
                 connectUp = true;
             }
             
             //Left
-            if (shouldConnectToBlock(block, x, y, z, block.getBlock(x, y, z - 1), block.getBlockMetadata(x, y, z - 1))) {
+            if (shouldConnectToBlock(block, x, y, z, block.getBlock(x, y, z - 1), block.getBlock(x, y + 1, z - 1), block.getBlock(x, y - 1, z - 1))) {
                 connectLeft = true;
             }
 
             //Right
-            if (shouldConnectToBlock(block, x, y, z, block.getBlock(x, y, z + 1), block.getBlockMetadata(x, y, z + 1))) {
+            if (shouldConnectToBlock(block, x, y, z, block.getBlock(x, y, z + 1), block.getBlock(x, y + 1, z + 1), block.getBlock(x, y - 1, z + 1))) {
                 connectRight = true;
             }
             
             //Up-Left
-            if ((shouldConnectToBlock(block, x, y, z, block.getBlock(x + 1, y, z), block.getBlockMetadata(x + 1, y, z))) 
-            		&& (shouldConnectToBlock(block, x, y, z, block.getBlock(x, y, z - 1), block.getBlockMetadata(x, y, z - 1)))) {
+            if (connectUp && connectLeft) {
             	connectLeftUp = true;
             }
             
             //Up-Right
-            if ((shouldConnectToBlock(block, x, y, z, block.getBlock(x + 1, y, z), block.getBlockMetadata(x + 1, y, z))) 
-            		&& (shouldConnectToBlock(block, x, y, z, block.getBlock(x, y, z + 1), block.getBlockMetadata(x, y, z + 1)))) {
+            if (connectUp && connectRight) {
             	connectRightUp = true;
             }
             
             //Down-Left
-            if ((shouldConnectToBlock(block, x, y, z, block.getBlock(x - 1, y, z), block.getBlockMetadata(x - 1, y, z))) 
-            		&& (shouldConnectToBlock(block, x, y, z, block.getBlock(x, y, z - 1), block.getBlockMetadata(x, y, z - 1)))) {
+            if (connectDown && connectLeft) {
             	connectLeftDown = true;
             }
             
             //Down-Right
-            if ((shouldConnectToBlock(block, x, y, z, block.getBlock(x + 1, y, z), block.getBlockMetadata(x + 1, y, z))) 
-            		&& (shouldConnectToBlock(block, x, y, z, block.getBlock(x, y, z + 1), block.getBlockMetadata(x, y, z + 1)))) {
+            if (connectDown && connectRight) {
             	connectRightDown = true;
             }
             
             //Left Up/Down
-            if ((shouldConnectToBlock(block, x, y, z, block.getBlock(x, y, z - 1), block.getBlockMetadata(x, y, z - 1))) 
-            		&& (shouldConnectToBlock(block, x, y, z, block.getBlock(x + 1, y, z), block.getBlockMetadata(x + 1, y, z)))
-            		&& (shouldConnectToBlock(block, x, y, z, block.getBlock(x - 1, y, z), block.getBlockMetadata(x - 1, y, z)))) {
+            if (connectUp && connectLeft && connectDown) {
             	connectLeftUpDown = true;
             }
             
             //Right Up/Down
-            if ((shouldConnectToBlock(block, x, y, z, block.getBlock(x, y, z + 1), block.getBlockMetadata(x, y, z + 1))) 
-            		&& (shouldConnectToBlock(block, x, y, z, block.getBlock(x + 1, y, z), block.getBlockMetadata(x + 1, y, z)))
-            		&& (shouldConnectToBlock(block, x, y, z, block.getBlock(x - 1, y, z), block.getBlockMetadata(x - 1, y, z)))) {
+            if (connectUp && connectRight && connectDown) {
             	connectRightUpDown = true;
             }
             
             //Upper Left/Right
-            if ((shouldConnectToBlock(block, x, y, z, block.getBlock(x + 1, y, z), block.getBlockMetadata(x + 1, y, z))) 
-            		&& (shouldConnectToBlock(block, x, y, z, block.getBlock(x, y, z - 1), block.getBlockMetadata(x, y, z - 1)))
-            		&& (shouldConnectToBlock(block, x, y, z, block.getBlock(x, y, z + 1), block.getBlockMetadata(x, y, z + 1)))) {
+            if (connectUp && connectLeft && connectRight) {
             	connectUpLeftRight = true;
             }
             
             //Lower Left/Right
-            if ((shouldConnectToBlock(block, x, y, z, block.getBlock(x - 1, y, z), block.getBlockMetadata(x - 1, y, z))) 
-            		&& (shouldConnectToBlock(block, x, y, z, block.getBlock(x, y, z - 1), block.getBlockMetadata(x, y, z - 1)))
-            		&& (shouldConnectToBlock(block, x, y, z, block.getBlock(x, y, z + 1), block.getBlockMetadata(x, y, z + 1)))) {
+            if (connectDown && connectLeft && connectRight) {
             	connectDownLeftRight = true;
             }
             
