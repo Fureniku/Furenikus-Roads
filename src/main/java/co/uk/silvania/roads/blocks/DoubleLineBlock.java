@@ -19,9 +19,9 @@ import co.uk.silvania.roads.client.ClientProxy;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class LineBlock extends Block {
+public class DoubleLineBlock extends Block {
 
-	public LineBlock() {
+	public DoubleLineBlock() {
 		super(Material.rock);
 		this.setCreativeTab(FlenixRoads.tabRoads);
 	}
@@ -129,18 +129,7 @@ public class LineBlock extends Block {
 		world.setBlockMetadataWithNotify(x, y, z, newMeta, 0);
 	}
 	
-    public boolean shouldConnectToBlock(IBlockAccess blockAccess, int x, int y, int z, Block block, int compMeta) {
-    	String unloc = blockAccess.getBlock(x, y, z).getUnlocalizedName();
-    	int meta = blockAccess.getBlockMetadata(x, y, z);
-    	if (unloc.equals("lineBlock3") || unloc.equals("lineBlock3")) {
-    		if (block.getUnlocalizedName().equals("iconBlock1")) {
-    			if (meta <= 1) {
-    				if (compMeta <= 7) {
-    					return true;
-    				}
-    			}
-    		}
-    	}
+    public boolean shouldConnectToBlock(IBlockAccess blockAccess, int x, int y, int z, Block block) {
         return block == (Block) this;
     }
 	
@@ -152,19 +141,19 @@ public class LineBlock extends Block {
 		
     	int meta = block.getBlockMetadata(x, y, z);
         boolean connectNorth = false, connectSouth = false, connectWest = false, connectEast = false;
-        if (shouldConnectToBlock(block, x, y, z, block.getBlock(x - 1, y, z), block.getBlockMetadata(x - 1, y, z))) {
+        if (shouldConnectToBlock(block, x, y, z, block.getBlock(x - 1, y, z))) {
             connectWest = true;
         }
 
-        if (shouldConnectToBlock(block, x, y, z, block.getBlock(x + 1, y, z), block.getBlockMetadata(x + 1, y, z))) {
+        if (shouldConnectToBlock(block, x, y, z, block.getBlock(x + 1, y, z))) {
             connectEast = true;
         }
 
-        if (shouldConnectToBlock(block, x, y, z, block.getBlock(x, y, z - 1), block.getBlockMetadata(x, y, z - 1))) {
+        if (shouldConnectToBlock(block, x, y, z, block.getBlock(x, y, z - 1))) {
             connectNorth = true;
         }
 
-        if (shouldConnectToBlock(block, x, y, z, block.getBlock(x, y, z + 1), block.getBlockMetadata(x, y, z + 1))) {
+        if (shouldConnectToBlock(block, x, y, z, block.getBlock(x, y, z + 1))) {
             connectSouth = true;
         }
         if (meta == 0 || meta == 1) {

@@ -3,6 +3,7 @@ package co.uk.silvania.roads.client.render;
 import org.lwjgl.opengl.GL11;
 
 import co.uk.silvania.roads.blocks.FRBlocks;
+import co.uk.silvania.roads.blocks.LineBlock;
 import co.uk.silvania.roads.blocks.RoadBlock;
 import co.uk.silvania.roads.client.ClientProxy;
 import net.minecraft.block.Block;
@@ -21,7 +22,7 @@ public class RoadBlockRenderingHandler implements ISimpleBlockRenderingHandler {
 
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
         //tess.setColorOpaque_F(0.8F, 0.8F, 0.8F);
-        IIcon icon = FRBlocks.roadBlockBase1.getIcon(0, 0);
+        IIcon icon = block.getIcon(0, meta);
 
         double u0 = (double)icon.getMinU();
         double u1 = (double)icon.getMaxU();
@@ -224,15 +225,36 @@ public class RoadBlockRenderingHandler implements ISimpleBlockRenderingHandler {
         if (!(neQ == nwQ && neQ == seQ && neQ == swQ)) {
         	col = 240;
         }
+        
+        //If block above extends LineBlock, take it's texture and render it.
+        Block blockAbove = world.getBlock(x, y+1, z);
+    	if (blockAbove instanceof LineBlock) {
+        	IIcon iconAbove = blockAbove.getIcon(world, x, y, z, meta);
 
-        //System.out.println("SWB: " + swB + ", SB: " + sB + ", WB: " + wB);
-        //System.out.println("NE: " + neQ + ", SE: " + seQ + ", SW: " + swQ + ", NW: " + nwQ);
+            double u0_1 = (double)iconAbove.getMinU();
+            double u1_1 = (double)iconAbove.getMaxU();
+            double v0_1 = (double)iconAbove.getMinV();
+            double v1_1 = (double)iconAbove.getMaxV();
+            
+            tess.setColorOpaque_F(1.0F, 1.0F, 1.0F);
+            tess.addVertexWithUV(x,   y+nwQ+0.001, z,   u0_1, v0_1); //NW
+            tess.addVertexWithUV(x,   y+swQ+0.001, z+1, u0_1, v1_1); //SW
+            tess.addVertexWithUV(x+1, y+seQ+0.001, z+1, u1_1, v1_1); //SE
+            tess.addVertexWithUV(x+1, y+neQ+0.001, z,   u1_1, v0_1); //NE
+            tess.draw();
+            tess.startDrawingQuads();
+        }
         
         //Now, we actually render each face.
         //Each face needs the colour setting, and then four vertex.
         //Colour is required as it's reduced for sides and bottom, to give a false effect of "shading" which is surprisingly very important.
+        
+        
+        
+        
+        
         //Top Side
-        tess.setColorOpaque(col, col, col);
+        tess.setColorOpaque_F(1.0F, 1.0F, 1.0F);
         tess.addVertexWithUV(x,   y+nwQ, z,   u1, v1); //NW
         tess.addVertexWithUV(x,   y+swQ, z+1, u1, v0); //SW
         tess.addVertexWithUV(x+1, y+seQ, z+1, u0, v0); //SE
@@ -241,7 +263,7 @@ public class RoadBlockRenderingHandler implements ISimpleBlockRenderingHandler {
         
         //North Side
         tess.startDrawingQuads();
-        tess.setColorOpaque(204, 204, 204);
+        tess.setColorOpaque_F(0.8F, 0.8F, 0.8F);
         tess.addVertexWithUV(x+1, y+e, z, u1, v1);
         tess.addVertexWithUV(x+1, y,   z, u1, v0);
         tess.addVertexWithUV(x,   y,   z, u0, v0);
@@ -250,7 +272,7 @@ public class RoadBlockRenderingHandler implements ISimpleBlockRenderingHandler {
         
         //East Side
         tess.startDrawingQuads();
-        tess.setColorOpaque(153, 153, 155);
+        tess.setColorOpaque_F(0.6F, 0.6F, 0.6F);
         tess.addVertexWithUV(x+1, y+s, z+1, u1, v1);
         tess.addVertexWithUV(x+1, y,   z+1, u1, v0);
         tess.addVertexWithUV(x+1, y,   z,   u0, v0);
@@ -259,7 +281,7 @@ public class RoadBlockRenderingHandler implements ISimpleBlockRenderingHandler {
         
         //South Side
         tess.startDrawingQuads();
-        tess.setColorOpaque(204, 204, 204);
+        tess.setColorOpaque_F(0.8F, 0.8F, 0.8F);
         tess.addVertexWithUV(x,   y+w, z+1, u1, v1);
         tess.addVertexWithUV(x,   y,   z+1, u1, v0);
         tess.addVertexWithUV(x+1, y,   z+1, u0, v0);
@@ -268,7 +290,7 @@ public class RoadBlockRenderingHandler implements ISimpleBlockRenderingHandler {
         
         //West Side
         tess.startDrawingQuads();
-        tess.setColorOpaque(153, 153, 155);
+        tess.setColorOpaque_F(0.6F, 0.6F, 0.6F);
         tess.addVertexWithUV(x,   y+n, z,   u1, v1);
         tess.addVertexWithUV(x,   y,   z,   u1, v0);
         tess.addVertexWithUV(x,   y,   z+1, u0, v0);
@@ -277,7 +299,7 @@ public class RoadBlockRenderingHandler implements ISimpleBlockRenderingHandler {
         
         //Bottom Side
         tess.startDrawingQuads();
-        tess.setColorOpaque(127, 127, 127);
+        tess.setColorOpaque_F(0.5F, 0.5F, 0.5F);
         tess.addVertexWithUV(x,   y,   z+1, u1, v1);
         tess.addVertexWithUV(x,   y,   z, u1, v0);
         tess.addVertexWithUV(x+1, y,   z, u0, v0);
