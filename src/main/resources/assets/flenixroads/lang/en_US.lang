@@ -1,4 +1,21 @@
 tile.roadBlockBase1.name=Tarmac Road
+tile.roadBlockConcrete.name=Concrete Road
+tile.roadBlockConcrete2.name=Concrete Road
+tile.roadBlockLight.name=Light Tarmac Road
+tile.roadBlockFine.name=Fine Tarmac Road
+tile.roadBlockDark.name=Dark Tarmac Road
+tile.roadBlockPale.name=Pale Tarmac Road
+tile.roadBlockRed.name=Red Tarmac Road
+tile.roadBlockBlue.name=Blue Tarmac Road
+tile.roadBlockWhite.name=White Tarmac Road
+tile.roadBlockYellow.name=Yellow Tarmac Road
+    
+tile.roadBlockStone.name=Stone Road
+tile.roadBlockGrass.name=Grass Road
+tile.roadBlockDirt.name=Dirt Road
+tile.roadBlockGravel.name=Gravel Road
+tile.roadBlockSand.name=Sand Road
+
 tile.sidewalk1.name=Light Grey Sidewalk
 
 tile.lineBlock1=White Single Line Road Paint

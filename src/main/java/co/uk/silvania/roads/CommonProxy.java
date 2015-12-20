@@ -17,9 +17,32 @@ public class CommonProxy {
 	
 	public void registerBlocks() {
 		GameRegistry.registerBlock(FRBlocks.roadBlockBase1, RoadItemBlock.class, "roadblockBase1");
+		GameRegistry.registerBlock(FRBlocks.roadBlockConcrete, RoadItemBlock.class, "roadBlockConcrete");
+		GameRegistry.registerBlock(FRBlocks.roadBlockConcrete2, RoadItemBlock.class, "roadBlockConcrete2");
+		GameRegistry.registerBlock(FRBlocks.roadBlockLight, RoadItemBlock.class, "roadBlockLight");
+		GameRegistry.registerBlock(FRBlocks.roadBlockFine, RoadItemBlock.class, "roadBlockFine");
+		GameRegistry.registerBlock(FRBlocks.roadBlockDark, RoadItemBlock.class, "roadBlockDark");
+		GameRegistry.registerBlock(FRBlocks.roadBlockPale, RoadItemBlock.class, "roadBlockPale");
+		GameRegistry.registerBlock(FRBlocks.roadBlockRed, RoadItemBlock.class, "roadBlockRed");
+		GameRegistry.registerBlock(FRBlocks.roadBlockBlue, RoadItemBlock.class, "roadBlockBlue");
+		GameRegistry.registerBlock(FRBlocks.roadBlockWhite, RoadItemBlock.class, "roadBlockWhite");
+		GameRegistry.registerBlock(FRBlocks.roadBlockYellow, RoadItemBlock.class, "roadBlockYellow");
+		
+		GameRegistry.registerBlock(FRBlocks.roadBlockStone, RoadItemBlock.class, "roadBlockStone");
+		GameRegistry.registerBlock(FRBlocks.roadBlockGrass, RoadItemBlock.class, "roadBlockGrass");
+		GameRegistry.registerBlock(FRBlocks.roadBlockDirt, RoadItemBlock.class, "roadBlockDirt");
+		GameRegistry.registerBlock(FRBlocks.roadBlockGravel, RoadItemBlock.class, "roadBlockGravel");
+		GameRegistry.registerBlock(FRBlocks.roadBlockSand, RoadItemBlock.class, "roadBlockSand");
+		
 		GameRegistry.registerBlock(FRBlocks.lineBlock1, RoadItemBlock.class, "lineBlock1");
 		GameRegistry.registerBlock(FRBlocks.lineBlock2, RoadItemBlock.class, "lineBlock2");
 		GameRegistry.registerBlock(FRBlocks.lineBlock3, RoadItemBlock.class, "lineBlock3");
+		GameRegistry.registerBlock(FRBlocks.lineBlock4, RoadItemBlock.class, "lineBlock4");
+		
+		GameRegistry.registerBlock(FRBlocks.iconBlock1, RoadItemBlock.class, "iconBlock1");
+		
+		GameRegistry.registerBlock(FRBlocks.doubleLineBlock1, RoadItemBlock.class, "doubleLineBlock1");
+		GameRegistry.registerBlock(FRBlocks.doubleLineBlock2, RoadItemBlock.class, "doubleLineBlock2");
 		
 		GameRegistry.registerBlock(FRBlocks.sidewalk1, RoadItemBlock.class, "sidewalk1");
 

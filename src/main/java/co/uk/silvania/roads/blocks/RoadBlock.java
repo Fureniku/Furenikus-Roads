@@ -61,7 +61,7 @@ public class RoadBlock extends Block {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerBlockIcons(IIconRegister icon) {
-		blockIcon = icon.registerIcon(FlenixRoads.modid + ":" + (this.getUnlocalizedName().substring(5)) + "_0");
+		blockIcon = icon.registerIcon(FlenixRoads.modid + ":" + (this.getUnlocalizedName().substring(5)));
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -71,10 +71,6 @@ public class RoadBlock extends Block {
 		for (int i = 0; i < 16; i++) {
 			list.add(new ItemStack(item, 1, i));
 		}
-		/*list.add(new ItemStack(item, 1, 2)); //0=0.25, 1=0.5, 2=0.75, 3=1.0 height
-		list.add(new ItemStack(item, 1, 6));
-		list.add(new ItemStack(item, 1, 10));
-		list.add(new ItemStack(item, 1, 14));*/
 	}
 	
 	@Override

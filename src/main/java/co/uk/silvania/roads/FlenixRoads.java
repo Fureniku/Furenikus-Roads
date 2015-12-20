@@ -14,7 +14,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
-@Mod(modid=FlenixRoads.modid, /*dependencies="requiredafter:flenixcities",*/ name="FlenixRoads", version="1.0.0")
+@Mod(modid=FlenixRoads.modid, /*dependencies="requiredafter:flenixcities",*/ name="FlenixRoads", version="0.8.0")
 public class FlenixRoads {
 	
 	public static final String modid = "flenixroads";
@@ -28,7 +28,13 @@ public class FlenixRoads {
 	public static CreativeTabs tabRoads = new CreativeTabs("tabRoads") {
 		@Override
 		public Item getTabIconItem() {
-			return new ItemStack(Items.apple, 1, 0).getItem();
+			return new ItemStack(FRBlocks.roadBlockBase1, 1, 11).getItem();
+		}
+	};
+	public static CreativeTabs tabPaints = new CreativeTabs("tabPaints") {
+		@Override
+		public Item getTabIconItem() {
+			return new ItemStack(FRBlocks.lineBlock1, 1, 0).getItem();
 		}
 	};
 

@@ -1,11 +1,28 @@
 package co.uk.silvania.roads.blocks;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 
 public class FRBlocks {
 	
 	//Tarmac variants
 	public static Block roadBlockBase1;
+	public static Block roadBlockConcrete;
+	public static Block roadBlockConcrete2;
+	public static Block roadBlockLight;
+	public static Block roadBlockFine;
+	public static Block roadBlockDark;
+	public static Block roadBlockPale;
+	public static Block roadBlockRed;
+	public static Block roadBlockBlue;
+	public static Block roadBlockWhite;
+	public static Block roadBlockYellow;
+	
+	public static Block roadBlockStone;
+	public static Block roadBlockGrass;
+	public static Block roadBlockDirt;
+	public static Block roadBlockGravel;
+	public static Block roadBlockSand;
 	
 	//Other "road blocks"
 	public static Block sidewalk1;
@@ -32,6 +49,12 @@ public class FRBlocks {
 	public static Block lineBlock1;
 	public static Block lineBlock2;
 	public static Block lineBlock3;
+	public static Block lineBlock4;
+	
+	public static Block doubleLineBlock1;
+	public static Block doubleLineBlock2;
+	
+	public static Block iconBlock1;
 	
 	public static void init() {
 		roadBlocks();
@@ -39,6 +62,22 @@ public class FRBlocks {
 	
 	public static void roadBlocks() {
 		roadBlockBase1 = new RoadBlock().setBlockName("roadBlockBase1");
+		roadBlockConcrete = new RoadBlock().setBlockName("roadBlockConcrete");
+		roadBlockConcrete2 = new RoadBlock().setBlockName("roadBlockConcrete2");
+		roadBlockLight = new RoadBlock().setBlockName("roadBlockLight");
+		roadBlockFine = new RoadBlock().setBlockName("roadBlockFine");
+		roadBlockDark = new RoadBlock().setBlockName("roadBlockDark");
+		roadBlockPale = new RoadBlock().setBlockName("roadBlockPale");
+		roadBlockRed = new RoadBlock().setBlockName("roadBlockRed");
+		roadBlockBlue = new RoadBlock().setBlockName("roadBlockBlue");
+		roadBlockWhite = new RoadBlock().setBlockName("roadBlockWhite");
+		roadBlockYellow = new RoadBlock().setBlockName("roadBlockYellow");
+		
+		roadBlockStone = new VanillaRoadBlock(Blocks.stone).setBlockName("roadBlockStone");
+		roadBlockGrass = new GrassRoadBlock().setBlockName("roadBlockGrass");
+		roadBlockDirt = new VanillaRoadBlock(Blocks.dirt).setBlockName("roadBlockDirt");
+		roadBlockGravel = new VanillaRoadBlock(Blocks.gravel).setBlockName("roadBlockGravel");
+		roadBlockSand = new VanillaRoadBlock(Blocks.sand).setBlockName("roadBlockSand");
 		
 		sidewalk1 = new NonRoadBlockCT().setBlockName("sidewalk1");
 		
@@ -61,6 +100,12 @@ public class FRBlocks {
 		lineBlock1 = new LineBlock().setBlockName("lineBlock1");
 		lineBlock2 = new LineBlock().setBlockName("lineBlock2");
 		lineBlock3 = new LineBlock().setBlockName("lineBlock3");
+		lineBlock4 = new LineBlock().setBlockName("lineBlock4");
+		
+		doubleLineBlock1 = new LineBlock().setBlockName("doubleLineBlock1");
+		doubleLineBlock2 = new LineBlock().setBlockName("doubleLineBlock2");
+		
+		iconBlock1 = new IconBlock().setBlockName("iconBlock1");
 	}
 
 }
