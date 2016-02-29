@@ -237,10 +237,10 @@ public class RoadBlockRenderingHandler implements ISimpleBlockRenderingHandler {
             double v1_1 = (double)iconAbove.getMaxV();
             
             tess.setColorOpaque_F(1.0F, 1.0F, 1.0F);
-            tess.addVertexWithUV(x,   y+nwQ+0.001, z,   u0_1, v0_1); //NW
-            tess.addVertexWithUV(x,   y+swQ+0.001, z+1, u0_1, v1_1); //SW
-            tess.addVertexWithUV(x+1, y+seQ+0.001, z+1, u1_1, v1_1); //SE
-            tess.addVertexWithUV(x+1, y+neQ+0.001, z,   u1_1, v0_1); //NE
+            tess.addVertexWithUV(x,   y+nwQ+0.05, z,   u0_1, v0_1); //NW
+            tess.addVertexWithUV(x,   y+swQ+0.05, z+1, u0_1, v1_1); //SW
+            tess.addVertexWithUV(x+1, y+seQ+0.05, z+1, u1_1, v1_1); //SE
+            tess.addVertexWithUV(x+1, y+neQ+0.05, z,   u1_1, v0_1); //NE
             tess.draw();
             tess.startDrawingQuads();
         }
