@@ -44,6 +44,7 @@ public class RoadBlock extends Block {
     }
 	
 	@Override
+	@SideOnly(Side.CLIENT)
 	public int getRenderType() {
 		return ClientProxy.roadBlockRenderID;
 	}
