@@ -1,5 +1,6 @@
 package co.uk.silvania.roads.client.render;
 
+import co.uk.silvania.roads.blocks.GrassRoadBlock;
 import co.uk.silvania.roads.blocks.NonRoadBlock;
 import co.uk.silvania.roads.client.ClientProxy;
 import net.minecraft.block.Block;
@@ -9,7 +10,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
-public class NonRoadBlockRenderingHandler implements ISimpleBlockRenderingHandler {
+public class GrassKerbRenderingHandler implements ISimpleBlockRenderingHandler {
 	Tessellator tess;
 	
 	@Override
@@ -32,29 +33,37 @@ public class NonRoadBlockRenderingHandler implements ISimpleBlockRenderingHandle
         IIcon icon;
         IIcon icon1;
         IIcon icon2;
+        IIcon icon3;
 
         //int meta = renderer.blockAccess.getBlockMetadata(x, y, z);
-        icon = block.getIcon(renderer.blockAccess, x, y, z, 0);
-        icon1 = block.getIcon(renderer.blockAccess, x, y, z, 1);
+        icon = block.getIcon(renderer.blockAccess, x, y, z, 1);
+        icon1 = block.getIcon(renderer.blockAccess, x, y, z, 0);
         icon2 = block.getIcon(renderer.blockAccess, x, y, z, 2);
+        icon3 = block.getIcon(renderer.blockAccess, x, y, z, 3);
 
-        double u0 = (double)icon.getMinU(); //Underlayer
+        double u0 = (double)icon.getMinU();
         double u1 = (double)icon.getMaxU();
         
         double v0 = (double)icon.getMinV();
         double v1 = (double)icon.getMaxV();
         
-        double u0_1 = (double)icon1.getMinU(); //Kerb
-        double u1_1 = (double)icon1.getMaxU();
+        double u0_2 = (double)icon1.getMinU();
+        double u1_2 = (double)icon1.getMaxU();
         
-        double v0_1 = (double)icon1.getMinV();
-        double v1_1 = (double)icon1.getMaxV();
+        double v0_2 = (double)icon1.getMinV();
+        double v1_2 = (double)icon1.getMaxV();
         
-        double u0_2 = (double)icon2.getMinU(); //Kerb Side
-        double u1_2 = (double)icon2.getMaxU();
+        double u0_3 = (double)icon2.getMinU();
+        double u1_3 = (double)icon2.getMaxU();
         
-        double v0_2 = (double)icon2.getMinV();
-        double v1_2 = (double)icon2.getMaxV();
+        double v0_3 = (double)icon2.getMinV();
+        double v1_3 = (double)icon2.getMaxV();
+        
+        double u0_4 = (double)icon3.getMinU();
+        double u1_4 = (double)icon3.getMaxU();
+        
+        double v0_4 = (double)icon3.getMinV();
+        double v1_4 = (double)icon3.getMaxV();
         
         //Initial height values. Quad Height method simply gets the height from meta via quick calculation (more reliable than checking bounding box size, for some reason)
         //Value is compass.
@@ -271,94 +280,115 @@ public class NonRoadBlockRenderingHandler implements ISimpleBlockRenderingHandle
          *   End AO code
          */
         
+        //GC = grass colour ;)
+        int gcl = 0;
+        int gci1 = 0;
+        int gcj1 = 0;
+
+        for (int gck1 = -1; gck1 <= 1; ++gck1) {
+            for (int gcl1 = -1; gcl1 <= 1; ++gcl1) {
+                int gci2 = world.getBiomeGenForCoords(x + gcl1, z + gck1).getBiomeGrassColor(x + gcl1, y, z + gck1);
+                gcl += (gci2 & 16711680) >> 16;
+            	gci1 += (gci2 & 65280) >> 8;
+            	gcj1 += gci2 & 255;
+            }
+        }
+        
+        int grassCol = (gcl / 9 & 255) << 16 | (gci1 / 9 & 255) << 8 | gcj1 / 9 & 255;
+        
+        //Top side (Kerb)
+        tess.setColorOpaque_F(renderer.colorRedBottomRight, renderer.colorGreenBottomRight, renderer.colorBlueBottomRight);
+        tess.setBrightness(renderer.brightnessBottomRight);
+        tess.addVertexWithUV(x,   y+nwQ+0.001, z,   u1, v1); //NW
+        
+        tess.setColorOpaque_F(renderer.colorRedTopRight, renderer.colorGreenTopRight, renderer.colorBlueTopRight);
+        tess.setBrightness(renderer.brightnessTopRight);
+        tess.addVertexWithUV(x,   y+swQ+0.001, z+1, u1, v0); //SW
+        
+        tess.setColorOpaque_F(renderer.colorRedTopLeft, renderer.colorGreenTopLeft, renderer.colorBlueTopLeft);
+        tess.setBrightness(renderer.brightnessTopLeft);
+        tess.addVertexWithUV(x+1, y+seQ+0.001, z+1, u0, v0); //SE
+        
+        tess.setColorOpaque_F(renderer.colorRedBottomLeft, renderer.colorGreenBottomLeft, renderer.colorBlueBottomLeft);
+        tess.setBrightness(renderer.brightnessBottomLeft);
+        tess.addVertexWithUV(x+1, y+neQ+0.001, z,   u0, v1); //NE
+        
+        
         //Top Side
         tess.setColorOpaque_F(renderer.colorRedBottomRight, renderer.colorGreenBottomRight, renderer.colorBlueBottomRight);
+        tess.setColorOpaque_I(grassCol);
         tess.setBrightness(renderer.brightnessBottomRight);
-        tess.addVertexWithUV(x,   y+nwQ, z,   u1, v1); //NW
+        tess.addVertexWithUV(x,   y+nwQ, z,   u1_2, v1_2); //NW
         
         tess.setColorOpaque_F(renderer.colorRedTopRight, renderer.colorGreenTopRight, renderer.colorBlueTopRight);
+        tess.setColorOpaque_I(grassCol);
         tess.setBrightness(renderer.brightnessTopRight);
-        tess.addVertexWithUV(x,   y+swQ, z+1, u1, v0); //SW
+        tess.addVertexWithUV(x,   y+swQ, z+1, u1_2, v0_2); //SW
         
         tess.setColorOpaque_F(renderer.colorRedTopLeft, renderer.colorGreenTopLeft, renderer.colorBlueTopLeft);
+        tess.setColorOpaque_I(grassCol);
         tess.setBrightness(renderer.brightnessTopLeft);
-        tess.addVertexWithUV(x+1, y+seQ, z+1, u0, v0); //SE
+        tess.addVertexWithUV(x+1, y+seQ, z+1, u0_2, v0_2); //SE
         
         tess.setColorOpaque_F(renderer.colorRedBottomLeft, renderer.colorGreenBottomLeft, renderer.colorBlueBottomLeft);
+        tess.setColorOpaque_I(grassCol);
         tess.setBrightness(renderer.brightnessBottomLeft);
-        tess.addVertexWithUV(x+1, y+neQ, z,   u0, v1); //NE
+        tess.addVertexWithUV(x+1, y+neQ, z,   u0_2, v1_2); //NE
         
-        tess.setColorOpaque_F(renderer.colorRedBottomRight, renderer.colorGreenBottomRight, renderer.colorBlueBottomRight);
-        tess.setBrightness(renderer.brightnessBottomRight);
-        tess.addVertexWithUV(x,   y+nwQ, z,   u1_1, v1_1); //NW
-        
-        tess.setColorOpaque_F(renderer.colorRedTopRight, renderer.colorGreenTopRight, renderer.colorBlueTopRight);
-        tess.setBrightness(renderer.brightnessTopRight);
-        tess.addVertexWithUV(x,   y+swQ, z+1, u1_1, v0_1); //SW
-        
-        tess.setColorOpaque_F(renderer.colorRedTopLeft, renderer.colorGreenTopLeft, renderer.colorBlueTopLeft);
-        tess.setBrightness(renderer.brightnessTopLeft);
-        tess.addVertexWithUV(x+1, y+seQ, z+1, u0_1, v0_1); //SE
-        
-        tess.setColorOpaque_F(renderer.colorRedBottomLeft, renderer.colorGreenBottomLeft, renderer.colorBlueBottomLeft);
-        tess.setBrightness(renderer.brightnessBottomLeft);
-        tess.addVertexWithUV(x+1, y+neQ, z,   u0_1, v1_1); //NE
-        
-        
-        //North side
+        //North Side
         tess.setColorOpaque(204, 204, 204);
-        tess.addVertexWithUV(x+1, y+e, z, u1, v1);
-        tess.addVertexWithUV(x+1, y,   z, u1, v0);
-        tess.addVertexWithUV(x,   y,   z, u0, v0);
-        tess.addVertexWithUV(x,   y+w, z, u0, v1);
+        tess.addVertexWithUV(x+1, y+e, z, u1_3, v1_3);
+        tess.addVertexWithUV(x+1, y,   z, u1_3, v0_3);
+        tess.addVertexWithUV(x,   y,   z, u0_3, v0_3);
+        tess.addVertexWithUV(x,   y+w, z, u0_3, v1_3);
         
-        tess.addVertexWithUV(x+1, y+e, z-0.0001, u1_2, v1_2);
-        tess.addVertexWithUV(x+1, y,   z-0.0001, u1_2, v0_2);
-        tess.addVertexWithUV(x,   y,   z-0.0001, u0_2, v0_2);
-        tess.addVertexWithUV(x,   y+w, z-0.0001, u0_2, v1_2);
+        tess.addVertexWithUV(x+1, y+e, z-0.0001, u1_4, v1_4);
+        tess.addVertexWithUV(x+1, y,   z-0.0001, u1_4, v0_4);
+        tess.addVertexWithUV(x,   y,   z-0.0001, u0_4, v0_4);
+        tess.addVertexWithUV(x,   y+w, z-0.0001, u0_4, v1_4);
         
         //East Side
         tess.setColorOpaque(153, 153, 153);
-        tess.addVertexWithUV(x+1, y+s, z+1, u1, v1);
-        tess.addVertexWithUV(x+1, y,   z+1, u1, v0);
-        tess.addVertexWithUV(x+1, y,   z,   u0, v0);
-        tess.addVertexWithUV(x+1, y+n, z,   u0, v1);
+        tess.addVertexWithUV(x+1, y+s, z+1, u1_3, v1_3);
+        tess.addVertexWithUV(x+1, y,   z+1, u1_3, v0_3);
+        tess.addVertexWithUV(x+1, y,   z,   u0_3, v0_3);
+        tess.addVertexWithUV(x+1, y+n, z,   u0_3, v1_3);
         
-        tess.addVertexWithUV(x+1.0001, y+s, z+1, u1_2, v1_2);
-        tess.addVertexWithUV(x+1.0001, y,   z+1, u1_2, v0_2);
-        tess.addVertexWithUV(x+1.0001, y,   z,   u0_2, v0_2);
-        tess.addVertexWithUV(x+1.0001, y+n, z,   u0_2, v1_2);
+        tess.addVertexWithUV(x+1.0001, y+s, z+1, u1_4, v1_4);
+        tess.addVertexWithUV(x+1.0001, y,   z+1, u1_4, v0_4);
+        tess.addVertexWithUV(x+1.0001, y,   z,   u0_4, v0_4);
+        tess.addVertexWithUV(x+1.0001, y+n, z,   u0_4, v1_4);
         
         //South Side
         tess.setColorOpaque(204, 204, 204);
-        tess.addVertexWithUV(x,   y+w, z+1, u1, v1);
-        tess.addVertexWithUV(x,   y,   z+1, u1, v0);
-        tess.addVertexWithUV(x+1, y,   z+1, u0, v0);
-        tess.addVertexWithUV(x+1, y+e, z+1, u0, v1);
+        tess.addVertexWithUV(x,   y+w, z+1, u1_3, v1_3);
+        tess.addVertexWithUV(x,   y,   z+1, u1_3, v0_3);
+        tess.addVertexWithUV(x+1, y,   z+1, u0_3, v0_3);
+        tess.addVertexWithUV(x+1, y+e, z+1, u0_3, v1_3);
         
-        tess.addVertexWithUV(x,   y+w, z+1.0001, u1_2, v1_2);
-        tess.addVertexWithUV(x,   y,   z+1.0001, u1_2, v0_2);
-        tess.addVertexWithUV(x+1, y,   z+1.0001, u0_2, v0_2);
-        tess.addVertexWithUV(x+1, y+e, z+1.0001, u0_2, v1_2);
+        tess.addVertexWithUV(x,   y+w, z+1.0001, u1_4, v1_4);
+        tess.addVertexWithUV(x,   y,   z+1.0001, u1_4, v0_4);
+        tess.addVertexWithUV(x+1, y,   z+1.0001, u0_4, v0_4);
+        tess.addVertexWithUV(x+1, y+e, z+1.0001, u0_4, v1_4);
 
         //West Side
         tess.setColorOpaque(153, 153, 153);
-        tess.addVertexWithUV(x,   y+n, z,   u1, v1);
-        tess.addVertexWithUV(x,   y,   z,   u1, v0);
-        tess.addVertexWithUV(x,   y,   z+1, u0, v0);
-        tess.addVertexWithUV(x,   y+s, z+1, u0, v1);
+        tess.addVertexWithUV(x,   y+n, z,   u1_3, v1_3);
+        tess.addVertexWithUV(x,   y,   z,   u1_3, v0_3);
+        tess.addVertexWithUV(x,   y,   z+1, u0_3, v0_3);
+        tess.addVertexWithUV(x,   y+s, z+1, u0_3, v1_3);
         
-        tess.addVertexWithUV(x-0.0001,   y+n, z,   u1_2, v1_2);
-        tess.addVertexWithUV(x-0.0001,   y,   z,   u1_2, v0_2);
-        tess.addVertexWithUV(x-0.0001,   y,   z+1, u0_2, v0_2);
-        tess.addVertexWithUV(x-0.0001,   y+s, z+1, u0_2, v1_2);
+        tess.addVertexWithUV(x-0.0001,   y+n, z,   u1_4, v1_4);
+        tess.addVertexWithUV(x-0.0001,   y,   z,   u1_4, v0_4);
+        tess.addVertexWithUV(x-0.0001,   y,   z+1, u0_4, v0_4);
+        tess.addVertexWithUV(x-0.0001,   y+s, z+1, u0_4, v1_4);
 
         //Bottom Side
         tess.setColorOpaque(127, 127, 127);
-        tess.addVertexWithUV(x,   y,   z+1, u1, v1);
-        tess.addVertexWithUV(x,   y,   z,   u1, v0);
-        tess.addVertexWithUV(x+1, y,   z,   u0, v0);
-        tess.addVertexWithUV(x+1, y,   z+1, u0, v1);
+        tess.addVertexWithUV(x,   y,   z+1, u1_3, v1_3);
+        tess.addVertexWithUV(x,   y,   z,   u1_3, v0_3);
+        tess.addVertexWithUV(x+1, y,   z,   u0_3, v0_3);
+        tess.addVertexWithUV(x+1, y,   z+1, u0_3, v1_3);
 		return true;
 	}
 
