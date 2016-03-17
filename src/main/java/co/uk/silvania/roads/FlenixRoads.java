@@ -14,7 +14,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
-@Mod(modid=FlenixRoads.modid, /*dependencies="requiredafter:flenixcities",*/ name="FlenixRoads", version="0.8.0")
+@Mod(modid=FlenixRoads.modid, /*dependencies="requiredafter:flenixcities",*/ name="FlenixRoads", version="0.9.0")
 public class FlenixRoads {
 	
 	public static final String modid = "flenixroads";
