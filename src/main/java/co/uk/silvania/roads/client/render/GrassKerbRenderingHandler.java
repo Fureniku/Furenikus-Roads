@@ -2,15 +2,16 @@ package co.uk.silvania.roads.client.render;
 
 import org.lwjgl.opengl.GL11;
 
+import co.uk.silvania.roads.FlenixRoads;
 import co.uk.silvania.roads.blocks.GrassKerb;
-import co.uk.silvania.roads.blocks.NonRoadBlock;
+import co.uk.silvania.roads.blocks.GrassKerb;
 import co.uk.silvania.roads.client.ClientProxy;
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class GrassKerbRenderingHandler implements ISimpleBlockRenderingHandler {
 	Tessellator tess;
@@ -238,14 +239,14 @@ public class GrassKerbRenderingHandler implements ISimpleBlockRenderingHandler {
         //This currently only checks the block next to it, and if there's a block there then it adds full.
         //should check block ABOVE the block next to it, and add the correct amount.
         //double not boolean, y+1, meta to get value. boom.
-        if (world.getBlock(x,   y+1, z-1) instanceof NonRoadBlock) { nt  = quadHeight(world.getBlockMetadata(x,   y+1, z-1)) + offset;}
-        if (world.getBlock(x+1, y+1, z-1) instanceof NonRoadBlock) { net = quadHeight(world.getBlockMetadata(x+1, y+1, z-1)) + offset;}
-        if (world.getBlock(x+1, y+1, z)   instanceof NonRoadBlock) { et  = quadHeight(world.getBlockMetadata(x+1, y+1, z  )) + offset;}
-        if (world.getBlock(x+1, y+1, z+1) instanceof NonRoadBlock) { set = quadHeight(world.getBlockMetadata(x+1, y+1, z+1)) + offset;}
-        if (world.getBlock(x,   y+1, z+1) instanceof NonRoadBlock) { st  = quadHeight(world.getBlockMetadata(x,   y+1, z+1)) + offset;}
-        if (world.getBlock(x-1, y+1, z+1) instanceof NonRoadBlock) { swt = quadHeight(world.getBlockMetadata(x-1, y+1, z+1)) + offset;}
-        if (world.getBlock(x-1, y+1, z)   instanceof NonRoadBlock) { wt  = quadHeight(world.getBlockMetadata(x-1, y+1, z  )) + offset;}
-        if (world.getBlock(x-1, y+1, z-1) instanceof NonRoadBlock) { nwt = quadHeight(world.getBlockMetadata(x-1, y+1, z-1)) + offset;}
+        if (world.getBlock(x,   y+1, z-1) instanceof GrassKerb) { nt  = quadHeight(world.getBlockMetadata(x,   y+1, z-1)) + offset;}
+        if (world.getBlock(x+1, y+1, z-1) instanceof GrassKerb) { net = quadHeight(world.getBlockMetadata(x+1, y+1, z-1)) + offset;}
+        if (world.getBlock(x+1, y+1, z)   instanceof GrassKerb) { et  = quadHeight(world.getBlockMetadata(x+1, y+1, z  )) + offset;}
+        if (world.getBlock(x+1, y+1, z+1) instanceof GrassKerb) { set = quadHeight(world.getBlockMetadata(x+1, y+1, z+1)) + offset;}
+        if (world.getBlock(x,   y+1, z+1) instanceof GrassKerb) { st  = quadHeight(world.getBlockMetadata(x,   y+1, z+1)) + offset;}
+        if (world.getBlock(x-1, y+1, z+1) instanceof GrassKerb) { swt = quadHeight(world.getBlockMetadata(x-1, y+1, z+1)) + offset;}
+        if (world.getBlock(x-1, y+1, z)   instanceof GrassKerb) { wt  = quadHeight(world.getBlockMetadata(x-1, y+1, z  )) + offset;}
+        if (world.getBlock(x-1, y+1, z-1) instanceof GrassKerb) { nwt = quadHeight(world.getBlockMetadata(x-1, y+1, z-1)) + offset;}
                 
         double nQh = 0;
         double neQh = 0;
@@ -256,23 +257,23 @@ public class GrassKerbRenderingHandler implements ISimpleBlockRenderingHandler {
         double wQh = 0;
         double nwQh = 0;
         
-        if (world.getBlock(x,   y, z-1) instanceof NonRoadBlock) { nQh  = quadHeight(world.getBlockMetadata(x,   y, z-1)); } else if (!(world.isAirBlock(x,   y, z-1))) { nQh  = 1;}
-        if (world.getBlock(x+1, y, z-1) instanceof NonRoadBlock) { neQh = quadHeight(world.getBlockMetadata(x+1, y, z-1)); } else if (!(world.isAirBlock(x+1, y, z-1))) { neQh = 1;}
-        if (world.getBlock(x+1, y, z)   instanceof NonRoadBlock) { eQh  = quadHeight(world.getBlockMetadata(x+1, y, z));   } else if (!(world.isAirBlock(x+1, y, z)))   { eQh  = 1;}
-        if (world.getBlock(x+1, y, z+1) instanceof NonRoadBlock) { seQh = quadHeight(world.getBlockMetadata(x+1, y, z+1)); } else if (!(world.isAirBlock(x+1, y, z+1))) { seQh = 1;}
-        if (world.getBlock(x,   y, z+1) instanceof NonRoadBlock) { sQh  = quadHeight(world.getBlockMetadata(x,   y, z+1)); } else if (!(world.isAirBlock(x,   y, z+1))) { sQh  = 1;}
-        if (world.getBlock(x-1, y, z+1) instanceof NonRoadBlock) { swQh = quadHeight(world.getBlockMetadata(x-1, y, z+1)); } else if (!(world.isAirBlock(x-1, y, z+1))) { swQh = 1;}
-        if (world.getBlock(x-1, y, z)   instanceof NonRoadBlock) { wQh  = quadHeight(world.getBlockMetadata(x-1, y, z));   } else if (!(world.isAirBlock(x-1, y, z)))   { wQh  = 1;}
-        if (world.getBlock(x-1, y, z-1) instanceof NonRoadBlock) { nwQh = quadHeight(world.getBlockMetadata(x-1, y, z-1)); } else if (!(world.isAirBlock(x-1, y, z-1))) { nwQh = 1;}
+        if (world.getBlock(x,   y, z-1) instanceof GrassKerb) { nQh  = quadHeight(world.getBlockMetadata(x,   y, z-1)); } else if (!(world.isAirBlock(x,   y, z-1))) { nQh  = 1;}
+        if (world.getBlock(x+1, y, z-1) instanceof GrassKerb) { neQh = quadHeight(world.getBlockMetadata(x+1, y, z-1)); } else if (!(world.isAirBlock(x+1, y, z-1))) { neQh = 1;}
+        if (world.getBlock(x+1, y, z)   instanceof GrassKerb) { eQh  = quadHeight(world.getBlockMetadata(x+1, y, z));   } else if (!(world.isAirBlock(x+1, y, z)))   { eQh  = 1;}
+        if (world.getBlock(x+1, y, z+1) instanceof GrassKerb) { seQh = quadHeight(world.getBlockMetadata(x+1, y, z+1)); } else if (!(world.isAirBlock(x+1, y, z+1))) { seQh = 1;}
+        if (world.getBlock(x,   y, z+1) instanceof GrassKerb) { sQh  = quadHeight(world.getBlockMetadata(x,   y, z+1)); } else if (!(world.isAirBlock(x,   y, z+1))) { sQh  = 1;}
+        if (world.getBlock(x-1, y, z+1) instanceof GrassKerb) { swQh = quadHeight(world.getBlockMetadata(x-1, y, z+1)); } else if (!(world.isAirBlock(x-1, y, z+1))) { swQh = 1;}
+        if (world.getBlock(x-1, y, z)   instanceof GrassKerb) { wQh  = quadHeight(world.getBlockMetadata(x-1, y, z));   } else if (!(world.isAirBlock(x-1, y, z)))   { wQh  = 1;}
+        if (world.getBlock(x-1, y, z-1) instanceof GrassKerb) { nwQh = quadHeight(world.getBlockMetadata(x-1, y, z-1)); } else if (!(world.isAirBlock(x-1, y, z-1))) { nwQh = 1;}
         
-        if ((world.getBlock(x,   y, z-1) instanceof NonRoadBlock) || (nt > 0))  { n  = nQh  + nt;}  else { n  = a;} //TODO this one!
-        if ((world.getBlock(x+1, y, z-1) instanceof NonRoadBlock) || (net > 0)) { ne = neQh + net;} else { ne = a;}
-        if ((world.getBlock(x+1, y, z)   instanceof NonRoadBlock) || (et > 0))  { e  = eQh  + et;}  else { e  = a;}
-        if ((world.getBlock(x+1, y, z+1) instanceof NonRoadBlock) || (set > 0)) { se = seQh + set;} else { se = a;}
-        if ((world.getBlock(x,   y, z+1) instanceof NonRoadBlock) || (st > 0))  { s  = sQh  + st;}  else { s  = a;}
-        if ((world.getBlock(x-1, y, z+1) instanceof NonRoadBlock) || (swt > 0)) { sw = swQh + swt;} else { sw = a;}
-        if ((world.getBlock(x-1, y, z)   instanceof NonRoadBlock) || (wt > 0))  { w  = wQh  + wt;}  else { w  = a;}
-        if ((world.getBlock(x-1, y, z-1) instanceof NonRoadBlock) || (nwt > 0)) { nw = nwQh + nwt;} else { nw = a;}
+        if ((world.getBlock(x,   y, z-1) instanceof GrassKerb) || (nt > 0))  { n  = nQh  + nt;}  else { n  = a;} //TODO this one!
+        if ((world.getBlock(x+1, y, z-1) instanceof GrassKerb) || (net > 0)) { ne = neQh + net;} else { ne = a;}
+        if ((world.getBlock(x+1, y, z)   instanceof GrassKerb) || (et > 0))  { e  = eQh  + et;}  else { e  = a;}
+        if ((world.getBlock(x+1, y, z+1) instanceof GrassKerb) || (set > 0)) { se = seQh + set;} else { se = a;}
+        if ((world.getBlock(x,   y, z+1) instanceof GrassKerb) || (st > 0))  { s  = sQh  + st;}  else { s  = a;}
+        if ((world.getBlock(x-1, y, z+1) instanceof GrassKerb) || (swt > 0)) { sw = swQh + swt;} else { sw = a;}
+        if ((world.getBlock(x-1, y, z)   instanceof GrassKerb) || (wt > 0))  { w  = wQh  + wt;}  else { w  = a;}
+        if ((world.getBlock(x-1, y, z-1) instanceof GrassKerb) || (nwt > 0)) { nw = nwQh + nwt;} else { nw = a;}
         
         //Create a boolean as to whether there's a valid connection on each of the 8 sides.
         //Check if each side is HIGHER than the current block. We only go up, never down.
@@ -441,23 +442,24 @@ public class GrassKerbRenderingHandler implements ISimpleBlockRenderingHandler {
         }
         
         int grassCol = (gcl / 9 & 255) << 16 | (gci1 / 9 & 255) << 8 | gcj1 / 9 & 255;
+        double over = FlenixRoads.over;
         
         //Top side (Kerb)
         tess.setColorOpaque_F(renderer.colorRedBottomRight, renderer.colorGreenBottomRight, renderer.colorBlueBottomRight);
         tess.setBrightness(renderer.brightnessBottomRight);
-        tess.addVertexWithUV(x,   y+nwQ+0.001, z,   u1, v1); //NW
+        tess.addVertexWithUV(x,   y+nwQ+over, z,   u1, v1); //NW
         
         tess.setColorOpaque_F(renderer.colorRedTopRight, renderer.colorGreenTopRight, renderer.colorBlueTopRight);
         tess.setBrightness(renderer.brightnessTopRight);
-        tess.addVertexWithUV(x,   y+swQ+0.001, z+1, u1, v0); //SW
+        tess.addVertexWithUV(x,   y+swQ+over, z+1, u1, v0); //SW
         
         tess.setColorOpaque_F(renderer.colorRedTopLeft, renderer.colorGreenTopLeft, renderer.colorBlueTopLeft);
         tess.setBrightness(renderer.brightnessTopLeft);
-        tess.addVertexWithUV(x+1, y+seQ+0.001, z+1, u0, v0); //SE
+        tess.addVertexWithUV(x+1, y+seQ+over, z+1, u0, v0); //SE
         
         tess.setColorOpaque_F(renderer.colorRedBottomLeft, renderer.colorGreenBottomLeft, renderer.colorBlueBottomLeft);
         tess.setBrightness(renderer.brightnessBottomLeft);
-        tess.addVertexWithUV(x+1, y+neQ+0.001, z,   u0, v1); //NE
+        tess.addVertexWithUV(x+1, y+neQ+over, z,   u0, v1); //NE
         
         
         //Top Side
@@ -488,10 +490,10 @@ public class GrassKerbRenderingHandler implements ISimpleBlockRenderingHandler {
         tess.addVertexWithUV(x,   y,   z, u0_3, v0_3);
         tess.addVertexWithUV(x,   y+w, z, u0_3, v1_3);
         
-        tess.addVertexWithUV(x+1, y+e, z-0.0001, u1_4, v1_4);
-        tess.addVertexWithUV(x+1, y,   z-0.0001, u1_4, v0_4);
-        tess.addVertexWithUV(x,   y,   z-0.0001, u0_4, v0_4);
-        tess.addVertexWithUV(x,   y+w, z-0.0001, u0_4, v1_4);
+        tess.addVertexWithUV(x+1, y+e, z-over, u1_4, v1_4);
+        tess.addVertexWithUV(x+1, y,   z-over, u1_4, v0_4);
+        tess.addVertexWithUV(x,   y,   z-over, u0_4, v0_4);
+        tess.addVertexWithUV(x,   y+w, z-over, u0_4, v1_4);
         
         //East Side
         tess.setColorOpaque(153, 153, 153);
@@ -500,10 +502,10 @@ public class GrassKerbRenderingHandler implements ISimpleBlockRenderingHandler {
         tess.addVertexWithUV(x+1, y,   z,   u0_3, v0_3);
         tess.addVertexWithUV(x+1, y+n, z,   u0_3, v1_3);
         
-        tess.addVertexWithUV(x+1.0001, y+s, z+1, u1_4, v1_4);
-        tess.addVertexWithUV(x+1.0001, y,   z+1, u1_4, v0_4);
-        tess.addVertexWithUV(x+1.0001, y,   z,   u0_4, v0_4);
-        tess.addVertexWithUV(x+1.0001, y+n, z,   u0_4, v1_4);
+        tess.addVertexWithUV(x+1+over, y+s, z+1, u1_4, v1_4);
+        tess.addVertexWithUV(x+1+over, y,   z+1, u1_4, v0_4);
+        tess.addVertexWithUV(x+1+over, y,   z,   u0_4, v0_4);
+        tess.addVertexWithUV(x+1+over, y+n, z,   u0_4, v1_4);
         
         //South Side
         tess.setColorOpaque(204, 204, 204);
@@ -512,10 +514,10 @@ public class GrassKerbRenderingHandler implements ISimpleBlockRenderingHandler {
         tess.addVertexWithUV(x+1, y,   z+1, u0_3, v0_3);
         tess.addVertexWithUV(x+1, y+e, z+1, u0_3, v1_3);
         
-        tess.addVertexWithUV(x,   y+w, z+1.0001, u1_4, v1_4);
-        tess.addVertexWithUV(x,   y,   z+1.0001, u1_4, v0_4);
-        tess.addVertexWithUV(x+1, y,   z+1.0001, u0_4, v0_4);
-        tess.addVertexWithUV(x+1, y+e, z+1.0001, u0_4, v1_4);
+        tess.addVertexWithUV(x,   y+w, z+1+over, u1_4, v1_4);
+        tess.addVertexWithUV(x,   y,   z+1+over, u1_4, v0_4);
+        tess.addVertexWithUV(x+1, y,   z+1+over, u0_4, v0_4);
+        tess.addVertexWithUV(x+1, y+e, z+1+over, u0_4, v1_4);
 
         //West Side
         tess.setColorOpaque(153, 153, 153);
@@ -524,10 +526,10 @@ public class GrassKerbRenderingHandler implements ISimpleBlockRenderingHandler {
         tess.addVertexWithUV(x,   y,   z+1, u0_3, v0_3);
         tess.addVertexWithUV(x,   y+s, z+1, u0_3, v1_3);
         
-        tess.addVertexWithUV(x-0.0001,   y+n, z,   u1_4, v1_4);
-        tess.addVertexWithUV(x-0.0001,   y,   z,   u1_4, v0_4);
-        tess.addVertexWithUV(x-0.0001,   y,   z+1, u0_4, v0_4);
-        tess.addVertexWithUV(x-0.0001,   y+s, z+1, u0_4, v1_4);
+        tess.addVertexWithUV(x-over,   y+n, z,   u1_4, v1_4);
+        tess.addVertexWithUV(x-over,   y,   z,   u1_4, v0_4);
+        tess.addVertexWithUV(x-over,   y,   z+1, u0_4, v0_4);
+        tess.addVertexWithUV(x-over,   y+s, z+1, u0_4, v1_4);
 
         //Bottom Side
         tess.setColorOpaque(127, 127, 127);

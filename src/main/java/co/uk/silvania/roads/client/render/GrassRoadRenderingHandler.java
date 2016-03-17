@@ -2,6 +2,7 @@ package co.uk.silvania.roads.client.render;
 
 import org.lwjgl.opengl.GL11;
 
+import co.uk.silvania.roads.FlenixRoads;
 import co.uk.silvania.roads.blocks.RoadBlock;
 import co.uk.silvania.roads.client.ClientProxy;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
@@ -423,7 +424,8 @@ public class GrassRoadRenderingHandler implements ISimpleBlockRenderingHandler {
         }
         
         int grassCol = (gcl / 9 & 255) << 16 | (gci1 / 9 & 255) << 8 | gcj1 / 9 & 255;
-
+        double over = FlenixRoads.over;
+        
         //Top Side
         tess.setColorOpaque_F(renderer.colorRedBottomRight, renderer.colorGreenBottomRight, renderer.colorBlueBottomRight);
         tess.setColorOpaque_I(grassCol);
@@ -454,10 +456,10 @@ public class GrassRoadRenderingHandler implements ISimpleBlockRenderingHandler {
         tess.addVertexWithUV(x,   y+w, z, u0_2, v1_2);
         
         tess.setColorOpaque_I(grassCol);
-        tess.addVertexWithUV(x+1, y+e, z-0.0001, u0_1, v0_1);
-        tess.addVertexWithUV(x+1, y,   z-0.0001, u0_1, v1_1);
-        tess.addVertexWithUV(x,   y,   z-0.0001, u1_1, v1_1);
-        tess.addVertexWithUV(x,   y+w, z-0.0001, u1_1, v0_1);
+        tess.addVertexWithUV(x+1, y+e, z-over, u0_1, v0_1);
+        tess.addVertexWithUV(x+1, y,   z-over, u0_1, v1_1);
+        tess.addVertexWithUV(x,   y,   z-over, u1_1, v1_1);
+        tess.addVertexWithUV(x,   y+w, z-over, u1_1, v0_1);
         
         //East Side
         tess.setColorOpaque(153, 153, 153);
@@ -467,10 +469,10 @@ public class GrassRoadRenderingHandler implements ISimpleBlockRenderingHandler {
         tess.addVertexWithUV(x+1, y+n, z,   u0_2, v1_2);
         
         tess.setColorOpaque_I(grassCol);
-        tess.addVertexWithUV(x+1.0001, y+s, z+1, u0_1, v0_1);
-        tess.addVertexWithUV(x+1.0001, y,   z+1, u0_1, v1_1);
-        tess.addVertexWithUV(x+1.0001, y,   z,   u1_1, v1_1);
-        tess.addVertexWithUV(x+1.0001, y+n, z,   u1_1, v0_1);
+        tess.addVertexWithUV(x+1+over, y+s, z+1, u0_1, v0_1);
+        tess.addVertexWithUV(x+1+over, y,   z+1, u0_1, v1_1);
+        tess.addVertexWithUV(x+1+over, y,   z,   u1_1, v1_1);
+        tess.addVertexWithUV(x+1+over, y+n, z,   u1_1, v0_1);
         
         //South Side
         tess.setColorOpaque(204, 204, 204);
@@ -480,10 +482,10 @@ public class GrassRoadRenderingHandler implements ISimpleBlockRenderingHandler {
         tess.addVertexWithUV(x+1, y+e, z+1, u0_2, v1_2);
         
         tess.setColorOpaque_I(grassCol);
-        tess.addVertexWithUV(x,   y+w, z+1.0001, u0_1, v0_1);
-        tess.addVertexWithUV(x,   y,   z+1.0001, u0_1, v1_1);
-        tess.addVertexWithUV(x+1, y,   z+1.0001, u1_1, v1_1);
-        tess.addVertexWithUV(x+1, y+e, z+1.0001, u1_1, v0_1);
+        tess.addVertexWithUV(x,   y+w, z+1+over, u0_1, v0_1);
+        tess.addVertexWithUV(x,   y,   z+1+over, u0_1, v1_1);
+        tess.addVertexWithUV(x+1, y,   z+1+over, u1_1, v1_1);
+        tess.addVertexWithUV(x+1, y+e, z+1+over, u1_1, v0_1);
 
         //West Side
         tess.setColorOpaque(153, 153, 153);
@@ -493,10 +495,10 @@ public class GrassRoadRenderingHandler implements ISimpleBlockRenderingHandler {
         tess.addVertexWithUV(x,   y+s, z+1, u0_2, v1_2);
         
         tess.setColorOpaque_I(grassCol);
-        tess.addVertexWithUV(x-0.0001,   y+n, z,   u0_1, v0_1);
-        tess.addVertexWithUV(x-0.0001,   y,   z,   u0_1, v1_1);
-        tess.addVertexWithUV(x-0.0001,   y,   z+1, u1_1, v1_1);
-        tess.addVertexWithUV(x-0.0001,   y+s, z+1, u1_1, v0_1);
+        tess.addVertexWithUV(x-over,   y+n, z,   u0_1, v0_1);
+        tess.addVertexWithUV(x-over,   y,   z,   u0_1, v1_1);
+        tess.addVertexWithUV(x-over,   y,   z+1, u1_1, v1_1);
+        tess.addVertexWithUV(x-over,   y+s, z+1, u1_1, v0_1);
 
         //Bottom Side
         tess.setColorOpaque(127, 127, 127);

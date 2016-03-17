@@ -2,6 +2,7 @@ package co.uk.silvania.roads.client.render;
 
 import org.lwjgl.opengl.GL11;
 
+import co.uk.silvania.roads.FlenixRoads;
 import co.uk.silvania.roads.blocks.FRBlocks;
 import co.uk.silvania.roads.blocks.LineBlock;
 import co.uk.silvania.roads.blocks.RoadBlock;
@@ -230,6 +231,7 @@ public class RoadBlockRenderingHandler implements ISimpleBlockRenderingHandler {
         Block blockAbove = world.getBlock(x, y+1, z);
     	if (blockAbove instanceof LineBlock) {
         	IIcon iconAbove = blockAbove.getIcon(world, x, y, z, meta);
+        	double over = FlenixRoads.over;
 
             double u0_1 = (double)iconAbove.getMinU();
             double u1_1 = (double)iconAbove.getMaxU();
@@ -237,10 +239,10 @@ public class RoadBlockRenderingHandler implements ISimpleBlockRenderingHandler {
             double v1_1 = (double)iconAbove.getMaxV();
             
             tess.setColorOpaque_F(1.0F, 1.0F, 1.0F);
-            tess.addVertexWithUV(x,   y+nwQ+0.05, z,   u0_1, v0_1); //NW
-            tess.addVertexWithUV(x,   y+swQ+0.05, z+1, u0_1, v1_1); //SW
-            tess.addVertexWithUV(x+1, y+seQ+0.05, z+1, u1_1, v1_1); //SE
-            tess.addVertexWithUV(x+1, y+neQ+0.05, z,   u1_1, v0_1); //NE
+            tess.addVertexWithUV(x,   y+nwQ+over, z,   u0_1, v0_1); //NW
+            tess.addVertexWithUV(x,   y+swQ+over, z+1, u0_1, v1_1); //SW
+            tess.addVertexWithUV(x+1, y+seQ+over, z+1, u1_1, v1_1); //SE
+            tess.addVertexWithUV(x+1, y+neQ+over, z,   u1_1, v0_1); //NE
             tess.draw();
             tess.startDrawingQuads();
         }

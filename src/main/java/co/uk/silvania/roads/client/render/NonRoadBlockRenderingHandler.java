@@ -2,6 +2,7 @@ package co.uk.silvania.roads.client.render;
 
 import org.lwjgl.opengl.GL11;
 
+import co.uk.silvania.roads.FlenixRoads;
 import co.uk.silvania.roads.blocks.NonRoadBlock;
 import co.uk.silvania.roads.client.ClientProxy;
 import net.minecraft.block.Block;
@@ -408,6 +409,8 @@ public class NonRoadBlockRenderingHandler implements ISimpleBlockRenderingHandle
          *   End AO code
          */
         
+        double over = FlenixRoads.over;
+        
         //Top Side
         tess.setColorOpaque_F(renderer.colorRedBottomRight, renderer.colorGreenBottomRight, renderer.colorBlueBottomRight);
         tess.setBrightness(renderer.brightnessBottomRight);
@@ -449,10 +452,10 @@ public class NonRoadBlockRenderingHandler implements ISimpleBlockRenderingHandle
         tess.addVertexWithUV(x,   y,   z, u0, v0);
         tess.addVertexWithUV(x,   y+w, z, u0, v1);
         
-        tess.addVertexWithUV(x+1, y+e, z-0.0001, u1_2, v1_2);
-        tess.addVertexWithUV(x+1, y,   z-0.0001, u1_2, v0_2);
-        tess.addVertexWithUV(x,   y,   z-0.0001, u0_2, v0_2);
-        tess.addVertexWithUV(x,   y+w, z-0.0001, u0_2, v1_2);
+        tess.addVertexWithUV(x+1, y+e, z-over, u1_2, v1_2);
+        tess.addVertexWithUV(x+1, y,   z-over, u1_2, v0_2);
+        tess.addVertexWithUV(x,   y,   z-over, u0_2, v0_2);
+        tess.addVertexWithUV(x,   y+w, z-over, u0_2, v1_2);
         
         //East Side
         tess.setColorOpaque(153, 153, 153);
@@ -461,10 +464,10 @@ public class NonRoadBlockRenderingHandler implements ISimpleBlockRenderingHandle
         tess.addVertexWithUV(x+1, y,   z,   u0, v0);
         tess.addVertexWithUV(x+1, y+n, z,   u0, v1);
         
-        tess.addVertexWithUV(x+1.0001, y+s, z+1, u1_2, v1_2);
-        tess.addVertexWithUV(x+1.0001, y,   z+1, u1_2, v0_2);
-        tess.addVertexWithUV(x+1.0001, y,   z,   u0_2, v0_2);
-        tess.addVertexWithUV(x+1.0001, y+n, z,   u0_2, v1_2);
+        tess.addVertexWithUV(x+1+over, y+s, z+1, u1_2, v1_2);
+        tess.addVertexWithUV(x+1+over, y,   z+1, u1_2, v0_2);
+        tess.addVertexWithUV(x+1+over, y,   z,   u0_2, v0_2);
+        tess.addVertexWithUV(x+1+over, y+n, z,   u0_2, v1_2);
         
         //South Side
         tess.setColorOpaque(204, 204, 204);
@@ -473,10 +476,10 @@ public class NonRoadBlockRenderingHandler implements ISimpleBlockRenderingHandle
         tess.addVertexWithUV(x+1, y,   z+1, u0, v0);
         tess.addVertexWithUV(x+1, y+e, z+1, u0, v1);
         
-        tess.addVertexWithUV(x,   y+w, z+1.0001, u1_2, v1_2);
-        tess.addVertexWithUV(x,   y,   z+1.0001, u1_2, v0_2);
-        tess.addVertexWithUV(x+1, y,   z+1.0001, u0_2, v0_2);
-        tess.addVertexWithUV(x+1, y+e, z+1.0001, u0_2, v1_2);
+        tess.addVertexWithUV(x,   y+w, z+1+over, u1_2, v1_2);
+        tess.addVertexWithUV(x,   y,   z+1+over, u1_2, v0_2);
+        tess.addVertexWithUV(x+1, y,   z+1+over, u0_2, v0_2);
+        tess.addVertexWithUV(x+1, y+e, z+1+over, u0_2, v1_2);
 
         //West Side
         tess.setColorOpaque(153, 153, 153);
@@ -485,10 +488,10 @@ public class NonRoadBlockRenderingHandler implements ISimpleBlockRenderingHandle
         tess.addVertexWithUV(x,   y,   z+1, u0, v0);
         tess.addVertexWithUV(x,   y+s, z+1, u0, v1);
         
-        tess.addVertexWithUV(x-0.0001,   y+n, z,   u1_2, v1_2);
-        tess.addVertexWithUV(x-0.0001,   y,   z,   u1_2, v0_2);
-        tess.addVertexWithUV(x-0.0001,   y,   z+1, u0_2, v0_2);
-        tess.addVertexWithUV(x-0.0001,   y+s, z+1, u0_2, v1_2);
+        tess.addVertexWithUV(x-over,   y+n, z,   u1_2, v1_2);
+        tess.addVertexWithUV(x-over,   y,   z,   u1_2, v0_2);
+        tess.addVertexWithUV(x-over,   y,   z+1, u0_2, v0_2);
+        tess.addVertexWithUV(x-over,   y+s, z+1, u0_2, v1_2);
 
         //Bottom Side
         tess.setColorOpaque(127, 127, 127);

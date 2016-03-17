@@ -14,10 +14,14 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
-@Mod(modid=FlenixRoads.modid, /*dependencies="requiredafter:flenixcities",*/ name="FlenixRoads", version="0.9.0")
+@Mod(modid=FlenixRoads.modid, /*dependencies="requiredafter:flenixcities",*/ name="FlenixRoads", version="0.9.1")
 public class FlenixRoads {
 	
 	public static final String modid = "flenixroads";
+	//Overlay offset. Used by all renderers.
+	//Optifine seems to mess with this. Tiny amounts work great here, but with Optifine they Z-fight.
+	//Intiially put globally so I could toy with it, but might as well keep it here.
+	public static final double over = 0.01;
 	
     @Instance(FlenixRoads.modid)
     public static FlenixRoads instance;
