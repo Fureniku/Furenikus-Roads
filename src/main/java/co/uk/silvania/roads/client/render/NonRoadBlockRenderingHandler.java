@@ -161,11 +161,123 @@ public class NonRoadBlockRenderingHandler implements ISimpleBlockRenderingHandle
         //Now, we actually render each face.
         //Each face needs the colour setting, and then four vertex.
         //Colour is required as it's reduced for sides and bottom, to give a false effect of "shading" which is surprisingly very important.
+        
+        /*
+         *  AO code shamelessly taken directly from RenderBlocks with a few cleanups.
+         */
+    	renderer.enableAO = true;
+        boolean flag = false;
+        float f3_2 = 0.0F;
+        float f4 = 0.0F;
+        float f5 = 0.0F;
+        float f6 = 0.0F;
+        boolean flag1 = true;
+    	
+    	boolean flag2;
+        boolean flag3;
+        boolean flag4;
+        boolean flag5;
+        int i1;
+        float f7;
+        
+        int l = block.getMixedBrightnessForBlock(world, x, y, z);
+        Tessellator tessellator = Tessellator.instance;
+        tessellator.setBrightness(983055);
+
+        renderer.aoBrightnessXYNP = block.getMixedBrightnessForBlock(world, x - 1, y, z);
+        renderer.aoBrightnessXYPP = block.getMixedBrightnessForBlock(world, x + 1, y, z);
+        renderer.aoBrightnessYZPN = block.getMixedBrightnessForBlock(world, x, y, z - 1);
+        renderer.aoBrightnessYZPP = block.getMixedBrightnessForBlock(world, x, y, z + 1);
+        renderer.aoLightValueScratchXYNP = world.getBlock(x - 1, y, z).getAmbientOcclusionLightValue();
+        renderer.aoLightValueScratchXYPP = world.getBlock(x + 1, y, z).getAmbientOcclusionLightValue();
+        renderer.aoLightValueScratchYZPN = world.getBlock(x, y, z - 1).getAmbientOcclusionLightValue();
+        renderer.aoLightValueScratchYZPP = world.getBlock(x, y, z + 1).getAmbientOcclusionLightValue();
+        flag2 = world.getBlock(x + 1, y + 1, z).getCanBlockGrass();
+        flag3 = world.getBlock(x - 1, y + 1, z).getCanBlockGrass();
+        flag4 = world.getBlock(x, y + 1, z + 1).getCanBlockGrass();
+        flag5 = world.getBlock(x, y + 1, z - 1).getCanBlockGrass();
+
+        if (!flag5 && !flag3) {
+        	renderer.aoLightValueScratchXYZNPN = renderer.aoLightValueScratchXYNP;
+        	renderer.aoBrightnessXYZNPN = renderer.aoBrightnessXYNP;
+        } else {
+        	renderer.aoLightValueScratchXYZNPN = world.getBlock(x - 1, y, z - 1).getAmbientOcclusionLightValue();
+        	renderer.aoBrightnessXYZNPN = block.getMixedBrightnessForBlock(world, x - 1, y, z - 1);
+        }
+
+        if (!flag5 && !flag2) {
+        	renderer.aoLightValueScratchXYZPPN = renderer.aoLightValueScratchXYPP;
+        	renderer.aoBrightnessXYZPPN = renderer.aoBrightnessXYPP;
+        } else {
+        	renderer.aoLightValueScratchXYZPPN = world.getBlock(x + 1, y, z - 1).getAmbientOcclusionLightValue();
+        	renderer.aoBrightnessXYZPPN = block.getMixedBrightnessForBlock(world, x + 1, y, z - 1);
+        }
+
+        if (!flag4 && !flag3) {
+        	renderer.aoLightValueScratchXYZNPP = renderer.aoLightValueScratchXYNP;
+        	renderer.aoBrightnessXYZNPP = renderer.aoBrightnessXYNP;
+        } else {
+        	renderer.aoLightValueScratchXYZNPP = world.getBlock(x - 1, y, z + 1).getAmbientOcclusionLightValue();
+        	renderer.aoBrightnessXYZNPP = block.getMixedBrightnessForBlock(world, x - 1, y, z + 1);
+        }
+
+        if (!flag4 && !flag2) {
+        	renderer.aoLightValueScratchXYZPPP = renderer.aoLightValueScratchXYPP;
+        	renderer.aoBrightnessXYZPPP = renderer.aoBrightnessXYPP;
+        } else {
+        	renderer.aoLightValueScratchXYZPPP = world.getBlock(x + 1, y, z + 1).getAmbientOcclusionLightValue();
+        	renderer.aoBrightnessXYZPPP = block.getMixedBrightnessForBlock(world, x + 1, y, z + 1);
+        }
+
+
+        i1 = l;
+
+        f7 = world.getBlock(x, y + 1, z).getAmbientOcclusionLightValue();
+        f6 = (renderer.aoLightValueScratchXYZNPP + renderer.aoLightValueScratchXYNP + renderer.aoLightValueScratchYZPP + f7) / 4.0F;
+        f3_2 = (renderer.aoLightValueScratchYZPP + f7 + renderer.aoLightValueScratchXYZPPP + renderer.aoLightValueScratchXYPP) / 4.0F;
+        f4 = (f7 + renderer.aoLightValueScratchYZPN + renderer.aoLightValueScratchXYPP + renderer.aoLightValueScratchXYZPPN) / 4.0F;
+        f5 = (renderer.aoLightValueScratchXYNP + renderer.aoLightValueScratchXYZNPN + f7 + renderer.aoLightValueScratchYZPN) / 4.0F;
+        renderer.brightnessTopRight = renderer.getAoBrightness(renderer.aoBrightnessXYZNPP, renderer.aoBrightnessXYNP, renderer.aoBrightnessYZPP, i1);
+        renderer.brightnessTopLeft = renderer.getAoBrightness(renderer.aoBrightnessYZPP, renderer.aoBrightnessXYZPPP, renderer.aoBrightnessXYPP, i1);
+        renderer.brightnessBottomLeft = renderer.getAoBrightness(renderer.aoBrightnessYZPN, renderer.aoBrightnessXYPP, renderer.aoBrightnessXYZPPN, i1);
+        renderer.brightnessBottomRight = renderer.getAoBrightness(renderer.aoBrightnessXYNP, renderer.aoBrightnessXYZNPN, renderer.aoBrightnessYZPN, i1);
+        renderer.colorRedTopLeft = renderer.colorRedBottomLeft = renderer.colorRedBottomRight = renderer.colorRedTopRight = f1;
+        renderer.colorGreenTopLeft = renderer.colorGreenBottomLeft = renderer.colorGreenBottomRight = renderer.colorGreenTopRight = f2;
+        renderer.colorBlueTopLeft = renderer.colorBlueBottomLeft = renderer.colorBlueBottomRight = renderer.colorBlueTopRight = f3;
+        renderer.colorRedTopLeft *= f3_2;
+        renderer.colorGreenTopLeft *= f3_2;
+        renderer.colorBlueTopLeft *= f3_2;
+        renderer.colorRedBottomLeft *= f4;
+        renderer.colorGreenBottomLeft *= f4;
+        renderer.colorBlueBottomLeft *= f4;
+        renderer.colorRedBottomRight *= f5;
+        renderer.colorGreenBottomRight *= f5;
+        renderer.colorBlueBottomRight *= f5;
+        renderer.colorRedTopRight *= f6;
+        renderer.colorGreenTopRight *= f6;
+        renderer.colorBlueTopRight *= f6;
+        renderer.renderFaceYPos(block, (double)x, (double)y, (double)z, renderer.getBlockIcon(block, world, x, y, z, 1));
+        flag = true;
+        
+        /*
+         *   End AO code
+         */
+        
         //Top Side
-        tess.setColorOpaque(col, col, col);
+        tess.setColorOpaque_F(renderer.colorRedBottomRight, renderer.colorGreenBottomRight, renderer.colorBlueBottomRight);
+        tess.setBrightness(renderer.brightnessBottomRight);
         tess.addVertexWithUV(x,   y+nwQ, z,   u1, v1); //NW
+        
+        tess.setColorOpaque_F(renderer.colorRedTopRight, renderer.colorGreenTopRight, renderer.colorBlueTopRight);
+        tess.setBrightness(renderer.brightnessTopRight);
         tess.addVertexWithUV(x,   y+swQ, z+1, u1, v0); //SW
+        
+        tess.setColorOpaque_F(renderer.colorRedTopLeft, renderer.colorGreenTopLeft, renderer.colorBlueTopLeft);
+        tess.setBrightness(renderer.brightnessTopLeft);
         tess.addVertexWithUV(x+1, y+seQ, z+1, u0, v0); //SE
+        
+        tess.setColorOpaque_F(renderer.colorRedBottomLeft, renderer.colorGreenBottomLeft, renderer.colorBlueBottomLeft);
+        tess.setBrightness(renderer.brightnessBottomLeft);
         tess.addVertexWithUV(x+1, y+neQ, z,   u0, v1); //NE
         
         //North Side
