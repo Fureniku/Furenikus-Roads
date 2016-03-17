@@ -2,6 +2,7 @@ package co.uk.silvania.roads.client;
 
 import co.uk.silvania.roads.CommonProxy;
 import co.uk.silvania.roads.client.render.GrassKerbRenderingHandler;
+import co.uk.silvania.roads.client.render.GrassRoadRenderingHandler;
 import co.uk.silvania.roads.client.render.NonRoadBlockRenderingHandler;
 import co.uk.silvania.roads.client.render.RoadBlockRenderingHandler;
 import co.uk.silvania.roads.client.render.RoadPaintRenderingHandler;
@@ -13,6 +14,7 @@ public class ClientProxy extends CommonProxy {
 	public static int nonRoadBlockRenderID;
 	public static int roadPaintRenderID;
 	public static int grassKerbRenderID;
+	public static int grassRoadRenderID;
 	
 	@Override
 	public void registerRenderers() {
@@ -20,11 +22,13 @@ public class ClientProxy extends CommonProxy {
 		nonRoadBlockRenderID = RenderingRegistry.getNextAvailableRenderId();
 		roadPaintRenderID = RenderingRegistry.getNextAvailableRenderId();
 		grassKerbRenderID = RenderingRegistry.getNextAvailableRenderId();
+		grassRoadRenderID = RenderingRegistry.getNextAvailableRenderId();
 		
 		RenderingRegistry.registerBlockHandler(roadBlockRenderID, new RoadBlockRenderingHandler());
 		RenderingRegistry.registerBlockHandler(nonRoadBlockRenderID, new NonRoadBlockRenderingHandler());
 		RenderingRegistry.registerBlockHandler(roadPaintRenderID, new RoadPaintRenderingHandler());
 		RenderingRegistry.registerBlockHandler(grassKerbRenderID, new GrassKerbRenderingHandler());
+		RenderingRegistry.registerBlockHandler(grassRoadRenderID, new GrassRoadRenderingHandler());
 	}
 
 }

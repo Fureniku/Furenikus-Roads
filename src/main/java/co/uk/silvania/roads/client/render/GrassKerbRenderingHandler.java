@@ -1,6 +1,8 @@
 package co.uk.silvania.roads.client.render;
 
-import co.uk.silvania.roads.blocks.GrassRoadBlock;
+import org.lwjgl.opengl.GL11;
+
+import co.uk.silvania.roads.blocks.GrassKerb;
 import co.uk.silvania.roads.blocks.NonRoadBlock;
 import co.uk.silvania.roads.client.ClientProxy;
 import net.minecraft.block.Block;
@@ -15,6 +17,150 @@ public class GrassKerbRenderingHandler implements ISimpleBlockRenderingHandler {
 	
 	@Override
 	public void renderInventoryBlock(Block block, int meta, int modelId, RenderBlocks renderer) {
+		Tessellator tess = Tessellator.instance;
+
+		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
+        //tess.setColorOpaque_F(0.8F, 0.8F, 0.8F);
+        IIcon icon = block.getIcon(0, meta); //Dirt texture
+        IIcon icon1 = block.getIcon(1, meta); //Kerb Top overlay
+        IIcon icon2 = block.getIcon(2, meta); //Kerb Side overlay
+        IIcon icon3 = block.getIcon(3, meta); //Grass texture
+
+        double u0 = (double)icon.getMinU();
+        double u1 = (double)icon.getMaxU();
+
+        double v0 = (double)icon.getMinV();
+        double v1 = (double)icon.getMaxV();
+        
+        double u0_1 = (double)icon1.getMinU();
+        double u1_1 = (double)icon1.getMaxU();
+
+        double v0_1 = (double)icon1.getMinV();
+        double v1_1 = (double)icon1.getMaxV();
+        
+        double u0_2 = (double)icon2.getMinU();
+        double u1_2 = (double)icon2.getMaxU();
+
+        double v0_2 = (double)icon2.getMinV();
+        double v1_2 = (double)icon2.getMaxV();
+        
+        double u0_3 = (double)icon3.getMinU();
+        double u1_3 = (double)icon3.getMaxU();
+
+        double v0_3 = (double)icon3.getMinV();
+        double v1_3 = (double)icon3.getMaxV();
+        
+        final float FACE_XZ_NORMAL = 0.8944F;
+        final float FACE_Y_NORMAL  = 0.4472F;
+        
+        int grassCol = 7979098;
+        
+        //The height of the block. Drawn from metadata, which is more reliable than trying to pull it from the bounding box.
+        double a  = quadHeight(meta); //Current block
+        
+        //Now, we actually render each face.
+        //Each face needs the colour setting, and then four vertex.
+        //Colour is required as it's reduced for sides and bottom, to give a false effect of "shading" which is surprisingly very important.
+        //Top Side
+        tess.startDrawingQuads();
+        tess.setNormal(0.0F, 1.0F, 0.0F);
+        tess.setColorOpaque_I(grassCol);
+        tess.addVertexWithUV(0, a, 0, u1_3, v1_3); //NW
+        tess.addVertexWithUV(0, a, 1, u1_3, v0_3); //SW
+        tess.addVertexWithUV(1, a, 1, u0_3, v0_3); //SE
+        tess.addVertexWithUV(1, a, 0, u0_3, v1_3); //NE
+        tess.draw();
+        
+        tess.startDrawingQuads();
+        tess.setNormal(0.0F, 1.0F, 0.0F);
+        tess.addVertexWithUV(0, a+0.001, 0, u1_1, v1_1); //NW
+        tess.addVertexWithUV(0, a+0.001, 1, u1_1, v0_1); //SW
+        tess.addVertexWithUV(1, a+0.001, 1, u0_1, v0_1); //SE
+        tess.addVertexWithUV(1, a+0.001, 0, u0_1, v1_1); //NE
+        tess.draw();
+        
+        
+        //North Side
+        tess.startDrawingQuads();
+        tess.setNormal(0.0F, FACE_Y_NORMAL, -FACE_XZ_NORMAL);
+        tess.addVertexWithUV(1, a, 0, u1, v1);
+        tess.addVertexWithUV(1, 0, 0, u1, v0);
+        tess.addVertexWithUV(0, 0, 0, u0, v0);
+        tess.addVertexWithUV(0, a, 0, u0, v1);
+        tess.draw();
+        
+        tess.startDrawingQuads();
+        tess.setNormal(0.0F, FACE_Y_NORMAL, -FACE_XZ_NORMAL);
+        tess.addVertexWithUV(1, a, -0.001, u1_2, v1_2);
+        tess.addVertexWithUV(1, 0, -0.001, u1_2, v0_2);
+        tess.addVertexWithUV(0, 0, -0.001, u0_2, v0_2);
+        tess.addVertexWithUV(0, a, -0.001, u0_2, v1_2);
+        tess.draw();
+        
+        
+        //East Side
+        tess.startDrawingQuads();
+        tess.setNormal(FACE_XZ_NORMAL, FACE_Y_NORMAL, 0.0F);
+        tess.addVertexWithUV(1, a, 1, u1, v1);
+        tess.addVertexWithUV(1, 0, 1, u1, v0);
+        tess.addVertexWithUV(1, 0, 0, u0, v0);
+        tess.addVertexWithUV(1, a, 0, u0, v1);
+        tess.draw();
+        
+        tess.startDrawingQuads();
+        tess.setNormal(FACE_XZ_NORMAL, FACE_Y_NORMAL, 0.0F);
+        tess.addVertexWithUV(1.001, a, 1, u1_2, v1_2);
+        tess.addVertexWithUV(1.001, 0, 1, u1_2, v0_2);
+        tess.addVertexWithUV(1.001, 0, 0, u0_2, v0_2);
+        tess.addVertexWithUV(1.001, a, 0, u0_2, v1_2);
+        tess.draw();
+        
+        
+        //South Side
+        tess.startDrawingQuads();
+        tess.setNormal(0.0F, FACE_Y_NORMAL, FACE_XZ_NORMAL);
+        tess.addVertexWithUV(0, a, 1, u1, v1);
+        tess.addVertexWithUV(0, 0, 1, u1, v0);
+        tess.addVertexWithUV(1, 0, 1, u0, v0);
+        tess.addVertexWithUV(1, a, 1, u0, v1);
+        tess.draw();
+        
+        tess.startDrawingQuads();
+        tess.setNormal(0.0F, FACE_Y_NORMAL, FACE_XZ_NORMAL);
+        tess.addVertexWithUV(0, a, 1.001, u1_2, v1_2);
+        tess.addVertexWithUV(0, 0, 1.001, u1_2, v0_2);
+        tess.addVertexWithUV(1, 0, 1.001, u0_2, v0_2);
+        tess.addVertexWithUV(1, a, 1.001, u0_2, v1_2);
+        tess.draw();
+        
+
+        //West Side
+        tess.startDrawingQuads();
+        tess.setNormal(-FACE_XZ_NORMAL, FACE_Y_NORMAL, 0.0F);
+        tess.addVertexWithUV(0, a, 0, u1, v1);
+        tess.addVertexWithUV(0, 0, 0, u1, v0);
+        tess.addVertexWithUV(0, 0, 1, u0, v0);
+        tess.addVertexWithUV(0, a, 1, u0, v1);
+        tess.draw();
+        
+        tess.startDrawingQuads();
+        tess.setNormal(-FACE_XZ_NORMAL, FACE_Y_NORMAL, 0.0F);
+        tess.addVertexWithUV(-0.001, a, 0, u1_2, v1_2);
+        tess.addVertexWithUV(-0.001, 0, 0, u1_2, v0_2);
+        tess.addVertexWithUV(-0.001, 0, 1, u0_2, v0_2);
+        tess.addVertexWithUV(-0.001, a, 1, u0_2, v1_2);
+        tess.draw();
+
+        //Bottom Side
+        tess.startDrawingQuads();
+        tess.setNormal(0.0F, -1.0F, 0.0F);
+        tess.addVertexWithUV(0, 0, 1, u1, v1);
+        tess.addVertexWithUV(0, 0, 0, u1, v0);
+        tess.addVertexWithUV(1, 0, 0, u0, v0);
+        tess.addVertexWithUV(1, 0, 1, u0, v1);
+        tess.draw();
+        
+        GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 	}
 
 	@Override
@@ -394,12 +540,12 @@ public class GrassKerbRenderingHandler implements ISimpleBlockRenderingHandler {
 
 	@Override
 	public boolean shouldRender3DInInventory(int modelId) {
-		return false;
+		return true;
 	}
 
 	@Override
 	public int getRenderId() {
-		return ClientProxy.roadBlockRenderID;
+		return ClientProxy.grassKerbRenderID;
 	}
 	
 	public double quadHeight(int meta) {

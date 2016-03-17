@@ -30,11 +30,34 @@ public class FlenixRoads {
 		public Item getTabIconItem() {
 			return new ItemStack(FRBlocks.roadBlockBase1, 1, 11).getItem();
 		}
+		@Override
+		public int func_151243_f() {
+			return 11;
+		}
 	};
+	
 	public static CreativeTabs tabPaints = new CreativeTabs("tabPaints") {
 		@Override
 		public Item getTabIconItem() {
 			return new ItemStack(FRBlocks.lineBlock1, 1, 0).getItem();
+		}
+	};
+	
+	public static CreativeTabs tabSidewalks = new CreativeTabs("tabSidewalks") {
+		@Override
+		public Item getTabIconItem() {
+			return new ItemStack(FRBlocks.sidewalk1, 1, 15).getItem();
+		}
+		@Override
+		public int func_151243_f() {
+			return 15;
+		}
+	};
+	
+	public static CreativeTabs tabTools = new CreativeTabs("tabTools") {
+		@Override
+		public Item getTabIconItem() {
+			return new ItemStack(FRItems.pneumaticDrill, 1, 0).getItem();
 		}
 	};
 

@@ -9,7 +9,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class TarmacCutter extends Item {
 	
 	public TarmacCutter() {
-		this.setCreativeTab(FlenixRoads.tabRoads);
+		this.setCreativeTab(FlenixRoads.tabTools);
 	}
 	
 	@SideOnly(Side.CLIENT)

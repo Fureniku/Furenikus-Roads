@@ -1,7 +1,8 @@
 package co.uk.silvania.roads;
 
-import net.minecraft.block.Block;
 import co.uk.silvania.roads.blocks.FRBlocks;
+import co.uk.silvania.roads.blocks.IconBlock;
+import co.uk.silvania.roads.blocks.PaintItemBlock;
 import co.uk.silvania.roads.blocks.RoadItemBlock;
 import co.uk.silvania.roads.items.FRItems;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -27,6 +28,8 @@ public class CommonProxy {
 		GameRegistry.registerBlock(FRBlocks.roadBlockBlue, RoadItemBlock.class, "roadBlockBlue");
 		GameRegistry.registerBlock(FRBlocks.roadBlockWhite, RoadItemBlock.class, "roadBlockWhite");
 		GameRegistry.registerBlock(FRBlocks.roadBlockYellow, RoadItemBlock.class, "roadBlockYellow");
+		GameRegistry.registerBlock(FRBlocks.roadBlockMuddy, RoadItemBlock.class, "roadBlockMuddy");
+		GameRegistry.registerBlock(FRBlocks.roadBlockMuddyDried, RoadItemBlock.class, "roadBlockMuddyDried");
 		
 		GameRegistry.registerBlock(FRBlocks.roadBlockStone, RoadItemBlock.class, "roadBlockStone");
 		GameRegistry.registerBlock(FRBlocks.roadBlockGrass, RoadItemBlock.class, "roadBlockGrass");
@@ -34,33 +37,35 @@ public class CommonProxy {
 		GameRegistry.registerBlock(FRBlocks.roadBlockGravel, RoadItemBlock.class, "roadBlockGravel");
 		GameRegistry.registerBlock(FRBlocks.roadBlockSand, RoadItemBlock.class, "roadBlockSand");
 		
-		GameRegistry.registerBlock(FRBlocks.lineBlock1, RoadItemBlock.class, "lineBlock1");
-		GameRegistry.registerBlock(FRBlocks.lineBlock2, RoadItemBlock.class, "lineBlock2");
-		GameRegistry.registerBlock(FRBlocks.lineBlock3, RoadItemBlock.class, "lineBlock3");
-		GameRegistry.registerBlock(FRBlocks.lineBlock4, RoadItemBlock.class, "lineBlock4");
+		GameRegistry.registerBlock(FRBlocks.lineBlock1, PaintItemBlock.class, "lineBlock1");
+		GameRegistry.registerBlock(FRBlocks.lineBlock2, PaintItemBlock.class, "lineBlock2");
+		GameRegistry.registerBlock(FRBlocks.lineBlock3, PaintItemBlock.class, "lineBlock3");
+		GameRegistry.registerBlock(FRBlocks.lineBlock4, PaintItemBlock.class, "lineBlock4");
 		
-		GameRegistry.registerBlock(FRBlocks.iconBlock1, RoadItemBlock.class, "iconBlock1");
+		GameRegistry.registerBlock(FRBlocks.iconBlock1, PaintItemBlock.class, "iconBlock1");
 		
-		GameRegistry.registerBlock(FRBlocks.doubleLineBlock1, RoadItemBlock.class, "doubleLineBlock1");
-		GameRegistry.registerBlock(FRBlocks.doubleLineBlock2, RoadItemBlock.class, "doubleLineBlock2");
+		GameRegistry.registerBlock(FRBlocks.iconLetters2345, PaintItemBlock.class, "iconLetters2345");
+		GameRegistry.registerBlock(FRBlocks.iconLetters6789, PaintItemBlock.class, "iconLetters6789");
+		GameRegistry.registerBlock(FRBlocks.iconLettersABCD, PaintItemBlock.class, "iconLettersABCD");
+		GameRegistry.registerBlock(FRBlocks.iconLettersEFGH, PaintItemBlock.class, "iconLettersEFGH");
+		GameRegistry.registerBlock(FRBlocks.iconLettersIJKL, PaintItemBlock.class, "iconLettersIJKL");
+		GameRegistry.registerBlock(FRBlocks.iconLettersMNOP, PaintItemBlock.class, "iconLettersMNOP");
+		GameRegistry.registerBlock(FRBlocks.iconLettersQRST, PaintItemBlock.class, "iconLettersQRST");
+		GameRegistry.registerBlock(FRBlocks.iconLettersUVWX, PaintItemBlock.class, "iconLettersUVWX");
+		GameRegistry.registerBlock(FRBlocks.iconLettersYZ01, PaintItemBlock.class, "iconLettersYZ01");
+		GameRegistry.registerBlock(FRBlocks.iconLettersMisc, PaintItemBlock.class, "iconLettersMisc");
+		
+		GameRegistry.registerBlock(FRBlocks.doubleLineBlock1, PaintItemBlock.class, "doubleLineBlock1");
+		GameRegistry.registerBlock(FRBlocks.doubleLineBlock2, PaintItemBlock.class, "doubleLineBlock2");
+		
+		GameRegistry.registerBlock(FRBlocks.sidewalkGrass, RoadItemBlock.class, "sidewalkGrass");
 		
 		GameRegistry.registerBlock(FRBlocks.sidewalk1, RoadItemBlock.class, "sidewalk1");
+		GameRegistry.registerBlock(FRBlocks.sidewalk2, RoadItemBlock.class, "sidewalk2");
+		GameRegistry.registerBlock(FRBlocks.sidewalk3, RoadItemBlock.class, "sidewalk3");
+		GameRegistry.registerBlock(FRBlocks.sidewalk4, RoadItemBlock.class, "sidewalk4");
 
-		GameRegistry.registerBlock(FRBlocks.streetBlocks1, RoadItemBlock.class, "streetBlocks1");
-		GameRegistry.registerBlock(FRBlocks.streetBlocks2, RoadItemBlock.class, "streetBlocks2");
-		GameRegistry.registerBlock(FRBlocks.streetBlocks3, RoadItemBlock.class, "streetBlocks3");
-		GameRegistry.registerBlock(FRBlocks.streetBlocks4, RoadItemBlock.class, "streetBlocks4");
-		GameRegistry.registerBlock(FRBlocks.streetBlocks5, RoadItemBlock.class, "streetBlocks5");
-		GameRegistry.registerBlock(FRBlocks.streetBlocks6, RoadItemBlock.class, "streetBlocks6");
-		GameRegistry.registerBlock(FRBlocks.streetBlocks7, RoadItemBlock.class, "streetBlocks7");
-		GameRegistry.registerBlock(FRBlocks.streetBlocks8, RoadItemBlock.class, "streetBlocks8");
-		GameRegistry.registerBlock(FRBlocks.streetBlocks9, RoadItemBlock.class, "streetBlocks9");
-		GameRegistry.registerBlock(FRBlocks.streetBlocks10, RoadItemBlock.class, "streetBlocks10");
-		GameRegistry.registerBlock(FRBlocks.streetBlocks11, RoadItemBlock.class, "streetBlocks11");
-		GameRegistry.registerBlock(FRBlocks.streetBlocks12, RoadItemBlock.class, "streetBlocks12");
-		GameRegistry.registerBlock(FRBlocks.streetBlocks13, RoadItemBlock.class, "streetBlocks13");
-		GameRegistry.registerBlock(FRBlocks.streetBlocks14, RoadItemBlock.class, "streetBlocks14");
-		GameRegistry.registerBlock(FRBlocks.streetBlocks15, RoadItemBlock.class, "streetBlocks15");
+		GameRegistry.registerBlock(FRBlocks.streetBlocks, PaintItemBlock.class, "streetBlocks");
 	}
 	
 	public void registerItems() {

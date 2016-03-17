@@ -17,6 +17,8 @@ public class FRBlocks {
 	public static Block roadBlockBlue;
 	public static Block roadBlockWhite;
 	public static Block roadBlockYellow;
+	public static Block roadBlockMuddy;
+	public static Block roadBlockMuddyDried;
 	
 	public static Block roadBlockStone;
 	public static Block roadBlockGrass;
@@ -25,26 +27,14 @@ public class FRBlocks {
 	public static Block roadBlockSand;
 	
 	//Other "road blocks"
+	public static Block sidewalkGrass;
+	
 	public static Block sidewalk1;
 	public static Block sidewalk2;
 	public static Block sidewalk3;
 	public static Block sidewalk4;
 	
-	public static Block streetBlocks1;
-	public static Block streetBlocks2;
-	public static Block streetBlocks3;
-	public static Block streetBlocks4;
-	public static Block streetBlocks5;
-	public static Block streetBlocks6;
-	public static Block streetBlocks7;
-	public static Block streetBlocks8;
-	public static Block streetBlocks9;
-	public static Block streetBlocks10;
-	public static Block streetBlocks11;
-	public static Block streetBlocks12;
-	public static Block streetBlocks13;
-	public static Block streetBlocks14;
-	public static Block streetBlocks15;
+	public static Block streetBlocks;
 	
 	public static Block lineBlock1;
 	public static Block lineBlock2;
@@ -55,6 +45,17 @@ public class FRBlocks {
 	public static Block doubleLineBlock2;
 	
 	public static Block iconBlock1;
+	
+	public static Block iconLetters2345;
+	public static Block iconLetters6789;
+	public static Block iconLettersABCD;
+	public static Block iconLettersEFGH;
+	public static Block iconLettersIJKL;
+	public static Block iconLettersMNOP;
+	public static Block iconLettersQRST;
+	public static Block iconLettersUVWX;
+	public static Block iconLettersYZ01;
+	public static Block iconLettersMisc;
 	
 	public static void init() {
 		roadBlocks();
@@ -72,6 +73,8 @@ public class FRBlocks {
 		roadBlockBlue = new RoadBlock().setBlockName("roadBlockBlue");
 		roadBlockWhite = new RoadBlock().setBlockName("roadBlockWhite");
 		roadBlockYellow = new RoadBlock().setBlockName("roadBlockYellow");
+		roadBlockMuddy = new RoadBlock().setBlockName("roadBlockMuddy");
+		roadBlockMuddyDried = new RoadBlock().setBlockName("roadBlockMuddyDried");
 		
 		roadBlockStone = new VanillaRoadBlock(Blocks.stone).setBlockName("roadBlockStone");
 		roadBlockGrass = new GrassRoadBlock().setBlockName("roadBlockGrass");
@@ -79,23 +82,14 @@ public class FRBlocks {
 		roadBlockGravel = new VanillaRoadBlock(Blocks.gravel).setBlockName("roadBlockGravel");
 		roadBlockSand = new VanillaRoadBlock(Blocks.sand).setBlockName("roadBlockSand");
 		
-		sidewalk1 = new NonRoadBlockCT().setBlockName("sidewalk1");
+		sidewalkGrass = new GrassKerb().setBlockName("sidewalkGrass");
 		
-		streetBlocks1 = new SimpleBlock().setBlockName("streetBlocks1");
-		streetBlocks2 = new SimpleBlock().setBlockName("streetBlocks2");
-		streetBlocks3 = new SimpleBlock().setBlockName("streetBlocks3");
-		streetBlocks4 = new SimpleBlock().setBlockName("streetBlocks4");
-		streetBlocks5 = new SimpleBlock().setBlockName("streetBlocks5");
-		streetBlocks6 = new SimpleBlock().setBlockName("streetBlocks6");
-		streetBlocks7 = new SimpleBlock().setBlockName("streetBlocks7");
-		streetBlocks8 = new SimpleBlock().setBlockName("streetBlocks8");
-		streetBlocks9 = new SimpleBlock().setBlockName("streetBlocks9");
-		streetBlocks10 = new SimpleBlock().setBlockName("streetBlocks10");
-		streetBlocks11 = new SimpleBlock().setBlockName("streetBlocks11");
-		streetBlocks12 = new SimpleBlock().setBlockName("streetBlocks12");
-		streetBlocks13 = new SimpleBlock().setBlockName("streetBlocks13");
-		streetBlocks14 = new SimpleBlock().setBlockName("streetBlocks14");
-		streetBlocks15 = new SimpleBlock().setBlockName("streetBlocks15");
+		sidewalk1 = new NonRoadBlockCT().setBlockName("sidewalk1");
+		sidewalk2 = new NonRoadBlockCT().setBlockName("sidewalk2");
+		sidewalk3 = new NonRoadBlockCT().setBlockName("sidewalk3");
+		sidewalk4 = new NonRoadBlockCT().setBlockName("sidewalk4");
+		
+		streetBlocks = new SimpleBlock().setBlockName("streetBlocks");
 		
 		lineBlock1 = new LineBlock().setBlockName("lineBlock1");
 		lineBlock2 = new LineBlock().setBlockName("lineBlock2");
@@ -106,6 +100,16 @@ public class FRBlocks {
 		doubleLineBlock2 = new LineBlock().setBlockName("doubleLineBlock2");
 		
 		iconBlock1 = new IconBlock().setBlockName("iconBlock1");
+		iconLetters2345 = new IconBlock().setBlockName("iconLetters2345");
+		iconLetters6789 = new IconBlock().setBlockName("iconLetters6789");
+		iconLettersABCD = new IconBlock().setBlockName("iconLettersABCD");
+		iconLettersEFGH = new IconBlock().setBlockName("iconLettersEFGH");
+		iconLettersIJKL = new IconBlock().setBlockName("iconLettersIJKL");
+		iconLettersMNOP = new IconBlock().setBlockName("iconLettersMNOP");
+		iconLettersQRST = new IconBlock().setBlockName("iconLettersQRST");
+		iconLettersUVWX = new IconBlock().setBlockName("iconLettersUVWX");
+		iconLettersYZ01 = new IconBlock().setBlockName("iconLettersYZ01");
+		iconLettersMisc = new IconBlock().setBlockName("iconLettersMisc");
 	}
 
 }

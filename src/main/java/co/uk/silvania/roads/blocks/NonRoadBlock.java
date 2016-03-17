@@ -22,7 +22,7 @@ public class NonRoadBlock extends Block {
 	public NonRoadBlock() {
 		super(Material.rock);
 		this.setHardness(1.5F);
-		this.setCreativeTab(FlenixRoads.tabRoads);
+		this.setCreativeTab(FlenixRoads.tabSidewalks);
 	}
 	
 	@Override
@@ -90,10 +90,6 @@ public class NonRoadBlock extends Block {
 		for (int i = 0; i < 16; i++) {
 			list.add(new ItemStack(item, 1, i));
 		}
-		/*list.add(new ItemStack(item, 1, 2)); //0=0.25, 1=0.5, 2=0.75, 3=1.0 height
-		list.add(new ItemStack(item, 1, 6));
-		list.add(new ItemStack(item, 1, 10));
-		list.add(new ItemStack(item, 1, 14));*/
 	}
 	
 	@Override

@@ -9,7 +9,7 @@ import net.minecraft.item.Item;
 public class ImpactWrench extends Item {
 	
 	public ImpactWrench() {
-		this.setCreativeTab(FlenixRoads.tabRoads);
+		this.setCreativeTab(FlenixRoads.tabTools);
 	}
 	
 	@SideOnly(Side.CLIENT)

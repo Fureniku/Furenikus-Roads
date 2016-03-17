@@ -31,7 +31,13 @@ public class NonRoadBlockCT extends NonRoadBlock {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public IIcon getIcon(int side, int meta) {
-		return icons[23];
+		if (side == 1) {
+			return icons[0];
+		}
+		if (side == 2) {
+			return icons[14];
+		}
+		return blockIcon;
 	}
 	
 	@Override

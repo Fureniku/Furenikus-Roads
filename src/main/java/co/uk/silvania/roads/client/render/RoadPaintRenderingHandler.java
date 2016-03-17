@@ -126,7 +126,7 @@ public class RoadPaintRenderingHandler implements ISimpleBlockRenderingHandler {
 
 	@Override
 	public int getRenderId() {
-		return ClientProxy.roadBlockRenderID;
+		return ClientProxy.roadPaintRenderID;
 	}
 	
 	public double quadHeight(int meta) {

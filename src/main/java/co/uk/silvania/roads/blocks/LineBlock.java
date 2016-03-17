@@ -23,7 +23,7 @@ public class LineBlock extends Block {
 
 	public LineBlock() {
 		super(Material.rock);
-		this.setCreativeTab(FlenixRoads.tabRoads);
+		this.setCreativeTab(FlenixRoads.tabPaints);
 	}
 	
 	@Override
