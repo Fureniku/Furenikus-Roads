@@ -430,19 +430,19 @@ public class NonRoadBlockRenderingHandler implements ISimpleBlockRenderingHandle
         
         tess.setColorOpaque_F(renderer.colorRedBottomRight, renderer.colorGreenBottomRight, renderer.colorBlueBottomRight);
         tess.setBrightness(renderer.brightnessBottomRight);
-        tess.addVertexWithUV(x,   y+nwQ, z,   u1_1, v1_1); //NW
+        tess.addVertexWithUV(x,   y+nwQ+over, z,   u1_1, v1_1); //NW
         
         tess.setColorOpaque_F(renderer.colorRedTopRight, renderer.colorGreenTopRight, renderer.colorBlueTopRight);
         tess.setBrightness(renderer.brightnessTopRight);
-        tess.addVertexWithUV(x,   y+swQ, z+1, u1_1, v0_1); //SW
+        tess.addVertexWithUV(x,   y+swQ+over, z+1, u1_1, v0_1); //SW
         
         tess.setColorOpaque_F(renderer.colorRedTopLeft, renderer.colorGreenTopLeft, renderer.colorBlueTopLeft);
         tess.setBrightness(renderer.brightnessTopLeft);
-        tess.addVertexWithUV(x+1, y+seQ, z+1, u0_1, v0_1); //SE
+        tess.addVertexWithUV(x+1, y+seQ+over, z+1, u0_1, v0_1); //SE
         
         tess.setColorOpaque_F(renderer.colorRedBottomLeft, renderer.colorGreenBottomLeft, renderer.colorBlueBottomLeft);
         tess.setBrightness(renderer.brightnessBottomLeft);
-        tess.addVertexWithUV(x+1, y+neQ, z,   u0_1, v1_1); //NE
+        tess.addVertexWithUV(x+1, y+neQ+over, z,   u0_1, v1_1); //NE
         
         
         //North side

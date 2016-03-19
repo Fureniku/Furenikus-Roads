@@ -21,17 +21,61 @@ import net.minecraft.world.ColorizerGrass;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class GrassKerb extends NonRoadBlock {
+public class GrassKerb extends Block {
 	
 	public GrassKerb() {
-		super();
+		super(Material.grass);
 		this.setHardness(1.5F);
 		this.setCreativeTab(FlenixRoads.tabSidewalks);
 	}
 	
 	@Override
+	public void setBlockBoundsBasedOnState(IBlockAccess block, int x, int y, int z) {
+		this.setLightOpacity(0);
+		int meta = block.getBlockMetadata(x, y, z);
+		float height = ((float)meta + 1.0F) / 16.0F;
+		
+		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, height, 1.0F);
+		this.setBlockBoundsForItemRender();
+	}
+	
+	@Override
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
+        int meta = world.getBlockMetadata(x, y, z);
+        return AxisAlignedBB.getBoundingBox(x + this.minX, y + this.minY, z + this.minZ, x + this.maxX, y + (((float)meta + 1.0F) / 16.0F), z + this.maxZ);
+    }
+	
+	@Override
 	public int getRenderType() {
 		return ClientProxy.grassKerbRenderID;
+	}
+	
+	@Override
+	public boolean isOpaqueCube() {
+		return false;
+	}
+	
+	@Override
+	public boolean renderAsNormalBlock() {
+		return false;
+	}
+	
+	@Override
+	public int damageDropped(int meta) {
+		return meta;
+	}
+	
+	public float height(int meta) {
+		return (meta + 1) / 16;
+	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void getSubBlocks(Item item, CreativeTabs tab, List list) {
+		for (int i = 0; i < 16; i++) {
+			list.add(new ItemStack(item, 1, i));
+		}
 	}
 	
 	@SideOnly(Side.CLIENT) private IIcon[] icons;

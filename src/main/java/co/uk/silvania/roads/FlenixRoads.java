@@ -6,6 +6,8 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -21,7 +23,8 @@ public class FlenixRoads {
 	//Overlay offset. Used by all renderers.
 	//Optifine seems to mess with this. Tiny amounts work great here, but with Optifine they Z-fight.
 	//Intiially put globally so I could toy with it, but might as well keep it here.
-	public static final double over = 0.01;
+	
+	public static double over = 0.0001;
 	
     @Instance(FlenixRoads.modid)
     public static FlenixRoads instance;
@@ -67,12 +70,23 @@ public class FlenixRoads {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		FRBlocks.init();
-		FRItems.init();
+		System.out.println("[FlenixRoads] Checking for OptiFine...");
+		if (!FMLClientHandler.instance().hasOptifine()) {
+			System.out.println("[FlenixRoads] OptiFine not installed. Everything should work fine :)");
+		} else {
+			System.out.println("###### WARNING: OPTIFINE DETECTED ######");
+			System.out.println("###### WARNING: OPTIFINE DETECTED ######");
+			System.out.println("[FlenixRoads] Please navigate your options to Video Settings -> Performance Settings,");
+			System.out.println("[FlenixRoads] and DISABLE Fast Render. It causes graphical issues with FlenixRoads.");
+			System.out.println("###### WARNING: OPTIFINE DETECTED ######");
+			System.out.println("###### WARNING: OPTIFINE DETECTED ######");
+		}
 	}
 	
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
+		FRBlocks.init();
+		FRItems.init();
 		proxy.init();
 	}
 	
