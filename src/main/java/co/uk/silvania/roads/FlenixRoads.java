@@ -71,16 +71,6 @@ public class FlenixRoads {
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		System.out.println("[FlenixRoads] Checking for OptiFine...");
-		if (!FMLClientHandler.instance().hasOptifine()) {
-			System.out.println("[FlenixRoads] OptiFine not installed. Everything should work fine :)");
-		} else {
-			System.out.println("###### WARNING: OPTIFINE DETECTED ######");
-			System.out.println("###### WARNING: OPTIFINE DETECTED ######");
-			System.out.println("[FlenixRoads] Please navigate your options to Video Settings -> Performance Settings,");
-			System.out.println("[FlenixRoads] and DISABLE Fast Render. It causes graphical issues with FlenixRoads.");
-			System.out.println("###### WARNING: OPTIFINE DETECTED ######");
-			System.out.println("###### WARNING: OPTIFINE DETECTED ######");
-		}
 	}
 	
 	@EventHandler
