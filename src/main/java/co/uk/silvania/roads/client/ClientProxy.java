@@ -19,7 +19,7 @@ public class ClientProxy extends CommonProxy {
 	public static int grassRoadRenderID;
 	
 	@Override
-	public void init() {
+	public void optifineCheck() {
 		if (!FMLClientHandler.instance().hasOptifine()) {
 			System.out.println("[FlenixRoads] OptiFine not installed. Everything should work fine :)");
 		} else {

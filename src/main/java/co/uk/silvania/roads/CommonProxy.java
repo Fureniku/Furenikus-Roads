@@ -16,6 +16,8 @@ public class CommonProxy {
 		registerTileEntities();
 	}
 	
+	public void optifineCheck() {}
+	
 	public void registerBlocks() {
 		GameRegistry.registerBlock(FRBlocks.roadBlockBase1, RoadItemBlock.class, "roadblockBase1");
 		GameRegistry.registerBlock(FRBlocks.roadBlockConcrete, RoadItemBlock.class, "roadBlockConcrete");
