@@ -70,7 +70,7 @@ public class FlenixRoads {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		System.out.println("[FlenixRoads] Checking for OptiFine...");
+		
 	}
 	
 	@EventHandler

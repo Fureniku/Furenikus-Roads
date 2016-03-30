@@ -20,6 +20,7 @@ public class ClientProxy extends CommonProxy {
 	
 	@Override
 	public void optifineCheck() {
+		System.out.println("[FlenixRoads] Checking for OptiFine...");
 		if (!FMLClientHandler.instance().hasOptifine()) {
 			System.out.println("[FlenixRoads] OptiFine not installed. Everything should work fine :)");
 		} else {

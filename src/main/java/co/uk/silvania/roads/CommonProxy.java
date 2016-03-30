@@ -14,6 +14,7 @@ public class CommonProxy {
 		registerItems();
 		registerRenderers();
 		registerTileEntities();
+		optifineCheck();
 	}
 	
 	public void optifineCheck() {}
