@@ -49,7 +49,6 @@ public class IconBlock extends LineBlock {
 		int meta = world.getBlockMetadata(x, y, z);
 		int direction = MathHelper.floor_double((double)(entity.rotationYaw * 4.0F / 360F) + 2.5D) & 3;
 		world.setBlockMetadataWithNotify(x, y, z, meta + direction, 3);
-		System.out.println("Meta: " + (meta+direction));
 	}
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })

@@ -203,7 +203,6 @@ public class IconBlockWide extends IconBlock {
     		}
     	}
 
-        System.out.println("connect! north south east west " + connectNorth + connectSouth + connectEast + connectWest + ", side: " + side);
         return icons[meta];
     }
 }
