@@ -45,9 +45,10 @@ public class LineBlock extends Block {
 	
 	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
-		int mountBlockMeta = world.getBlockMetadata(x, y-1, z);
+		return null;
+		/*int mountBlockMeta = world.getBlockMetadata(x, y-1, z);
 		float height = (((float)mountBlockMeta + 1.0F) / 16.0F) - 1.0F;
-        return AxisAlignedBB.getBoundingBox(x + this.minX, y + height + 0.01F, z + this.minZ, x + this.maxX, y + height + 0.02F, z + this.maxZ);
+        return AxisAlignedBB.getBoundingBox(x + this.minX, y + height + 0.01F, z + this.minZ, x + this.maxX, y + height + 0.02F, z + this.maxZ);*/
     }
 	
 	@Override
