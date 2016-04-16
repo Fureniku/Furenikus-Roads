@@ -31,6 +31,7 @@ public class CommonProxy {
 		GameRegistry.registerBlock(FRBlocks.roadBlockBlue, RoadItemBlock.class, "roadBlockBlue");
 		GameRegistry.registerBlock(FRBlocks.roadBlockWhite, RoadItemBlock.class, "roadBlockWhite");
 		GameRegistry.registerBlock(FRBlocks.roadBlockYellow, RoadItemBlock.class, "roadBlockYellow");
+		GameRegistry.registerBlock(FRBlocks.roadBlockGreen, RoadItemBlock.class, "roadBlockGreen");
 		GameRegistry.registerBlock(FRBlocks.roadBlockMuddy, RoadItemBlock.class, "roadBlockMuddy");
 		GameRegistry.registerBlock(FRBlocks.roadBlockMuddyDried, RoadItemBlock.class, "roadBlockMuddyDried");
 		
@@ -46,6 +47,8 @@ public class CommonProxy {
 		GameRegistry.registerBlock(FRBlocks.lineBlock4, PaintItemBlock.class, "lineBlock4");
 		
 		GameRegistry.registerBlock(FRBlocks.iconBlock1, PaintItemBlock.class, "iconBlock1");
+		GameRegistry.registerBlock(FRBlocks.iconBlock2, PaintItemBlock.class, "iconBlock2");
+		GameRegistry.registerBlock(FRBlocks.iconBlock3, PaintItemBlock.class, "iconBlock3");
 		
 		GameRegistry.registerBlock(FRBlocks.iconLetters2345, PaintItemBlock.class, "iconLetters2345");
 		GameRegistry.registerBlock(FRBlocks.iconLetters6789, PaintItemBlock.class, "iconLetters6789");

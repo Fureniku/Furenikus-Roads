@@ -54,11 +54,11 @@ public class RoadBlockCT extends RoadBlock {
 		return meta;
 	}
 	
-    public boolean shouldConnectToBlock (IBlockAccess block, int x, int y, int z, Block ctBlock, int ctMeta) {
+	public boolean shouldConnectToBlock (IBlockAccess block, int x, int y, int z, Block ctBlock, int ctMeta) {
         return ctBlock == this;
     }
 	
-    public IIcon getConnectedBlockTexture (IBlockAccess block, int x, int y, int z, int side, IIcon[] icons) {
+	public IIcon getConnectedBlockTexture (IBlockAccess block, int x, int y, int z, int side, IIcon[] icons) {
         boolean connectUp = false, connectDown = false, connectLeft = false, connectRight = false;
 
         if (side == 1) {

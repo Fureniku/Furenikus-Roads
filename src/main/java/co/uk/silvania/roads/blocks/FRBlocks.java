@@ -17,6 +17,7 @@ public class FRBlocks {
 	public static Block roadBlockBlue;
 	public static Block roadBlockWhite;
 	public static Block roadBlockYellow;
+	public static Block roadBlockGreen;
 	public static Block roadBlockMuddy;
 	public static Block roadBlockMuddyDried;
 	
@@ -45,6 +46,8 @@ public class FRBlocks {
 	public static Block doubleLineBlock2;
 	
 	public static Block iconBlock1;
+	public static Block iconBlock2;
+	public static Block iconBlock3;
 	
 	public static Block iconLetters2345;
 	public static Block iconLetters6789;
@@ -73,6 +76,7 @@ public class FRBlocks {
 		roadBlockBlue = new RoadBlock().setBlockName("roadBlockBlue");
 		roadBlockWhite = new RoadBlock().setBlockName("roadBlockWhite");
 		roadBlockYellow = new RoadBlock().setBlockName("roadBlockYellow");
+		roadBlockGreen = new RoadBlock().setBlockName("roadBlockGreen");
 		roadBlockMuddy = new RoadBlock().setBlockName("roadBlockMuddy");
 		roadBlockMuddyDried = new RoadBlock().setBlockName("roadBlockMuddyDried");
 		
@@ -100,6 +104,8 @@ public class FRBlocks {
 		doubleLineBlock2 = new LineBlock().setBlockName("doubleLineBlock2");
 		
 		iconBlock1 = new IconBlock().setBlockName("iconBlock1");
+		iconBlock2 = new IconBlock().setBlockName("iconBlock2");
+		iconBlock3 = new IconBlockWide().setBlockName("iconBlock3");
 		iconLetters2345 = new IconBlock().setBlockName("iconLetters2345");
 		iconLetters6789 = new IconBlock().setBlockName("iconLetters6789");
 		iconLettersABCD = new IconBlock().setBlockName("iconLettersABCD");
