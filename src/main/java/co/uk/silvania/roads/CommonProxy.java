@@ -45,10 +45,19 @@ public class CommonProxy {
 		GameRegistry.registerBlock(FRBlocks.lineBlock2, PaintItemBlock.class, "lineBlock2");
 		GameRegistry.registerBlock(FRBlocks.lineBlock3, PaintItemBlock.class, "lineBlock3");
 		GameRegistry.registerBlock(FRBlocks.lineBlock4, PaintItemBlock.class, "lineBlock4");
+		GameRegistry.registerBlock(FRBlocks.lineBlock5, PaintItemBlock.class, "lineBlock5");
+		GameRegistry.registerBlock(FRBlocks.lineBlock6, PaintItemBlock.class, "lineBlock6");
 		
 		GameRegistry.registerBlock(FRBlocks.iconBlock1, PaintItemBlock.class, "iconBlock1");
 		GameRegistry.registerBlock(FRBlocks.iconBlock2, PaintItemBlock.class, "iconBlock2");
 		GameRegistry.registerBlock(FRBlocks.iconBlock3, PaintItemBlock.class, "iconBlock3");
+		
+		GameRegistry.registerBlock(FRBlocks.sideDoubleYellow, PaintItemBlock.class, "sideDoubleYellow");
+		GameRegistry.registerBlock(FRBlocks.sideSingleYellow, PaintItemBlock.class, "sideSingleYellow");
+		GameRegistry.registerBlock(FRBlocks.sideDoubleWhite, PaintItemBlock.class, "sideDoubleWhite");
+		GameRegistry.registerBlock(FRBlocks.sideSingleWhite, PaintItemBlock.class, "sideSingleWhite");
+		GameRegistry.registerBlock(FRBlocks.sideDoubleRed, PaintItemBlock.class, "sideDoubleRed");
+		GameRegistry.registerBlock(FRBlocks.sideSingleRed, PaintItemBlock.class, "sideSingleRed");
 		
 		GameRegistry.registerBlock(FRBlocks.iconLetters2345, PaintItemBlock.class, "iconLetters2345");
 		GameRegistry.registerBlock(FRBlocks.iconLetters6789, PaintItemBlock.class, "iconLetters6789");
@@ -63,6 +72,7 @@ public class CommonProxy {
 		
 		GameRegistry.registerBlock(FRBlocks.doubleLineBlock1, PaintItemBlock.class, "doubleLineBlock1");
 		GameRegistry.registerBlock(FRBlocks.doubleLineBlock2, PaintItemBlock.class, "doubleLineBlock2");
+		GameRegistry.registerBlock(FRBlocks.doubleLineBlock3, PaintItemBlock.class, "doubleLineBlock3");
 		
 		GameRegistry.registerBlock(FRBlocks.sidewalkGrass, RoadItemBlock.class, "sidewalkGrass");
 		

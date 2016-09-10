@@ -41,9 +41,19 @@ public class FRBlocks {
 	public static Block lineBlock2;
 	public static Block lineBlock3;
 	public static Block lineBlock4;
+	public static Block lineBlock5;
+	public static Block lineBlock6;
 	
 	public static Block doubleLineBlock1;
 	public static Block doubleLineBlock2;
+	public static Block doubleLineBlock3;
+	
+	public static Block sideDoubleYellow;
+	public static Block sideSingleYellow;
+	public static Block sideDoubleWhite;
+	public static Block sideSingleWhite;
+	public static Block sideDoubleRed;
+	public static Block sideSingleRed;
 	
 	public static Block iconBlock1;
 	public static Block iconBlock2;
@@ -99,9 +109,19 @@ public class FRBlocks {
 		lineBlock2 = new LineBlock().setBlockName("lineBlock2");
 		lineBlock3 = new LineBlock().setBlockName("lineBlock3");
 		lineBlock4 = new LineBlock().setBlockName("lineBlock4");
+		lineBlock5 = new LineBlock().setBlockName("lineBlock5");
+		lineBlock6 = new LineBlock().setBlockName("lineBlock6");
 		
 		doubleLineBlock1 = new LineBlock().setBlockName("doubleLineBlock1");
 		doubleLineBlock2 = new LineBlock().setBlockName("doubleLineBlock2");
+		doubleLineBlock3 = new LineBlock().setBlockName("doubleLineBlock3");
+		
+		sideDoubleYellow = new LineBlock4Way().setBlockName("sideDoubleYellow");
+		sideSingleYellow = new LineBlock4Way().setBlockName("sideSingleYellow");
+		sideDoubleWhite = new LineBlock4Way().setBlockName("sideDoubleWhite");
+		sideSingleWhite = new LineBlock4Way().setBlockName("sideSingleWhite");
+		sideDoubleRed = new LineBlock4Way().setBlockName("sideDoubleRed");
+		sideSingleRed = new LineBlock4Way().setBlockName("sideSingleRed");
 		
 		iconBlock1 = new IconBlock().setBlockName("iconBlock1");
 		iconBlock2 = new IconBlock().setBlockName("iconBlock2");

@@ -241,7 +241,6 @@ public class LineBlock extends Block {
         return icons[0];
     }
 	
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void getSubBlocks(Item item, CreativeTabs tab, List list) {
