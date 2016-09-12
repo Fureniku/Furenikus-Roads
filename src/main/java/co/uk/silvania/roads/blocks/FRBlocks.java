@@ -58,6 +58,10 @@ public class FRBlocks {
 	public static Block iconBlock1;
 	public static Block iconBlock2;
 	public static Block iconBlock3;
+	public static Block iconBlock4;
+	public static Block iconBlock5;
+	public static Block iconBlock6;
+	public static Block iconBlock7;
 	
 	public static Block iconLetters2345;
 	public static Block iconLetters6789;
@@ -126,6 +130,10 @@ public class FRBlocks {
 		iconBlock1 = new IconBlock().setBlockName("iconBlock1");
 		iconBlock2 = new IconBlock().setBlockName("iconBlock2");
 		iconBlock3 = new IconBlockWide().setBlockName("iconBlock3");
+		iconBlock4 = new IconBlockWide().setBlockName("iconBlock4");
+		iconBlock5 = new IconBlockWide().setBlockName("iconBlock5");
+		iconBlock6 = new IconBlockWide().setBlockName("iconBlock6");
+		iconBlock7 = new IconBlockWide().setBlockName("iconBlock7");
 		iconLetters2345 = new IconBlock().setBlockName("iconLetters2345");
 		iconLetters6789 = new IconBlock().setBlockName("iconLetters6789");
 		iconLettersABCD = new IconBlock().setBlockName("iconLettersABCD");

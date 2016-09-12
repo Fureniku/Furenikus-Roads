@@ -51,6 +51,10 @@ public class CommonProxy {
 		GameRegistry.registerBlock(FRBlocks.iconBlock1, PaintItemBlock.class, "iconBlock1");
 		GameRegistry.registerBlock(FRBlocks.iconBlock2, PaintItemBlock.class, "iconBlock2");
 		GameRegistry.registerBlock(FRBlocks.iconBlock3, PaintItemBlock.class, "iconBlock3");
+		GameRegistry.registerBlock(FRBlocks.iconBlock4, PaintItemBlock.class, "iconBlock4");
+		GameRegistry.registerBlock(FRBlocks.iconBlock5, PaintItemBlock.class, "iconBlock5");
+		GameRegistry.registerBlock(FRBlocks.iconBlock6, PaintItemBlock.class, "iconBlock6");
+		GameRegistry.registerBlock(FRBlocks.iconBlock7, PaintItemBlock.class, "iconBlock7");
 		
 		GameRegistry.registerBlock(FRBlocks.sideDoubleYellow, PaintItemBlock.class, "sideDoubleYellow");
 		GameRegistry.registerBlock(FRBlocks.sideSingleYellow, PaintItemBlock.class, "sideSingleYellow");

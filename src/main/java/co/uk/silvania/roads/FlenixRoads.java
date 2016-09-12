@@ -24,7 +24,7 @@ public class FlenixRoads {
 	//Optifine seems to mess with this. Tiny amounts work great here, but with Optifine they Z-fight.
 	//Intiially put globally so I could toy with it, but might as well keep it here.
 	
-	public static double over = 0.0001;
+	public static double over = 0.01;
 	
     @Instance(FlenixRoads.modid)
     public static FlenixRoads instance;

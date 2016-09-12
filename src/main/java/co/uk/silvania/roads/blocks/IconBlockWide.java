@@ -100,6 +100,14 @@ public class IconBlockWide extends IconBlock {
 	    		if (iconNorth) { return icons[61]; }
 	    		if (iconSouth) { return icons[67]; }
     		}
+    		if (meta >= 8 && meta <= 11) {
+    			if (iconNorth) { return icons[73]; }
+    			if (iconSouth) { return icons[79]; }
+    		}
+    		if (meta >= 12 && meta <= 15) {
+    			if (iconNorth) { return icons[85]; }
+    			if (iconSouth) { return icons[91]; }
+    		}
     	}
     	
     	if (connectWest2 && !connectEast) {
@@ -111,6 +119,14 @@ public class IconBlockWide extends IconBlock {
     			if (iconNorth) { return icons[62]; }
 		    	if (iconSouth) { return icons[66]; }
     		}
+    		if (meta >= 8 && meta <= 11) {
+    			if (iconNorth) { return icons[74]; }
+    			if (iconSouth) { return icons[78]; }
+    		}
+    		if (meta >= 12 && meta <= 15) {
+    			if (iconNorth) { return icons[86]; }
+    			if (iconSouth) { return icons[90]; }
+    		}
     	}
     	
     	if (connectEast2 && !connectWest) {
@@ -121,6 +137,14 @@ public class IconBlockWide extends IconBlock {
     		if (meta >= 4 && meta <= 7) {
     			if (iconNorth) { return icons[60]; }
 		    	if (iconSouth) { return icons[68]; }
+    		}
+    		if (meta >= 8 && meta <= 11) {
+    			if (iconNorth) { return icons[72]; }
+    			if (iconSouth) { return icons[80]; }
+    		}
+    		if (meta >= 12 && meta <= 15) {
+    			if (iconNorth) { return icons[84]; }
+    			if (iconSouth) { return icons[92]; }
     		}
     	}
     	
@@ -135,6 +159,14 @@ public class IconBlockWide extends IconBlock {
     			if (iconEast) { return icons[64]; }
 		    	if (iconWest) { return icons[70]; }
     		}
+    		if (meta >= 8 && meta <= 11) {
+    			if (iconEast) { return icons[76]; }
+    			if (iconWest) { return icons[82]; }
+    		}
+    		if (meta >= 12 && meta <= 15) {
+    			if (iconEast) { return icons[88]; }
+    			if (iconWest) { return icons[94]; }
+    		}
     	}
     	
     	if (connectNorth2 && !connectSouth) {
@@ -145,6 +177,14 @@ public class IconBlockWide extends IconBlock {
     		if (meta >= 4 && meta <= 7) {
     			if (iconEast) { return icons[65]; }
 		    	if (iconWest) { return icons[69]; }
+    		}
+    		if (meta >= 8 && meta <= 11) {
+    			if (iconEast) { return icons[77]; }
+    			if (iconWest) { return icons[81]; }
+    		}
+    		if (meta >= 12 && meta <= 15) {
+    			if (iconEast) { return icons[89]; }
+    			if (iconWest) { return icons[93]; }
     		}
     	}
     	
@@ -157,6 +197,14 @@ public class IconBlockWide extends IconBlock {
     			if (iconEast) { return icons[63]; }
 		    	if (iconWest) { return icons[71]; }
     		}
+    		if (meta >= 8 && meta <= 11) {
+    			if (iconEast) { return icons[75]; }
+    			if (iconWest) { return icons[83]; }
+    		}
+    		if (meta >= 12 && meta <= 15) {
+    			if (iconEast) { return icons[87]; }
+    			if (iconWest) { return icons[95]; }
+    		}
     	}
     	
     	if (!connectEast && connectWest) {
@@ -168,6 +216,15 @@ public class IconBlockWide extends IconBlock {
 	    		if (iconNorth) { return icons[25]; }
 	    		if (iconSouth) { return icons[28]; }
     		}
+    		if (meta >= 8 && meta <= 11) {
+    			if (iconNorth) { return icons[33]; }
+    			if (iconSouth) { return icons[36]; }
+    		}
+    		if (meta >= 12 && meta <= 15) {
+    			if (iconNorth) { return icons[41]; }
+    			if (iconSouth) { return icons[44]; }
+    		}
+    		
     	}
     	
     	if (connectEast && !connectWest) {
@@ -178,6 +235,14 @@ public class IconBlockWide extends IconBlock {
     		if (meta >= 4 && meta <= 7) {
 	    		if (iconNorth) { return icons[24]; }
 	    		if (iconSouth) { return icons[29]; }
+    		}
+    		if (meta >= 8 && meta <= 11) {
+    			if (iconNorth) { return icons[32]; }
+    			if (iconSouth) { return icons[37]; }
+    		}
+    		if (meta >= 12 && meta <= 15) {
+    			if (iconNorth) { return icons[40]; }
+    			if (iconSouth) { return icons[45]; }
     		}
     	}
     	
@@ -190,6 +255,14 @@ public class IconBlockWide extends IconBlock {
 	    		if (iconEast) { return icons[26]; }
 	    		if (iconWest) { return icons[31]; }
     		}
+    		if (meta >= 8 && meta <= 11) {
+    			if (iconEast) { return icons[34]; }
+    			if (iconWest) { return icons[39]; }
+    		}
+    		if (meta >= 12 && meta <= 15) {
+    			if (iconEast) { return icons[42]; }
+    			if (iconWest) { return icons[47]; }
+    		}
     	}
     	
     	if (connectNorth && !connectSouth) {
@@ -200,6 +273,14 @@ public class IconBlockWide extends IconBlock {
     		if (meta >= 4 && meta <= 7) {
 	    		if (iconEast) { return icons[27]; }
 	    		if (iconWest) { return icons[30]; }
+    		}
+    		if (meta >= 8 && meta <= 11) {
+    			if (iconEast) { return icons[35]; }
+    			if (iconWest) { return icons[38]; }
+    		}
+    		if (meta >= 12 && meta <= 15) {
+    			if (iconEast) { return icons[43]; }
+    			if (iconWest) { return icons[46]; }
     		}
     	}
 
