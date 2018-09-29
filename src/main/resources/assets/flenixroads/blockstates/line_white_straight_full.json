@@ -1,0 +1,78 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"transform": "forge:default-block",
+		"textures": {
+			"0": "flenixroads:blocks/paint_white",
+			"particle": "flenixroads:blocks/paint_white"
+		},
+		"model": "flenixroads:single_middle"
+	},
+	"variants": {
+		"inventory": [{
+			"transform": "forge:default-block"
+		}],
+		"zz_default_stuff": {
+			"true": {
+			},
+			"false": {
+			}
+		},
+		"east": {
+			"true": {
+				"submodel": {
+					"paint_east": { "model": "flenixroads:single_line_n", "y": 90 }
+				}
+			},
+			"false": {
+			}
+		},
+		"facing_ew": {
+			"true": {
+				"submodel": {
+					"paint_east": { "model": "flenixroads:single_line_n", "y": 90 },
+					"paint_west": { "model": "flenixroads:single_line_n", "y": 270 }
+				}
+			},
+			"false": {
+			}
+		},
+		"facing_ns": {
+			"true": {
+				"submodel": {
+					"paint_north": { "model": "flenixroads:single_line_n" },
+					"paint_south": { "model": "flenixroads:single_line_n", "y": 180 }
+				}
+			},
+			"false": {
+			}
+		},
+		"north": {
+			"true": {
+				"submodel": {
+					"paint_north": { "model": "flenixroads:single_line_n" }
+				}
+			},
+			"false": {
+			}
+		},
+		"south": {
+			"true": {
+				"submodel": {
+					"paint_south": { "model": "flenixroads:single_line_n", "y": 180 }
+				}
+			},
+			"false": {
+			}
+		},
+		"west": {
+			"true": {
+				"submodel": {
+					"paint_west": { "model": "flenixroads:single_line_n", "y": 270 }
+				}
+			},
+			"false": {
+			}
+		}
+	}
+}

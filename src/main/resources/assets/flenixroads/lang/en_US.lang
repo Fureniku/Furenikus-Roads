@@ -1,6 +1,27 @@
-tile.roadBlockBase1.name=Tarmac Road
-tile.roadBlockConcrete.name=Concrete Road
-tile.roadBlockConcrete2.name=Concrete Road
+tile.flenixroads.road_block_standard.name=Standard Tarmac Road
+tile.flenixroads.road_block_concrete_1.name=Concrete Road
+tile.flenixroads.road_block_concrete_2.name=Concrete Road
+tile.flenixroads.road_block_light.name=Light Tarmac Road
+tile.flenixroads.road_block_dark.name=Dark Tarmac Road
+tile.flenixroads.road_block_pale.name=Pale Tarmac Road
+tile.flenixroads.road_block_red.name=Red Tarmac Road
+tile.flenixroads.road_block_blue.name=Blue Tarmac Road
+tile.flenixroads.road_block_white.name=White Tarmac Road
+tile.flenixroads.road_block_yellow.name=Yellow Tarmac Road
+tile.flenixroads.road_block_green.name=Green Tarmac Road
+tile.flenixroads.road_block_fine.name=Fine Tarmac Road
+tile.flenixroads.road_block_muddy.name=Mud Road
+tile.flenixroads.road_block_muddy_dried.name=Dried Mud Road
+
+tile.flenixroads.road_block_stone.name=Stone Road
+tile.flenixroads.road_block_grass.name=Grass Road
+tile.flenixroads.road_block_dirt.name=Dirt Road
+tile.flenixroads.road_block_sand.name=Sand Road
+tile.flenixroads.road_block_gravel.name=Gravel Road
+
+tile.flenixroads.paint_letter_white_ab.name=Letter A
+
+
 tile.roadBlockLight.name=Light Tarmac Road
 tile.roadBlockFine.name=Fine Tarmac Road
 tile.roadBlockDark.name=Dark Tarmac Road
@@ -389,7 +410,6 @@ tile.iconLettersMisc.13.name=Icon # Paint
 tile.iconLettersMisc.14.name=Icon # Paint
 tile.iconLettersMisc.15.name=Icon # Paint
 
-itemGroup.tabRoads=[FlenixRoads] Roads
-itemGroup.tabPaints=[FlenixRoads] Paints
-itemGroup.tabSidewalks=[FlenixRoads] Sidewalks
-itemGroup.tabTools=[FlenixRoads] Tools
+itemGroup.tab_roads=[FlenixRoads] Roads
+itemGroup.tab_paint=[FlenixRoads] Paints
+itemGroup.tab_tools=[FlenixRoads] Tools

@@ -1,26 +1,22 @@
-/cpw/*
-/ibxm/*
-/net/*
-/paulscode/*
-/fml_at.cfg
-/fml_marker.cfg
-/fmlversion.properties
-/forge_at.cfg
-/forge_logo.png
-/mcp.png
-/mcpmod.info
-/Start.java
+# eclipse
+bin
+*.launch
+.settings
+.metadata
+.classpath
+.project
 
+# idea
+out
+*.ipr
+*.iws
+*.iml
+.idea
 
-/.gradle
-/.settings
-/bin/
-/build/
-/eclipse
+# gradle
+build
+.gradle
 
-/.classpath
-/.project
-*.txt
-*.bat
-*.sh
-*.lzma
+# other
+eclipse
+run

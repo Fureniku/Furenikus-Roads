@@ -1,0 +1,19 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"transform": "forge:default-block",
+		"textures": {
+			"0": "flenixroads:blocks/paint_yellow",
+			"particle": "flenixroads:blocks/paint_yellow"
+		},
+		"model": "flenixroads:double_middle_dash"
+	},
+	"variants": {
+		"facing": {
+			"north": { "model": "flenixroads:double_middle_dash" },
+			"east":  { "model": "flenixroads:double_middle_dash", "y": 90 },
+			"south": { "model": "flenixroads:double_middle_dash", "y": 180 },
+			"west":  { "model": "flenixroads:double_middle_dash", "y": 270 }
+		}
+	}
+}

@@ -1,0 +1,31 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"transform": "forge:default-block",
+		"textures": {
+			"0": "flenixroads:blocks/paint_yellow",
+			"particle": "flenixroads:blocks/paint_yellow"
+		},
+		"model": "flenixroads:tile_punct_question"
+	},
+	"variants": {
+		"letter_paint": {
+			"flat_north": { "model": "flenixroads:tile_punct_question" },
+			"flat_east":  { "model": "flenixroads:tile_punct_question", "y": 90 },
+			"flat_south": { "model": "flenixroads:tile_punct_question", "y": 180 },
+			"flat_west":  { "model": "flenixroads:tile_punct_question", "y": 270 },
+			"face_north": { "model": "flenixroads:tile_punct_question", "x": 270 },
+			"face_east":  { "model": "flenixroads:tile_punct_question", "x": 270, "y": 90 },
+			"face_south": { "model": "flenixroads:tile_punct_question", "x": 270, "y": 180 },
+			"face_west":  { "model": "flenixroads:tile_punct_question", "x": 270, "y": 270 },
+			"flat_north_2": { "model": "flenixroads:tile_punct_exclamation" },
+			"flat_east_2":  { "model": "flenixroads:tile_punct_exclamation", "y": 90 },
+			"flat_south_2": { "model": "flenixroads:tile_punct_exclamation", "y": 180 },
+			"flat_west_2":  { "model": "flenixroads:tile_punct_exclamation", "y": 270 },
+			"face_north_2": { "model": "flenixroads:tile_punct_exclamation", "x": 270 },
+			"face_east_2":  { "model": "flenixroads:tile_punct_exclamation", "x": 270, "y": 90 },
+			"face_south_2": { "model": "flenixroads:tile_punct_exclamation", "x": 270, "y": 180 },
+			"face_west_2":  { "model": "flenixroads:tile_punct_exclamation", "x": 270, "y": 270 }
+		}
+	}
+}

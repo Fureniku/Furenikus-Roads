@@ -1,0 +1,19 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"transform": "forge:default-block",
+		"textures": {
+			"0": "flenixroads:blocks/paint_red",
+			"particle": "flenixroads:blocks/paint_red"
+		},
+		"model": "flenixroads:single_line_short"
+	},
+	"variants": {
+		"facing": {
+			"north": { "model": "flenixroads:single_line_short" },
+			"east":  { "model": "flenixroads:single_line_short", "y": 90 },
+			"south": { "model": "flenixroads:single_line_short" },
+			"west":  { "model": "flenixroads:single_line_short", "y": 90 }
+		}
+	}
+}

@@ -1,0 +1,33 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "blocks/paint_white",
+		"particle": "blocks/paint_white"
+	},
+	"elements": [
+		{
+			"from": [6.5, 0, 0],
+			"to": [7.5, 0.25, 16],
+			"faces": {
+				"north": {"uv": [8.5, 15.75, 9.5, 16], "texture": "#0"},
+				"east": {"uv": [16, 16, 0, 15.75], "texture": "#0"},
+				"south": {"uv": [6.5, 15.75, 7.5, 16], "texture": "#0"},
+				"west": {"uv": [0, 15.75, 16, 16], "texture": "#0"},
+				"up": {"uv": [6.5, 0, 7.5, 16], "texture": "#0"},
+				"down": {"uv": [6.5, 0, 7.5, 16], "texture": "#0"}
+			}
+		},
+		{
+			"from": [8.5, 0, 5],
+			"to": [9.5, 0.25, 11],
+			"faces": {
+				"north": {"uv": [6.5, 15.75, 7.5, 16], "texture": "#0"},
+				"east": {"uv": [11, 16, 5, 15.75], "texture": "#0"},
+				"south": {"uv": [8.5, 15.75, 9.5, 16], "texture": "#0"},
+				"west": {"uv": [5, 15.75, 11, 16], "texture": "#0"},
+				"up": {"uv": [8.5, 5, 9.5, 11], "texture": "#0"},
+				"down": {"uv": [8.5, 5, 9.5, 11], "texture": "#0"}
+			}
+		}
+	]
+}
