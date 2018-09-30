@@ -74,16 +74,16 @@ public class FlenixRoads {
 			FRItems.register(event.getRegistry());
 			FRBlocks.registerItemBlocks(event.getRegistry());
 		}
+				
+		@SubscribeEvent
+		public static void registerBlocks(RegistryEvent.Register<Block> event) {
+			FRBlocks.register(event.getRegistry());
+		}
 		
 		@SubscribeEvent
 		public static void registerModels(ModelRegistryEvent event) {
 			FRItems.registerModels();
 			FRBlocks.registerModels();
-		}
-		
-		@SubscribeEvent
-		public static void registerBlocks(RegistryEvent.Register<Block> event) {
-			FRBlocks.register(event.getRegistry());
 		}
 	}
 }

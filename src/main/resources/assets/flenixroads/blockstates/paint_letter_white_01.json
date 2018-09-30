@@ -9,6 +9,18 @@
 		"model": "flenixroads:tile_number_0"
 	},
 	"variants": {
+		"inventory": [{
+            "transform": {
+                "thirdperson": {
+                    "translation": [0, 0.09375, -0.171875],
+                    "rotation": [ { "y": -45}, {"x": 10}, {"z": 170} ],
+                    "scale": 0.375
+                },
+                "gui": {
+                    "rotation": [ {"y": 90} ]
+                }
+            }
+        }],
 		"letter_paint": {
 			"flat_north": { "model": "flenixroads:tile_number_0" },
 			"flat_east":  { "model": "flenixroads:tile_number_0", "y": 90 },

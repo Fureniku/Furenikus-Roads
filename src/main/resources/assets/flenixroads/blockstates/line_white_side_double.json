@@ -9,9 +9,7 @@
 		"model": "flenixroads:nomodel"
 	},
 	"variants": {
-		"inventory": [{
-			"transform": "forge:default-block"
-		}],
+		"inventory": [{}],
 		"diagonal_connections": {
 			"none": {
 			},

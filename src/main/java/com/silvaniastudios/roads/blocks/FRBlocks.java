@@ -304,9 +304,9 @@ public class FRBlocks {
 		
 		line_white_straight_double.initModel();
 		
-		line_white_side_double.initModel();
-		line_yellow_side_double.initModel();
-		line_red_side_double.initModel();
+		initModel(line_white_side_double);
+		initModel(line_yellow_side_double);
+		initModel(line_red_side_double);
 		line_white_side_single.initModel();
 		line_yellow_side_single.initModel();
 		line_red_side_single.initModel();
@@ -326,9 +326,9 @@ public class FRBlocks {
 		for (int i = 0; i < letterBlockYellowArray.length; i++) { letterBlockYellowArray[i].initModel(); }
 		for (int i = 0; i < letterBlockRedArray.length; i++)    { letterBlockRedArray[i].initModel(); }
 	}
-	
-	@SideOnly(Side.CLIENT)
+
 	public static void initModel(Block block) {
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(FlenixRoads.MODID + ":" + block.getUnlocalizedName().substring(5), "inventory"));
+		System.out.println("initModel");
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 2, new ModelResourceLocation(FlenixRoads.MODID + ":" + block.getUnlocalizedName().substring(5), "inventory"));
 	}
 }

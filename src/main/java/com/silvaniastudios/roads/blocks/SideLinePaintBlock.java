@@ -26,8 +26,7 @@ public class SideLinePaintBlock extends PaintBlockBase implements ILineConnectab
 
 	public SideLinePaintBlock(String name) {
 		super(name);
-		this.setDefaultState(this.blockState.getBaseState()
-				.withProperty(FACING, EnumFacing.NORTH));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 	}
 	
 	@Override
