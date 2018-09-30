@@ -3,8 +3,8 @@
 	"defaults": {
 		"transform": "forge:default-block",
 		"textures": {
-			"0": "flenixroads:blocks/paint_red",
-			"particle": "flenixroads:blocks/paint_red"
+			"0": "flenixroads:blocks/paint_yellow",
+			"particle": "flenixroads:blocks/paint_yellow"
 		},
 		"model": "flenixroads:single_middle"
 	},

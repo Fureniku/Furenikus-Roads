@@ -2,7 +2,6 @@ package com.silvaniastudios.roads.blocks;
 
 import com.silvaniastudios.roads.FlenixRoads;
 import com.silvaniastudios.roads.blocks.enums.EnumRoadHeight;
-import com.silvaniastudios.roads.blocks.enums.IMetaBlockName;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -21,7 +20,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class RoadBlock extends BlockBase implements IMetaBlockName {
+public class RoadBlock extends BlockBase {
 	
 	public static final PropertyEnum<EnumRoadHeight> ENUM_HEIGHT = PropertyEnum.create("road_block", EnumRoadHeight.class);
 	
@@ -60,11 +59,6 @@ public class RoadBlock extends BlockBase implements IMetaBlockName {
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
         return new ItemStack(state.getBlock(), 1, this.getMetaFromState(state));
     }
-	
-	@Override
-	public String getSpecialName(ItemStack stack) {
-		return stack.getItemDamage() + "";
-	}
 
     @Override
     public int damageDropped(IBlockState state) {

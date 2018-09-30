@@ -1,6 +1,7 @@
 package com.silvaniastudios.roads.blocks;
 
 import com.silvaniastudios.roads.blocks.enums.ILineConnectable;
+import com.silvaniastudios.roads.blocks.enums.IMetaBlockName;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
@@ -19,7 +20,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class LinePaintBlock extends PaintBlockBase implements ILineConnectable {
+public class LinePaintBlock extends PaintBlockBase implements ILineConnectable, IMetaBlockName {
 	
 	public static final PropertyBool NORTH = PropertyBool.create("north");
 	public static final PropertyBool EAST = PropertyBool.create("east");
@@ -39,6 +40,11 @@ public class LinePaintBlock extends PaintBlockBase implements ILineConnectable {
 				.withProperty(DEFAULTS, true)
 				.withProperty(FACING_NORTH_SOUTH, false)
 				.withProperty(FACING_EAST_WEST, false));
+	}
+	
+	@Override
+	public String getSpecialName(ItemStack stack) {
+		return stack.getItemDamage() + "";
 	}
 	
 

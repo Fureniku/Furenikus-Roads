@@ -2,6 +2,8 @@ package com.silvaniastudios.roads.blocks;
 
 import javax.annotation.Nullable;
 
+import com.silvaniastudios.roads.FlenixRoads;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -32,6 +34,7 @@ public class SidewalkBlock extends BlockBase {
 		super(name, mat);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(NORTH, Boolean.valueOf(false)).withProperty(EAST, Boolean.valueOf(false)).withProperty(SOUTH, Boolean.valueOf(false)).withProperty(WEST, Boolean.valueOf(false)));
 		this.connectToOthers = connect;
+		this.setCreativeTab(FlenixRoads.tab_roads);
 	}
 
 	public boolean isOpaqueCube(IBlockState state) {
