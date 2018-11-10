@@ -1,7 +1,7 @@
 package com.silvaniastudios.roads.blocks;
 
 import com.google.common.collect.ImmutableList;
-import com.silvaniastudios.roads.FlenixRoads;
+import com.silvaniastudios.roads.FurenikusRoads;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -23,12 +23,12 @@ public class BlockBase extends Block {
 	public BlockBase(String name, Material mat) {
 		super(mat);
 		this.name = name;
-		setUnlocalizedName(FlenixRoads.MODID + "." + name);
+		setUnlocalizedName(FurenikusRoads.MODID + "." + name);
 		setRegistryName(name);
 	}
 	
 	public void registerItemModel(Item itemBlock) {
-		FlenixRoads.proxy.registerItemRenderer(itemBlock, 0, name);
+		FurenikusRoads.proxy.registerItemRenderer(itemBlock, 0, name);
 	}
 	
 	public Item createItemBlock() {
@@ -47,5 +47,4 @@ public class BlockBase extends Block {
 			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(state.getBlock()), this.getMetaFromState(state), mrl);
 		}
 	}
-
 }

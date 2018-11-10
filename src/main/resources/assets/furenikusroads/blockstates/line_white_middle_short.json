@@ -1,0 +1,37 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"transform": "forge:default-block",
+		"textures": {
+			"0": "furenikusroads:blocks/paint_white",
+			"particle": "furenikusroads:blocks/paint_white"
+		},
+		"model": "furenikusroads:single_line_short"
+	},
+	"variants": {
+		"inventory": [{
+			"model": "furenikusroads:single_line_short",
+			"transform": {
+				"ground": {
+					"scale": [0.5, 0.5, 0.5],
+					"rotation": [90, 0, 180],
+					"translation": [0, 0, -0.2]
+				},
+				"fixed": {
+					"rotation": [90, 0, 180],
+					"translation": [0, 0, -0.45]
+				},
+				"gui": {
+					"translation": [0, 0, 0],
+					"rotation": [90, 0, 0]
+				}
+            }
+		}],
+		"facing": {
+			"north": { "model": "furenikusroads:single_line_short" },
+			"east":  { "model": "furenikusroads:single_line_short", "y": 90 },
+			"south": { "model": "furenikusroads:single_line_short" },
+			"west":  { "model": "furenikusroads:single_line_short", "y": 90 }
+		}
+	}
+}

@@ -1,0 +1,23 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"transform": "forge:default-block",
+		"textures": {
+			"0": "furenikusroads:blocks/paint_white",
+			"particle": "furenikusroads:blocks/paint_white"
+		},
+		"model": "furenikusroads:tile_letter_a"
+	},
+	"variants": {
+		"letter_paint": {
+			"flat_north": { "model": "furenikusroads:tile_letter_a" },
+			"flat_east":  { "model": "furenikusroads:tile_letter_a", "y": 90 },
+			"flat_south": { "model": "furenikusroads:tile_letter_a", "y": 180 },
+			"flat_west":  { "model": "furenikusroads:tile_letter_a", "y": 270 },
+			"face_north": { "model": "furenikusroads:tile_letter_a", "x": 270 },
+			"face_east":  { "model": "furenikusroads:tile_letter_a", "x": 270, "y": 90 },
+			"face_south": { "model": "furenikusroads:tile_letter_a", "x": 270, "y": 180 },
+			"face_west":  { "model": "furenikusroads:tile_letter_a", "x": 270, "y": 270 }
+		}
+	}
+}

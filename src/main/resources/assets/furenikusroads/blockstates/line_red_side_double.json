@@ -1,0 +1,113 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"transform": "forge:default-block",
+		"textures": {
+			"0": "furenikusroads:blocks/paint_red",
+			"particle": "furenikusroads:blocks/paint_red"
+		},
+		"model": "furenikusroads:nomodel"
+	},
+	"variants": {
+		"inventory": [{
+			"model": "furenikusroads:double_line_side_inv",
+			"transform": {
+				"ground": {
+					"scale": [0.5, 0.5, 0.5],
+					"rotation": [90, 0, 180],
+					"translation": [0, 0, -0.2]
+				},
+				"fixed": {
+					"rotation": [90, 0, 180],
+					"translation": [0, 0, -0.45]
+				},
+				"gui": {
+					"translation": [0, 0, 0],
+					"rotation": [90, 0, 0]
+				}
+            }
+		}],
+		"connect_left": {
+			"none": {
+				"submodel": {
+					"paint_left": { "model": "furenikusroads:double_line_side_left_end" },
+					"paint_mid":  { "model": "furenikusroads:double_line_side" }
+				}
+			},
+			"up": {
+				"submodel": {
+					"paint_left": { "model": "furenikusroads:double_line_side_lu" },
+					"paint_mid":  { "model": "furenikusroads:double_line_side" }
+				}
+			},
+			"side": {
+				"submodel": { 
+					"paint_left": { "model": "furenikusroads:double_line_side_left" },
+					"paint_mid":  { "model": "furenikusroads:double_line_side" }
+				}
+			},
+			"down": {
+				"submodel": { 
+					"paint_left": { "model": "furenikusroads:double_line_side_ld" },
+					"paint_mid":  { "model": "furenikusroads:double_line_side" }
+				}
+			},
+			"corner": {
+				"submodel": { 
+					"paint_left": { "model": "furenikusroads:double_line_side_corner", "y": 270 },
+					"paint_mid":  { "model": "furenikusroads:nomodel" }
+				}
+			},
+			"empty": {
+				"submodel": { 
+					"paint_left": { "model": "furenikusroads:nomodel" },
+					"paint_mid":   { "model": "furenikusroads:nomodel" }
+				}
+			}
+		},
+		"connect_right": {
+			"none": {
+				"submodel": {
+					"paint_right": { "model": "furenikusroads:double_line_side_right_end" },
+					"paint_mid":  { "model": "furenikusroads:double_line_side" }
+				}
+			},
+			"up": {
+				"submodel": {
+					"paint_right": { "model": "furenikusroads:double_line_side_ru" },
+					"paint_mid":  { "model": "furenikusroads:double_line_side" }
+				}
+			},
+			"side": {
+				"submodel": { 
+					"paint_right": { "model": "furenikusroads:double_line_side_right" },
+					"paint_mid":  { "model": "furenikusroads:double_line_side" }
+				}
+			},
+			"down": {
+				"submodel": { 
+					"paint_right": { "model": "furenikusroads:double_line_side_rd" },
+					"paint_mid":  { "model": "furenikusroads:double_line_side" }
+				}
+			},
+			"corner": {
+				"submodel": { 
+					"paint_right": { "model": "furenikusroads:double_line_side_corner" },
+					"paint_mid":   { "model": "furenikusroads:nomodel" }
+				}
+			},
+			"empty": {
+				"submodel": { 
+					"paint_right": { "model": "furenikusroads:nomodel" },
+					"paint_mid":   { "model": "furenikusroads:nomodel" }
+				}
+			}
+		},
+		"zz_facing": {
+			"north": { "model": "furenikusroads:nomodel" },
+			"east":  { "model": "furenikusroads:nomodel", "y":  90 },
+			"south": { "model": "furenikusroads:nomodel", "y": 180 },
+			"west":  { "model": "furenikusroads:nomodel", "y": 270 }
+		}
+	}
+}

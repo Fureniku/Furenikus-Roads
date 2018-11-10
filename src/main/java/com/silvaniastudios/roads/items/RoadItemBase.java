@@ -1,6 +1,6 @@
 package com.silvaniastudios.roads.items;
 
-import com.silvaniastudios.roads.FlenixRoads;
+import com.silvaniastudios.roads.FurenikusRoads;
 
 import net.minecraft.item.Item;
 
@@ -13,11 +13,11 @@ public class RoadItemBase extends Item {
 		this.setUnlocalizedName(name);
 		this.setRegistryName(name);
 		this.maxStackSize = stackSize;
-		this.setCreativeTab(FlenixRoads.tab_tools);
+		this.setCreativeTab(FurenikusRoads.tab_tools);
 	}
 
 	public void registerItemModel() {
-		FlenixRoads.proxy.registerItemRenderer(this, 0, name);
+		FurenikusRoads.proxy.registerItemRenderer(this, 0, name);
 	}
 
 }

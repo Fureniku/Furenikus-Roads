@@ -1,0 +1,78 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"transform": "forge:default-block",
+		"textures": {
+			"0": "furenikusroads:blocks/paint_white",
+			"particle": "furenikusroads:blocks/paint_white"
+		},
+		"model": "furenikusroads:junction_chevron_left_thin_1"
+	},
+	"variants": {
+		"inventory": [{
+			"model": "furenikusroads:junction_chevron_left_thin_1",
+			"transform": {
+				"ground": {
+					"scale": [0.5, 0.5, 0.5],
+					"rotation": [90, 0, 180],
+					"translation": [0, 0, -0.2]
+				},
+				"fixed": {
+					"rotation": [90, 0, 180],
+					"translation": [0, 0, -0.45]
+				},
+				"gui": {
+					"translation": [0, 0, 0],
+					"rotation": [90, 0, 0]
+				}
+            }
+		}],
+		"inventory_2": [{
+			"model": "furenikusroads:junction_chevron_right_thin_1",
+			"transform": {
+				"ground": {
+					"scale": [0.5, 0.5, 0.5],
+					"rotation": [90, 0, 180],
+					"translation": [0, 0, -0.2]
+				},
+				"fixed": {
+					"rotation": [90, 0, 180],
+					"translation": [0, 0, -0.45]
+				},
+				"gui": {
+					"translation": [0, 0, 0],
+					"rotation": [90, 0, 0]
+				}
+            }
+		}],
+		"meta": {
+			"0": { "model": "furenikusroads:junction_chevron_left_thin_1" },
+			"1": { "model": "furenikusroads:junction_chevron_left_thin_1", "y": 90 },
+			"2": { "model": "furenikusroads:junction_chevron_left_thin_1", "y": 180 },
+			"3": { "model": "furenikusroads:junction_chevron_left_thin_1", "y": 270 },
+			"4": { "model": "furenikusroads:junction_chevron_left_thin_2" },
+			"5": { "model": "furenikusroads:junction_chevron_left_thin_2", "y": 90 },
+			"6": { "model": "furenikusroads:junction_chevron_left_thin_2", "y": 180 },
+			"7": { "model": "furenikusroads:junction_chevron_left_thin_2", "y": 270 },
+			"8": { "model": "furenikusroads:junction_chevron_right_thin_1" },
+			"9": { "model": "furenikusroads:junction_chevron_right_thin_1", "y": 90 },
+			"10": { "model": "furenikusroads:junction_chevron_right_thin_1", "y": 180 },
+			"11": { "model": "furenikusroads:junction_chevron_right_thin_1", "y": 270 },
+			"12": { "model": "furenikusroads:junction_chevron_right_thin_2" },
+			"13": { "model": "furenikusroads:junction_chevron_right_thin_2", "y": 90 },
+			"14": { "model": "furenikusroads:junction_chevron_right_thin_2", "y": 180 },
+			"15": { "model": "furenikusroads:junction_chevron_right_thin_2", "y": 270 }
+		},
+		"edge": {
+			"none": {},
+			"n1": { "model": "furenikusroads:junction_chevron_left_thin_2b" },
+			"e1": { "model": "furenikusroads:junction_chevron_left_thin_2b", "y": 90 },
+			"s1": { "model": "furenikusroads:junction_chevron_left_thin_2b", "y": 180 },
+			"w1": { "model": "furenikusroads:junction_chevron_left_thin_2b", "y": 270 },
+			"n2": { "model": "furenikusroads:junction_chevron_right_thin_2b" },
+			"e2": { "model": "furenikusroads:junction_chevron_right_thin_2b", "y": 90 },
+			"s2": { "model": "furenikusroads:junction_chevron_right_thin_2b", "y": 180 },
+			"w2": { "model": "furenikusroads:junction_chevron_right_thin_2b", "y": 270 }
+		}
+	}
+}

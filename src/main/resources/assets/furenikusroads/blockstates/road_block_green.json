@@ -1,0 +1,35 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"transform": "forge:default-block",
+		"textures": {
+			"0": "furenikusroads:blocks/road_block_green",
+			"particle": "furenikusroads:blocks/road_block_green"
+		},
+		"model": "furenikusroads:road_12_16"
+	},
+	"variants": {
+		"inventory": [{
+			"transform": "forge:default-block"
+		}],
+		"road_block":
+		{
+			"1_16th": { "model": "furenikusroads:road_1_16" },
+			"1_8th": { "model": "furenikusroads:road_2_16" },
+			"3_16ths": { "model": "furenikusroads:road_3_16" },
+			"quarter_block": { "model": "furenikusroads:road_4_16" },
+			"5_16ths": { "model": "furenikusroads:road_5_16" },
+			"6_16ths": { "model": "furenikusroads:road_6_16" },
+			"7_16ths": { "model": "furenikusroads:road_7_16" },
+			"half_block": { "model": "furenikusroads:road_8_16" },
+			"9_16ths": { "model": "furenikusroads:road_9_16" },
+			"10_16ths": { "model": "furenikusroads:road_10_16" },
+			"11_16ths": { "model": "furenikusroads:road_11_16" },
+			"three_quarter_block": { "model": "furenikusroads:road_12_16" },
+			"13_16ths": { "model": "furenikusroads:road_13_16" },
+			"14_16ths": { "model": "furenikusroads:road_14_16" },
+			"15_16ths": { "model": "furenikusroads:road_15_16" },
+			"full_block": { "model": "furenikusroads:road_16_16" }
+		}
+	}
+}

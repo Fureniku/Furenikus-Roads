@@ -1,7 +1,6 @@
 package com.silvaniastudios.roads.blocks;
 
-import com.silvaniastudios.roads.FlenixRoads;
-import com.silvaniastudios.roads.blocks.enums.EnumRoadHeight;
+import com.silvaniastudios.roads.FurenikusRoads;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -11,6 +10,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -22,7 +22,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class RoadBlock extends BlockBase {
 	
-	public static final PropertyEnum<EnumRoadHeight> ENUM_HEIGHT = PropertyEnum.create("road_block", EnumRoadHeight.class);
+	public static final PropertyEnum<RoadBlock.EnumRoadHeight> ENUM_HEIGHT = PropertyEnum.create("road_block", RoadBlock.EnumRoadHeight.class);
 	
 	public static final AxisAlignedBB ROAD_1_16_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0625D, 1.0D);
 	public static final AxisAlignedBB ROAD_2_16_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.125D, 1.0D);
@@ -43,14 +43,14 @@ public class RoadBlock extends BlockBase {
 	
 	public RoadBlock(String name, Material mat) {
 		super(name, mat);
-		setDefaultState(this.blockState.getBaseState().withProperty(ENUM_HEIGHT, EnumRoadHeight.id0));
-		this.setCreativeTab(FlenixRoads.tab_roads);
+		setDefaultState(this.blockState.getBaseState().withProperty(ENUM_HEIGHT, RoadBlock.EnumRoadHeight.id0));
+		this.setCreativeTab(FurenikusRoads.tab_roads);
 	}
 	
 	@SideOnly(Side.CLIENT)
 	@Override
     public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> items) {
-        for (EnumRoadHeight height: EnumRoadHeight.values()) {
+        for (RoadBlock.EnumRoadHeight height: RoadBlock.EnumRoadHeight.values()) {
             items.add(new ItemStack(this, 1, height.getMetadata()));
         }
     }
@@ -72,12 +72,12 @@ public class RoadBlock extends BlockBase {
 	
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(ENUM_HEIGHT, EnumRoadHeight.byMetadata(meta));
+        return this.getDefaultState().withProperty(ENUM_HEIGHT, RoadBlock.EnumRoadHeight.byMetadata(meta));
     }
 	
 	@Override
     public int getMetaFromState(IBlockState state) {
-        return ((EnumRoadHeight)state.getValue(ENUM_HEIGHT)).getMetadata();
+        return ((RoadBlock.EnumRoadHeight)state.getValue(ENUM_HEIGHT)).getMetadata();
     }
 	
     @Override
@@ -113,12 +113,12 @@ public class RoadBlock extends BlockBase {
 	
     @Override
     public boolean isFullCube(IBlockState state) {
-        return false;
+        return getMetaFromState(state) == 15;
     }
     
-	@Override
+    @Override
     public boolean isOpaqueCube(IBlockState state) {
-        return false;
+        return getMetaFromState(state) == 15;
     }
 	
 	//onblockclicked
@@ -126,4 +126,55 @@ public class RoadBlock extends BlockBase {
 	
 	//onblockactivated
 	//impact wrench = raise block size, take tarmac fragment
+	
+	public static enum EnumRoadHeight implements IStringSerializable {
+		id0(0, "1_16th"),
+		id1(1, "1_8th"),
+		id2(2, "3_16ths"),
+		id3(3, "quarter_block"),
+		id4(4, "5_16ths"),
+		id5(5, "6_16ths"),
+		id6(6, "7_16ths"),
+		id7(7, "half_block"),
+		id8(8, "9_16ths"),
+		id9(9, "10_16ths"),
+		id10(10, "11_16ths"),
+		id11(11, "three_quarter_block"),
+		id12(12, "13_16ths"),
+		id13(13, "14_16ths"),
+		id14(14, "15_16ths"),
+		id15(15, "full_block");
+		
+		private static final EnumRoadHeight[] META_LOOKUP = new EnumRoadHeight[values().length];
+		private final int meta;
+		private final String name;
+		
+		private EnumRoadHeight(int meta, String name) {
+			this.meta = meta;
+			this.name = name;
+		}
+
+		@Override
+		public String getName() {
+			return this.name;
+		}
+		
+		public int getMetadata() {
+	        return this.meta;
+	    }
+		
+		public static EnumRoadHeight byMetadata(int meta) {
+	        if (meta < 0 || meta >= META_LOOKUP.length) {
+	            meta = 0;
+	        }
+	        
+	        return META_LOOKUP[meta];
+	    }
+		
+		static {
+	        for (EnumRoadHeight type: values()) {
+	            META_LOOKUP[type.getMetadata()] = type;
+	        }
+	    }
+	}
 }

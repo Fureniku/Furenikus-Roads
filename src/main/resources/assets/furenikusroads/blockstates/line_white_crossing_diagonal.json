@@ -1,0 +1,52 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"transform": "forge:default-block",
+		"textures": {
+			"0": "furenikusroads:blocks/paint_white",
+			"particle": "furenikusroads:blocks/paint_white"
+		},
+		"model": "furenikusroads:connected_diagonal_1"
+	},
+	"variants": {
+		"inventory": [{
+			"model": "furenikusroads:connected_diagonal_1",
+			"transform": {
+				"ground": {
+					"scale": [0.5, 0.5, 0.5],
+					"rotation": [90, 0, 180],
+					"translation": [0, 0, -0.2]
+				},
+				"fixed": {
+					"rotation": [90, 0, 180],
+					"translation": [0, 0, -0.45]
+				},
+				"gui": {
+					"translation": [0, 0, 0],
+					"rotation": [90, 0, 0]
+				}
+            }
+		}],
+		"position_rotation": {
+			"north_top": { "model": "furenikusroads:connected_diagonal_1" },
+			"north_top_mid":  { "model": "furenikusroads:connected_diagonal_1", "y": 180 },
+			"north_bottom_mid": { "model": "furenikusroads:connected_diagonal_2" },
+			"north_bottom":  { "model": "furenikusroads:connected_diagonal_2", "y": 180 },
+			
+			"east_top": { "model": "furenikusroads:connected_diagonal_1", "y": 90 },
+			"east_top_mid":  { "model": "furenikusroads:connected_diagonal_1", "y": 270 },
+			"east_bottom_mid": { "model": "furenikusroads:connected_diagonal_2", "y": 90 },
+			"east_bottom":  { "model": "furenikusroads:connected_diagonal_2", "y": 270 },
+			
+			"south_top": { "model": "furenikusroads:connected_diagonal_1", "y": 180 },
+			"south_top_mid":  { "model": "furenikusroads:connected_diagonal_1" },
+			"south_bottom_mid": { "model": "furenikusroads:connected_diagonal_2", "y": 180 },
+			"south_bottom":  { "model": "furenikusroads:connected_diagonal_2" },
+			
+			"west_top": { "model": "furenikusroads:connected_diagonal_1", "y": 270 },
+			"west_top_mid":  { "model": "furenikusroads:connected_diagonal_1", "y": 90 },
+			"west_bottom_mid": { "model": "furenikusroads:connected_diagonal_2", "y": 270 },
+			"west_bottom":  { "model": "furenikusroads:connected_diagonal_2", "y": 90 }
+		}
+	}
+}

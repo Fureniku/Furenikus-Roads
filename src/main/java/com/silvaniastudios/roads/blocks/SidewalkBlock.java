@@ -2,7 +2,7 @@ package com.silvaniastudios.roads.blocks;
 
 import javax.annotation.Nullable;
 
-import com.silvaniastudios.roads.FlenixRoads;
+import com.silvaniastudios.roads.FurenikusRoads;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -34,7 +34,7 @@ public class SidewalkBlock extends BlockBase {
 		super(name, mat);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(NORTH, Boolean.valueOf(false)).withProperty(EAST, Boolean.valueOf(false)).withProperty(SOUTH, Boolean.valueOf(false)).withProperty(WEST, Boolean.valueOf(false)));
 		this.connectToOthers = connect;
-		this.setCreativeTab(FlenixRoads.tab_roads);
+		this.setCreativeTab(FurenikusRoads.tab_roads);
 	}
 
 	public boolean isOpaqueCube(IBlockState state) {
@@ -113,7 +113,12 @@ public class SidewalkBlock extends BlockBase {
 	private double getBlockBelowHeight(IBlockAccess worldIn, BlockPos pos) {
     	IBlockState underState = worldIn.getBlockState(pos.offset(EnumFacing.DOWN));
         Block underBlock = underState.getBlock();
+        double extraOffset = 0.0;
         
-        return underBlock.getBoundingBox(underState, worldIn, pos.offset(EnumFacing.DOWN)).maxY;
+        if (underBlock instanceof PaintBlockBase || underBlock instanceof TactileCrossingBumps || underBlock instanceof SidewalkBlock) {
+        	extraOffset = 0.062;
+        }
+        
+        return underBlock.getBoundingBox(underState, worldIn, pos.offset(EnumFacing.DOWN)).maxY - extraOffset;
     }
 }

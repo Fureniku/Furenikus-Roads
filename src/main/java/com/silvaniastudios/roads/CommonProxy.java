@@ -8,7 +8,7 @@ import net.minecraftforge.fml.common.Mod.Instance;
 public class CommonProxy {
 	
 	@Instance
-	public static FlenixRoads instance;
+	public static FurenikusRoads instance;
 	
 	public void registerItemRenderer(Item item, int meta, String id) {}
 	

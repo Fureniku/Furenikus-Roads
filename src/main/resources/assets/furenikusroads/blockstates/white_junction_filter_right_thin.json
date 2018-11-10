@@ -1,0 +1,143 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"transform": "forge:default-block",
+		"textures": {
+			"0": "furenikusroads:blocks/paint_white",
+			"particle": "furenikusroads:blocks/paint_white"
+		},
+		"model": "furenikusroads:junction_filter_right_thin_1"
+	},
+	"variants": {
+		"inventory": [{
+			"model": "furenikusroads:junction_filter_right_thin_3",
+			"transform": {
+				"ground": {
+					"scale": [0.5, 0.5, 0.5],
+					"rotation": [90, 0, 180],
+					"translation": [0, 0, -0.2]
+				},
+				"fixed": {
+					"rotation": [90, 0, 180],
+					"translation": [0, 0, -0.45]
+				},
+				"gui": {
+					"translation": [0, 0, 0],
+					"rotation": [90, 0, 0]
+				}
+            }
+		}],
+		"position_rotation": {
+			"north_top": { "model": "furenikusroads:junction_filter_right_thin_4" },
+			"north_top_mid":  { "model": "furenikusroads:junction_filter_right_thin_3" },
+			"north_bottom_mid": { "model": "furenikusroads:junction_filter_right_thin_2" },
+			"north_bottom":  { "model": "furenikusroads:junction_filter_right_thin_1" },
+			
+			"east_top": { "model": "furenikusroads:junction_filter_right_thin_4", "y": 90 },
+			"east_top_mid":  { "model": "furenikusroads:junction_filter_right_thin_3", "y": 90 },
+			"east_bottom_mid": { "model": "furenikusroads:junction_filter_right_thin_2", "y": 90 },
+			"east_bottom":  { "model": "furenikusroads:junction_filter_right_thin_1", "y": 90 },
+			
+			"south_top": { "model": "furenikusroads:junction_filter_right_thin_4", "y": 180 },
+			"south_top_mid":  { "model": "furenikusroads:junction_filter_right_thin_3", "y": 180 },
+			"south_bottom_mid": { "model": "furenikusroads:junction_filter_right_thin_2", "y": 180 },
+			"south_bottom":  { "model": "furenikusroads:junction_filter_right_thin_1", "y": 180 },
+			
+			"west_top": { "model": "furenikusroads:junction_filter_right_thin_4", "y": 270 },
+			"west_top_mid":  { "model": "furenikusroads:junction_filter_right_thin_3", "y": 270 },
+			"west_bottom_mid": { "model": "furenikusroads:junction_filter_right_thin_2", "y": 270 },
+			"west_bottom":  { "model": "furenikusroads:junction_filter_right_thin_1", "y": 270 }
+		},
+		"connect": {
+			"none": {
+				"submodel": {
+					"chevron":  { "model": "furenikusroads:nomodel" }
+				}
+			},
+			
+			"top_chevron_a": {
+				"submodel": {
+					"chevron":  { "model": "furenikusroads:junction_chevron_right_down_a_4" }
+				}
+			},
+			"top_chevron_b": {
+				"submodel": {
+					"chevron":  { "model": "furenikusroads:junction_chevron_right_down_b_4" }
+				}
+			},
+			"top_chevron_thin_a": {
+				"submodel": {
+					"chevron":  { "model": "furenikusroads:junction_chevron_right_down_thin_a_4" }
+				}
+			},
+			"top_chevron_thin_b": {
+				"submodel": {
+					"chevron":  { "model": "furenikusroads:junction_chevron_right_down_thin_b_4" }
+				}
+			},
+			
+			"top_mid_chevron_a": {
+				"submodel": {
+					"chevron":  { "model": "furenikusroads:junction_chevron_right_down_a_3" }
+				}
+			},
+			"top_mid_chevron_b": {
+				"submodel": {
+					"chevron":  { "model": "furenikusroads:junction_chevron_right_down_b_3" }
+				}
+			},
+			"top_mid_chevron_thin_a": {
+				"submodel": {
+					"chevron":  { "model": "furenikusroads:junction_chevron_right_down_thin_a_3" }
+				}
+			},
+			"top_mid_chevron_thin_b": {
+				"submodel": {
+					"chevron":  { "model": "furenikusroads:junction_chevron_right_down_thin_b_3" }
+				}
+			},
+			
+			"bottom_mid_chevron_a": {
+				"submodel": {
+					"chevron":  { "model": "furenikusroads:junction_chevron_right_down_a_2" }
+				}
+			},
+			"bottom_mid_chevron_b": {
+				"submodel": {
+					"chevron":  { "model": "furenikusroads:junction_chevron_right_down_b_2" }
+				}
+			},
+			"bottom_mid_chevron_thin_a": {
+				"submodel": {
+					"chevron":  { "model": "furenikusroads:junction_chevron_right_down_thin_a_2" }
+				}
+			},
+			"bottom_mid_chevron_thin_b": {
+				"submodel": {
+					"chevron":  { "model": "furenikusroads:junction_chevron_right_down_thin_b_2" }
+				}
+			},
+			
+			"bottom_chevron_a": {
+				"submodel": {
+					"chevron":  { "model": "furenikusroads:junction_chevron_right_down_a_1" }
+				}
+			},
+			"bottom_chevron_b": {
+				"submodel": {
+					"chevron":  { "model": "furenikusroads:junction_chevron_right_down_b_1" }
+				}
+			},
+			"bottom_chevron_thin_a": {
+				"submodel": {
+					"chevron":  { "model": "furenikusroads:junction_chevron_right_down_thin_a_1" }
+				}
+			},
+			"bottom_chevron_thin_b": {
+				"submodel": {
+					"chevron":  { "model": "furenikusroads:junction_chevron_right_down_thin_b_1" }
+				}
+			}
+		}
+	}
+}

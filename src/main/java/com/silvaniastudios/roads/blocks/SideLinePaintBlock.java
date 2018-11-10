@@ -1,7 +1,6 @@
 package com.silvaniastudios.roads.blocks;
 
-import com.silvaniastudios.roads.blocks.enums.EnumConnectDiagonal;
-import com.silvaniastudios.roads.blocks.enums.EnumConnectDirectional;
+import com.silvaniastudios.roads.blocks.enums.EnumConnectSideLine;
 import com.silvaniastudios.roads.blocks.enums.ILineConnectable;
 import com.silvaniastudios.roads.blocks.enums.IMetaBlockName;
 
@@ -10,23 +9,28 @@ import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class SideLinePaintBlock extends PaintBlockBase implements ILineConnectable, IMetaBlockName {
 	
-	public static final PropertyEnum<EnumConnectDiagonal> CONNECT_DIAGONAL = PropertyEnum.create("diagonal_connections", EnumConnectDiagonal.class);
-	public static final PropertyEnum<EnumConnectDirectional> CONNECT_DIRECTIONAL = PropertyEnum.create("directional_connections", EnumConnectDirectional.class);
+	public static final PropertyEnum<EnumConnectSideLine> CONNECT_LEFT = PropertyEnum.create("connect_left", EnumConnectSideLine.class);
+	public static final PropertyEnum<EnumConnectSideLine> CONNECT_RIGHT = PropertyEnum.create("connect_right", EnumConnectSideLine.class);
 	public static final PropertyDirection FACING =  PropertyDirection.create("zz_facing", EnumFacing.Plane.HORIZONTAL);
 
 	public SideLinePaintBlock(String name) {
 		super(name);
-		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(CONNECT_LEFT, EnumConnectSideLine.NONE).withProperty(CONNECT_RIGHT, EnumConnectSideLine.NONE));
 	}
 	
 	@Override
@@ -52,123 +56,158 @@ public class SideLinePaintBlock extends PaintBlockBase implements ILineConnectab
 	
 	@Override
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, new IProperty[] {FACING, CONNECT_DIRECTIONAL, CONNECT_DIAGONAL});
+		return new BlockStateContainer(this, new IProperty[] {FACING, CONNECT_LEFT, CONNECT_RIGHT});
 	}
 
-	public EnumConnectDirectional getFacingForConnectedBlock(IBlockAccess world, BlockPos pos) {
-		int rootBlockMeta = getMetaFromState(world.getBlockState(pos));
-		IBlockState offsetBlockNorth = world.getBlockState(pos.offset(EnumFacing.NORTH));
-		IBlockState offsetBlockEast  = world.getBlockState(pos.offset(EnumFacing.EAST));
-		IBlockState offsetBlockSouth = world.getBlockState(pos.offset(EnumFacing.SOUTH));
-		IBlockState offsetBlockWest  = world.getBlockState(pos.offset(EnumFacing.WEST));
-		int offsetMetaNorth = offsetBlockNorth.getBlock().getMetaFromState(offsetBlockNorth);
-		int offsetMetaEast  = offsetBlockEast.getBlock().getMetaFromState(offsetBlockEast);
-		int offsetMetaSouth = offsetBlockSouth.getBlock().getMetaFromState(offsetBlockSouth);
-		int offsetMetaWest  = offsetBlockWest.getBlock().getMetaFromState(offsetBlockWest);
-		
-		//NORTH
-		if (rootBlockMeta == 2) {
-			if (offsetMetaNorth == 4) {
-				return EnumConnectDirectional.CONNECT_NORTH_LEFT_UP;
-			}
-			if (offsetMetaNorth == 5) {
-				return EnumConnectDirectional.CONNECT_NORTH_RIGHT_UP;
-			}
-			if (offsetMetaSouth == 4) {
-				return EnumConnectDirectional.CONNECT_SOUTH_LEFT_DOWN;
-			}
-			if (offsetMetaSouth == 5) {
-				return EnumConnectDirectional.CONNECT_SOUTH_RIGHT_DOWN;
-			}
-		}	
-		//SOUTH
-		if (rootBlockMeta == 3) {
-			if (offsetMetaNorth == 4) {
-				return EnumConnectDirectional.CONNECT_NORTH_RIGHT_DOWN;
-			}
-			if (offsetMetaNorth == 5) {
-				return EnumConnectDirectional.CONNECT_NORTH_LEFT_DOWN;
-			}
-			if (offsetMetaSouth == 4) {
-				return EnumConnectDirectional.CONNECT_SOUTH_RIGHT_UP;
-			}
-			if (offsetMetaSouth == 5) {
-				return EnumConnectDirectional.CONNECT_SOUTH_LEFT_UP;
-			}
-		}		
-		//WEST
-		if (rootBlockMeta == 4) {
-			if (offsetMetaEast == 2) {
-				return EnumConnectDirectional.CONNECT_EAST_RIGHT_DOWN;
-			}
-			if (offsetMetaEast == 3) {
-				return EnumConnectDirectional.CONNECT_EAST_LEFT_DOWN;
-			}
-			
-			if (offsetMetaWest == 2) {
-				return EnumConnectDirectional.CONNECT_WEST_RIGHT_UP;
-			}
-			if (offsetMetaWest == 3) {
-				return EnumConnectDirectional.CONNECT_WEST_LEFT_UP;
-			}
-		}
-		//EAST
-		if (rootBlockMeta == 5) {
-			if (offsetMetaEast == 2) {
-				return EnumConnectDirectional.CONNECT_EAST_LEFT_UP;
-			}
-			if (offsetMetaEast == 3) {
-				return EnumConnectDirectional.CONNECT_EAST_RIGHT_UP;
-			}
-			if (offsetMetaWest == 2) {
-				return EnumConnectDirectional.CONNECT_WEST_LEFT_DOWN;
-			}
-			if (offsetMetaWest == 3) {
-				return EnumConnectDirectional.CONNECT_WEST_RIGHT_DOWN;
-			}
-		}
-		return EnumConnectDirectional.CONNECT_NONE;
-	}
 	
-	public EnumConnectDiagonal getInnerCorner(IBlockAccess world, BlockPos pos) {
-		int rootBlockMeta = getMetaFromState(world.getBlockState(pos));
-		IBlockState offsetBlockNorth = world.getBlockState(pos.offset(EnumFacing.NORTH));
-		IBlockState offsetBlockEast  = world.getBlockState(pos.offset(EnumFacing.EAST));
-		IBlockState offsetBlockSouth = world.getBlockState(pos.offset(EnumFacing.SOUTH));
-		IBlockState offsetBlockWest  = world.getBlockState(pos.offset(EnumFacing.WEST));
-		int offsetMetaNorth = offsetBlockNorth.getBlock().getMetaFromState(offsetBlockNorth);
-		int offsetMetaEast  = offsetBlockEast.getBlock().getMetaFromState(offsetBlockEast);
-		int offsetMetaSouth = offsetBlockSouth.getBlock().getMetaFromState(offsetBlockSouth);
-		int offsetMetaWest  = offsetBlockWest.getBlock().getMetaFromState(offsetBlockWest);
-		if (rootBlockMeta == 2 || rootBlockMeta == 5) {
-			if (offsetMetaNorth == 5 && offsetMetaEast == 2) {
-				return EnumConnectDiagonal.NORTH_EAST;
+	private EnumConnectSideLine canLineConnectTo(IBlockAccess world, BlockPos pos, boolean leftSide) {
+		IBlockState state = world.getBlockState(pos);
+		int meta = getMetaFromState(state);
+		IBlockState stateNorth = world.getBlockState(pos);
+		IBlockState stateEast  = world.getBlockState(pos);
+		IBlockState stateSouth = world.getBlockState(pos);
+		IBlockState stateWest  = world.getBlockState(pos);
+		
+		boolean blockNorth = world.getBlockState(pos.offset(EnumFacing.NORTH)).getBlock() instanceof ILineConnectable;
+		boolean blockEast  = world.getBlockState(pos.offset(EnumFacing.EAST)) .getBlock() instanceof ILineConnectable;
+		boolean blockSouth = world.getBlockState(pos.offset(EnumFacing.SOUTH)).getBlock() instanceof ILineConnectable;
+		boolean blockWest  = world.getBlockState(pos.offset(EnumFacing.WEST)) .getBlock() instanceof ILineConnectable;
+		
+		if (blockNorth) { stateNorth = world.getBlockState(pos.offset(EnumFacing.NORTH)); }
+		if (blockEast)  { stateEast  = world.getBlockState(pos.offset(EnumFacing.EAST));  }
+		if (blockSouth) { stateSouth = world.getBlockState(pos.offset(EnumFacing.SOUTH)); }
+		if (blockWest)  { stateWest  = world.getBlockState(pos.offset(EnumFacing.WEST));  }
+		
+		IBlockState stateUp = null;
+		IBlockState stateDown = null;
+		
+		boolean blockUp = false;
+		boolean blockLeft = false;
+		boolean blockRight = false;
+		boolean blockDown = false;
+		
+		//north
+		if (getMetaFromState(state) == 2) {
+			blockUp    = blockNorth;
+			blockLeft  = blockWest;
+			blockRight = blockEast;
+			blockDown  = blockSouth;
+			if (blockUp)   { stateUp   = stateNorth; }
+			if (blockDown) { stateDown = stateSouth; }
+		}
+		
+		//east
+		if (getMetaFromState(state) == 5) {
+			blockUp    = blockEast;
+			blockLeft  = blockNorth;
+			blockRight = blockSouth;
+			blockDown  = blockWest;
+			if (blockUp)   { stateUp   = stateEast; }
+			if (blockDown) { stateDown = stateWest; }
+		}
+		
+		//south
+		if (getMetaFromState(state) == 3) {
+			blockUp    = blockSouth;
+			blockLeft  = blockEast;
+			blockRight = blockWest;
+			blockDown  = blockNorth;
+			if (blockUp)   { stateUp   = stateSouth; }
+			if (blockDown) { stateDown = stateNorth; }
+		}
+		
+		//west
+		if (getMetaFromState(state) == 4) {
+			blockUp    = blockWest;
+			blockLeft  = blockSouth;
+			blockRight = blockNorth;
+			blockDown  = blockEast;
+			if (blockUp)   { stateUp   = stateWest; }
+			if (blockDown) { stateDown = stateEast; }
+		}
+		boolean blockSide = false;
+		int metaUp = blockUp ? getMetaFromState(stateUp) : -1;
+		int metaDown = blockDown ? getMetaFromState(stateDown) : -1;
+
+		if (leftSide) {
+			if (blockRight && blockUp) {
+				if ((meta == 2 && metaUp != 4) ||
+					(meta == 3 && metaUp != 5) ||
+					(meta == 4 && metaUp != 3) ||
+					(meta == 5 && metaUp != 2)) {
+						return EnumConnectSideLine.EMPTY;
+				}
+			}
+			blockSide = blockLeft;
+			blockRight = false;
+		} else {
+			if (blockLeft && blockUp) { 
+				if ((meta == 2 && metaUp != 5) ||
+					(meta == 3 && metaUp != 4) ||
+					(meta == 4 && metaUp != 2) ||
+					(meta == 5 && metaUp != 3)) {
+						return EnumConnectSideLine.EMPTY;
+				}
+			}
+			blockSide = blockRight;
+			blockLeft = false;
+		}
+		if (!blockUp &&  blockSide && !blockDown) { return EnumConnectSideLine.SIDE; }
+		if ( blockUp &&  blockSide &&  blockDown) { return EnumConnectSideLine.SIDE; }
+		if (!blockUp &&  blockSide &&  blockDown) { return EnumConnectSideLine.SIDE; }
+
+		if ((meta == 2 && metaUp == 4) ||
+			(meta == 3 && metaUp == 5) ||
+			(meta == 4 && metaUp == 3) ||
+			(meta == 5 && metaUp == 2)) {
+			if (leftSide) {
+				if ( blockUp && !blockSide && !blockDown) { return EnumConnectSideLine.UP; }
+				if ( blockUp && !blockSide &&  blockDown) { return EnumConnectSideLine.UP; }
+				if ( blockUp &&  blockSide && !blockDown) { return EnumConnectSideLine.CORNER; }
+			}
+		}
+		if ((meta == 2 && metaUp == 5) ||
+			(meta == 3 && metaUp == 4) ||
+			(meta == 4 && metaUp == 2) ||
+			(meta == 5 && metaUp == 3)) {
+			if (!leftSide) {
+				if ( blockUp && !blockSide && !blockDown) { return EnumConnectSideLine.UP; }
+				if ( blockUp && !blockSide &&  blockDown) { return EnumConnectSideLine.UP; }
+				if ( blockUp &&  blockSide && !blockDown) { return EnumConnectSideLine.CORNER; }
 			}
 		}
 		
-		if (rootBlockMeta == 2 || rootBlockMeta == 4) {
-			if (offsetMetaNorth == 4 && offsetMetaWest == 2) {
-				return EnumConnectDiagonal.NORTH_WEST;
+		if ((meta == 2 && metaDown == 4) ||
+			(meta == 3 && metaDown == 5) ||
+			(meta == 4 && metaDown == 3) ||
+			(meta == 5 && metaDown == 2)) {
+			if (leftSide) {
+				if (!blockUp && !blockSide &&  blockDown) { return EnumConnectSideLine.DOWN; }
+			}
+		}
+		if ((meta == 2 && metaDown == 5) ||
+			(meta == 3 && metaDown == 4) ||
+			(meta == 4 && metaDown == 2) ||
+			(meta == 5 && metaDown == 3)) {
+			if (!leftSide) {
+				if (!blockUp && !blockSide &&  blockDown) { return EnumConnectSideLine.DOWN; }
 			}
 		}
 		
-		if (rootBlockMeta == 3 || rootBlockMeta == 5) {
-			if (offsetMetaSouth == 5 && offsetMetaEast == 3) {
-				return EnumConnectDiagonal.SOUTH_EAST;
-			}
-		}
+		if (blockSide) { return EnumConnectSideLine.SIDE; }
 		
-		if (rootBlockMeta == 3 || rootBlockMeta == 4) {
-			if (offsetMetaSouth == 4 && offsetMetaWest == 3) {
-				return EnumConnectDiagonal.SOUTH_WEST;
-			}
-		}
-		return EnumConnectDiagonal.NONE;
+		return EnumConnectSideLine.NONE;
 	}
 	
 	@Override
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-		return state.withProperty(CONNECT_DIAGONAL, getInnerCorner(worldIn, pos))
-			.withProperty(CONNECT_DIRECTIONAL, getFacingForConnectedBlock(worldIn, pos));
+		return state.withProperty(CONNECT_LEFT, canLineConnectTo(worldIn, pos, true))
+			.withProperty(CONNECT_RIGHT, canLineConnectTo(worldIn, pos, false));
+	}
+	
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void initModel() {
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "inventory"));
 	}
 }

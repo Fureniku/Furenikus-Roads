@@ -1,0 +1,67 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"transform": "forge:default-block",
+		"textures": {
+			"0": "furenikusroads:blocks/paint_white",
+			"particle": "furenikusroads:blocks/paint_white"
+		},
+		"model": "furenikusroads:tile_letter_m"
+	},
+	"variants": {
+		"inventory": [{
+			"model": "furenikusroads:tile_letter_m",
+			"transform": {
+				"ground": {
+					"scale": [0.5, 0.5, 0.5],
+					"rotation": [90, 0, 180],
+					"translation": [0, 0, -0.2]
+				},
+				"fixed": {
+					"rotation": [90, 0, 180],
+					"translation": [0, 0, -0.45]
+				},
+				"gui": {
+					"translation": [0, 0, 0],
+					"rotation": [90, 0, 0]
+				}
+            }
+		}],
+		"inventory_2": [{
+			"model": "furenikusroads:tile_letter_n",
+			"transform": {
+				"ground": {
+					"scale": [0.5, 0.5, 0.5],
+					"rotation": [90, 0, 180],
+					"translation": [0, 0, -0.2]
+				},
+				"fixed": {
+					"rotation": [90, 0, 180],
+					"translation": [0, 0, -0.45]
+				},
+				"gui": {
+					"translation": [0, 0, 0],
+					"rotation": [90, 0, 0]
+				}
+            }
+		}],
+		"letter_paint": {
+			"flat_north": { "model": "furenikusroads:tile_letter_m" },
+			"flat_east":  { "model": "furenikusroads:tile_letter_m", "y": 90 },
+			"flat_south": { "model": "furenikusroads:tile_letter_m", "y": 180 },
+			"flat_west":  { "model": "furenikusroads:tile_letter_m", "y": 270 },
+			"face_north": { "model": "furenikusroads:tile_letter_m", "x": 270 },
+			"face_east":  { "model": "furenikusroads:tile_letter_m", "x": 270, "y": 90 },
+			"face_south": { "model": "furenikusroads:tile_letter_m", "x": 270, "y": 180 },
+			"face_west":  { "model": "furenikusroads:tile_letter_m", "x": 270, "y": 270 },
+			"flat_north_2": { "model": "furenikusroads:tile_letter_n" },
+			"flat_east_2":  { "model": "furenikusroads:tile_letter_n", "y": 90 },
+			"flat_south_2": { "model": "furenikusroads:tile_letter_n", "y": 180 },
+			"flat_west_2":  { "model": "furenikusroads:tile_letter_n", "y": 270 },
+			"face_north_2": { "model": "furenikusroads:tile_letter_n", "x": 270 },
+			"face_east_2":  { "model": "furenikusroads:tile_letter_n", "x": 270, "y": 90 },
+			"face_south_2": { "model": "furenikusroads:tile_letter_n", "x": 270, "y": 180 },
+			"face_west_2":  { "model": "furenikusroads:tile_letter_n", "x": 270, "y": 270 }
+		}
+	}
+}

@@ -1,0 +1,52 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"transform": "forge:default-block",
+		"textures": {
+			"0": "furenikusroads:blocks/paint_white",
+			"particle": "furenikusroads:blocks/paint_white"
+		},
+		"model": "furenikusroads:junction_filter_chevron_right_thin_1_b"
+	},
+	"variants": {
+		"inventory": [{
+			"model": "furenikusroads:junction_filter_chevron_right_thin_3_b",
+			"transform": {
+				"ground": {
+					"scale": [0.5, 0.5, 0.5],
+					"rotation": [90, 0, 180],
+					"translation": [0, 0, -0.2]
+				},
+				"fixed": {
+					"rotation": [90, 0, 180],
+					"translation": [0, 0, -0.45]
+				},
+				"gui": {
+					"translation": [0, 0, 0],
+					"rotation": [90, 0, 0]
+				}
+            }
+		}],
+		"position_rotation": {
+			"north_top": { "model": "furenikusroads:junction_filter_chevron_right_thin_4_b" },
+			"north_top_mid":  { "model": "furenikusroads:junction_filter_chevron_right_thin_3_b" },
+			"north_bottom_mid": { "model": "furenikusroads:junction_filter_chevron_right_thin_2_b" },
+			"north_bottom":  { "model": "furenikusroads:junction_filter_chevron_right_thin_1_b" },
+			
+			"east_top": { "model": "furenikusroads:junction_filter_chevron_right_thin_4_b", "y": 90 },
+			"east_top_mid":  { "model": "furenikusroads:junction_filter_chevron_right_thin_3_b", "y": 90 },
+			"east_bottom_mid": { "model": "furenikusroads:junction_filter_chevron_right_thin_2_b", "y": 90 },
+			"east_bottom":  { "model": "furenikusroads:junction_filter_chevron_right_thin_1_b", "y": 90 },
+			
+			"south_top": { "model": "furenikusroads:junction_filter_chevron_right_thin_4_b", "y": 180 },
+			"south_top_mid":  { "model": "furenikusroads:junction_filter_chevron_right_thin_3_b", "y": 180 },
+			"south_bottom_mid": { "model": "furenikusroads:junction_filter_chevron_right_thin_2_b", "y": 180 },
+			"south_bottom":  { "model": "furenikusroads:junction_filter_chevron_right_thin_1_b", "y": 180 },
+			
+			"west_top": { "model": "furenikusroads:junction_filter_chevron_right_thin_4_b", "y": 270 },
+			"west_top_mid":  { "model": "furenikusroads:junction_filter_chevron_right_thin_3_b", "y": 270 },
+			"west_bottom_mid": { "model": "furenikusroads:junction_filter_chevron_right_thin_2_b", "y": 270 },
+			"west_bottom":  { "model": "furenikusroads:junction_filter_chevron_right_thin_1_b", "y": 270 }
+		}
+	}
+}

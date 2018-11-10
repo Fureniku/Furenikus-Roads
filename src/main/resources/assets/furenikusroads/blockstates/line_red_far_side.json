@@ -1,0 +1,152 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"transform": "forge:default-block",
+		"textures": {
+			"0": "furenikusroads:blocks/paint_red",
+			"particle": "furenikusroads:blocks/paint_red"
+		},
+		"model": "furenikusroads:nomodel"
+	},
+	"variants": {
+		"inventory": [{
+			"model": "furenikusroads:line_far_side",
+			"transform": {
+				"ground": {
+					"scale": [0.5, 0.5, 0.5],
+					"rotation": [90, 0, 180],
+					"translation": [0, 0, -0.2]
+				},
+				"fixed": {
+					"rotation": [90, 0, 180],
+					"translation": [0, 0, -0.45]
+				},
+				"gui": {
+					"translation": [0, 0, 0],
+					"rotation": [90, 0, 0]
+				}
+            }
+		}],
+		"diagonal_connections": {
+			"none": {
+			},
+			"north_east": {
+				"submodel": {
+					"paint_north": { "model": "furenikusroads:nomodel" },
+					"paint_east":  { "model": "furenikusroads:nomodel" },
+					"paint_south": { "model": "furenikusroads:nomodel" },
+					"paint_west":  { "model": "furenikusroads:nomodel" },
+					"paint_connect_right": { "model": "furenikusroads:line_far_side_corner" },
+					"paint_connect_left": { "model": "furenikusroads:nomodel" }
+				}
+			},
+			"north_west": {
+				"submodel": {
+					"paint_north": { "model": "furenikusroads:nomodel" },
+					"paint_east":  { "model": "furenikusroads:nomodel" },
+					"paint_south": { "model": "furenikusroads:nomodel" },
+					"paint_west":  { "model": "furenikusroads:nomodel" },
+					"paint_connect_right": { "model": "furenikusroads:line_far_side_corner", "y": 270 },
+					"paint_connect_left": { "model": "furenikusroads:nomodel" }
+				}
+			},
+			"south_east": {
+				"submodel": {
+					"paint_north": { "model": "furenikusroads:nomodel" },
+					"paint_east":  { "model": "furenikusroads:nomodel" },
+					"paint_south": { "model": "furenikusroads:nomodel" },
+					"paint_west":  { "model": "furenikusroads:nomodel" },
+					"paint_connect_right": { "model": "furenikusroads:line_far_side_corner", "y": 90 },
+					"paint_connect_left": { "model": "furenikusroads:nomodel" }
+				}
+			},
+			"south_west": {
+				"submodel": {
+					"paint_north": { "model": "furenikusroads:nomodel" },
+					"paint_east":  { "model": "furenikusroads:nomodel" },
+					"paint_south": { "model": "furenikusroads:nomodel" },
+					"paint_west":  { "model": "furenikusroads:nomodel" },
+					"paint_connect_right": { "model": "furenikusroads:line_far_side_corner", "y": 180 },
+					"paint_connect_left": { "model": "furenikusroads:nomodel" }
+				}
+			}
+		},
+		"directional_connections": {
+			"none": {
+			},
+			"connect_north_left_up": {
+			},
+			"connect_north_right_up": {
+			},
+			"connect_north_left_down": {
+				"submodel": {
+					"paint_connect_left": { "model": "furenikusroads:line_far_side_ld", "y": 180 }
+				}
+			},
+			"connect_north_right_down": {
+				"submodel": {
+					"paint_connect_right": { "model": "furenikusroads:line_far_side_rd", "y": 180 }
+				}
+			},
+			
+			"connect_east_left_up": {
+			},
+			"connect_east_right_up": {
+			},
+			"connect_east_left_down": {
+				"submodel": {
+					"paint_connect_left": { "model": "furenikusroads:line_far_side_ld", "y": 270 }
+				}
+			},
+			"connect_east_right_down": {
+				"submodel": {
+					"paint_connect_right": { "model": "furenikusroads:line_far_side_rd", "y": 270 }
+				}
+			},
+			
+			"connect_south_left_up": {
+			},
+			"connect_south_right_up": {
+			},
+			"connect_south_left_down": {
+				"submodel": {
+					"paint_connect_left": { "model": "furenikusroads:line_far_side_ld" }
+				}
+			},
+			"connect_south_right_down": {
+				"submodel": {
+					"paint_connect_right": { "model": "furenikusroads:line_far_side_rd" }
+				}
+			},
+			
+			"connect_west_left_up": {
+			},
+			"connect_west_right_up": {
+			},
+			"connect_west_left_down": {
+				"submodel": {
+					"paint_connect_left": { "model": "furenikusroads:line_far_side_ld", "y": 90 }
+				}
+			},
+			"connect_west_right_down": {
+				"submodel": {
+					"paint_connect_right": { "model": "furenikusroads:line_far_side_rd", "y": 90 }
+				}
+			}
+		},
+		"zz_facing": {
+			"north": {
+				"submodel": { "paint_north": { "model": "furenikusroads:line_far_side" } }
+			},
+			"east": {
+				"submodel": { "paint_east":  { "model": "furenikusroads:line_far_side", "y": 90 } }
+			},
+			"south": {
+				"submodel": { "paint_south": { "model": "furenikusroads:line_far_side", "y": 180 } }
+			},
+			"west": {
+				"submodel": { "paint_west":  { "model": "furenikusroads:line_far_side", "y": 270 } }
+			}
+		}
+	}
+}

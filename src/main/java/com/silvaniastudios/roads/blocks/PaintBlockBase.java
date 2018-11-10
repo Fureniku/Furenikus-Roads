@@ -2,7 +2,7 @@ package com.silvaniastudios.roads.blocks;
 
 import javax.annotation.Nullable;
 
-import com.silvaniastudios.roads.FlenixRoads;
+import com.silvaniastudios.roads.FurenikusRoads;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -17,7 +17,7 @@ public class PaintBlockBase extends BlockBase {
 	
 	public PaintBlockBase(String name) {
 		super(name, Material.CLOTH);
-		this.setCreativeTab(FlenixRoads.tab_paint);
+		this.setCreativeTab(FurenikusRoads.tab_paint);
 	}
 	
 	@Override
@@ -56,8 +56,12 @@ public class PaintBlockBase extends BlockBase {
 	public double getBlockBelowHeight(IBlockAccess worldIn, BlockPos pos) {
     	IBlockState underState = worldIn.getBlockState(pos.offset(EnumFacing.DOWN));
         Block underBlock = underState.getBlock();
+        double extraOffset = 0.0;
         
-        return underBlock.getBoundingBox(underState, worldIn, pos.offset(EnumFacing.DOWN)).maxY;
+        if (underBlock instanceof PaintBlockBase || underBlock instanceof TactileCrossingBumps || underBlock instanceof SidewalkBlock) {
+        	extraOffset = 0.062;
+        }
+        
+        return underBlock.getBoundingBox(underState, worldIn, pos.offset(EnumFacing.DOWN)).maxY - extraOffset;
     }
-
 }
