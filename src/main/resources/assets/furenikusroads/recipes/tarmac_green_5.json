@@ -1,0 +1,25 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern":
+	[
+		"ttt",
+		"tdt",
+		"ttt"
+	],
+	"key": {
+		"d": {
+			"item": "minecraft:dye",
+			"data": 2
+		},
+		"t": {
+			"type": "forge:ore_dict",
+			"ore": "tarmac",
+			"data": 4
+		}
+	},
+	"result": {
+		"item": "furenikusroads:road_block_blue",
+		"count": 8,
+		"data": 4
+	}
+}

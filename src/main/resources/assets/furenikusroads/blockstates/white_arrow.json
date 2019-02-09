@@ -28,7 +28,8 @@
             }
 		}],
 		"inventory_2": [{
-			"model": "furenikusroads:tile_arrow_side",
+			"model": "furenikusroads:tile_full",
+			"textures": { "0": "furenikusroads:items/paint_icons/white_arrow_4" },
 			"transform": {
 				"ground": {
 					"scale": [0.5, 0.5, 0.5],

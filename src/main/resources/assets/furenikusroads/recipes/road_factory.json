@@ -1,0 +1,30 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern":
+	[
+		"ici",
+		"bmi",
+		"gii"
+	],
+	"key": {
+		"g": {
+			"item": "furenikusroads:large_glass_tank"
+		},
+		"i": {
+			"item": "minecraft:iron_ingot"
+		},
+		"b": {
+			"item": "minecraft:iron_block"
+		},
+		"c": {
+			"item": "minecraft:chest"
+		},
+		"m": {
+			"item": "furenikusroads:machine_frame"
+		}
+	},
+	"result": {
+		"item": "furenikusroads:road_factory",
+		"data": 0
+	}
+}

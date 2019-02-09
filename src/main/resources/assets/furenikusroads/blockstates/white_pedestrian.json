@@ -10,7 +10,8 @@
 	},
 	"variants": {
 		"inventory": [{
-			"model": "furenikusroads:icon_pedestrian_1",
+			"model": "furenikusroads:tile_full",
+			"textures": { "0": "furenikusroads:items/paint_icons/white_pedestrian" },
 			"transform": {
 				"ground": {
 					"scale": [0.5, 0.5, 0.5],

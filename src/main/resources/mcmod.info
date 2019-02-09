@@ -1,14 +1,14 @@
 [
 {
-  "modid": "flenixroads",
-  "name": "FlenixRoads",
+  "modid": "furenikusroads",
+  "name": "Fureniku's Roads",
   "description": "Simple roads for your Minecraft world!",
   "version": "${version}",
   "mcversion": "${mcversion}",
-  "url": "http://www.silvania.co.uk/mods/downloads",
+  "url": "http://www.silvaniastudios.com/mods/downloads",
   "updateUrl": "",
-  "authorList": ["Flenix"],
-  "credits": "Flenix for making the mod. BioFusionz for being awesome. Countless people for texture help!",
+  "authorList": ["Fureniku"],
+  "credits": "",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []

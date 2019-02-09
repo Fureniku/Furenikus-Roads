@@ -1,0 +1,17 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{
+			"item": "furenikusroads:cats_eye_yellow",
+			"data": 0
+		},
+		{
+			"item": "minecraft:dye",
+			"data": 1
+		}
+	],
+	"result": {
+		"item": "furenikusroads:cats_eye_red",
+		"data": 0
+	}
+}

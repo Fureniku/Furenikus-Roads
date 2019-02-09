@@ -1,0 +1,35 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"transform": "forge:default-block",
+		"textures": {
+			"0": "furenikusroads:blocks/machine_metal",
+			"1": "furenikusroads:blocks/machine_hazard",
+			"particle": "furenikusroads:blocks/machine_metal"
+		},
+		"model": "furenikusroads:barrier_standard_end"
+	},
+	"variants": {
+		"inventory": [{
+			"model": "furenikusroads:barrier_standard_middle_end"
+		}],
+		"meta": {
+			"0": { "model": "furenikusroads:barrier_standard_middle_end" },
+			"1": { "model": "furenikusroads:barrier_standard_middle_end", "y":  90 },
+			"2": { "model": "furenikusroads:barrier_standard_middle_end", "y": 180  },
+			"3": { "model": "furenikusroads:barrier_standard_middle_end", "y": 270  },
+			"4": { "model": "furenikusroads:nomodel" },
+			"5": { "model": "furenikusroads:nomodel" },
+			"6": { "model": "furenikusroads:nomodel" },
+			"7": { "model": "furenikusroads:nomodel" },
+			"8": { "model": "furenikusroads:nomodel" },
+			"9": { "model": "furenikusroads:nomodel" },
+			"10": { "model": "furenikusroads:nomodel" },
+			"11": { "model": "furenikusroads:nomodel" },
+			"12": { "model": "furenikusroads:nomodel" },
+			"13": { "model": "furenikusroads:nomodel" },
+			"14": { "model": "furenikusroads:nomodel" },
+			"15": { "model": "furenikusroads:nomodel" }
+		}
+	}
+}

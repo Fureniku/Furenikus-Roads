@@ -1,20 +1,20 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "flenixroads:blocks/paint_white",
-		"particle": "flenixroads:blocks/paint_white"
+		"0": "furenikusroads:blocks/paint_white",
+		"particle": "furenikusroads:blocks/paint_white"
 	},
 	"elements": [
 		{
 			"from": [7, 0, 7],
 			"to": [9, 0.25, 9],
 			"faces": {
-				"north": {"uv": [0, 0, 4, 0.5], "texture": "#0"},
-				"east": {"uv": [0, 0, 4, 0.5], "texture": "#0"},
-				"south": {"uv": [0, 0, 4, 0.5], "texture": "#0"},
-				"west": {"uv": [0, 0, 4, 0.5], "texture": "#0"},
-				"up": {"uv": [6, 6, 10, 10], "texture": "#0"},
-				"down": {"uv": [6, 6, 10, 10], "texture": "#0"}
+				"north": {"uv": [7, 15.75, 9, 16], "texture": "#0"},
+				"east": {"uv": [9, 16, 7, 15.75], "texture": "#0"},
+				"south": {"uv": [7, 15.75, 9, 16], "texture": "#0"},
+				"west": {"uv": [7, 15.75, 9, 16], "texture": "#0"},
+				"up": {"uv": [7, 7, 9, 9], "texture": "#0"},
+				"down": {"uv": [7, 7, 9, 9], "texture": "#0"}
 			}
 		}
 	]

@@ -1,0 +1,32 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern":
+	[
+		"ggg",
+		"bir",
+		" dt"
+	],
+	"key": {
+		"g": {
+			"item": "furenikusroads:small_glass_tank"
+		},
+		"i": {
+			"item": "minecraft:iron_ingot"
+		},
+		"r": {
+			"item": "minecraft:redstone"
+		},
+		"b": {
+			"item": "furenikusroads:paint_gun_barrel"
+		},
+		"d": {
+			"item": "furenikusroads:paint_gun_display"
+		},
+		"t": {
+			"item": "furenikusroads:tool_handle"
+		}
+	},
+	"result": {
+		"item": "furenikusroads:paint_gun"
+	}
+}

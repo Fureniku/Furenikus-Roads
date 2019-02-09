@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "blocks/paint_white",
-		"particle": "blocks/paint_white"
+		"0": "furenikusroads:blocks/paint_white",
+		"particle": "furenikusroads:blocks/paint_white"
 	},
 	"elements": [
 		{
@@ -43,12 +43,12 @@
 		},
 		{
 			"from": [14, 0, 2.25],
-			"to": [15.25, 0, 2.75],
+			"to": [15.25, 0.25, 2.75],
 			"faces": {
-				"north": {"uv": [0.75, 16, 2, 16], "texture": "#0"},
-				"east": {"uv": [13.75, 16, 13.25, 16], "texture": "#0"},
-				"south": {"uv": [14, 16, 15.25, 16], "texture": "#0"},
-				"west": {"uv": [2.25, 16, 2.75, 16], "texture": "#0"},
+				"north": {"uv": [0.75, 15.75, 2, 16], "texture": "#0"},
+				"east": {"uv": [13.75, 16, 13.25, 15.75], "texture": "#0"},
+				"south": {"uv": [14, 15.75, 15.25, 16], "texture": "#0"},
+				"west": {"uv": [2.25, 15.75, 2.75, 16], "texture": "#0"},
 				"up": {"uv": [14, 2.25, 15.25, 2.75], "texture": "#0"},
 				"down": {"uv": [14, 13.25, 15.25, 13.75], "texture": "#0"}
 			}
@@ -200,35 +200,34 @@
 	],
 	"display": {
 		"thirdperson_righthand": {
-			"scale": [0.5, 0.5, 0.5],
 			"rotation": [90, 0, 0],
-			"translation": [0, 3.5, 4.5]
+			"translation": [0, 3.5, 4.5],
+			"scale": [0.5, 0.5, 0.5]
 		},
 		"thirdperson_lefthand": {
-			"scale": [0.5, 0.5, 0.5],
 			"rotation": [90, 0, 0],
-			"translation": [0, 3.5, 4.54]
+			"translation": [0, 3.5, 4.54],
+			"scale": [0.5, 0.5, 0.5]
 		},
 		"firstperson_righthand": {
-			"scale": [0.25, 0.25, 0.25],
+			"rotation": [65, 0, 0],
 			"translation": [-6, 8, 9],
-			"rotation": [65, 0, 0]
+			"scale": [0.25, 0.25, 0.25]
 		},
 		"firstperson_lefthand": {
-			"scale": [0.25, 0.25, 0.25],
 			"rotation": [65, 0, 0],
-			"translation": [-6, 8, 9]
+			"translation": [-6, 8, 9],
+			"scale": [0.25, 0.25, 0.25]
 		},
 		"ground": {
 			"translation": [0, 4.5, 0]
 		},
+		"gui": {
+			"rotation": [90, 0, 0]
+		},
 		"fixed": {
 			"rotation": [90, 0, 180],
 			"translation": [0, 0, -8]
-		},
-		"gui": {
-			"translation": [0, 0, 0],
-			"rotation": [90, 0, 0]
 		}
 	}
 }

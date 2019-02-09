@@ -1,0 +1,24 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern":
+	[
+		"iig",
+		"gmi",
+		"iig"
+	],
+	"key": {
+		"g": {
+			"item": "furenikusroads:large_glass_tank"
+		},
+		"i": {
+			"item": "minecraft:iron_ingot"
+		},
+		"m": {
+			"item": "furenikusroads:machine_frame"
+		}
+	},
+	"result": {
+		"item": "furenikusroads:tar_distiller",
+		"data": 0
+	}
+}

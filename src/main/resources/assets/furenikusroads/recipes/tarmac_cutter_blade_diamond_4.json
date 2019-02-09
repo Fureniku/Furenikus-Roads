@@ -1,0 +1,17 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{
+			"item": "furenikusroads:tarmac_cutter_blade_2_diamond",
+			"data": 0
+		},
+		{
+			"item": "furenikusroads:tarmac_cutter_blade_2_diamond",
+			"data": 0
+		}
+	],
+	"result": {
+		"item": "furenikusroads:tarmac_cutter_blade_4_diamond",
+		"data": 0
+	}
+}

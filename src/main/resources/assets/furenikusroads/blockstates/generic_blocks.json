@@ -1,0 +1,31 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"transform": "forge:default-block",
+		"textures": { "all": "furenikusroads:blocks/generic_blocks_0" },
+		"model": "cube_all"
+	},
+	"variants": {
+		"inventory": [{
+			"transform": "forge:default-block"
+		}],
+		"street_block": {
+			"0": { "textures": { "all": "furenikusroads:blocks/generic_blocks_0" }},
+			"1": { "textures": { "all": "furenikusroads:blocks/generic_blocks_1" }},
+			"2": { "textures": { "all": "furenikusroads:blocks/generic_blocks_2" }},
+			"3": { "textures": { "all": "furenikusroads:blocks/generic_blocks_3" }},
+			"4": { "textures": { "all": "furenikusroads:blocks/generic_blocks_3" }},
+			"5": { "textures": { "all": "furenikusroads:blocks/generic_blocks_3" }},
+			"6": { "textures": { "all": "furenikusroads:blocks/generic_blocks_3" }},
+			"7": { "textures": { "all": "furenikusroads:blocks/generic_blocks_3" }},
+			"8": { "textures": { "all": "furenikusroads:blocks/generic_blocks_3" }},
+			"9": { "textures": { "all": "furenikusroads:blocks/generic_blocks_3" }},
+			"10": { "textures": { "all": "furenikusroads:blocks/generic_blocks_3" }},
+			"11": { "textures": { "all": "furenikusroads:blocks/generic_blocks_3" }},
+			"12": { "textures": { "all": "furenikusroads:blocks/generic_blocks_3" }},
+			"13": { "textures": { "all": "furenikusroads:blocks/generic_blocks_3" }},
+			"14": { "textures": { "all": "furenikusroads:blocks/generic_blocks_3" }},
+			"15": { "textures": { "all": "furenikusroads:blocks/generic_blocks_3" }}
+		}
+	}
+}

@@ -95,6 +95,8 @@
 					"widget_east": { "model": "furenikusroads:nomodel" },
 					"widget_west": { "model": "furenikusroads:nomodel" }
 				}
+			},
+			"connect": {
 			}
 		},
 		"north": {

@@ -1,10 +1,12 @@
 package com.silvaniastudios.roads.items;
 
 import com.silvaniastudios.roads.blocks.enums.IMetaBlockName;
+import com.silvaniastudios.roads.blocks.paint.PaintBlockBase;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.TextFormatting;
 
 public class RoadItemBlock extends ItemBlock {
 	
@@ -29,5 +31,16 @@ public class RoadItemBlock extends ItemBlock {
 		}
 		return super.getUnlocalizedName(stack);
 	}
-
+	
+	public String getItemStackDisplayName(ItemStack stack) {
+		String unloc = this.getUnlocalizedNameInefficiently(stack);
+		
+		if (Block.getBlockFromItem(stack.getItem()) instanceof PaintBlockBase) {
+			if (unloc.contains("white")) { return TextFormatting.WHITE + super.getItemStackDisplayName(stack); }
+			if (unloc.contains("yellow")) { return TextFormatting.YELLOW + super.getItemStackDisplayName(stack); }
+			if (unloc.contains("red")) { return TextFormatting.RED + super.getItemStackDisplayName(stack); }
+		}
+		
+        return super.getItemStackDisplayName(stack);
+    }
 }

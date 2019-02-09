@@ -10,7 +10,8 @@
 	},
 	"variants": {
 		"inventory": [{
-			"model": "furenikusroads:junction_filter_left_thin_3",
+			"model": "furenikusroads:tile_full",
+			"textures": { "0": "furenikusroads:items/paint_icons/white_junction_filter_left_thin" },
 			"transform": {
 				"ground": {
 					"scale": [0.5, 0.5, 0.5],

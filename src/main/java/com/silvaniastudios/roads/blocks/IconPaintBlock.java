@@ -1,5 +1,8 @@
 package com.silvaniastudios.roads.blocks;
 
+import com.silvaniastudios.roads.FurenikusRoads;
+import com.silvaniastudios.roads.blocks.paint.PaintBlockBase;
+
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
@@ -22,6 +25,7 @@ public class IconPaintBlock extends PaintBlockBase {
 	public IconPaintBlock(String name) {
 		super(name);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+		this.setCreativeTab(FurenikusRoads.tab_paint_icons);
 	}
 
 	@Override

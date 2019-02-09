@@ -13,7 +13,6 @@ public class RoadItemBase extends Item {
 		this.setUnlocalizedName(name);
 		this.setRegistryName(name);
 		this.maxStackSize = stackSize;
-		this.setCreativeTab(FurenikusRoads.tab_tools);
 	}
 
 	public void registerItemModel() {

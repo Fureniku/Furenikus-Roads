@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "flenixroads:blocks/road_block_standard",
-		"particle": "flenixroads:blocks/road_block_standard"
+		"0": "furenikusroads:blocks/road_block_standard",
+		"particle": "furenikusroads:blocks/road_block_standard"
 	},
 	"elements": [
 		{

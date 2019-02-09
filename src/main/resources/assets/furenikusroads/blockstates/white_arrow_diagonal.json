@@ -10,7 +10,8 @@
 	},
 	"variants": {
 		"inventory": [{
-			"model": "furenikusroads:tile_arrow_diagonal",
+			"model": "furenikusroads:tile_full",
+			"textures": { "0": "furenikusroads:items/paint_icons/white_arrow_diagonal" },
 			"transform": {
 				"ground": {
 					"scale": [0.5, 0.5, 0.5],
@@ -28,7 +29,8 @@
             }
 		}],
 		"inventory_2": [{
-			"model": "furenikusroads:tile_arrow_diagonal_line_full",
+			"model": "furenikusroads:tile_full",
+			"textures": { "0": "furenikusroads:items/paint_icons/white_arrow_diagonal_4" },
 			"transform": {
 				"ground": {
 					"scale": [0.5, 0.5, 0.5],

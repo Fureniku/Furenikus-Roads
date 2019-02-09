@@ -1,0 +1,38 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"transform": "forge:default-block",
+		"textures": {
+			"0": "furenikusroads:blocks/machine_metal",
+			"1": "furenikusroads:blocks/street_light_bulb",
+			"particle": "furenikusroads:blocks/machine_metal"
+		},
+		"model": "furenikusroads:street_light_1"
+	},
+	"variants": {
+		"inventory": [{
+			"model": "furenikusroads:street_light_1",
+			"transform": {
+				"ground": {
+					"scale": [0.5, 0.5, 0.5],
+					"rotation": [90, 0, 180],
+					"translation": [0, 0, -0.2]
+				},
+				"fixed": {
+					"rotation": [90, 0, 180],
+					"translation": [0, 0, -0.45]
+				},
+				"gui": {
+					"translation": [0, 0, 0],
+					"rotation": [90, 0, 0]
+				}
+            }
+		}],
+		"rotation": {
+			"north": { "model": "furenikusroads:street_light_1" },
+			"east":  { "model": "furenikusroads:street_light_1", "y": 90 },
+			"south": { "model": "furenikusroads:street_light_1", "y": 180 },
+			"west":  { "model": "furenikusroads:street_light_1", "y": 270 }
+		}
+	}
+}

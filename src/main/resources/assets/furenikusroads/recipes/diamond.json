@@ -1,0 +1,17 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern":
+	[
+		"nnn",
+		"nnn",
+		"nnn"
+	],
+	"key": {
+		"n": {
+			"item": "furenikusroads:diamond_nugget"
+		}
+	},
+	"result": {
+		"item": "minecraft:diamond"
+	}
+}

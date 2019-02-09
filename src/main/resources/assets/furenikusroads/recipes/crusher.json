@@ -1,0 +1,31 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern":
+	[
+		"pbp",
+		"iai",
+		"imi"
+	],
+	"key": {
+		"a": {
+			"item": "minecraft:anvil",
+			"data": 0
+		},
+		"i": {
+			"item": "minecraft:iron_ingot"
+		},
+		"b": {
+			"item": "minecraft:iron_block"
+		},
+		"p": {
+			"item": "minecraft:piston"
+		},
+		"m": {
+			"item": "furenikusroads:machine_frame"
+		}
+	},
+	"result": {
+		"item": "furenikusroads:crusher",
+		"data": 0
+	}
+}

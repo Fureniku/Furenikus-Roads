@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern":
+	[
+		"g",
+		"g"
+	],
+	"key": {
+		"g": {
+			"item": "furenikusroads:small_glass_tank"
+		}
+	},
+	"result": {
+		"item": "furenikusroads:large_glass_tank"
+	}
+}

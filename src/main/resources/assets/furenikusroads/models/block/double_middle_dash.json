@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "blocks/paint_white",
-		"particle": "blocks/paint_white"
+		"0": "furenikusroads:blocks/paint_white",
+		"particle": "furenikusroads:blocks/paint_white"
 	},
 	"elements": [
 		{
@@ -27,28 +27,6 @@
 				"west": {"uv": [0, 15.75, 16, 16], "texture": "#0"},
 				"up": {"uv": [5.5, 0, 7.5, 16], "texture": "#0"},
 				"down": {"uv": [5.5, 0, 7.5, 16], "texture": "#0"}
-			}
-		},
-		{
-			"from": [5.5, -16, -0.25],
-			"to": [7.5, 0, 0],
-			"faces": {
-				"north": {"uv": [8.5, 0, 10.5, 16], "texture": "#0"},
-				"east": {"uv": [16, 16, 16, 0], "texture": "#0"},
-				"west": {"uv": [0, 0, 0, 16], "texture": "#0"},
-				"up": {"uv": [5.5, 0, 7.5, 0], "texture": "#0"},
-				"down": {"uv": [5.5, 16, 7.5, 16], "texture": "#0"}
-			}
-		},
-		{
-			"from": [5.5, -16, 16],
-			"to": [7.5, 0, 16.25],
-			"faces": {
-				"east": {"uv": [0, 16, 0, 0], "texture": "#0"},
-				"south": {"uv": [5.5, 0, 7.5, 16], "texture": "#0"},
-				"west": {"uv": [16, 0, 16, 16], "texture": "#0"},
-				"up": {"uv": [5.5, 16, 7.5, 16], "texture": "#0"},
-				"down": {"uv": [5.5, 0, 7.5, 0], "texture": "#0"}
 			}
 		}
 	]

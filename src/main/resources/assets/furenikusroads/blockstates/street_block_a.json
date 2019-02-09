@@ -1,0 +1,31 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"transform": "forge:default-block",
+		"textures": { "all": "furenikusroads:blocks/street_block_a_0" },
+		"model": "cube_all"
+	},
+	"variants": {
+		"inventory": [{
+			"transform": "forge:default-block"
+		}],
+		"street_block": {
+			"0": { "textures": { "all": "furenikusroads:blocks/street_block_a_0" }},
+			"1": { "textures": { "all": "furenikusroads:blocks/street_block_a_1" }},
+			"2": { "textures": { "all": "furenikusroads:blocks/street_block_a_2" }},
+			"3": { "textures": { "all": "furenikusroads:blocks/street_block_a_3" }},
+			"4": { "textures": { "all": "furenikusroads:blocks/street_block_a_4" }},
+			"5": { "textures": { "all": "furenikusroads:blocks/street_block_a_5" }},
+			"6": { "textures": { "all": "furenikusroads:blocks/street_block_a_6" }},
+			"7": { "textures": { "all": "furenikusroads:blocks/street_block_a_7" }},
+			"8": { "textures": { "all": "furenikusroads:blocks/street_block_a_8" }},
+			"9": { "textures": { "all": "furenikusroads:blocks/street_block_a_9" }},
+			"10": { "textures": { "all": "furenikusroads:blocks/street_block_a_10" }},
+			"11": { "textures": { "all": "furenikusroads:blocks/street_block_a_11" }},
+			"12": { "textures": { "all": "furenikusroads:blocks/street_block_a_12" }},
+			"13": { "textures": { "all": "furenikusroads:blocks/street_block_a_13" }},
+			"14": { "textures": { "all": "furenikusroads:blocks/street_block_a_14" }},
+			"15": { "textures": { "all": "furenikusroads:blocks/street_block_a_15" }}
+		}
+	}
+}

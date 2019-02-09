@@ -1,0 +1,21 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern":
+	[
+		"pgp",
+		"pgp",
+		"pgp"
+	],
+	"key": {
+		"g": {
+			"item": "minecraft:glass"
+		},
+		"p": {
+			"item": "minecraft:glass_pane"
+		}
+	},
+	"result": {
+		"item": "furenikusroads:small_glass_tank",
+		"count": 3
+	}
+}

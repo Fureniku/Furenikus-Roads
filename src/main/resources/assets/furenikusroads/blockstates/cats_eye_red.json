@@ -1,0 +1,73 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"transform": "forge:default-block",
+		"textures": {
+			"1": "furenikusroads:blocks/cats_eye_red",
+			"2": "furenikusroads:blocks/machine_metal_dark",
+			"particle": "furenikusroads:blocks/machine_metal_dark"
+		},
+		"model": "furenikusroads:cats_eye"
+	},
+	"variants": {
+		"inventory": [{
+			"model": "furenikusroads:cats_eye",
+			"transform": {
+				"thirdperson_righthand": {
+					"translation": [0, 8, 1.25]
+				},
+				"thirdperson_lefthand": {
+					"translation": [0, 8, 1.25]
+				},
+				"firstperson_righthand": {
+					"translation": [0, 16, 0],
+					"scale": [2, 2, 2]
+				},
+				"firstperson_lefthand": {
+					"translation": [0, 16, 0],
+					"scale": [2, 2, 2]
+				},
+				"ground": {
+					"translation": [0, 12.25, 0.25],
+					"scale": [2, 2, 2]
+				},
+				"gui": {
+					"rotation": [15, 45, 0],
+					"translation": [0, 30, 0],
+					"scale": [4, 4, 4]
+				},
+				"fixed": {
+					"rotation": [-90, 90, 0],
+					"translation": [0, 0, -31.75],
+					"scale": [4, 4, 4]
+				}
+            }
+		}],
+		"eye_type": {
+			"floor_ns": {
+				"model": "furenikusroads:cats_eye", "y": 90
+			},
+			"floor_ew": {
+				"model": "furenikusroads:cats_eye"
+			},
+			"wall_north": {
+				"model": "furenikusroads:cats_eye", "x": 90
+			},
+			"wall_east": {
+				"model": "furenikusroads:cats_eye", "x": 90, "y": 90
+			},
+			"wall_south": {
+				"model": "furenikusroads:cats_eye", "x": 270
+			},
+			"wall_west": {
+				"model": "furenikusroads:cats_eye", "x": 270, "y": 90
+			},
+			"roof_ns": {
+				"model": "furenikusroads:cats_eye", "x": 180, "y": 90
+			},
+			"roof_ew": {
+				"model": "furenikusroads:cats_eye", "x": 180
+			}
+		}
+	}
+}

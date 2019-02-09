@@ -3,84 +3,191 @@
 	"defaults": {
 		"transform": "forge:default-block",
 		"textures": {
-			"0": "furenikusroads:blocks/sidewalk_1",
-			"particle": "furenikusroads:blocks/sidewalk_1"
+			"0": "furenikusroads:blocks/sidewalk_kerb",
+			"particle": "furenikusroads:blocks/sidewalk_kerb"
 		},
 		"model": "furenikusroads:nomodel"
 	},
 	"variants": {
-		"inventory": [{
-			"transform": "forge:default-block"
+		"inventory1": [{
+			"model": "furenikusroads:kerb_inv",
+			"textures": {
+				"0": "furenikusroads:blocks/sidewalk_kerb",
+				"particle": "furenikusroads:blocks/sidewalk_kerb"
+			},
+			"thirdperson_righthand": {
+				"translation": [0, 11.25, 6]
+			},
+			"thirdperson_lefthand": {
+				"translation": [0, 11.25, 6]
+			},
+			"firstperson_righthand": {
+				"translation": [0, 9.5, 4.25]
+			},
+			"firstperson_lefthand": {
+				"translation": [0, 9.5, 4.25]
+			},
+			"ground": {
+				"translation": [0, 8.5, 0]
+			},
+			"gui": {
+				"rotation": [29.5, 45, 0],
+				"translation": [4.25, 6.25, 0]
+			},
+			"head": {
+				"translation": [0, 4.75, 0]
+			},
+			"fixed": {
+				"translation": [0, 3.5, 4]
+			}
 		}],
-		"east": {
-			"true": {
+		"inventory2": [{
+			"model": "furenikusroads:kerb_inv",
+			"textures": {
+				"0": "furenikusroads:blocks/sidewalk_white",
+				"particle": "furenikusroads:blocks/sidewalk_white"
 			},
-			"false": {
+			"thirdperson_righthand": {
+				"translation": [0, 11.25, 6]
+			},
+			"thirdperson_lefthand": {
+				"translation": [0, 11.25, 6]
+			},
+			"firstperson_righthand": {
+				"translation": [0, 9.5, 4.25]
+			},
+			"firstperson_lefthand": {
+				"translation": [0, 9.5, 4.25]
+			},
+			"ground": {
+				"translation": [0, 8.5, 0]
+			},
+			"gui": {
+				"rotation": [29.5, 45, 0],
+				"translation": [4.25, 6.25, 0]
+			},
+			"head": {
+				"translation": [0, 4.75, 0]
+			},
+			"fixed": {
+				"translation": [0, 3.5, 4]
+			}
+		}],
+		"inventory3": [{
+			"model": "furenikusroads:kerb_inv",
+			"textures": {
+				"0": "furenikusroads:blocks/sidewalk_yellow",
+				"particle": "furenikusroads:blocks/sidewalk_yellow"
+			},
+			"thirdperson_righthand": {
+				"translation": [0, 11.25, 6]
+			},
+			"thirdperson_lefthand": {
+				"translation": [0, 11.25, 6]
+			},
+			"firstperson_righthand": {
+				"translation": [0, 9.5, 4.25]
+			},
+			"firstperson_lefthand": {
+				"translation": [0, 9.5, 4.25]
+			},
+			"ground": {
+				"translation": [0, 8.5, 0]
+			},
+			"gui": {
+				"rotation": [29.5, 45, 0],
+				"translation": [4.25, 6.25, 0]
+			},
+			"head": {
+				"translation": [0, 4.75, 0]
+			},
+			"fixed": {
+				"translation": [0, 3.5, 4]
+			}
+		}],
+		"inventory4": [{
+			"model": "furenikusroads:kerb_inv",
+			"textures": {
+				"0": "furenikusroads:blocks/sidewalk_red",
+				"particle": "furenikusroads:blocks/sidewalk_red"
+			},
+			"thirdperson_righthand": {
+				"translation": [0, 11.25, 6]
+			},
+			"thirdperson_lefthand": {
+				"translation": [0, 11.25, 6]
+			},
+			"firstperson_righthand": {
+				"translation": [0, 9.5, 4.25]
+			},
+			"firstperson_lefthand": {
+				"translation": [0, 9.5, 4.25]
+			},
+			"ground": {
+				"translation": [0, 8.5, 0]
+			},
+			"gui": {
+				"rotation": [29.5, 45, 0],
+				"translation": [4.25, 6.25, 0]
+			},
+			"head": {
+				"translation": [0, 4.75, 0]
+			},
+			"fixed": {
+				"translation": [0, 3.5, 4]
+			}
+		}],
+		"connect": {
+			"none": {
 				"submodel": {
-					"kerb1": { "model": "furenikusroads:sidewalk_north_east" },
-					"kerb2": { "model": "furenikusroads:sidewalk_east" },
-					"kerb3": { "model": "furenikusroads:sidewalk_south_east" }
+					"kerb_side":  { "model": "furenikusroads:nomodel" }
+				}
+			},
+			"left": {
+				"submodel": {
+					"kerb_side":  { "model": "furenikusroads:kerb_left" }
+				}
+			},
+			"right": {
+				"submodel": {
+					"kerb_side":  { "model": "furenikusroads:kerb_right" }
+				}
+			},
+			"left_b": {
+				"submodel": {
+					"kerb_side":  { "model": "furenikusroads:kerb_left_b" }
+				}
+			},
+			"right_b": {
+				"submodel": {
+					"kerb_side":  { "model": "furenikusroads:kerb_right_b" }
 				}
 			}
 		},
-		"north": {
-			"true": {
-			},
-			"false": {
-				"submodel": {
-					"kerb4": { "model": "furenikusroads:sidewalk_north_east" },
-					"kerb5": { "model": "furenikusroads:sidewalk_north" },
-					"kerb6": { "model": "furenikusroads:sidewalk_north_west" }
+		"zz_facing": {
+			"north": { "model": "furenikusroads:kerb_a" },
+			"east":  { "model": "furenikusroads:kerb_b", "y":  90 },
+			"south": { "model": "furenikusroads:kerb_a", "y": 180 },
+			"west":  { "model": "furenikusroads:kerb_b", "y": 270 }
+		},
+		"colour": {
+			"standard": {},
+			"white": {
+				"textures": {
+					"0": "furenikusroads:blocks/sidewalk_white",
+					"particle": "furenikusroads:blocks/sidewalk_white"
 				}
-			}
-		},
-		"north_east": {
-			"true": {
 			},
-			"false": {
-				"submodel": "furenikusroads:sidewalk_north_east"
-			}
-		},
-		"north_west": {
-			"true": {
-			},
-			"false": {
-				"submodel": "furenikusroads:sidewalk_north_west"
-			}
-		},
-		"south": {
-			"true": {
-			},
-			"false": {
-				"submodel": {
-					"kerb7": { "model": "furenikusroads:sidewalk_south_east" },
-					"kerb8": { "model": "furenikusroads:sidewalk_south" },
-					"kerb9": { "model": "furenikusroads:sidewalk_south_west" }
+			"yellow": {
+				"textures": {
+					"0": "furenikusroads:blocks/sidewalk_yellow",
+					"particle": "furenikusroads:blocks/sidewalk_yellow"
 				}
-			}
-		},
-		"south_east": {
-			"true": {
 			},
-			"false": {
-				"submodel": "furenikusroads:sidewalk_south_east"
-			}
-		},
-		"south_west": {
-			"true": {
-			},
-			"false": {
-				"submodel": "furenikusroads:sidewalk_south_west"
-			}
-		},
-		"west": {
-			"true": {
-			},
-			"false": {
-				"submodel": {
-					"kerb10": { "model":  "furenikusroads:sidewalk_north_west" },
-					"kerb11": { "model":  "furenikusroads:sidewalk_west" },
-					"kerb12": { "model":  "furenikusroads:sidewalk_south_west" }
+			"red": {
+				"textures": {
+					"0": "furenikusroads:blocks/sidewalk_red",
+					"particle": "furenikusroads:blocks/sidewalk_red"
 				}
 			}
 		}

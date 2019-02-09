@@ -10,7 +10,8 @@
 	},
 	"variants": {
 		"inventory": [{
-			"model": "furenikusroads:icon_give_way_1",
+			"model": "furenikusroads:tile_full",
+			"textures": { "0": "furenikusroads:items/paint_icons/white_give_way" },
 			"transform": {
 				"ground": {
 					"scale": [0.5, 0.5, 0.5],

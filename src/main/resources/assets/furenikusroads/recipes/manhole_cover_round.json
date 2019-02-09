@@ -1,0 +1,21 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern":
+	[
+		" i ",
+		"iti",
+		" i "
+	],
+	"key": {
+		"t": {
+			"item": "furenikusroads:tool_handle"
+		},
+		"i": {
+			"item": "minecraft:iron_ingot"
+		}
+	},
+	"result": {
+		"item": "furenikusroads:manhole_cover_round",
+		"data": 0
+	}
+}

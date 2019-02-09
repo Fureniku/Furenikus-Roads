@@ -1,0 +1,21 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{
+			"item": "minecraft:gravel"
+		},
+		{
+			"item": "furenikusroads:generic_blocks",
+			"data": 2
+		},
+		{
+			"item": "minecraft:sand",
+			"data": 0
+		}
+	],
+	"result": {
+		"item": "furenikusroads:road_block_concrete_2",
+		"count": 3,
+		"data": 15
+	}
+}

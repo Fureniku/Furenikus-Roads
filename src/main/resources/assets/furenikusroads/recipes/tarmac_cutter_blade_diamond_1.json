@@ -1,0 +1,21 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern":
+	[
+		"nin",
+		"iii",
+		"nin"
+	],
+	"key": {
+		"i": {
+			"item": "minecraft:diamond"
+		},
+		"n": {
+			"type": "forge:ore_dict",
+            "ore": "nuggetDiamond"
+		}
+	},
+	"result": {
+		"item": "furenikusroads:tarmac_cutter_blade_1_diamond"
+	}
+}

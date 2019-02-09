@@ -1,7 +1,11 @@
 package com.silvaniastudios.roads.blocks;
 
 import com.silvaniastudios.roads.FurenikusRoads;
+import com.silvaniastudios.roads.blocks.paint.PaintBlockBase;
+import com.silvaniastudios.roads.items.FRItems;
+import com.silvaniastudios.roads.items.RoadItemBase;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
@@ -9,7 +13,10 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -41,10 +48,40 @@ public class RoadBlock extends BlockBase {
 	public static final AxisAlignedBB ROAD_15_16_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.9375D, 1.0D);
 	public static final AxisAlignedBB ROAD_16_16_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
 	
-	public RoadBlock(String name, Material mat) {
+	public RoadItemBase fragmentItem;
+	
+	public RoadBlock(String name, Material mat, RoadItemBase fragment) {
 		super(name, mat);
 		setDefaultState(this.blockState.getBaseState().withProperty(ENUM_HEIGHT, RoadBlock.EnumRoadHeight.id0));
 		this.setCreativeTab(FurenikusRoads.tab_roads);
+		this.fragmentItem = fragment;
+		this.setHarvestLevel("pneumatic_drill", 0);
+		this.setHardness(2.0F);
+	}
+	
+	public RoadItemBase getFragmentItem(Block block) {
+		if (block == FRBlocks.road_block_standard) { return FRItems.tarmac_fragment_standard; }
+		if (block == FRBlocks.road_block_concrete_1) { return FRItems.tarmac_fragment_concrete_1; }
+		if (block == FRBlocks.road_block_concrete_2) { return FRItems.tarmac_fragment_concrete_2; }
+		if (block == FRBlocks.road_block_light) { return FRItems.tarmac_fragment_light; }
+		if (block == FRBlocks.road_block_fine) { return FRItems.tarmac_fragment_fine; }
+		if (block == FRBlocks.road_block_dark) { return FRItems.tarmac_fragment_dark; }
+		if (block == FRBlocks.road_block_pale) { return FRItems.tarmac_fragment_pale; }
+		if (block == FRBlocks.road_block_red) { return FRItems.tarmac_fragment_red; }
+		if (block == FRBlocks.road_block_blue) { return FRItems.tarmac_fragment_blue; }
+		if (block == FRBlocks.road_block_white) { return FRItems.tarmac_fragment_white; }
+		if (block == FRBlocks.road_block_yellow) { return FRItems.tarmac_fragment_yellow; }
+		if (block == FRBlocks.road_block_green) { return FRItems.tarmac_fragment_green; }
+		if (block == FRBlocks.road_block_muddy) { return FRItems.tarmac_fragment_muddy; }
+		if (block == FRBlocks.road_block_muddy_dried) { return FRItems.tarmac_fragment_muddy; }
+		
+		if (block == FRBlocks.road_block_stone) { return FRItems.tarmac_fragment_stone; }
+		if (block == FRBlocks.road_block_grass) { return FRItems.tarmac_fragment_grass; }
+		if (block == FRBlocks.road_block_dirt) { return FRItems.tarmac_fragment_dirt; }
+		if (block == FRBlocks.road_block_gravel) { return FRItems.tarmac_fragment_gravel; }
+		if (block == FRBlocks.road_block_sand) { return FRItems.tarmac_fragment_sand; }
+		
+		return FRItems.tarmac_fragment_standard;
 	}
 	
 	@SideOnly(Side.CLIENT)
@@ -54,6 +91,20 @@ public class RoadBlock extends BlockBase {
             items.add(new ItemStack(this, 1, height.getMetadata()));
         }
     }
+	
+	@Override
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		Item item = player.getHeldItem(hand).getItem();
+
+		if (item.equals(FRItems.paint_scraper)) {
+			IBlockState stateAbove = world.getBlockState(pos.offset(EnumFacing.UP));
+			if (stateAbove.getBlock() instanceof PaintBlockBase) {
+				world.setBlockToAir(pos.offset(EnumFacing.UP));
+				return true;
+			}
+		}
+		return super.onBlockActivated(world, pos, state, player, hand, facing, hitX, hitY, hitZ);
+	}
 	
 	@Override
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
@@ -120,12 +171,6 @@ public class RoadBlock extends BlockBase {
     public boolean isOpaqueCube(IBlockState state) {
         return getMetaFromState(state) == 15;
     }
-	
-	//onblockclicked
-	//tarmac cutter = lower block size, give tarmac fragment
-	
-	//onblockactivated
-	//impact wrench = raise block size, take tarmac fragment
 	
 	public static enum EnumRoadHeight implements IStringSerializable {
 		id0(0, "1_16th"),

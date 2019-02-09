@@ -75,11 +75,13 @@
 			},
 			"all": {
 				"submodel": {
-					"paint_east": { "model": "furenikusroads:single_line_n", "y": 90 },
-					"paint_west": { "model": "furenikusroads:single_line_n", "y": 270 },
+					"paint_east":  { "model": "furenikusroads:single_line_n", "y": 90 },
+					"paint_west":  { "model": "furenikusroads:single_line_n", "y": 270 },
 					"paint_north": { "model": "furenikusroads:single_line_n" },
 					"paint_south": { "model": "furenikusroads:single_line_n", "y": 180 }
 				}
+			},
+			"connect": {
 			}
 		},
 		"north": {

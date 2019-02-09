@@ -1,0 +1,20 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern":
+	[
+		"nin",
+		"iii",
+		"nin"
+	],
+	"key": {
+		"i": {
+			"item": "minecraft:gold_ingot"
+		},
+		"n": {
+			"item": "minecraft:gold_nugget"
+		}
+	},
+	"result": {
+		"item": "furenikusroads:tarmac_cutter_blade_1_gold"
+	}
+}

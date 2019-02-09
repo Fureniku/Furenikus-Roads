@@ -1,0 +1,23 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern":
+	[
+		"ddd",
+		"dbd",
+		"ddd"
+	],
+	"key": {
+		"d": {
+			"item": "furenikusroads:road_block_muddy_dried",
+			"data": 15
+		},
+		"b": {
+			"item": "minecraft:water_bucket"
+		}
+	},
+	"result": {
+		"item": "furenikusroads:road_block_muddy",
+		"count": 8,
+		"data": 15
+	}
+}

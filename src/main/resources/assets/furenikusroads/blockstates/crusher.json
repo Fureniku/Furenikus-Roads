@@ -1,0 +1,60 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"transform": "forge:default-block",
+		"textures": {
+			"0": "furenikusroads:blocks/machine_metal",
+			"2": "furenikusroads:blocks/machine_metal_dark",
+			"3": "furenikusroads:blocks/machine_metal_patterned",
+			"4": "furenikusroads:blocks/machine_piping",
+			"5": "furenikusroads:blocks/machine_part_plain",
+			"6": "furenikusroads:blocks/crusher_vents",
+			"7": "furenikusroads:blocks/machine_hazard",
+			"8": "furenikusroads:blocks/machine_vent_back_off",
+			"particle": "furenikusroads:blocks/machine_metal"
+		},
+		"model": "furenikusroads:crusher"
+	},
+	"variants": {
+		"inventory": [{
+			"model": "furenikusroads:crusher",
+			"transform": {
+				"ground": {
+					"scale": [0.5, 0.5, 0.5]
+				},
+				"fixed": {
+					"rotation": [0, -90, 0],
+					"translation": [0, 0, -2.5],
+					"scale": [0.5, 0.5, 0.5]
+				},
+				"gui": {
+					"rotation": [15, 45, 0],
+					"scale": [0.5, 0.5, 0.5]
+				}
+            }
+		}],
+		"furnace_active": {
+			"true": {
+				"textures": {
+					"8": "furenikusroads:blocks/machine_vent_back_on"
+				}
+			},
+			"false": {
+			}
+		},
+		"rotation": {
+			"north": {
+				"model": "furenikusroads:crusher", "y": 0
+			},
+			"east": {
+				"model": "furenikusroads:crusher", "y": 90
+			},
+			"south": {
+				"model": "furenikusroads:crusher", "y": 180
+			},
+			"west": {
+				"model": "furenikusroads:crusher", "y": 270
+			}
+		}
+	}
+}

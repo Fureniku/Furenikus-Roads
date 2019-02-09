@@ -1,0 +1,20 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern":
+	[
+		"t",
+		"t",
+		"b"
+	],
+	"key": {
+		"t": {
+			"item": "furenikusroads:tool_handle"
+		},
+		"b": {
+			"item": "minecraft:iron_block"
+		}
+	},
+	"result": {
+		"item": "furenikusroads:tarmac_rammer"
+	}
+}

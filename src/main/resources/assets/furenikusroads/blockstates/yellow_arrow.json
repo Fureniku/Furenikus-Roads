@@ -1,0 +1,68 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"transform": "forge:default-block",
+		"textures": {
+			"0": "furenikusroads:blocks/paint_yellow",
+			"particle": "furenikusroads:blocks/paint_yellow"
+		},
+		"model": "furenikusroads:tile_arrow"
+	},
+	"variants": {
+		"inventory": [{
+			"model": "furenikusroads:tile_arrow",
+			"transform": {
+				"ground": {
+					"scale": [0.5, 0.5, 0.5],
+					"rotation": [90, 0, 180],
+					"translation": [0, 0, -0.2]
+				},
+				"fixed": {
+					"rotation": [90, 0, 180],
+					"translation": [0, 0, -0.45]
+				},
+				"gui": {
+					"translation": [0, 0, 0],
+					"rotation": [90, 0, 0]
+				}
+            }
+		}],
+		"inventory_2": [{
+			"model": "furenikusroads:tile_full",
+			"textures": { "0": "furenikusroads:items/paint_icons/yellow_arrow_4" },
+			"transform": {
+				"ground": {
+					"scale": [0.5, 0.5, 0.5],
+					"rotation": [90, 0, 180],
+					"translation": [0, 0, -0.2]
+				},
+				"fixed": {
+					"rotation": [90, 0, 180],
+					"translation": [0, 0, -0.45]
+				},
+				"gui": {
+					"translation": [0, 0, 0],
+					"rotation": [90, 0, 0]
+				}
+            }
+		}],
+		"meta": {
+			"0":  { "model": "furenikusroads:tile_arrow" },
+			"1":  { "model": "furenikusroads:tile_arrow", "y": 90 },
+			"2":  { "model": "furenikusroads:tile_arrow", "y": 180 },
+			"3":  { "model": "furenikusroads:tile_arrow", "y": 270 },
+			"4":  { "model": "furenikusroads:tile_arrow_side" },
+			"5":  { "model": "furenikusroads:tile_arrow_side", "y": 90 },
+			"6":  { "model": "furenikusroads:tile_arrow_side", "y": 180 },
+			"7":  { "model": "furenikusroads:tile_arrow_side", "y": 270 },
+			"8":  { "model": "furenikusroads:tile_arrow_side", "x": 270 },
+			"9":  { "model": "furenikusroads:tile_arrow_side", "x": 270, "y": 90 },
+			"10": { "model": "furenikusroads:tile_arrow_side", "x": 270, "y": 180 },
+			"11": { "model": "furenikusroads:tile_arrow_side", "x": 270, "y": 270 },
+			"12": { "model": "furenikusroads:tile_arrow_side", "x": 270 },
+			"13": { "model": "furenikusroads:tile_arrow_side", "x": 270, "y": 90 },
+			"14": { "model": "furenikusroads:tile_arrow_side", "x": 270, "y": 180 },
+			"15": { "model": "furenikusroads:tile_arrow_side", "x": 270, "y": 270 }
+		}
+	}
+}

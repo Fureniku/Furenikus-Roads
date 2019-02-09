@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{
+			"item": "furenikusroads:limestone_dust"
+		},
+		{
+			"item": "minecraft:clay_ball"
+		}
+	],
+	"result": {
+		"item": "furenikusroads:clinker_mix"
+	}
+}

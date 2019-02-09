@@ -1,0 +1,24 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern":
+	[
+		"bbb",
+		"bdb",
+		"bbb"
+	],
+	"key": {
+		"b": {
+			"item": "furenikusroads:sidewalk",
+			"data": 15
+		},
+		"d": {
+			"item": "minecraft:dye",
+			"data": 3
+		}
+	},
+	"result": {
+		"item": "furenikusroads:sidewalk_dark",
+		"data": 15,
+		"count": 9
+	}
+}

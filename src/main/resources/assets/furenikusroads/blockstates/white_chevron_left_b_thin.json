@@ -43,6 +43,12 @@
 		"edge": {
 			"true":  { "submodel": { "block": { "model": "furenikusroads:junction_chevron_left_b_thin_edge" }}},
 			"false": { "submodel": { "block": { "model": "furenikusroads:junction_chevron_left_b_thin" }}}
+		},
+		"hide": {
+			"true": {
+				"textures": { "0": "furenikusroads:blocks/blank" }
+			},
+			"false": {}
 		}
 	}
 }

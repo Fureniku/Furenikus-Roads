@@ -1,0 +1,68 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"transform": "forge:default-block",
+		"textures": {
+			"0": "furenikusroads:blocks/machine_metal",
+			"1": "furenikusroads:blocks/machine_piping",
+			"2": "furenikusroads:blocks/machine_glass",
+			"4": "furenikusroads:blocks/road_factory_machine_b",
+			"5": "furenikusroads:blocks/machine_part_plain",
+			"6": "furenikusroads:blocks/road_factory_machine_a",
+			"7": "furenikusroads:blocks/machine_part_dark",
+			"8": "furenikusroads:blocks/machine_vent_back_off",
+			"9": "furenikusroads:blocks/machine_metal_dark",
+			"particle": "furenikusroads:blocks/machine_metal"
+		},
+		"model": "furenikusroads:road_factory"
+	},
+	"variants": {
+		"inventory": [{
+			"model": "furenikusroads:road_factory",
+			"transform": {
+				"ground": {
+					"scale": [0.5, 0.5, 0.5]
+				},
+				"fixed": {
+					"rotation": [0, -90, 0],
+					"translation": [0, 0, -2.5],
+					"scale": [0.5, 0.5, 0.5]
+				},
+				"gui": {
+					"rotation": [15, 45, 0],
+					"scale": [0.5, 0.5, 0.5]
+				}
+            }
+		}],
+		"connected": {
+			"true": {
+				"submodel": "furenikusroads:road_factory_pipe_in"
+			},
+			"false": {
+			}
+		},
+		"furnace_active": {
+			"true": {
+				"textures": {
+					"8": "furenikusroads:blocks/machine_vent_back_on"
+				}
+			},
+			"false": {
+			}
+		},
+		"rotation": {
+			"north": {
+				"model": "furenikusroads:road_factory", "y": 0
+			},
+			"east": {
+				"model": "furenikusroads:road_factory", "y": 90
+			},
+			"south": {
+				"model": "furenikusroads:road_factory", "y": 180
+			},
+			"west": {
+				"model": "furenikusroads:road_factory", "y": 270
+			}
+		}
+	}
+}

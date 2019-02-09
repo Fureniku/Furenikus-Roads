@@ -80,6 +80,8 @@
 					"paint_north": { "model": "furenikusroads:single_line_thick_n" },
 					"paint_south": { "model": "furenikusroads:single_line_thick_n", "y": 180 }
 				}
+			},
+			"connect": {
 			}
 		},
 		"north": {

@@ -10,7 +10,8 @@
 	},
 	"variants": {
 		"inventory": [{
-			"model": "furenikusroads:crossing_paint",
+			"model": "furenikusroads:tile_full",
+			"textures": { "0": "furenikusroads:items/paint_icons/white_crossing_paint" },
 			"transform": {
 				"ground": {
 					"scale": [0.5, 0.5, 0.5],

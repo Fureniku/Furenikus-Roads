@@ -1,0 +1,26 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern":
+	[
+		"iri",
+		" b ",
+		" p "
+	],
+	"key": {
+		"r": {
+			"item": "minecraft:redstone"
+		},
+		"i": {
+			"item": "minecraft:iron_ingot"
+		},
+		"b": {
+			"item": "minecraft:iron_block"
+		},
+		"p": {
+			"item": "furenikusroads:pneumatic_drill_bit"
+		}
+	},
+	"result": {
+		"item": "furenikusroads:pneumatic_drill"
+	}
+}

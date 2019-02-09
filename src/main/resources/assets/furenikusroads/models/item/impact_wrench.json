@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "flenixroads:items/impact_wrench"
+		"layer0": "furenikusroads:items/impact_wrench"
 	}
 }
