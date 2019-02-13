@@ -38,6 +38,8 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void init() {
 		Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler(new ModBlockColours(), FRBlocks.road_block_grass);
+		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ModItemColours(), FRBlocks.road_block_grass);
+		//Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler(new ModBlockColours(), FRItem)
 		
 		ClientRegistry.bindTileEntitySpecialRenderer(PaintFillerEntity.class, new PaintFillerRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TarDistillerEntity.class, new TarDistillerRenderer());

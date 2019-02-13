@@ -6,11 +6,11 @@
 			"0": "furenikusroads:blocks/paint_red",
 			"particle": "furenikusroads:blocks/paint_red"
 		},
-		"model": "furenikusroads:single_line_side_junction_left_thin_1"
+		"model": "furenikusroads:connect_junction_thin_thin_l_back_cont"
 	},
 	"variants": {
 		"inventory": [{
-			"model": "furenikusroads:single_line_side_junction_left_thin_1",
+			"model": "furenikusroads:connect_junction_thin_thin_l_back_cont",
 			"transform": {
 				"ground": {
 					"scale": [0.5, 0.5, 0.5],
@@ -28,7 +28,7 @@
             }
 		}],
 		"inventory_2": [{
-			"model": "furenikusroads:single_line_side_junction_left_thin_2",
+			"model": "furenikusroads:connect_junction_thin_thin_l_back",
 			"transform": {
 				"ground": {
 					"scale": [0.5, 0.5, 0.5],
@@ -46,7 +46,7 @@
             }
 		}],
 		"inventory_3": [{
-			"model": "furenikusroads:single_line_side_junction_right_thin_1",
+			"model": "furenikusroads:connect_junction_thin_thin_l_forward_cont",
 			"transform": {
 				"ground": {
 					"scale": [0.5, 0.5, 0.5],
@@ -64,7 +64,7 @@
             }
 		}],
 		"inventory_4": [{
-			"model": "furenikusroads:single_line_side_junction_right_thin_2",
+			"model": "furenikusroads:connect_junction_thin_thin_l_forward",
 			"transform": {
 				"ground": {
 					"scale": [0.5, 0.5, 0.5],
@@ -82,22 +82,22 @@
             }
 		}],
 		"meta": {
-			"0": {  "model": "furenikusroads:single_line_side_junction_left_thin_1" },
-			"1": {  "model": "furenikusroads:single_line_side_junction_left_thin_1", "y": 90  },
-			"2": {  "model": "furenikusroads:single_line_side_junction_left_thin_1", "y": 180 },
-			"3": {  "model": "furenikusroads:single_line_side_junction_left_thin_1", "y": 270 },
-			"4": {  "model": "furenikusroads:single_line_side_junction_left_thin_2" },
-			"5": {  "model": "furenikusroads:single_line_side_junction_left_thin_2", "y": 90  },
-			"6": {  "model": "furenikusroads:single_line_side_junction_left_thin_2", "y": 180 },
-			"7": {  "model": "furenikusroads:single_line_side_junction_left_thin_2", "y": 270 },
-			"8": {  "model": "furenikusroads:single_line_side_junction_right_thin_1" },
-			"9": {  "model": "furenikusroads:single_line_side_junction_right_thin_1", "y": 90  },
-			"10": { "model": "furenikusroads:single_line_side_junction_right_thin_1", "y": 180 },
-			"11": { "model": "furenikusroads:single_line_side_junction_right_thin_1", "y": 270 },
-			"12": { "model": "furenikusroads:single_line_side_junction_right_thin_2" },
-			"13": { "model": "furenikusroads:single_line_side_junction_right_thin_2", "y": 90  },
-			"14": { "model": "furenikusroads:single_line_side_junction_right_thin_2", "y": 180 },
-			"15": { "model": "furenikusroads:single_line_side_junction_right_thin_2", "y": 270 }
+			"0": {  "model": "furenikusroads:connect_junction_thin_thin_l_back_cont" },
+			"1": {  "model": "furenikusroads:connect_junction_thin_thin_l_back_cont", "y": 90  },
+			"2": {  "model": "furenikusroads:connect_junction_thin_thin_l_back_cont", "y": 180 },
+			"3": {  "model": "furenikusroads:connect_junction_thin_thin_l_back_cont", "y": 270 },
+			"4": {  "model": "furenikusroads:connect_junction_thin_thin_l_back" },
+			"5": {  "model": "furenikusroads:connect_junction_thin_thin_l_back", "y": 90  },
+			"6": {  "model": "furenikusroads:connect_junction_thin_thin_l_back", "y": 180 },
+			"7": {  "model": "furenikusroads:connect_junction_thin_thin_l_back", "y": 270 },
+			"8": {  "model": "furenikusroads:connect_junction_thin_thin_l_forward_cont" },
+			"9": {  "model": "furenikusroads:connect_junction_thin_thin_l_forward_cont", "y": 90  },
+			"10": { "model": "furenikusroads:connect_junction_thin_thin_l_forward_cont", "y": 180 },
+			"11": { "model": "furenikusroads:connect_junction_thin_thin_l_forward_cont", "y": 270 },
+			"12": { "model": "furenikusroads:connect_junction_thin_thin_l_forward" },
+			"13": { "model": "furenikusroads:connect_junction_thin_thin_l_forward", "y": 90  },
+			"14": { "model": "furenikusroads:connect_junction_thin_thin_l_forward", "y": 180 },
+			"15": { "model": "furenikusroads:connect_junction_thin_thin_l_forward", "y": 270 }
 		}
 	}
 }

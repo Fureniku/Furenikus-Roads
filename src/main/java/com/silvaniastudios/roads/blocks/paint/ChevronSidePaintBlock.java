@@ -75,9 +75,6 @@ public class ChevronSidePaintBlock extends ChevronMidPaintBlock {
 		if (rootBlockMeta == 14 && offsetMetaWest  == 11 && offsetMetaNorth == 8)  { return EnumConnectJunctionChevron.S_2; }
 		if (rootBlockMeta == 15 && offsetMetaSouth == 15 && offsetMetaEast  == 12) { return EnumConnectJunctionChevron.W_2; }
 		
-		IBlockState blockBelow = world.getBlockState(pos.offset(EnumFacing.DOWN));
-		IBlockState blockAbove = world.getBlockState(pos.offset(EnumFacing.UP));
-		
 		if (rootBlockMeta == 4) {}
 		
 		return EnumConnectJunctionChevron.NONE;

@@ -624,6 +624,20 @@ public class GuiPaintGun extends GuiScreen {
 				if (selMeta == 0)  { return 2; }
 				if (selMeta == 8)  { return 3; }
 			}
+			
+			if (selection == FRBlocks.white_junction_side_line_connection_thick_thick) {
+				if (selMeta == 0)  { return 0; }
+				if (selMeta == 4)  { return 1; }
+				if (selMeta == 8)  { return 2; }
+				if (selMeta == 12) { return 3; }
+			}
+			
+			if (selection == FRBlocks.white_junction_mid_line_connection) {
+				if (selMeta == 0)  { return 0; }
+				if (selMeta == 4)  { return 1; }
+				if (selMeta == 8)  { return 2; }
+				if (selMeta == 12) { return 3; }
+			}
 		}
 		
 		return 0;

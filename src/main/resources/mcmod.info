@@ -9,7 +9,7 @@
   "updateUrl": "",
   "authorList": ["Fureniku"],
   "credits": "",
-  "logoFile": "",
+  "logoFile": "/assets/furenikusroads/logo.png",
   "screenshots": [],
   "dependencies": []
 }

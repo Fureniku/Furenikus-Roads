@@ -11,5 +11,4 @@ public class ModBlockColours implements IBlockColor {
 	public int colorMultiplier(IBlockState state, IBlockAccess worldIn, BlockPos pos, int tintIndex) {
 		return worldIn.getBiome(pos).getGrassColorAtPos(pos);
 	}
-
 }

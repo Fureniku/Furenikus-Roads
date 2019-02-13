@@ -45,7 +45,7 @@ public class CatsEyeDoubleModel implements IBakedModel {
 		List<BakedQuad> quadList = new LinkedList<BakedQuad>();
 		quadList.addAll(model.getQuads(state, side, rand));
 		
-		if (side == null || dir == null) {
+		if (side == null || dir == null || state == null) {
 			return model.getQuads(state, side, rand);
 		}
 		

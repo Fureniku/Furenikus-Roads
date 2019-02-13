@@ -21,9 +21,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.property.ExtendedBlockState;
-import net.minecraftforge.common.property.IUnlistedProperty;
-import net.minecraftforge.common.property.Properties;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -55,7 +52,7 @@ public class CrusherBlock extends RoadTEBlock {
 	}
 	
 	protected BlockStateContainer createBlockState() {
-		return new ExtendedBlockState(this, new IProperty[] {ROTATION, FURNACE_ACTIVE}, new IUnlistedProperty[] {Properties.AnimationProperty});
+		return new BlockStateContainer(this, new IProperty[] {ROTATION, FURNACE_ACTIVE});
 	}
 	
 	public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
@@ -63,11 +60,11 @@ public class CrusherBlock extends RoadTEBlock {
 		if (te instanceof RoadTileEntity) {
 			RoadTileEntity tileEntity = (RoadTileEntity) te;
 			if (tileEntity.fuel_remaining > 0) {
-				return state.withProperty(FURNACE_ACTIVE, true).withProperty(Properties.StaticProperty, true);
+				return state.withProperty(FURNACE_ACTIVE, true);
 			} else {
-				return state.withProperty(FURNACE_ACTIVE, false).withProperty(Properties.StaticProperty, true);
+				return state.withProperty(FURNACE_ACTIVE, false);
 			}
 		}
-		return state.withProperty(Properties.StaticProperty, true);
+		return state;
 	}
 }

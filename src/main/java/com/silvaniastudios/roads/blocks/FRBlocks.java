@@ -3,7 +3,6 @@ package com.silvaniastudios.roads.blocks;
 import java.util.ArrayList;
 
 import com.silvaniastudios.roads.FurenikusRoads;
-import com.silvaniastudios.roads.RoadsConfig;
 import com.silvaniastudios.roads.blocks.paint.ArrowDiagonalPaintBlock;
 import com.silvaniastudios.roads.blocks.paint.ArrowLinePaintBlock;
 import com.silvaniastudios.roads.blocks.paint.ArrowPaintBlock;
@@ -44,8 +43,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 
 public class FRBlocks {
-	
-	public static RoadsConfig.Modules cfg = new RoadsConfig.Modules();
 	
 	public static ArrayList<RoadBlock> roadBlockList = new ArrayList<RoadBlock>();
 	public static ArrayList<PaintBlockBase> paintBlockList = new ArrayList<PaintBlockBase>();
@@ -181,6 +178,8 @@ public class FRBlocks {
 	
 	public static MultiIconPaintBlock white_junction_side_line_connection = new MultiIconPaintBlock("white_junction_side_line_connection", true);
 	public static MultiIconPaintBlock white_junction_side_line_connection_thin = new MultiIconPaintBlock("white_junction_side_line_connection_thin", true);
+	public static MultiIconPaintBlock white_junction_side_line_connection_thick_thick = new MultiIconPaintBlock("white_junction_side_line_connection_thick_thick", true);
+	public static MultiIconPaintBlock white_junction_mid_line_connection = new MultiIconPaintBlock("white_junction_mid_line_connection", true);
 	
 	public static Connected3x1PaintBlock white_slow  = new Connected3x1PaintBlock("white_slow");
 	public static Connected3x1PaintBlock white_stop  = new Connected3x1PaintBlock("white_stop");
@@ -285,6 +284,8 @@ public class FRBlocks {
 	
 	public static MultiIconPaintBlock yellow_junction_side_line_connection = new MultiIconPaintBlock("yellow_junction_side_line_connection", true);
 	public static MultiIconPaintBlock yellow_junction_side_line_connection_thin = new MultiIconPaintBlock("yellow_junction_side_line_connection_thin", true);
+	public static MultiIconPaintBlock yellow_junction_side_line_connection_thick_thick = new MultiIconPaintBlock("yellow_junction_side_line_connection_thick_thick", true);
+	public static MultiIconPaintBlock yellow_junction_mid_line_connection = new MultiIconPaintBlock("yellow_junction_mid_line_connection", true);
 	
 	public static Connected3x1PaintBlock yellow_slow  = new Connected3x1PaintBlock("yellow_slow");
 	public static Connected3x1PaintBlock yellow_stop  = new Connected3x1PaintBlock("yellow_stop");
@@ -387,8 +388,10 @@ public class FRBlocks {
 	public static MultiIconPaintBlock red_chevron_mid_left = new MultiIconPaintBlock("red_chevron_mid_left", true);
 	public static MultiIconPaintBlock red_chevron_mid_right = new MultiIconPaintBlock("red_chevron_mid_right", true);
 	
-	public static MultiIconPaintBlock red_junction_side_line_connection = new MultiIconPaintBlock("red_junction_side_line_connection", false);
-	public static MultiIconPaintBlock red_junction_side_line_connection_thin = new MultiIconPaintBlock("red_junction_side_line_connection_thin", false);
+	public static MultiIconPaintBlock red_junction_side_line_connection = new MultiIconPaintBlock("red_junction_side_line_connection", true);
+	public static MultiIconPaintBlock red_junction_side_line_connection_thin = new MultiIconPaintBlock("red_junction_side_line_connection_thin", true);
+	public static MultiIconPaintBlock red_junction_side_line_connection_thick_thick = new MultiIconPaintBlock("red_junction_side_line_connection_thick_thick", true);
+	public static MultiIconPaintBlock red_junction_mid_line_connection = new MultiIconPaintBlock("red_junction_mid_line_connection", true);
 	
 	public static Connected3x1PaintBlock red_slow  = new Connected3x1PaintBlock("red_slow");
 	public static Connected3x1PaintBlock red_stop  = new Connected3x1PaintBlock("red_stop");
@@ -563,6 +566,8 @@ public class FRBlocks {
 		
 		paintBlockList.add(white_junction_side_line_connection);
 		paintBlockList.add(white_junction_side_line_connection_thin);
+		paintBlockList.add(white_junction_side_line_connection_thick_thick);
+		paintBlockList.add(white_junction_mid_line_connection);
 		
 		paintBlockList.add(white_chevron_mid);
 		paintBlockList.add(white_chevron_mid_left);
@@ -596,6 +601,8 @@ public class FRBlocks {
 		
 		paintBlockList.add(yellow_junction_side_line_connection);
 		paintBlockList.add(yellow_junction_side_line_connection_thin);
+		paintBlockList.add(yellow_junction_side_line_connection_thick_thick);
+		paintBlockList.add(yellow_junction_mid_line_connection);
 		
 		paintBlockList.add(yellow_chevron_mid);
 		paintBlockList.add(yellow_chevron_mid_left);
@@ -629,6 +636,8 @@ public class FRBlocks {
 		
 		paintBlockList.add(red_junction_side_line_connection);
 		paintBlockList.add(red_junction_side_line_connection_thin);
+		paintBlockList.add(red_junction_side_line_connection_thick_thick);
+		paintBlockList.add(red_junction_mid_line_connection);
 		
 		paintBlockList.add(red_chevron_mid);
 		paintBlockList.add(red_chevron_mid_left);
@@ -1030,6 +1039,16 @@ public class FRBlocks {
 		PaintGunItemRegistry.registerJunction(white_junction_side_line_connection_thin, 12);
 		PaintGunItemRegistry.registerJunction(white_junction_side_line_connection_thin, 0);
 		PaintGunItemRegistry.registerJunction(white_junction_side_line_connection_thin, 8);
+		
+		PaintGunItemRegistry.registerJunction(white_junction_side_line_connection_thick_thick, 0);
+		PaintGunItemRegistry.registerJunction(white_junction_side_line_connection_thick_thick, 4);
+		PaintGunItemRegistry.registerJunction(white_junction_side_line_connection_thick_thick, 8);
+		PaintGunItemRegistry.registerJunction(white_junction_side_line_connection_thick_thick, 12);
+		
+		PaintGunItemRegistry.registerJunction(white_junction_mid_line_connection, 0);
+		PaintGunItemRegistry.registerJunction(white_junction_mid_line_connection, 4);
+		PaintGunItemRegistry.registerJunction(white_junction_mid_line_connection, 8);
+		PaintGunItemRegistry.registerJunction(white_junction_mid_line_connection, 12);
 		
 		FurenikusRoads.logger.info("REGISTRATION COMPLETE! " + PaintGunItemRegistry.lines.size() + " lines, " + PaintGunItemRegistry.icons.size() + " icons, " + PaintGunItemRegistry.letters.size() + " letters, " + PaintGunItemRegistry.text.size() + " texts, " + PaintGunItemRegistry.junction.size() + " junctions.");
 	}

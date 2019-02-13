@@ -44,7 +44,6 @@ public class LetterPaintBlock extends PaintBlockBase implements IMetaBlockName {
 	
 	@Override
 	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-		System.out.println("facing: " + facing.getName() + ", meta: " + meta);
 		if (meta < 8) {
 			if (facing == EnumFacing.UP) {
 				if (placer.getHorizontalFacing() == EnumFacing.NORTH) { return this.getDefaultState().withProperty(ROTATE_ID, EnumRotatable.FLAT_NORTH); }

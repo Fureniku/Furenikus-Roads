@@ -171,8 +171,11 @@ public class SideLinePaintBlock extends PaintBlockBase implements ILineConnectab
 			if (blockDown) { stateDown = stateEast; }
 		}
 		boolean blockSide = false;
-		int metaUp = blockUp ? getMetaFromState(stateUp) : -1;
-		int metaDown = blockDown ? getMetaFromState(stateDown) : -1;
+		int metaUp = -1;
+		int metaDown = -1;
+		
+		if (blockUp && stateUp.getBlock() instanceof ILineConnectable) { metaUp = stateUp.getBlock().getMetaFromState(stateUp); }
+		if (blockDown && stateDown.getBlock() instanceof ILineConnectable) { metaDown = stateDown.getBlock().getMetaFromState(stateDown); }
 
 		if (leftSide) {
 			if (blockRight && blockUp) {

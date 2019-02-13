@@ -94,6 +94,14 @@ public class RenderHelper {
 	}
 	
 	public static BakedQuad setBrightTexture(BakedQuad quad, float light) {
+		if (FMLClientHandler.instance().hasOptifine()) {
+			return quad;
+		}
+		
+		if (!ForgeModContainer.forgeLightPipelineEnabled) {
+			return quad;
+		}
+		
 		VertexFormat newFormat = getFormatWithLightMap(quad.getFormat());
 	  
 		UnpackedBakedQuad.Builder builder = new UnpackedBakedQuad.Builder(newFormat);

@@ -79,7 +79,19 @@ public class CurbBlock extends BlockBase implements IMetaBlockName {
 	
 	@Override
 	public int getMetaFromState(IBlockState state) {
-		return ((EnumFacing)state.getValue(FACING)).getIndex() - 2 + ((EnumColourSidewalk)state.getValue(COLOUR)).getMetadata();
+		EnumFacing facing = (EnumFacing)state.getValue(FACING);
+		int rot = 0;
+		if (facing == EnumFacing.SOUTH) { rot = 1; }
+		if (facing == EnumFacing.WEST)  { rot = 2; }
+		if (facing == EnumFacing.EAST)  { rot = 3; }
+		
+		EnumColourSidewalk colour = (EnumColourSidewalk) state.getValue(COLOUR);
+		int col = 0;
+		if (colour == EnumColourSidewalk.WHITE)  { col = 4; }
+		if (colour == EnumColourSidewalk.YELLOW) { col = 8; }
+		if (colour == EnumColourSidewalk.RED)    { col = 12; }
+		
+		return rot + col;
 	}
 	
 	@Override
@@ -323,7 +335,6 @@ public class CurbBlock extends BlockBase implements IMetaBlockName {
 			downState = worldIn.getBlockState(downOffset);
 			countDown++;
 		}
-		
 		if (downState.getBlock() instanceof BlockBase || downState.getBlock().getBlockFaceShape(worldIn, downState, downOffset, EnumFacing.UP).equals(BlockFaceShape.SOLID)) {
 			BlockPos sideOffset = downOffset.offset(checkDir);
 			IBlockState endBlock = worldIn.getBlockState(sideOffset);

@@ -13,16 +13,12 @@ import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
 
 public class BarrierBlock extends BlockBase implements IConnectable {
 	
@@ -45,15 +41,18 @@ public class BarrierBlock extends BlockBase implements IConnectable {
 		this.setCreativeTab(FurenikusRoads.tab_road_parts);
 	}
 
-	public boolean canConnectTo(IBlockAccess worldIn, BlockPos pos, EnumFacing facing) {
+	@SuppressWarnings("deprecation")
+	public boolean canConnectTo(IBlockAccess worldIn, BlockPos pos, BlockPos oppositePos) {
 		IBlockState state = worldIn.getBlockState(pos);
 		Block block = state.getBlock();
+		if ((worldIn.getBlockState(oppositePos).getBlock() instanceof IConnectable) && block.isFullCube(state)) { return true; }
 		return block instanceof IConnectable;
 	}
 
 	private boolean canBarrierConnectTo(IBlockAccess world, BlockPos pos, EnumFacing facing) {
 		BlockPos offset = pos.offset(facing);
-		return canConnectTo(world, offset, facing.getOpposite()) || canConnectTo(world, offset.offset(EnumFacing.DOWN), facing.getOpposite()) || canConnectTo(world, offset.offset(EnumFacing.UP), facing.getOpposite());
+		BlockPos oppositeOffset = pos.offset(facing.getOpposite());
+		return canConnectTo(world, offset, oppositeOffset) || canConnectTo(world, offset.offset(EnumFacing.DOWN), oppositeOffset) || canConnectTo(world, offset.offset(EnumFacing.UP), oppositeOffset);
 	}
 	
 	private EnumPost postDirection(IBlockAccess world, BlockPos pos, int meta) {

@@ -10,10 +10,11 @@
 	},
 	"variants": {
 		"inventory": [{
-			"transform": "forge:default-block"
+			"textures": {
+				"0": "furenikusroads:blocks/grass_inventory"
+			}
 		}],
-		"road_block":
-		{
+		"road_block": {
 			"1_16th": { "model": "furenikusroads:road_1_16" },
 			"1_8th": { "model": "furenikusroads:road_2_16" },
 			"3_16ths": { "model": "furenikusroads:road_3_16" },

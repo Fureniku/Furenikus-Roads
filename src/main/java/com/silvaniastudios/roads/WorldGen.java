@@ -24,7 +24,7 @@ public class WorldGen implements IWorldGenerator {
 	
 	private void generateOverworld(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
 		limestone = new WorldGenMinable(FRBlocks.generic_blocks.getStateFromMeta(3), 8);
-		addOreSpawn(limestone, world, random, chunkX * 16, chunkZ * 16, 6, 30, 80);
+		addOreSpawn(limestone, world, random, chunkX * 16, chunkZ * 16, 12, 30, 80);
 	}
 	
 	private void addOreSpawn(WorldGenMinable wgm, World world, Random random, int x, int z, int vpc, int minY, int maxY) {
@@ -32,7 +32,7 @@ public class WorldGen implements IWorldGenerator {
 		for (int i = 0; i < vpc; i++) {
 			BlockPos pos = new BlockPos(x + random.nextInt(16), minY + random.nextInt(rangeY), z + random.nextInt(16));
 			if (wgm.generate(world, random, pos)) {
-				System.out.println("Generating limestone at " + pos.getX() + ", " + pos.getY() + ", " + pos.getZ());
+				//System.out.println("Generating limestone at " + pos.getX() + ", " + pos.getY() + ", " + pos.getZ());
 			}
 		}
 	}

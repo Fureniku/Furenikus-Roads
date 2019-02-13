@@ -228,14 +228,22 @@ tile.furenikusroads.white_junction_fork_mid.name=Junction Fork
 tile.furenikusroads.white_junction_fork_mid_thin.name=Junction Fork (Thin)
 tile.furenikusroads.white_junction_fork_chevron_mid_thin.name=Junction Fork (Chevron, Thin)
 tile.furenikusroads.white_junction_fork_chevron_mid.name=Junction Fork (Chevron)
-tile.furenikusroads.white_junction_side_line_connection.0.name=Filter Lane to Side Line Connector
-tile.furenikusroads.white_junction_side_line_connection.4.name=Filter Lane to Side Line Connector
-tile.furenikusroads.white_junction_side_line_connection.8.name=Filter Lane to Side Line Connector
-tile.furenikusroads.white_junction_side_line_connection.12.name=Filter Lane to Side Line Connector
-tile.furenikusroads.white_junction_side_line_connection_thin.0.name=Filter Lane to Side Line Connector (Thin)
-tile.furenikusroads.white_junction_side_line_connection_thin.4.name=Filter Lane to Side Line Connector (Thin)
-tile.furenikusroads.white_junction_side_line_connection_thin.8.name=Filter Lane to Side Line Connector (Thin)
-tile.furenikusroads.white_junction_side_line_connection_thin.12.name=Filter Lane to Side Line Connector (Thin)
+tile.furenikusroads.white_junction_side_line_connection.0.name=Filter Lane Thin->Thick L Back Continuous
+tile.furenikusroads.white_junction_side_line_connection.4.name=Filter Lane Thin->Thick L Back
+tile.furenikusroads.white_junction_side_line_connection.8.name=Filter Lane Thin->Thick L Forward Continuous
+tile.furenikusroads.white_junction_side_line_connection.12.name=Filter Lane Thin->Thick L Forward
+tile.furenikusroads.white_junction_side_line_connection_thin.0.name=Filter Lane Thin->Thin L Back Continuous
+tile.furenikusroads.white_junction_side_line_connection_thin.4.name=Filter Lane Thin->Thin L Back
+tile.furenikusroads.white_junction_side_line_connection_thin.8.name=Filter Lane Thin->Thin L Forward Continuous
+tile.furenikusroads.white_junction_side_line_connection_thin.12.name=Filter Lane Thin->Thin L Forward
+tile.furenikusroads.white_junction_side_line_connection_thick_thick.0.name=Filter Lane Thick->Thick L Back Continuous
+tile.furenikusroads.white_junction_side_line_connection_thick_thick.4.name=Filter Lane Thick->Thick L Back
+tile.furenikusroads.white_junction_side_line_connection_thick_thick.8.name=Filter Lane Thick->Thick L Forward Continuous
+tile.furenikusroads.white_junction_side_line_connection_thick_thick.12.name=Filter Lane Thick->Thick L Forward
+tile.furenikusroads.white_junction_mid_line_connection.0.name=Thin Mid Line to Thick Filter Line L
+tile.furenikusroads.white_junction_mid_line_connection.4.name=Thin Mid Line to Thick Filter Line R
+tile.furenikusroads.white_junction_mid_line_connection.8.name=Thick Mid Line to Thick Filter Line R
+tile.furenikusroads.white_junction_mid_line_connection.12.name=Thick Mid Line to Thick Filter Line R
 
 
 
@@ -367,14 +375,22 @@ tile.furenikusroads.yellow_junction_fork_mid.name=Junction Fork
 tile.furenikusroads.yellow_junction_fork_mid_thin.name=Junction Fork (Thin)
 tile.furenikusroads.yellow_junction_fork_chevron_mid_thin.name=Junction Fork (Chevron, Thin)
 tile.furenikusroads.yellow_junction_fork_chevron_mid.name=Junction Fork (Chevron)
-tile.furenikusroads.yellow_junction_side_line_connection.0.name=Filter Lane to Side Line Connector
-tile.furenikusroads.yellow_junction_side_line_connection.4.name=Filter Lane to Side Line Connector
-tile.furenikusroads.yellow_junction_side_line_connection.8.name=Filter Lane to Side Line Connector
-tile.furenikusroads.yellow_junction_side_line_connection.12.name=Filter Lane to Side Line Connector
-tile.furenikusroads.yellow_junction_side_line_connection_thin.0.name=Filter Lane to Side Line Connector (Thin)
-tile.furenikusroads.yellow_junction_side_line_connection_thin.4.name=Filter Lane to Side Line Connector (Thin)
-tile.furenikusroads.yellow_junction_side_line_connection_thin.8.name=Filter Lane to Side Line Connector (Thin)
-tile.furenikusroads.yellow_junction_side_line_connection_thin.12.name=Filter Lane to Side Line Connector (Thin)
+tile.furenikusroads.yellow_junction_side_line_connection.0.name=Filter Lane Thin->Thick L Back Continuous
+tile.furenikusroads.yellow_junction_side_line_connection.4.name=Filter Lane Thin->Thick L Back
+tile.furenikusroads.yellow_junction_side_line_connection.8.name=Filter Lane Thin->Thick L Forward Continuous
+tile.furenikusroads.yellow_junction_side_line_connection.12.name=Filter Lane Thin->Thick L Forward
+tile.furenikusroads.yellow_junction_side_line_connection_thin.0.name=Filter Lane Thin->Thin L Back Continuous
+tile.furenikusroads.yellow_junction_side_line_connection_thin.4.name=Filter Lane Thin->Thin L Back
+tile.furenikusroads.yellow_junction_side_line_connection_thin.8.name=Filter Lane Thin->Thin L Forward Continuous
+tile.furenikusroads.yellow_junction_side_line_connection_thin.12.name=Filter Lane Thin->Thin L Forward
+tile.furenikusroads.yellow_junction_side_line_connection_thick_thick.0.name=Filter Lane Thick->Thick L Back Continuous
+tile.furenikusroads.yellow_junction_side_line_connection_thick_thick.4.name=Filter Lane Thick->Thick L Back
+tile.furenikusroads.yellow_junction_side_line_connection_thick_thick.8.name=Filter Lane Thick->Thick L Forward Continuous
+tile.furenikusroads.yellow_junction_side_line_connection_thick_thick.12.name=Filter Lane Thick->Thick L Forward
+tile.furenikusroads.yellow_junction_mid_line_connection.0.name=Thin Mid Line to Thick Filter Line L
+tile.furenikusroads.yellow_junction_mid_line_connection.4.name=Thin Mid Line to Thick Filter Line R
+tile.furenikusroads.yellow_junction_mid_line_connection.8.name=Thick Mid Line to Thick Filter Line R
+tile.furenikusroads.yellow_junction_mid_line_connection.12.name=Thick Mid Line to Thick Filter Line R
 
 
 
@@ -506,14 +522,22 @@ tile.furenikusroads.red_junction_fork_mid.name=Junction Fork
 tile.furenikusroads.red_junction_fork_mid_thin.name=Junction Fork (Thin)
 tile.furenikusroads.red_junction_fork_chevron_mid_thin.name=Junction Fork (Chevron, Thin)
 tile.furenikusroads.red_junction_fork_chevron_mid.name=Junction Fork (Chevron)
-tile.furenikusroads.red_junction_side_line_connection.0.name=Filter Lane to Side Line Connector
-tile.furenikusroads.red_junction_side_line_connection.4.name=Filter Lane to Side Line Connector
-tile.furenikusroads.red_junction_side_line_connection.8.name=Filter Lane to Side Line Connector
-tile.furenikusroads.red_junction_side_line_connection.12.name=Filter Lane to Side Line Connector
-tile.furenikusroads.red_junction_side_line_connection_thin.0.name=Filter Lane to Side Line Connector (Thin)
-tile.furenikusroads.red_junction_side_line_connection_thin.4.name=Filter Lane to Side Line Connector (Thin)
-tile.furenikusroads.red_junction_side_line_connection_thin.8.name=Filter Lane to Side Line Connector (Thin)
-tile.furenikusroads.red_junction_side_line_connection_thin.12.name=Filter Lane to Side Line Connector (Thin)
+tile.furenikusroads.red_junction_side_line_connection.0.name=Filter Lane Thin->Thick L Back Continuous
+tile.furenikusroads.red_junction_side_line_connection.4.name=Filter Lane Thin->Thick L Back
+tile.furenikusroads.red_junction_side_line_connection.8.name=Filter Lane Thin->Thick L Forward Continuous
+tile.furenikusroads.red_junction_side_line_connection.12.name=Filter Lane Thin->Thick L Forward
+tile.furenikusroads.red_junction_side_line_connection_thin.0.name=Filter Lane Thin->Thin L Back Continuous
+tile.furenikusroads.red_junction_side_line_connection_thin.4.name=Filter Lane Thin->Thin L Back
+tile.furenikusroads.red_junction_side_line_connection_thin.8.name=Filter Lane Thin->Thin L Forward Continuous
+tile.furenikusroads.red_junction_side_line_connection_thin.12.name=Filter Lane Thin->Thin L Forward
+tile.furenikusroads.red_junction_side_line_connection_thick_thick.0.name=Filter Lane Thick->Thick L Back Continuous
+tile.furenikusroads.red_junction_side_line_connection_thick_thick.4.name=Filter Lane Thick->Thick L Back
+tile.furenikusroads.red_junction_side_line_connection_thick_thick.8.name=Filter Lane Thick->Thick L Forward Continuous
+tile.furenikusroads.red_junction_side_line_connection_thick_thick.12.name=Filter Lane Thick->Thick L Forward
+tile.furenikusroads.red_junction_mid_line_connection.0.name=Thin Mid Line to Thick Filter Line L
+tile.furenikusroads.red_junction_mid_line_connection.4.name=Thin Mid Line to Thick Filter Line R
+tile.furenikusroads.red_junction_mid_line_connection.8.name=Thick Mid Line to Thick Filter Line R
+tile.furenikusroads.red_junction_mid_line_connection.12.name=Thick Mid Line to Thick Filter Line R
 
 
 
