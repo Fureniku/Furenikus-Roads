@@ -94,16 +94,22 @@ public class FRBlocks {
 	public static NonPaintRoadTopBlock manhole_cover_square = new NonPaintRoadTopBlock("manhole_cover_square");
 	
 	public static BarrierBlock barrier_standard_mid = new BarrierBlock("barrier_standard_mid");
+	public static BarrierBlock barrier_double_mid = new BarrierBlock("barrier_double_mid");
+	public static ConcreteBarrierBlock barrier_concrete_1_mid = new ConcreteBarrierBlock("barrier_concrete_1_mid");
+	public static ConcreteBarrierBlock barrier_concrete_2_mid = new ConcreteBarrierBlock("barrier_concrete_2_mid");
+	public static BarsBarrierBlock barrier_bars_mid = new BarsBarrierBlock("barrier_bars_mid");
 	public static BarrierEndBlock barrier_end = new BarrierEndBlock("barrier_end");
 	
 	public static CatsEyeBlock cats_eye_white  = new CatsEyeBlock("cats_eye_white", false);
 	public static CatsEyeBlock cats_eye_yellow = new CatsEyeBlock("cats_eye_yellow", false);
 	public static CatsEyeBlock cats_eye_red    = new CatsEyeBlock("cats_eye_red", false);
 	public static CatsEyeBlock cats_eye_green  = new CatsEyeBlock("cats_eye_green", false);
+	public static CatsEyeBlock cats_eye_blue  = new CatsEyeBlock("cats_eye_blue", false);
 	public static CatsEyeBlock cats_eye_white_double  = new CatsEyeBlock("cats_eye_white_double", true);
 	public static CatsEyeBlock cats_eye_yellow_double = new CatsEyeBlock("cats_eye_yellow_double", true);
 	public static CatsEyeBlock cats_eye_red_double    = new CatsEyeBlock("cats_eye_red_double", true);
 	public static CatsEyeBlock cats_eye_green_double  = new CatsEyeBlock("cats_eye_green_double", true);
+	public static CatsEyeBlock cats_eye_blue_double  = new CatsEyeBlock("cats_eye_blue_double", true);
 	
 	public static MetalPost post_small_vertical = new MetalPost("post_small_vertical", false, 0.125);
 	public static MetalPost post_small_horizontal = new MetalPost("post_small_horizontal", true, 0.125);
@@ -797,10 +803,12 @@ public class FRBlocks {
 		catsEyeList.add(cats_eye_yellow);
 		catsEyeList.add(cats_eye_red);
 		catsEyeList.add(cats_eye_green);
+		catsEyeList.add(cats_eye_blue);
 		catsEyeList.add(cats_eye_white_double);
 		catsEyeList.add(cats_eye_yellow_double);
 		catsEyeList.add(cats_eye_red_double);
 		catsEyeList.add(cats_eye_green_double);
+		catsEyeList.add(cats_eye_blue_double);
 		
 		genericList.add(post_small_vertical);
 		genericList.add(post_small_horizontal);
@@ -812,7 +820,11 @@ public class FRBlocks {
 		genericList.add(street_light_1);
 		
 		genericList.add(barrier_standard_mid);
+		genericList.add(barrier_double_mid);
+		genericList.add(barrier_concrete_1_mid);
+		genericList.add(barrier_concrete_2_mid);
 		genericList.add(barrier_end);
+		genericList.add(barrier_bars_mid);
 		
 		genericList.add(fake_light_source);
 

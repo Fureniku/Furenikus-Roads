@@ -28,13 +28,13 @@ public class CrusherBakedModel implements IBakedModel {
 	
 	private IBakedModel model;
 	float p = 1/16F;
-	private CatsEyeOverrideList overrideList;
+	private CrusherOverrideList overrideList;
 	String rot;
 	
 	public CrusherBakedModel(IBakedModel model, String rot) {
 		this.model = model;
 		this.rot = rot;
-		this.overrideList = new CatsEyeOverrideList(this);
+		this.overrideList = new CrusherOverrideList(this);
 	}
 
 	@Override
@@ -162,10 +162,10 @@ public class CrusherBakedModel implements IBakedModel {
 		return this;
 	}
 	
-	private static class CatsEyeOverrideList extends ItemOverrideList {
+	private static class CrusherOverrideList extends ItemOverrideList {
 		private CrusherBakedModel model;
 		
-		public CatsEyeOverrideList(CrusherBakedModel model) {
+		public CrusherOverrideList(CrusherBakedModel model) {
 			super(Collections.emptyList());
 			this.model = model;
 		}

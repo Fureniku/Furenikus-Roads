@@ -176,13 +176,13 @@ public class CrusherEntity extends RoadTileEntity implements ITickable, ICapabil
 			ItemBlock ib = (ItemBlock) itemIn.getItem();
 			
 			if (ib.getBlock() == Blocks.STONE) { return new ItemStack(Blocks.COBBLESTONE, 1); }
-			if (ib.getBlock() == Blocks.COBBLESTONE) { return new ItemStack(Blocks.GRAVEL); } //crushed rock
-			if (ib.getBlock() == Blocks.GRAVEL) { return new ItemStack(FRBlocks.generic_blocks, 1, 0); }
+			if (ib.getBlock() == Blocks.COBBLESTONE) { return new ItemStack(Blocks.GRAVEL); } 
+			if (ib.getBlock() == Blocks.GRAVEL) { return new ItemStack(FRBlocks.generic_blocks, 1, 0); } //crushed rock
 			
 			
 			if (ib.getBlock() == FRBlocks.generic_blocks) {
 				if (itemIn.getItemDamage() == 0) { return new ItemStack(Blocks.SAND, 1); } //crushed rock
-				if (itemIn.getItemDamage() == 1) { return new ItemStack(FRItems.cement_dust, 4); } //clinker
+				if (itemIn.getItemDamage() == 1) { return new ItemStack(FRItems.clinker_mix, 4); } //clinker
 				if (itemIn.getItemDamage() == 2) { return new ItemStack(FRItems.cement_dust, 4); } //cement
 				if (itemIn.getItemDamage() == 3) { return new ItemStack(FRItems.limestone_dust, 4); } //limestone
 			}

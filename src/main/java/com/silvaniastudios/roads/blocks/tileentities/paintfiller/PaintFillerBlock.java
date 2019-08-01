@@ -11,6 +11,7 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -39,8 +40,8 @@ public class PaintFillerBlock extends RoadTEBlock {
 	
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-		tooltip.add("Used to create paint, then fill a paint gun.");
-		tooltip.add("Fuel, then add white, yellow or red dye to begin!");
+		tooltip.add(I18n.format("roads.gui.paint_filler.tooltip_1"));
+		tooltip.add(I18n.format("roads.gui.paint_filler.tooltip_2"));
 	}
 	
 	@Override

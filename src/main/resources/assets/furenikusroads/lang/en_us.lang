@@ -597,6 +597,11 @@ item.sidewalk_fragment_clean.name=Clean Sidewalk Fragment
 item.sidewalk_fragment_dark.name=Dark Sidewalk Fragment
 item.sidewalk_fragment_tan.name=Tan Sidewalk Fragment
 
+fluid.white_paint=White Paint
+fluid.yellow_paint=Yellow Paint
+fluid.red_paint=Red Paint
+fluid.tar=Tar
+
 itemGroup.tab_roads=[Fureniku's Roads] Roads
 itemGroup.tab_sidewalks=[Fureniku's Roads] Sidewalks
 itemGroup.tab_tools=[Fureniku's Roads] Tools
@@ -606,3 +611,47 @@ itemGroup.tab_paint_icons=[Fureniku's Roads] Icon Paints
 itemGroup.tab_paint_letters=[Fureniku's Roads] Letter Paints
 itemGroup.tab_paint_text=[Fureniku's Roads] Text Paints
 itemGroup.tab_paint_junction=[Fureniku's Roads] Junction Paints
+
+roads.gui.inputSlot=Input
+roads.gui.outputSlot=Output
+roads.gui.fuelSlot=Fuel
+roads.gui.tarInputSlot=Tar Bucket Input
+roads.gui.tarOutputSlot=Tar Bucket Output
+roads.gui.fluidInputSlot=Fluid Bucket Input
+roads.gui.fluidOutputSlot=Fluid Bucket Output
+roads.gui.bucketInputSlot=Empty Bucket for fluid
+roads.gui.bucketOutputSlot=Empty Bucket from fluid
+roads.gui.valid=Valid Recipes:
+roads.gui.unused=Currently unused
+roads.gui.road_generic_name=Road Block
+roads.gui.road_generic_name_cut=Road Block (Cut)
+roads.gui.fragment_generic_name=Road Fragments
+
+roads.gui.crusher.name=Crusher
+roads.gui.crusher.tooltip_1=Crushes blocks to make different blocks!
+
+roads.gui.road_factory.name=Road Factory
+roads.gui.road_factory.connect_pass=Tar Distiller Linked
+roads.gui.road_factory.connect_failed_1=Tar Distiller not found.
+roads.gui.road_factory.connect_failed_2=Place Tar Distiller to the left,
+roads.gui.road_factory.connect_failed_3=or manually add Tar.
+roads.gui.road_factory.link=Link
+roads.gui.road_factory.tooltip_1=Create road blocks from their base block.
+roads.gui.road_factory.tooltip_2=Tip: Place to the right of a Tar Distiller!
+
+roads.gui.tar_distiller.name=Tar Distiller
+roads.gui.tar_distiller.tooltip_1=Creates tar from input items.
+roads.gui.tar_distiller.tooltip_2=Currently only takes coal. Fuel with lava.
+
+roads.gui.tarmac_cutter.name=Tarmac Cutter
+roads.gui.tarmac_cutter.bladeSlot=Cutter Blade
+roads.gui.tarmac_cutter.tooltip_1=Cuts tarmac down to size
+roads.gui.tarmac_cutter.tooltip_2=Use Tarmac Cutter Blades to set the required size.
+
+roads.gui.paint_filler.name=Paint Filler
+roads.gui.paint_filler.paint_gun_slot=Paint Gun Mount
+roads.gui.paint_filler.white_slot=White Dye Converter
+roads.gui.paint_filler.yellow_slot=Yellow Dye Converter
+roads.gui.paint_filler.red_slot=Red Dye Converter
+roads.gui.paint_filler.tooltip_1=Used to create paint, then fill a paint gun.
+roads.gui.paint_filler.tooltip_2=Fuel, then add white, yellow or red dye to begin!

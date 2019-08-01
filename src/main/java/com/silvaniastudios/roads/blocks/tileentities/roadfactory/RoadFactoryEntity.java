@@ -204,10 +204,10 @@ public class RoadFactoryEntity extends RoadTileEntity implements ITickable, ICap
 			
 			if (block == Blocks.STONE) {
 				if (meta == 0) { return new ItemStack(FRBlocks.road_block_stone, 8, 15); }
-				if (meta == 1) { return new ItemStack(FRBlocks.road_block_pale, 8, 15); }
-				if (meta == 3) { return new ItemStack(FRBlocks.road_block_light, 8, 15); }
-				if (meta == 5) { return new ItemStack(FRBlocks.road_block_dark, 8, 15); }
-				if (meta == 6) { return new ItemStack(FRBlocks.road_block_fine, 8, 15); }
+				if (meta == 1) { return new ItemStack(FRBlocks.road_block_pale, 8, 15); } //granite
+				if (meta == 3) { return new ItemStack(FRBlocks.road_block_light, 8, 15); } //diorite
+				if (meta == 5) { return new ItemStack(FRBlocks.road_block_dark, 8, 15); } //andesite
+				if (meta == 6) { return new ItemStack(FRBlocks.road_block_fine, 8, 15); } //polished andesite
 			}
 			
 			if (block == FRBlocks.generic_blocks && meta == 0) { return new ItemStack(FRBlocks.road_block_standard, 8, 15); }

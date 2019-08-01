@@ -1,5 +1,8 @@
 package com.silvaniastudios.roads.client.gui;
 
+import java.util.Arrays;
+import java.util.List;
+
 import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.RoadsConfig;
 import com.silvaniastudios.roads.blocks.tileentities.tarmaccutter.TarmacCutterContainer;
@@ -7,7 +10,9 @@ import com.silvaniastudios.roads.blocks.tileentities.tarmaccutter.TarmacCutterEn
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextFormatting;
 
 public class GuiTarmacCutter extends GuiContainer {
 	
@@ -33,8 +38,8 @@ public class GuiTarmacCutter extends GuiContainer {
 		int left = (width - xSize) / 2;
 		int top = (height - ySize) / 2;
 		
-		drawTooltip(2, left, top, mouseX, mouseY);
-        fontRenderer.drawString("Tarmac Cutter", 6, 6, 4210752);
+        fontRenderer.drawString(I18n.format("roads.gui.tarmac_cutter.name"), 6, 6, 4210752);
+        drawTooltip(2, left, top, mouseX, mouseY);
 	}
 
 	@Override
@@ -52,6 +57,21 @@ public class GuiTarmacCutter extends GuiContainer {
 	
 	private void drawTooltip(int col, int left, int top, int mouseX, int mouseY) {
 		if (mouseX >= (left + 153) && mouseX <= (left + 167) && mouseY >= (top + 3) && mouseY <= (top + 17)) { this.drawHoveringText(tileEntity.fuel_remaining + "/" + tileEntity.last_fuel_cap, mouseX - left, mouseY - top + 15); }
+		
+		if (RoadsConfig.general.guiGuide) {
+			String a = TextFormatting.RESET + " -> " + TextFormatting.GREEN;
+			List<String> inputList = Arrays.asList(
+					I18n.format("roads.gui.inputSlot"),
+					"",
+					TextFormatting.UNDERLINE + I18n.format("roads.gui.valid"),
+					TextFormatting.AQUA + I18n.format("roads.gui.road_generic_name") + a + I18n.format("roads.gui.road_generic_name_cut") + ", " + I18n.format("roads.gui.fragment_generic_name"));
+
+			
+			if (mouseX >= (left +   8) && mouseX <= (left +  24) && mouseY >= (top + 20) && mouseY <= (top + 36)) { this.drawHoveringText(inputList, mouseX - left, mouseY - top + 15); }
+			if (mouseX >= (left +  53) && mouseX <= (left +  69) && mouseY >= (top + 20) && mouseY <= (top + 36)) { this.drawHoveringText(I18n.format("roads.gui.tarmac_cutter.bladeSlot"), mouseX - left, mouseY - top + 15); }
+			if (mouseX >= (left +  98) && mouseX <= (left + 132) && mouseY >= (top + 20) && mouseY <= (top + 36)) { this.drawHoveringText(I18n.format("roads.gui.outputSlot"), mouseX - left, mouseY - top + 15); }
+			if (mouseX >= (left + 152) && mouseX <= (left + 168) && mouseY >= (top + 20) && mouseY <= (top + 36)) { this.drawHoveringText(I18n.format("roads.gui.fuelSlot"), mouseX - left, mouseY - top + 15); }
+		}
 	}
 	
 	private void drawFuel(int left, int top) {

@@ -28,5 +28,8 @@ public class RoadsConfig {
 		
 		@Config.Comment("How much paint is consumed when you place one block")
 		public int costToPaint = 50;
+		
+		@Config.Comment("Show additional tooltips to help in GUIs (showing names of slots etc)")
+		public boolean guiGuide = true;
 	}
 }

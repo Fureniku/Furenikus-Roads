@@ -10,7 +10,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
@@ -20,62 +19,47 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 
-public class BarrierBlock extends BlockBase implements IConnectable {
+public class BarsBarrierBlock extends BlockBase implements IConnectable {
 	
 	public static final PropertyBool NORTH = PropertyBool.create("north");
 	public static final PropertyBool EAST = PropertyBool.create("east");
 	public static final PropertyBool SOUTH = PropertyBool.create("south");
 	public static final PropertyBool WEST = PropertyBool.create("west");
-	public static final PropertyBool DEFAULTS = PropertyBool.create("zz_default_stuff");
-	public static final PropertyEnum<BarrierBlock.EnumPost> POSTS = PropertyEnum.create("post", BarrierBlock.EnumPost.class);
+	public static final PropertyBool POSTS = PropertyBool.create("post");
 
-	public BarrierBlock(String name) {
+	public BarsBarrierBlock(String name) {
 		super(name, Material.IRON);
 		this.setDefaultState(this.blockState.getBaseState()
 				.withProperty(NORTH, true)
 				.withProperty(EAST, false)
 				.withProperty(SOUTH, true)
 				.withProperty(WEST, false)
-				.withProperty(DEFAULTS, true)
-				.withProperty(POSTS, EnumPost.NONE));
+				.withProperty(POSTS, false));
 		this.setCreativeTab(FurenikusRoads.tab_road_parts);
 		this.setHardness(1.5F);
 		this.setHarvestLevel("pickaxe", 1);
 	}
 
 	@SuppressWarnings("deprecation")
-	public boolean canConnectTo(IBlockAccess worldIn, BlockPos pos, BlockPos oppositePos) {
+	public boolean canConnectTo(IBlockAccess worldIn, BlockPos pos, boolean checkingLevel) {
 		IBlockState state = worldIn.getBlockState(pos);
 		Block block = state.getBlock();
-		if ((worldIn.getBlockState(oppositePos).getBlock() instanceof IConnectable) && block.isFullCube(state)) { return true; }
+		if (checkingLevel) {
+			if (block instanceof IConnectable || block.isOpaqueCube(state)) {
+				return true;
+			}
+		} 
+		
 		return block instanceof IConnectable;
 	}
 
 	private boolean canBarrierConnectTo(IBlockAccess world, BlockPos pos, EnumFacing facing) {
 		BlockPos offset = pos.offset(facing);
-		BlockPos oppositeOffset = pos.offset(facing.getOpposite());
-		return canConnectTo(world, offset, oppositeOffset) || canConnectTo(world, offset.offset(EnumFacing.DOWN), oppositeOffset) || canConnectTo(world, offset.offset(EnumFacing.UP), oppositeOffset);
-	}
-	
-	private EnumPost postDirection(IBlockAccess world, BlockPos pos, int meta) {
-		if (meta == 1) {
-			boolean north = canBarrierConnectTo(world, pos, EnumFacing.NORTH);
-			boolean east  = canBarrierConnectTo(world, pos, EnumFacing.EAST);
-			boolean south = canBarrierConnectTo(world, pos, EnumFacing.SOUTH);
-			boolean west  = canBarrierConnectTo(world, pos, EnumFacing.WEST);
-			
-			if (north && east && south && west) { return EnumPost.NONE; }
-			if (!north && !south && east && west) { return EnumPost.NS; }
-			if ( north && !south && east && west) { return EnumPost.NS; }
-			if (!north &&  south && east && west) { return EnumPost.NS; }
-			
-			return EnumPost.EW;
-		}
-		return EnumPost.NONE;
+		return canConnectTo(world, offset, true) || canConnectTo(world, offset.offset(EnumFacing.DOWN), false) || canConnectTo(world, offset.offset(EnumFacing.UP), false);
 	}
 	
 	public int getMetaFromState(IBlockState state) {
-		if (state.getValue(POSTS).equals(BarrierBlock.EnumPost.NS) || state.getValue(POSTS).equals(BarrierBlock.EnumPost.EW)) {
+		if (state.getValue(POSTS).equals(true)) {
 			return 1;
 		}
 		return 0;
@@ -83,13 +67,13 @@ public class BarrierBlock extends BlockBase implements IConnectable {
 	
 	public IBlockState getStateFromMeta(int meta) {
 		if (meta == 1) {
-			return this.getDefaultState().withProperty(POSTS, EnumPost.NS);
+			return this.getDefaultState().withProperty(POSTS, true);
 		}
 		return this.getDefaultState();
 	}
 	
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, new IProperty[] {NORTH, EAST, WEST, SOUTH, DEFAULTS, POSTS});
+		return new BlockStateContainer(this, new IProperty[] {NORTH, EAST, WEST, SOUTH, POSTS});
 	}
 
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
@@ -97,7 +81,7 @@ public class BarrierBlock extends BlockBase implements IConnectable {
 			.withProperty(EAST,  canBarrierConnectTo(worldIn, pos, EnumFacing.EAST))
 			.withProperty(SOUTH, canBarrierConnectTo(worldIn, pos, EnumFacing.SOUTH))
 			.withProperty(WEST,  canBarrierConnectTo(worldIn, pos, EnumFacing.WEST))
-			.withProperty(POSTS, postDirection(worldIn, pos, getMetaFromState(state)));
+			.withProperty(POSTS, getMetaFromState(state) == 1);
 	}
 
     @Override

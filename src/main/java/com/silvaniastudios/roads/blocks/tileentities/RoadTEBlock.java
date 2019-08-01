@@ -42,6 +42,8 @@ public class RoadTEBlock extends Block {
 		setUnlocalizedName(FurenikusRoads.MODID + "." + name);
 		setRegistryName(name);
 		this.setCreativeTab(FurenikusRoads.tab_tools);
+		this.setHardness(2.5F);
+		this.setHarvestLevel("pickaxe", 1);
 	}
 	
 	@SuppressWarnings("deprecation")

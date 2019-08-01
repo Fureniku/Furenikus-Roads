@@ -40,8 +40,8 @@ public class ModelBakeHandler {
 	}
 	
 	private void bakeCatsEyeModels(ModelBakeEvent event) {
-		String[] catsEyeList = new String[] {"cats_eye_white", "cats_eye_yellow", "cats_eye_red", "cats_eye_green"};
-		String[] colourList = new String[] {"white", "yellow", "red", "green"};
+		String[] catsEyeList = new String[] {"cats_eye_white", "cats_eye_yellow", "cats_eye_red", "cats_eye_green", "cats_eye_blue"};
+		String[] colourList = new String[] {"white", "yellow", "red", "green", "blue"};
 		
 		for (int i = 0; i < catsEyeList.length; i++) {
 			for (int j = 0; j < CatsEyeBlock.EnumCatsEye.values().length; j++) {

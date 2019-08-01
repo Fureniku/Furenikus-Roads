@@ -10,6 +10,7 @@ import com.silvaniastudios.roads.blocks.tileentities.RoadTileEntity;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -39,8 +40,8 @@ public class TarmacCutterBlock extends RoadTEBlock {
 	
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-		tooltip.add("Cuts tarmac down to size");
-		tooltip.add("Use Tarmac Cutter Blades to set the required size.");
+		tooltip.add(I18n.format("roads.gui.tarmac_cutter.tooltip_1"));
+		tooltip.add(I18n.format("roads.gui.tarmac_cutter.tooltip_2"));
 	}
 	
 	@Override

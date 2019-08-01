@@ -7,6 +7,7 @@ import com.silvaniastudios.roads.blocks.tileentities.paintfiller.PaintFillerEnti
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 
 public class GuiPaintFiller extends GuiContainer {
@@ -27,7 +28,7 @@ public class GuiPaintFiller extends GuiContainer {
 		int top = (height - ySize) / 2;
         
         drawTooltip(2, left, top, mouseX, mouseY);
-        fontRenderer.drawString("Paint Filler", 6, 6, 4210752);
+        fontRenderer.drawString(I18n.format("roads.gui.paint_filler.name"), 6, 6, 4210752);
 	}
 	
 	@Override
@@ -87,6 +88,14 @@ public class GuiPaintFiller extends GuiContainer {
 		if (mouseX >= (left + 40) && mouseX <= (left + 50) && mouseY >= (top + 58) && mouseY <= (top + 108)) { this.drawHoveringText(tileEntity.gun_red    + "/" + PaintFillerEntity.GUN_TANK_CAP, mouseX - left, mouseY - top + 15); }
 		
 		if (mouseX >= (left + 75) && mouseX <= (left + 89) && mouseY >= (top + 75) && mouseY <= (top + 89)) { this.drawHoveringText(tileEntity.fuel_remaining + "/" + tileEntity.last_fuel_cap, mouseX - left, mouseY - top + 15); }
+		
+		if (RoadsConfig.general.guiGuide) {
+			if (mouseX >= (left + 21)  && mouseX <= (left + 37) && mouseY >= (top + 36) && mouseY <= (top + 52)) { this.drawHoveringText(I18n.format("roads.gui.paint_filler.paint_gun_slot"), mouseX - left, mouseY - top + 15); }
+			if (mouseX >= (left + 74)  && mouseX <= (left + 90) && mouseY >= (top +  8) && mouseY <= (top + 24)) { this.drawHoveringText(I18n.format("roads.gui.paint_filler.white_slot"), mouseX - left, mouseY - top + 15); }
+			if (mouseX >= (left + 74)  && mouseX <= (left + 90) && mouseY >= (top + 30) && mouseY <= (top + 46)) { this.drawHoveringText(I18n.format("roads.gui.paint_filler.yellow_slot"), mouseX - left, mouseY - top + 15); }
+			if (mouseX >= (left + 74)  && mouseX <= (left + 90) && mouseY >= (top + 52) && mouseY <= (top + 68)) { this.drawHoveringText(I18n.format("roads.gui.paint_filler.red_slot"), mouseX - left, mouseY - top + 15); }
+			if (mouseX >= (left + 74)  && mouseX <= (left + 90) && mouseY >= (top + 92) && mouseY <= (top + 108)) { this.drawHoveringText(I18n.format("roads.gui.fuelSlot"), mouseX - left, mouseY - top + 15); }
+		}
 	}
 	
 	private int getPercentage(int num, int max) {

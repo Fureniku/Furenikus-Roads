@@ -12,9 +12,13 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -36,18 +40,14 @@ public class StreetBlock extends BlockBase implements IMetaBlockName {
 	}
 	
 	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+	public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
 		int meta = getMetaFromState(state);
-		if (this == FRBlocks.generic_blocks && meta == 3) { return FRItems.limestone_dust; }
 		
-		return super.getItemDropped(state, rand, fortune);
-	}
-	
-	@Override
-	public int quantityDropped(IBlockState state, int fortune, Random random) {
-		int meta = getMetaFromState(state);
-		if (this == FRBlocks.generic_blocks && meta == 3) { return 4; }
-        return quantityDroppedWithBonus(fortune, random);
+		if (this == FRBlocks.generic_blocks && meta == 3) {
+			drops.add(new ItemStack(FRItems.limestone_dust, 4));
+		} else {
+			super.getDrops(drops, world, pos, state, fortune);
+		}
     }
 	
 	@SideOnly(Side.CLIENT)

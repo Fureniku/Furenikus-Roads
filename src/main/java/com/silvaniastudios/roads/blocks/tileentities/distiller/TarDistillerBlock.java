@@ -11,6 +11,7 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -38,8 +39,8 @@ public class TarDistillerBlock extends RoadTEBlock {
 	
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-		tooltip.add("Creates tar from input items.");
-		tooltip.add("Currently only takes coal. Fuel with lava.");
+		tooltip.add(I18n.format("roads.gui.tar_distiller.tooltip_1"));
+		tooltip.add(I18n.format("roads.gui.tar_distiller.tooltip_2"));
 	}
 	
 	@Override

@@ -40,6 +40,8 @@ public class BarrierEndBlock extends BlockBase implements IConnectable, IMetaBlo
 		this.setHardness(2.0F);
 		setDefaultState(this.blockState.getBaseState().withProperty(META_ID, EnumMeta.id0));
 		this.setCreativeTab(FurenikusRoads.tab_road_parts);
+		this.setHardness(1.5F);
+		this.setHarvestLevel("pickaxe", 1);
 	}
 
 	@Override

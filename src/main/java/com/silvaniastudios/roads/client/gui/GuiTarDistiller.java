@@ -1,13 +1,21 @@
 package com.silvaniastudios.roads.client.gui;
 
+import java.util.Arrays;
+import java.util.List;
+
 import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.RoadsConfig;
 import com.silvaniastudios.roads.blocks.tileentities.distiller.TarDistillerContainer;
 import com.silvaniastudios.roads.blocks.tileentities.distiller.TarDistillerEntity;
+import com.silvaniastudios.roads.items.FRItems;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextFormatting;
 
 public class GuiTarDistiller extends GuiContainer {
 	
@@ -26,8 +34,8 @@ public class GuiTarDistiller extends GuiContainer {
         int left = (width - xSize) / 2;
         int top = (height - ySize) / 2;
         
+        fontRenderer.drawString(I18n.format("roads.gui.tar_distiller.name"), 32, 6, 4210752);
         drawTooltip(2, left, top, mouseX, mouseY);
-        fontRenderer.drawString("Tar Distiller", 32, 6, 4210752);
 	}
 
 	@Override
@@ -76,6 +84,33 @@ public class GuiTarDistiller extends GuiContainer {
 		if (mouseX >= (left + 148) && mouseX <= (left + 168) && mouseY >= (top + 8) && mouseY <= (top + 108)) { this.drawHoveringText(tileEntity.fluidOutput2.getFluidAmount() + "/" + TarDistillerEntity.TANK_CAP, mouseX - left, mouseY - top + 15); }
 		
 		if (mouseX >= (left + 68) && mouseX <= (left + 82) && mouseY >= (top + 75) && mouseY <= (top + 89)) { this.drawHoveringText(tileEntity.fuel_remaining + "/" + tileEntity.last_fuel_cap, mouseX - left, mouseY - top + 15); }
+		
+		if (RoadsConfig.general.guiGuide) {
+			String a = TextFormatting.RESET + " -> " + TextFormatting.GREEN;
+			List<String> inputList = Arrays.asList(
+					I18n.format("roads.gui.inputSlot"),
+					"",
+					TextFormatting.UNDERLINE + I18n.format("roads.gui.valid"),
+					TextFormatting.AQUA + new ItemStack(Items.COAL, 1, 0).getDisplayName() + a + new ItemStack(FRItems.coal_coke, 1, 0).getDisplayName());
+			
+			List<String> fluidInputList = Arrays.asList(
+					I18n.format("roads.gui.fluidInputSlot"),
+					TextFormatting.ITALIC + I18n.format("roads.gui.unused"));
+			
+			if (mouseX >= (left +  34) && mouseX <= (left +  50) && mouseY >= (top + 30) && mouseY <= (top +  46)) { this.drawHoveringText(inputList, mouseX - left, mouseY - top + 15); }
+			if (mouseX >= (left +  34) && mouseX <= (left +  50) && mouseY >= (top + 70) && mouseY <= (top +  86)) { this.drawHoveringText(fluidInputList, mouseX - left, mouseY - top + 15); }
+			if (mouseX >= (left +  34) && mouseX <= (left +  50) && mouseY >= (top + 92) && mouseY <= (top + 108)) { this.drawHoveringText(I18n.format("roads.gui.bucketOutputSlot"), mouseX - left, mouseY - top + 15); }
+			if (mouseX >= (left +  67) && mouseX <= (left +  83) && mouseY >= (top + 92) && mouseY <= (top + 108)) { this.drawHoveringText(I18n.format("roads.gui.fuelSlot"), mouseX - left, mouseY - top + 15); }
+			
+			if (mouseX >= (left + 100) && mouseX <= (left + 116) && mouseY >= (top + 70) && mouseY <= (top +  86)) { this.drawHoveringText(I18n.format("roads.gui.bucketInputSlot"), mouseX - left, mouseY - top + 15); }
+			if (mouseX >= (left + 100) && mouseX <= (left + 116) && mouseY >= (top + 92) && mouseY <= (top + 108)) { this.drawHoveringText(I18n.format("roads.gui.fluidOutputSlot"), mouseX - left, mouseY - top + 15); }
+			
+			if (mouseX >= (left + 174) && mouseX <= (left + 190) && mouseY >= (top + 70) && mouseY <= (top +  86)) { this.drawHoveringText(I18n.format("roads.gui.bucketInputSlot"), mouseX - left, mouseY - top + 15); }
+			if (mouseX >= (left + 174) && mouseX <= (left + 190) && mouseY >= (top + 92) && mouseY <= (top + 108)) { this.drawHoveringText(I18n.format("roads.gui.fluidOutputSlot"), mouseX - left, mouseY - top + 15); }
+			
+			if (mouseX >= (left + 100) && mouseX <= (left + 116) && mouseY >= (top +  8) && mouseY <= (top +  24)) { this.drawHoveringText(I18n.format("roads.gui.outputSlot"), mouseX - left, mouseY - top + 15); }
+			if (mouseX >= (left + 100) && mouseX <= (left + 116) && mouseY >= (top + 30) && mouseY <= (top +  46)) { this.drawHoveringText(I18n.format("roads.gui.outputSlot"), mouseX - left, mouseY - top + 15); }
+		}
 	}
 	
 	private int getPercentage(int num, int max) {

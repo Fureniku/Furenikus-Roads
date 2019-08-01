@@ -11,6 +11,7 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -36,8 +37,8 @@ public class RoadFactoryBlock extends RoadTEBlock {
 	
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-		tooltip.add("Create road blocks from their base block.");
-		tooltip.add("Tip: Place to the right of a tar factory!");
+		tooltip.add(I18n.format("roads.gui.road_factory.tooltip_1"));
+		tooltip.add(I18n.format("roads.gui.road_factory.tooltip_2"));
 	}
 	
 	@Override
@@ -52,6 +53,10 @@ public class RoadFactoryBlock extends RoadTEBlock {
 	}
 	
 	public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
+		return state.withProperty(CONNECTED, connect(state, world, pos)).withProperty(FURNACE_ACTIVE, isFurnaceEnabled(state, world, pos));
+	}
+	
+	public boolean connect(IBlockState state, IBlockAccess world, BlockPos pos) {
 		EnumFacing getLeft = EnumFacing.EAST;
 		if (getMetaFromState(state) == 0) { getLeft = EnumFacing.WEST;  }
 		if (getMetaFromState(state) == 1) { getLeft = EnumFacing.NORTH; }
@@ -59,8 +64,7 @@ public class RoadFactoryBlock extends RoadTEBlock {
 		if (getMetaFromState(state) == 3) { getLeft = EnumFacing.SOUTH; }
 		
 		IBlockState blockRight = world.getBlockState(pos.offset(getLeft));
-		boolean connect = blockRight.getBlock() instanceof TarDistillerBlock;
-		return state.withProperty(CONNECTED, connect).withProperty(FURNACE_ACTIVE, isFurnaceEnabled(state, world, pos));
+		return blockRight.getBlock() instanceof TarDistillerBlock;
 	}
 	
 	protected BlockStateContainer createBlockState() {
