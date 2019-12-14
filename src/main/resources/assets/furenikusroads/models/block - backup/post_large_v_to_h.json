@@ -1,0 +1,46 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "furenikusroads:blocks/machine_metal",
+		"particle": "furenikusroads:blocks/machine_metal"
+	},
+	"elements": [
+		{
+			"from": [5, 5, 0],
+			"to": [11, 11, 4],
+			"faces": {
+				"north": {"uv": [5, 5, 11, 11], "texture": "#0"},
+				"east": {"uv": [16, 11, 12, 5], "texture": "#0"},
+				"south": {"uv": [5, 5, 11, 11], "texture": "#0"},
+				"west": {"uv": [0, 5, 4, 11], "texture": "#0"},
+				"up": {"uv": [5, 0, 11, 4], "texture": "#0"},
+				"down": {"uv": [5, 12, 11, 16], "texture": "#0"}
+			}
+		},
+		{
+			"from": [5.005, 5.46447, 1.29289],
+			"to": [10.995, 10.46447, 11.15789],
+			"rotation": {"angle": 45, "axis": "x", "origin": [8, 7.46447, 3.29289]},
+			"faces": {
+				"north": {"uv": [5.005, 5.53553, 10.995, 10.53553], "texture": "#0"},
+				"east": {"uv": [14.70711, 10.53553, 4.84211, 5.53553], "texture": "#0"},
+				"south": {"uv": [5.005, 5.53553, 10.995, 10.53553], "texture": "#0"},
+				"west": {"uv": [1.29289, 5.53553, 11.15789, 10.53553], "texture": "#0"},
+				"up": {"uv": [5.005, 1.29289, 10.995, 11.15789], "texture": "#0"},
+				"down": {"uv": [5.005, 4.84211, 10.995, 14.70711], "texture": "#0"}
+			}
+		},
+		{
+			"from": [5, 0, 5],
+			"to": [11, 4, 11],
+			"faces": {
+				"north": {"uv": [5, 12, 11, 16], "texture": "#0"},
+				"east": {"uv": [11, 16, 5, 12], "texture": "#0"},
+				"south": {"uv": [5, 12, 11, 16], "texture": "#0"},
+				"west": {"uv": [5, 12, 11, 16], "texture": "#0"},
+				"up": {"uv": [5, 5, 11, 11], "texture": "#0"},
+				"down": {"uv": [5, 5, 11, 11], "texture": "#0"}
+			}
+		}
+	]
+}

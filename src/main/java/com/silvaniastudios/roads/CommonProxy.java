@@ -45,5 +45,6 @@ public class CommonProxy {
 	
 	public static void registerFurnaceRecipes() {
 		GameRegistry.addSmelting(FRItems.clinker_mix, new ItemStack(FRBlocks.generic_blocks, 1, 1), 0.0F);
+		GameRegistry.addSmelting(FRItems.cement_dust, new ItemStack(FRBlocks.generic_blocks, 1, 2), 0.0F);
 	}
 }

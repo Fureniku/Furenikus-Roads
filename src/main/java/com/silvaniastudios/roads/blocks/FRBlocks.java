@@ -14,6 +14,7 @@ import com.silvaniastudios.roads.blocks.paint.Connected3x1PaintBlock;
 import com.silvaniastudios.roads.blocks.paint.CrossingPaintBlock;
 import com.silvaniastudios.roads.blocks.paint.FarSideLinePaintBlock;
 import com.silvaniastudios.roads.blocks.paint.HatchBoxPaintBlock;
+import com.silvaniastudios.roads.blocks.paint.IconPaintBlock;
 import com.silvaniastudios.roads.blocks.paint.JunctionFilterLinePaintBlock;
 import com.silvaniastudios.roads.blocks.paint.JunctionPaintBlock;
 import com.silvaniastudios.roads.blocks.paint.LetterPaintBlock;
@@ -92,6 +93,8 @@ public class FRBlocks {
 	public static NonPaintRoadTopBlock tactile_crossing_bumps = new NonPaintRoadTopBlock("tactile_crossing_bumps");
 	public static NonPaintRoadTopBlock manhole_cover_round = new NonPaintRoadTopBlock("manhole_cover_round");
 	public static NonPaintRoadTopBlock manhole_cover_square = new NonPaintRoadTopBlock("manhole_cover_square");
+	public static NonPaintRoadTopBlock drain_cover_1 = new NonPaintRoadTopBlock("drain_cover_1");
+	public static NonPaintRoadTopBlock drain_cover_2 = new NonPaintRoadTopBlock("drain_cover_2");
 	
 	public static BarrierBlock barrier_standard_mid = new BarrierBlock("barrier_standard_mid");
 	public static BarrierBlock barrier_double_mid = new BarrierBlock("barrier_double_mid");
@@ -99,6 +102,11 @@ public class FRBlocks {
 	public static ConcreteBarrierBlock barrier_concrete_2_mid = new ConcreteBarrierBlock("barrier_concrete_2_mid");
 	public static BarsBarrierBlock barrier_bars_mid = new BarsBarrierBlock("barrier_bars_mid");
 	public static BarrierEndBlock barrier_end = new BarrierEndBlock("barrier_end");
+	
+	public static BarrierEdgeBlock barrier_bars_edge = new BarrierEdgeBlock("barrier_bars_edge");
+	
+	public static BollardBlock bollard_1 = new BollardBlock("bollard_1");
+	public static GenericDecorativeBlock bollard_2 = new GenericDecorativeBlock("bollard_2");
 	
 	public static CatsEyeBlock cats_eye_white  = new CatsEyeBlock("cats_eye_white", false);
 	public static CatsEyeBlock cats_eye_yellow = new CatsEyeBlock("cats_eye_yellow", false);
@@ -122,6 +130,8 @@ public class FRBlocks {
 	//pedestrian crossing metal markers
 	
 	public static BlockFakeLight fake_light_source = new BlockFakeLight("fake_light_source");
+	
+	
 	
 	public static LinePaintBlock line_white_straight_full = new LinePaintBlock("line_white_straight_full");
 	public static LinePaintBlock line_white_straight_thick = new LinePaintBlock("line_white_straight_thick");
@@ -826,6 +836,11 @@ public class FRBlocks {
 		genericList.add(barrier_end);
 		genericList.add(barrier_bars_mid);
 		
+		genericList.add(barrier_bars_edge);
+		
+		genericList.add(bollard_1);
+		genericList.add(bollard_2);
+		
 		genericList.add(fake_light_source);
 
 		registry.registerAll(
@@ -843,7 +858,9 @@ public class FRBlocks {
 			
 			tactile_crossing_bumps,
 			manhole_cover_round,
-			manhole_cover_square
+			manhole_cover_square,
+			drain_cover_1,
+			drain_cover_2
 		);
 		
 		for (int i = 0; i < roadBlockList.size(); i++)  { registry.register(roadBlockList.get(i)); }
@@ -873,6 +890,8 @@ public class FRBlocks {
 		registry.register(new RoadItemBlock(tactile_crossing_bumps).setRegistryName(tactile_crossing_bumps.getRegistryName()));
 		registry.register(new RoadItemBlock(manhole_cover_round).setRegistryName(manhole_cover_round.getRegistryName()));
 		registry.register(new RoadItemBlock(manhole_cover_square).setRegistryName(manhole_cover_square.getRegistryName()));
+		registry.register(new RoadItemBlock(drain_cover_1).setRegistryName(drain_cover_1.getRegistryName()));
+		registry.register(new RoadItemBlock(drain_cover_2).setRegistryName(drain_cover_2.getRegistryName()));
 	}
 	
 	public static void registerModels() {
@@ -896,6 +915,8 @@ public class FRBlocks {
 		tactile_crossing_bumps.initModel();
 		manhole_cover_round.initModel();
 		manhole_cover_square.initModel();
+		drain_cover_1.initModel();
+		drain_cover_2.initModel();
 	}
 	
 	//We only register white variants. Yellow and red can be taken from the white.

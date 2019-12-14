@@ -1,7 +1,6 @@
-package com.silvaniastudios.roads.blocks;
+package com.silvaniastudios.roads.blocks.paint;
 
 import com.silvaniastudios.roads.FurenikusRoads;
-import com.silvaniastudios.roads.blocks.paint.PaintBlockBase;
 
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
@@ -41,6 +40,10 @@ public class IconPaintBlock extends PaintBlockBase {
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
 		EnumFacing enumfacing = EnumFacing.getFront(meta);
+		if (enumfacing == EnumFacing.DOWN || enumfacing == EnumFacing.UP) {
+			System.out.println("[Fureniku's Roads] Something has gone wrong with getting state from meta for " + this.getUnlocalizedName() + " (" + meta + "). Please tell Fureniku at https://discord.gg/BPzpQk2");
+			return this.getDefaultState().withProperty(FACING, EnumFacing.NORTH);
+		}
 		return this.getDefaultState().withProperty(FACING, enumfacing);
 	}
 	

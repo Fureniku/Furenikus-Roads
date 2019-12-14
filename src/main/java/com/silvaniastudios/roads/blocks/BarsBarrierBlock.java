@@ -146,27 +146,4 @@ public class BarsBarrierBlock extends BlockBase implements IConnectable {
         
         return underBlock.getBoundingBox(underState, worldIn, pos.offset(EnumFacing.DOWN)).maxY - extraOffset;
     }
-    
-    public static enum EnumPost implements IStringSerializable {
-    	NS("north_south"),
-		EW("east_west"),
-		NONE("none");
-    	
-		private final String name;
-		
-		private EnumPost(String name) {
-			this.name = name;
-		}
-
-		@Override
-		public String getName() {
-			return this.name;
-		}
-		
-		public static EnumPost byId(int id) {
-	        if (id == 0) { return EnumPost.NS; }
-	        if (id == 1) { return EnumPost.EW; }
-	        return EnumPost.NONE;
-	    }
-    }
 }

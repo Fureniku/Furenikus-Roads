@@ -1,0 +1,45 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "furenikusroads:blocks/machine_metal",
+		"particle": "furenikusroads:blocks/machine_metal"
+	},
+	"elements": [
+		{
+			"from": [0, 19, 0],
+			"to": [2, 20, 2],
+			"faces": {
+				"north": {"uv": [12, 3, 14, 4], "texture": "#0"},
+				"east": {"uv": [14, 3, 16, 4], "texture": "#0"},
+				"south": {"uv": [2, 3, 4, 4], "texture": "#0"},
+				"west": {"uv": [0, 3, 2, 4], "texture": "#0"},
+				"up": {"uv": [2, 0, 4, 2], "texture": "#0"},
+				"down": {"uv": [2, 14, 4, 16], "texture": "#0"}
+			}
+		},
+		{
+			"from": [0.5, 0, 0.5],
+			"to": [1.5, 16, 1.5],
+			"faces": {
+				"north": {"uv": [14.5, 0, 15.5, 16], "texture": "#0"},
+				"east": {"uv": [14.5, 0, 15.5, 16], "texture": "#0"},
+				"south": {"uv": [0.5, 0, 1.5, 16], "texture": "#0"},
+				"west": {"uv": [0.5, 0, 1.5, 16], "texture": "#0"},
+				"up": {"uv": [0.5, 0.5, 1.5, 1.5], "texture": "#0"},
+				"down": {"uv": [0.5, 14.5, 1.5, 15.5], "texture": "#0"}
+			}
+		},
+		{
+			"from": [0.5, 16, 0.5],
+			"to": [1.5, 19, 1.5],
+			"faces": {
+				"north": {"uv": [14.5, 13, 15.5, 16], "texture": "#0"},
+				"east": {"uv": [14.5, 13, 15.5, 16], "texture": "#0"},
+				"south": {"uv": [0.5, 13, 1.5, 16], "texture": "#0"},
+				"west": {"uv": [0.5, 13, 1.5, 16], "texture": "#0"},
+				"up": {"uv": [0.5, 0.5, 1.5, 1.5], "texture": "#0"},
+				"down": {"uv": [0.5, 14.5, 1.5, 15.5], "texture": "#0"}
+			}
+		}
+	]
+}

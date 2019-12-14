@@ -59,6 +59,8 @@ public class TarDistillerEntity extends RoadTileEntity implements ITickable, ICa
 		}
 	};
 	
+	public TarDistillerStackHandler interactable_inv = new TarDistillerStackHandler(inventory);
+	
 	public FluidTank fluidInput = new FluidTank(TANK_CAP) {
 		@Override
 		public boolean canFillFluidType(FluidStack fluid) {
@@ -88,7 +90,7 @@ public class TarDistillerEntity extends RoadTileEntity implements ITickable, ICa
 		} else if (fuel_remaining <= 0) {
 			if (inventory.getStackInSlot(TarDistillerContainer.FUEL).getItem() == Items.LAVA_BUCKET) {
 				fuel_remaining = 20000;
-				inventory.extractItem(TarDistillerContainer.FUEL, 1, false);
+				inventory.setStackInSlot(TarDistillerContainer.FUEL, new ItemStack(Items.BUCKET));
 				sendUpdates();
 			} else {
 				timerCount = 0;
@@ -274,7 +276,11 @@ public class TarDistillerEntity extends RoadTileEntity implements ITickable, ICa
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
 		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-			return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(inventory);
+			if (facing != null) {
+				return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(interactable_inv);
+			} else {
+				return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(inventory);
+			}
 		}
 		
 		if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {

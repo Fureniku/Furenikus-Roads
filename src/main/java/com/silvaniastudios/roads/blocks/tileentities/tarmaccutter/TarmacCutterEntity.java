@@ -40,6 +40,8 @@ public class TarmacCutterEntity extends RoadTileEntity implements ITickable, ICa
 		}
 	};
 	
+	public TarmacCutterStackHandler interactable_inv = new TarmacCutterStackHandler(inventory);
+	
 	public Container createContainer(EntityPlayer player) {
 		return new TarmacCutterContainer(player.inventory, this);
 	}
@@ -55,7 +57,11 @@ public class TarmacCutterEntity extends RoadTileEntity implements ITickable, ICa
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
 		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-			return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(inventory);
+			if (facing != null) {
+				return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(interactable_inv);
+			} else {
+				return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(inventory);
+			}
 		}
 		
 		return super.getCapability(capability, facing);
@@ -85,41 +91,45 @@ public class TarmacCutterEntity extends RoadTileEntity implements ITickable, ICa
 			}
 		} else {
 			if (!world.isRemote) {
-				ItemStack in = inventory.getStackInSlot(0);
-				ItemStack blade = inventory.getStackInSlot(1);
-				ItemStack blockOut = inventory.getStackInSlot(2);
-				ItemStack fragOut = inventory.getStackInSlot(3); //If you didn't read this var name in an angry call of duty man voice... you're lying you did.
+				ItemStack in = inventory.getStackInSlot(TarmacCutterContainer.INPUT);
+				ItemStack blade = inventory.getStackInSlot(TarmacCutterContainer.BLADE);
+				ItemStack blockOut = inventory.getStackInSlot(TarmacCutterContainer.OUTPUT_1);
+				ItemStack fragOut = inventory.getStackInSlot(TarmacCutterContainer.OUTPUT_2); //If you didn't read this var name in an angry call of duty man voice... you're lying you did.
 				
-				if (blade.getItem() instanceof TarmacCutterBlade && blade.getItemDamage() < blade.getMaxDamage()) {
-					int cutSize = getCutSize(blade);
-					
-					if (in.getItemDamage() >= cutSize && in.getItem() instanceof ItemBlock) {
-						ItemBlock ib = (ItemBlock) in.getItem();
+				if (blade.getItem() instanceof TarmacCutterBlade) {
+					if (blade.getItemDamage() < blade.getMaxDamage()) {
+						int cutSize = getCutSize(blade);
 						
-						if (ib.getBlock() instanceof RoadBlock) {
-							RoadBlock block = (RoadBlock) ib.getBlock();
-							if (blockOut.isEmpty() || (blockOut.getItem() == in.getItem() && blockOut.getItemDamage() == in.getItemDamage() - cutSize)) {
-								if (fragOut.isEmpty() || (fragOut.getItem() == block.getFragmentItem(block) && fragOut.getCount() <= fragOut.getMaxStackSize() - cutSize)) {
-									in.setCount(in.getCount() - 1);
-									
-									if (blockOut.isEmpty()) {
-										inventory.setStackInSlot(2, new ItemStack(in.getItem(), 1, in.getItemDamage()-cutSize));
-									} else {
-										blockOut.setCount(blockOut.getCount() + 1);
+						if (in.getItemDamage() >= cutSize && in.getItem() instanceof ItemBlock) {
+							ItemBlock ib = (ItemBlock) in.getItem();
+							
+							if (ib.getBlock() instanceof RoadBlock) {
+								RoadBlock block = (RoadBlock) ib.getBlock();
+								if (blockOut.isEmpty() || (blockOut.getItem() == in.getItem() && blockOut.getItemDamage() == in.getItemDamage() - cutSize)) {
+									if (fragOut.isEmpty() || (fragOut.getItem() == block.getFragmentItem(block) && fragOut.getCount() <= fragOut.getMaxStackSize() - cutSize)) {
+										in.setCount(in.getCount() - 1);
+										
+										if (blockOut.isEmpty()) {
+											inventory.setStackInSlot(2, new ItemStack(in.getItem(), 1, in.getItemDamage()-cutSize));
+										} else {
+											blockOut.setCount(blockOut.getCount() + 1);
+										}
+										
+										if (fragOut.isEmpty()) { 
+											ItemStack fragment = new ItemStack(block.getFragmentItem(block), cutSize);
+											inventory.setStackInSlot(3, fragment);
+										} else {
+											fragOut.setCount(fragOut.getCount() + cutSize);
+										}
+										
+										blade.setItemDamage(blade.getItemDamage() + 1);
+										sendUpdates();
 									}
-									
-									if (fragOut.isEmpty()) { 
-										ItemStack fragment = new ItemStack(block.getFragmentItem(block), cutSize);
-										inventory.setStackInSlot(3, fragment);
-									} else {
-										fragOut.setCount(fragOut.getCount() + cutSize);
-									}
-									
-									blade.setItemDamage(blade.getItemDamage() + 1);
-									sendUpdates();
 								}
 							}
 						}
+					} else {
+						inventory.setStackInSlot(TarmacCutterContainer.BLADE, ItemStack.EMPTY);
 					}
 				}
 			}
@@ -131,7 +141,7 @@ public class TarmacCutterEntity extends RoadTileEntity implements ITickable, ICa
 		ItemStack in = inventory.getStackInSlot(0);
 		ItemStack blade = inventory.getStackInSlot(1);
 		ItemStack blockOut = inventory.getStackInSlot(2);
-		ItemStack fragOut = inventory.getStackInSlot(3); //If you didn't read this var name in an angry call of duty man voice... you're lying you did.
+		ItemStack fragOut = inventory.getStackInSlot(3);
 		
 		if (blade.getItem() instanceof TarmacCutterBlade && blade.getItemDamage() < blade.getMaxDamage()) {
 			int cutSize = getCutSize(blade);

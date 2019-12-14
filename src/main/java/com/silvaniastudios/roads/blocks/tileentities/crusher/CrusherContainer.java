@@ -17,13 +17,17 @@ public class CrusherContainer extends Container {
 	
 	private CrusherEntity tileEntity;
 	
+	public static final int INPUT_1 = 0;
+	public static final int OUTPUT_1 = 1;
+	public static final int FUEL = 2;
+	
 	public CrusherContainer(InventoryPlayer invPlayer, CrusherEntity tileEntity) {
 		this.tileEntity = tileEntity;
 		
 		IItemHandler itemHandler = this.tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-		addSlotToContainer(new SlotItemHandler(itemHandler, 0, 8, 20));
-		addSlotToContainer(new SlotOutput(itemHandler, 1,  98, 20));
-		addSlotToContainer(new SlotFuel(itemHandler,   2, 152, 20));
+		addSlotToContainer(new SlotItemHandler(itemHandler, INPUT_1, 8, 20));
+		addSlotToContainer(new SlotOutput(itemHandler, OUTPUT_1,  98, 20));
+		addSlotToContainer(new SlotFuel(itemHandler,   FUEL, 152, 20));
 		addPlayerSlots(invPlayer);
 	}
 	

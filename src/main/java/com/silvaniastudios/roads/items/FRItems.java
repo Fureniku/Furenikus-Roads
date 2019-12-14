@@ -28,18 +28,18 @@ public class FRItems {
 	public static RoadItemBase clinker_mix = (RoadItemBase) new RoadItemBase("clinker_mix", 64).setCreativeTab(FurenikusRoads.tab_tools);
 	public static RoadItemBase diamond_nugget = (RoadItemBase) new RoadItemBase("diamond_nugget", 64).setCreativeTab(FurenikusRoads.tab_tools);
 	
-	public static TarmacCutterBlade tarmac_cutter_blade_1_iron = (TarmacCutterBlade) new TarmacCutterBlade("tarmac_cutter_blade_1_iron", 255, 1).setCreativeTab(FurenikusRoads.tab_tools);
-	public static TarmacCutterBlade tarmac_cutter_blade_1_gold = (TarmacCutterBlade) new TarmacCutterBlade("tarmac_cutter_blade_1_gold", 120, 1).setCreativeTab(FurenikusRoads.tab_tools);
-	public static TarmacCutterBlade tarmac_cutter_blade_1_diamond = (TarmacCutterBlade) new TarmacCutterBlade("tarmac_cutter_blade_1_diamond", 1024, 1).setCreativeTab(FurenikusRoads.tab_tools);
-	public static TarmacCutterBlade tarmac_cutter_blade_2_iron = (TarmacCutterBlade) new TarmacCutterBlade("tarmac_cutter_blade_2_iron", 255, 2).setCreativeTab(FurenikusRoads.tab_tools);
-	public static TarmacCutterBlade tarmac_cutter_blade_2_gold = (TarmacCutterBlade) new TarmacCutterBlade("tarmac_cutter_blade_2_gold", 120, 2).setCreativeTab(FurenikusRoads.tab_tools);
-	public static TarmacCutterBlade tarmac_cutter_blade_2_diamond = (TarmacCutterBlade) new TarmacCutterBlade("tarmac_cutter_blade_2_diamond", 1024, 2).setCreativeTab(FurenikusRoads.tab_tools);
-	public static TarmacCutterBlade tarmac_cutter_blade_4_iron = (TarmacCutterBlade) new TarmacCutterBlade("tarmac_cutter_blade_4_iron", 255, 4).setCreativeTab(FurenikusRoads.tab_tools);
-	public static TarmacCutterBlade tarmac_cutter_blade_4_gold = (TarmacCutterBlade) new TarmacCutterBlade("tarmac_cutter_blade_4_gold", 120, 4).setCreativeTab(FurenikusRoads.tab_tools);
-	public static TarmacCutterBlade tarmac_cutter_blade_4_diamond = (TarmacCutterBlade) new TarmacCutterBlade("tarmac_cutter_blade_4_diamond", 1024, 4).setCreativeTab(FurenikusRoads.tab_tools);
-	public static TarmacCutterBlade tarmac_cutter_blade_8_iron = (TarmacCutterBlade) new TarmacCutterBlade("tarmac_cutter_blade_8_iron", 255, 8).setCreativeTab(FurenikusRoads.tab_tools);
-	public static TarmacCutterBlade tarmac_cutter_blade_8_gold = (TarmacCutterBlade) new TarmacCutterBlade("tarmac_cutter_blade_8_gold", 120, 8).setCreativeTab(FurenikusRoads.tab_tools);
-	public static TarmacCutterBlade tarmac_cutter_blade_8_diamond = (TarmacCutterBlade) new TarmacCutterBlade("tarmac_cutter_blade_8_diamond", 1024, 8).setCreativeTab(FurenikusRoads.tab_tools);
+	public static TarmacCutterBlade tarmac_cutter_blade_1_iron = (TarmacCutterBlade) new TarmacCutterBlade("tarmac_cutter_blade_1_iron", 1024, 1).setCreativeTab(FurenikusRoads.tab_tools);
+	public static TarmacCutterBlade tarmac_cutter_blade_1_gold = (TarmacCutterBlade) new TarmacCutterBlade("tarmac_cutter_blade_1_gold", 512, 1).setCreativeTab(FurenikusRoads.tab_tools);
+	public static TarmacCutterBlade tarmac_cutter_blade_1_diamond = (TarmacCutterBlade) new TarmacCutterBlade("tarmac_cutter_blade_1_diamond", 4096, 1).setCreativeTab(FurenikusRoads.tab_tools);
+	public static TarmacCutterBlade tarmac_cutter_blade_2_iron = (TarmacCutterBlade) new TarmacCutterBlade("tarmac_cutter_blade_2_iron", 1024, 2).setCreativeTab(FurenikusRoads.tab_tools);
+	public static TarmacCutterBlade tarmac_cutter_blade_2_gold = (TarmacCutterBlade) new TarmacCutterBlade("tarmac_cutter_blade_2_gold", 512, 2).setCreativeTab(FurenikusRoads.tab_tools);
+	public static TarmacCutterBlade tarmac_cutter_blade_2_diamond = (TarmacCutterBlade) new TarmacCutterBlade("tarmac_cutter_blade_2_diamond", 4096, 2).setCreativeTab(FurenikusRoads.tab_tools);
+	public static TarmacCutterBlade tarmac_cutter_blade_4_iron = (TarmacCutterBlade) new TarmacCutterBlade("tarmac_cutter_blade_4_iron", 1024, 4).setCreativeTab(FurenikusRoads.tab_tools);
+	public static TarmacCutterBlade tarmac_cutter_blade_4_gold = (TarmacCutterBlade) new TarmacCutterBlade("tarmac_cutter_blade_4_gold", 512, 4).setCreativeTab(FurenikusRoads.tab_tools);
+	public static TarmacCutterBlade tarmac_cutter_blade_4_diamond = (TarmacCutterBlade) new TarmacCutterBlade("tarmac_cutter_blade_4_diamond", 4096, 4).setCreativeTab(FurenikusRoads.tab_tools);
+	public static TarmacCutterBlade tarmac_cutter_blade_8_iron = (TarmacCutterBlade) new TarmacCutterBlade("tarmac_cutter_blade_8_iron", 1024, 8).setCreativeTab(FurenikusRoads.tab_tools);
+	public static TarmacCutterBlade tarmac_cutter_blade_8_gold = (TarmacCutterBlade) new TarmacCutterBlade("tarmac_cutter_blade_8_gold", 512, 8).setCreativeTab(FurenikusRoads.tab_tools);
+	public static TarmacCutterBlade tarmac_cutter_blade_8_diamond = (TarmacCutterBlade) new TarmacCutterBlade("tarmac_cutter_blade_8_diamond", 4096, 8).setCreativeTab(FurenikusRoads.tab_tools);
 	
 	public static RoadItemBase tarmac_fragment_standard = (RoadItemBase) new RoadItemBase("tarmac_fragment_standard", 64).setCreativeTab(FurenikusRoads.tab_roads);
 	public static RoadItemBase tarmac_fragment_concrete_1 = (RoadItemBase) new RoadItemBase("tarmac_fragment_concrete_1", 64).setCreativeTab(FurenikusRoads.tab_roads);

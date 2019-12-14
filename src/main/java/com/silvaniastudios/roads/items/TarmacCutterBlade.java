@@ -18,6 +18,7 @@ public class TarmacCutterBlade extends RoadItemBase {
 		super(name, 1);
 		this.setMaxDamage(maxDmg);
 		this.size = size;
+		this.setNoRepair();
 	}
 	
 	@Override

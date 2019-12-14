@@ -1,0 +1,17 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"transform": "forge:default-block",
+		"textures": {
+			"0": "furenikusroads:blocks/manhole_slight_rust",
+			"1": "furenikusroads:blocks/manhole_no_rust",
+			"2": "furenikusroads:blocks/crusher_vents",
+			"3_0": "furenikusroads:blocks/road_block_standard",
+			"particle": "furenikusroads:blocks/road_block_standard"
+		},
+		"model": "furenikusroads:draincover_1"
+	},
+	"variants": {
+		"normal": [{}]
+	}
+}

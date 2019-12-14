@@ -7,6 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -56,6 +57,7 @@ public class MetalPost extends BlockBase implements IPostConnectable {
 			.withProperty(DOWN,  getBlockBelowOffset(worldIn, pos));
 	}
 	
+	@SuppressWarnings("deprecation")
 	public boolean canConnectTo(IBlockAccess worldIn, BlockPos pos, EnumFacing facing) {
 		IBlockState state = worldIn.getBlockState(pos);
 		Block block = state.getBlock();
@@ -63,7 +65,7 @@ public class MetalPost extends BlockBase implements IPostConnectable {
 			return true;
 		}
 		
-		if (this.horizontal && !block.equals(Blocks.AIR)) {
+		if (this.horizontal && block.getBlockFaceShape(worldIn, state, pos, facing.getOpposite()) == BlockFaceShape.SOLID) {
 			return true;
 		}
 		if (block instanceof MetalPost) {

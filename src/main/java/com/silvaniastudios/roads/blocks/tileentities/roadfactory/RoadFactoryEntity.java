@@ -44,9 +44,9 @@ public class RoadFactoryEntity extends RoadTileEntity implements ITickable, ICap
 	}
 	
 	public ItemStackHandler inventory = new ItemStackHandler(11) {
-		
 		@Override
 		public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
+			System.out.println("[INTERNAL INV] Checking if " + stack.getDisplayName() + " is valid for slot " + slot);
 			return true;
 		}
 		
@@ -55,6 +55,8 @@ public class RoadFactoryEntity extends RoadTileEntity implements ITickable, ICap
 			RoadFactoryEntity.this.markDirty();
 		}
 	};
+	
+	public RoadFactoryStackHandler interactable_inv = new RoadFactoryStackHandler(inventory);
 	
 	public FluidTank tarFluid = new FluidTank(TANK_CAP) {
 		@Override
@@ -114,27 +116,27 @@ public class RoadFactoryEntity extends RoadTileEntity implements ITickable, ICap
 				if (tarFluid.getFluidAmount() >= 1000) {
 					boolean processed = false;
 					
-					if (putItemsInSlot(getRecipeResult(input_1), 1, false)) {
+					if (input_1.getCount() >=8 && putItemsInSlot(getRecipeResult(input_1), 1, false)) {
 						inventory.extractItem(RoadFactoryContainer.INPUT_1, 8, false);
 						processed = true;
 					}
 					
 					if (!processed) {
-						if (putItemsInSlot(getRecipeResult(input_2), 2, false)) {
+						if (input_2.getCount() >=8 && putItemsInSlot(getRecipeResult(input_2), 2, false)) {
 							inventory.extractItem(RoadFactoryContainer.INPUT_2, 8, false);
 							processed = true;
 						}
 					}
 					
 					if (!processed) {
-						if (putItemsInSlot(getRecipeResult(input_3), 3, false)) {
+						if (input_3.getCount() >=8 && putItemsInSlot(getRecipeResult(input_3), 3, false)) {
 							inventory.extractItem(RoadFactoryContainer.INPUT_3, 8, false);
 							processed = true;
 						}
 					}
 					
 					if (!processed) {
-						if (putItemsInSlot(getRecipeResult(input_4), 4, false)) {
+						if (input_4.getCount() >=8 && putItemsInSlot(getRecipeResult(input_4), 4, false)) {
 							inventory.extractItem(RoadFactoryContainer.INPUT_4, 8, false);
 							processed = true;
 						}
@@ -175,10 +177,10 @@ public class RoadFactoryEntity extends RoadTileEntity implements ITickable, ICap
 		ItemStack input_4 = inventory.getStackInSlot(RoadFactoryContainer.INPUT_4);
 		
 		if (tarFluid.getFluidAmount() >= 1000) {
-			if (putItemsInSlot(getRecipeResult(input_1), 1, true)) { return true; }
-			if (putItemsInSlot(getRecipeResult(input_2), 2, true)) { return true; }
-			if (putItemsInSlot(getRecipeResult(input_3), 3, true)) { return true; }
-			if (putItemsInSlot(getRecipeResult(input_4), 4, true)) { return true; }
+			if (input_1.getCount() >=8 && putItemsInSlot(getRecipeResult(input_1), 1, true)) { return true; }
+			if (input_2.getCount() >=8 && putItemsInSlot(getRecipeResult(input_2), 2, true)) { return true; }
+			if (input_3.getCount() >=8 && putItemsInSlot(getRecipeResult(input_3), 3, true)) { return true; }
+			if (input_4.getCount() >=8 && putItemsInSlot(getRecipeResult(input_4), 4, true)) { return true; }
 		}
 		
 		ItemStack fluid_in = inventory.getStackInSlot(RoadFactoryContainer.FLUID_IN);
@@ -193,7 +195,7 @@ public class RoadFactoryEntity extends RoadTileEntity implements ITickable, ICap
 	}
 	
 	public ItemStack getRecipeResult(ItemStack stack) {
-		if (stack.isEmpty()) {
+		if (stack.isEmpty() || stack.getCount() < 8) {
 			return stack;
 		}
 		
@@ -285,7 +287,7 @@ public class RoadFactoryEntity extends RoadTileEntity implements ITickable, ICap
 	@Override
 	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
 		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-            return true;
+            return getCapability(capability, facing) != null;
         }
 		if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
 			return true;
@@ -296,7 +298,11 @@ public class RoadFactoryEntity extends RoadTileEntity implements ITickable, ICap
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
 		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-			return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(inventory);
+			if (facing != null) {
+				return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(interactable_inv);
+			} else {
+				return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(inventory);
+			}
 		}
 		if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY && facing == EnumFacing.UP) {
 			CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY.cast(tarFluid);

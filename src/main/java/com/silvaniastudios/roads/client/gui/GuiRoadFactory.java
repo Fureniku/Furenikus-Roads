@@ -93,7 +93,7 @@ public class GuiRoadFactory extends GuiContainer {
 					I18n.format("roads.gui.inputSlot"),
 					"",
 					TextFormatting.UNDERLINE + I18n.format("roads.gui.valid"),
-					
+					TextFormatting.AQUA + new ItemStack(FRBlocks.generic_blocks, 1, 0).getDisplayName() + a + FRBlocks.road_block_standard.getLocalizedName(),
 					TextFormatting.AQUA + new ItemStack(Blocks.STONE, 1, 0).getDisplayName() + a + FRBlocks.road_block_stone.getLocalizedName(),
 					TextFormatting.AQUA + new ItemStack(Blocks.STONE, 1, 1).getDisplayName() + a + FRBlocks.road_block_pale.getLocalizedName(),
 					TextFormatting.AQUA + new ItemStack(Blocks.STONE, 1, 3).getDisplayName() + a + FRBlocks.road_block_light.getLocalizedName(),
