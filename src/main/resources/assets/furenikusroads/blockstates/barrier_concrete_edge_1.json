@@ -1,0 +1,86 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "furenikusroads:barrier_tall_edge",
+		"uvlock": true,
+		"textures": {
+			"0": "furenikusroads:blocks/road_block_concrete_1",
+			"particle": "furenikusroads:blocks/road_block_concrete_1"
+		}
+	},
+	"variants": {
+		"inventory": [{
+			"model": "furenikusroads:barrier_concrete_edge_inventory"
+		}],
+		"zpost": {
+			"true": {},
+			"false": {}
+		},
+		"left": {
+        	"normal": {
+        		"submodel": {
+	        		"corner_l":   { "model": "furenikusroads:nomodel" },
+	        		"main":       { "model": "furenikusroads:barrier_concrete_edge" },
+	        		"side_l":     { "model": "furenikusroads:barrier_concrete_edge_left" }
+	        	}
+        	},
+        	"down":  {
+        		"submodel": {
+	        		"corner_l":   { "model": "furenikusroads:nomodel" },
+	        		"main":       { "model": "furenikusroads:barrier_concrete_edge" },
+	        		"side_l":     { "model": "furenikusroads:barrier_concrete_edge_left_down" }
+	        	}
+	        },
+        	"corner": {
+        		"submodel": {
+	        		"corner_l":   { "model": "furenikusroads:barrier_concrete_edge_corner" },
+	        		"main":       { "model": "furenikusroads:nomodel" },
+	        		"side_l":     { "model": "furenikusroads:nomodel" }
+	        	}
+	        },
+	        "none": {
+	        	"submodel": {
+	        		"corner_l":   { "model": "furenikusroads:nomodel" },
+	        		"main":       { "model": "furenikusroads:nomodel" },
+	        		"side_l":     { "model": "furenikusroads:nomodel" }
+	        	}
+	        }
+        },
+        "right": {
+        	"normal": {
+        		"submodel": {
+	        		"corner_r":   { "model": "furenikusroads:nomodel" },
+	        		"main":       { "model": "furenikusroads:barrier_concrete_edge" },
+	        		"side_r":     { "model": "furenikusroads:barrier_concrete_edge_right" }
+	        	}
+        	},
+        	"down":  {
+        		"submodel": {
+	        		"corner_r":   { "model": "furenikusroads:nomodel" },
+	        		"main":       { "model": "furenikusroads:barrier_concrete_edge" },
+	        		"side_r":     { "model": "furenikusroads:barrier_concrete_edge_right_down" }
+	        	}
+	        },
+        	"corner": {
+        		"submodel": {
+	        		"corner_r":   { "model": "furenikusroads:barrier_concrete_edge_corner", "y": 90 },
+	        		"main":       { "model": "furenikusroads:nomodel" },
+	        		"side_r":     { "model": "furenikusroads:nomodel" }
+	        	}
+	        },
+	        "none": {
+	        	"submodel": {
+	        		"corner_r":   { "model": "furenikusroads:nomodel" },
+	        		"main":       { "model": "furenikusroads:nomodel" },
+	        		"side_r":     { "model": "furenikusroads:nomodel" }
+	        	}
+	        }
+        },
+        "rotation": {
+        	"north": { "model": "furenikusroads:nomodel" },
+        	"east":  { "model": "furenikusroads:nomodel", "y": 90  },
+        	"south": { "model": "furenikusroads:nomodel", "y": 180 },
+        	"west":  { "model": "furenikusroads:nomodel", "y": 270 }
+        }
+	}   	
+}

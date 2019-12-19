@@ -5,14 +5,21 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import com.silvaniastudios.roads.FurenikusRoads;
+import com.silvaniastudios.roads.blocks.paint.PaintBlockBase;
+import com.silvaniastudios.roads.items.FRItems;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
@@ -20,27 +27,37 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BarrierEdgeBlock extends BlockBase {
 	
 	public static final PropertyEnum<EnumBarrierRotation> ROTATION = PropertyEnum.create("rotation", EnumBarrierRotation.class);
 	public static final PropertyEnum<EnumBarrierSide> LEFT = PropertyEnum.create("left", EnumBarrierSide.class);
 	public static final PropertyEnum<EnumBarrierSide> RIGHT = PropertyEnum.create("right", EnumBarrierSide.class);
+	public static final PropertyBool POSTS = PropertyBool.create("zpost");
     
-    public static final AxisAlignedBB SOUTH_AABB = new AxisAlignedBB(0.0D,   0.0D, 0.875D, 1.0D,   1.0D,   1.0D);
-    public static final AxisAlignedBB WEST_AABB  = new AxisAlignedBB(0.0D,   0.0D,   0.0D, 0.125D, 1.0D,   1.0D);
-    public static final AxisAlignedBB NORTH_AABB = new AxisAlignedBB(0.0D,   0.0D,   0.0D, 1.0D,   1.0D, 0.125D);
-    public static final AxisAlignedBB EAST_AABB  = new AxisAlignedBB(0.875D, 0.0D,   0.0D, 1.0D,   1.0D,   1.0D);
+    boolean double_sided;
+    
+    AxisAlignedBB SOUTH_AABB = FULL_BLOCK_AABB;
+	AxisAlignedBB WEST_AABB  = FULL_BLOCK_AABB;
+	AxisAlignedBB NORTH_AABB = FULL_BLOCK_AABB;
+	AxisAlignedBB EAST_AABB  = FULL_BLOCK_AABB;
+	AxisAlignedBB FULL_AABB  = FULL_BLOCK_AABB;
 
-	public BarrierEdgeBlock(String name) {
+	public BarrierEdgeBlock(String name, boolean double_sided) {
 		super(name, Material.IRON);
+		this.double_sided = double_sided;
 		this.setCreativeTab(FurenikusRoads.tab_road_parts);
 		this.setHardness(2.0F);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(ROTATION, EnumBarrierRotation.NORTH)
 				.withProperty(LEFT, EnumBarrierSide.NORMAL)
-				.withProperty(RIGHT, EnumBarrierSide.NORMAL));
+				.withProperty(RIGHT, EnumBarrierSide.NORMAL)
+				.withProperty(POSTS, false));
 	}
 	
 	@Override
@@ -50,6 +67,19 @@ public class BarrierEdgeBlock extends BlockBase {
 
     @Override
     public boolean isFullCube(IBlockState state) {
+        return false;
+    }
+    
+    @Override
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		if (playerIn.getHeldItem(hand).getItem() == FRItems.wrench) {
+			if (getMetaFromState(state) > 3) {
+				worldIn.setBlockState(pos, state.withProperty(POSTS, false));
+			} else {
+				worldIn.setBlockState(pos, state.withProperty(POSTS, true));
+			}
+			return true;
+		}
         return false;
     }
     
@@ -66,13 +96,19 @@ public class BarrierEdgeBlock extends BlockBase {
     
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		return this.getDefaultState().withProperty(ROTATION, EnumBarrierRotation.byMetadata(meta));
+		boolean post = false;
+		if (meta > 3) { 
+			post = true;
+			meta -= 4;
+		} 
+		return this.getDefaultState().withProperty(ROTATION, EnumBarrierRotation.byMetadata(meta)).withProperty(POSTS, post);
     }
 	
 	@Override
     public int getMetaFromState(IBlockState state) {
 		EnumBarrierRotation rot = state.getValue(ROTATION);
-        return rot.getMetadata();
+		int post = state.getValue(POSTS) ? 4 : 0;
+        return rot.getMetadata() + post;
     }
     
     @Override
@@ -146,11 +182,6 @@ public class BarrierEdgeBlock extends BlockBase {
 		boolean rightBlock = stateRight.getBlock() instanceof BarrierEdgeBlock;
 		boolean downBlock  = stateDown.getBlock() instanceof BarrierEdgeBlock;
 		
-		/*if (stateUp.getBlock()    instanceof BlockFence || world.getBlockState(pos.offset(up)   .offset(EnumFacing.DOWN)) instanceof BlockWalkwayStairs) { upBlock    = true; }
-		if (stateLeft.getBlock()  instanceof BlockFence || world.getBlockState(pos.offset(left) .offset(EnumFacing.DOWN)) instanceof BlockWalkwayStairs) { leftBlock  = true; }
-		if (stateRight.getBlock() instanceof BlockFence || world.getBlockState(pos.offset(right).offset(EnumFacing.DOWN)) instanceof BlockWalkwayStairs) { rightBlock = true; }
-		if (stateDown.getBlock()  instanceof BlockFence || world.getBlockState(pos.offset(down) .offset(EnumFacing.DOWN)) instanceof BlockWalkwayStairs) { downBlock  = true; }*/
-		
 		if (upBlock && leftBlock) {
 			if (stateUp.getValue(ROTATION).equals(wrLeft) && stateLeft.getValue(ROTATION).equals(thisRot)) {
 				if (checkingLeft) {
@@ -188,27 +219,41 @@ public class BarrierEdgeBlock extends BlockBase {
 
 	@Override
 	public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
-		return state.withProperty(LEFT, canBarrierConnectTo(state, world, pos, true))
-				.withProperty(RIGHT,  canBarrierConnectTo(state, world, pos, false));
+		EnumBarrierSide left  = canBarrierConnectTo(state, world, pos, true);
+		EnumBarrierSide right = canBarrierConnectTo(state, world, pos, false);
+		if (left != EnumBarrierSide.NORMAL || right != EnumBarrierSide.NORMAL) {
+			double_sided = false;
+		}
+		
+		return state.withProperty(LEFT, left).withProperty(RIGHT,  right);
 	}
 	
 	@Override
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, ROTATION, LEFT, RIGHT);
+		return new BlockStateContainer(this, ROTATION, LEFT, RIGHT, POSTS);
+	}
+	
+	public void setBoxes(IBlockAccess world, BlockPos pos) {
+		SOUTH_AABB = new AxisAlignedBB(0.0D,   -1+getBlockBelowHeight(world, pos), 0.875D, 1.0D,   -1+getBlockBelowHeight(world, pos)+1.25D,   1.0D);
+		WEST_AABB  = new AxisAlignedBB(0.0D,   -1+getBlockBelowHeight(world, pos),   0.0D, 0.125D, -1+getBlockBelowHeight(world, pos)+1.25D,   1.0D);
+		NORTH_AABB = new AxisAlignedBB(0.0D,   -1+getBlockBelowHeight(world, pos),   0.0D, 1.0D,   -1+getBlockBelowHeight(world, pos)+1.25D, 0.125D);
+		EAST_AABB  = new AxisAlignedBB(0.875D, -1+getBlockBelowHeight(world, pos),   0.0D, 1.0D,   -1+getBlockBelowHeight(world, pos)+1.25D,   1.0D);
+		FULL_AABB  = new AxisAlignedBB(0.0D,   -1+getBlockBelowHeight(world, pos),   0.0D, 1.0D,   -1+getBlockBelowHeight(world, pos)+1.25D,   1.0D);
 	}
 
 	@Override
-	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean isActualState) {
+	public void addCollisionBoxToList(IBlockState state, World world, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean isActualState) {
+		setBoxes(world, pos);
 		if (!isActualState) {
-			state = state.getActualState(worldIn, pos);
+			state = state.getActualState(world, pos);
 		}
 		
 		int meta = getMetaFromState(state);
 		
-		boolean n = (meta == 0 || meta == 4 || meta == 8 || meta == 12);
-		boolean e = (meta == 1 || meta == 5 || meta == 9 || meta == 13);
-		boolean s = (meta == 2 || meta == 6 || meta == 10 || meta == 14);
-		boolean w = (meta == 3 || meta == 7 || meta == 11 || meta == 15);
+		boolean n = (meta == 0 || meta == 4);
+		boolean e = (meta == 1 || meta == 5);
+		boolean s = (meta == 2 || meta == 6);
+		boolean w = (meta == 3 || meta == 7);
 
 		EnumBarrierSide left  = state.getValue(LEFT);
 		EnumBarrierSide right = state.getValue(RIGHT);
@@ -236,56 +281,115 @@ public class BarrierEdgeBlock extends BlockBase {
 			System.out.println("Broken! NESW: " + n + e + s + w);
 		}
 		
-		if (n) { addCollisionBoxToList(pos, entityBox, collidingBoxes, NORTH_AABB); }
-		if (e) { addCollisionBoxToList(pos, entityBox, collidingBoxes, EAST_AABB); }
-		if (s) { addCollisionBoxToList(pos, entityBox, collidingBoxes, SOUTH_AABB); }
-		if (w) { addCollisionBoxToList(pos, entityBox, collidingBoxes, WEST_AABB); }
+		if (n) {
+			addCollisionBoxToList(pos, entityBox, collidingBoxes, NORTH_AABB);
+			if (double_sided) {
+				addCollisionBoxToList(pos, entityBox, collidingBoxes, SOUTH_AABB);
+			}
+		}
+		
+		if (e) {
+			addCollisionBoxToList(pos, entityBox, collidingBoxes, EAST_AABB);
+			if (double_sided) {
+				addCollisionBoxToList(pos, entityBox, collidingBoxes, WEST_AABB);
+			}
+		}
+		
+		if (s) {
+			addCollisionBoxToList(pos, entityBox, collidingBoxes, SOUTH_AABB);
+			if (double_sided) {
+				addCollisionBoxToList(pos, entityBox, collidingBoxes, NORTH_AABB);
+			}
+		}
+		
+		if (w) {
+			addCollisionBoxToList(pos, entityBox, collidingBoxes, WEST_AABB);
+			if (double_sided) {
+				addCollisionBoxToList(pos, entityBox, collidingBoxes, EAST_AABB);
+			}
+		}
 	}
     
 	@Override
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos) {
+		setBoxes(world, pos);
 		int meta = getMetaFromState(state);
 		
-		boolean n = (meta == 0 || meta == 4 || meta == 8 || meta == 12);
-		boolean e = (meta == 1 || meta == 5 || meta == 9 || meta == 13);
-		boolean s = (meta == 2 || meta == 6 || meta == 10 || meta == 14);
-		boolean w = (meta == 3 || meta == 7 || meta == 11 || meta == 15);
+		boolean n = (meta == 0 || meta == 4);
+		boolean e = (meta == 1 || meta == 5);
+		boolean s = (meta == 2 || meta == 6);
+		boolean w = (meta == 3 || meta == 7);
 		
-		state = state.getActualState(source, pos);
+		state = state.getActualState(world, pos);
 		EnumBarrierSide left  = state.getValue(LEFT);
 		EnumBarrierSide right = state.getValue(RIGHT);
 		
-		if (n && left .equals(EnumBarrierSide.DOWN)) { return FULL_BLOCK_AABB; }
-		if (n && right.equals(EnumBarrierSide.DOWN)) { return FULL_BLOCK_AABB; }
+		if (double_sided) { return FULL_AABB; }
 		
-		if (e && left .equals(EnumBarrierSide.DOWN)) { return FULL_BLOCK_AABB; }
-		if (e && right.equals(EnumBarrierSide.DOWN)) { return FULL_BLOCK_AABB; }
+		if (n && left .equals(EnumBarrierSide.DOWN)) { return FULL_AABB; }
+		if (n && right.equals(EnumBarrierSide.DOWN)) { return FULL_AABB; }
 		
-		if (s && left .equals(EnumBarrierSide.DOWN)) { return FULL_BLOCK_AABB; }
-		if (s && right.equals(EnumBarrierSide.DOWN)) { return FULL_BLOCK_AABB; }
+		if (e && left .equals(EnumBarrierSide.DOWN)) { return FULL_AABB; }
+		if (e && right.equals(EnumBarrierSide.DOWN)) { return FULL_AABB; }
 		
-		if (w && left .equals(EnumBarrierSide.DOWN)) { return FULL_BLOCK_AABB; }
-		if (w && right.equals(EnumBarrierSide.DOWN)) { return FULL_BLOCK_AABB; }
+		if (s && left .equals(EnumBarrierSide.DOWN)) { return FULL_AABB; }
+		if (s && right.equals(EnumBarrierSide.DOWN)) { return FULL_AABB; }
 		
-		if (n &&  left.equals(EnumBarrierSide.CORNER)) { return new AxisAlignedBB(0.0D,   0.0D, 0.0D,   0.125D, 1.0D, 0.125D); }
-		if (n && right.equals(EnumBarrierSide.CORNER)) { return new AxisAlignedBB(0.875D, 0.0D, 0.0D,     1.0D, 1.0D, 0.125D); }
+		if (w && left .equals(EnumBarrierSide.DOWN)) { return FULL_AABB; }
+		if (w && right.equals(EnumBarrierSide.DOWN)) { return FULL_AABB; }
 		
-		if (e &&  left.equals(EnumBarrierSide.CORNER)) { return new AxisAlignedBB(0.875D, 0.0D, 0.0D,     1.0D, 1.0D, 0.125D); }
-		if (e && right.equals(EnumBarrierSide.CORNER)) { return new AxisAlignedBB(0.875D, 0.0D, 0.875D,   1.0D, 1.0D,   1.0D); }
+		if (n &&  left.equals(EnumBarrierSide.CORNER)) { return new AxisAlignedBB(0.0D,   -1+getBlockBelowHeight(world, pos), 0.0D,   0.125D, -1+getBlockBelowHeight(world, pos)+1.0D, 0.125D); }
+		if (n && right.equals(EnumBarrierSide.CORNER)) { return new AxisAlignedBB(0.875D, -1+getBlockBelowHeight(world, pos), 0.0D,     1.0D, -1+getBlockBelowHeight(world, pos)+1.0D, 0.125D); }
 		
-		if (s &&  left.equals(EnumBarrierSide.CORNER)) { return new AxisAlignedBB(0.875D, 0.0D, 0.875D,   1.0D, 1.0D,   1.0D); }
-		if (s && right.equals(EnumBarrierSide.CORNER)) { return new AxisAlignedBB(  0.0D, 0.0D, 0.875D, 0.125D, 1.0D,   1.0D); }
+		if (e &&  left.equals(EnumBarrierSide.CORNER)) { return new AxisAlignedBB(0.875D, -1+getBlockBelowHeight(world, pos), 0.0D,     1.0D, -1+getBlockBelowHeight(world, pos)+1.0D, 0.125D); }
+		if (e && right.equals(EnumBarrierSide.CORNER)) { return new AxisAlignedBB(0.875D, -1+getBlockBelowHeight(world, pos), 0.875D,   1.0D, -1+getBlockBelowHeight(world, pos)+1.0D,   1.0D); }
 		
-		if (w &&  left.equals(EnumBarrierSide.CORNER)) { return new AxisAlignedBB(  0.0D, 0.0D, 0.875D, 0.125D, 1.0D,   1.0D); }
-		if (w && right.equals(EnumBarrierSide.CORNER)) { return new AxisAlignedBB(  0.0D, 0.0D,   0.0D, 0.125D, 1.0D, 0.125D); }
+		if (s &&  left.equals(EnumBarrierSide.CORNER)) { return new AxisAlignedBB(0.875D, -1+getBlockBelowHeight(world, pos), 0.875D,   1.0D, -1+getBlockBelowHeight(world, pos)+1.0D,   1.0D); }
+		if (s && right.equals(EnumBarrierSide.CORNER)) { return new AxisAlignedBB(  0.0D, -1+getBlockBelowHeight(world, pos), 0.875D, 0.125D, -1+getBlockBelowHeight(world, pos)+1.0D,   1.0D); }
+		
+		if (w &&  left.equals(EnumBarrierSide.CORNER)) { return new AxisAlignedBB(  0.0D, -1+getBlockBelowHeight(world, pos), 0.875D, 0.125D, -1+getBlockBelowHeight(world, pos)+1.0D,   1.0D); }
+		if (w && right.equals(EnumBarrierSide.CORNER)) { return new AxisAlignedBB(  0.0D, -1+getBlockBelowHeight(world, pos),   0.0D, 0.125D, -1+getBlockBelowHeight(world, pos)+1.0D, 0.125D); }
 		
 		if (n) { return NORTH_AABB; }
 		if (e) { return EAST_AABB;  }
 		if (s) { return SOUTH_AABB; }
 		if (w) { return WEST_AABB;  }
 		
-        return FULL_BLOCK_AABB;
+        return FULL_AABB;
     }
+	
+	
+	
+	@Override
+    public Block.EnumOffsetType getOffsetType()
+    {
+        return Block.EnumOffsetType.XYZ;
+    }
+    
+    @Override
+    public Vec3d getOffset(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+        double offset = 1.0 - getBlockBelowHeight(worldIn, pos);
+        return new Vec3d(0, -offset, 0);
+    }
+    
+    @SuppressWarnings("deprecation")
+	public double getBlockBelowHeight(IBlockAccess worldIn, BlockPos pos) {
+    	IBlockState underState = worldIn.getBlockState(pos.offset(EnumFacing.DOWN));
+        Block underBlock = underState.getBlock();
+        double extraOffset = 0.0;
+        
+        if (underBlock instanceof PaintBlockBase || underBlock instanceof NonPaintRoadTopBlock || underBlock instanceof CurbBlock) {
+        	extraOffset = 0.062;
+        }
+        
+        return underBlock.getBoundingBox(underState, worldIn, pos.offset(EnumFacing.DOWN)).maxY - extraOffset;
+    }
+	
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void initModel() {
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0,  new ModelResourceLocation(getRegistryName(), "inventory"));
+	}
 	
 	public enum EnumBarrierSide implements IStringSerializable {
 		NORMAL(0, "normal"),

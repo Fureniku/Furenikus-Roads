@@ -5,6 +5,7 @@ import javax.annotation.Nullable;
 import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.blocks.enums.IConnectable;
 import com.silvaniastudios.roads.blocks.paint.PaintBlockBase;
+import com.silvaniastudios.roads.items.FRItems;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -13,12 +14,15 @@ import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 
 public class BarrierBlock extends BlockBase implements IConnectable {
 	
@@ -56,6 +60,20 @@ public class BarrierBlock extends BlockBase implements IConnectable {
 		BlockPos oppositeOffset = pos.offset(facing.getOpposite());
 		return canConnectTo(world, offset, oppositeOffset) || canConnectTo(world, offset.offset(EnumFacing.DOWN), oppositeOffset) || canConnectTo(world, offset.offset(EnumFacing.UP), oppositeOffset);
 	}
+	
+	@Override
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		if (playerIn.getHeldItem(hand).getItem() == FRItems.wrench) {
+			System.out.println("Meta: " +  getMetaFromState(state));
+			if (getMetaFromState(state) == 1) {
+				worldIn.setBlockState(pos, state.withProperty(BarrierBlock.POSTS, BarrierBlock.EnumPost.NONE));
+			} else {
+				worldIn.setBlockState(pos, state.withProperty(BarrierBlock.POSTS, BarrierBlock.EnumPost.NS));
+			}
+			return true;
+		}
+        return false;
+    }
 	
 	private EnumPost postDirection(IBlockAccess world, BlockPos pos, int meta) {
 		if (meta == 1) {

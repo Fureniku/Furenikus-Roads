@@ -10,7 +10,7 @@
 	},
 	"variants": {
 		"inventory": [{
-			"model": "furenikusroads:barrier_bars_inventory"
+			"model": "furenikusroads:barrier_bars_edge_inventory"
 		}],
 		"east": {
 			"true": {

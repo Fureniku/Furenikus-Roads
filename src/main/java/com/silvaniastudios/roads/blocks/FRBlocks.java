@@ -97,16 +97,44 @@ public class FRBlocks {
 	public static NonPaintRoadTopBlock drain_cover_2 = new NonPaintRoadTopBlock("drain_cover_2");
 	
 	public static BarrierBlock barrier_standard_mid = new BarrierBlock("barrier_standard_mid");
-	public static BarrierBlock barrier_double_mid = new BarrierBlock("barrier_double_mid");
+	public static BarrierBlock barrier_tall_mid = new BarrierBlock("barrier_tall_mid");
 	public static ConcreteBarrierBlock barrier_concrete_1_mid = new ConcreteBarrierBlock("barrier_concrete_1_mid");
 	public static ConcreteBarrierBlock barrier_concrete_2_mid = new ConcreteBarrierBlock("barrier_concrete_2_mid");
 	public static BarsBarrierBlock barrier_bars_mid = new BarsBarrierBlock("barrier_bars_mid");
+	public static BarsBarrierBlock barrier_bars_mid_2 = new BarsBarrierBlock("barrier_bars_mid_2");
+	public static BarsBarrierBlock barrier_bars_mid_concrete_1 = new BarsBarrierBlock("barrier_bars_mid_concrete_1");
+	public static BarsBarrierBlock barrier_bars_mid_concrete_2 = new BarsBarrierBlock("barrier_bars_mid_concrete_2");
+	public static BarsBarrierBlock barrier_wall_mid_concrete_1 = new BarsBarrierBlock("barrier_wall_mid_concrete_1");
+	public static BarsBarrierBlock barrier_wall_mid_concrete_2 = new BarsBarrierBlock("barrier_wall_mid_concrete_2");
+	public static BarsBarrierBlock barrier_wall_pole_mid_concrete_1 = new BarsBarrierBlock("barrier_wall_pole_mid_concrete_1");
+	public static BarsBarrierBlock barrier_wall_pole_mid_concrete_2 = new BarsBarrierBlock("barrier_wall_pole_mid_concrete_2");
+	public static BarsBarrierBlock barrier_low_mid = new BarsBarrierBlock("barrier_low_mid");
 	public static BarrierEndBlock barrier_end = new BarrierEndBlock("barrier_end");
 	
-	public static BarrierEdgeBlock barrier_bars_edge = new BarrierEdgeBlock("barrier_bars_edge");
+	public static BarrierEdgeBlock barrier_bars_edge = new BarrierEdgeBlock("barrier_bars_edge", false);
+	public static BarrierEdgeBlock barrier_bars_edge_2 = new BarrierEdgeBlock("barrier_bars_edge_2", false);
+	public static BarrierEdgeBlock barrier_wall_edge_concrete_1 = new BarrierEdgeBlock("barrier_wall_edge_concrete_1", false);
+	public static BarrierEdgeBlock barrier_wall_edge_concrete_2 = new BarrierEdgeBlock("barrier_wall_edge_concrete_2", false);
+	public static BarrierEdgeBlock barrier_bars_edge_concrete_1 = new BarrierEdgeBlock("barrier_bars_edge_concrete_1", false);
+	public static BarrierEdgeBlock barrier_bars_edge_concrete_2 = new BarrierEdgeBlock("barrier_bars_edge_concrete_2", false);
+	public static BarrierEdgeBlock barrier_standard_edge = new BarrierEdgeBlock("barrier_standard_edge", false);
+	public static BarrierEdgeBlock barrier_tall_edge = new BarrierEdgeBlock("barrier_tall_edge", false);
+	public static BarrierConcreteEdgeBlock barrier_concrete_edge_1 = new BarrierConcreteEdgeBlock("barrier_concrete_edge_1");
+	public static BarrierConcreteEdgeBlock barrier_concrete_edge_2 = new BarrierConcreteEdgeBlock("barrier_concrete_edge_2");
+	public static BarrierEdgeBlock barrier_wall_pole_edge_concrete_1 = new BarrierEdgeBlock("barrier_wall_pole_edge_concrete_1", false);
+	public static BarrierEdgeBlock barrier_wall_pole_edge_concrete_2 = new BarrierEdgeBlock("barrier_wall_pole_edge_concrete_2", false);
+	public static BarrierLowEdgeBlock barrier_low_edge = new BarrierLowEdgeBlock("barrier_low_edge", false);
+	
+	public static BarrierEdgeBlock barrier_bars_edge_double = new BarrierEdgeBlock("barrier_bars_edge_double", true);
+	public static BarrierEdgeBlock barrier_wall_edge_concrete_1_double = new BarrierEdgeBlock("barrier_wall_edge_concrete_1_double", true);
+	public static BarrierEdgeBlock barrier_wall_edge_concrete_2_double = new BarrierEdgeBlock("barrier_wall_edge_concrete_2_double", true);
+	public static BarrierEdgeBlock barrier_standard_edge_double = new BarrierEdgeBlock("barrier_standard_edge_double", true);
+	public static BarrierEdgeBlock barrier_tall_edge_double = new BarrierEdgeBlock("barrier_tall_edge_double", true);
+	
 	
 	public static BollardBlock bollard_1 = new BollardBlock("bollard_1");
 	public static GenericDecorativeBlock bollard_2 = new GenericDecorativeBlock("bollard_2");
+	public static RetractableBollardBlock bollard_3 = new RetractableBollardBlock("bollard_3");
 	
 	public static CatsEyeBlock cats_eye_white  = new CatsEyeBlock("cats_eye_white", false);
 	public static CatsEyeBlock cats_eye_yellow = new CatsEyeBlock("cats_eye_yellow", false);
@@ -828,18 +856,47 @@ public class FRBlocks {
 		genericList.add(post_large_horizontal);
 		
 		genericList.add(street_light_1);
+		genericList.add(barrier_end);
 		
 		genericList.add(barrier_standard_mid);
-		genericList.add(barrier_double_mid);
+		genericList.add(barrier_tall_mid);
 		genericList.add(barrier_concrete_1_mid);
 		genericList.add(barrier_concrete_2_mid);
-		genericList.add(barrier_end);
+		
 		genericList.add(barrier_bars_mid);
+		genericList.add(barrier_bars_mid_2);
+		genericList.add(barrier_wall_mid_concrete_1);
+		genericList.add(barrier_wall_mid_concrete_2);
+		genericList.add(barrier_bars_mid_concrete_1);
+		genericList.add(barrier_bars_mid_concrete_2);
+		genericList.add(barrier_wall_pole_mid_concrete_1);
+		genericList.add(barrier_wall_pole_mid_concrete_2);
+		genericList.add(barrier_low_mid);
+		
+		genericList.add(barrier_standard_edge);
+		genericList.add(barrier_tall_edge);
+		genericList.add(barrier_concrete_edge_1);
+		genericList.add(barrier_concrete_edge_2);
 		
 		genericList.add(barrier_bars_edge);
+		genericList.add(barrier_bars_edge_2);
+		genericList.add(barrier_wall_edge_concrete_1);
+		genericList.add(barrier_wall_edge_concrete_2);
+		genericList.add(barrier_bars_edge_concrete_1);
+		genericList.add(barrier_bars_edge_concrete_2);
+		genericList.add(barrier_wall_pole_edge_concrete_1);
+		genericList.add(barrier_wall_pole_edge_concrete_2);
+		genericList.add(barrier_low_edge);
+		
+		genericList.add(barrier_bars_edge_double);
+		genericList.add(barrier_wall_edge_concrete_1_double);
+		genericList.add(barrier_wall_edge_concrete_2_double);
+		genericList.add(barrier_standard_edge_double);
+		genericList.add(barrier_tall_edge_double);
 		
 		genericList.add(bollard_1);
 		genericList.add(bollard_2);
+		genericList.add(bollard_3);
 		
 		genericList.add(fake_light_source);
 

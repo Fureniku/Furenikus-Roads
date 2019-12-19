@@ -5,13 +5,33 @@
 		"uvlock": true
 	},
 	"variants": {
+		"inventory": [{
+			"model": "furenikusroads:barrier_bars_edge_inventory"
+		}],
+		"zpost": {
+			"true": {
+				"submodel": {
+	        		"post_main": { "model": "furenikusroads:barrier_bars_edge_post" },
+	        		"post_l":    { "model": "furenikusroads:barrier_bars_edge_post", "y": 270 },
+	        		"post_r":    { "model": "furenikusroads:barrier_bars_edge_post", "y": 90  }
+	        	}
+			},
+			"false": {
+				"submodel": {
+	        		"post_main": { "model": "furenikusroads:barrier_bars_edge_no_post" },
+	        		"post_l":    { "model": "furenikusroads:barrier_bars_edge_no_post", "y": 270 },
+	        		"post_r":    { "model": "furenikusroads:barrier_bars_edge_no_post", "y": 90  }
+	        	}
+			}
+		},
 		"left": {
         	"normal": {
         		"submodel": {
 	        		"corner_l": { "model": "furenikusroads:barrier_bars_edge_corner" },
 	        		"main": { "model": "furenikusroads:barrier_bars_edge" },
 	        		"side_l": { "model": "furenikusroads:nomodel" },
-	        		"side_end_l": { "model": "furenikusroads:nomodel" }
+	        		"side_end_l": { "model": "furenikusroads:nomodel" },
+	        		"post_l": { "model": "furenikusroads:nomodel" }
 	        	}
         	},
         	"down":  {
@@ -27,7 +47,9 @@
 	        		"corner_l": { "model": "furenikusroads:barrier_bars_edge_corner" },
 	        		"main": { "model": "furenikusroads:nomodel" },
 	        		"side_l": { "model": "furenikusroads:nomodel" },
-	        		"side_end_l": { "model": "furenikusroads:nomodel" }
+	        		"side_end_l": { "model": "furenikusroads:nomodel" },
+	        		"post_main": { "model": "furenikusroads:nomodel" },
+	        		"post_l": { "model": "furenikusroads:nomodel" }
 	        	}
 	        },
 	        "none": {
@@ -35,7 +57,9 @@
 	        		"corner_l": { "model": "furenikusroads:nomodel" },
 	        		"main": { "model": "furenikusroads:nomodel" },
 	        		"side_l": { "model": "furenikusroads:nomodel" },
-	        		"side_end_l": { "model": "furenikusroads:nomodel" }
+	        		"side_end_l": { "model": "furenikusroads:nomodel" },
+	        		"post_main": { "model": "furenikusroads:nomodel" },
+	        		"post_l": { "model": "furenikusroads:nomodel" }
 	        	}
 	        }
         },
@@ -45,7 +69,8 @@
 	        		"corner_r": { "model": "furenikusroads:barrier_bars_edge_corner", "y": 90 },
 	        		"main": { "model": "furenikusroads:barrier_bars_edge" },
 	        		"side_r": { "model": "furenikusroads:nomodel", "y": 90 },
-	        		"side_end_r": { "model": "furenikusroads:nomodel" }
+	        		"side_end_r": { "model": "furenikusroads:nomodel" },
+	        		"post_r": { "model": "furenikusroads:nomodel" }
 	        	}
         	},
         	"down":  {
@@ -61,7 +86,9 @@
 	        		"corner_r": { "model": "furenikusroads:barrier_bars_edge_corner", "y": 90 },
 	        		"main": { "model": "furenikusroads:nomodel" },
 	        		"side_r": { "model": "furenikusroads:nomodel", "y": 90 },
-	        		"side_end_r": { "model": "furenikusroads:nomodel" }
+	        		"side_end_r": { "model": "furenikusroads:nomodel" },
+	        		"post_main": { "model": "furenikusroads:nomodel" },
+	        		"post_r": { "model": "furenikusroads:nomodel" }
 	        	}
 	        },
 	        "none": {
@@ -69,7 +96,9 @@
 	        		"corner_l": { "model": "furenikusroads:nomodel" },
 	        		"main": { "model": "furenikusroads:nomodel" },
 	        		"side_l": { "model": "furenikusroads:nomodel" },
-	        		"side_end_l": { "model": "furenikusroads:nomodel" }
+	        		"side_end_l": { "model": "furenikusroads:nomodel" },
+	        		"post_main": { "model": "furenikusroads:nomodel" },
+	        		"post_r": { "model": "furenikusroads:nomodel" }
 	        	}
 	        }
         },

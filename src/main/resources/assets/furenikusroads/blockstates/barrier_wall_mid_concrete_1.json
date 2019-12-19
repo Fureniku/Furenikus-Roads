@@ -1,0 +1,64 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"transform": "forge:default-block",
+		"textures": {
+			"0": "furenikusroads:blocks/road_block_concrete_1",
+			"particle": "furenikusroads:blocks/road_block_concrete_1"
+		},
+		"model": "furenikusroads:nomodel"
+	},
+	"variants": {
+		"inventory": [{
+			"model": "furenikusroads:barrier_wall_inventory"
+		}],
+		"east": {
+			"true": {
+				"submodel": {
+					"connect_east": { "model": "furenikusroads:barrier_wall_n", "y": 90 }
+				}
+			},
+			"false": {
+			}
+		},
+		"post": {
+			"true": {
+				"submodel": {
+					"post": { "model": "furenikusroads:barrier_wall_mid", "y": 90 }
+				}
+			},
+			"false": {
+				"submodel": {
+					"post": { "model": "furenikusroads:barrier_wall_mid_small" }
+				}
+			}
+		},
+		"north": {
+			"true": {
+				"submodel": {
+					"connect_north": { "model": "furenikusroads:barrier_wall_n" }
+				}
+			},
+			"false": {
+			}
+		},
+		"south": {
+			"true": {
+				"submodel": {
+					"connect_south": { "model": "furenikusroads:barrier_wall_n", "y": 180 }
+				}
+			},
+			"false": {
+			}
+		},
+		"west": {
+			"true": {
+				"submodel": {
+					"connect_west": { "model": "furenikusroads:barrier_wall_n", "y": 270 }
+				}
+			},
+			"false": {
+			}
+		}
+	}
+}

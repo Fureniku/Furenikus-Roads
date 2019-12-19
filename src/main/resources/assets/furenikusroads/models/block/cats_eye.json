@@ -1,8 +1,10 @@
 {
-	"credit": "by LauraDarkez",
+	"credit": "Made with Blockbench",
 	"ambientocclusion": false,
 	"textures": {
-		"1_2": "furenikusroads:blocks/machine_metal_dark"
+		"1": "furenikusroads:blocks/cats_eye_white",
+		"1_2": "furenikusroads:blocks/machine_metal_dark",
+		"particle": "furenikusroads:blocks/cats_eye_white"
 	},
 	"elements": [
 		{
@@ -11,9 +13,9 @@
 			"rotation": {"angle": 0, "axis": "y", "origin": [8.00195, 8, 8]},
 			"faces": {
 				"north": {"uv": [0, 0, 2, 2.25], "texture": "#1_2"},
-				"east": {"uv": [4, 7.875, 12, 10.125], "texture": "#1_2"},
+				"east": {"uv": [4, 7.875, 12, 10.125], "texture": "#1"},
 				"south": {"uv": [7.75, 8.3125, 9.75, 10.5625], "texture": "#1_2"},
-				"west": {"uv": [7, 7.3125, 15, 9.5625], "texture": "#1_2"},
+				"west": {"uv": [7, 7.3125, 15, 9.5625], "texture": "#1"},
 				"up": {"uv": [7.75, 7, 9.75, 15], "texture": "#1_2"},
 				"down": {"uv": [7.75, 7, 9.75, 15], "texture": "#1_2"}
 			}

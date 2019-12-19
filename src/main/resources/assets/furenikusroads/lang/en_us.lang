@@ -49,17 +49,91 @@ tile.furenikusroads.post_medium_horizontal.name=Horizontal Post (Medium)
 tile.furenikusroads.post_small_horizontal.name=Horizontal Post (Small)
 
 tile.furenikusroads.barrier_standard_mid.name=Road Barrier Standard (Mid)
-tile.furenikusroads.barrier_standard_side.name=Road Barrier Standard (Side)
+tile.furenikusroads.barrier_standard_edge.name=Road Barrier Standard (Edge)
+tile.furenikusroads.barrier_standard_edge_double.name=Road Barrier Standard (Double Edge)
 tile.furenikusroads.barrier_end.0.name=Road Barrier Standard End (Mid)
+
+tile.furenikusroads.barrier_tall_mid.name=Road Barrier Tall (Mid)
+tile.furenikusroads.barrier_tall_edge.name=Road Barrier Tall (Edge)
+tile.furenikusroads.barrier_tall_edge_double.name=Road Barrier Tall (Double Edge)
+
+tile.furenikusroads.barrier_concrete_1_mid.name=Concrete Barrier (Mid)
+tile.furenikusroads.barrier_concrete_2_mid.name=Concrete Barrier (Mid)
+tile.furenikusroads.barrier_bars_mid.name=Bars (Mid)
+tile.furenikusroads.barrier_bars_edge.name=Bars (Edge)
+tile.furenikusroads.barrier_wall_mid_concrete_1.name=Concrete Wall (Mid)
+tile.furenikusroads.barrier_wall_mid_concrete_2.name=Concrete Wall (Mid)
+tile.furenikusroads.barrier_wall_edge_concrete_1.name=Concrete Wall (Edge)
+tile.furenikusroads.barrier_wall_edge_concrete_2.name=Concrete Wall (Edge)
+tile.furenikusroads.barrier_wall_edge_concrete_1_double.name=Concrete Wall (Double Edge)
+tile.furenikusroads.barrier_wall_edge_concrete_2_double.name=Concrete Wall (Double Edge)
+tile.furenikusroads.barrier_bars_edge_double.name=Bars (Double Edge)
+tile.furenikusroads.barrier_concrete_edge_1.name=Concrete Barrier (Edge)
+tile.furenikusroads.barrier_concrete_edge_2.name=Concrete Barrier (Edge)
+tile.furenikusroads.barrier_bars_mid_concrete_1.name=Bars with Concrete Post (Mid)
+tile.furenikusroads.barrier_bars_mid_concrete_2.name=Bars with Concrete Post (Mid)
+tile.furenikusroads.barrier_bars_edge_concrete_1.name=Bars with Concrete Post (Edge)
+tile.furenikusroads.barrier_bars_edge_concrete_2.name=Bars with Concrete Post (Edge)
+tile.furenikusroads.barrier_bars_mid_2.name=Bars (Mid)
+tile.furenikusroads.barrier_bars_edge_2.name=Bars (Edge)
+tile.furenikusroads.barrier_wall_pole_mid_concrete_1.name=Concrete Wall with Pole (Mid)
+tile.furenikusroads.barrier_wall_pole_mid_concrete_2.name=Concrete Wall with Pole (Mid)
+tile.furenikusroads.barrier_wall_pole_edge_concrete_1.name=Concrete Wall with Pole (Edge)
+tile.furenikusroads.barrier_wall_pole_edge_concrete_2.name=Concrete Wall with Pole (Edge)
+tile.furenikusroads.
+tile.furenikusroads.
+tile.furenikusroads.
+tile.furenikusroads.
+
+tile.furenikusroads.drain_cover_1.name=Drain Cover
+tile.furenikusroads.drain_cover_2.name=Drain Cover
+
+tile.furenikusroads.bollard_1.0.name=Thick Traffic Bollard (Left-Side Drive)
+tile.furenikusroads.bollard_1.1.name=Thick Traffic Bollard (Left-Side Drive)
+tile.furenikusroads.bollard_1.2.name=Thick Traffic Bollard (Right-Side Drive)
+tile.furenikusroads.bollard_1.3.name=Thick Traffic Bollard (Right-Side Drive)
+tile.furenikusroads.bollard_1.4.name=Thin Traffic Bollard (Left-Side Drive)
+tile.furenikusroads.bollard_1.5.name=Thin Traffic Bollard (Left-Side Drive)
+tile.furenikusroads.bollard_1.6.name=Thin Traffic Bollard (Right-Side Drive)
+tile.furenikusroads.bollard_1.7.name=Thin Traffic Bollard (Right-Side Drive)
+tile.furenikusroads.bollard_1.8.name=unimplemented
+tile.furenikusroads.bollard_1.9.name=unimplemented
+tile.furenikusroads.bollard_1.10.name=unimplemented
+tile.furenikusroads.bollard_1.11.name=unimplemented
+tile.furenikusroads.bollard_1.12.name=unimplemented
+tile.furenikusroads.bollard_1.13.name=unimplemented
+tile.furenikusroads.bollard_1.14.name=unimplemented
+tile.furenikusroads.bollard_1.15.name=unimplemented
+
+item.diamond_nugget.name=Diamond Nugget
+
+tile.furenikusroads.bollard_2.0.name=Concrete Bollard 1
+tile.furenikusroads.bollard_2.1.name=Concrete Bollard 2
+tile.furenikusroads.bollard_2.2.name=Metal Bollard
+tile.furenikusroads.bollard_2.3.name=Metal Bollard (Striped)
+tile.furenikusroads.bollard_2.4.name=Metal Bollard (Rings)
+tile.furenikusroads.bollard_2.5.name=Metal Bollard (Yellow)
+tile.furenikusroads.bollard_2.6.name=Thin Metal Bollard
+tile.furenikusroads.bollard_2.7.name=Thin Metal Bollard (Striped)
+tile.furenikusroads.bollard_2.8.name=Thin Metal Bollard (Rings)
+tile.furenikusroads.bollard_2.9.name=Thin Metal Bollard (Yellow)
+tile.furenikusroads.bollard_2.10.name=Bollard (Topped)
+tile.furenikusroads.bollard_2.11.name=Bollard (Topped, Ring)
+tile.furenikusroads.bollard_2.12.name=unimplemented
+tile.furenikusroads.bollard_2.13.name=unimplemented
+tile.furenikusroads.bollard_2.14.name=Portable Bollard (Orange)
+tile.furenikusroads.bollard_2.15.name=Portable Bollard (Yellow)
 
 tile.furenikusroads.cats_eye_white.name=White Reflector
 tile.furenikusroads.cats_eye_yellow.name=Yellow Reflector
 tile.furenikusroads.cats_eye_red.name=Red Reflector
 tile.furenikusroads.cats_eye_green.name=Green Reflector
+tile.furenikusroads.cats_eye_blue.name=Blue Reflector
 tile.furenikusroads.cats_eye_white_double.name=White Reflectors
 tile.furenikusroads.cats_eye_yellow_double.name=Yellow Reflectors
 tile.furenikusroads.cats_eye_red_double.name=Red Reflectors
 tile.furenikusroads.cats_eye_green_double.name=Green Reflectors
+tile.furenikusroads.cats_eye_blue_double.name=Blue Reflectors
 
 tile.furenikusroads.street_block_a.0.name=Sidewalk (Brick)
 tile.furenikusroads.street_block_a.1.name=Sidewalk (Crossed Brick)

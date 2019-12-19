@@ -62,10 +62,6 @@ public class BollardBlock extends NonPaintRoadTopBlock implements IMetaBlockName
 		list.add(new ItemStack(this, 1, 2));
 		list.add(new ItemStack(this, 1, 4));
 		list.add(new ItemStack(this, 1, 6));
-		list.add(new ItemStack(this, 1, 8));
-		list.add(new ItemStack(this, 1, 10));
-		list.add(new ItemStack(this, 1, 12));
-		list.add(new ItemStack(this, 1, 14));
 	}
 	
 	@Override

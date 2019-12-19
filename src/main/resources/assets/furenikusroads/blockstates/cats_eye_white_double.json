@@ -3,7 +3,7 @@
 	"defaults": {
 		"transform": "forge:default-block",
 		"textures": {
-			"1": "furenikusroads:blocks/cats_eye_white",
+			"2_1": "furenikusroads:blocks/cats_eye_white",
 			"2": "furenikusroads:blocks/machine_metal_dark",
 			"particle": "furenikusroads:blocks/machine_metal_dark"
 		},
@@ -11,37 +11,7 @@
 	},
 	"variants": {
 		"inventory": [{
-			"model": "furenikusroads:cats_eye_double",
-			"transform": {
-				"thirdperson_righthand": {
-					"translation": [0, 8, -3.5]
-				},
-				"thirdperson_lefthand": {
-					"translation": [0, 8, -3.5]
-				},
-				"firstperson_righthand": {
-					"translation": [0, 16, -9],
-					"scale": [2, 2, 2]
-				},
-				"firstperson_lefthand": {
-					"translation": [0, 16, -9],
-					"scale": [2, 2, 2]
-				},
-				"ground": {
-					"translation": [0, 12.25, 0.25],
-					"scale": [1.5, 1.5, 1.5]
-				},
-				"gui": {
-					"rotation": [15, 45, 0],
-					"translation": [0, 10.75, 0],
-					"scale": [1.5, 1.5, 1.5]
-				},
-				"fixed": {
-					"rotation": [-90, 0, 0],
-					"translation": [0, 0, -12.25],
-					"scale": [1.5, 1.5, 1.5]
-				}
-            }
+			"model": "furenikusroads:cats_eye_double"
 		}],
 		"eye_type": {
 			"floor_ns": {

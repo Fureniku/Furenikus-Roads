@@ -5,6 +5,7 @@ import javax.annotation.Nullable;
 import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.blocks.enums.IConnectable;
 import com.silvaniastudios.roads.blocks.paint.PaintBlockBase;
+import com.silvaniastudios.roads.items.FRItems;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -12,12 +13,14 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 
 public class BarsBarrierBlock extends BlockBase implements IConnectable {
 	
@@ -57,6 +60,19 @@ public class BarsBarrierBlock extends BlockBase implements IConnectable {
 		BlockPos offset = pos.offset(facing);
 		return canConnectTo(world, offset, true) || canConnectTo(world, offset.offset(EnumFacing.DOWN), false) || canConnectTo(world, offset.offset(EnumFacing.UP), false);
 	}
+	
+	@Override
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		if (playerIn.getHeldItem(hand).getItem() == FRItems.wrench) {
+			if (getMetaFromState(state) == 1) {
+				worldIn.setBlockState(pos, state.withProperty(POSTS, false));
+			} else {
+				worldIn.setBlockState(pos, state.withProperty(POSTS, true));
+			}
+			return true;
+		}
+        return false;
+    }
 	
 	public int getMetaFromState(IBlockState state) {
 		if (state.getValue(POSTS).equals(true)) {
@@ -119,7 +135,7 @@ public class BarsBarrierBlock extends BlockBase implements IConnectable {
     	if (east)  { xHigh = 1.0; } else { xHigh = 1.0-((1.0/16.0)*5.375); }
     	if (south) { zHigh = 1.0; } else { zHigh = 1.0-((1.0/16.0)*5.375); }
     	if (west)  { xLow  = 0.0; } else { xLow  = (1.0/16.0)*5.375; }
-    	return new AxisAlignedBB(xLow, -1+getBlockBelowHeight(world, pos), zLow, xHigh, -1+getBlockBelowHeight(world, pos)+1.0, zHigh);
+    	return new AxisAlignedBB(xLow, -1+getBlockBelowHeight(world, pos), zLow, xHigh, -1+getBlockBelowHeight(world, pos)+1.25, zHigh);
     }
     
     @Override
