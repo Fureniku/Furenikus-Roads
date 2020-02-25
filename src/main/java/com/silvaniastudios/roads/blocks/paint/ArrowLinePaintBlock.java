@@ -2,7 +2,6 @@ package com.silvaniastudios.roads.blocks.paint;
 
 import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.blocks.enums.EnumConnectArrows;
-import com.silvaniastudios.roads.blocks.enums.ILineConnectable;
 import com.silvaniastudios.roads.blocks.enums.IMetaBlockName;
 
 import net.minecraft.block.properties.IProperty;
@@ -23,7 +22,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ArrowLinePaintBlock extends PaintBlockBase implements IMetaBlockName, ILineConnectable {
+public class ArrowLinePaintBlock extends PaintBlockBase implements IMetaBlockName {
 	
 	//Direction is rotation of the block, not the actual direction to connect in.
 	public static final PropertyEnum<EnumConnectArrows> CONNECT = PropertyEnum.create("connect", EnumConnectArrows.class);

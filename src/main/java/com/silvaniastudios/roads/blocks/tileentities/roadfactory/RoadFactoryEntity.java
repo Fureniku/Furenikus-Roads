@@ -40,7 +40,7 @@ public class RoadFactoryEntity extends RoadTileEntity implements ITickable, ICap
 	public RoadFactoryEntity() {}
 	
 	public Container createContainer(EntityPlayer player) {
-		return new RoadFactoryContainer(player.inventory, this);
+		return new RoadFactoryContainer(player.inventory, this, false);
 	}
 	
 	public ItemStackHandler inventory = new ItemStackHandler(11) {
@@ -69,7 +69,7 @@ public class RoadFactoryEntity extends RoadTileEntity implements ITickable, ICap
 	public void update() {
 		//Used for rendering. Only do it on client.
 		if (world.isRemote) {
-			if (fillCheckTick < RoadsConfig.general.roadFactoryTickRate) {
+			if (fillCheckTick < RoadsConfig.machine.roadFactoryTickRate) {
 				fillCheckTick++;
 			} else {
 				if (previousFill < tarFluid.getFluidAmount()) {
@@ -89,14 +89,18 @@ public class RoadFactoryEntity extends RoadTileEntity implements ITickable, ICap
 			if (!fuel.isEmpty()) {
 				fuel_remaining = TileEntityFurnace.getItemBurnTime(fuel);
 				last_fuel_cap = fuel_remaining;
-				inventory.extractItem(RoadFactoryContainer.FUEL, 1, false);
+				if (inventory.getStackInSlot(RoadFactoryContainer.FUEL).getItem() == Items.LAVA_BUCKET) {
+					inventory.setStackInSlot(RoadFactoryContainer.FUEL, new ItemStack(Items.BUCKET));
+				} else {
+					inventory.extractItem(RoadFactoryContainer.FUEL, 1, false);
+				}
 				sendUpdates();
 			} else {
 				timerCount = 0;
 				return;
 			}
 		}
-		if (timerCount < RoadsConfig.general.roadFactoryTickRate) {
+		if (timerCount < RoadsConfig.machine.roadFactoryTickRate) {
 			if (shouldTick()) {
 				timerCount++;
 				fillCheckTick = timerCount;

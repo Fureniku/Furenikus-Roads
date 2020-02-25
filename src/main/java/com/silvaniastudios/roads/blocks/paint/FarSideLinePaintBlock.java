@@ -3,7 +3,6 @@ package com.silvaniastudios.roads.blocks.paint;
 import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.blocks.enums.EnumConnectDiagonal;
 import com.silvaniastudios.roads.blocks.enums.EnumConnectDirectional_FarSide;
-import com.silvaniastudios.roads.blocks.enums.ILineConnectable;
 import com.silvaniastudios.roads.blocks.enums.IMetaBlockName;
 
 import net.minecraft.block.properties.IProperty;
@@ -24,7 +23,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class FarSideLinePaintBlock extends PaintBlockBase implements ILineConnectable, IMetaBlockName {
+public class FarSideLinePaintBlock extends PaintBlockBase implements IMetaBlockName {
 	
 	public static final PropertyEnum<EnumConnectDiagonal> CONNECT_DIAGONAL = PropertyEnum.create("diagonal_connections", EnumConnectDiagonal.class);
 	public static final PropertyEnum<EnumConnectDirectional_FarSide> CONNECT_DIRECTIONAL = PropertyEnum.create("directional_connections", EnumConnectDirectional_FarSide.class);
@@ -68,10 +67,10 @@ public class FarSideLinePaintBlock extends PaintBlockBase implements ILineConnec
 		IBlockState offsetBlockEast  = world.getBlockState(pos.offset(EnumFacing.EAST));
 		IBlockState offsetBlockSouth = world.getBlockState(pos.offset(EnumFacing.SOUTH));
 		IBlockState offsetBlockWest  = world.getBlockState(pos.offset(EnumFacing.WEST));
-		int offsetMetaNorth = offsetBlockNorth.getBlock() instanceof ILineConnectable ? offsetBlockNorth.getBlock().getMetaFromState(offsetBlockNorth) : -1;
-		int offsetMetaEast  = offsetBlockEast.getBlock()  instanceof ILineConnectable ? offsetBlockEast.getBlock().getMetaFromState(offsetBlockEast) : -1;
-		int offsetMetaSouth = offsetBlockSouth.getBlock() instanceof ILineConnectable ? offsetBlockSouth.getBlock().getMetaFromState(offsetBlockSouth) : -1;
-		int offsetMetaWest  = offsetBlockWest.getBlock()  instanceof ILineConnectable ? offsetBlockWest.getBlock().getMetaFromState(offsetBlockWest) : -1;
+		int offsetMetaNorth = offsetBlockNorth.getBlock() instanceof FarSideLinePaintBlock ? offsetBlockNorth.getBlock().getMetaFromState(offsetBlockNorth) : -1;
+		int offsetMetaEast  = offsetBlockEast.getBlock()  instanceof FarSideLinePaintBlock ? offsetBlockEast.getBlock().getMetaFromState(offsetBlockEast) : -1;
+		int offsetMetaSouth = offsetBlockSouth.getBlock() instanceof FarSideLinePaintBlock ? offsetBlockSouth.getBlock().getMetaFromState(offsetBlockSouth) : -1;
+		int offsetMetaWest  = offsetBlockWest.getBlock()  instanceof FarSideLinePaintBlock ? offsetBlockWest.getBlock().getMetaFromState(offsetBlockWest) : -1;
 		
 		//NORTH
 		if (rootBlockMeta == 2) {
@@ -118,10 +117,10 @@ public class FarSideLinePaintBlock extends PaintBlockBase implements ILineConnec
 		IBlockState offsetBlockEast  = world.getBlockState(pos.offset(EnumFacing.EAST));
 		IBlockState offsetBlockSouth = world.getBlockState(pos.offset(EnumFacing.SOUTH));
 		IBlockState offsetBlockWest  = world.getBlockState(pos.offset(EnumFacing.WEST));
-		int offsetMetaNorth = offsetBlockNorth.getBlock() instanceof ILineConnectable ? offsetBlockNorth.getBlock().getMetaFromState(offsetBlockNorth) : -1;
-		int offsetMetaEast  = offsetBlockEast.getBlock()  instanceof ILineConnectable ? offsetBlockEast.getBlock().getMetaFromState(offsetBlockEast) : -1;
-		int offsetMetaSouth = offsetBlockSouth.getBlock() instanceof ILineConnectable ? offsetBlockSouth.getBlock().getMetaFromState(offsetBlockSouth) : -1;
-		int offsetMetaWest  = offsetBlockWest.getBlock()  instanceof ILineConnectable ? offsetBlockWest.getBlock().getMetaFromState(offsetBlockWest) : -1;
+		int offsetMetaNorth = offsetBlockNorth.getBlock() instanceof FarSideLinePaintBlock ? offsetBlockNorth.getBlock().getMetaFromState(offsetBlockNorth) : -1;
+		int offsetMetaEast  = offsetBlockEast.getBlock()  instanceof FarSideLinePaintBlock ? offsetBlockEast.getBlock().getMetaFromState(offsetBlockEast) : -1;
+		int offsetMetaSouth = offsetBlockSouth.getBlock() instanceof FarSideLinePaintBlock ? offsetBlockSouth.getBlock().getMetaFromState(offsetBlockSouth) : -1;
+		int offsetMetaWest  = offsetBlockWest.getBlock()  instanceof FarSideLinePaintBlock ? offsetBlockWest.getBlock().getMetaFromState(offsetBlockWest) : -1;
 		if (rootBlockMeta == 2 || rootBlockMeta == 5) {
 			if (offsetMetaNorth == 5 && offsetMetaEast == 2) {
 				return EnumConnectDiagonal.NORTH_EAST;

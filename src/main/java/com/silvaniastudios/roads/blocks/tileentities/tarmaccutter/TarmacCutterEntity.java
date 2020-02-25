@@ -9,6 +9,7 @@ import com.silvaniastudios.roads.items.FRItems;
 import com.silvaniastudios.roads.items.TarmacCutterBlade;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -43,7 +44,7 @@ public class TarmacCutterEntity extends RoadTileEntity implements ITickable, ICa
 	public TarmacCutterStackHandler interactable_inv = new TarmacCutterStackHandler(inventory);
 	
 	public Container createContainer(EntityPlayer player) {
-		return new TarmacCutterContainer(player.inventory, this);
+		return new TarmacCutterContainer(player.inventory, this, false);
 	}
 
 	@Override
@@ -75,7 +76,11 @@ public class TarmacCutterEntity extends RoadTileEntity implements ITickable, ICa
 			if (!inventory.getStackInSlot(4).isEmpty()) {
 				fuel_remaining = TileEntityFurnace.getItemBurnTime(inventory.getStackInSlot(4));
 				last_fuel_cap = fuel_remaining;
-				inventory.extractItem(4, 1, false);
+				if (inventory.getStackInSlot(4).getItem() == Items.LAVA_BUCKET) {
+					inventory.setStackInSlot(4, new ItemStack(Items.BUCKET));
+				} else {
+					inventory.extractItem(4, 1, false);
+				}
 				sendUpdates();
 			} else {
 				timerCount = 0;
@@ -83,7 +88,7 @@ public class TarmacCutterEntity extends RoadTileEntity implements ITickable, ICa
 			}
 		}
 		
-		if (timerCount < RoadsConfig.general.tarmacCutterTickRate) {
+		if (timerCount < RoadsConfig.machine.tarmacCutterTickRate) {
 			if (shouldTick()) {
 				timerCount++;
 			} else {
@@ -163,6 +168,10 @@ public class TarmacCutterEntity extends RoadTileEntity implements ITickable, ICa
 	}
 	
 	public int getCutSize(ItemStack stack) {
+		if (stack.getItem() instanceof TarmacCutterBlade) {
+			TarmacCutterBlade blade = (TarmacCutterBlade) stack.getItem();
+			return blade.size;
+		}
 		if (stack.getItem() == FRItems.tarmac_cutter_blade_1_iron || stack.getItem() == FRItems.tarmac_cutter_blade_1_gold || stack.getItem() == FRItems.tarmac_cutter_blade_1_diamond) { return 1; }
 		if (stack.getItem() == FRItems.tarmac_cutter_blade_2_iron || stack.getItem() == FRItems.tarmac_cutter_blade_2_gold || stack.getItem() == FRItems.tarmac_cutter_blade_2_diamond) { return 2; }
 		if (stack.getItem() == FRItems.tarmac_cutter_blade_4_iron || stack.getItem() == FRItems.tarmac_cutter_blade_4_gold || stack.getItem() == FRItems.tarmac_cutter_blade_4_diamond) { return 4; }

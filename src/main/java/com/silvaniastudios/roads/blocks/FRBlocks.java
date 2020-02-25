@@ -24,14 +24,19 @@ import com.silvaniastudios.roads.blocks.paint.PaintBlockBase;
 import com.silvaniastudios.roads.blocks.paint.SideLinePaintBlock;
 import com.silvaniastudios.roads.blocks.paint.SimpleLinePaintBlock;
 import com.silvaniastudios.roads.blocks.tileentities.crusher.CrusherBlock;
+import com.silvaniastudios.roads.blocks.tileentities.crusher.CrusherElectricEntity;
 import com.silvaniastudios.roads.blocks.tileentities.crusher.CrusherEntity;
 import com.silvaniastudios.roads.blocks.tileentities.distiller.TarDistillerBlock;
+import com.silvaniastudios.roads.blocks.tileentities.distiller.TarDistillerElectricEntity;
 import com.silvaniastudios.roads.blocks.tileentities.distiller.TarDistillerEntity;
 import com.silvaniastudios.roads.blocks.tileentities.paintfiller.PaintFillerBlock;
+import com.silvaniastudios.roads.blocks.tileentities.paintfiller.PaintFillerElectricEntity;
 import com.silvaniastudios.roads.blocks.tileentities.paintfiller.PaintFillerEntity;
 import com.silvaniastudios.roads.blocks.tileentities.roadfactory.RoadFactoryBlock;
+import com.silvaniastudios.roads.blocks.tileentities.roadfactory.RoadFactoryElectricEntity;
 import com.silvaniastudios.roads.blocks.tileentities.roadfactory.RoadFactoryEntity;
 import com.silvaniastudios.roads.blocks.tileentities.tarmaccutter.TarmacCutterBlock;
+import com.silvaniastudios.roads.blocks.tileentities.tarmaccutter.TarmacCutterElectricEntity;
 import com.silvaniastudios.roads.blocks.tileentities.tarmaccutter.TarmacCutterEntity;
 import com.silvaniastudios.roads.items.FRItems;
 import com.silvaniastudios.roads.items.PaintGunItemRegistry;
@@ -40,6 +45,7 @@ import com.silvaniastudios.roads.items.RoadItemBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 
@@ -74,11 +80,17 @@ public class FRBlocks {
 
 	public static CurbBlock kerb_standard = new CurbBlock("kerb_standard", Material.ROCK);
 	
-	public static PaintFillerBlock paint_filler = new PaintFillerBlock("paint_filler");
-	public static TarDistillerBlock tar_distiller = new TarDistillerBlock("tar_distiller");
-	public static RoadFactoryBlock road_factory = new RoadFactoryBlock("road_factory");
-	public static TarmacCutterBlock tarmac_cutter = new TarmacCutterBlock("tarmac_cutter");
-	public static CrusherBlock crusher = new CrusherBlock("crusher");
+	public static PaintFillerBlock paint_filler = new PaintFillerBlock("paint_filler", false);
+	public static TarDistillerBlock tar_distiller = new TarDistillerBlock("tar_distiller", false);
+	public static RoadFactoryBlock road_factory = new RoadFactoryBlock("road_factory", false);
+	public static TarmacCutterBlock tarmac_cutter = new TarmacCutterBlock("tarmac_cutter", false);
+	public static CrusherBlock crusher = new CrusherBlock("crusher", false);
+	
+	public static PaintFillerBlock paint_filler_electric = new PaintFillerBlock("paint_filler_electric", true);
+	public static TarDistillerBlock tar_distiller_electric = new TarDistillerBlock("tar_distiller_electric", true);
+	public static RoadFactoryBlock road_factory_electric = new RoadFactoryBlock("road_factory_electric", true);
+	public static TarmacCutterBlock tarmac_cutter_electric = new TarmacCutterBlock("tarmac_cutter_electric", true);
+	public static CrusherBlock crusher_electric = new CrusherBlock("crusher_electric", true);
 		
 	public static StreetBlock street_block_a = (StreetBlock) new StreetBlock("street_block_a", 16).setCreativeTab(FurenikusRoads.tab_sidewalks);
 	public static StreetBlock street_block_b = (StreetBlock) new StreetBlock("street_block_b", 16).setCreativeTab(FurenikusRoads.tab_sidewalks);
@@ -477,13 +489,20 @@ public class FRBlocks {
 	public static LetterPaintBlock paint_letter_red_punct_question_exclamation = new LetterPaintBlock("paint_letter_red_punct_question_exclamation");
 	public static LetterPaintBlock paint_letter_red_punct_hash_slash = new LetterPaintBlock("paint_letter_red_punct_hash_slash");
 	
-	@SuppressWarnings("deprecation")
+	public static BlockRoadSnow road_snow = new BlockRoadSnow("road_snow");
+	
 	public static void registerTileEntities() {
-		GameRegistry.registerTileEntity(PaintFillerEntity.class, FurenikusRoads.MODID + ":paint_filler_entity");
-		GameRegistry.registerTileEntity(TarDistillerEntity.class, FurenikusRoads.MODID + ":tar_distiller_entity");
-		GameRegistry.registerTileEntity(RoadFactoryEntity.class, FurenikusRoads.MODID + ":road_factory_entity");
-		GameRegistry.registerTileEntity(TarmacCutterEntity.class, FurenikusRoads.MODID + ":tarmac_cutter_entity");
-		GameRegistry.registerTileEntity(CrusherEntity.class, FurenikusRoads.MODID + ":crusher_entity");
+		GameRegistry.registerTileEntity(PaintFillerEntity.class, new ResourceLocation(FurenikusRoads.MODID, "paint_filler_entity"));
+		GameRegistry.registerTileEntity(TarDistillerEntity.class, new ResourceLocation(FurenikusRoads.MODID, "tar_distiller_entity"));
+		GameRegistry.registerTileEntity(RoadFactoryEntity.class, new ResourceLocation(FurenikusRoads.MODID, "road_factory_entity"));
+		GameRegistry.registerTileEntity(TarmacCutterEntity.class, new ResourceLocation(FurenikusRoads.MODID, "tarmac_cutter_entity"));
+		GameRegistry.registerTileEntity(CrusherEntity.class, new ResourceLocation(FurenikusRoads.MODID, "crusher_entity"));
+		
+		GameRegistry.registerTileEntity(PaintFillerElectricEntity.class, new ResourceLocation(FurenikusRoads.MODID, "paint_filler_electric_entity"));
+		GameRegistry.registerTileEntity(TarDistillerElectricEntity.class, new ResourceLocation(FurenikusRoads.MODID, "tar_distiller_electric_entity"));
+		GameRegistry.registerTileEntity(RoadFactoryElectricEntity.class, new ResourceLocation(FurenikusRoads.MODID, "road_factory_electric_entity"));
+		GameRegistry.registerTileEntity(TarmacCutterElectricEntity.class, new ResourceLocation(FurenikusRoads.MODID, "tarmac_cutter_electric_entity"));
+		GameRegistry.registerTileEntity(CrusherElectricEntity.class, new ResourceLocation(FurenikusRoads.MODID, "crusher_electric_entity"));
 	}
 
 	public static void register(IForgeRegistry<Block> registry) {
@@ -907,6 +926,12 @@ public class FRBlocks {
 			tarmac_cutter,
 			crusher,
 			
+			paint_filler_electric,
+			tar_distiller_electric,
+			road_factory_electric,
+			tarmac_cutter_electric,
+			crusher_electric,
+			
 			kerb_standard,
 			
 			street_block_a,
@@ -917,7 +942,8 @@ public class FRBlocks {
 			manhole_cover_round,
 			manhole_cover_square,
 			drain_cover_1,
-			drain_cover_2
+			drain_cover_2,
+			road_snow
 		);
 		
 		for (int i = 0; i < roadBlockList.size(); i++)  { registry.register(roadBlockList.get(i)); }
@@ -938,6 +964,12 @@ public class FRBlocks {
 		registry.register(new RoadItemBlock(tarmac_cutter).setRegistryName(tarmac_cutter.getRegistryName()));
 		registry.register(new RoadItemBlock(crusher).setRegistryName(crusher.getRegistryName()));
 		
+		registry.register(new RoadItemBlock(paint_filler_electric).setRegistryName(paint_filler_electric.getRegistryName()));
+		registry.register(new RoadItemBlock(tar_distiller_electric).setRegistryName(tar_distiller_electric.getRegistryName()));
+		registry.register(new RoadItemBlock(road_factory_electric).setRegistryName(road_factory_electric.getRegistryName()));
+		registry.register(new RoadItemBlock(tarmac_cutter_electric).setRegistryName(tarmac_cutter_electric.getRegistryName()));
+		registry.register(new RoadItemBlock(crusher_electric).setRegistryName(crusher_electric.getRegistryName()));
+		
 		registry.register(new RoadItemBlock(kerb_standard).setRegistryName(kerb_standard.getRegistryName()));
 		
 		registry.register(new RoadItemBlock(street_block_a).setRegistryName(street_block_a.getRegistryName()));
@@ -949,6 +981,7 @@ public class FRBlocks {
 		registry.register(new RoadItemBlock(manhole_cover_square).setRegistryName(manhole_cover_square.getRegistryName()));
 		registry.register(new RoadItemBlock(drain_cover_1).setRegistryName(drain_cover_1.getRegistryName()));
 		registry.register(new RoadItemBlock(drain_cover_2).setRegistryName(drain_cover_2.getRegistryName()));
+		registry.register(new RoadItemBlock(road_snow).setRegistryName(road_snow.getRegistryName()));
 	}
 	
 	public static void registerModels() {
@@ -963,6 +996,12 @@ public class FRBlocks {
 		tarmac_cutter.initModel();
 		crusher.initModel();
 		
+		paint_filler_electric.initModel();
+		tar_distiller_electric.initModel();
+		road_factory_electric.initModel();
+		tarmac_cutter_electric.initModel();
+		crusher_electric.initModel();
+		
 		kerb_standard.initModel();
 		
 		street_block_a.initModel();
@@ -974,6 +1013,7 @@ public class FRBlocks {
 		manhole_cover_square.initModel();
 		drain_cover_1.initModel();
 		drain_cover_2.initModel();
+		road_snow.initModel();
 	}
 	
 	//We only register white variants. Yellow and red can be taken from the white.

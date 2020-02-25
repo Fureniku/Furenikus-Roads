@@ -35,8 +35,10 @@ public class RoadTEBlock extends Block {
 	protected String name;
 	public static final PropertyEnum<RoadTEBlock.EnumRotation> ROTATION = PropertyEnum.create("rotation", RoadTEBlock.EnumRotation.class);
 	public static final PropertyBool FURNACE_ACTIVE = PropertyBool.create("furnace_active");
+	private int guiId = 0;
+	protected boolean electric;
 	
-	public RoadTEBlock(String name) {
+	public RoadTEBlock(String name, boolean electric, int guiId) {
 		super(Material.IRON);
 		this.name = name;
 		setUnlocalizedName(FurenikusRoads.MODID + "." + name);
@@ -44,6 +46,8 @@ public class RoadTEBlock extends Block {
 		this.setCreativeTab(FurenikusRoads.tab_tools);
 		this.setHardness(2.5F);
 		this.setHarvestLevel("pickaxe", 1);
+		this.guiId = guiId;
+		this.electric = electric;
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -56,18 +60,24 @@ public class RoadTEBlock extends Block {
 		return super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer);
 	}
 	
-	public void openGui(World world, BlockPos pos, EntityPlayer player, int guiId) {
+	@Override
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		openGui(world, pos, player);
+		return true;
+	}
+	
+	public void openGui(World world, BlockPos pos, EntityPlayer player) {
 		TileEntity te = world.getTileEntity(pos);
 		if (!world.isRemote) {
 			if (te != null && te instanceof RoadTileEntity) {
-				player.openGui(FurenikusRoads.instance, guiId, world, pos.getX(), pos.getY(), pos.getZ());
+				player.openGui(FurenikusRoads.instance, guiId + (electric ? 5 : 0), world, pos.getX(), pos.getY(), pos.getZ());
 			}
 		}
 	}
 	
 	@Override
-	 public boolean hasTileEntity(IBlockState state) {
-        return true;
+	public boolean hasTileEntity(IBlockState state) {
+		return true;
     }
 	
 	public int getMetaFromState(IBlockState state) {

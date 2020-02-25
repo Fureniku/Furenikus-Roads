@@ -7,9 +7,12 @@ import com.silvaniastudios.roads.blocks.tileentities.SlotOutput;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
@@ -28,14 +31,17 @@ public class TarDistillerContainer extends Container {
 	public static final int FLUID_OUT_1_BUCKET = 8;
 	public static final int FLUID_OUT_2_BUCKET = 9;
 	
-	public TarDistillerContainer(InventoryPlayer invPlayer, TarDistillerEntity tileEntity) {
+	private boolean isElectric = false;
+	private int energy;
+	
+	public TarDistillerContainer(InventoryPlayer invPlayer, TarDistillerEntity tileEntity, boolean isElectric) {
 		this.tileEntity = tileEntity;
 		
 		IItemHandler itemHandler = this.tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-		addSlotToContainer(new SlotDistillerInput(itemHandler, INPUT, 34, 30));
+		addSlotToContainer(new SlotDistillerInput(itemHandler, INPUT, 34, 30, tileEntity));
 		addSlotToContainer(new SlotOutput(itemHandler, OUTPUT_1, 100, 8));
 		addSlotToContainer(new SlotOutput(itemHandler, OUTPUT_2, 100, 30));
-		addSlotToContainer(new SlotDistillerFuel(itemHandler, FUEL, 67, 92));
+		if (!isElectric) { addSlotToContainer(new SlotDistillerFuel(itemHandler, FUEL, 174, 30)); }
 		
 		addSlotToContainer(new SlotFluid(itemHandler, FLUID_IN, 34, 70));
 		addSlotToContainer(new SlotFluid(itemHandler, FLUID_OUT_1, 100, 92));
@@ -44,6 +50,8 @@ public class TarDistillerContainer extends Container {
 		addSlotToContainer(new SlotBucket(itemHandler, FLUID_IN_BUCKET, 34, 92));
 		addSlotToContainer(new SlotBucket(itemHandler, FLUID_OUT_1_BUCKET, 100, 70));
 		addSlotToContainer(new SlotBucket(itemHandler, FLUID_OUT_2_BUCKET, 174, 70));
+		
+		this.isElectric = isElectric;
 		
 		addPlayerSlots(invPlayer);
 	}
@@ -62,6 +70,30 @@ public class TarDistillerContainer extends Container {
             int y = 58 + 126;
             this.addSlotToContainer(new Slot(playerInventory, i, x, y));
         }
+    }
+	
+	@Override
+	public void detectAndSendChanges() {
+		if (this.isElectric) {
+			TarDistillerElectricEntity tdee = (TarDistillerElectricEntity) tileEntity;
+			super.detectAndSendChanges();
+	
+			for (int i = 0; i < this.listeners.size(); ++i) {
+				IContainerListener icontainerlistener = this.listeners.get(i);
+	        	if (this.energy != tdee.energy.getEnergyStored()) {
+	        		icontainerlistener.sendWindowProperty(this, 0, tdee.energy.getEnergyStored());
+	        	}
+			}
+			this.energy = tdee.energy.getEnergyStored();
+		}
+	}
+	
+	@SideOnly(Side.CLIENT)
+	public void updateProgressBar(int id, int data) {
+		if (this.isElectric) {
+			TarDistillerElectricEntity tdee = (TarDistillerElectricEntity) tileEntity;
+			tdee.energy.setEnergy(data);
+		}
     }
 
 	@Override

@@ -9,9 +9,8 @@ import com.silvaniastudios.roads.fluids.FluidPaint;
 import com.silvaniastudios.roads.items.PaintGun;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
-import net.minecraft.item.EnumDyeColor;
-import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityFurnace;
@@ -23,6 +22,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class PaintFillerEntity extends RoadTileEntity implements ITickable, ICapabilityProvider {
 	
@@ -94,7 +94,7 @@ public class PaintFillerEntity extends RoadTileEntity implements ITickable, ICap
 	};
 	
 	public Container createContainer(EntityPlayer player) {
-		return new PaintFillerContainer(player.inventory, this);
+		return new PaintFillerContainer(player.inventory, this, false);
 	}
 
 	@Override
@@ -122,7 +122,11 @@ public class PaintFillerEntity extends RoadTileEntity implements ITickable, ICap
 			if (!inventory.getStackInSlot(4).isEmpty()) {
 				fuel_remaining = TileEntityFurnace.getItemBurnTime(inventory.getStackInSlot(4));
 				last_fuel_cap = fuel_remaining;
-				inventory.extractItem(4, 1, false);
+				if (inventory.getStackInSlot(4).getItem() == Items.LAVA_BUCKET) {
+					inventory.setStackInSlot(4, new ItemStack(Items.BUCKET));
+				} else {
+					inventory.extractItem(4, 1, false);
+				}
 				sendUpdates();
 			} else {
 				timerCount = 0;
@@ -130,7 +134,7 @@ public class PaintFillerEntity extends RoadTileEntity implements ITickable, ICap
 			}
 		}
 		
-		if (timerCount < RoadsConfig.general.fillerTickRate) {
+		if (timerCount < RoadsConfig.machine.fillerTickRate) {
 			if (shouldTick()) {
 				timerCount++;
 			} else {
@@ -142,35 +146,22 @@ public class PaintFillerEntity extends RoadTileEntity implements ITickable, ICap
 				boolean hasChanges = false;
 				
 				if ((!inventory.getStackInSlot(0).isEmpty() || !inventory.getStackInSlot(2).isEmpty() || !inventory.getStackInSlot(3).isEmpty()) && fuel_remaining > 0) {
-					ItemStack white_dye = inventory.getStackInSlot(0);
-					ItemStack yellow_dye = inventory.getStackInSlot(2);
-					ItemStack red_dye = inventory.getStackInSlot(3);
-					
-					if (white_dye.getItem() instanceof ItemDye) {
-						EnumDyeColor col = EnumDyeColor.byDyeDamage(white_dye.getMetadata());
-						if (col == EnumDyeColor.WHITE && white_paint.getFluidAmount() <= white_paint.getCapacity() + paintPerDye) {
-							inventory.extractItem(0, 1, false);
-							white_paint.fill(new FluidStack(FRFluids.white_paint, paintPerDye), true);
-							hasChanges = true;
-						}
+					if (isWhiteDye(inventory.getStackInSlot(0)) && white_paint.getFluidAmount() <= white_paint.getCapacity() + paintPerDye) {
+						inventory.extractItem(0, 1, false);
+						white_paint.fill(new FluidStack(FRFluids.white_paint, paintPerDye), true);
+						hasChanges = true;
 					}
-					
-					if (yellow_dye.getItem() instanceof ItemDye) {
-						EnumDyeColor col = EnumDyeColor.byDyeDamage(yellow_dye.getMetadata());
-						if (col == EnumDyeColor.YELLOW && yellow_paint.getFluidAmount() <= yellow_paint.getCapacity() + paintPerDye) {
-							inventory.extractItem(2, 1, false);
-							yellow_paint.fill(new FluidStack(FRFluids.yellow_paint, paintPerDye), true);
-							hasChanges = true;
-						}
+
+					if (isYellowDye(inventory.getStackInSlot(2)) && yellow_paint.getFluidAmount() <= yellow_paint.getCapacity() + paintPerDye) {
+						inventory.extractItem(2, 1, false);
+						yellow_paint.fill(new FluidStack(FRFluids.yellow_paint, paintPerDye), true);
+						hasChanges = true;
 					}
-					
-					if (red_dye.getItem() instanceof ItemDye) {
-						EnumDyeColor col = EnumDyeColor.byDyeDamage(red_dye.getMetadata());
-						if (col == EnumDyeColor.RED && red_paint.getFluidAmount() <= red_paint.getCapacity() + paintPerDye) {
-							inventory.extractItem(3, 1, false);
-							red_paint.fill(new FluidStack(FRFluids.red_paint, paintPerDye), true);
-							hasChanges = true;
-						}
+				
+					if (isRedDye(inventory.getStackInSlot(3)) && red_paint.getFluidAmount() <= red_paint.getCapacity() + paintPerDye) {
+						inventory.extractItem(3, 1, false);
+						red_paint.fill(new FluidStack(FRFluids.red_paint, paintPerDye), true);
+						hasChanges = true;
 					}
 				}
 
@@ -213,33 +204,53 @@ public class PaintFillerEntity extends RoadTileEntity implements ITickable, ICap
 		}
 	}
 	
+	public boolean isWhiteDye(ItemStack stack) {
+		if (stack != ItemStack.EMPTY) {
+			for (int id : OreDictionary.getOreIDs(stack)) {
+				if (OreDictionary.getOreName(id).equals("dyeWhite")) {
+	                return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	public boolean isYellowDye(ItemStack stack) {
+		if (stack != ItemStack.EMPTY) {
+			for (int id : OreDictionary.getOreIDs(stack)) {
+				if (OreDictionary.getOreName(id).equals("dyeYellow")) {
+	                return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	public boolean isRedDye(ItemStack stack) {
+		if (stack != ItemStack.EMPTY) {
+			for (int id : OreDictionary.getOreIDs(stack)) {
+				if (OreDictionary.getOreName(id).equals("dyeRed")) {
+	                return true;
+				}
+			}
+		}
+		return false;
+	}
+	
 	public boolean shouldTick() {
 		int paintPerDye = RoadsConfig.general.paintPerDye;
 		
 		if ((!inventory.getStackInSlot(0).isEmpty() || !inventory.getStackInSlot(2).isEmpty() || !inventory.getStackInSlot(3).isEmpty()) && fuel_remaining > 0) {
-			ItemStack white_dye = inventory.getStackInSlot(0);
-			ItemStack yellow_dye = inventory.getStackInSlot(2);
-			ItemStack red_dye = inventory.getStackInSlot(3);
-			
-			if (white_dye.getItem() instanceof ItemDye) {
-				EnumDyeColor col = EnumDyeColor.byDyeDamage(white_dye.getMetadata());
-				if (col == EnumDyeColor.WHITE && white_paint.getFluidAmount() <= white_paint.getCapacity() + paintPerDye) {
-					return true;
-				}
+			if (isWhiteDye(inventory.getStackInSlot(0)) && white_paint.getFluidAmount() <= white_paint.getCapacity() + paintPerDye) {
+				return true;
 			}
-			
-			if (yellow_dye.getItem() instanceof ItemDye) {
-				EnumDyeColor col = EnumDyeColor.byDyeDamage(yellow_dye.getMetadata());
-				if (col == EnumDyeColor.YELLOW && yellow_paint.getFluidAmount() <= yellow_paint.getCapacity() + paintPerDye) {
-					return true;
-				}
+
+			if (isYellowDye(inventory.getStackInSlot(2)) && yellow_paint.getFluidAmount() <= yellow_paint.getCapacity() + paintPerDye) {
+				return true;
 			}
-			
-			if (red_dye.getItem() instanceof ItemDye) {
-				EnumDyeColor col = EnumDyeColor.byDyeDamage(red_dye.getMetadata());
-				if (col == EnumDyeColor.RED && red_paint.getFluidAmount() <= red_paint.getCapacity() + paintPerDye) {
-					return true;
-				}
+
+			if (isRedDye(inventory.getStackInSlot(3)) && red_paint.getFluidAmount() <= red_paint.getCapacity() + paintPerDye) {
+				return true;
 			}
 		}
 

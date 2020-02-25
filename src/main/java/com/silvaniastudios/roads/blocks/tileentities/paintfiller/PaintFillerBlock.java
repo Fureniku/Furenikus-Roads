@@ -13,11 +13,8 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -30,8 +27,8 @@ public class PaintFillerBlock extends RoadTEBlock {
 	
 	public static final PropertyBool GUN_LOADED = PropertyBool.create("gun_loaded");
 
-	public PaintFillerBlock(String name) {
-		super(name);
+	public PaintFillerBlock(String name, boolean electric) {
+		super(name, electric, 1);
 		this.setDefaultState(this.blockState.getBaseState()
 				.withProperty(GUN_LOADED, false)
 				.withProperty(ROTATION, RoadTEBlock.EnumRotation.north)
@@ -46,13 +43,10 @@ public class PaintFillerBlock extends RoadTEBlock {
 	
 	@Override
 	public TileEntity createTileEntity(World worldIn, IBlockState state) {
+		if (electric) {
+			return new PaintFillerElectricEntity();
+		}
 		return new PaintFillerEntity();
-	}
-	
-	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		openGui(world, pos, player, 1);
-		return true;
 	}
 	
 	public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {

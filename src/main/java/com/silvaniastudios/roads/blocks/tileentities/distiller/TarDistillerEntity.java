@@ -13,9 +13,11 @@ import com.silvaniastudios.roads.items.FRItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
-import net.minecraft.item.ItemCoal;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -35,7 +37,6 @@ import net.minecraftforge.items.ItemStackHandler;
 public class TarDistillerEntity extends RoadTileEntity implements ITickable, ICapabilityProvider {
 	
 	public int last_fuel_cap = 20000;
-	
 	public int timerCount = 0;
 	
 	public static final int TANK_CAP = 320000;
@@ -43,7 +44,7 @@ public class TarDistillerEntity extends RoadTileEntity implements ITickable, ICa
 	public TarDistillerEntity() {}
 	
 	public Container createContainer(EntityPlayer player) {
-		return new TarDistillerContainer(player.inventory, this);
+		return new TarDistillerContainer(player.inventory, this, false);
 	}
 	
 	public ItemStackHandler inventory = new ItemStackHandler(10) {
@@ -98,7 +99,7 @@ public class TarDistillerEntity extends RoadTileEntity implements ITickable, ICa
 			}
 		}
 		
-		if (timerCount < RoadsConfig.general.tarDistillerTickRate) {
+		if (timerCount < RoadsConfig.machine.tarDistillerTickRate) {
 			if (shouldTick()) {
 				timerCount++;
 			} else {
@@ -110,25 +111,27 @@ public class TarDistillerEntity extends RoadTileEntity implements ITickable, ICa
 				ItemStack input = inventory.getStackInSlot(TarDistillerContainer.INPUT);
 				ItemStack output_1 = inventory.getStackInSlot(TarDistillerContainer.OUTPUT_1);
 				
-				if (input.getItem() instanceof ItemCoal) {
-					ItemStack stack = output_1;
-					if (stack.isEmpty() || stack.getCount() < inventory.getSlotLimit(TarDistillerContainer.OUTPUT_1)) {
+				if (validInput(input, null)) {
+					ItemStack itemOut1 = output1(input, null);
+					FluidStack fluidOut1 = fluidOut1(input, null);
+					
+					if (output_1.isEmpty() || output_1.getCount() + itemOut1.getCount() <= inventory.getSlotLimit(TarDistillerContainer.OUTPUT_1)) {
 						boolean process = false;
 						if (fluidOutput1.getFluid() == null) {
-							fluidOutput1.setFluid(new FluidStack(FRFluids.tar, 1000));
+							fluidOutput1.setFluid(fluidOut1);
 							process = true;
-						} else if ((fluidOutput1.getFluidAmount() <= TANK_CAP - 1000 && (fluidOutput1.getFluid().getFluid().equals(FRFluids.tar)) || fluidOutput1.getFluidAmount() <= 0)) {
-							fluidOutput1.fill(new FluidStack(FRFluids.tar, 1000), true);
+						} else if ((fluidOutput1.getFluidAmount() <= TANK_CAP - fluidOut1.amount && (fluidOutput1.getFluid().getFluid().equals(FRFluids.tar)) || fluidOutput1.getFluidAmount() <= 0)) {
+							fluidOutput1.fill(fluidOut1, true);
 							process = true;
 						}
 						
 						if (process) {
 							inventory.extractItem(TarDistillerContainer.INPUT, 1, false);
 							
-							if (stack.isEmpty()) { 
-								inventory.setStackInSlot(TarDistillerContainer.OUTPUT_1, new ItemStack(FRItems.coal_coke, 1));
+							if (output_1.isEmpty()) { 
+								inventory.setStackInSlot(TarDistillerContainer.OUTPUT_1, itemOut1);
 							} else {
-								stack.setCount(stack.getCount()+1);
+								output_1.setCount(output_1.getCount()+itemOut1.getCount());
 							}
 							hasChanges = true;
 						}
@@ -203,12 +206,66 @@ public class TarDistillerEntity extends RoadTileEntity implements ITickable, ICa
 		}
 	}
 	
+	public boolean validInput(ItemStack input, FluidStack fluidIn) {
+		Item item = input.getItem();
+		if (item == Items.COAL) {
+			return true;
+		}
+		if (item instanceof ItemBlock) {
+			ItemBlock ib = (ItemBlock) item;
+			if (ib.getBlock() == Blocks.COAL_BLOCK) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public ItemStack output1(ItemStack itemIn, FluidStack fluidIn) {
+		Item item = itemIn.getItem();
+		if (item == Items.COAL) {
+			return new ItemStack(FRItems.coal_coke);
+		}
+		if (item instanceof ItemBlock) {
+			ItemBlock ib = (ItemBlock) item;
+			if (ib.getBlock() == Blocks.COAL_BLOCK) {
+				return new ItemStack(FRItems.coal_coke, 9);
+			}
+		}
+		return ItemStack.EMPTY;
+	}
+	
+	public ItemStack output2(ItemStack itemIn, FluidStack fluidIn) {
+		return ItemStack.EMPTY;
+	}
+	
+	public FluidStack fluidOut1(ItemStack itemIn, FluidStack fluidIn) {
+		Item item = itemIn.getItem();
+		if (item == Items.COAL) {
+			if (itemIn.getItemDamage() == 0) {
+				return new FluidStack(FRFluids.tar, 1000);
+			}
+			return new FluidStack(FRFluids.tar, 750);
+		}
+		if (item instanceof ItemBlock) {
+			ItemBlock ib = (ItemBlock) item;
+			if (ib.getBlock() == Blocks.COAL_BLOCK) {
+				return new FluidStack(FRFluids.tar, 9000);
+			}
+		}
+		return null;
+	}
+
+	public FluidStack fluidOut2(ItemStack itemIn, FluidStack fluidIn) {
+		return null;
+	}
+	
+	
+	
 	//Simulate everything but dont actually process. This is to check if it "can" do stuff.
 	public boolean shouldTick() {
-
 		ItemStack input = inventory.getStackInSlot(TarDistillerContainer.INPUT);
 		
-		if (input.getItem() instanceof ItemCoal) {
+		if (validInput(input, null)) {
 			ItemStack stack = inventory.getStackInSlot(TarDistillerContainer.OUTPUT_1);
 			if (stack.isEmpty() || stack.getCount() < inventory.getSlotLimit(TarDistillerContainer.OUTPUT_1)) {
 				return true;

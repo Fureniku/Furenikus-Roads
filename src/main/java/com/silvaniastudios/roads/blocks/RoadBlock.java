@@ -1,11 +1,13 @@
 package com.silvaniastudios.roads.blocks;
 
 import com.silvaniastudios.roads.FurenikusRoads;
+import com.silvaniastudios.roads.RoadsConfig;
 import com.silvaniastudios.roads.blocks.paint.PaintBlockBase;
 import com.silvaniastudios.roads.items.FRItems;
 import com.silvaniastudios.roads.items.RoadItemBase;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockSnow;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
@@ -56,7 +58,7 @@ public class RoadBlock extends BlockBase {
 		this.setCreativeTab(FurenikusRoads.tab_roads);
 		this.fragmentItem = fragment;
 		this.setHarvestLevel("pneumatic_drill", 0);
-		this.setHardness(2.0F);
+		this.setHardness(1.0F);
 	}
 	
 	public RoadItemBase getFragmentItem(Block block) {
@@ -82,6 +84,19 @@ public class RoadBlock extends BlockBase {
 		if (block == FRBlocks.road_block_sand) { return FRItems.tarmac_fragment_sand; }
 		
 		return FRItems.tarmac_fragment_standard;
+	}
+	
+	@Override
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+		IBlockState stateAbove = worldIn.getBlockState(pos.offset(EnumFacing.UP));
+		
+		if (stateAbove.getBlock() instanceof BlockSnow && !(stateAbove.getBlock() instanceof BlockRoadSnow)) {
+			if (RoadsConfig.general.snowOnRoads) {
+				worldIn.setBlockState(pos.offset(EnumFacing.UP), FRBlocks.road_snow.getDefaultState(), 3);
+			} else {
+				worldIn.setBlockToAir(pos.offset(EnumFacing.UP));
+			}
+		}
 	}
 	
 	@SideOnly(Side.CLIENT)

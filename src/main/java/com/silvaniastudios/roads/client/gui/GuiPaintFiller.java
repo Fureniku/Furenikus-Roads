@@ -2,7 +2,9 @@ package com.silvaniastudios.roads.client.gui;
 
 import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.RoadsConfig;
+import com.silvaniastudios.roads.blocks.tileentities.crusher.CrusherElectricEntity;
 import com.silvaniastudios.roads.blocks.tileentities.paintfiller.PaintFillerContainer;
+import com.silvaniastudios.roads.blocks.tileentities.paintfiller.PaintFillerElectricEntity;
 import com.silvaniastudios.roads.blocks.tileentities.paintfiller.PaintFillerEntity;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -14,12 +16,14 @@ public class GuiPaintFiller extends GuiContainer {
 	
 	private static final ResourceLocation guiTextures = new ResourceLocation(FurenikusRoads.MODID + ":textures/gui/paint_filler.png");
 	private PaintFillerEntity tileEntity;
+	private boolean electric;
 	
-	public GuiPaintFiller(PaintFillerEntity tileEntity, PaintFillerContainer container) {
+	public GuiPaintFiller(PaintFillerEntity tileEntity, PaintFillerContainer container, boolean electric) {
 		super(container);
-		this.tileEntity = tileEntity;
-		xSize = 176;
+		xSize = 196;
 		ySize = 206;
+		this.tileEntity = tileEntity;
+		this.electric = electric;
 	}
 
 	@Override
@@ -28,7 +32,11 @@ public class GuiPaintFiller extends GuiContainer {
 		int top = (height - ySize) / 2;
         
         drawTooltip(2, left, top, mouseX, mouseY);
-        fontRenderer.drawString(I18n.format("roads.gui.paint_filler.name"), 6, 6, 4210752);
+        if (electric) {
+			fontRenderer.drawString(I18n.format("roads.gui.electric_paint_filler.name"), 6, 6, 4210752);
+		} else {
+			fontRenderer.drawString(I18n.format("roads.gui.paint_filler.name"), 6, 6, 4210752);
+		}
 	}
 	
 	@Override
@@ -38,6 +46,9 @@ public class GuiPaintFiller extends GuiContainer {
         int left = (width - xSize) / 2;
         int top = (height - ySize) / 2;
         drawTexturedModalRect(left, top, 0, 0, xSize, ySize);
+        if (electric) {
+        	drawTexturedModalRect(left+xSize-23, top, 196, 0, 23, 56);
+        }
         drawGunFillBar(0, left, top, tileEntity.gun_white);
         drawGunFillBar(1, left, top, tileEntity.gun_yellow);
         drawGunFillBar(2, left, top, tileEntity.gun_red);
@@ -47,6 +58,8 @@ public class GuiPaintFiller extends GuiContainer {
         
         drawFuel(left, top);
         drawProgress(left, top);
+        
+        
 	}
 	
 	@Override
@@ -67,13 +80,21 @@ public class GuiPaintFiller extends GuiContainer {
 	}
 	
 	private void drawFuel(int left, int top) {
-		int p = getPercentage(tileEntity.fuel_remaining, tileEntity.last_fuel_cap);
-		int x = Math.round(p / 7.0F);
-		drawTexturedModalRect(left + 75, top + 75 + (14-x), 176, 14-x, 14, x);
+		if (electric) {
+			PaintFillerElectricEntity pfee = (PaintFillerElectricEntity) tileEntity;
+			int p = getPercentage(pfee.energy.getEnergyStored(), pfee.energy.getMaxEnergyStored());
+			int x = Math.round(p / 2.5F);
+			if (p == 100) { x = 42; }
+			drawTexturedModalRect(left + 175, top + 7 + (42-x), 242, 42-x, 14, x);
+		} else {
+			int p = getPercentage(tileEntity.fuel_remaining, tileEntity.last_fuel_cap);
+			int x = Math.round(p / 7.0F);
+			drawTexturedModalRect(left + 75, top + 75 + (14-x), 176, 14-x, 14, x);
+		}
 	}
 	
 	private void drawProgress(int left, int top) {
-		int p = getPercentage(tileEntity.timerCount, RoadsConfig.general.fillerTickRate);
+		int p = getPercentage(tileEntity.timerCount, electric ? RoadsConfig.machine.electricFillerTickRate : RoadsConfig.machine.fillerTickRate);
 		int x = Math.round(p * 1.6F);
 		drawTexturedModalRect(left + 8, top + 114, 0, 252, x, 4);
 	}
@@ -87,14 +108,20 @@ public class GuiPaintFiller extends GuiContainer {
 		if (mouseX >= (left + 24) && mouseX <= (left + 34) && mouseY >= (top + 58) && mouseY <= (top + 108)) { this.drawHoveringText(tileEntity.gun_yellow + "/" + PaintFillerEntity.GUN_TANK_CAP, mouseX - left, mouseY - top + 15); }
 		if (mouseX >= (left + 40) && mouseX <= (left + 50) && mouseY >= (top + 58) && mouseY <= (top + 108)) { this.drawHoveringText(tileEntity.gun_red    + "/" + PaintFillerEntity.GUN_TANK_CAP, mouseX - left, mouseY - top + 15); }
 		
-		if (mouseX >= (left + 75) && mouseX <= (left + 89) && mouseY >= (top + 75) && mouseY <= (top + 89)) { this.drawHoveringText(tileEntity.fuel_remaining + "/" + tileEntity.last_fuel_cap, mouseX - left, mouseY - top + 15); }
+		if (electric) {
+			PaintFillerElectricEntity pfee = (PaintFillerElectricEntity) tileEntity;
+			if (mouseX >= (left + 175) && mouseX <= (left + 189) && mouseY >= (top +  7) && mouseY <= (top + 49)) { this.drawHoveringText(pfee.energy.getEnergyStored() + "/" + pfee.energy.getMaxEnergyStored(), mouseX - left, mouseY - top + 15); }
+		} else {
+			if (mouseX >= (left + 175) && mouseX <= (left + 189) && mouseY >= (top + 13) && mouseY <= (top + 27)) { this.drawHoveringText(tileEntity.fuel_remaining + "/" + tileEntity.last_fuel_cap, mouseX - left, mouseY - top + 15); }
+		}
 		
 		if (RoadsConfig.general.guiGuide) {
 			if (mouseX >= (left + 21)  && mouseX <= (left + 37) && mouseY >= (top + 36) && mouseY <= (top + 52)) { this.drawHoveringText(I18n.format("roads.gui.paint_filler.paint_gun_slot"), mouseX - left, mouseY - top + 15); }
-			if (mouseX >= (left + 74)  && mouseX <= (left + 90) && mouseY >= (top +  8) && mouseY <= (top + 24)) { this.drawHoveringText(I18n.format("roads.gui.paint_filler.white_slot"), mouseX - left, mouseY - top + 15); }
-			if (mouseX >= (left + 74)  && mouseX <= (left + 90) && mouseY >= (top + 30) && mouseY <= (top + 46)) { this.drawHoveringText(I18n.format("roads.gui.paint_filler.yellow_slot"), mouseX - left, mouseY - top + 15); }
-			if (mouseX >= (left + 74)  && mouseX <= (left + 90) && mouseY >= (top + 52) && mouseY <= (top + 68)) { this.drawHoveringText(I18n.format("roads.gui.paint_filler.red_slot"), mouseX - left, mouseY - top + 15); }
-			if (mouseX >= (left + 74)  && mouseX <= (left + 90) && mouseY >= (top + 92) && mouseY <= (top + 108)) { this.drawHoveringText(I18n.format("roads.gui.fuelSlot"), mouseX - left, mouseY - top + 15); }
+			
+			if (mouseX >= (left + 74)  && mouseX <= (left +  90) && mouseY >= (top + 36) && mouseY <= (top +  52)) { this.drawHoveringText(I18n.format("roads.gui.paint_filler.white_slot"), mouseX - left, mouseY - top + 15); }
+			if (mouseX >= (left + 74)  && mouseX <= (left +  90) && mouseY >= (top + 64) && mouseY <= (top +  80)) { this.drawHoveringText(I18n.format("roads.gui.paint_filler.yellow_slot"), mouseX - left, mouseY - top + 15); }
+			if (mouseX >= (left + 74)  && mouseX <= (left +  90) && mouseY >= (top + 92) && mouseY <= (top + 108)) { this.drawHoveringText(I18n.format("roads.gui.paint_filler.red_slot"), mouseX - left, mouseY - top + 15); }
+			if (mouseX >= (left + 174) && mouseX <= (left + 190) && mouseY >= (top + 32) && mouseY <= (top +  48) && !electric) { this.drawHoveringText(I18n.format("roads.gui.fuelSlot"), mouseX - left, mouseY - top + 15); }
 		}
 	}
 	

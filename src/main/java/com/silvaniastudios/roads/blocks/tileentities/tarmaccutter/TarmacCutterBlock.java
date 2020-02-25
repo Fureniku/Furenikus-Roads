@@ -12,11 +12,8 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -26,8 +23,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TarmacCutterBlock extends RoadTEBlock {
 	
-	public TarmacCutterBlock(String name) {
-		super(name);
+	public TarmacCutterBlock(String name, boolean electric) {
+		super(name, electric, 4);
 		this.setDefaultState(this.blockState.getBaseState()
 				.withProperty(ROTATION, RoadTEBlock.EnumRotation.north)
 				.withProperty(FURNACE_ACTIVE, false));
@@ -35,6 +32,9 @@ public class TarmacCutterBlock extends RoadTEBlock {
 	
 	@Override
 	public TileEntity createTileEntity(World worldIn, IBlockState state) {
+		if (electric) {
+			return new TarmacCutterElectricEntity();
+		}
 		return new TarmacCutterEntity();
 	}
 	
@@ -42,12 +42,6 @@ public class TarmacCutterBlock extends RoadTEBlock {
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 		tooltip.add(I18n.format("roads.gui.tarmac_cutter.tooltip_1"));
 		tooltip.add(I18n.format("roads.gui.tarmac_cutter.tooltip_2"));
-	}
-	
-	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		openGui(world, pos, player, 4);
-		return true;
 	}
 	
 	protected BlockStateContainer createBlockState() {

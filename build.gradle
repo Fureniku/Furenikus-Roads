@@ -11,7 +11,7 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 //Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 
 
-version = "1.0.2"
+version = "1.1.0"
 group = "com.silvaniastudios.roads" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "Fureniku's Roads"
 
@@ -21,7 +21,7 @@ compileJava {
 }
 
 minecraft {
-    version = "1.12.2-14.23.4.2759"
+    version = "1.12.2-14.23.5.2847"
     runDir = "run"
     
     // the mappings can be changed at any time, and must be in the following format.
@@ -33,7 +33,42 @@ minecraft {
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 }
 
+repositories {
+    maven {
+        // location of the maven that hosts JEI files
+        name = "Progwml6 maven"
+        url = "https://dvs1.progwml6.com/files/maven/"
+    }
+    maven {
+        // location of a maven mirror for JEI files, as a fallback
+        name = "ModMaven"
+        url = "https://modmaven.k-4u.nl"
+    }
+    maven {
+		name = "ChickenBones Maven"
+		url = "http://chickenbones.net/maven/"
+	}
+	maven {
+		name = "CoFH Maven"
+		url = "https://maven.covers1624.net"
+	}
+}
+
 dependencies {
+    // compile against the JEI API but do not include it at runtime
+    deobfProvided "mezz.jei:jei_1.12.2:4.15.0.289:api"
+    // at runtime, use the full JEI jar
+    runtime "mezz.jei:jei_1.12.2:4.15.0.289"
+    
+    //Easy way to get CoFH stuff into dev environment for testing. Not needed for building etc so commented out, it actually causes problems with JEI.
+    //deobfCompile "cofh:RedstoneFlux:1.12-2.1.0.6:universal"
+    //deobfCompile "cofh:CoFHCore:1.12.2-4.6.0.+:universal"
+    //deobfCompile "cofh:CoFHWorld:1.12.2-1.2.0.+:universal"
+    //deobfCompile "cofh:ThermalFoundation:1.12.2-2.6.0.+:universal"
+    //deobfCompile "cofh:ThermalDynamics:1.12.2-2.5.5.+:universal"
+    //deobfCompile "cofh:ThermalExpansion:1.12.2-5.5.4.+:universal"
+
+    //deobfCompile "codechicken:CodeChickenLib:1.12.2-3.2.2.+:universal"
     // you may put jars on which you depend on in ./libs
     // or you may define them like so..
     //compile "some.group:artifact:version:classifier"

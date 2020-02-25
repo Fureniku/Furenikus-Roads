@@ -701,9 +701,11 @@ roads.gui.road_generic_name=Road Block
 roads.gui.road_generic_name_cut=Road Block (Cut)
 roads.gui.fragment_generic_name=Road Fragments
 
+roads.gui.electric_crusher.name=Crusher
 roads.gui.crusher.name=Crusher
 roads.gui.crusher.tooltip_1=Crushes blocks to make different blocks!
 
+roads.gui.electric_road_factory.name=Road Factory
 roads.gui.road_factory.name=Road Factory
 roads.gui.road_factory.connect_pass=Tar Distiller Linked
 roads.gui.road_factory.connect_failed_1=Tar Distiller not found.
@@ -713,15 +715,18 @@ roads.gui.road_factory.link=Link
 roads.gui.road_factory.tooltip_1=Create road blocks from their base block.
 roads.gui.road_factory.tooltip_2=Tip: Place to the right of a Tar Distiller!
 
+roads.gui.electric_tar_distiller.name=Tar Distiller
 roads.gui.tar_distiller.name=Tar Distiller
 roads.gui.tar_distiller.tooltip_1=Creates tar from input items.
 roads.gui.tar_distiller.tooltip_2=Currently only takes coal. Fuel with lava.
 
+roads.gui.electric_tarmac_cutter.name=Tarmac Cutter
 roads.gui.tarmac_cutter.name=Tarmac Cutter
 roads.gui.tarmac_cutter.bladeSlot=Cutter Blade
 roads.gui.tarmac_cutter.tooltip_1=Cuts tarmac down to size
 roads.gui.tarmac_cutter.tooltip_2=Use Tarmac Cutter Blades to set the required size.
 
+roads.gui.electric_paint_filler.name=Paint Filler
 roads.gui.paint_filler.name=Paint Filler
 roads.gui.paint_filler.paint_gun_slot=Paint Gun Mount
 roads.gui.paint_filler.white_slot=White Dye Converter

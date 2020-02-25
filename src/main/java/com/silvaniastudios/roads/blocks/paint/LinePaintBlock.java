@@ -1,7 +1,6 @@
 package com.silvaniastudios.roads.blocks.paint;
 
 import com.silvaniastudios.roads.FurenikusRoads;
-import com.silvaniastudios.roads.blocks.enums.ILineConnectable;
 import com.silvaniastudios.roads.blocks.enums.IMetaBlockName;
 
 import net.minecraft.block.Block;
@@ -26,7 +25,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class LinePaintBlock extends PaintBlockBase implements ILineConnectable, IMetaBlockName {
+public class LinePaintBlock extends PaintBlockBase implements IMetaBlockName {
 	
 	public static final PropertyBool NORTH = PropertyBool.create("north");
 	public static final PropertyBool EAST = PropertyBool.create("east");
@@ -67,7 +66,7 @@ public class LinePaintBlock extends PaintBlockBase implements ILineConnectable, 
 	public boolean canConnectTo(IBlockAccess worldIn, BlockPos pos, EnumFacing facing) {
 		IBlockState state = worldIn.getBlockState(pos);
 		Block block = state.getBlock();
-		return block instanceof ILineConnectable;
+		return block instanceof LinePaintBlock || block instanceof ArrowLinePaintBlock;
 	}
 
 	private boolean canLineConnectTo(IBlockAccess world, BlockPos pos, EnumFacing facing) {

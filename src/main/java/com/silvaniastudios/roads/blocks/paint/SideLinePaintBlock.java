@@ -2,7 +2,6 @@ package com.silvaniastudios.roads.blocks.paint;
 
 import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.blocks.enums.EnumConnectSideLine;
-import com.silvaniastudios.roads.blocks.enums.ILineConnectable;
 import com.silvaniastudios.roads.blocks.enums.IMetaBlockName;
 
 import net.minecraft.block.properties.IProperty;
@@ -23,7 +22,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class SideLinePaintBlock extends PaintBlockBase implements ILineConnectable, IMetaBlockName {
+public class SideLinePaintBlock extends PaintBlockBase implements IMetaBlockName {
 	
 	public static final PropertyEnum<EnumConnectSideLine> CONNECT_LEFT = PropertyEnum.create("connect_left", EnumConnectSideLine.class);
 	public static final PropertyEnum<EnumConnectSideLine> CONNECT_RIGHT = PropertyEnum.create("connect_right", EnumConnectSideLine.class);
@@ -70,10 +69,10 @@ public class SideLinePaintBlock extends PaintBlockBase implements ILineConnectab
 		IBlockState stateSouth = world.getBlockState(pos);
 		IBlockState stateWest  = world.getBlockState(pos);
 		
-		boolean blockNorth = world.getBlockState(pos.offset(EnumFacing.NORTH)).getBlock() instanceof ILineConnectable;
-		boolean blockEast  = world.getBlockState(pos.offset(EnumFacing.EAST)) .getBlock() instanceof ILineConnectable;
-		boolean blockSouth = world.getBlockState(pos.offset(EnumFacing.SOUTH)).getBlock() instanceof ILineConnectable;
-		boolean blockWest  = world.getBlockState(pos.offset(EnumFacing.WEST)) .getBlock() instanceof ILineConnectable;
+		boolean blockNorth = world.getBlockState(pos.offset(EnumFacing.NORTH)).getBlock() instanceof SideLinePaintBlock;
+		boolean blockEast  = world.getBlockState(pos.offset(EnumFacing.EAST)) .getBlock() instanceof SideLinePaintBlock;
+		boolean blockSouth = world.getBlockState(pos.offset(EnumFacing.SOUTH)).getBlock() instanceof SideLinePaintBlock;
+		boolean blockWest  = world.getBlockState(pos.offset(EnumFacing.WEST)) .getBlock() instanceof SideLinePaintBlock;
 		
 		if (blockNorth) { stateNorth = world.getBlockState(pos.offset(EnumFacing.NORTH)); }
 		if (blockEast)  { stateEast  = world.getBlockState(pos.offset(EnumFacing.EAST));  }
@@ -84,40 +83,40 @@ public class SideLinePaintBlock extends PaintBlockBase implements ILineConnectab
 		BlockPos posUp = pos.offset(EnumFacing.UP);
 		
 		if (!blockNorth) {
-			if (world.getBlockState(posDown.offset(EnumFacing.NORTH)).getBlock() instanceof ILineConnectable) {
+			if (world.getBlockState(posDown.offset(EnumFacing.NORTH)).getBlock() instanceof SideLinePaintBlock) {
 				blockNorth = true;
 				stateNorth = world.getBlockState(posDown.offset(EnumFacing.NORTH));
-			} else if (world.getBlockState(posUp.offset(EnumFacing.NORTH)).getBlock() instanceof ILineConnectable) {
+			} else if (world.getBlockState(posUp.offset(EnumFacing.NORTH)).getBlock() instanceof SideLinePaintBlock) {
 				blockNorth = true;
 				stateNorth = world.getBlockState(posUp.offset(EnumFacing.NORTH));
 			}
 		}
 		
 		if (!blockEast) {
-			if (world.getBlockState(posDown.offset(EnumFacing.EAST)).getBlock() instanceof ILineConnectable) {
+			if (world.getBlockState(posDown.offset(EnumFacing.EAST)).getBlock() instanceof SideLinePaintBlock) {
 				blockEast = true;
 				stateEast = world.getBlockState(posDown.offset(EnumFacing.EAST));
-			} else if (world.getBlockState(posUp.offset(EnumFacing.EAST)).getBlock() instanceof ILineConnectable) {
+			} else if (world.getBlockState(posUp.offset(EnumFacing.EAST)).getBlock() instanceof SideLinePaintBlock) {
 				blockEast = true;
 				stateEast = world.getBlockState(posUp.offset(EnumFacing.EAST));
 			}
 		}
 		
 		if (!blockSouth) {
-			if (world.getBlockState(posDown.offset(EnumFacing.SOUTH)).getBlock() instanceof ILineConnectable) {
+			if (world.getBlockState(posDown.offset(EnumFacing.SOUTH)).getBlock() instanceof SideLinePaintBlock) {
 				blockSouth = true;
 				stateSouth = world.getBlockState(posDown.offset(EnumFacing.SOUTH));
-			} else if (world.getBlockState(posUp.offset(EnumFacing.SOUTH)).getBlock() instanceof ILineConnectable) {
+			} else if (world.getBlockState(posUp.offset(EnumFacing.SOUTH)).getBlock() instanceof SideLinePaintBlock) {
 				blockSouth = true;
 				stateSouth = world.getBlockState(posUp.offset(EnumFacing.SOUTH));
 			}
 		}
 		
 		if (!blockWest) {
-			if (world.getBlockState(posDown.offset(EnumFacing.WEST)).getBlock() instanceof ILineConnectable) {
+			if (world.getBlockState(posDown.offset(EnumFacing.WEST)).getBlock() instanceof SideLinePaintBlock) {
 				blockWest = true;
 				stateWest = world.getBlockState(posDown.offset(EnumFacing.WEST));
-			} else if (world.getBlockState(posUp.offset(EnumFacing.WEST)).getBlock() instanceof ILineConnectable) {
+			} else if (world.getBlockState(posUp.offset(EnumFacing.WEST)).getBlock() instanceof SideLinePaintBlock) {
 				blockWest = true;
 				stateWest = world.getBlockState(posUp.offset(EnumFacing.WEST));
 			}
@@ -174,8 +173,8 @@ public class SideLinePaintBlock extends PaintBlockBase implements ILineConnectab
 		int metaUp = -1;
 		int metaDown = -1;
 		
-		if (blockUp && stateUp.getBlock() instanceof ILineConnectable) { metaUp = stateUp.getBlock().getMetaFromState(stateUp); }
-		if (blockDown && stateDown.getBlock() instanceof ILineConnectable) { metaDown = stateDown.getBlock().getMetaFromState(stateDown); }
+		if (blockUp && stateUp.getBlock() instanceof SideLinePaintBlock) { metaUp = stateUp.getBlock().getMetaFromState(stateUp); }
+		if (blockDown && stateDown.getBlock() instanceof SideLinePaintBlock) { metaDown = stateDown.getBlock().getMetaFromState(stateDown); }
 
 		if (leftSide) {
 			if (blockRight && blockUp) {

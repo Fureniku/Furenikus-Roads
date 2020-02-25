@@ -37,6 +37,7 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void init() {
+		super.init();
 		Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler(new ModBlockColours(), FRBlocks.road_block_grass);
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ModItemColours(), FRBlocks.road_block_grass);
 		//Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler(new ModBlockColours(), FRItem)

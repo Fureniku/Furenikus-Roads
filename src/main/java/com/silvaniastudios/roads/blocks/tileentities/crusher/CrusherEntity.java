@@ -10,6 +10,7 @@ import com.silvaniastudios.roads.items.FRItems;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -25,7 +26,6 @@ import net.minecraftforge.items.ItemStackHandler;
 public class CrusherEntity extends RoadTileEntity implements ITickable, ICapabilityProvider {
 	
 	public int timerCount = 0;
-	
 	
 	public CrusherEntity() {
 
@@ -47,7 +47,7 @@ public class CrusherEntity extends RoadTileEntity implements ITickable, ICapabil
 	public CrusherStackHandler interactable_inv = new CrusherStackHandler(inventory);
 	
 	public Container createContainer(EntityPlayer player) {
-		return new CrusherContainer(player.inventory, this);
+		return new CrusherContainer(player.inventory, this, false);
 	}
 
 	@Override
@@ -79,7 +79,11 @@ public class CrusherEntity extends RoadTileEntity implements ITickable, ICapabil
 			if (!inventory.getStackInSlot(2).isEmpty()) {
 				fuel_remaining = TileEntityFurnace.getItemBurnTime(inventory.getStackInSlot(2));
 				last_fuel_cap = fuel_remaining;
-				inventory.extractItem(2, 1, false);
+				if (inventory.getStackInSlot(2).getItem() == Items.LAVA_BUCKET) {
+					inventory.setStackInSlot(2, new ItemStack(Items.BUCKET));
+				} else {
+					inventory.extractItem(2, 1, false);
+				}
 				sendUpdates();
 			} else {
 				timerCount = 0;
@@ -87,7 +91,7 @@ public class CrusherEntity extends RoadTileEntity implements ITickable, ICapabil
 			}
 		}
 		
-		if (timerCount < RoadsConfig.general.crusherTickRate) {
+		if (timerCount < RoadsConfig.machine.crusherTickRate) {
 			if (shouldTick()) {
 				timerCount++;
 			} else {
@@ -116,7 +120,6 @@ public class CrusherEntity extends RoadTileEntity implements ITickable, ICapabil
 	
 	public boolean shouldTick() {
 		ItemStack itemIn = inventory.getStackInSlot(0);
-		
 		if (!itemIn.isEmpty()) {
 			ItemStack itemOut = getRecipes(itemIn);
 			if (!itemOut.isEmpty()) {
@@ -160,8 +163,8 @@ public class CrusherEntity extends RoadTileEntity implements ITickable, ICapabil
 			
 			if (ib.getBlock() == FRBlocks.generic_blocks) {
 				if (itemIn.getItemDamage() == 0) { return new ItemStack(Blocks.SAND, 1); } //crushed rock
-				if (itemIn.getItemDamage() == 1) { return new ItemStack(FRItems.clinker_mix, 4); } //clinker
-				if (itemIn.getItemDamage() == 2) { return new ItemStack(FRItems.cement_dust, 4); } //cement
+				if (itemIn.getItemDamage() == 1) { return new ItemStack(FRItems.cement_dust, 1); } //clinker
+				if (itemIn.getItemDamage() == 2) { return new ItemStack(FRItems.cement_dust, 1); } //cement
 				if (itemIn.getItemDamage() == 3) { return new ItemStack(FRItems.limestone_dust, 4); } //limestone
 			}
 			
@@ -169,6 +172,10 @@ public class CrusherEntity extends RoadTileEntity implements ITickable, ICapabil
 				RoadBlock block = (RoadBlock) ib.getBlock();
 				
 				return new ItemStack(block.getFragmentItem(block), itemIn.getItemDamage() + 1);
+			}
+		} else {
+			if (itemIn.getItem() == FRItems.clinker_mix) {
+				return new ItemStack(FRItems.cement_dust, 1);
 			}
 		}
 		

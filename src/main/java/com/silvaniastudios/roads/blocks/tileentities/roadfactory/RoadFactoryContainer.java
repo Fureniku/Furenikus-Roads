@@ -7,9 +7,12 @@ import com.silvaniastudios.roads.blocks.tileentities.SlotOutput;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
@@ -29,21 +32,25 @@ public class RoadFactoryContainer extends Container {
 	public static final int FLUID_IN = 9;
 	public static final int FLUID_IN_BUCKET = 10;
 	
-	public RoadFactoryContainer(InventoryPlayer invPlayer, RoadFactoryEntity tileEntity) {
+	private boolean isElectric = false;
+	private int energy;
+	
+	public RoadFactoryContainer(InventoryPlayer invPlayer, RoadFactoryEntity tileEntity, boolean isElectric) {
 		this.tileEntity = tileEntity;
 		IItemHandler itemHandler = this.tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-		addSlotToContainer(new SlotRoadIn(itemHandler, INPUT_1, 40, 20));
-		addSlotToContainer(new SlotRoadIn(itemHandler, INPUT_2, 62, 20));
-		addSlotToContainer(new SlotRoadIn(itemHandler, INPUT_3, 40, 42));
-		addSlotToContainer(new SlotRoadIn(itemHandler, INPUT_4, 62, 42));
-		addSlotToContainer(new SlotOutput(itemHandler, OUTPUT_1, 124, 20));
-		addSlotToContainer(new SlotOutput(itemHandler, OUTPUT_2, 146, 20));
-		addSlotToContainer(new SlotOutput(itemHandler, OUTPUT_3, 124, 42));
-		addSlotToContainer(new SlotOutput(itemHandler, OUTPUT_4, 146, 42));
-		addSlotToContainer(new SlotFuel(itemHandler, FUEL, 93, 92));
+		addSlotToContainer(new SlotRoadIn(itemHandler, INPUT_1, 34, 20));
+		addSlotToContainer(new SlotRoadIn(itemHandler, INPUT_2, 57, 20));
+		addSlotToContainer(new SlotRoadIn(itemHandler, INPUT_3, 34, 43));
+		addSlotToContainer(new SlotRoadIn(itemHandler, INPUT_4, 57, 43));
+		addSlotToContainer(new SlotOutput(itemHandler, OUTPUT_1, 107, 20));
+		addSlotToContainer(new SlotOutput(itemHandler, OUTPUT_2, 130, 20));
+		addSlotToContainer(new SlotOutput(itemHandler, OUTPUT_3, 107, 43));
+		addSlotToContainer(new SlotOutput(itemHandler, OUTPUT_4, 130, 43));
+		if (!isElectric) { addSlotToContainer(new SlotFuel(itemHandler, FUEL, 152, 43)); }
 		addSlotToContainer(new SlotFluid(itemHandler, FLUID_IN, 34, 70));
 		addSlotToContainer(new SlotFluid(itemHandler, FLUID_IN_BUCKET, 34, 92));
 		
+		this.isElectric = isElectric;
 		addPlayerSlots(invPlayer);
 	}
 	
@@ -61,6 +68,30 @@ public class RoadFactoryContainer extends Container {
             int y = 58 + 124;
             this.addSlotToContainer(new Slot(playerInventory, i, x, y));
         }
+    }
+	
+	@Override
+	public void detectAndSendChanges() {
+		if (this.isElectric) {
+			RoadFactoryElectricEntity rfee = (RoadFactoryElectricEntity) tileEntity;
+			super.detectAndSendChanges();
+	
+			for (int i = 0; i < this.listeners.size(); ++i) {
+				IContainerListener icontainerlistener = this.listeners.get(i);
+	        	if (this.energy != rfee.energy.getEnergyStored()) {
+	        		icontainerlistener.sendWindowProperty(this, 0, rfee.energy.getEnergyStored());
+	        	}
+			}
+			this.energy = rfee.energy.getEnergyStored();
+		}
+	}
+	
+	@SideOnly(Side.CLIENT)
+	public void updateProgressBar(int id, int data) {
+		if (this.isElectric) {
+			RoadFactoryElectricEntity rfee = (RoadFactoryElectricEntity) tileEntity;
+			rfee.energy.setEnergy(data);
+		}
     }
 
 	@Override

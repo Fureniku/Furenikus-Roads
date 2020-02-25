@@ -44,6 +44,7 @@ public class PneumaticDrill extends ItemTool {
 		this.setUnlocalizedName(name);
 		this.setRegistryName(name);
 		this.maxStackSize = 1;
+		this.setMaxDamage(4096);
 		this.setCreativeTab(FurenikusRoads.tab_tools);
 	}
 	

@@ -28,8 +28,8 @@ public class RoadFactoryBlock extends RoadTEBlock {
 	
 	public static final PropertyBool CONNECTED = PropertyBool.create("connected");
 
-	public RoadFactoryBlock(String name) {
-		super(name);
+	public RoadFactoryBlock(String name, boolean electric) {
+		super(name, electric, 3);
 		this.setDefaultState(this.blockState.getBaseState()
 				.withProperty(ROTATION, RoadTEBlock.EnumRotation.north).withProperty(CONNECTED, false)
 				.withProperty(FURNACE_ACTIVE, false));
@@ -43,13 +43,10 @@ public class RoadFactoryBlock extends RoadTEBlock {
 	
 	@Override
 	public TileEntity createTileEntity(World worldIn, IBlockState state) {
+		if (electric) {
+			return new RoadFactoryElectricEntity();
+		}
 		return new RoadFactoryEntity();
-	}
-	
-	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		openGui(world, pos, player, 3);
-		return true;
 	}
 	
 	public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {

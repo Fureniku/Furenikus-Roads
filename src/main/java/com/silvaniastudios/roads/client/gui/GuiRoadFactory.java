@@ -6,8 +6,10 @@ import java.util.List;
 import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.RoadsConfig;
 import com.silvaniastudios.roads.blocks.FRBlocks;
+import com.silvaniastudios.roads.blocks.tileentities.crusher.CrusherElectricEntity;
 import com.silvaniastudios.roads.blocks.tileentities.roadfactory.RoadFactoryBlock;
 import com.silvaniastudios.roads.blocks.tileentities.roadfactory.RoadFactoryContainer;
+import com.silvaniastudios.roads.blocks.tileentities.roadfactory.RoadFactoryElectricEntity;
 import com.silvaniastudios.roads.blocks.tileentities.roadfactory.RoadFactoryEntity;
 
 import net.minecraft.block.state.IBlockState;
@@ -24,12 +26,14 @@ public class GuiRoadFactory extends GuiContainer {
 	
 	private static final ResourceLocation guiTextures = new ResourceLocation(FurenikusRoads.MODID + ":textures/gui/road_factory.png");
 	private RoadFactoryEntity tileEntity;
+	private boolean electric;
 	
-	public GuiRoadFactory(RoadFactoryEntity tileEntity, RoadFactoryContainer container) {
+	public GuiRoadFactory(RoadFactoryEntity tileEntity, RoadFactoryContainer container, boolean electric) {
 		super(container);
-		this.tileEntity = tileEntity;
 		xSize = 176;
 		ySize = 206;
+		this.tileEntity = tileEntity;
+		this.electric = electric;
 	}
 	
 	@Override
@@ -37,9 +41,13 @@ public class GuiRoadFactory extends GuiContainer {
         int left = (width - xSize) / 2;
         int top = (height - ySize) / 2;
         
-        fontRenderer.drawString(I18n.format("roads.gui.road_factory.name"), 32, 6, 4210752);
         fontRenderer.drawString(I18n.format("roads.gui.road_factory.link"), 116, 96, 4210752);
         drawTooltip(2, left, top, mouseX, mouseY);
+        if (electric) {
+			fontRenderer.drawString(I18n.format("roads.gui.electric_road_factory.name"), 32, 6, 4210752);
+		} else {
+			fontRenderer.drawString(I18n.format("roads.gui.road_factory.name"), 32, 6, 4210752);
+		}
 	}
 
 	@Override
@@ -49,13 +57,17 @@ public class GuiRoadFactory extends GuiContainer {
         int left = (width - xSize) / 2;
         int top = (height - ySize) / 2;
         drawTexturedModalRect(left, top, 0, 0, xSize, ySize);
-        drawTankFillBar(left, top, tileEntity.tarFluid.getFluidAmount());
+        drawTexturedModalRect(left, top, 0, 0, xSize, ySize);
+        if (electric) {
+        	drawTexturedModalRect(left+xSize-25, top, 176, 0, 25, 206);
+        }
         
+        drawTankFillBar(left, top, tileEntity.tarFluid.getFluidAmount());
         drawFuel(left, top);
         drawProgress(left, top);
         
         if (distillerFound()) {
-        	drawTexturedModalRect(left + 157, top + 95, 176, 14, 10, 10);
+        	drawTexturedModalRect(left + 157, top + 95, 232, 14, 10, 10);
         }
 	}
 	
@@ -72,20 +84,34 @@ public class GuiRoadFactory extends GuiContainer {
 	}
 	
 	private void drawFuel(int left, int top) {
-		int p = getPercentage(tileEntity.fuel_remaining, tileEntity.last_fuel_cap);
-		int x = Math.round(p / 7.0F);
-		drawTexturedModalRect(left + 94, top + 75 + (14-x), 176, 14-x, 14, x);
+		if (electric) {
+			RoadFactoryElectricEntity rfee = (RoadFactoryElectricEntity) tileEntity;
+			int p = getPercentage(rfee.energy.getEnergyStored(), rfee.energy.getMaxEnergyStored());
+			int x = Math.round(p / 2.5F);
+			if (p == 100) { x = 42; }
+			drawTexturedModalRect(left + 153, top + 18 + (42-x), 242, 42-x, 14, x);
+		} else {
+			int p = getPercentage(tileEntity.fuel_remaining, tileEntity.last_fuel_cap);
+			int x = Math.round(p / 7.0F);
+			drawTexturedModalRect(left + 153, top + 23 + (14-x), 228, 14-x, 14, x);
+		}
 	}
 	
 	private void drawProgress(int left, int top) {
-		int p = getPercentage(tileEntity.timerCount, RoadsConfig.general.roadFactoryTickRate);
+		int p = getPercentage(tileEntity.timerCount, RoadsConfig.machine.roadFactoryTickRate);
 		int x = Math.round(p * 1.6F);
 		drawTexturedModalRect(left + 8, top + 114, 0, 252, x, 4);
 	}
 	
 	private void drawTooltip(int col, int left, int top, int mouseX, int mouseY) {
 		if (mouseX >= (left + 8)  && mouseX <= (left + 28) && mouseY >= (top + 8) && mouseY <= (top + 108)) { this.drawHoveringText(tileEntity.tarFluid.getFluidAmount()  + "/" + RoadFactoryEntity.TANK_CAP, mouseX - left, mouseY - top + 15); }
-		if (mouseX >= (left + 94) && mouseX <= (left + 108) && mouseY >= (top + 75) && mouseY <= (top + 89)) { this.drawHoveringText(tileEntity.fuel_remaining + "/" + tileEntity.last_fuel_cap, mouseX - left, mouseY - top + 15); }
+		
+		if (electric) {
+			RoadFactoryElectricEntity rfee = (RoadFactoryElectricEntity) tileEntity;
+			if (mouseX >= (left + 153) && mouseX <= (left + 167) && mouseY >= (top + 18) && mouseY <= (top + 60)) { this.drawHoveringText(rfee.energy.getEnergyStored() + "/" + rfee.energy.getMaxEnergyStored(), mouseX - left, mouseY - top + 15); }
+		} else {
+			if (mouseX >= (left + 153) && mouseX <= (left + 167) && mouseY >= (top + 23) && mouseY <= (top + 37)) { this.drawHoveringText(tileEntity.fuel_remaining + "/" + tileEntity.last_fuel_cap, mouseX - left, mouseY - top + 15); }
+		}
 		
 		if (RoadsConfig.general.guiGuide) {
 			String a = TextFormatting.RESET + " -> " + TextFormatting.GREEN;
@@ -104,11 +130,11 @@ public class GuiRoadFactory extends GuiContainer {
 					TextFormatting.AQUA + Blocks.GRAVEL.getLocalizedName() + a + FRBlocks.road_block_gravel.getLocalizedName(),
 					TextFormatting.AQUA + Blocks.SAND.getLocalizedName() + a + FRBlocks.road_block_sand.getLocalizedName());
 			
-			if (mouseX >= (left +  39) && mouseX <= (left +  79) && mouseY >= (top + 19) && mouseY <= (top +  69)) { this.drawHoveringText(inputList, mouseX - left, mouseY - top + 15); }
+			if (mouseX >= (left +  34) && mouseX <= (left +  73) && mouseY >= (top + 20) && mouseY <= (top +  59)) { this.drawHoveringText(inputList, mouseX - left, mouseY - top + 15); }
 			if (mouseX >= (left +  34) && mouseX <= (left +  50) && mouseY >= (top + 70) && mouseY <= (top +  86)) { this.drawHoveringText(I18n.format("roads.gui.tarInputSlot"), mouseX - left, mouseY - top + 15); }
 			if (mouseX >= (left +  34) && mouseX <= (left +  50) && mouseY >= (top + 92) && mouseY <= (top + 108)) { this.drawHoveringText(I18n.format("roads.gui.bucketOutputSlot"), mouseX - left, mouseY - top + 15); }
-			if (mouseX >= (left +  93) && mouseX <= (left + 109) && mouseY >= (top + 92) && mouseY <= (top + 108)) { this.drawHoveringText(I18n.format("roads.gui.fuelSlot"), mouseX - left, mouseY - top + 15); }
-			if (mouseX >= (left + 123) && mouseX <= (left + 163) && mouseY >= (top + 19) && mouseY <= (top +  69)) { this.drawHoveringText(I18n.format("roads.gui.outputSlot"), mouseX - left, mouseY - top + 15); }
+			if (mouseX >= (left + 152) && mouseX <= (left + 168) && mouseY >= (top + 43) && mouseY <= (top +  59) && !electric) { this.drawHoveringText(I18n.format("roads.gui.fuelSlot"), mouseX - left, mouseY - top + 15); }
+			if (mouseX >= (left + 107) && mouseX <= (left + 146) && mouseY >= (top + 20) && mouseY <= (top +  59)) { this.drawHoveringText(I18n.format("roads.gui.outputSlot"), mouseX - left, mouseY - top + 15); }
 			
 			if (distillerFound()) {
 				if (mouseX >= (left + 114) && mouseX <= (left + 169) && mouseY >= (top + 93) && mouseY <= (top + 107)) { this.drawHoveringText(TextFormatting.GREEN + I18n.format("roads.gui.road_factory.connect_pass"), mouseX - left, mouseY - top + 15); }
