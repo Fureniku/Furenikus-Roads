@@ -98,22 +98,7 @@ public class CrusherEntity extends RoadTileEntity implements ITickable, ICapabil
 				timerCount = 0;
 			}
 		} else {
-			if (!world.isRemote) {
-				ItemStack itemIn = inventory.getStackInSlot(0);
-				
-				if (!itemIn.isEmpty()) {
-					ItemStack itemOut = getRecipes(itemIn);
-					if (!itemOut.isEmpty()) {
-						if (inventory.getStackInSlot(1).isEmpty()) {
-							inventory.setStackInSlot(1, itemOut);
-							itemIn.setCount(itemIn.getCount()-1);
-						} else if (inventory.getStackInSlot(1).getItem() == itemOut.getItem() && (inventory.getStackInSlot(1).getCount() + itemOut.getCount()) <= itemOut.getMaxStackSize()) {
-							inventory.getStackInSlot(1).setCount(inventory.getStackInSlot(1).getCount() + itemOut.getCount());
-							itemIn.setCount(itemIn.getCount()-1);
-						}
-					}
-				}
-			}
+			process();
 			timerCount = 0;
 		}
 	}
@@ -133,23 +118,23 @@ public class CrusherEntity extends RoadTileEntity implements ITickable, ICapabil
 		return false;
 	}
 	
-	@Override
-	public void readNBT(NBTTagCompound nbt) {
-		if (nbt.hasKey("items")) {
-			inventory.deserializeNBT((NBTTagCompound) nbt.getTag("items"));
+	public void process() {		
+		if (!world.isRemote) {
+			ItemStack itemIn = inventory.getStackInSlot(0);
+			
+			if (!itemIn.isEmpty()) {
+				ItemStack itemOut = getRecipes(itemIn);
+				if (!itemOut.isEmpty()) {
+					if (inventory.getStackInSlot(1).isEmpty()) {
+						inventory.setStackInSlot(1, itemOut);
+						itemIn.setCount(itemIn.getCount()-1);
+					} else if (inventory.getStackInSlot(1).getItem() == itemOut.getItem() && (inventory.getStackInSlot(1).getCount() + itemOut.getCount()) <= itemOut.getMaxStackSize()) {
+						inventory.getStackInSlot(1).setCount(inventory.getStackInSlot(1).getCount() + itemOut.getCount());
+						itemIn.setCount(itemIn.getCount()-1);
+					}
+				}
+			}
 		}
-		
-		fuel_remaining = nbt.getInteger("fuel");
-		last_fuel_cap = nbt.getInteger("fuel_last_used");
-	}
-	
-	@Override
-	public NBTTagCompound writeNBT(NBTTagCompound nbt) {
-		nbt.setTag("items", inventory.serializeNBT());
-		
-		nbt.setInteger("fuel", fuel_remaining);
-		nbt.setInteger("fuel_last_used", last_fuel_cap);
-		return nbt;
 	}
 	
 	protected ItemStack getRecipes(ItemStack itemIn) {
@@ -180,6 +165,25 @@ public class CrusherEntity extends RoadTileEntity implements ITickable, ICapabil
 		}
 		
 		return ItemStack.EMPTY;
+	}
+	
+	@Override
+	public void readNBT(NBTTagCompound nbt) {
+		if (nbt.hasKey("items")) {
+			inventory.deserializeNBT((NBTTagCompound) nbt.getTag("items"));
+		}
+		
+		fuel_remaining = nbt.getInteger("fuel");
+		last_fuel_cap = nbt.getInteger("fuel_last_used");
+	}
+	
+	@Override
+	public NBTTagCompound writeNBT(NBTTagCompound nbt) {
+		nbt.setTag("items", inventory.serializeNBT());
+		
+		nbt.setInteger("fuel", fuel_remaining);
+		nbt.setInteger("fuel_last_used", last_fuel_cap);
+		return nbt;
 	}
 	
 	@Override

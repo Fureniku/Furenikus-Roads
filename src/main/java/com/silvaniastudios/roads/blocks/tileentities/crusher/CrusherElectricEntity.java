@@ -5,7 +5,6 @@ import com.silvaniastudios.roads.blocks.tileentities.FREnergyStorage;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
@@ -76,22 +75,7 @@ public class CrusherElectricEntity extends CrusherEntity implements ITickable, I
 				if (consumedEnergy < RoadsConfig.machine.electricCrusherEnergyConsumption) {
 					energy.extractEnergy(RoadsConfig.machine.electricCrusherEnergyConsumption - consumedEnergy, false);
 				}
-				consumedEnergy = 0;
-
-				ItemStack itemIn = inventory.getStackInSlot(0);
-				
-				if (!itemIn.isEmpty()) {
-					ItemStack itemOut = getRecipes(itemIn);
-					if (!itemOut.isEmpty()) {
-						if (inventory.getStackInSlot(1).isEmpty()) {
-							inventory.setStackInSlot(1, itemOut);
-							itemIn.setCount(itemIn.getCount()-1);
-						} else if (inventory.getStackInSlot(1).getItem() == itemOut.getItem() && (inventory.getStackInSlot(1).getCount() + itemOut.getCount()) <= itemOut.getMaxStackSize()) {
-							inventory.getStackInSlot(1).setCount(inventory.getStackInSlot(1).getCount() + itemOut.getCount());
-							itemIn.setCount(itemIn.getCount()-1);
-						}
-					}
-				}
+				process();
 				
 				timerCount = 0;
 				

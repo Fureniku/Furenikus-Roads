@@ -26,6 +26,9 @@ public class CrusherContainer extends Container {
 	
 	private boolean isElectric = false;
 	private int energy;
+	private int tick;
+	private int fuel;
+	private int fuelCap;
 	
 	public CrusherContainer(InventoryPlayer invPlayer, CrusherEntity tileEntity, boolean isElectric) {
 		this.tileEntity = tileEntity;
@@ -57,26 +60,49 @@ public class CrusherContainer extends Container {
 	
 	@Override
 	public void detectAndSendChanges() {
-		if (this.isElectric) {
-			CrusherElectricEntity cee = (CrusherElectricEntity) tileEntity;
-			super.detectAndSendChanges();
-	
-			for (int i = 0; i < this.listeners.size(); ++i) {
-				IContainerListener icontainerlistener = this.listeners.get(i);
+		super.detectAndSendChanges();
+
+		for (int i = 0; i < this.listeners.size(); ++i) {
+			IContainerListener icontainerlistener = this.listeners.get(i);
+			if (this.isElectric) {
+				CrusherElectricEntity cee = (CrusherElectricEntity) tileEntity;
 	        	if (this.energy != cee.energy.getEnergyStored()) {
 	        		icontainerlistener.sendWindowProperty(this, 0, cee.energy.getEnergyStored());
 	        	}
+	        	this.energy = cee.energy.getEnergyStored();
 			}
-			this.energy = cee.energy.getEnergyStored();
+        	if (this.tick != tileEntity.timerCount) {
+        		icontainerlistener.sendWindowProperty(this, 1, tileEntity.timerCount);
+        	}
+        	if (this.fuel != tileEntity.fuel_remaining) {
+        		icontainerlistener.sendWindowProperty(this, 2, tileEntity.fuel_remaining);
+        	}
+        	if (this.fuelCap != tileEntity.last_fuel_cap) {
+        		icontainerlistener.sendWindowProperty(this, 3, tileEntity.last_fuel_cap);
+        	}
 		}
+		
+		this.tick = tileEntity.timerCount;
+		this.fuel = tileEntity.fuel_remaining;
+		this.fuelCap = tileEntity.last_fuel_cap;
 	}
 	
 	@SideOnly(Side.CLIENT)
 	public void updateProgressBar(int id, int data) {
-		if (this.isElectric) {
+		if (this.isElectric && id == 0) {
 			CrusherElectricEntity cee = (CrusherElectricEntity) tileEntity;
 			cee.energy.setEnergy(data);
 		}
+		if (id == 1) {
+			tileEntity.timerCount = data;
+		}
+		if (id == 2) {
+			tileEntity.fuel_remaining = data;
+		}
+		if (id == 3) {
+			tileEntity.last_fuel_cap = data;
+		}
+		
     }
 
 	@Override
