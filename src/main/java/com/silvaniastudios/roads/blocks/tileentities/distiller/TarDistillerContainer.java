@@ -33,6 +33,9 @@ public class TarDistillerContainer extends Container {
 	
 	private boolean isElectric = false;
 	private int energy;
+	private int fluid_in;
+	private int fluid_out_1;
+	private int fluid_out_2;
 	
 	public TarDistillerContainer(InventoryPlayer invPlayer, TarDistillerEntity tileEntity, boolean isElectric) {
 		this.tileEntity = tileEntity;
@@ -74,25 +77,50 @@ public class TarDistillerContainer extends Container {
 	
 	@Override
 	public void detectAndSendChanges() {
+		TarDistillerElectricEntity tdee = null;
 		if (this.isElectric) {
-			TarDistillerElectricEntity tdee = (TarDistillerElectricEntity) tileEntity;
-			super.detectAndSendChanges();
-	
-			for (int i = 0; i < this.listeners.size(); ++i) {
-				IContainerListener icontainerlistener = this.listeners.get(i);
-	        	if (this.energy != tdee.energy.getEnergyStored()) {
+			tdee = (TarDistillerElectricEntity) tileEntity;
+		}
+		super.detectAndSendChanges();
+
+		for (int i = 0; i < this.listeners.size(); ++i) {
+			IContainerListener icontainerlistener = this.listeners.get(i);
+			if (this.isElectric) {
+				if (this.energy != tdee.energy.getEnergyStored()) {
 	        		icontainerlistener.sendWindowProperty(this, 0, tdee.energy.getEnergyStored());
 	        	}
 			}
-			this.energy = tdee.energy.getEnergyStored();
+        	if (this.fluid_in != tileEntity.fluidInput.getFluidAmount()) {
+        		icontainerlistener.sendWindowProperty(this, 1, tileEntity.fluidInput.getFluidAmount());
+        	}
+        	if (this.fluid_out_1 != tileEntity.fluidOutput1.getFluidAmount()) {
+        		icontainerlistener.sendWindowProperty(this, 2, tileEntity.fluidOutput1.getFluidAmount());
+        	}
+        	if (this.fluid_out_2 != tileEntity.fluidOutput2.getFluidAmount()) {
+        		icontainerlistener.sendWindowProperty(this, 3, tileEntity.fluidOutput2.getFluidAmount());
+        	}
 		}
+		if (this.isElectric) { this.energy = tdee.energy.getEnergyStored(); }
+		this.fluid_in = tileEntity.fluidInput.getFluidAmount();
+		this.fluid_out_1 = tileEntity.fluidOutput1.getFluidAmount();
+		this.fluid_out_2 = tileEntity.fluidOutput2.getFluidAmount();
 	}
 	
 	@SideOnly(Side.CLIENT)
 	public void updateProgressBar(int id, int data) {
-		if (this.isElectric) {
+		if (this.isElectric && id == 0) {
 			TarDistillerElectricEntity tdee = (TarDistillerElectricEntity) tileEntity;
 			tdee.energy.setEnergy(data);
+		}
+		
+		if (id == 1 && tileEntity.fluidInput.getFluid() != null) {
+			tileEntity.fluidInput.getFluid().amount = data;
+		}
+		if (id == 2 && tileEntity.fluidOutput1.getFluid() != null) {
+			tileEntity.fluidOutput1.getFluid().amount = data;
+		}
+		if (id == 3 && tileEntity.fluidOutput2.getFluid() != null) {
+			tileEntity.fluidOutput2.getFluid().amount = data;
 		}
     }
 

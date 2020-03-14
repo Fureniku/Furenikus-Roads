@@ -3,9 +3,12 @@ package com.silvaniastudios.roads;
 import org.apache.logging.log4j.Logger;
 
 import com.silvaniastudios.roads.blocks.FRBlocks;
+import com.silvaniastudios.roads.blocks.tileentities.recipes.RecipeRegistry;
 import com.silvaniastudios.roads.fluids.FRFluids;
 import com.silvaniastudios.roads.items.FRItems;
 import com.silvaniastudios.roads.items.RoadsFuelHandler;
+import com.silvaniastudios.roads.network.CompactorUpdatePacket;
+import com.silvaniastudios.roads.network.FabricatorUpdatePacket;
 import com.silvaniastudios.roads.network.PaintGunUpdatePacket;
 
 import net.minecraft.block.Block;
@@ -34,7 +37,7 @@ import net.minecraftforge.fml.relauncher.Side;
 public class FurenikusRoads {
 	
 	public static final String MODID = "furenikusroads";
-	public static final String VERSION = "1.1.0-beta";
+	public static final String VERSION = "1.1.0-rc-1";
 	
 	@Instance(MODID)
 	public static FurenikusRoads instance;
@@ -127,6 +130,8 @@ public class FurenikusRoads {
 		proxy.init();
 		NetworkRegistry.INSTANCE.registerGuiHandler(FurenikusRoads.instance, new GuiHandler());
 		PACKET_CHANNEL.registerMessage(PaintGunUpdatePacket.Handler.class, PaintGunUpdatePacket.class, 0, Side.SERVER);
+		PACKET_CHANNEL.registerMessage(CompactorUpdatePacket.Handler.class, CompactorUpdatePacket.class, 1, Side.SERVER);
+		PACKET_CHANNEL.registerMessage(FabricatorUpdatePacket.Handler.class, FabricatorUpdatePacket.class, 2, Side.SERVER);
 		FRFluids.registerFluids();
 		MinecraftForge.EVENT_BUS.register(FRItems.class);
 		
@@ -135,7 +140,7 @@ public class FurenikusRoads {
 	
 	@EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-		
+		RecipeRegistry.init();
 	}
     
     @Mod.EventBusSubscriber

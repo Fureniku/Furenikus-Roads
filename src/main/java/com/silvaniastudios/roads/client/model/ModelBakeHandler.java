@@ -2,6 +2,7 @@ package com.silvaniastudios.roads.client.model;
 
 import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.blocks.CatsEyeBlock;
+import com.silvaniastudios.roads.blocks.CatsEyeBlockFourWay;
 import com.silvaniastudios.roads.blocks.paint.PaintBlockBase;
 import com.silvaniastudios.roads.items.PaintGunItemRegistry;
 
@@ -22,6 +23,7 @@ public class ModelBakeHandler {
 	public void onModelBakeEvent(ModelBakeEvent event) {
 		bakePaintGunModel(event);
 		bakeCatsEyeModels(event);
+		bakeCatsEyeDoubleSidedModels(event);
 		bakeCrusherFurnace(event);
 		bakePaintFillerFurnace(event);
 		bakeRoadFactoryFurnace(event);
@@ -36,6 +38,41 @@ public class ModelBakeHandler {
 			IBakedModel existingModel = (IBakedModel) model;
 			PaintGunModel customModel = new PaintGunModel(existingModel);
 			event.getModelRegistry().putObject(PaintGunModel.modelResourceLocation, customModel);
+		}
+	}
+	
+	private void bakeCatsEyeDoubleSidedModels(ModelBakeEvent event) {
+		String[] catsEyeList = new String[] {"cats_eye_red_green", "cats_eye_white_red", "cats_eye_white_yellow", "cats_eye_white_green", "cats_eye_yellow_red"};
+		
+		for (int i = 0; i < catsEyeList.length; i++) {
+			String l = "red";
+			String r = "green";
+			
+			if (i == 1 || i == 2 || i == 3) { l = "white"; }
+			if (i == 1) { r = "red"; }
+			if (i == 2) { r = "yellow"; }
+			if (i == 3) { r = "green"; }
+			if (i == 4) { l = "yellow"; r = "red"; }
+			
+			for (int j = 0; j < CatsEyeBlockFourWay.EnumCatsEye.values().length; j++) {
+				ModelResourceLocation mrl = new ModelResourceLocation(FurenikusRoads.MODID + ":" + catsEyeList[i], "eye_type=" + CatsEyeBlockFourWay.EnumCatsEye.byMetadata(j));
+				Object cats_eye = event.getModelRegistry().getObject(mrl);
+				
+				if (cats_eye instanceof IBakedModel) {
+					IBakedModel existingModel = (IBakedModel) cats_eye;
+					CatsEyeTwoSidedModel customModel = new CatsEyeTwoSidedModel(existingModel, l, r, CatsEyeBlockFourWay.EnumCatsEye.byMetadata(j));
+					event.getModelRegistry().putObject(mrl, customModel);
+				}
+
+				ModelResourceLocation mrl_double = new ModelResourceLocation(FurenikusRoads.MODID + ":" + catsEyeList[i] + "_double", "eye_type=" + CatsEyeBlockFourWay.EnumCatsEye.byMetadata(j));
+				Object cats_eye_double = event.getModelRegistry().getObject(mrl_double);
+				
+				if (cats_eye_double instanceof IBakedModel) {
+					IBakedModel existingModel = (IBakedModel) cats_eye_double;
+					CatsEyeTwoSidedDoubleModel customModel = new CatsEyeTwoSidedDoubleModel(existingModel, l, r, CatsEyeBlockFourWay.EnumCatsEye.byMetadata(j));
+					event.getModelRegistry().putObject(mrl_double, customModel);
+				}
+			}
 		}
 	}
 	
@@ -94,13 +131,17 @@ public class ModelBakeHandler {
 			if (model instanceof IBakedModel) {
 				IBakedModel existingModel = (IBakedModel) model;
 				PaintFillerBakedModel customModel = new PaintFillerBakedModel(existingModel, rotations[i], false);
-				event.getModelRegistry().putObject(mrl, customModel);
+				if (((IBakedModel) model).getParticleTexture() != null) {
+					event.getModelRegistry().putObject(mrl, customModel);
+				}
 			}
 			
 			if (model_gunloaded instanceof IBakedModel) {
 				IBakedModel existingModel = (IBakedModel) model_gunloaded;
 				PaintFillerBakedModel customModel = new PaintFillerBakedModel(existingModel, rotations[i], true);
-				event.getModelRegistry().putObject(mrl_gunloaded, customModel);
+				if (((IBakedModel) model).getParticleTexture() != null) {
+					event.getModelRegistry().putObject(mrl_gunloaded, customModel);
+				}
 			}
 		}
 	}
@@ -172,6 +213,12 @@ public class ModelBakeHandler {
 		
 		ResourceLocation tar_flowing = new ResourceLocation(FurenikusRoads.MODID + ":fluids/tar_flowing");
 		ResourceLocation tar_still = new ResourceLocation(FurenikusRoads.MODID + ":fluids/tar_still");
+		ResourceLocation white_paint_flowing = new ResourceLocation(FurenikusRoads.MODID + ":fluids/white_paint_flowing");
+		ResourceLocation white_paint_still = new ResourceLocation(FurenikusRoads.MODID + ":fluids/white_paint_still");
+		ResourceLocation yellow_paint_flowing = new ResourceLocation(FurenikusRoads.MODID + ":fluids/yellow_paint_flowing");
+		ResourceLocation yellow_paint_still = new ResourceLocation(FurenikusRoads.MODID + ":fluids/yellow_paint_still");
+		ResourceLocation red_paint_flowing = new ResourceLocation(FurenikusRoads.MODID + ":fluids/red_paint_flowing");
+		ResourceLocation red_paint_still = new ResourceLocation(FurenikusRoads.MODID + ":fluids/red_paint_still");
 		
 		ResourceLocation cats_eye_white  = new ResourceLocation(FurenikusRoads.MODID + ":blocks/cats_eye_white");
 		ResourceLocation cats_eye_yellow = new ResourceLocation(FurenikusRoads.MODID + ":blocks/cats_eye_yellow");
@@ -181,12 +228,31 @@ public class ModelBakeHandler {
 		ResourceLocation machine_vent_on = new ResourceLocation(FurenikusRoads.MODID + ":blocks/machine_vent_back_on");
 		ResourceLocation paint_filler_display = new ResourceLocation(FurenikusRoads.MODID + ":blocks/paint_filler_machine_display");
 		
+		ResourceLocation sprite_white_paint = new ResourceLocation(FurenikusRoads.MODID + ":fluids/white_paint_flowing");
+		ResourceLocation sprite_yellow_paint = new ResourceLocation(FurenikusRoads.MODID + ":fluids/yellow_paint_flowing");
+		ResourceLocation sprite_red_paint = new ResourceLocation(FurenikusRoads.MODID + ":fluids/red_paint_flowing");
+		
+		ResourceLocation sprite_glass = new ResourceLocation(FurenikusRoads.MODID + ":blocks/hopper_tank");
+		ResourceLocation sprite_glass_top = new ResourceLocation(FurenikusRoads.MODID + ":blocks/hopper_tank_top");
+		
+		ResourceLocation sprite_light_white = new ResourceLocation(FurenikusRoads.MODID + ":blocks/hopper_type_white");
+		ResourceLocation sprite_light_yellow = new ResourceLocation(FurenikusRoads.MODID + ":blocks/hopper_type_yellow");
+		ResourceLocation sprite_light_red = new ResourceLocation(FurenikusRoads.MODID + ":blocks/hopper_type_red");
+		ResourceLocation sprite_light_item = new ResourceLocation(FurenikusRoads.MODID + ":blocks/hopper_type_item");
+		ResourceLocation sprite_light_none = new ResourceLocation(FurenikusRoads.MODID + ":blocks/hopper_type_none");
+		
 		event.getMap().registerSprite(white_paint);
 		event.getMap().registerSprite(yellow_paint);
 		event.getMap().registerSprite(red_paint);
 		
 		event.getMap().registerSprite(tar_flowing);
 		event.getMap().registerSprite(tar_still);
+		event.getMap().registerSprite(white_paint_flowing);
+		event.getMap().registerSprite(white_paint_still);
+		event.getMap().registerSprite(yellow_paint_flowing);
+		event.getMap().registerSprite(yellow_paint_still);
+		event.getMap().registerSprite(red_paint_flowing);
+		event.getMap().registerSprite(red_paint_still);
 		
 		event.getMap().registerSprite(cats_eye_white);
 		event.getMap().registerSprite(cats_eye_yellow);
@@ -195,6 +261,19 @@ public class ModelBakeHandler {
 		
 		event.getMap().registerSprite(machine_vent_on);
 		event.getMap().registerSprite(paint_filler_display);
+		
+		event.getMap().registerSprite(sprite_white_paint);
+		event.getMap().registerSprite(sprite_yellow_paint);
+		event.getMap().registerSprite(sprite_red_paint);
+		
+		event.getMap().registerSprite(sprite_glass);
+		event.getMap().registerSprite(sprite_glass_top);
+		
+		event.getMap().registerSprite(sprite_light_white);
+		event.getMap().registerSprite(sprite_light_yellow);
+		event.getMap().registerSprite(sprite_light_red);
+		event.getMap().registerSprite(sprite_light_item);
+		event.getMap().registerSprite(sprite_light_none);
 		
 		for (int i = 0; i < PaintGunItemRegistry.lines.size(); i++) {
 			PaintBlockBase block = PaintGunItemRegistry.lines.get(i);

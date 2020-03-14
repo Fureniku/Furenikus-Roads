@@ -1,0 +1,87 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"transform": "forge:default-block",
+		"textures": {
+			"0": "furenikusroads:blocks/machine_metal_electric",
+			"1": "furenikusroads:blocks/machine_piping",
+			"2": "furenikusroads:blocks/machine_glass",
+			"4": "furenikusroads:blocks/road_factory_machine_b_electric",
+			"5": "furenikusroads:blocks/machine_part_plain_electric",
+			"6": "furenikusroads:blocks/road_factory_machine_a_electric",
+			"7": "furenikusroads:blocks/machine_part_plain",
+			"8": "furenikusroads:blocks/machine_vent_back_off",
+			"9": "furenikusroads:blocks/machine_metal",
+			"particle": "furenikusroads:blocks/machine_metal"
+		},
+		"model": "furenikusroads:road_factory"
+	},
+	"variants": {
+		"inventory": [{
+			"model": "furenikusroads:road_factory",
+			"transform": {
+				"ground": {
+					"scale": [0.5, 0.5, 0.5]
+				},
+				"fixed": {
+					"rotation": [0, -90, 0],
+					"translation": [0, 0, -2.5],
+					"scale": [0.5, 0.5, 0.5]
+				},
+				"gui": {
+					"rotation": [15, 45, 0],
+					"scale": [0.5, 0.5, 0.5]
+				}
+            }
+		}],
+		"fluid_left": {
+			"true": {
+				"submodel": "furenikusroads:road_factory_fluid_left"
+			},
+			"false": {
+			}
+		},
+		"fluid_up": {
+			"true": {
+				"submodel": "furenikusroads:road_factory_fluid_up"
+			},
+			"false": {
+			}
+		},
+		"base_plate": {
+			"true": {
+				"submodel": {
+	        		"baseplate": { "model": "furenikusroads:base_plate" }
+	        	}
+			},
+			"false": {
+				"submodel": {
+	        		"baseplate": { "model": "furenikusroads:base_plate_road_factory" }
+	        	}
+			}
+		},
+		"furnace_active": {
+			"true": {
+				"textures": {
+					"8": "furenikusroads:blocks/machine_vent_back_on"
+				}
+			},
+			"false": {
+			}
+		},
+		"rotation": {
+			"north": {
+				"model": "furenikusroads:road_factory", "y": 0
+			},
+			"east": {
+				"model": "furenikusroads:road_factory", "y": 90
+			},
+			"south": {
+				"model": "furenikusroads:road_factory", "y": 180
+			},
+			"west": {
+				"model": "furenikusroads:road_factory", "y": 270
+			}
+		}
+	}
+}

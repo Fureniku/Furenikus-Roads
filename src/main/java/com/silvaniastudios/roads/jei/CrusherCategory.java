@@ -65,7 +65,6 @@ public class CrusherCategory implements IRecipeCategory<CrusherWrapper> {
 
 	@Override
 	public IDrawable getBackground() {
-		
 		return background;
 	}
 	

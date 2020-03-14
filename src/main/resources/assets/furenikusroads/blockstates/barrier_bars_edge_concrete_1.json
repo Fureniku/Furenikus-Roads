@@ -2,7 +2,10 @@
 	"forge_marker": 1,
 	"defaults": {
 		"model": "furenikusroads:barrier_bars_edge",
-		"uvlock": true
+		"uvlock": true,
+		"textures": {
+			"particle": "furenikusroads:blocks/machine_metal"
+		}
 	},
 	"variants": {
 		"inventory": [{
@@ -14,19 +17,19 @@
 	        		"post_main": {
 	        			"model": "furenikusroads:barrier_wall_edge_post",
 	        			"textures": {
-							"0": "furenikusroads:blocks/road_block_concrete_2"
+							"0": "furenikusroads:blocks/road_block_concrete_1"
 						}
 	        		},
 	        		"post_l":    {
 	        			"model": "furenikusroads:barrier_wall_edge_post", "y": 270,
 	        			"textures": {
-							"0": "furenikusroads:blocks/road_block_concrete_2"
+							"0": "furenikusroads:blocks/road_block_concrete_1"
 						}
 	        		},
 	        		"post_r":    {
 	        			"model": "furenikusroads:barrier_wall_edge_post", "y": 90 ,
 	        			"textures": {
-							"0": "furenikusroads:blocks/road_block_concrete_2"
+							"0": "furenikusroads:blocks/road_block_concrete_1"
 						}
 	        		}
 	        	}

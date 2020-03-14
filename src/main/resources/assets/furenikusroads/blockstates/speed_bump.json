@@ -1,0 +1,139 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"transform": "forge:default-block",
+		"model": "furenikusroads:speed_bump_inventory"
+	},
+	"variants": {
+		"meta": {
+			"0": {
+				"model": "furenikusroads:nomodel",
+				"textures": {
+					"0": "furenikusroads:blocks/bollard_black"
+				}
+			},
+			"1": {
+				"model": "furenikusroads:nomodel", "y": 90,
+				"textures": {
+					"0": "furenikusroads:blocks/bollard_black"
+				}
+			},
+			"2": {
+				"model": "furenikusroads:nomodel",
+				"textures": {
+					"0": "furenikusroads:blocks/bollard_yellow"
+				}
+			},
+			"3": {
+				"model": "furenikusroads:nomodel", "y": 90,
+				"textures": {
+					"0": "furenikusroads:blocks/bollard_yellow"
+				}
+			},
+			"4": {
+				"model": "furenikusroads:nomodel",
+				"textures": {
+					"0": "furenikusroads:blocks/road_block_concrete_1"
+				}
+			},
+			"5": {
+				"model": "furenikusroads:nomodel", "y": 90,
+				"textures": {
+					"0": "furenikusroads:blocks/road_block_concrete_1"
+				}
+			},
+			"6": {
+				"model": "furenikusroads:nomodel",
+				"textures": {
+					"0": "furenikusroads:blocks/road_block_concrete_2"
+				}
+			},
+			"7": {
+				"model": "furenikusroads:nomodel", "y": 90,
+				"textures": {
+					"0": "furenikusroads:blocks/road_block_concrete_2"
+				}
+			},
+			"8": {
+				"model": "furenikusroads:nomodel",
+				"textures": {
+					"0": "furenikusroads:blocks/road_block_standard"
+				}
+			},
+			"9": {
+				"model": "furenikusroads:nomodel", "y": 90,
+				"textures": {
+					"0": "furenikusroads:blocks/road_block_standard"
+				}
+			},
+			"10": {
+				"model": "furenikusroads:nomodel", 
+				"textures": {
+					"0": "furenikusroads:blocks/road_block_white"
+				}
+			},
+			"11": {
+				"model": "furenikusroads:nomodel", "y": 90,
+				"textures": {
+					"0": "furenikusroads:blocks/road_block_white"
+				}
+			},
+			"12": {
+				"model": "furenikusroads:nomodel",
+				"textures": {
+					"0": "furenikusroads:blocks/road_block_yellow"
+				}
+			},
+			"13": {
+				"model": "furenikusroads:nomodel", "y": 90,
+				"textures": {
+					"0": "furenikusroads:blocks/road_block_yellow"
+				}
+			},
+			"14": {
+				"model": "furenikusroads:nomodel", 
+				"textures": {
+					"0": "furenikusroads:blocks/road_block_red"
+				}
+			},
+			"15": {
+				"model": "furenikusroads:nomodel", "y": 90,
+				"textures": {
+					"0": "furenikusroads:blocks/road_block_red"
+				}
+			}
+		},
+		"left": {
+			"true": {
+				"submodel": {
+					"left": {
+						"model": "furenikusroads:speed_bump_full_l"
+					}
+				}
+			},
+			"false": {
+				"submodel": {
+					"left": {
+						"model": "furenikusroads:speed_bump_end_l"
+					}
+				}
+			}
+		},
+		"right": {
+			"true": {
+				"submodel": {
+					"right": {
+						"model": "furenikusroads:speed_bump_full_r"
+					}
+				}
+			},
+			"false": {
+				"submodel": {
+					"right": {
+						"model": "furenikusroads:speed_bump_end_r"
+					}
+				}
+			}
+		}
+	}
+}

@@ -2,11 +2,10 @@
 	"forge_marker": 1,
 	"defaults": {
 		"transform": "forge:default-block",
+		"model": "furenikusroads:barrier_low_mid",
 		"textures": {
-			"0": "furenikusroads:blocks/machine_metal",
 			"particle": "furenikusroads:blocks/machine_metal"
-		},
-		"model": "furenikusroads:barrier_low_mid"
+		}
 	},
 	"variants": {
 		"inventory": [{

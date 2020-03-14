@@ -1,26 +1,15 @@
 {
-	"type": "minecraft:crafting_shaped",
-	"pattern":
-	[
-		" d ",
-		" l ",
-		"igi"
-	],
-	"key": {
-		"g": {
-			"item": "minecraft:glowstone_dust"
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{
+			"item": "furenikusroads:cats_eye_blue",
+			"data": 0
 		},
-		"l": {
-			"item": "minecraft:glass"
-		},
-		"i": {
-			"item": "minecraft:iron_ingot"
-		},
-		"d": {
+		{
 			"item": "minecraft:dye",
 			"data": 2
 		}
-	},
+	],
 	"result": {
 		"item": "furenikusroads:cats_eye_green",
 		"data": 0

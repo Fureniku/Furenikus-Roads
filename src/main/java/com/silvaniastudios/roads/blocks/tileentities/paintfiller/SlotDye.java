@@ -18,8 +18,14 @@ public class SlotDye extends SlotItemHandler {
 	public boolean isItemValid(ItemStack stack) {
 		if (stack != ItemStack.EMPTY) {
 			for (int id : OreDictionary.getOreIDs(stack)) {
-				if (OreDictionary.getOreName(id).equals(dyeName)) {
-	                return true;
+				if (dyeName.equals("dyeAny")) {
+					if (OreDictionary.getOreName(id).equals("dyeWhite") || OreDictionary.getOreName(id).equals("dyeYellow") || OreDictionary.getOreName(id).equals("dyeRed")) {
+		                return true;
+					}
+				} else {
+					if (OreDictionary.getOreName(id).equals(dyeName)) {
+		                return true;
+					}
 				}
 			}
 		}

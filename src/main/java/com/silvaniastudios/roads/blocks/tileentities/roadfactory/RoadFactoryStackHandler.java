@@ -8,7 +8,9 @@ import net.minecraftforge.fluids.UniversalBucket;
 import net.minecraftforge.items.ItemStackHandler;
 
 public class RoadFactoryStackHandler extends ItemStackHandler {
+	
 	private final ItemStackHandler internalStackHandler;
+	boolean electric;
 	
 	public int[] inputSlots = {
 			RoadFactoryContainer.INPUT_1, 
@@ -26,8 +28,9 @@ public class RoadFactoryStackHandler extends ItemStackHandler {
 	
 	private int fuelSlot = RoadFactoryContainer.FUEL;
 
-	public RoadFactoryStackHandler(ItemStackHandler ish) {
+	public RoadFactoryStackHandler(ItemStackHandler ish, boolean electric) {
 		super();
+		this.electric = electric;
 		internalStackHandler = ish;
 	}
 
@@ -53,7 +56,7 @@ public class RoadFactoryStackHandler extends ItemStackHandler {
 
 	@Override
 	public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
-		if (slot == fuelSlot && TileEntityFurnace.getItemBurnTime(stack) > 0) {
+		if (slot == fuelSlot && TileEntityFurnace.getItemBurnTime(stack) > 0 && !electric) {
 			return internalStackHandler.insertItem(slot, stack, simulate);
 		}
 		if (slot == RoadFactoryContainer.FLUID_IN && stack.getItem() instanceof UniversalBucket) {

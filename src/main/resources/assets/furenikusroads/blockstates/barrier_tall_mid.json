@@ -6,7 +6,7 @@
 			"0": "furenikusroads:blocks/machine_metal",
 			"particle": "furenikusroads:blocks/machine_metal"
 		},
-		"model": "furenikusroads:barrier_standard_middle_inventory"
+		"model": "furenikusroads:barrier_tall_middle_inventory"
 	},
 	"variants": {
 		"inventory": [{

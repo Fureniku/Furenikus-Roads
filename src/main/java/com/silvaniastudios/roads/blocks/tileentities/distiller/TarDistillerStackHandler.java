@@ -6,10 +6,13 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.items.ItemStackHandler;
 
 public class TarDistillerStackHandler extends ItemStackHandler {
+	
 	private final ItemStackHandler internalStackHandler;
-
-	public TarDistillerStackHandler(ItemStackHandler ish) {
+	boolean electric;
+	
+	public TarDistillerStackHandler(ItemStackHandler ish, boolean electric) {
 		super();
+		this.electric = electric;
 		internalStackHandler = ish;
 	}
 
@@ -36,7 +39,7 @@ public class TarDistillerStackHandler extends ItemStackHandler {
 	@Override
 	public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
 		//Only lava is a valid fuel for this, coal doesnt burn hot enough.
-		if (slot == TarDistillerContainer.FUEL && stack.getItem() == Items.LAVA_BUCKET) {
+		if (slot == TarDistillerContainer.FUEL && stack.getItem() == Items.LAVA_BUCKET && !electric) {
 			return internalStackHandler.insertItem(slot, stack, simulate);
 		}
 		//Right now we only accept coal, so just hard-check it.

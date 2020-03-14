@@ -4,8 +4,8 @@
 		"model": "furenikusroads:barrier_tall_edge",
 		"uvlock": true,
 		"textures": {
-			"0": "furenikusroads:blocks/road_block_concrete_1",
-			"particle": "furenikusroads:blocks/road_block_concrete_1"
+			"0": "furenikusroads:blocks/road_block_concrete_2",
+			"particle": "furenikusroads:blocks/road_block_concrete_2"
 		}
 	},
 	"variants": {
@@ -33,7 +33,7 @@
 	        },
         	"corner": {
         		"submodel": {
-	        		"corner_l":   { "model": "furenikusroads:nomodel" },
+	        		"corner_l":   { "model": "furenikusroads:barrier_concrete_edge_corner" },
 	        		"main":       { "model": "furenikusroads:nomodel" },
 	        		"side_l":     { "model": "furenikusroads:nomodel" }
 	        	}
@@ -49,30 +49,30 @@
         "right": {
         	"normal": {
         		"submodel": {
-	        		"corner_l":   { "model": "furenikusroads:nomodel" },
+	        		"corner_r":   { "model": "furenikusroads:nomodel" },
 	        		"main":       { "model": "furenikusroads:barrier_concrete_edge" },
-	        		"side_l":     { "model": "furenikusroads:barrier_concrete_edge_right" }
+	        		"side_r":     { "model": "furenikusroads:barrier_concrete_edge_right" }
 	        	}
         	},
         	"down":  {
         		"submodel": {
-	        		"corner_l":   { "model": "furenikusroads:nomodel" },
+	        		"corner_r":   { "model": "furenikusroads:nomodel" },
 	        		"main":       { "model": "furenikusroads:barrier_concrete_edge" },
-	        		"side_l":     { "model": "furenikusroads:barrier_concrete_edge_right_down" }
+	        		"side_r":     { "model": "furenikusroads:barrier_concrete_edge_right_down" }
 	        	}
 	        },
         	"corner": {
         		"submodel": {
-	        		"corner_l":   { "model": "furenikusroads:nomodel" },
+	        		"corner_r":   { "model": "furenikusroads:barrier_concrete_edge_corner", "y": 90 },
 	        		"main":       { "model": "furenikusroads:nomodel" },
-	        		"side_l":     { "model": "furenikusroads:nomodel" }
+	        		"side_r":     { "model": "furenikusroads:nomodel" }
 	        	}
 	        },
 	        "none": {
 	        	"submodel": {
-	        		"corner_l":   { "model": "furenikusroads:nomodel" },
+	        		"corner_r":   { "model": "furenikusroads:nomodel" },
 	        		"main":       { "model": "furenikusroads:nomodel" },
-	        		"side_l":     { "model": "furenikusroads:nomodel" }
+	        		"side_r":     { "model": "furenikusroads:nomodel" }
 	        	}
 	        }
         },

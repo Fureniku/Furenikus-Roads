@@ -3,16 +3,13 @@ package com.silvaniastudios.roads.blocks.tileentities.crusher;
 import javax.annotation.Nonnull;
 
 import com.silvaniastudios.roads.RoadsConfig;
-import com.silvaniastudios.roads.blocks.FRBlocks;
-import com.silvaniastudios.roads.blocks.RoadBlock;
 import com.silvaniastudios.roads.blocks.tileentities.RoadTileEntity;
-import com.silvaniastudios.roads.items.FRItems;
+import com.silvaniastudios.roads.blocks.tileentities.recipes.CrusherRecipes;
+import com.silvaniastudios.roads.blocks.tileentities.recipes.RecipeRegistry;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityFurnace;
@@ -20,6 +17,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
@@ -44,7 +42,7 @@ public class CrusherEntity extends RoadTileEntity implements ITickable, ICapabil
 		}
 	};
 	
-	public CrusherStackHandler interactable_inv = new CrusherStackHandler(inventory);
+	public CrusherStackHandler interactable_inv = new CrusherStackHandler(inventory, hasCapability(CapabilityEnergy.ENERGY, null));
 	
 	public Container createContainer(EntityPlayer player) {
 		return new CrusherContainer(player.inventory, this, false);
@@ -138,32 +136,12 @@ public class CrusherEntity extends RoadTileEntity implements ITickable, ICapabil
 	}
 	
 	protected ItemStack getRecipes(ItemStack itemIn) {
-		if (itemIn.getItem() instanceof ItemBlock) {
-			ItemBlock ib = (ItemBlock) itemIn.getItem();
-			
-			if (ib.getBlock() == Blocks.STONE) { return new ItemStack(Blocks.COBBLESTONE, 1); }
-			if (ib.getBlock() == Blocks.COBBLESTONE) { return new ItemStack(Blocks.GRAVEL); } 
-			if (ib.getBlock() == Blocks.GRAVEL) { return new ItemStack(FRBlocks.generic_blocks, 1, 0); } //crushed rock
-			
-			
-			if (ib.getBlock() == FRBlocks.generic_blocks) {
-				if (itemIn.getItemDamage() == 0) { return new ItemStack(Blocks.SAND, 1); } //crushed rock
-				if (itemIn.getItemDamage() == 1) { return new ItemStack(FRItems.cement_dust, 1); } //clinker
-				if (itemIn.getItemDamage() == 2) { return new ItemStack(FRItems.cement_dust, 1); } //cement
-				if (itemIn.getItemDamage() == 3) { return new ItemStack(FRItems.limestone_dust, 4); } //limestone
-			}
-			
-			if (ib.getBlock() instanceof RoadBlock) {
-				RoadBlock block = (RoadBlock) ib.getBlock();
-				
-				return new ItemStack(block.getFragmentItem(block), itemIn.getItemDamage() + 1);
-			}
-		} else {
-			if (itemIn.getItem() == FRItems.clinker_mix) {
-				return new ItemStack(FRItems.cement_dust, 1);
+		for (int i = 0; i < RecipeRegistry.crusherRecipes.size(); i++) {
+			CrusherRecipes recipe = RecipeRegistry.crusherRecipes.get(i);
+			if (recipe.test(itemIn)) {
+				return recipe.getCraftingResult(inventory);
 			}
 		}
-		
 		return ItemStack.EMPTY;
 	}
 	

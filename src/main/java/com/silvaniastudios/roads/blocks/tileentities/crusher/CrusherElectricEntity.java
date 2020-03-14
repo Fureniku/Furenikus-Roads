@@ -11,7 +11,6 @@ import net.minecraft.util.ITickable;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.energy.CapabilityEnergy;
-import net.minecraftforge.items.CapabilityItemHandler;
 
 public class CrusherElectricEntity extends CrusherEntity implements ITickable, ICapabilityProvider {
 	
@@ -29,11 +28,8 @@ public class CrusherElectricEntity extends CrusherEntity implements ITickable, I
 	@Override
 	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
 		if (capability == CapabilityEnergy.ENERGY) {
-			return getCapability(capability, facing) != null;
+			return true;
 		}
-		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-			return getCapability(capability, facing) != null;
-        }
 		
 		return super.hasCapability(capability, facing);
 	}
@@ -43,13 +39,6 @@ public class CrusherElectricEntity extends CrusherEntity implements ITickable, I
 		if (capability == CapabilityEnergy.ENERGY) {
 			if (facing != null) {
 				return CapabilityEnergy.ENERGY.cast(energy);
-			}
-		}
-		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-			if (facing != null) {
-				return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(interactable_inv);
-			} else {
-				return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(inventory);
 			}
 		}
 		return super.getCapability(capability, facing);

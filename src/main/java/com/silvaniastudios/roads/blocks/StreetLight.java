@@ -10,6 +10,8 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -20,10 +22,17 @@ import net.minecraft.world.World;
 public class StreetLight extends MetalPost {
 	
 	public static final PropertyEnum<EnumSimpleRotation> ROTATION = PropertyEnum.create("rotation", EnumSimpleRotation.class);
+	
+	private double length;
+	private double width;
+	private double height;
 
-	public StreetLight(String name) {
+	public StreetLight(String name, double length, double width, double height) {
 		super(name, true, 0.0);
 		this.setLightLevel(1.0F);
+		this.length = length;
+		this.width = width;
+		this.height = height;
 	}
 	
 	@Override
@@ -76,6 +85,16 @@ public class StreetLight extends MetalPost {
     	}
 	}
 	
+	@Override
+	public EnumBlockRenderType getRenderType(IBlockState state) {
+        return EnumBlockRenderType.MODEL;
+    }
+	
+	@Override
+    public BlockRenderLayer getBlockLayer() {
+        return BlockRenderLayer.CUTOUT;
+    }
+	
 	public void destroyLightBlockBelow(World world, BlockPos pos) {
 		BlockPos posOffset = pos.offset(EnumFacing.DOWN);
     	Block block = world.getBlockState(posOffset).getBlock();
@@ -96,10 +115,12 @@ public class StreetLight extends MetalPost {
 	public AxisAlignedBB getBoxFromState(IBlockState state, IBlockAccess world, BlockPos pos) {
 		int meta = getMetaFromState(state);
 		
-		if (meta == 0) { return new AxisAlignedBB(0.40625,  0.46875, 0.359375, 0.59375,  0.578125, 1); }
-		if (meta == 1) { return new AxisAlignedBB(0,        0.46875, 0.40625,  0.640625, 0.578125, 0.59375); }
-		if (meta == 2) { return new AxisAlignedBB(0.40625,  0.46875, 0,        0.59375,  0.578125, 0.640625); }
-		if (meta == 3) { return new AxisAlignedBB(0.359375, 0.46875, 0.40625,  1,        0.578125, 0.59375); }
+		double v = 1.0/16.0;
+		
+		if (meta == 0) { return new AxisAlignedBB((8-(width/2))*v, 7*v, 16*v-(length*v),  (8+(width/2))*v, (7+height)*v, 16*v); }
+		if (meta == 1) { return new AxisAlignedBB(0,               7*v, (8-(width/2))*v,  (length*v), (7+height)*v, (8+(width/2))*v); }
+		if (meta == 2) { return new AxisAlignedBB((8-(width/2))*v, 7*v, 0,                (8+(width/2))*v, (7+height)*v, (length*v)); }
+		if (meta == 3) { return new AxisAlignedBB(16*v-(length*v), 7*v, (8-(width/2))*v,  16*v,            (7+height)*v, (8+(width/2))*v); }
 		
 		return new AxisAlignedBB(0, 0.4375, 0, 1, 1, 1);
 	}

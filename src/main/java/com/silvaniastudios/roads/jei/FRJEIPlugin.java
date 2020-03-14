@@ -3,16 +3,25 @@ package com.silvaniastudios.roads.jei;
 import java.util.ArrayList;
 
 import com.silvaniastudios.roads.blocks.FRBlocks;
+import com.silvaniastudios.roads.blocks.paint.PaintBlockBase;
+import com.silvaniastudios.roads.blocks.tileentities.recipes.CompactorRecipes;
+import com.silvaniastudios.roads.blocks.tileentities.recipes.CrusherRecipes;
+import com.silvaniastudios.roads.blocks.tileentities.recipes.FabricatorRecipes;
+import com.silvaniastudios.roads.blocks.tileentities.recipes.RecipeRegistry;
+import com.silvaniastudios.roads.blocks.tileentities.recipes.RoadFactoryRecipes;
+import com.silvaniastudios.roads.blocks.tileentities.recipes.TarDistillerRecipes;
 import com.silvaniastudios.roads.fluids.FRFluids;
 import com.silvaniastudios.roads.items.FRItems;
+import com.silvaniastudios.roads.items.PaintGunItemRegistry;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.JEIPlugin;
+import mezz.jei.api.ingredients.IIngredientBlacklist;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 @JEIPlugin
@@ -24,11 +33,19 @@ public class FRJEIPlugin implements IModPlugin {
 		registry.addRecipes(tarDistillerRecipes(), "fr_tar_distiller");
 		registry.addRecipes(tarmacCutterRecipes(), "fr_tarmac_cutter");
 		registry.addRecipes(crusherRecipes(), "fr_crusher");
+		registry.addRecipes(paintOvenRecipes(), "fr_paint_oven");
+		registry.addRecipes(compactorRecipes(), "fr_compactor");
+		registry.addRecipes(fabricatorRecipes(), "fr_fabricator");
 		
 		registry.addRecipes(roadFactoryRecipes(), "fr_electric_road_factory");
 		registry.addRecipes(tarDistillerRecipes(), "fr_electric_tar_distiller");
 		registry.addRecipes(tarmacCutterRecipes(), "fr_electric_tarmac_cutter");
 		registry.addRecipes(crusherRecipes(), "fr_electric_crusher");
+		registry.addRecipes(paintOvenRecipes(), "fr_electric_paint_oven");
+		registry.addRecipes(compactorRecipes(), "fr_electric_compactor");
+		registry.addRecipes(fabricatorRecipes(), "fr_electric_fabricator");
+		
+		blacklistedIngredients(registry.getJeiHelpers().getIngredientBlacklist());
 	}
 	
 	@Override
@@ -37,27 +54,121 @@ public class FRJEIPlugin implements IModPlugin {
 		registry.addRecipeCategories(new TarDistillerCategory(registry.getJeiHelpers().getGuiHelper(), "fr_tar_distiller", false));
 		registry.addRecipeCategories(new TarmacCutterCategory(registry.getJeiHelpers().getGuiHelper(), "fr_tarmac_cutter", false));
 		registry.addRecipeCategories(new CrusherCategory(registry.getJeiHelpers().getGuiHelper(), "fr_crusher", false));
+		registry.addRecipeCategories(new PaintOvenCategory(registry.getJeiHelpers().getGuiHelper(), "fr_paint_oven", false));
+		registry.addRecipeCategories(new CompactorCategory(registry.getJeiHelpers().getGuiHelper(), "fr_compactor", false));
+		registry.addRecipeCategories(new FabricatorCategory(registry.getJeiHelpers().getGuiHelper(), "fr_fabricator", false));
 		
 		registry.addRecipeCategories(new RoadFactoryCategory(registry.getJeiHelpers().getGuiHelper(), "fr_electric_road_factory", true));
 		registry.addRecipeCategories(new TarDistillerCategory(registry.getJeiHelpers().getGuiHelper(), "fr_electric_tar_distiller", true));
 		registry.addRecipeCategories(new TarmacCutterCategory(registry.getJeiHelpers().getGuiHelper(), "fr_electric_tarmac_cutter", true));
 		registry.addRecipeCategories(new CrusherCategory(registry.getJeiHelpers().getGuiHelper(), "fr_electric_crusher", true));
+		registry.addRecipeCategories(new PaintOvenCategory(registry.getJeiHelpers().getGuiHelper(), "fr_electric_paint_oven", true));
+		registry.addRecipeCategories(new CompactorCategory(registry.getJeiHelpers().getGuiHelper(), "fr_electric_compactor", true));
+		registry.addRecipeCategories(new FabricatorCategory(registry.getJeiHelpers().getGuiHelper(), "fr_electric_fabricator", true));
+	}
+	
+	private void blacklistedIngredients(IIngredientBlacklist blacklist) {
+		for (int i = 0; i < PaintGunItemRegistry.lines.size(); i++) {
+			PaintBlockBase white = PaintGunItemRegistry.lines.get(i);
+			int meta = PaintGunItemRegistry.linesMeta.get(i);
+			removePaint(white, meta, blacklist);
+		}
+		
+		for (int i = 0; i < PaintGunItemRegistry.icons.size(); i++) {
+			PaintBlockBase white = PaintGunItemRegistry.icons.get(i);
+			int meta = PaintGunItemRegistry.iconsMeta.get(i);
+			removePaint(white, meta, blacklist);
+		}
+		
+		for (int i = 0; i < PaintGunItemRegistry.letters.size(); i++) {
+			PaintBlockBase white = PaintGunItemRegistry.letters.get(i);
+			int meta = PaintGunItemRegistry.lettersMeta.get(i);
+			removePaint(white, meta, blacklist);
+		}
+		
+		for (int i = 0; i < PaintGunItemRegistry.text.size(); i++) {
+			PaintBlockBase white = PaintGunItemRegistry.text.get(i);
+			int meta = PaintGunItemRegistry.textMeta.get(i);
+			removePaint(white, meta, blacklist);
+		}
+		
+		for (int i = 0; i < PaintGunItemRegistry.junction.size(); i++) {
+			PaintBlockBase white = PaintGunItemRegistry.junction.get(i);
+			int meta = PaintGunItemRegistry.junctionMeta.get(i);
+			removePaint(white, meta, blacklist);
+		}
+		
+		for (int i = 0; i < PaintGunItemRegistry.other.size(); i++) {
+			PaintBlockBase white = PaintGunItemRegistry.other.get(i);
+			int meta = PaintGunItemRegistry.otherMeta.get(i);
+			removePaint(white, meta, blacklist);
+		}
+		
+		//extras which don't show in the gun anyway so we cant steal them from the gun lists
+		removePaint(FRBlocks.white_chevron_mid, 4, blacklist);
+		removePaint(FRBlocks.white_chevron_mid, 12, blacklist);
+		removePaint(FRBlocks.white_chevron_mid_left, 4, blacklist);
+		removePaint(FRBlocks.white_chevron_mid_left, 12, blacklist);
+		removePaint(FRBlocks.white_chevron_mid_right, 4, blacklist);
+		removePaint(FRBlocks.white_chevron_mid_right, 12, blacklist);
+		
+		removePaint(FRBlocks.white_chevron_left_b, 0, blacklist);
+		removePaint(FRBlocks.white_chevron_left_b_thin, 0, blacklist);
+		removePaint(FRBlocks.white_chevron_right_b, 0, blacklist);
+		removePaint(FRBlocks.white_chevron_right_b_thin, 0, blacklist);
+		
+		blacklist.addIngredientToBlacklist(new ItemStack(FRBlocks.road_snow));
+	}
+	
+	private void removePaint(PaintBlockBase paint, int meta, IIngredientBlacklist blacklist) {
+		PaintBlockBase yellow = PaintGunItemRegistry.getYellow(paint);
+		PaintBlockBase red = PaintGunItemRegistry.getRed(paint);
+		blacklist.addIngredientToBlacklist(new ItemStack(paint, 1, meta));
+		blacklist.addIngredientToBlacklist(new ItemStack(yellow, 1, meta));
+		blacklist.addIngredientToBlacklist(new ItemStack(red, 1, meta));
+	}
+	
+	private ArrayList<PaintOvenWrapper> paintOvenRecipes() {
+		ArrayList<PaintOvenWrapper> recipes = new ArrayList<PaintOvenWrapper>();
+		
+		recipes.add(new PaintOvenWrapper(new ItemStack(Items.DYE, 1, 15), new FluidStack(FluidRegistry.WATER, 1000), new FluidStack(FRFluids.white_paint, 1000)));
+		recipes.add(new PaintOvenWrapper(new ItemStack(Items.DYE, 1, 11), new FluidStack(FluidRegistry.WATER, 1000), new FluidStack(FRFluids.yellow_paint, 1000)));
+		recipes.add(new PaintOvenWrapper(new ItemStack(Items.DYE, 1, 1), new FluidStack(FluidRegistry.WATER, 1000), new FluidStack(FRFluids.red_paint, 1000)));
+		
+		return recipes;
+	}
+	
+	private ArrayList<CompactorWrapper> compactorRecipes() {
+		ArrayList<CompactorWrapper> recipes = new ArrayList<CompactorWrapper>();
+
+		for (int i = 0; i < RecipeRegistry.compactorRecipes.size(); i++) {
+			CompactorRecipes cr = RecipeRegistry.compactorRecipes.get(i);
+			for (int j = 0; j < 16; j++) {
+				recipes.add(new CompactorWrapper(new ItemStack(cr.getInputStack().getItem(), j+1), new ItemStack(cr.getOutputStack().getItem(), 1, j)));
+			}
+		}
+		
+		return recipes;
+	}
+	
+	private ArrayList<FabricatorWrapper> fabricatorRecipes() {
+		ArrayList<FabricatorWrapper> recipes = new ArrayList<FabricatorWrapper>();
+		
+		for (int i = 0; i < RecipeRegistry.fabricatorRecipes.size(); i++) {
+			FabricatorRecipes fr = RecipeRegistry.fabricatorRecipes.get(i);
+			recipes.add(new FabricatorWrapper(fr.getInput1(), fr.getInput2(), fr.getInput3(), fr.getInput4(), fr.getInput5(), fr.getInput6(), fr.getOutput()));
+		}
+		
+		return recipes;
 	}
 	
 	private ArrayList<RoadFactoryWrapper> roadFactoryRecipes() {
 		ArrayList<RoadFactoryWrapper> recipes = new ArrayList<RoadFactoryWrapper>();
 		
-		recipes.add(new RoadFactoryWrapper(new ItemStack(FRBlocks.generic_blocks, 8, 0), new FluidStack(FRFluids.tar, 1000), new ItemStack(FRBlocks.road_block_standard, 8, 15)));
-		recipes.add(new RoadFactoryWrapper(new ItemStack(Blocks.STONE, 8, 0), new FluidStack(FRFluids.tar, 1000), new ItemStack(FRBlocks.road_block_stone, 8, 15)));
-		recipes.add(new RoadFactoryWrapper(new ItemStack(Blocks.STONE, 8, 1), new FluidStack(FRFluids.tar, 1000), new ItemStack(FRBlocks.road_block_pale, 8, 15)));
-		recipes.add(new RoadFactoryWrapper(new ItemStack(Blocks.STONE, 8, 3), new FluidStack(FRFluids.tar, 1000), new ItemStack(FRBlocks.road_block_light, 8, 15)));
-		recipes.add(new RoadFactoryWrapper(new ItemStack(Blocks.STONE, 8, 5), new FluidStack(FRFluids.tar, 1000), new ItemStack(FRBlocks.road_block_dark, 8, 15)));
-		recipes.add(new RoadFactoryWrapper(new ItemStack(Blocks.STONE, 8, 6), new FluidStack(FRFluids.tar, 1000), new ItemStack(FRBlocks.road_block_fine, 8, 15)));
-		
-		recipes.add(new RoadFactoryWrapper(new ItemStack(Blocks.GRASS,  8, 0), new FluidStack(FRFluids.tar, 1000), new ItemStack(FRBlocks.road_block_grass, 8, 15)));
-		recipes.add(new RoadFactoryWrapper(new ItemStack(Blocks.DIRT,   8, 0), new FluidStack(FRFluids.tar, 1000), new ItemStack(FRBlocks.road_block_dirt, 8, 15)));
-		recipes.add(new RoadFactoryWrapper(new ItemStack(Blocks.GRAVEL, 8, 0), new FluidStack(FRFluids.tar, 1000), new ItemStack(FRBlocks.road_block_gravel, 8, 15)));
-		recipes.add(new RoadFactoryWrapper(new ItemStack(Blocks.SAND,   8, 0), new FluidStack(FRFluids.tar, 1000), new ItemStack(FRBlocks.road_block_sand, 8, 15)));
+		for (int i = 0; i < RecipeRegistry.roadFactoryRecipes.size(); i++) {
+			RoadFactoryRecipes rfr = RecipeRegistry.roadFactoryRecipes.get(i);
+			recipes.add(new RoadFactoryWrapper(rfr.getInputStack(), rfr.getModifier(), rfr.getFluidInputStack(), rfr.getOutputStack()));
+		}
 
 		return recipes;
 	}
@@ -65,9 +176,11 @@ public class FRJEIPlugin implements IModPlugin {
 	private ArrayList<TarDistillerWrapper> tarDistillerRecipes() {
 		ArrayList<TarDistillerWrapper> recipes = new ArrayList<TarDistillerWrapper>();
 		
-		recipes.add(new TarDistillerWrapper(new ItemStack(Items.COAL, 1, 0), null, new ItemStack(FRItems.coal_coke, 1, 0), ItemStack.EMPTY, new FluidStack(FRFluids.tar, 1000), null));
-		recipes.add(new TarDistillerWrapper(new ItemStack(Items.COAL, 1, 1), null, new ItemStack(FRItems.coal_coke, 1, 0), ItemStack.EMPTY, new FluidStack(FRFluids.tar, 750), null));
-		recipes.add(new TarDistillerWrapper(new ItemStack(Blocks.COAL_BLOCK, 1, 0), null, new ItemStack(FRItems.coal_coke, 9, 0), ItemStack.EMPTY, new FluidStack(FRFluids.tar, 9000), null));
+		for (int i = 0; i < RecipeRegistry.tarDistillerRecipes.size(); i++) {
+			TarDistillerRecipes tdr = RecipeRegistry.tarDistillerRecipes.get(i);
+			recipes.add(new TarDistillerWrapper(tdr.getInputStack(), tdr.getFluidInputStack(), tdr.getOutput1Stack(), tdr.getOutput2Stack(), tdr.getFluidOutput1Stack(), tdr.getFluidOutput2Stack()));
+		}
+		
 		return recipes;
 	}
 	
@@ -119,15 +232,11 @@ public class FRJEIPlugin implements IModPlugin {
 	private ArrayList<CrusherWrapper> crusherRecipes() {
 		ArrayList<CrusherWrapper> recipes = new ArrayList<CrusherWrapper>();
 		
-		recipes.add(new CrusherWrapper(new ItemStack(Blocks.STONE, 1, 0), new ItemStack(Blocks.COBBLESTONE, 1, 0)));
-		recipes.add(new CrusherWrapper(new ItemStack(Blocks.COBBLESTONE, 1, 0), new ItemStack(Blocks.GRAVEL, 1, 0)));
-		recipes.add(new CrusherWrapper(new ItemStack(Blocks.GRAVEL, 1, 0), new ItemStack(FRBlocks.generic_blocks, 1, 0)));
-		
-		recipes.add(new CrusherWrapper(new ItemStack(FRBlocks.generic_blocks, 1, 0), new ItemStack(Blocks.SAND, 1, 0)));
-		recipes.add(new CrusherWrapper(new ItemStack(FRBlocks.generic_blocks, 1, 1), new ItemStack(FRItems.cement_dust, 1, 0)));
-		recipes.add(new CrusherWrapper(new ItemStack(FRBlocks.generic_blocks, 1, 2), new ItemStack(FRItems.cement_dust, 1, 0)));
-		recipes.add(new CrusherWrapper(new ItemStack(FRBlocks.generic_blocks, 1, 3), new ItemStack(FRItems.limestone_dust, 1, 0)));
-		
+		for (int i = 0; i < RecipeRegistry.crusherRecipes.size(); i++) {
+			CrusherRecipes cr = RecipeRegistry.crusherRecipes.get(i);
+			recipes.add(new CrusherWrapper(cr.getInputStack(), cr.getOutputStack()));
+		}
+
 		return recipes;
 	}
 }

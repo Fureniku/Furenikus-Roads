@@ -10,7 +10,7 @@
 	},
 	"variants": {
 		"inventory": [{
-			"model": "furenikusroads:barrier_wall_inventory",
+			"model": "furenikusroads:barrier_wall_pole_edge_inventory",
 			"textures": {
 				"0": "furenikusroads:blocks/road_block_concrete_2"
 			}

@@ -1,3 +1,9 @@
+tile.furenikusroads.tar_fluid.name=Tar
+tile.furenikusroads.paint_white_fluid.name=White Paint
+tile.furenikusroads.paint_yellow_fluid.name=Yellow Paint
+tile.furenikusroads.paint_red_fluid.name=Red Paint
+
+
 tile.furenikusroads.road_block_standard.name=Standard Tarmac Road
 tile.furenikusroads.road_block_concrete_1.name=Concrete Road
 tile.furenikusroads.road_block_concrete_2.name=Concrete Road
@@ -29,6 +35,19 @@ tile.furenikusroads.tar_distiller.name=Tar Distiller
 tile.furenikusroads.road_factory.name=Road Factory
 tile.furenikusroads.tarmac_cutter.name=Tarmac Cutter
 tile.furenikusroads.crusher.name=Crusher
+tile.furenikusroads.paint_oven.name=Paint Oven
+tile.furenikusroads.compactor.name=Compactor
+tile.furenikusroads.fabricator.name=Fabricator
+tile.furenikusroads.paint_filler_hopper.name=Paint Filler Hopper
+
+tile.furenikusroads.paint_filler_electric.name=Electric Paint Filler
+tile.furenikusroads.tar_distiller_electric.name=Electric Tar Distiller
+tile.furenikusroads.road_factory_electric.name=Electric Road Factory
+tile.furenikusroads.tarmac_cutter_electric.name=Electric Tarmac Cutter
+tile.furenikusroads.crusher_electric.name=Electric Crusher
+tile.furenikusroads.paint_oven_electric.name=Electric Paint Oven
+tile.furenikusroads.compactor_electric.name=Electric Compactor
+tile.furenikusroads.fabricator_electric.name=Electric Fabricator
 
 tile.furenikusroads.kerb_standard.0.name=Curb (Unpainted)
 tile.furenikusroads.kerb_standard.4.name=Curb (White)
@@ -40,10 +59,18 @@ tile.furenikusroads.manhole_cover_round.name=Manhole Cover
 tile.furenikusroads.manhole_cover_square.name=Manhole Cover
 
 tile.furenikusroads.street_light_1.name=Street Light
+tile.furenikusroads.street_light_2.name=Street Light (Long)
+tile.furenikusroads.street_light_3.name=Street Light
+tile.furenikusroads.street_light_4.name=Street Light (Long)
+tile.furenikusroads.street_light_5.name=Street Light (Slant)
+tile.furenikusroads.street_light_6.name=Street Light (Slant)
 
 tile.furenikusroads.post_large_vertical.name=Post (Large)
 tile.furenikusroads.post_medium_vertical.name=Post (Medium)
 tile.furenikusroads.post_small_vertical.name=Post (Small)
+tile.furenikusroads.post_large_vertical_2.name=Post (Large)
+tile.furenikusroads.post_medium_vertical_2.name=Post (Medium)
+tile.furenikusroads.post_small_vertical_2.name=Post (Small)
 tile.furenikusroads.post_large_horizontal.name=Horizontal Post (Large)
 tile.furenikusroads.post_medium_horizontal.name=Horizontal Post (Medium)
 tile.furenikusroads.post_small_horizontal.name=Horizontal Post (Small)
@@ -60,30 +87,43 @@ tile.furenikusroads.barrier_tall_edge_double.name=Road Barrier Tall (Double Edge
 tile.furenikusroads.barrier_concrete_1_mid.name=Concrete Barrier (Mid)
 tile.furenikusroads.barrier_concrete_2_mid.name=Concrete Barrier (Mid)
 tile.furenikusroads.barrier_bars_mid.name=Bars (Mid)
-tile.furenikusroads.barrier_bars_edge.name=Bars (Edge)
+tile.furenikusroads.barrier_bars_mid_2.name=Bars (Mid)
+tile.furenikusroads.barrier_bars_mid_3.name=Bars (Mid)
 tile.furenikusroads.barrier_wall_mid_concrete_1.name=Concrete Wall (Mid)
 tile.furenikusroads.barrier_wall_mid_concrete_2.name=Concrete Wall (Mid)
-tile.furenikusroads.barrier_wall_edge_concrete_1.name=Concrete Wall (Edge)
-tile.furenikusroads.barrier_wall_edge_concrete_2.name=Concrete Wall (Edge)
-tile.furenikusroads.barrier_wall_edge_concrete_1_double.name=Concrete Wall (Double Edge)
-tile.furenikusroads.barrier_wall_edge_concrete_2_double.name=Concrete Wall (Double Edge)
-tile.furenikusroads.barrier_bars_edge_double.name=Bars (Double Edge)
-tile.furenikusroads.barrier_concrete_edge_1.name=Concrete Barrier (Edge)
-tile.furenikusroads.barrier_concrete_edge_2.name=Concrete Barrier (Edge)
 tile.furenikusroads.barrier_bars_mid_concrete_1.name=Bars with Concrete Post (Mid)
 tile.furenikusroads.barrier_bars_mid_concrete_2.name=Bars with Concrete Post (Mid)
-tile.furenikusroads.barrier_bars_edge_concrete_1.name=Bars with Concrete Post (Edge)
-tile.furenikusroads.barrier_bars_edge_concrete_2.name=Bars with Concrete Post (Edge)
-tile.furenikusroads.barrier_bars_mid_2.name=Bars (Mid)
-tile.furenikusroads.barrier_bars_edge_2.name=Bars (Edge)
 tile.furenikusroads.barrier_wall_pole_mid_concrete_1.name=Concrete Wall with Pole (Mid)
 tile.furenikusroads.barrier_wall_pole_mid_concrete_2.name=Concrete Wall with Pole (Mid)
+tile.furenikusroads.barrier_low_mid.name=Barrier Low (Mid)
+
+tile.furenikusroads.barrier_wall_edge_concrete_1.name=Concrete Wall (Edge)
+tile.furenikusroads.barrier_wall_edge_concrete_2.name=Concrete Wall (Edge)
+tile.furenikusroads.barrier_bars_edge.name=Bars (Edge)
+tile.furenikusroads.barrier_bars_edge_2.name=Bars (Edge)
+tile.furenikusroads.barrier_bars_edge_3.name=Bars (Edge)
+tile.furenikusroads.barrier_concrete_edge_1.name=Concrete Barrier (Edge)
+tile.furenikusroads.barrier_concrete_edge_2.name=Concrete Barrier (Edge)
+tile.furenikusroads.barrier_bars_edge_concrete_1.name=Bars with Concrete Post (Edge)
+tile.furenikusroads.barrier_bars_edge_concrete_2.name=Bars with Concrete Post (Edge)
 tile.furenikusroads.barrier_wall_pole_edge_concrete_1.name=Concrete Wall with Pole (Edge)
 tile.furenikusroads.barrier_wall_pole_edge_concrete_2.name=Concrete Wall with Pole (Edge)
-tile.furenikusroads.
-tile.furenikusroads.
-tile.furenikusroads.
-tile.furenikusroads.
+tile.furenikusroads.barrier_low_edge.name=Barrier Low (Edge)
+
+tile.furenikusroads.barrier_bars_edge_double.name=Bars (Double Edge)
+tile.furenikusroads.barrier_bars_edge_double_2.name=Bars (Double Edge)
+tile.furenikusroads.barrier_bars_edge_double_3.name=Bars (Double Edge)
+tile.furenikusroads.barrier_wall_edge_concrete_1_double.name=Concrete Wall (Double Edge)
+tile.furenikusroads.barrier_wall_edge_concrete_2_double.name=Concrete Wall (Double Edge)
+tile.furenikusroads.barrier_bars_edge_concrete_1_double.name=Bars with Concrete Post (Double Edge)
+tile.furenikusroads.barrier_bars_edge_concrete_2_double.name=Bars with Concrete Post (Double Edge)
+tile.furenikusroads.barrier_wall_pole_edge_concrete_1_double.name=Concrete Wall with Pole (Double Edge)
+tile.furenikusroads.barrier_wall_pole_edge_concrete_2_double.name=Concrete Wall with Pole (Double Edge)
+
+
+
+
+
 
 tile.furenikusroads.drain_cover_1.name=Drain Cover
 tile.furenikusroads.drain_cover_2.name=Drain Cover
@@ -119,21 +159,136 @@ tile.furenikusroads.bollard_2.8.name=Thin Metal Bollard (Rings)
 tile.furenikusroads.bollard_2.9.name=Thin Metal Bollard (Yellow)
 tile.furenikusroads.bollard_2.10.name=Bollard (Topped)
 tile.furenikusroads.bollard_2.11.name=Bollard (Topped, Ring)
-tile.furenikusroads.bollard_2.12.name=unimplemented
-tile.furenikusroads.bollard_2.13.name=unimplemented
+tile.furenikusroads.bollard_2.12.name=Metal Bollard (Light)
+tile.furenikusroads.bollard_2.13.name=Metal Bollard (Black, Light)
 tile.furenikusroads.bollard_2.14.name=Portable Bollard (Orange)
 tile.furenikusroads.bollard_2.15.name=Portable Bollard (Yellow)
+
+tile.furenikusroads.bollard_3.0.name=Metal Retractable Bollard
+tile.furenikusroads.bollard_3.1.name=Metal Retractable Bollard
+tile.furenikusroads.bollard_3.2.name=Metal Retractable Bollard (Black)
+tile.furenikusroads.bollard_3.3.name=Metal Retractable Bollard (Black)
+tile.furenikusroads.bollard_3.4.name=Tall Metal Retractable Bollard
+tile.furenikusroads.bollard_3.5.name=Tall Metal Retractable Bollard 
+tile.furenikusroads.bollard_3.6.name=Tall Metal Retractable Bollard (Black)
+tile.furenikusroads.bollard_3.7.name=Tall Metal Retractable Bollard (Black)
+tile.furenikusroads.bollard_3.8.name=Metal Retractable Bollard
+tile.furenikusroads.bollard_3.9.name=Metal Retractable Bollard
+tile.furenikusroads.bollard_3.10.name=Metal Retractable Bollard (Rings)
+tile.furenikusroads.bollard_3.11.name=Metal Retractable Bollard (Rings)
+tile.furenikusroads.bollard_3.12.name=Thin Metal Retractable Bollard
+tile.furenikusroads.bollard_3.13.name=Thin Metal Retractable Bollard
+tile.furenikusroads.bollard_3.14.name=Thin Metal Retractable Bollard (Rings)
+tile.furenikusroads.bollard_3.15.name=Thin Metal Retractable Bollard (Rings)
+
+tile.furenikusroads.bollard_folding_smooth_metal.0.name=Metal Folding Bollard
+tile.furenikusroads.bollard_folding_smooth_metal.1.name=Metal Folding Bollard
+tile.furenikusroads.bollard_folding_smooth_metal.2.name=Metal Folding Bollard
+tile.furenikusroads.bollard_folding_smooth_metal.3.name=Metal Folding Bollard
+tile.furenikusroads.bollard_folding_smooth_metal.4.name=Metal Folding Bollard
+tile.furenikusroads.bollard_folding_smooth_metal.5.name=Metal Folding Bollard
+tile.furenikusroads.bollard_folding_smooth_metal.6.name=Metal Folding Bollard
+tile.furenikusroads.bollard_folding_smooth_metal.7.name=Metal Folding Bollard
+tile.furenikusroads.bollard_folding_smooth_metal.8.name=Metal Wide Folding Bollard
+tile.furenikusroads.bollard_folding_smooth_metal.9.name=Metal Wide Folding Bollard
+tile.furenikusroads.bollard_folding_smooth_metal.10.name=Metal Wide Folding Bollard
+tile.furenikusroads.bollard_folding_smooth_metal.11.name=Metal Wide Folding Bollard
+tile.furenikusroads.bollard_folding_smooth_metal.12.name=Metal Wide Folding Bollard
+tile.furenikusroads.bollard_folding_smooth_metal.13.name=Metal Wide Folding Bollard
+tile.furenikusroads.bollard_folding_smooth_metal.14.name=Metal Wide Folding Bollard
+tile.furenikusroads.bollard_folding_smooth_metal.15.name=Metal Wide Folding Bollard
+
+tile.furenikusroads.bollard_folding_black.0.name=Black Folding Bollard
+tile.furenikusroads.bollard_folding_black.1.name=Black Folding Bollard
+tile.furenikusroads.bollard_folding_black.2.name=Black Folding Bollard
+tile.furenikusroads.bollard_folding_black.3.name=Black Folding Bollard
+tile.furenikusroads.bollard_folding_black.4.name=Black Folding Bollard
+tile.furenikusroads.bollard_folding_black.5.name=Black Folding Bollard
+tile.furenikusroads.bollard_folding_black.6.name=Black Folding Bollard
+tile.furenikusroads.bollard_folding_black.7.name=Black Folding Bollard
+tile.furenikusroads.bollard_folding_black.8.name=Black Wide Folding Bollard
+tile.furenikusroads.bollard_folding_black.9.name=Black Wide Folding Bollard
+tile.furenikusroads.bollard_folding_black.10.name=Black Wide Folding Bollard
+tile.furenikusroads.bollard_folding_black.11.name=Black Wide Folding Bollard
+tile.furenikusroads.bollard_folding_black.12.name=Black Wide Folding Bollard
+tile.furenikusroads.bollard_folding_black.13.name=Black Wide Folding Bollard
+tile.furenikusroads.bollard_folding_black.14.name=Black Wide Folding Bollard
+tile.furenikusroads.bollard_folding_black.15.name=Black Wide Folding Bollard
+
+tile.furenikusroads.bollard_folding_yellow.0.name=Yellow Folding Bollard
+tile.furenikusroads.bollard_folding_yellow.1.name=Yellow Folding Bollard
+tile.furenikusroads.bollard_folding_yellow.2.name=Yellow Folding Bollard
+tile.furenikusroads.bollard_folding_yellow.3.name=Yellow Folding Bollard
+tile.furenikusroads.bollard_folding_yellow.4.name=Yellow Folding Bollard
+tile.furenikusroads.bollard_folding_yellow.5.name=Yellow Folding Bollard
+tile.furenikusroads.bollard_folding_yellow.6.name=Yellow Folding Bollard
+tile.furenikusroads.bollard_folding_yellow.7.name=Yellow Folding Bollard
+tile.furenikusroads.bollard_folding_yellow.8.name=Yellow Wide Folding Bollard
+tile.furenikusroads.bollard_folding_yellow.9.name=Yellow Wide Folding Bollard
+tile.furenikusroads.bollard_folding_yellow.10.name=Yellow Wide Folding Bollard
+tile.furenikusroads.bollard_folding_yellow.11.name=Yellow Wide Folding Bollard
+tile.furenikusroads.bollard_folding_yellow.12.name=Yellow Wide Folding Bollard
+tile.furenikusroads.bollard_folding_yellow.13.name=Yellow Wide Folding Bollard
+tile.furenikusroads.bollard_folding_yellow.14.name=Yellow Wide Folding Bollard
+tile.furenikusroads.bollard_folding_yellow.15.name=Yellow Wide Folding Bollard
+
+tile.furenikusroads.wheel_stop.0.name=Concrete Wheel Stop
+tile.furenikusroads.wheel_stop.1.name=Concrete Wheel Stop
+tile.furenikusroads.wheel_stop.2.name=Concrete Wheel Stop
+tile.furenikusroads.wheel_stop.3.name=Concrete Wheel Stop
+tile.furenikusroads.wheel_stop.4.name=Concrete Wheel Stop
+tile.furenikusroads.wheel_stop.5.name=Concrete Wheel Stop
+tile.furenikusroads.wheel_stop.6.name=Concrete Wheel Stop
+tile.furenikusroads.wheel_stop.7.name=Concrete Wheel Stop
+tile.furenikusroads.wheel_stop.8.name=Yellow Wheel Stop
+tile.furenikusroads.wheel_stop.9.name=Yellow Wheel Stop
+tile.furenikusroads.wheel_stop.10.name=Yellow Wheel Stop
+tile.furenikusroads.wheel_stop.11.name=Yellow Wheel Stop
+tile.furenikusroads.wheel_stop.12.name=Black Wheel Stop
+tile.furenikusroads.wheel_stop.13.name=Black Wheel Stop
+tile.furenikusroads.wheel_stop.14.name=Black Wheel Stop
+tile.furenikusroads.wheel_stop.15.name=Black Wheel Stop
+
+tile.furenikusroads.speed_bump.0.name=Black Speed Bump
+tile.furenikusroads.speed_bump.1.name=Black Speed Bump
+tile.furenikusroads.speed_bump.2.name=Yellow Speed Bump
+tile.furenikusroads.speed_bump.3.name=Yellow Speed Bump
+tile.furenikusroads.speed_bump.4.name=Concrete Speed Bump
+tile.furenikusroads.speed_bump.5.name=Concrete Speed Bump
+tile.furenikusroads.speed_bump.6.name=Concrete Speed Bump
+tile.furenikusroads.speed_bump.7.name=Concrete Speed Bump
+tile.furenikusroads.speed_bump.8.name=Standard Tarmac Speed Bump
+tile.furenikusroads.speed_bump.9.name=Standard Tarmac Speed Bump
+tile.furenikusroads.speed_bump.10.name=White Tarmac Speed Bump
+tile.furenikusroads.speed_bump.11.name=White Tarmac Speed Bump
+tile.furenikusroads.speed_bump.12.name=Yellow Tarmac Speed Bump
+tile.furenikusroads.speed_bump.13.name=Yellow Tarmac Speed Bump
+tile.furenikusroads.speed_bump.14.name=Red Tarmac Speed Bump
+tile.furenikusroads.speed_bump.15.name=Red Tarmac Speed Bump
 
 tile.furenikusroads.cats_eye_white.name=White Reflector
 tile.furenikusroads.cats_eye_yellow.name=Yellow Reflector
 tile.furenikusroads.cats_eye_red.name=Red Reflector
 tile.furenikusroads.cats_eye_green.name=Green Reflector
 tile.furenikusroads.cats_eye_blue.name=Blue Reflector
+
+tile.furenikusroads.cats_eye_red_green.name=Red/Green Reflector
+tile.furenikusroads.cats_eye_white_red.name=White/Red Reflector
+tile.furenikusroads.cats_eye_white_yellow.name=White/Yellow Reflector
+tile.furenikusroads.cats_eye_white_green.name=White/Green Reflector
+tile.furenikusroads.cats_eye_yellow_red.name=Yellow/Red Reflector
+
 tile.furenikusroads.cats_eye_white_double.name=White Reflectors
 tile.furenikusroads.cats_eye_yellow_double.name=Yellow Reflectors
 tile.furenikusroads.cats_eye_red_double.name=Red Reflectors
 tile.furenikusroads.cats_eye_green_double.name=Green Reflectors
 tile.furenikusroads.cats_eye_blue_double.name=Blue Reflectors
+
+tile.furenikusroads.cats_eye_red_green_double.name=Red/Green Reflectors
+tile.furenikusroads.cats_eye_white_red_double.name=White/Red Reflectors
+tile.furenikusroads.cats_eye_white_yellow_double.name=White/Yellow Reflectors
+tile.furenikusroads.cats_eye_white_green_double.name=White/Green Reflectors
+tile.furenikusroads.cats_eye_yellow_red_double.name=Yellow/Red Reflectors
 
 tile.furenikusroads.street_block_a.0.name=Sidewalk (Brick)
 tile.furenikusroads.street_block_a.1.name=Sidewalk (Crossed Brick)
@@ -613,7 +768,7 @@ tile.furenikusroads.red_junction_mid_line_connection.4.name=Thin Mid Line to Thi
 tile.furenikusroads.red_junction_mid_line_connection.8.name=Thick Mid Line to Thick Filter Line R
 tile.furenikusroads.red_junction_mid_line_connection.12.name=Thick Mid Line to Thick Filter Line R
 
-
+tile.furenikusroads.road_snow.name=Snow (But magic snow that settles on roads)
 
 item.pneumatic_drill.name=Pneumatic Drill
 item.tarmac_rammer.name=Tarmac Rammer
@@ -623,6 +778,7 @@ item.wrench.name=Wrench
 
 item.pneumatic_drill_bit.name=Pneumatic Drill Bit
 item.machine_frame.name=Machine Frame
+item.machine_frame_electric.name=Electric Machine Frame
 item.tool_handle.name=Tool Handle
 item.large_glass_tank.name=Large Glass Tank
 item.small_glass_tank.name=Small Glass Tank
@@ -714,6 +870,15 @@ roads.gui.road_factory.connect_failed_3=or manually add Tar.
 roads.gui.road_factory.link=Link
 roads.gui.road_factory.tooltip_1=Create road blocks from their base block.
 roads.gui.road_factory.tooltip_2=Tip: Place to the right of a Tar Distiller!
+roads.gui.road_factory.modifierSlot=Modifier Slot
+roads.gui.road_factory.tar_required=All recipes require 1000mb of Tar per 8 blocks
+roads.gui.road_factory.modifierSlot.tooltip_1=Use Standard Tarmac or Crushed Rock & Tar with
+roads.gui.road_factory.modifierSlot.tooltip_2=a dye to craft coloured roads
+roads.gui.road_factory.modifierSlot.red_dye=Red Dye
+roads.gui.road_factory.modifierSlot.blue_dye=Blue Dye
+roads.gui.road_factory.modifierSlot.yellow_dye=Yellow Dye
+roads.gui.road_factory.modifierSlot.green_dye=Green Dye
+roads.gui.road_factory.modifierSlot.white_dye=White Dye
 
 roads.gui.electric_tar_distiller.name=Tar Distiller
 roads.gui.tar_distiller.name=Tar Distiller
@@ -734,3 +899,21 @@ roads.gui.paint_filler.yellow_slot=Yellow Dye Converter
 roads.gui.paint_filler.red_slot=Red Dye Converter
 roads.gui.paint_filler.tooltip_1=Used to create paint, then fill a paint gun.
 roads.gui.paint_filler.tooltip_2=Fuel, then add white, yellow or red dye to begin!
+
+roads.gui.paint_filler_hopper.tooltip_1=Allows pumping of items and paints in/out of the Paint Filler.
+
+roads.gui.paint_oven.dye_slot=Dye
+roads.gui.paint_oven.tooltip_1=Mixes dyes with water for higher paint yields.
+roads.gui.paint_oven.tooltip_2=Requires some method of transporting the paint!
+
+roads.gui.compactor.name=Compactor
+roads.gui.compactor_electric.name=Compactor
+roads.gui.compactor.fragmentSlot=Tarmac Fragments
+roads.gui.compactor.size=Size to compress to
+roads.gui.compactor.tooltip_1=Compacts Road Fragments into new Road Blocks
+
+roads.gui.fabricator.name=Fabricator
+roads.gui.electric_fabricator.name=Fabricator
+roads.gui.fabricator.requirement=Requires: 
+roads.gui.fabricator.recipe_select=Click to select recipe
+roads.gui.fabricator.tooltip_1=Crafts decorative blocks to prettify your roads!

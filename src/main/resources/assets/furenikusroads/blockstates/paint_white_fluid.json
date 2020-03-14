@@ -1,0 +1,38 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "textures": {
+            "particle": "furenikusroads:fluids/white_paint_particle",
+            "all": "furenikusroads:fluids/white_paint_flowing"
+        },
+        "model": "forge:fluid",
+     	"custom": { "fluid": "white_paint" },
+     	"uvlock": false
+    },
+    "variants": {
+        "inventory": {
+			"model": "forge:fluid",
+			"textures": {
+				"1": "furenikusroads:blocks/white_paint_flowing"
+			}
+        },
+        "level": {
+            "0": { },
+            "1": { },
+            "2": { },
+            "3": { },
+            "4": { },
+            "5": { },
+            "6": { },
+            "7": { },
+            "8": { },
+            "9": { },
+            "10": { },
+            "11": { },
+            "12": { },
+            "13": { },
+            "14": { },
+            "15": { }
+        }
+    }
+}

@@ -2,6 +2,9 @@ package com.silvaniastudios.roads.blocks.tileentities.distiller;
 
 import javax.annotation.Nullable;
 
+import com.silvaniastudios.roads.blocks.tileentities.recipes.RecipeRegistry;
+import com.silvaniastudios.roads.blocks.tileentities.recipes.TarDistillerRecipes;
+
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
@@ -17,7 +20,13 @@ public class SlotDistillerInput extends SlotItemHandler {
 	
 	@Override
 	public boolean isItemValid(@Nullable ItemStack stack) {
-		return te.validInput(stack, null);
+		for (int i = 0; i < RecipeRegistry.tarDistillerRecipes.size(); i++) {
+			TarDistillerRecipes tdr = RecipeRegistry.tarDistillerRecipes.get(i);
+			if (tdr.getInputStack().getItem() == stack.getItem() && tdr.getInputStack().getItemDamage() == stack.getItemDamage()) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

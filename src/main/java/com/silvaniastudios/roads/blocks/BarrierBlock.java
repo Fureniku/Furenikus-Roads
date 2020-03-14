@@ -12,6 +12,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -48,23 +49,25 @@ public class BarrierBlock extends BlockBase implements IConnectable {
 	}
 
 	@SuppressWarnings("deprecation")
-	public boolean canConnectTo(IBlockAccess worldIn, BlockPos pos, BlockPos oppositePos) {
+	public boolean canConnectTo(IBlockAccess worldIn, BlockPos pos, EnumFacing oppositeFace) {
 		IBlockState state = worldIn.getBlockState(pos);
-		Block block = state.getBlock();
-		if ((worldIn.getBlockState(oppositePos).getBlock() instanceof IConnectable) && block.isFullCube(state)) { return true; }
-		return block instanceof IConnectable;
+		return state.getBlock() instanceof IConnectable || (!state.getBlock().isAir(state, worldIn, pos) && getBlockFaceShape(worldIn, state, pos, oppositeFace) == BlockFaceShape.SOLID);
+	}
+	
+	public boolean canConnectTo(IBlockAccess worldIn, BlockPos pos) {
+		IBlockState state = worldIn.getBlockState(pos);
+		return state.getBlock() instanceof IConnectable;
 	}
 
 	private boolean canBarrierConnectTo(IBlockAccess world, BlockPos pos, EnumFacing facing) {
 		BlockPos offset = pos.offset(facing);
-		BlockPos oppositeOffset = pos.offset(facing.getOpposite());
-		return canConnectTo(world, offset, oppositeOffset) || canConnectTo(world, offset.offset(EnumFacing.DOWN), oppositeOffset) || canConnectTo(world, offset.offset(EnumFacing.UP), oppositeOffset);
+		EnumFacing oppositeFacing = facing.getOpposite();
+		return canConnectTo(world, offset, oppositeFacing) || canConnectTo(world, offset.offset(EnumFacing.DOWN)) || canConnectTo(world, offset.offset(EnumFacing.UP));
 	}
 	
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (playerIn.getHeldItem(hand).getItem() == FRItems.wrench) {
-			System.out.println("Meta: " +  getMetaFromState(state));
 			if (getMetaFromState(state) == 1) {
 				worldIn.setBlockState(pos, state.withProperty(BarrierBlock.POSTS, BarrierBlock.EnumPost.NONE));
 			} else {

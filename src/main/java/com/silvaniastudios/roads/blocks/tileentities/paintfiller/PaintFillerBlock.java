@@ -15,6 +15,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -52,16 +53,34 @@ public class PaintFillerBlock extends RoadTEBlock {
 	public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
 		TileEntity tileEntity = world.getTileEntity(pos);
 		
-		boolean connect = false;
+		boolean hasGun = false;
 		if (tileEntity instanceof PaintFillerEntity) {
 			PaintFillerEntity te = (PaintFillerEntity) tileEntity;
-			connect = hasGun(te);
+			hasGun = hasGun(te);
 		}
-		return state.withProperty(GUN_LOADED, connect).withProperty(FURNACE_ACTIVE, isFurnaceEnabled(state, world, pos));
+		return state.withProperty(GUN_LOADED, hasGun).withProperty(FURNACE_ACTIVE, isFurnaceEnabled(state, world, pos)).withProperty(BASE_PLATE, hasBasePlate(world, pos));
 	}
 	
+	@Override
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos) {
+		int meta = getMetaFromState(state);
+
+		if (meta == 0) { return new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.9375D, 1.0D, 0.9375D); }
+		if (meta == 1) { return new AxisAlignedBB(0.0625D, 0.0D, 0.0D, 1.0D, 1.0D, 0.9375D); }
+		if (meta == 2) { return new AxisAlignedBB(0.0625D, 0.0D, 0.0625D, 1.0D, 1.0D, 1.0D); }
+		if (meta == 3) { return new AxisAlignedBB(0.0D, 0.0D, 0.0625D, 0.9375D, 1.0D, 1.0D); }
+		
+		
+    	return new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
+    }
+
+    @Override
+    public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos) {
+    	return getBoundingBox(state, world, pos);
+    }
+	
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, new IProperty[] {GUN_LOADED, ROTATION, FURNACE_ACTIVE});
+		return new BlockStateContainer(this, new IProperty[] {GUN_LOADED, ROTATION, FURNACE_ACTIVE, BASE_PLATE});
 	}
 	
 	public boolean hasGun(PaintFillerEntity tileEntity) {

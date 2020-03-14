@@ -1,22 +1,34 @@
 package com.silvaniastudios.roads;
 
+import com.silvaniastudios.roads.blocks.tileentities.compactor.CompactorContainer;
+import com.silvaniastudios.roads.blocks.tileentities.compactor.CompactorElectricEntity;
+import com.silvaniastudios.roads.blocks.tileentities.compactor.CompactorEntity;
 import com.silvaniastudios.roads.blocks.tileentities.crusher.CrusherContainer;
 import com.silvaniastudios.roads.blocks.tileentities.crusher.CrusherElectricEntity;
 import com.silvaniastudios.roads.blocks.tileentities.crusher.CrusherEntity;
 import com.silvaniastudios.roads.blocks.tileentities.distiller.TarDistillerContainer;
 import com.silvaniastudios.roads.blocks.tileentities.distiller.TarDistillerElectricEntity;
 import com.silvaniastudios.roads.blocks.tileentities.distiller.TarDistillerEntity;
+import com.silvaniastudios.roads.blocks.tileentities.fabricator.FabricatorContainer;
+import com.silvaniastudios.roads.blocks.tileentities.fabricator.FabricatorElectricEntity;
+import com.silvaniastudios.roads.blocks.tileentities.fabricator.FabricatorEntity;
 import com.silvaniastudios.roads.blocks.tileentities.paintfiller.PaintFillerContainer;
 import com.silvaniastudios.roads.blocks.tileentities.paintfiller.PaintFillerElectricEntity;
 import com.silvaniastudios.roads.blocks.tileentities.paintfiller.PaintFillerEntity;
+import com.silvaniastudios.roads.blocks.tileentities.paintoven.PaintOvenContainer;
+import com.silvaniastudios.roads.blocks.tileentities.paintoven.PaintOvenElectricEntity;
+import com.silvaniastudios.roads.blocks.tileentities.paintoven.PaintOvenEntity;
 import com.silvaniastudios.roads.blocks.tileentities.roadfactory.RoadFactoryContainer;
 import com.silvaniastudios.roads.blocks.tileentities.roadfactory.RoadFactoryElectricEntity;
 import com.silvaniastudios.roads.blocks.tileentities.roadfactory.RoadFactoryEntity;
 import com.silvaniastudios.roads.blocks.tileentities.tarmaccutter.TarmacCutterContainer;
 import com.silvaniastudios.roads.blocks.tileentities.tarmaccutter.TarmacCutterElectricEntity;
 import com.silvaniastudios.roads.blocks.tileentities.tarmaccutter.TarmacCutterEntity;
+import com.silvaniastudios.roads.client.gui.GuiCompactor;
 import com.silvaniastudios.roads.client.gui.GuiCrusher;
+import com.silvaniastudios.roads.client.gui.GuiFabricator;
 import com.silvaniastudios.roads.client.gui.GuiPaintFiller;
+import com.silvaniastudios.roads.client.gui.GuiPaintOven;
 import com.silvaniastudios.roads.client.gui.GuiRoadFactory;
 import com.silvaniastudios.roads.client.gui.GuiTarDistiller;
 import com.silvaniastudios.roads.client.gui.GuiTarmacCutter;
@@ -64,6 +76,27 @@ public class GuiHandler implements IGuiHandler {
 			}
 			if (ID == 10) {
 				return new CrusherContainer(player.inventory, (CrusherElectricEntity) te, true);
+			}
+			
+			if (ID == 11) {
+				return new PaintOvenContainer(player.inventory, (PaintOvenEntity) te, false);
+			}
+			if (ID == 12) { 
+				return new PaintOvenContainer(player.inventory, (PaintOvenElectricEntity) te, true);
+			}
+			
+			if (ID == 13) {
+				return new CompactorContainer(player.inventory, (CompactorEntity) te, false);
+			}
+			if (ID == 14) { 
+				return new CompactorContainer(player.inventory, (CompactorElectricEntity) te, true);
+			}
+			
+			if (ID == 15) {
+				return new FabricatorContainer(player.inventory, (FabricatorEntity) te, false);
+			}
+			if (ID == 16) { 
+				return new FabricatorContainer(player.inventory, (FabricatorElectricEntity) te, true);
 			}
 			
 			System.out.println("You forgot to register GUI ID " + ID + " server-side, idiot.");
@@ -115,6 +148,33 @@ public class GuiHandler implements IGuiHandler {
 			if (ID == 10) {
 				CrusherElectricEntity entity = (CrusherElectricEntity) te;
 				return new GuiCrusher(entity, new CrusherContainer(player.inventory, entity, true), true);
+			}
+			
+			if (ID == 11) {
+				PaintOvenEntity entity = (PaintOvenEntity) te;
+				return new GuiPaintOven(entity, new PaintOvenContainer(player.inventory, entity, false), false);
+			}
+			if (ID == 12) {
+				PaintOvenElectricEntity entity = (PaintOvenElectricEntity) te;
+				return new GuiPaintOven(entity, new PaintOvenContainer(player.inventory, entity, true), true);
+			}
+			
+			if (ID == 13) {
+				CompactorEntity entity = (CompactorEntity) te;
+				return new GuiCompactor(entity, new CompactorContainer(player.inventory, entity, false), false);
+			}
+			if (ID == 14) {
+				CompactorElectricEntity entity = (CompactorElectricEntity) te;
+				return new GuiCompactor(entity, new CompactorContainer(player.inventory, entity, true), true);
+			}
+			
+			if (ID == 15) {
+				FabricatorEntity entity = (FabricatorEntity) te;
+				return new GuiFabricator(entity, new FabricatorContainer(player.inventory, entity, false), false);
+			}
+			if (ID == 16) {
+				FabricatorElectricEntity entity = (FabricatorElectricEntity) te;
+				return new GuiFabricator(entity, new FabricatorContainer(player.inventory, entity, true), true);
 			}
 			
 			System.out.println("You forgot to register GUI ID " + ID + " client-side, idiot.");

@@ -31,9 +31,7 @@ public class WorldGen implements IWorldGenerator {
 		int rangeY = maxY - minY;
 		for (int i = 0; i < vpc; i++) {
 			BlockPos pos = new BlockPos(x + random.nextInt(16), minY + random.nextInt(rangeY), z + random.nextInt(16));
-			if (wgm.generate(world, random, pos)) {
-				//System.out.println("Generating limestone at " + pos.getX() + ", " + pos.getY() + ", " + pos.getZ());
-			}
+			wgm.generate(world, random, pos);
 		}
 	}
 }

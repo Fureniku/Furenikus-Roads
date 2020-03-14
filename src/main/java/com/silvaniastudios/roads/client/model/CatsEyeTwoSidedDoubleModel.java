@@ -1,0 +1,554 @@
+package com.silvaniastudios.roads.client.model;
+
+import java.awt.Color;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+
+import javax.vecmath.Matrix4f;
+
+import org.apache.commons.lang3.tuple.Pair;
+
+import com.google.common.primitives.Ints;
+import com.silvaniastudios.roads.FurenikusRoads;
+import com.silvaniastudios.roads.blocks.CatsEyeBlockFourWay;
+
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.renderer.block.model.IBakedModel;
+import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
+import net.minecraft.client.renderer.block.model.ItemOverrideList;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.world.World;
+
+public class CatsEyeTwoSidedDoubleModel implements IBakedModel {
+	
+	private IBakedModel model;
+	String colLeft;
+	String colRight;
+	CatsEyeBlockFourWay.EnumCatsEye dir;
+	float p = 1/16F;
+	private CatsEyeOverrideList overrideList;
+	
+	public CatsEyeTwoSidedDoubleModel(IBakedModel model_ns, String colLeft, String colRight, CatsEyeBlockFourWay.EnumCatsEye dir) {
+		this.model = model_ns;
+		this.colLeft = colLeft;
+		this.colRight = colRight;
+		this.dir = dir;
+		this.overrideList = new CatsEyeOverrideList(this);
+	}
+
+	@Override
+	public List<BakedQuad> getQuads(IBlockState state, EnumFacing side, long rand) {
+		List<BakedQuad> quadList = new LinkedList<BakedQuad>();
+		quadList.addAll(model.getQuads(state, side, rand));
+		
+		if (side == null || dir == null || state == null) {
+			return model.getQuads(state, side, rand);
+		}
+		
+		TextureAtlasSprite texLeft = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(FurenikusRoads.MODID + ":blocks/cats_eye_" + colLeft);
+		TextureAtlasSprite texRight = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(FurenikusRoads.MODID + ":blocks/cats_eye_" + colRight);
+				
+		if (dir == CatsEyeBlockFourWay.EnumCatsEye.floor_n) {
+			quadList.add(RenderHelper.setBrightTexture(light(texRight,
+					//SW SE NE NW
+					2.0617F*p, 0.125F*p, 8.47F*p, 
+					3.9367F*p, 0.125F*p, 8.47F*p,
+					3.9367F*p, 0.625F*p, 8.25F*p,
+					2.0617F*p, 0.625F*p, 8.25F*p), 0.007F));
+			quadList.add(RenderHelper.setBrightTexture(light(texLeft,
+					//SW SE NE NW
+					3.9367F*p, 0.125F*p, 7.53F*p, 
+					2.0617F*p, 0.125F*p, 7.53F*p,
+					2.0617F*p, 0.625F*p, 7.75F*p,
+					3.9367F*p, 0.625F*p, 7.75F*p), 0.007F));
+			quadList.add(RenderHelper.setBrightTexture(light(texRight,
+					//SW SE NE NW
+					12.0617F*p, 0.125F*p, 8.47F*p, 
+					13.9367F*p, 0.125F*p, 8.47F*p,
+					13.9367F*p, 0.625F*p, 8.25F*p,
+					12.0617F*p, 0.625F*p, 8.25F*p), 0.007F));
+			quadList.add(RenderHelper.setBrightTexture(light(texLeft,
+					//SW SE NE NW
+					13.9367F*p, 0.125F*p, 7.53F*p, 
+					12.0617F*p, 0.125F*p, 7.53F*p,
+					12.0617F*p, 0.625F*p, 7.75F*p,
+					13.9367F*p, 0.625F*p, 7.75F*p), 0.007F));
+		}
+		if (dir == CatsEyeBlockFourWay.EnumCatsEye.floor_e) {
+			quadList.add(RenderHelper.setBrightTexture(light(texRight,
+					//SW SE NE NW
+					7.53F*p, 0.125F*p, 2.0617F*p, 
+					7.53F*p, 0.125F*p, 3.9367F*p,
+					7.75F*p, 0.625F*p, 3.9367F*p,
+					7.75F*p, 0.625F*p, 2.0617F*p), 0.007F));
+			quadList.add(RenderHelper.setBrightTexture(light(texLeft,
+					//SW SE NE NW
+					8.47F*p, 0.125F*p, 3.9367F*p, 
+					8.47F*p, 0.125F*p, 2.0617F*p,
+					8.25F*p, 0.625F*p, 2.0617F*p,
+					8.25F*p, 0.625F*p, 3.9367F*p), 0.007F));
+			quadList.add(RenderHelper.setBrightTexture(light(texRight,
+					//SW SE NE NW
+					7.53F*p, 0.125F*p, 12.0617F*p, 
+					7.53F*p, 0.125F*p, 13.9367F*p,
+					7.75F*p, 0.625F*p, 13.9367F*p,
+					7.75F*p, 0.625F*p, 12.0617F*p), 0.007F));
+			quadList.add(RenderHelper.setBrightTexture(light(texLeft,
+					//SW SE NE NW
+					8.47F*p, 0.125F*p, 13.9367F*p, 
+					8.47F*p, 0.125F*p, 12.0617F*p,
+					8.25F*p, 0.625F*p, 12.0617F*p,
+					8.25F*p, 0.625F*p, 13.9367F*p), 0.007F));
+		}
+		if (dir == CatsEyeBlockFourWay.EnumCatsEye.floor_s) {
+			quadList.add(RenderHelper.setBrightTexture(light(texLeft,
+					//SW SE NE NW
+					2.0617F*p, 0.125F*p, 8.47F*p, 
+					3.9367F*p, 0.125F*p, 8.47F*p,
+					3.9367F*p, 0.625F*p, 8.25F*p,
+					2.0617F*p, 0.625F*p, 8.25F*p), 0.007F));
+			quadList.add(RenderHelper.setBrightTexture(light(texRight,
+					//SW SE NE NW
+					3.9367F*p, 0.125F*p, 7.53F*p, 
+					2.0617F*p, 0.125F*p, 7.53F*p,
+					2.0617F*p, 0.625F*p, 7.75F*p,
+					3.9367F*p, 0.625F*p, 7.75F*p), 0.007F));
+			quadList.add(RenderHelper.setBrightTexture(light(texLeft,
+					//SW SE NE NW
+					12.0617F*p, 0.125F*p, 8.47F*p, 
+					13.9367F*p, 0.125F*p, 8.47F*p,
+					13.9367F*p, 0.625F*p, 8.25F*p,
+					12.0617F*p, 0.625F*p, 8.25F*p), 0.007F));
+			quadList.add(RenderHelper.setBrightTexture(light(texRight,
+					//SW SE NE NW
+					13.9367F*p, 0.125F*p, 7.53F*p, 
+					12.0617F*p, 0.125F*p, 7.53F*p,
+					12.0617F*p, 0.625F*p, 7.75F*p,
+					13.9367F*p, 0.625F*p, 7.75F*p), 0.007F));
+		}
+		if (dir == CatsEyeBlockFourWay.EnumCatsEye.floor_w) {
+			quadList.add(RenderHelper.setBrightTexture(light(texLeft,
+					//SW SE NE NW
+					7.53F*p, 0.125F*p, 2.0617F*p, 
+					7.53F*p, 0.125F*p, 3.9367F*p,
+					7.75F*p, 0.625F*p, 3.9367F*p,
+					7.75F*p, 0.625F*p, 2.0617F*p), 0.007F));
+			quadList.add(RenderHelper.setBrightTexture(light(texRight,
+					//SW SE NE NW
+					8.47F*p, 0.125F*p, 3.9367F*p, 
+					8.47F*p, 0.125F*p, 2.0617F*p,
+					8.25F*p, 0.625F*p, 2.0617F*p,
+					8.25F*p, 0.625F*p, 3.9367F*p), 0.007F));
+			quadList.add(RenderHelper.setBrightTexture(light(texLeft,
+					//SW SE NE NW
+					7.53F*p, 0.125F*p, 12.0617F*p, 
+					7.53F*p, 0.125F*p, 13.9367F*p,
+					7.75F*p, 0.625F*p, 13.9367F*p,
+					7.75F*p, 0.625F*p, 12.0617F*p), 0.007F));
+			quadList.add(RenderHelper.setBrightTexture(light(texRight,
+					//SW SE NE NW
+					8.47F*p, 0.125F*p, 13.9367F*p, 
+					8.47F*p, 0.125F*p, 12.0617F*p,
+					8.25F*p, 0.625F*p, 12.0617F*p,
+					8.25F*p, 0.625F*p, 13.9367F*p), 0.007F));
+		}
+		
+		if (dir == CatsEyeBlockFourWay.EnumCatsEye.wall_north_rg) {
+			quadList.add(RenderHelper.setBrightTexture(light(texRight,
+					//SW SE NE NW
+					8.47F*p, 2.0617F*p, (16-0.125F)*p, 
+					8.25F*p, 2.0617F*p, (16-0.625F)*p,
+					8.25F*p, 3.9367F*p, (16-0.625F)*p,
+					8.47F*p, 3.9367F*p, (16-0.125F)*p), 0.007F));
+			quadList.add(RenderHelper.setBrightTexture(light(texLeft,
+					//SW SE NE NW
+					7.75F*p, 2.0617F*p, (16-0.625F)*p, 
+					7.53F*p, 2.0617F*p, (16-0.125F)*p,
+					7.53F*p, 3.9367F*p, (16-0.125F)*p,
+					7.75F*p, 3.9367F*p, (16-0.625F)*p), 0.007F));
+			quadList.add(RenderHelper.setBrightTexture(light(texRight,
+					//SW SE NE NW
+					8.47F*p, 12.0617F*p, (16-0.125F)*p, 
+					8.25F*p, 12.0617F*p, (16-0.625F)*p,
+					8.25F*p, 13.9367F*p, (16-0.625F)*p,
+					8.47F*p, 13.9367F*p, (16-0.125F)*p), 0.007F));
+			quadList.add(RenderHelper.setBrightTexture(light(texLeft,
+					//SW SE NE NW
+					7.75F*p, 12.0617F*p, (16-0.625F)*p, 
+					7.53F*p, 12.0617F*p, (16-0.125F)*p,
+					7.53F*p, 13.9367F*p, (16-0.125F)*p,
+					7.75F*p, 13.9367F*p, (16-0.625F)*p), 0.007F));
+		}
+		
+		if (dir == CatsEyeBlockFourWay.EnumCatsEye.wall_south_rg) {
+			quadList.add(RenderHelper.setBrightTexture(light(texRight,
+					//SW SE NE NW
+					7.53F*p, 2.0617F*p, 0.125F*p, 
+					7.75F*p, 2.0617F*p, 0.625F*p,
+					7.75F*p, 3.9367F*p, 0.625F*p,
+					7.53F*p, 3.9367F*p, 0.125F*p), 0.007F));
+			quadList.add(RenderHelper.setBrightTexture(light(texLeft,
+					//SW SE NE NW
+					8.25F*p, 2.0617F*p, 0.625F*p, 
+					8.47F*p, 2.0617F*p, 0.125F*p,
+					8.47F*p, 3.9367F*p, 0.125F*p,
+					8.25F*p, 3.9367F*p, 0.625F*p), 0.007F));
+			quadList.add(RenderHelper.setBrightTexture(light(texRight,
+					//SW SE NE NW
+					7.53F*p, 12.0617F*p, 0.125F*p, 
+					7.75F*p, 12.0617F*p, 0.625F*p,
+					7.75F*p, 13.9367F*p, 0.625F*p,
+					7.53F*p, 13.9367F*p, 0.125F*p), 0.007F));
+			quadList.add(RenderHelper.setBrightTexture(light(texLeft,
+					//SW SE NE NW
+					8.25F*p, 12.0617F*p, 0.625F*p, 
+					8.47F*p, 12.0617F*p, 0.125F*p,
+					8.47F*p, 13.9367F*p, 0.125F*p,
+					8.25F*p, 13.9367F*p, 0.625F*p), 0.007F));
+		}
+		
+		if (dir == CatsEyeBlockFourWay.EnumCatsEye.wall_west_rg) {
+			quadList.add(RenderHelper.setBrightTexture(light(texRight,
+					//SW SE NE NW
+					(16-0.625F)*p, 2.0617F*p, 8.25F*p, 
+					(16-0.125F)*p, 2.0617F*p, 8.47F*p,
+					(16-0.125F)*p, 3.9367F*p, 8.47F*p,
+					(16-0.625F)*p, 3.9367F*p, 8.25F*p), 0.007F));
+			quadList.add(RenderHelper.setBrightTexture(light(texLeft,
+					//SW SE NE NW
+					(16-0.125F)*p, 2.0617F*p, 7.53F*p, 
+					(16-0.625F)*p, 2.0617F*p, 7.75F*p,
+					(16-0.625F)*p, 3.9367F*p, 7.75F*p,
+					(16-0.125F)*p, 3.9367F*p, 7.53F*p), 0.007F));
+			quadList.add(RenderHelper.setBrightTexture(light(texRight,
+					//SW SE NE NW
+					(16-0.625F)*p, 12.0617F*p, 8.25F*p, 
+					(16-0.125F)*p, 12.0617F*p, 8.47F*p,
+					(16-0.125F)*p, 13.9367F*p, 8.47F*p,
+					(16-0.625F)*p, 13.9367F*p, 8.25F*p), 0.007F));
+			quadList.add(RenderHelper.setBrightTexture(light(texLeft,
+					//SW SE NE NW
+					(16-0.125F)*p, 12.0617F*p, 7.53F*p, 
+					(16-0.625F)*p, 12.0617F*p, 7.75F*p,
+					(16-0.625F)*p, 13.9367F*p, 7.75F*p,
+					(16-0.125F)*p, 13.9367F*p, 7.53F*p), 0.007F));
+		}
+		
+		if (dir == CatsEyeBlockFourWay.EnumCatsEye.wall_east_rg) {
+			quadList.add(RenderHelper.setBrightTexture(light(texRight,
+					//SW SE NE NW
+					0.625F*p, 2.0617F*p, 7.75F*p, 
+					0.125F*p, 2.0617F*p, 7.53F*p,
+					0.125F*p, 3.9367F*p, 7.53F*p,
+					0.625F*p, 3.9367F*p, 7.75F*p), 0.007F));
+			quadList.add(RenderHelper.setBrightTexture(light(texLeft,
+					//SW SE NE NW
+					0.125F*p, 2.0617F*p, 8.47F*p, 
+					0.625F*p, 2.0617F*p, 8.25F*p,
+					0.625F*p, 3.9367F*p, 8.25F*p,
+					0.125F*p, 3.9367F*p, 8.47F*p), 0.007F));
+			quadList.add(RenderHelper.setBrightTexture(light(texRight,
+					//SW SE NE NW
+					0.625F*p, 12.0617F*p, 7.75F*p, 
+					0.125F*p, 12.0617F*p, 7.53F*p,
+					0.125F*p, 13.9367F*p, 7.53F*p,
+					0.625F*p, 13.9367F*p, 7.75F*p), 0.007F));
+			quadList.add(RenderHelper.setBrightTexture(light(texLeft,
+					//SW SE NE NW
+					0.125F*p, 12.0617F*p, 8.47F*p, 
+					0.625F*p, 12.0617F*p, 8.25F*p,
+					0.625F*p, 13.9367F*p, 8.25F*p,
+					0.125F*p, 13.9367F*p, 8.47F*p), 0.007F));
+		}
+		
+		if (dir == CatsEyeBlockFourWay.EnumCatsEye.wall_north_gr) {
+			quadList.add(RenderHelper.setBrightTexture(light(texLeft,
+					//SW SE NE NW
+					8.47F*p, 2.0617F*p, (16-0.125F)*p, 
+					8.25F*p, 2.0617F*p, (16-0.625F)*p,
+					8.25F*p, 3.9367F*p, (16-0.625F)*p,
+					8.47F*p, 3.9367F*p, (16-0.125F)*p), 0.007F));
+			quadList.add(RenderHelper.setBrightTexture(light(texRight,
+					//SW SE NE NW
+					7.75F*p, 2.0617F*p, (16-0.625F)*p, 
+					7.53F*p, 2.0617F*p, (16-0.125F)*p,
+					7.53F*p, 3.9367F*p, (16-0.125F)*p,
+					7.75F*p, 3.9367F*p, (16-0.625F)*p), 0.007F));
+			quadList.add(RenderHelper.setBrightTexture(light(texLeft,
+					//SW SE NE NW
+					8.47F*p, 12.0617F*p, (16-0.125F)*p, 
+					8.25F*p, 12.0617F*p, (16-0.625F)*p,
+					8.25F*p, 13.9367F*p, (16-0.625F)*p,
+					8.47F*p, 13.9367F*p, (16-0.125F)*p), 0.007F));
+			quadList.add(RenderHelper.setBrightTexture(light(texRight,
+					//SW SE NE NW
+					7.75F*p, 12.0617F*p, (16-0.625F)*p, 
+					7.53F*p, 12.0617F*p, (16-0.125F)*p,
+					7.53F*p, 13.9367F*p, (16-0.125F)*p,
+					7.75F*p, 13.9367F*p, (16-0.625F)*p), 0.007F));
+		}
+		
+		if (dir == CatsEyeBlockFourWay.EnumCatsEye.wall_south_gr) {
+			quadList.add(RenderHelper.setBrightTexture(light(texLeft,
+					//SW SE NE NW
+					7.53F*p, 2.0617F*p, 0.125F*p, 
+					7.75F*p, 2.0617F*p, 0.625F*p,
+					7.75F*p, 3.9367F*p, 0.625F*p,
+					7.53F*p, 3.9367F*p, 0.125F*p), 0.007F));
+			quadList.add(RenderHelper.setBrightTexture(light(texRight,
+					//SW SE NE NW
+					8.25F*p, 2.0617F*p, 0.625F*p, 
+					8.47F*p, 2.0617F*p, 0.125F*p,
+					8.47F*p, 3.9367F*p, 0.125F*p,
+					8.25F*p, 3.9367F*p, 0.625F*p), 0.007F));
+			quadList.add(RenderHelper.setBrightTexture(light(texLeft,
+					//SW SE NE NW
+					7.53F*p, 12.0617F*p, 0.125F*p, 
+					7.75F*p, 12.0617F*p, 0.625F*p,
+					7.75F*p, 13.9367F*p, 0.625F*p,
+					7.53F*p, 13.9367F*p, 0.125F*p), 0.007F));
+			quadList.add(RenderHelper.setBrightTexture(light(texRight,
+					//SW SE NE NW
+					8.25F*p, 12.0617F*p, 0.625F*p, 
+					8.47F*p, 12.0617F*p, 0.125F*p,
+					8.47F*p, 13.9367F*p, 0.125F*p,
+					8.25F*p, 13.9367F*p, 0.625F*p), 0.007F));
+		}
+		
+		if (dir == CatsEyeBlockFourWay.EnumCatsEye.wall_west_gr) {
+			quadList.add(RenderHelper.setBrightTexture(light(texLeft,
+					//SW SE NE NW
+					(16-0.625F)*p, 2.0617F*p, 8.25F*p, 
+					(16-0.125F)*p, 2.0617F*p, 8.47F*p,
+					(16-0.125F)*p, 3.9367F*p, 8.47F*p,
+					(16-0.625F)*p, 3.9367F*p, 8.25F*p), 0.007F));
+			quadList.add(RenderHelper.setBrightTexture(light(texRight,
+					//SW SE NE NW
+					(16-0.125F)*p, 2.0617F*p, 7.53F*p, 
+					(16-0.625F)*p, 2.0617F*p, 7.75F*p,
+					(16-0.625F)*p, 3.9367F*p, 7.75F*p,
+					(16-0.125F)*p, 3.9367F*p, 7.53F*p), 0.007F));
+			quadList.add(RenderHelper.setBrightTexture(light(texLeft,
+					//SW SE NE NW
+					(16-0.625F)*p, 12.0617F*p, 8.25F*p, 
+					(16-0.125F)*p, 12.0617F*p, 8.47F*p,
+					(16-0.125F)*p, 13.9367F*p, 8.47F*p,
+					(16-0.625F)*p, 13.9367F*p, 8.25F*p), 0.007F));
+			quadList.add(RenderHelper.setBrightTexture(light(texRight,
+					//SW SE NE NW
+					(16-0.125F)*p, 12.0617F*p, 7.53F*p, 
+					(16-0.625F)*p, 12.0617F*p, 7.75F*p,
+					(16-0.625F)*p, 13.9367F*p, 7.75F*p,
+					(16-0.125F)*p, 13.9367F*p, 7.53F*p), 0.007F));
+		}
+		
+		if (dir == CatsEyeBlockFourWay.EnumCatsEye.wall_east_gr) {
+			quadList.add(RenderHelper.setBrightTexture(light(texLeft,
+					//SW SE NE NW
+					0.625F*p, 2.0617F*p, 7.75F*p, 
+					0.125F*p, 2.0617F*p, 7.53F*p,
+					0.125F*p, 3.9367F*p, 7.53F*p,
+					0.625F*p, 3.9367F*p, 7.75F*p), 0.007F));
+			quadList.add(RenderHelper.setBrightTexture(light(texRight,
+					//SW SE NE NW
+					0.125F*p, 2.0617F*p, 8.47F*p, 
+					0.625F*p, 2.0617F*p, 8.25F*p,
+					0.625F*p, 3.9367F*p, 8.25F*p,
+					0.125F*p, 3.9367F*p, 8.47F*p), 0.007F));
+			quadList.add(RenderHelper.setBrightTexture(light(texLeft,
+					//SW SE NE NW
+					0.625F*p, 12.0617F*p, 7.75F*p, 
+					0.125F*p, 12.0617F*p, 7.53F*p,
+					0.125F*p, 13.9367F*p, 7.53F*p,
+					0.625F*p, 13.9367F*p, 7.75F*p), 0.007F));
+			quadList.add(RenderHelper.setBrightTexture(light(texRight,
+					//SW SE NE NW
+					0.125F*p, 12.0617F*p, 8.47F*p, 
+					0.625F*p, 12.0617F*p, 8.25F*p,
+					0.625F*p, 13.9367F*p, 8.25F*p,
+					0.125F*p, 13.9367F*p, 8.47F*p), 0.007F));
+		}
+		
+		if (dir == CatsEyeBlockFourWay.EnumCatsEye.roof_n) {
+			quadList.add(RenderHelper.setBrightTexture(light(texLeft,
+					//SW SE NE NW
+					2.0617F*p, (16-0.125F)*p, 7.53F*p, 
+					3.9367F*p, (16-0.125F)*p, 7.53F*p,
+					3.9367F*p, (16-0.625F)*p, 7.75F*p,
+					2.0617F*p, (16-0.625F)*p, 7.75F*p), 0.007F));
+			quadList.add(RenderHelper.setBrightTexture(light(texRight,
+					//SW SE NE NW
+					3.9367F*p, (16-0.125F)*p, 8.47F*p, 
+					2.0617F*p, (16-0.125F)*p, 8.47F*p,
+					2.0617F*p, (16-0.625F)*p, 8.25F*p,
+					3.9367F*p, (16-0.625F)*p, 8.25F*p), 0.007F));
+			quadList.add(RenderHelper.setBrightTexture(light(texLeft,
+					//SW SE NE NW
+					12.0617F*p, (16-0.125F)*p, 7.53F*p, 
+					13.9367F*p, (16-0.125F)*p, 7.53F*p,
+					13.9367F*p, (16-0.625F)*p, 7.75F*p,
+					12.0617F*p, (16-0.625F)*p, 7.75F*p), 0.007F));
+			quadList.add(RenderHelper.setBrightTexture(light(texRight,
+					//SW SE NE NW
+					13.9367F*p, (16-0.125F)*p, 8.47F*p, 
+					12.0617F*p, (16-0.125F)*p, 8.47F*p,
+					12.0617F*p, (16-0.625F)*p, 8.25F*p,
+					13.9367F*p, (16-0.625F)*p, 8.25F*p), 0.007F));
+		}
+		
+		if (dir == CatsEyeBlockFourWay.EnumCatsEye.roof_e) {
+			quadList.add(RenderHelper.setBrightTexture(light(texLeft,
+					//SW SE NE NW
+					8.47F*p, (16-0.125F)*p, 2.0617F*p, 
+					8.47F*p, (16-0.125F)*p, 3.9367F*p,
+					8.25F*p, (16-0.625F)*p, 3.9367F*p,
+					8.25F*p, (16-0.625F)*p, 2.0617F*p), 0.007F));
+			quadList.add(RenderHelper.setBrightTexture(light(texRight,
+					//SW SE NE NW
+					7.53F*p, (16-0.125F)*p, 3.9367F*p, 
+					7.53F*p, (16-0.125F)*p, 2.0617F*p,
+					7.75F*p, (16-0.625F)*p, 2.0617F*p,
+					7.75F*p, (16-0.625F)*p, 3.9367F*p), 0.007F));
+			quadList.add(RenderHelper.setBrightTexture(light(texLeft,
+					//SW SE NE NW
+					8.47F*p, (16-0.125F)*p, 12.0617F*p, 
+					8.47F*p, (16-0.125F)*p, 13.9367F*p,
+					8.25F*p, (16-0.625F)*p, 13.9367F*p,
+					8.25F*p, (16-0.625F)*p, 12.0617F*p), 0.007F));
+			quadList.add(RenderHelper.setBrightTexture(light(texRight,
+					//SW SE NE NW
+					7.53F*p, (16-0.125F)*p, 13.9367F*p, 
+					7.53F*p, (16-0.125F)*p, 12.0617F*p,
+					7.75F*p, (16-0.625F)*p, 12.0617F*p,
+					7.75F*p, (16-0.625F)*p, 13.9367F*p), 0.007F));
+		}
+		
+		if (dir == CatsEyeBlockFourWay.EnumCatsEye.roof_s) {
+			quadList.add(RenderHelper.setBrightTexture(light(texRight,
+					//SW SE NE NW
+					2.0617F*p, (16-0.125F)*p, 7.53F*p, 
+					3.9367F*p, (16-0.125F)*p, 7.53F*p,
+					3.9367F*p, (16-0.625F)*p, 7.75F*p,
+					2.0617F*p, (16-0.625F)*p, 7.75F*p), 0.007F));
+			quadList.add(RenderHelper.setBrightTexture(light(texLeft,
+					//SW SE NE NW
+					3.9367F*p, (16-0.125F)*p, 8.47F*p, 
+					2.0617F*p, (16-0.125F)*p, 8.47F*p,
+					2.0617F*p, (16-0.625F)*p, 8.25F*p,
+					3.9367F*p, (16-0.625F)*p, 8.25F*p), 0.007F));
+			quadList.add(RenderHelper.setBrightTexture(light(texRight,
+					//SW SE NE NW
+					12.0617F*p, (16-0.125F)*p, 7.53F*p, 
+					13.9367F*p, (16-0.125F)*p, 7.53F*p,
+					13.9367F*p, (16-0.625F)*p, 7.75F*p,
+					12.0617F*p, (16-0.625F)*p, 7.75F*p), 0.007F));
+			quadList.add(RenderHelper.setBrightTexture(light(texLeft,
+					//SW SE NE NW
+					13.9367F*p, (16-0.125F)*p, 8.47F*p, 
+					12.0617F*p, (16-0.125F)*p, 8.47F*p,
+					12.0617F*p, (16-0.625F)*p, 8.25F*p,
+					13.9367F*p, (16-0.625F)*p, 8.25F*p), 0.007F));
+		}
+		
+		if (dir == CatsEyeBlockFourWay.EnumCatsEye.roof_w) {
+			quadList.add(RenderHelper.setBrightTexture(light(texRight,
+					//SW SE NE NW
+					8.47F*p, (16-0.125F)*p, 2.0617F*p, 
+					8.47F*p, (16-0.125F)*p, 3.9367F*p,
+					8.25F*p, (16-0.625F)*p, 3.9367F*p,
+					8.25F*p, (16-0.625F)*p, 2.0617F*p), 0.007F));
+			quadList.add(RenderHelper.setBrightTexture(light(texLeft,
+					//SW SE NE NW
+					7.53F*p, (16-0.125F)*p, 3.9367F*p, 
+					7.53F*p, (16-0.125F)*p, 2.0617F*p,
+					7.75F*p, (16-0.625F)*p, 2.0617F*p,
+					7.75F*p, (16-0.625F)*p, 3.9367F*p), 0.007F));
+			quadList.add(RenderHelper.setBrightTexture(light(texRight,
+					//SW SE NE NW
+					8.47F*p, (16-0.125F)*p, 12.0617F*p, 
+					8.47F*p, (16-0.125F)*p, 13.9367F*p,
+					8.25F*p, (16-0.625F)*p, 13.9367F*p,
+					8.25F*p, (16-0.625F)*p, 12.0617F*p), 0.007F));
+			quadList.add(RenderHelper.setBrightTexture(light(texLeft,
+					//SW SE NE NW
+					7.53F*p, (16-0.125F)*p, 13.9367F*p, 
+					7.53F*p, (16-0.125F)*p, 12.0617F*p,
+					7.75F*p, (16-0.625F)*p, 12.0617F*p,
+					7.75F*p, (16-0.625F)*p, 13.9367F*p), 0.007F));
+		}
+		return quadList;
+	}
+	
+	private BakedQuad light(TextureAtlasSprite texture, float x1, float y1, float z1, float x2, float y2, float z2, float x3, float y3, float z3, float x4, float y4, float z4) {
+		int packednormal;
+		packednormal = RenderHelper.calculatePackedNormal(x1, y1, z1,  x2, y2, z2,  x3, y3, z3,  x4, y4, z4);
+		return new BakedQuad(Ints.concat(
+				RenderHelper.vertexToInts(x1, y1, z1, Color.WHITE.getRGB(), texture, 16, 16, packednormal),
+				RenderHelper.vertexToInts(x2, y2, z2, Color.WHITE.getRGB(), texture, 16, 0, packednormal),
+				RenderHelper.vertexToInts(x3, y3, z3, Color.WHITE.getRGB(), texture, 0, 0, packednormal),
+				RenderHelper.vertexToInts(x4, y4, z4, Color.WHITE.getRGB(), texture, 0, 16, packednormal)),
+				0, EnumFacing.SOUTH, texture, true, net.minecraft.client.renderer.vertex.DefaultVertexFormats.ITEM);
+	}
+
+	@Override
+	public boolean isAmbientOcclusion() {
+		return model.isAmbientOcclusion();
+	}
+
+	@Override
+	public boolean isGui3d() {
+		return model.isGui3d();
+	}
+
+	@Override
+	public boolean isBuiltInRenderer() {
+		return false;
+	}
+
+	@Override
+	public TextureAtlasSprite getParticleTexture() {
+		return model.getParticleTexture();
+	}
+
+	@Override
+	public ItemOverrideList getOverrides() {
+		return this.overrideList;
+	}
+	
+	@SuppressWarnings("deprecation")
+	@Override
+	public ItemCameraTransforms getItemCameraTransforms() {
+		return model.getItemCameraTransforms();
+	}
+	
+	@Override
+	public Pair<? extends IBakedModel, Matrix4f> handlePerspective(ItemCameraTransforms.TransformType cameraTransformType) {
+		Matrix4f matrix4f = model.handlePerspective(cameraTransformType).getRight();
+		return Pair.of(this, matrix4f);
+	}
+	
+	public CatsEyeTwoSidedDoubleModel setCurrentItemStack(ItemStack stack) {
+		return this;
+	}
+	
+	private static class CatsEyeOverrideList extends ItemOverrideList {
+		private CatsEyeTwoSidedDoubleModel model;
+		
+		public CatsEyeOverrideList(CatsEyeTwoSidedDoubleModel model) {
+			super(Collections.emptyList());
+			this.model = model;
+		}
+		
+		@Override
+		public IBakedModel handleItemState(IBakedModel originalModel, ItemStack stack, World world, EntityLivingBase entity) {
+			return this.model.setCurrentItemStack(stack);
+		}
+	}
+
+}

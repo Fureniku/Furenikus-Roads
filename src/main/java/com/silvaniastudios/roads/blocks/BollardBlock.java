@@ -1,5 +1,7 @@
 package com.silvaniastudios.roads.blocks;
 
+import javax.annotation.Nullable;
+
 import com.silvaniastudios.roads.blocks.enums.IMetaBlockName;
 
 import net.minecraft.block.properties.IProperty;
@@ -16,7 +18,9 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
@@ -31,6 +35,7 @@ public class BollardBlock extends NonPaintRoadTopBlock implements IMetaBlockName
 		super(name);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(ROTATED, false).withProperty(BOLLARD_TYPE, EnumBollard.ID_0));
 		this.setHarvestLevel("pickaxe", 1);
+		this.setLightLevel(12);
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -71,6 +76,16 @@ public class BollardBlock extends NonPaintRoadTopBlock implements IMetaBlockName
     	
     	if (meta % 2 == 1) { return meta - 1; }
     	return meta;
+    }
+	
+	@Override
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+        return new AxisAlignedBB(0.25, -1+getBlockBelowHeight(worldIn, pos), 0.25, 0.75, -1+getBlockBelowHeight(worldIn, pos)+1, 0.75);
+    }
+
+    @Nullable
+    public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+    	return new AxisAlignedBB(0.25, -1+getBlockBelowHeight(worldIn, pos), 0.25, 0.75, -1+getBlockBelowHeight(worldIn, pos)+1, 0.75);
     }
 	
 	public IBlockState getStateFromMeta(int meta) {

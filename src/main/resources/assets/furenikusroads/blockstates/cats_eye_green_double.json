@@ -3,8 +3,8 @@
 	"defaults": {
 		"transform": "forge:default-block",
 		"textures": {
-			"2_1": "furenikusroads:blocks/cats_eye_green",
-			"2": "furenikusroads:blocks/machine_metal_dark",
+			"left": "furenikusroads:blocks/cats_eye_green_e",
+			"right": "furenikusroads:blocks/cats_eye_green_e",
 			"particle": "furenikusroads:blocks/machine_metal_dark"
 		},
 		"model": "furenikusroads:cats_eye_double"

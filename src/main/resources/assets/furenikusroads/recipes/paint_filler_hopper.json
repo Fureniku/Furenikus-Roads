@@ -1,0 +1,27 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern":
+	[
+		"ici",
+		"tmt",
+		"iti"
+	],
+	"key": {
+		"c": {
+			"item": "minecraft:chest"
+		},
+		"t": {
+			"item": "furenikusroads:large_glass_tank"
+		},
+		"i": {
+			"item": "minecraft:iron_ingot"
+		},
+		"m": {
+			"item": "furenikusroads:machine_frame"
+		}
+	},
+	"result": {
+		"item": "furenikusroads:paint_filler_hopper",
+		"data": 0
+	}
+}

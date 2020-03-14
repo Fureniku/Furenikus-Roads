@@ -116,7 +116,7 @@ public class RoadFactoryBakedModel implements IBakedModel {
 
 	@Override
 	public TextureAtlasSprite getParticleTexture() {
-		return null;
+		return model.getParticleTexture();
 	}
 
 	@Override

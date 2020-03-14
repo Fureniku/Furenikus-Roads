@@ -3,6 +3,7 @@ package com.silvaniastudios.roads.blocks.tileentities;
 import com.google.common.collect.ImmutableList;
 import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.blocks.tileentities.paintfiller.PaintFillerBlock;
+import com.silvaniastudios.roads.items.ItemWrench;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -15,8 +16,10 @@ import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumBlockRenderType;
@@ -29,12 +32,15 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 
 public class RoadTEBlock extends Block {
 
 	protected String name;
 	public static final PropertyEnum<RoadTEBlock.EnumRotation> ROTATION = PropertyEnum.create("rotation", RoadTEBlock.EnumRotation.class);
 	public static final PropertyBool FURNACE_ACTIVE = PropertyBool.create("furnace_active");
+	public static final PropertyBool BASE_PLATE = PropertyBool.create("base_plate");
 	private int guiId = 0;
 	protected boolean electric;
 	
@@ -61,8 +67,51 @@ public class RoadTEBlock extends Block {
 	}
 	
 	@Override
+	public void breakBlock(World world, BlockPos pos, IBlockState state) {
+		TileEntity te = world.getTileEntity(pos);
+		if (te != null) {
+			IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+			
+			for (int i = 0; i < cap.getSlots(); i++) {
+				ItemStack stack = cap.getStackInSlot(i);
+				if (stack != ItemStack.EMPTY) {
+					InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), stack);
+				}
+			}
+		}
+		super.breakBlock(world, pos, state);
+	}
+	
+	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		openGui(world, pos, player);
+		if (player.getHeldItem(hand).getItem() instanceof ItemWrench) {
+			ItemWrench wrench = (ItemWrench) player.getHeldItem(hand).getItem();
+			int mode = wrench.getMode(player.getHeldItem(hand));
+			if (mode == 0) {
+				if (state.getValue(ROTATION).equals(RoadTEBlock.EnumRotation.north)) {
+					world.setBlockState(pos, state.withProperty(ROTATION, EnumRotation.east));
+				}
+				if (state.getValue(ROTATION).equals(RoadTEBlock.EnumRotation.east)) {
+					world.setBlockState(pos, state.withProperty(ROTATION, EnumRotation.south));
+				}
+				if (state.getValue(ROTATION).equals(RoadTEBlock.EnumRotation.south)) {
+					world.setBlockState(pos, state.withProperty(ROTATION, EnumRotation.west));
+				}
+				if (state.getValue(ROTATION).equals(RoadTEBlock.EnumRotation.west)) {
+					world.setBlockState(pos, state.withProperty(ROTATION, EnumRotation.north));
+				}
+			}
+			
+			if (mode == 1) {
+				if (world.getTileEntity(pos) != null && world.getTileEntity(pos) instanceof RoadTileEntity) {
+					RoadTileEntity te = (RoadTileEntity) world.getTileEntity(pos);
+					te.hasBasePlate = !te.hasBasePlate;
+					te.sendUpdates();
+				}
+			}
+		} else {
+			openGui(world, pos, player);
+		}
 		return true;
 	}
 	
@@ -73,6 +122,20 @@ public class RoadTEBlock extends Block {
 				player.openGui(FurenikusRoads.instance, guiId + (electric ? 5 : 0), world, pos.getX(), pos.getY(), pos.getZ());
 			}
 		}
+	}
+	
+	public boolean isElectric() {
+		return electric;
+	}
+	
+	public boolean hasBasePlate(IBlockAccess world, BlockPos pos) {
+		if (world.getTileEntity(pos) != null && world.getTileEntity(pos) instanceof RoadTileEntity) {
+			RoadTileEntity te = (RoadTileEntity) world.getTileEntity(pos);
+			
+			return te.hasBasePlate;
+		}
+		
+		return true;
 	}
 	
 	@Override

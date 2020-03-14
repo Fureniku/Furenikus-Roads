@@ -34,11 +34,26 @@
 				}
             }
 		}],
-		"connected": {
+		"fluid_left": {
 			"true": {
-				"submodel": "furenikusroads:road_factory_pipe_in"
+				"submodel": "furenikusroads:road_factory_fluid_left"
 			},
 			"false": {
+			}
+		},
+		"fluid_up": {
+			"true": {
+				"submodel": "furenikusroads:road_factory_fluid_up"
+			},
+			"false": {
+			}
+		},
+		"base_plate": {
+			"true": {
+				"submodel": "furenikusroads:base_plate"
+			},
+			"false": {
+				"submodel": "furenikusroads:base_plate_road_factory"
 			}
 		},
 		"furnace_active": {

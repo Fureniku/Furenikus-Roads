@@ -1,115 +1,105 @@
 {
-	"forge_marker": 1,
-	"defaults": {
-		"transform": "forge:default-block",
-		"model": "furenikusroads:bollard_concrete_1"
+	"forge_marker":1,
+	"defaults":{
+		"transform":"forge:default-block",
+		"model":"furenikusroads:bollard_concrete_1"
 	},
-	"variants": {
-		"meta": {
-			"0": {
-				"model": "furenikusroads:bollard_stumpy",
-				"textures": {
-					"0": "furenikusroads:blocks/bollard_smooth_metal",
-					"1": "furenikusroads:blocks/bollard_black"
+	"variants":{
+		"meta":{
+			"0":{
+				"model":"furenikusroads:bollard_stumpy",
+				"textures":{
+					"0":"furenikusroads:blocks/bollard_smooth_metal"
 				}
 			},
-			"1": {
-				"model": "furenikusroads:bollard_stumpy_retracted",
-				"textures": {
-					"0": "furenikusroads:blocks/bollard_smooth_metal",
-					"1": "furenikusroads:blocks/bollard_black"
+			"1":{
+				"model":"furenikusroads:bollard_stumpy_retracted",
+				"textures":{
+					"0":"furenikusroads:blocks/bollard_smooth_metal"
 				}
 			},
-			"2": {
-				"model": "furenikusroads:bollard_stumpy",
-				"textures": {
-					"0": "furenikusroads:blocks/bollard_smooth_metal",
-					"1": "furenikusroads:blocks/bollard_black"
+			"2":{
+				"model":"furenikusroads:bollard_stumpy",
+				"textures":{
+					"0":"furenikusroads:blocks/bollard_black"
 				}
 			},
-			"3": {
-				"model": "furenikusroads:bollard_stumpy_retracted",
-				"textures": {
-					"0": "furenikusroads:blocks/bollard_smooth_metal",
-					"1": "furenikusroads:blocks/bollard_black"
+			"3":{
+				"model":"furenikusroads:bollard_stumpy_retracted",
+				"textures":{
+					"0":"furenikusroads:blocks/bollard_black"
 				}
 			},
-			"4": {
-				"model": "furenikusroads:bollard_smooth",
-				"textures": {
-					"0": "furenikusroads:blocks/bollard_ringed",
-					"1": "furenikusroads:blocks/bollard_smooth_metal"
+			"4":{
+				"model":"furenikusroads:bollard_thicc",
+				"textures":{
+					"0":"furenikusroads:blocks/bollard_smooth_metal"
 				}
 			},
-			"5": {
-				"model": "furenikusroads:bollard_smooth",
-				"textures": {
-					"0": "furenikusroads:blocks/bollard_yellow",
-					"1": "furenikusroads:blocks/bollard_yellow"
+			"5":{
+				"model":"furenikusroads:bollard_stumpy_retracted",
+				"textures":{
+					"0":"furenikusroads:blocks/bollard_smooth_metal"
 				}
 			},
-			"6": {
-				"model": "furenikusroads:bollard_smooth_small",
-				"textures": {
-					"0": "furenikusroads:blocks/bollard_smooth_metal",
-					"1": "furenikusroads:blocks/bollard_smooth_metal"
+			"6":{
+				"model":"furenikusroads:bollard_thicc",
+				"textures":{
+					"0":"furenikusroads:blocks/bollard_black"
 				}
 			},
-			"7": {
-				"model": "furenikusroads:bollard_smooth_small",
-				"textures": {
-					"0": "furenikusroads:blocks/bollard_striped",
-					"1": "furenikusroads:blocks/bollard_black"
+			"7":{
+				"model":"furenikusroads:bollard_stumpy_retracted",
+				"textures":{
+					"0":"furenikusroads:blocks/bollard_black"
 				}
 			},
-			"8": {
-				"model": "furenikusroads:bollard_smooth_small",
-				"textures": {
-					"0": "furenikusroads:blocks/bollard_ringed",
-					"1": "furenikusroads:blocks/bollard_smooth_metal"
+			"8":{
+				"model":"furenikusroads:bollard_smooth_retract_up",
+				"textures":{
+					"0":"furenikusroads:blocks/bollard_smooth_metal"
 				}
 			},
-			"9": {
-				"model": "furenikusroads:bollard_smooth_small",
-				"textures": {
-					"0": "furenikusroads:blocks/bollard_yellow",
-					"1": "furenikusroads:blocks/bollard_yellow"
+			"9":{
+				"model":"furenikusroads:bollard_smooth_retract_down",
+				"textures":{
+					"0":"furenikusroads:blocks/bollard_smooth_metal"
 				}
 			},
-			
-			
-			"10": {
-				"model": "furenikusroads:bollard_topped"
-			},
-			"11": {
-				"model": "furenikusroads:bollard_topped_ringed"
-			},
-			"12": {
-				"model": "furenikusroads:bollard_stumpy",
-				"textures": {
-					"0": "furenikusroads:blocks/bollard_yellow",
-					"1": "furenikusroads:blocks/bollard_yellow"
+			"10":{
+				"model":"furenikusroads:bollard_smooth_retract_up",
+				"textures":{
+					"0":"furenikusroads:blocks/bollard_ringed"
 				}
 			},
-			"13": {
-				"model": "furenikusroads:bollard_stumpy",
-				"textures": {
-					"0": "furenikusroads:blocks/bollard_yellow",
-					"1": "furenikusroads:blocks/bollard_yellow"
+			"11":{
+				"model":"furenikusroads:bollard_smooth_retract_down",
+				"textures":{
+					"0":"furenikusroads:blocks/bollard_ringed"
 				}
 			},
-			"14": {
-				"model": "furenikusroads:bollard_portable",
-				"textures": {
-					"0": "furenikusroads:blocks/machine_metal_dark",
-					"1": "furenikusroads:blocks/bollard_small_portable"
+			"12":{
+				"model":"furenikusroads:bollard_smooth_small_retract_up",
+				"textures":{
+					"0":"furenikusroads:blocks/bollard_smooth_metal"
 				}
 			},
-			"15": {
-				"model": "furenikusroads:bollard_portable",
-				"textures": {
-					"0": "furenikusroads:blocks/machine_metal_dark",
-					"1": "furenikusroads:blocks/bollard_small_portable_yellow"
+			"13":{
+				"model":"furenikusroads:bollard_smooth_small_retract_down",
+				"textures":{
+					"0":"furenikusroads:blocks/bollard_smooth_metal"
+				}
+			},
+			"14":{
+				"model":"furenikusroads:bollard_smooth_small_retract_up",
+				"textures":{
+					"0":"furenikusroads:blocks/bollard_ringed"
+				}
+			},
+			"15":{
+				"model":"furenikusroads:bollard_smooth_small_retract_down",
+				"textures":{
+					"0":"furenikusroads:blocks/bollard_ringed"
 				}
 			}
 		}

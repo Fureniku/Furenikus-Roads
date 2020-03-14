@@ -5,7 +5,6 @@ import javax.annotation.Nonnull;
 import com.silvaniastudios.roads.RoadsConfig;
 import com.silvaniastudios.roads.blocks.tileentities.RoadTileEntity;
 import com.silvaniastudios.roads.fluids.FRFluids;
-import com.silvaniastudios.roads.fluids.FluidPaint;
 import com.silvaniastudios.roads.items.PaintGun;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,11 +17,11 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
-import net.minecraftforge.oredict.OreDictionary;
 
 public class PaintFillerEntity extends RoadTileEntity implements ITickable, ICapabilityProvider {
 	
@@ -34,7 +33,7 @@ public class PaintFillerEntity extends RoadTileEntity implements ITickable, ICap
 	
 	public int timerCount = 0;
 	
-	public static final int FILLER_TANK_CAP = 320000;
+	public static final int FILLER_TANK_CAP = 32000;
 	public static final int GUN_TANK_CAP = 32000;
 	
 	public PaintFillerEntity() {}
@@ -60,38 +59,25 @@ public class PaintFillerEntity extends RoadTileEntity implements ITickable, ICap
 	public FluidTank white_paint = new FluidTank(FILLER_TANK_CAP) {
 		@Override
 		public boolean canFillFluidType(FluidStack fluid) {
-			if (fluid.getFluid() instanceof FluidPaint) {
-				FluidPaint paint = (FluidPaint) fluid.getFluid();
-				
-				return paint.colour == 0;
-			}
-	        return false; 
+			return fluid.getFluid() == FRFluids.white_paint;
 	    }
 	};
 	
 	public FluidTank yellow_paint = new FluidTank(FILLER_TANK_CAP) {
 		@Override
 		public boolean canFillFluidType(FluidStack fluid) {
-			if (fluid.getFluid() instanceof FluidPaint) {
-				FluidPaint paint = (FluidPaint) fluid.getFluid();
-				
-				return paint.colour == 1;
-			}
-	        return false; 
+			return fluid.getFluid() == FRFluids.yellow_paint; 
 	    }
 	};
 	
 	public FluidTank red_paint = new FluidTank(FILLER_TANK_CAP) {
 		@Override
 		public boolean canFillFluidType(FluidStack fluid) {
-			if (fluid.getFluid() instanceof FluidPaint) {
-				FluidPaint paint = (FluidPaint) fluid.getFluid();
-				
-				return paint.colour == 2;
-			}
-	        return false; 
+			return fluid.getFluid() == FRFluids.red_paint;
 	    }
 	};
+	
+	public PaintFillerStackHandler interactable_inv = new PaintFillerStackHandler(inventory, hasCapability(CapabilityEnergy.ENERGY, null));
 	
 	public Container createContainer(EntityPlayer player) {
 		return new PaintFillerContainer(player.inventory, this, false);
@@ -100,7 +86,7 @@ public class PaintFillerEntity extends RoadTileEntity implements ITickable, ICap
 	@Override
 	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
 		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-            return true;
+            return getCapability(capability, facing) != null;
         }
 		return super.hasCapability(capability, facing);
 	}
@@ -108,11 +94,15 @@ public class PaintFillerEntity extends RoadTileEntity implements ITickable, ICap
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
 		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-			return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(inventory);
+			return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(interactable_inv);
 		}
 		
 		return super.getCapability(capability, facing);
 	}
+	
+	int lastWhite = 0;
+	int lastYellow = 0;
+	int lastRed = 0;
 	
 	@Override
 	public void update() {
@@ -130,126 +120,106 @@ public class PaintFillerEntity extends RoadTileEntity implements ITickable, ICap
 				sendUpdates();
 			} else {
 				timerCount = 0;
-				return;
 			}
 		}
 		
-		if (timerCount < RoadsConfig.machine.fillerTickRate) {
+		if (timerCount < RoadsConfig.machine.fillerTickRate && fuel_remaining > 0) {
 			if (shouldTick()) {
 				timerCount++;
 			} else {
 				timerCount = 0;
 			}
 		} else {
-			if (!world.isRemote) {
-				int paintPerDye = RoadsConfig.general.paintPerDye;
-				boolean hasChanges = false;
-				
-				if ((!inventory.getStackInSlot(0).isEmpty() || !inventory.getStackInSlot(2).isEmpty() || !inventory.getStackInSlot(3).isEmpty()) && fuel_remaining > 0) {
-					if (isWhiteDye(inventory.getStackInSlot(0)) && white_paint.getFluidAmount() <= white_paint.getCapacity() + paintPerDye) {
-						inventory.extractItem(0, 1, false);
-						white_paint.fill(new FluidStack(FRFluids.white_paint, paintPerDye), true);
-						hasChanges = true;
-					}
-
-					if (isYellowDye(inventory.getStackInSlot(2)) && yellow_paint.getFluidAmount() <= yellow_paint.getCapacity() + paintPerDye) {
-						inventory.extractItem(2, 1, false);
-						yellow_paint.fill(new FluidStack(FRFluids.yellow_paint, paintPerDye), true);
-						hasChanges = true;
-					}
-				
-					if (isRedDye(inventory.getStackInSlot(3)) && red_paint.getFluidAmount() <= red_paint.getCapacity() + paintPerDye) {
-						inventory.extractItem(3, 1, false);
-						red_paint.fill(new FluidStack(FRFluids.red_paint, paintPerDye), true);
-						hasChanges = true;
-					}
-				}
-
-				if (getGun().getItem() instanceof PaintGun) {
-					if (!has_gun) { hasChanges = true; }
-					has_gun = true;
-					
-					NBTTagCompound nbt;
-					
-					if (!getGun().hasTagCompound()) {
-						nbt = new NBTTagCompound();
-						nbt.setInteger("white_paint", 0);
-						nbt.setInteger("yellow_paint", 0);
-						nbt.setInteger("red_paint", 0);
-						
-						getGun().setTagCompound(nbt);
-					} else {
-						nbt = getGun().getTagCompound();
-					}
-					
-					gun_white = nbt.getInteger("white_paint");
-					gun_yellow = nbt.getInteger("yellow_paint");
-					gun_red = nbt.getInteger("red_paint");
-					
-					fillGun(nbt);
-				} else {
-					if (has_gun) { hasChanges = true; }
-					has_gun = false;
-					
-					gun_white = 0;
-					gun_yellow = 0;
-					gun_red = 0;
-				}
-				
-				if (hasChanges) {
-					sendUpdates();
-				}
-			}
+			process();
 			timerCount = 0;
 		}
-	}
-	
-	public boolean isWhiteDye(ItemStack stack) {
-		if (stack != ItemStack.EMPTY) {
-			for (int id : OreDictionary.getOreIDs(stack)) {
-				if (OreDictionary.getOreName(id).equals("dyeWhite")) {
-	                return true;
-				}
+		
+		if (!world.isRemote) {
+			if (lastWhite != white_paint.getFluidAmount() || lastYellow != yellow_paint.getFluidAmount() || lastRed != red_paint.getFluidAmount()) {
+				lastWhite = white_paint.getFluidAmount();
+				lastYellow = yellow_paint.getFluidAmount();
+				lastRed = red_paint.getFluidAmount();
+				
+				sendUpdates();
 			}
 		}
-		return false;
 	}
 	
-	public boolean isYellowDye(ItemStack stack) {
-		if (stack != ItemStack.EMPTY) {
-			for (int id : OreDictionary.getOreIDs(stack)) {
-				if (OreDictionary.getOreName(id).equals("dyeYellow")) {
-	                return true;
+	public void process() {
+		if (!world.isRemote) {
+			int paintPerDye = RoadsConfig.machine.fillerPaintPerDye;
+			boolean hasChanges = false;
+			
+			if ((!inventory.getStackInSlot(0).isEmpty() || !inventory.getStackInSlot(2).isEmpty() || !inventory.getStackInSlot(3).isEmpty()) && fuel_remaining > 0) {
+				if (isDye(inventory.getStackInSlot(0), "dyeWhite") && white_paint.getFluidAmount() + paintPerDye <= white_paint.getCapacity()) {
+					inventory.extractItem(0, 1, false);
+					white_paint.fill(new FluidStack(FRFluids.white_paint, paintPerDye), true);
+					hasChanges = true;
+				}
+
+				if (isDye(inventory.getStackInSlot(2), "dyeYellow") && yellow_paint.getFluidAmount() + paintPerDye <= yellow_paint.getCapacity()) {
+					inventory.extractItem(2, 1, false);
+					yellow_paint.fill(new FluidStack(FRFluids.yellow_paint, paintPerDye), true);
+					hasChanges = true;
+				}
+			
+				if (isDye(inventory.getStackInSlot(3), "dyeRed") && red_paint.getFluidAmount() + paintPerDye <= red_paint.getCapacity()) {
+					inventory.extractItem(3, 1, false);
+					red_paint.fill(new FluidStack(FRFluids.red_paint, paintPerDye), true);
+					hasChanges = true;
 				}
 			}
-		}
-		return false;
-	}
-	
-	public boolean isRedDye(ItemStack stack) {
-		if (stack != ItemStack.EMPTY) {
-			for (int id : OreDictionary.getOreIDs(stack)) {
-				if (OreDictionary.getOreName(id).equals("dyeRed")) {
-	                return true;
+
+			if (getGun().getItem() instanceof PaintGun) {
+				if (!has_gun) { hasChanges = true; }
+				has_gun = true;
+				
+				NBTTagCompound nbt;
+				
+				if (!getGun().hasTagCompound()) {
+					nbt = new NBTTagCompound();
+					nbt.setInteger("white_paint", 0);
+					nbt.setInteger("yellow_paint", 0);
+					nbt.setInteger("red_paint", 0);
+					
+					getGun().setTagCompound(nbt);
+				} else {
+					nbt = getGun().getTagCompound();
 				}
+				
+				gun_white = nbt.getInteger("white_paint");
+				gun_yellow = nbt.getInteger("yellow_paint");
+				gun_red = nbt.getInteger("red_paint");
+				
+				fillGun(nbt);
+			} else {
+				if (has_gun) { hasChanges = true; }
+				has_gun = false;
+				
+				gun_white = 0;
+				gun_yellow = 0;
+				gun_red = 0;
+			}
+			
+			if (hasChanges) {
+				sendUpdates();
 			}
 		}
-		return false;
 	}
 	
 	public boolean shouldTick() {
-		int paintPerDye = RoadsConfig.general.paintPerDye;
+		int paintPerDye = RoadsConfig.machine.fillerPaintPerDye;
 		
-		if ((!inventory.getStackInSlot(0).isEmpty() || !inventory.getStackInSlot(2).isEmpty() || !inventory.getStackInSlot(3).isEmpty()) && fuel_remaining > 0) {
-			if (isWhiteDye(inventory.getStackInSlot(0)) && white_paint.getFluidAmount() <= white_paint.getCapacity() + paintPerDye) {
+		if ((!inventory.getStackInSlot(0).isEmpty() || !inventory.getStackInSlot(2).isEmpty() || !inventory.getStackInSlot(3).isEmpty()) && (fuel_remaining > 0 || hasCapability(CapabilityEnergy.ENERGY, null))) {
+			if (isDye(inventory.getStackInSlot(0), "dyeWhite") && white_paint.getFluidAmount() + paintPerDye <= white_paint.getCapacity()) {
 				return true;
 			}
 
-			if (isYellowDye(inventory.getStackInSlot(2)) && yellow_paint.getFluidAmount() <= yellow_paint.getCapacity() + paintPerDye) {
+			if (isDye(inventory.getStackInSlot(2), "dyeYellow") && yellow_paint.getFluidAmount() + paintPerDye <= yellow_paint.getCapacity()) {
 				return true;
 			}
 
-			if (isRedDye(inventory.getStackInSlot(3)) && red_paint.getFluidAmount() <= red_paint.getCapacity() + paintPerDye) {
+			if (isDye(inventory.getStackInSlot(3), "dyeRed") && red_paint.getFluidAmount() + paintPerDye <= red_paint.getCapacity()) {
 				return true;
 			}
 		}
@@ -353,18 +323,6 @@ public class PaintFillerEntity extends RoadTileEntity implements ITickable, ICap
 		fuel_remaining = nbt.getInteger("fuel");
 		last_fuel_cap = nbt.getInteger("fuel_last_used");
 		
-		int wp = nbt.getInteger("white_paint");
-		int yp = nbt.getInteger("yellow_paint");
-		int rp = nbt.getInteger("red_paint");
-		
-		if (wp > FILLER_TANK_CAP) { wp = FILLER_TANK_CAP; }
-		if (yp > FILLER_TANK_CAP) { yp = FILLER_TANK_CAP; }
-		if (rp > FILLER_TANK_CAP) { rp = FILLER_TANK_CAP; }
-		
-		white_paint.setFluid(new FluidStack(FRFluids.white_paint, wp));
-		yellow_paint.setFluid(new FluidStack(FRFluids.yellow_paint, yp));
-		red_paint.setFluid(new FluidStack(FRFluids.red_paint, rp));
-		
 		gun_white = nbt.getInteger("gun_white");
 		gun_yellow = nbt.getInteger("gun_yellow");
 		gun_red = nbt.getInteger("gun_red");
@@ -376,6 +334,15 @@ public class PaintFillerEntity extends RoadTileEntity implements ITickable, ICap
 		if (nbt.hasKey("items")) {
 			inventory.deserializeNBT((NBTTagCompound) nbt.getTag("items"));
 		}
+		if (nbt.hasKey("paint_white")) {
+			white_paint.readFromNBT((NBTTagCompound) nbt.getTag("paint_white"));
+		}
+		if (nbt.hasKey("paint_yellow")) {
+			yellow_paint.readFromNBT((NBTTagCompound) nbt.getTag("paint_yellow"));
+		}
+		if (nbt.hasKey("paint_red")) {
+			red_paint.readFromNBT((NBTTagCompound) nbt.getTag("paint_red"));
+		}
 	}
 	
 	@Override
@@ -384,9 +351,9 @@ public class PaintFillerEntity extends RoadTileEntity implements ITickable, ICap
 		nbt.setInteger("fuel", fuel_remaining);
 		nbt.setInteger("fuel_last_used", last_fuel_cap);
 		
-		nbt.setInteger("white_paint", white_paint.getFluidAmount());
-		nbt.setInteger("yellow_paint", yellow_paint.getFluidAmount());
-		nbt.setInteger("red_paint", red_paint.getFluidAmount());
+		nbt.setTag("paint_white", white_paint.writeToNBT(new NBTTagCompound()));
+		nbt.setTag("paint_yellow", yellow_paint.writeToNBT(new NBTTagCompound()));
+		nbt.setTag("paint_red", red_paint.writeToNBT(new NBTTagCompound()));
 		
 		nbt.setInteger("gun_white", gun_white);
 		nbt.setInteger("gun_yellow", gun_yellow);
@@ -394,17 +361,5 @@ public class PaintFillerEntity extends RoadTileEntity implements ITickable, ICap
 		
 		nbt.setTag("items", inventory.serializeNBT());
 		return nbt;
-	}
-	
-	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-		super.writeToNBT(nbt);
-		return writeNBT(nbt);
-	}
-	
-	@Override
-	public void readFromNBT(NBTTagCompound nbt) {
-		super.readFromNBT(nbt);
-		readNBT(nbt);
 	}
 }

@@ -16,6 +16,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -47,7 +48,7 @@ public class CrusherBlock extends RoadTEBlock {
 	}
 	
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, new IProperty[] {ROTATION, FURNACE_ACTIVE});
+		return new BlockStateContainer(this, new IProperty[] {ROTATION, FURNACE_ACTIVE, BASE_PLATE});
 	}
 	
 	public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
@@ -55,11 +56,21 @@ public class CrusherBlock extends RoadTEBlock {
 		if (te instanceof RoadTileEntity) {
 			RoadTileEntity tileEntity = (RoadTileEntity) te;
 			if (tileEntity.fuel_remaining > 0) {
-				return state.withProperty(FURNACE_ACTIVE, true);
+				return state.withProperty(FURNACE_ACTIVE, true).withProperty(BASE_PLATE, hasBasePlate(world, pos));
 			} else {
-				return state.withProperty(FURNACE_ACTIVE, false);
+				return state.withProperty(FURNACE_ACTIVE, false).withProperty(BASE_PLATE, hasBasePlate(world, pos));
 			}
 		}
 		return state;
 	}
+	
+	@Override
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    	return new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.90625D, 0.875D);
+    }
+
+    @Override
+    public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos) {
+    	return getBoundingBox(state, world, pos);
+    }
 }

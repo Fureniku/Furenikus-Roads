@@ -3,21 +3,29 @@ package com.silvaniastudios.roads.client.gui;
 import java.util.Arrays;
 import java.util.List;
 
+import org.lwjgl.opengl.GL11;
+
 import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.RoadsConfig;
-import com.silvaniastudios.roads.blocks.tileentities.crusher.CrusherElectricEntity;
 import com.silvaniastudios.roads.blocks.tileentities.distiller.TarDistillerContainer;
 import com.silvaniastudios.roads.blocks.tileentities.distiller.TarDistillerElectricEntity;
 import com.silvaniastudios.roads.blocks.tileentities.distiller.TarDistillerEntity;
 import com.silvaniastudios.roads.items.FRItems;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.fluids.FluidTank;
 
 public class GuiTarDistiller extends GuiContainer {
 	
@@ -57,9 +65,9 @@ public class GuiTarDistiller extends GuiContainer {
         if (electric) {
         	drawTexturedModalRect(left+xSize-23, top, 196, 0, 23, 116);
         }
-        drawTankFillBar(left +   8, top, tileEntity.fluidInput.getFluidAmount(),   0);
-        drawTankFillBar(left + 122, top, tileEntity.fluidOutput1.getFluidAmount(), 1);
-        drawTankFillBar(left + 148, top, tileEntity.fluidOutput2.getFluidAmount(), 2);
+        drawFluid(left +   8, top + 8, tileEntity.fluidInput);
+        drawFluid(left + 122, top + 8, tileEntity.fluidOutput1);
+        drawFluid(left + 148, top + 8, tileEntity.fluidOutput2);
         
         drawFuel(left, top);
         drawProgress(left, top);
@@ -71,11 +79,6 @@ public class GuiTarDistiller extends GuiContainer {
         super.drawScreen(mouseX, mouseY, partialTicks);
         this.renderHoveredToolTip(mouseX, mouseY);
     }
-	
-	private void drawTankFillBar(int left, int top, int fill, int id) {
-		int p = getPercentage(fill, TarDistillerEntity.TANK_CAP);
-		drawTexturedModalRect(left, top + 108 - p, 196 + (id*20), 100 - p, 20, p);
-	}
 	
 	private void drawFuel(int left, int top) {
 		if (electric) {
@@ -117,30 +120,65 @@ public class GuiTarDistiller extends GuiContainer {
 					TextFormatting.UNDERLINE + I18n.format("roads.gui.valid"),
 					TextFormatting.AQUA + new ItemStack(Items.COAL, 1, 0).getDisplayName() + a + new ItemStack(FRItems.coal_coke, 1, 0).getDisplayName());
 			
-			List<String> fluidInputList = Arrays.asList(
-					I18n.format("roads.gui.fluidInputSlot"),
-					TextFormatting.ITALIC + I18n.format("roads.gui.unused"));
+			if (mouseX >= (left +  34) && mouseX <= (left +  50) && mouseY >= (top + 30) && mouseY <= (top +  46) && tileEntity.inventory.getStackInSlot(TarDistillerContainer.INPUT).getCount() == 0) { this.drawHoveringText(inputList, mouseX - left, mouseY - top + 15); }
+			if (mouseX >= (left +  34) && mouseX <= (left +  50) && mouseY >= (top + 70) && mouseY <= (top +  86) && tileEntity.inventory.getStackInSlot(TarDistillerContainer.FLUID_IN).getCount() == 0) { this.drawHoveringText(I18n.format("roads.gui.fluidInputSlot"), mouseX - left, mouseY - top + 15); }
+			if (mouseX >= (left +  34) && mouseX <= (left +  50) && mouseY >= (top + 92) && mouseY <= (top + 108) && tileEntity.inventory.getStackInSlot(TarDistillerContainer.FLUID_IN_BUCKET).getCount() == 0) { this.drawHoveringText(I18n.format("roads.gui.bucketOutputSlot"), mouseX - left, mouseY - top + 15); }
+			if (mouseX >= (left + 174) && mouseX <= (left + 190) && mouseY >= (top + 30) && mouseY <= (top +  46) && !electric && tileEntity.inventory.getStackInSlot(TarDistillerContainer.FUEL).getCount() == 0) { this.drawHoveringText(I18n.format("roads.gui.fuelSlot"), mouseX - left, mouseY - top + 15); }
 			
-			if (mouseX >= (left +  34) && mouseX <= (left +  50) && mouseY >= (top + 30) && mouseY <= (top +  46)) { this.drawHoveringText(inputList, mouseX - left, mouseY - top + 15); }
-			if (mouseX >= (left +  34) && mouseX <= (left +  50) && mouseY >= (top + 70) && mouseY <= (top +  86)) { this.drawHoveringText(fluidInputList, mouseX - left, mouseY - top + 15); }
-			if (mouseX >= (left +  34) && mouseX <= (left +  50) && mouseY >= (top + 92) && mouseY <= (top + 108)) { this.drawHoveringText(I18n.format("roads.gui.bucketOutputSlot"), mouseX - left, mouseY - top + 15); }
-			if (mouseX >= (left + 174) && mouseX <= (left + 190) && mouseY >= (top + 30) && mouseY <= (top +  46) && !electric) { this.drawHoveringText(I18n.format("roads.gui.fuelSlot"), mouseX - left, mouseY - top + 15); }
+			if (mouseX >= (left + 100) && mouseX <= (left + 116) && mouseY >= (top + 70) && mouseY <= (top +  86) && tileEntity.inventory.getStackInSlot(TarDistillerContainer.FLUID_OUT_1).getCount() == 0) { this.drawHoveringText(I18n.format("roads.gui.bucketInputSlot"), mouseX - left, mouseY - top + 15); }
+			if (mouseX >= (left + 100) && mouseX <= (left + 116) && mouseY >= (top + 92) && mouseY <= (top + 108) && tileEntity.inventory.getStackInSlot(TarDistillerContainer.FLUID_OUT_1_BUCKET).getCount() == 0) { this.drawHoveringText(I18n.format("roads.gui.fluidOutputSlot"), mouseX - left, mouseY - top + 15); }
 			
-			if (mouseX >= (left + 100) && mouseX <= (left + 116) && mouseY >= (top + 70) && mouseY <= (top +  86)) { this.drawHoveringText(I18n.format("roads.gui.bucketInputSlot"), mouseX - left, mouseY - top + 15); }
-			if (mouseX >= (left + 100) && mouseX <= (left + 116) && mouseY >= (top + 92) && mouseY <= (top + 108)) { this.drawHoveringText(I18n.format("roads.gui.fluidOutputSlot"), mouseX - left, mouseY - top + 15); }
+			if (mouseX >= (left + 174) && mouseX <= (left + 190) && mouseY >= (top + 70) && mouseY <= (top +  86) && tileEntity.inventory.getStackInSlot(TarDistillerContainer.FLUID_OUT_2).getCount() == 0) { this.drawHoveringText(I18n.format("roads.gui.bucketInputSlot"), mouseX - left, mouseY - top + 15); }
+			if (mouseX >= (left + 174) && mouseX <= (left + 190) && mouseY >= (top + 92) && mouseY <= (top + 108) && tileEntity.inventory.getStackInSlot(TarDistillerContainer.FLUID_OUT_2_BUCKET).getCount() == 0) { this.drawHoveringText(I18n.format("roads.gui.fluidOutputSlot"), mouseX - left, mouseY - top + 15); }
 			
-			if (mouseX >= (left + 174) && mouseX <= (left + 190) && mouseY >= (top + 70) && mouseY <= (top +  86)) { this.drawHoveringText(I18n.format("roads.gui.bucketInputSlot"), mouseX - left, mouseY - top + 15); }
-			if (mouseX >= (left + 174) && mouseX <= (left + 190) && mouseY >= (top + 92) && mouseY <= (top + 108)) { this.drawHoveringText(I18n.format("roads.gui.fluidOutputSlot"), mouseX - left, mouseY - top + 15); }
-			
-			if (mouseX >= (left + 100) && mouseX <= (left + 116) && mouseY >= (top +  8) && mouseY <= (top +  24)) { this.drawHoveringText(I18n.format("roads.gui.outputSlot"), mouseX - left, mouseY - top + 15); }
-			if (mouseX >= (left + 100) && mouseX <= (left + 116) && mouseY >= (top + 30) && mouseY <= (top +  46)) { this.drawHoveringText(I18n.format("roads.gui.outputSlot"), mouseX - left, mouseY - top + 15); }
+			if (mouseX >= (left + 100) && mouseX <= (left + 116) && mouseY >= (top +  8) && mouseY <= (top +  24) && tileEntity.inventory.getStackInSlot(TarDistillerContainer.OUTPUT_1).getCount() == 0) { this.drawHoveringText(I18n.format("roads.gui.outputSlot"), mouseX - left, mouseY - top + 15); }
+			if (mouseX >= (left + 100) && mouseX <= (left + 116) && mouseY >= (top + 30) && mouseY <= (top +  46) && tileEntity.inventory.getStackInSlot(TarDistillerContainer.OUTPUT_2).getCount() == 0) { this.drawHoveringText(I18n.format("roads.gui.outputSlot"), mouseX - left, mouseY - top + 15); }
 		}
+	}
+	
+	private void drawFluid(int left, int top, FluidTank fluid) {
+		if (fluid.getFluidAmount() > 0) {
+			int fillPercent = getPercentage(fluid.getFluidAmount(), TarDistillerEntity.TANK_CAP);
+			mc.getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+			TextureAtlasSprite texture = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(fluid.getFluid().getFluid().getStill(fluid.getFluid()).toString());
+	
+			for (int i = 0; i < 6; i++) {
+				drawFluidQuad(left,    top+(i*16), 16, 16, texture);
+				drawFluidQuad(left+16, top+(i*16), 4, 16, texture);
+			}
+			
+			drawFluidQuad(left,    top+96, 16, 4, texture);
+			drawFluidQuad(left+16, top+96,  4, 4, texture);
+			
+			mc.getTextureManager().bindTexture(guiTextures);
+			drawTexturedModalRect(left, top, 8, 8, 20, 100-fillPercent);
+		}
+		drawTexturedModalRect(left, top, 236, 156, 20, 100);
+	}
+	
+	private void drawFluidQuad(int x, int y, int width, int height, TextureAtlasSprite texture) {
+		float minU = texture.getInterpolatedU(0);
+		float minV = texture.getInterpolatedV(0);
+		float maxU = texture.getInterpolatedU(width);
+		float maxV = texture.getInterpolatedV(height);
+		
+		Tessellator tessellator = Tessellator.getInstance();
+		BufferBuilder worldrenderer = tessellator.getBuffer();
+		worldrenderer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
+		worldrenderer.pos((double)x, (double)(y + height), (double)this.zLevel).tex(minU, maxV).endVertex();
+		worldrenderer.pos((double)(x + width), (double)(y + height), (double)this.zLevel).tex(maxU, maxV).endVertex();
+		worldrenderer.pos((double)(x + width), (double)y, (double)this.zLevel).tex(maxU, minV).endVertex();
+		worldrenderer.pos((double)x, (double)y, (double)this.zLevel).tex(minU, minV).endVertex();
+		tessellator.draw();
 	}
 	
 	private int getPercentage(int num, int max) {
 		float x = (float) num / (float) max;
 		int y = Math.round(x*100);
 		if (y > 100) { return 100; }
+		if (y == 0 && num > 0) {
+			return 1;
+		}
 		return y;
 	}
 

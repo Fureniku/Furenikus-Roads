@@ -29,8 +29,10 @@ public class BarsBarrierBlock extends BlockBase implements IConnectable {
 	public static final PropertyBool SOUTH = PropertyBool.create("south");
 	public static final PropertyBool WEST = PropertyBool.create("west");
 	public static final PropertyBool POSTS = PropertyBool.create("post");
-
-	public BarsBarrierBlock(String name) {
+	
+	float height;
+	
+	public BarsBarrierBlock(String name, float height) {
 		super(name, Material.IRON);
 		this.setDefaultState(this.blockState.getBaseState()
 				.withProperty(NORTH, true)
@@ -41,6 +43,11 @@ public class BarsBarrierBlock extends BlockBase implements IConnectable {
 		this.setCreativeTab(FurenikusRoads.tab_road_parts);
 		this.setHardness(1.5F);
 		this.setHarvestLevel("pickaxe", 1);
+		this.height = height;
+	}
+
+	public BarsBarrierBlock(String name) {
+		this(name, 1.0F);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -135,7 +142,7 @@ public class BarsBarrierBlock extends BlockBase implements IConnectable {
     	if (east)  { xHigh = 1.0; } else { xHigh = 1.0-((1.0/16.0)*5.375); }
     	if (south) { zHigh = 1.0; } else { zHigh = 1.0-((1.0/16.0)*5.375); }
     	if (west)  { xLow  = 0.0; } else { xLow  = (1.0/16.0)*5.375; }
-    	return new AxisAlignedBB(xLow, -1+getBlockBelowHeight(world, pos), zLow, xHigh, -1+getBlockBelowHeight(world, pos)+1.25, zHigh);
+    	return new AxisAlignedBB(xLow, -1+getBlockBelowHeight(world, pos)-(1-height), zLow, xHigh, -1+getBlockBelowHeight(world, pos)+1.25-(1-height), zHigh);
     }
     
     @Override

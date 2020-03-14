@@ -13,6 +13,69 @@ import net.minecraftforge.fml.client.FMLClientHandler;
 
 public class RenderHelper {
 	
+	public static void renderTankFluid(final BufferBuilder buffer, double x, double y, double z, 
+			float posX, float posY, float posZ, float sizeX, float sizeY, float sizeZ,
+			int tankFill, int tankCap, TextureAtlasSprite sprite) {
+		float fill = (sizeY/100) * RenderHelper.getPercentage(tankFill, tankCap);
+		float p = 1/16F;
+		RenderHelper.renderScaledCube(buffer, x, y, z, posX*p, posY*p, posZ*p, sizeX*p, fill*p, sizeZ*p, sprite);
+	}
+	
+	public static void renderScaledCube(final BufferBuilder buffer, double x, double y, double z, float xLow, float yLow, float zLow, float xSize, float ySize, float zSize, TextureAtlasSprite texture) {
+		final int red = (int) (0xFF);
+		final int green = (int) (0xFF);
+		final int blue = (int) (0xFF);
+		final int alpha = 0xFF;
+		
+		float xHigh = xLow + xSize;
+		float yHigh = yLow + ySize;
+		float zHigh = zLow + zSize;
+		
+		//Up
+		double minU = texture.getInterpolatedU(xLow*16);
+		double minV = texture.getInterpolatedV(zLow*16);
+		double maxU = texture.getInterpolatedU(xHigh*16);
+		double maxV = texture.getInterpolatedV(zHigh*16);
+		buffer.pos(x + xHigh, y + yHigh, z + zHigh).color(red, green, blue, alpha).tex(minU, maxV).lightmap(240, 0).endVertex(); //SE
+		buffer.pos(x + xHigh, y + yHigh, z +  zLow).color(red, green, blue, alpha).tex(maxU, maxV).lightmap(240, 0).endVertex(); //NE
+		buffer.pos(x +  xLow, y + yHigh, z +  zLow).color(red, green, blue, alpha).tex(maxU, minV).lightmap(240, 0).endVertex(); //NW
+		buffer.pos(x +  xLow, y + yHigh, z + zHigh).color(red, green, blue, alpha).tex(minU, minV).lightmap(240, 0).endVertex(); //SW
+		
+		//Down
+		buffer.pos(x + xHigh, y +  yLow, z +  zLow).color(red, green, blue, alpha).tex(minU, maxV).lightmap(168, 0).endVertex(); //SE
+		buffer.pos(x + xHigh, y +  yLow, z + zHigh).color(red, green, blue, alpha).tex(minU, minV).lightmap(168, 0).endVertex(); //NE
+		buffer.pos(x +  xLow, y +  yLow, z + zHigh).color(red, green, blue, alpha).tex(maxU, minV).lightmap(168, 0).endVertex(); //NW
+		buffer.pos(x +  xLow, y +  yLow, z +  zLow).color(red, green, blue, alpha).tex(maxU, maxV).lightmap(168, 0).endVertex(); //SW
+		
+		//North
+		minU = texture.getInterpolatedU(xLow*16);
+		minV = texture.getInterpolatedV(yLow*16);
+		maxU = texture.getInterpolatedU(xHigh*16);
+		maxV = texture.getInterpolatedV(yHigh*16);
+		buffer.pos(x +  xLow, y +  yLow, z +  zLow).color(red, green, blue, alpha).tex(minU, maxV).lightmap(216, 0).endVertex(); //SE
+		buffer.pos(x +  xLow, y + yHigh, z +  zLow).color(red, green, blue, alpha).tex(minU, minV).lightmap(216, 0).endVertex(); //NE
+		buffer.pos(x + xHigh, y + yHigh, z +  zLow).color(red, green, blue, alpha).tex(maxU, minV).lightmap(216, 0).endVertex(); //NW
+		buffer.pos(x + xHigh, y +  yLow, z +  zLow).color(red, green, blue, alpha).tex(maxU, maxV).lightmap(216, 0).endVertex(); //SW
+		
+		//South
+		buffer.pos(x + xHigh, y +  yLow, z + zHigh).color(red, green, blue, alpha).tex(minU, maxV).lightmap(216, 0).endVertex(); //SE
+		buffer.pos(x + xHigh, y + yHigh, z + zHigh).color(red, green, blue, alpha).tex(minU, minV).lightmap(216, 0).endVertex(); //NE
+		buffer.pos(x +  xLow, y + yHigh, z + zHigh).color(red, green, blue, alpha).tex(maxU, minV).lightmap(216, 0).endVertex(); //NW
+		buffer.pos(x +  xLow, y +  yLow, z + zHigh).color(red, green, blue, alpha).tex(maxU, maxV).lightmap(216, 0).endVertex(); //SW
+		
+		//West
+		buffer.pos(x +  xLow, y +  yLow, z +  zLow).color(red, green, blue, alpha).tex(minU, maxV).lightmap(192, 0).endVertex(); //SE
+		buffer.pos(x +  xLow, y + yHigh, z +  zLow).color(red, green, blue, alpha).tex(minU, minV).lightmap(192, 0).endVertex(); //NE
+		buffer.pos(x +  xLow, y + yHigh, z + zHigh).color(red, green, blue, alpha).tex(maxU, minV).lightmap(192, 0).endVertex(); //NW
+		buffer.pos(x +  xLow, y +  yLow, z + zHigh).color(red, green, blue, alpha).tex(maxU, maxV).lightmap(192, 0).endVertex(); //SW
+		
+		//East
+		buffer.pos(x + xHigh, y +  yLow, z + zHigh).color(red, green, blue, alpha).tex(minU, maxV).lightmap(192, 0).endVertex(); //SE
+		buffer.pos(x + xHigh, y + yHigh, z + zHigh).color(red, green, blue, alpha).tex(minU, minV).lightmap(192, 0).endVertex(); //NE
+		buffer.pos(x + xHigh, y + yHigh, z +  zLow).color(red, green, blue, alpha).tex(maxU, minV).lightmap(192, 0).endVertex(); //NW
+		buffer.pos(x + xHigh, y +  yLow, z +  zLow).color(red, green, blue, alpha).tex(maxU, maxV).lightmap(192, 0).endVertex(); //SW
+	}
+	
 	public static void renderCube(final BufferBuilder buffer, double x, double y, double z, float xLow, float yLow, float zLow, float xSize, float ySize, float zSize, TextureAtlasSprite texture) {
 		final int red = (int) (0xFF);
 		final int green = (int) (0xFF);

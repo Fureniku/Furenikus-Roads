@@ -2,11 +2,14 @@
 	"forge_marker": 1,
 	"defaults": {
 		"model": "furenikusroads:barrier_tall_edge",
-		"uvlock": true
+		"uvlock": true,
+		"textures": {
+			"particle": "furenikusroads:blocks/machine_metal"
+		}
 	},
 	"variants": {
 		"inventory": [{
-			"model": "furenikusroads:barrier_tall_edge_inventory"
+			"model": "furenikusroads:barrier_low_edge"
 		}],
 		"zpost": {
 			"true": {

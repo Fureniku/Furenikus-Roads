@@ -1,0 +1,22 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "furenikusroads:blocks/machine_metal",
+		"particle": "furenikusroads:blocks/machine_metal"
+	},
+	"elements": [
+		{
+			"from": [6.005, 5.68687, -0.91761],
+			"to": [9.995, 9.38687, 9.90239],
+			"rotation": {"angle": 22.5, "axis": "x", "origin": [8, 7.38687, 1.08239]},
+			"faces": {
+				"north": {"uv": [6.005, 6.61313, 9.995, 10.31313], "texture": "#0"},
+				"east": {"uv": [6.09761, 6.61313, 16, 10.31313], "texture": "#0"},
+				"south": {"uv": [6.005, 6.61313, 9.995, 10.31313], "texture": "#0"},
+				"west": {"uv": [0, 6.61313, 9.90239, 10.31313], "texture": "#0"},
+				"up": {"uv": [6.005, 0, 9.995, 9.90239], "texture": "#0"},
+				"down": {"uv": [6.005, 6.09761, 9.995, 16], "texture": "#0"}
+			}
+		}
+	]
+}

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import org.lwjgl.opengl.GL11;
 
 import com.silvaniastudios.roads.FurenikusRoads;
-import com.silvaniastudios.roads.RoadsConfig;
 import com.silvaniastudios.roads.blocks.FRBlocks;
 import com.silvaniastudios.roads.blocks.paint.PaintBlockBase;
 import com.silvaniastudios.roads.blocks.tileentities.paintfiller.PaintFillerEntity;

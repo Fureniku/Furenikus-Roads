@@ -16,6 +16,7 @@ public class FRItems {
 	
 	public static RoadItemBase pneumatic_drill_bit = (RoadItemBase) new RoadItemBase("pneumatic_drill_bit", 64).setCreativeTab(FurenikusRoads.tab_tools);
 	public static RoadItemBase machine_frame = (RoadItemBase) new RoadItemBase("machine_frame", 64).setCreativeTab(FurenikusRoads.tab_tools);
+	public static RoadItemBase machine_frame_electric = (RoadItemBase) new RoadItemBase("machine_frame_electric", 64).setCreativeTab(FurenikusRoads.tab_tools);
 	public static RoadItemBase tool_handle = (RoadItemBase) new RoadItemBase("tool_handle", 64).setCreativeTab(FurenikusRoads.tab_tools);
 	public static RoadItemBase large_glass_tank = (RoadItemBase) new RoadItemBase("large_glass_tank", 64).setCreativeTab(FurenikusRoads.tab_tools);
 	public static RoadItemBase small_glass_tank = (RoadItemBase) new RoadItemBase("small_glass_tank", 64).setCreativeTab(FurenikusRoads.tab_tools);
@@ -41,29 +42,29 @@ public class FRItems {
 	public static TarmacCutterBlade tarmac_cutter_blade_8_gold = (TarmacCutterBlade) new TarmacCutterBlade("tarmac_cutter_blade_8_gold", 512, 8).setCreativeTab(FurenikusRoads.tab_tools);
 	public static TarmacCutterBlade tarmac_cutter_blade_8_diamond = (TarmacCutterBlade) new TarmacCutterBlade("tarmac_cutter_blade_8_diamond", 4096, 8).setCreativeTab(FurenikusRoads.tab_tools);
 	
-	public static RoadItemBase tarmac_fragment_standard = (RoadItemBase) new RoadItemBase("tarmac_fragment_standard", 64).setCreativeTab(FurenikusRoads.tab_roads);
-	public static RoadItemBase tarmac_fragment_concrete_1 = (RoadItemBase) new RoadItemBase("tarmac_fragment_concrete_1", 64).setCreativeTab(FurenikusRoads.tab_roads);
-	public static RoadItemBase tarmac_fragment_concrete_2 = (RoadItemBase) new RoadItemBase("tarmac_fragment_concrete_2", 64).setCreativeTab(FurenikusRoads.tab_roads);
-	public static RoadItemBase tarmac_fragment_light = (RoadItemBase) new RoadItemBase("tarmac_fragment_light", 64).setCreativeTab(FurenikusRoads.tab_roads);
-	public static RoadItemBase tarmac_fragment_fine = (RoadItemBase) new RoadItemBase("tarmac_fragment_fine", 64).setCreativeTab(FurenikusRoads.tab_roads);
-	public static RoadItemBase tarmac_fragment_dark = (RoadItemBase) new RoadItemBase("tarmac_fragment_dark", 64).setCreativeTab(FurenikusRoads.tab_roads);
-	public static RoadItemBase tarmac_fragment_pale = (RoadItemBase) new RoadItemBase("tarmac_fragment_pale", 64).setCreativeTab(FurenikusRoads.tab_roads);
-	public static RoadItemBase tarmac_fragment_red = (RoadItemBase) new RoadItemBase("tarmac_fragment_red", 64).setCreativeTab(FurenikusRoads.tab_roads);
-	public static RoadItemBase tarmac_fragment_blue = (RoadItemBase) new RoadItemBase("tarmac_fragment_blue", 64).setCreativeTab(FurenikusRoads.tab_roads);
-	public static RoadItemBase tarmac_fragment_white = (RoadItemBase) new RoadItemBase("tarmac_fragment_white", 64).setCreativeTab(FurenikusRoads.tab_roads);
-	public static RoadItemBase tarmac_fragment_yellow = (RoadItemBase) new RoadItemBase("tarmac_fragment_yellow", 64).setCreativeTab(FurenikusRoads.tab_roads);
-	public static RoadItemBase tarmac_fragment_green = (RoadItemBase) new RoadItemBase("tarmac_fragment_green", 64).setCreativeTab(FurenikusRoads.tab_roads);
-	public static RoadItemBase tarmac_fragment_muddy = (RoadItemBase) new RoadItemBase("tarmac_fragment_muddy", 64).setCreativeTab(FurenikusRoads.tab_roads);
-	public static RoadItemBase tarmac_fragment_stone = (RoadItemBase) new RoadItemBase("tarmac_fragment_stone", 64).setCreativeTab(FurenikusRoads.tab_roads);
-	public static RoadItemBase tarmac_fragment_grass = (RoadItemBase) new RoadItemBase("tarmac_fragment_grass", 64).setCreativeTab(FurenikusRoads.tab_roads);
-	public static RoadItemBase tarmac_fragment_dirt = (RoadItemBase) new RoadItemBase("tarmac_fragment_dirt", 64).setCreativeTab(FurenikusRoads.tab_roads);
-	public static RoadItemBase tarmac_fragment_gravel = (RoadItemBase) new RoadItemBase("tarmac_fragment_gravel", 64).setCreativeTab(FurenikusRoads.tab_roads);
-	public static RoadItemBase tarmac_fragment_sand = (RoadItemBase) new RoadItemBase("tarmac_fragment_sand", 64).setCreativeTab(FurenikusRoads.tab_roads);
+	public static ItemFragment tarmac_fragment_standard = (ItemFragment) new ItemFragment("tarmac_fragment_standard").setCreativeTab(FurenikusRoads.tab_roads);
+	public static ItemFragment tarmac_fragment_concrete_1 = (ItemFragment) new ItemFragment("tarmac_fragment_concrete_1").setCreativeTab(FurenikusRoads.tab_roads);
+	public static ItemFragment tarmac_fragment_concrete_2 = (ItemFragment) new ItemFragment("tarmac_fragment_concrete_2").setCreativeTab(FurenikusRoads.tab_roads);
+	public static ItemFragment tarmac_fragment_light = (ItemFragment) new ItemFragment("tarmac_fragment_light").setCreativeTab(FurenikusRoads.tab_roads);
+	public static ItemFragment tarmac_fragment_fine = (ItemFragment) new ItemFragment("tarmac_fragment_fine").setCreativeTab(FurenikusRoads.tab_roads);
+	public static ItemFragment tarmac_fragment_dark = (ItemFragment) new ItemFragment("tarmac_fragment_dark").setCreativeTab(FurenikusRoads.tab_roads);
+	public static ItemFragment tarmac_fragment_pale = (ItemFragment) new ItemFragment("tarmac_fragment_pale").setCreativeTab(FurenikusRoads.tab_roads);
+	public static ItemFragment tarmac_fragment_red = (ItemFragment) new ItemFragment("tarmac_fragment_red").setCreativeTab(FurenikusRoads.tab_roads);
+	public static ItemFragment tarmac_fragment_blue = (ItemFragment) new ItemFragment("tarmac_fragment_blue").setCreativeTab(FurenikusRoads.tab_roads);
+	public static ItemFragment tarmac_fragment_white = (ItemFragment) new ItemFragment("tarmac_fragment_white").setCreativeTab(FurenikusRoads.tab_roads);
+	public static ItemFragment tarmac_fragment_yellow = (ItemFragment) new ItemFragment("tarmac_fragment_yellow").setCreativeTab(FurenikusRoads.tab_roads);
+	public static ItemFragment tarmac_fragment_green = (ItemFragment) new ItemFragment("tarmac_fragment_green").setCreativeTab(FurenikusRoads.tab_roads);
+	public static ItemFragment tarmac_fragment_muddy = (ItemFragment) new ItemFragment("tarmac_fragment_muddy").setCreativeTab(FurenikusRoads.tab_roads);
+	public static ItemFragment tarmac_fragment_stone = (ItemFragment) new ItemFragment("tarmac_fragment_stone").setCreativeTab(FurenikusRoads.tab_roads);
+	public static ItemFragment tarmac_fragment_grass = (ItemFragment) new ItemFragment("tarmac_fragment_grass").setCreativeTab(FurenikusRoads.tab_roads);
+	public static ItemFragment tarmac_fragment_dirt = (ItemFragment) new ItemFragment("tarmac_fragment_dirt").setCreativeTab(FurenikusRoads.tab_roads);
+	public static ItemFragment tarmac_fragment_gravel = (ItemFragment) new ItemFragment("tarmac_fragment_gravel").setCreativeTab(FurenikusRoads.tab_roads);
+	public static ItemFragment tarmac_fragment_sand = (ItemFragment) new ItemFragment("tarmac_fragment_sand").setCreativeTab(FurenikusRoads.tab_roads);
 	
-	public static RoadItemBase sidewalk_fragment_standard = (RoadItemBase) new RoadItemBase("sidewalk_fragment_standard", 64).setCreativeTab(FurenikusRoads.tab_sidewalks);
-	public static RoadItemBase sidewalk_fragment_clean = (RoadItemBase) new RoadItemBase("sidewalk_fragment_clean", 64).setCreativeTab(FurenikusRoads.tab_sidewalks);
-	public static RoadItemBase sidewalk_fragment_dark = (RoadItemBase) new RoadItemBase("sidewalk_fragment_dark", 64).setCreativeTab(FurenikusRoads.tab_sidewalks);
-	public static RoadItemBase sidewalk_fragment_tan = (RoadItemBase) new RoadItemBase("sidewalk_fragment_tan", 64).setCreativeTab(FurenikusRoads.tab_sidewalks);
+	public static ItemFragment sidewalk_fragment_standard = (ItemFragment) new ItemFragment("sidewalk_fragment_standard").setCreativeTab(FurenikusRoads.tab_sidewalks);
+	public static ItemFragment sidewalk_fragment_clean = (ItemFragment) new ItemFragment("sidewalk_fragment_clean").setCreativeTab(FurenikusRoads.tab_sidewalks);
+	public static ItemFragment sidewalk_fragment_dark = (ItemFragment) new ItemFragment("sidewalk_fragment_dark").setCreativeTab(FurenikusRoads.tab_sidewalks);
+	public static ItemFragment sidewalk_fragment_tan = (ItemFragment) new ItemFragment("sidewalk_fragment_tan").setCreativeTab(FurenikusRoads.tab_sidewalks);
 	
 	public static void register(IForgeRegistry<Item> registry) {
 		registry.registerAll(
@@ -75,6 +76,7 @@ public class FRItems {
 				
 				pneumatic_drill_bit,
 				machine_frame,
+				machine_frame_electric,
 				tool_handle,
 				large_glass_tank,
 				small_glass_tank,
@@ -134,6 +136,7 @@ public class FRItems {
 		
 		pneumatic_drill_bit.registerItemModel();
 		machine_frame.registerItemModel();
+		machine_frame_electric.registerItemModel();
 		tool_handle.registerItemModel();
 		large_glass_tank.registerItemModel();
 		small_glass_tank.registerItemModel();

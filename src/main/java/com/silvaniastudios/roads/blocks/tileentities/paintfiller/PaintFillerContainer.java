@@ -20,6 +20,15 @@ public class PaintFillerContainer extends Container {
 	
 	private boolean isElectric = false;
 	private int energy;
+	private int paint_white;
+	private int paint_yellow;
+	private int paint_red;
+	
+	public static final int WHITE_DYE = 0;
+	public static final int YELLOW_DYE = 2;
+	public static final int RED_DYE = 3;
+	public static final int GUN = 1;
+	public static final int FUEL = 4;
 	
 	public PaintFillerContainer(InventoryPlayer invPlayer, PaintFillerEntity tileEntity, boolean isElectric) {
 		this.tileEntity = tileEntity;
@@ -29,7 +38,7 @@ public class PaintFillerContainer extends Container {
 		addSlotToContainer(new SlotPaintGun(itemHandler, 1, 21, 36));
 		addSlotToContainer(new SlotDye(itemHandler, 2, 74, 64, "dyeYellow"));
 		addSlotToContainer(new SlotDye(itemHandler, 3, 74, 92, "dyeRed"));
-		if (!isElectric) { addSlotToContainer(new SlotFuel(itemHandler, 4, 74, 92)); }
+		if (!isElectric) { addSlotToContainer(new SlotFuel(itemHandler, 4, 174, 32)); }
 		
 		this.isElectric = isElectric;
 		addPlayerSlots(invPlayer);
@@ -53,25 +62,52 @@ public class PaintFillerContainer extends Container {
 	
 	@Override
 	public void detectAndSendChanges() {
+		PaintFillerElectricEntity pfee = null;
+		
 		if (this.isElectric) {
-			PaintFillerElectricEntity pfee = (PaintFillerElectricEntity) tileEntity;
-			super.detectAndSendChanges();
-	
-			for (int i = 0; i < this.listeners.size(); ++i) {
-				IContainerListener icontainerlistener = this.listeners.get(i);
+			pfee = (PaintFillerElectricEntity) tileEntity;
+		}
+		super.detectAndSendChanges();
+
+		for (int i = 0; i < this.listeners.size(); ++i) {
+			IContainerListener icontainerlistener = this.listeners.get(i);
+			if (this.isElectric) {
 	        	if (this.energy != pfee.energy.getEnergyStored()) {
 	        		icontainerlistener.sendWindowProperty(this, 0, pfee.energy.getEnergyStored());
 	        	}
 			}
-			this.energy = pfee.energy.getEnergyStored();
+			
+			if (this.paint_white != tileEntity.white_paint.getFluidAmount()) {
+        		icontainerlistener.sendWindowProperty(this, 1, tileEntity.white_paint.getFluidAmount());
+        	}
+        	if (this.paint_yellow != tileEntity.yellow_paint.getFluidAmount()) {
+        		icontainerlistener.sendWindowProperty(this, 2, tileEntity.yellow_paint.getFluidAmount());
+        	}
+        	if (this.paint_red != tileEntity.red_paint.getFluidAmount()) {
+        		icontainerlistener.sendWindowProperty(this, 3, tileEntity.red_paint.getFluidAmount());
+        	}
 		}
+		if (this.isElectric) { this.energy = pfee.energy.getEnergyStored(); }
+		this.paint_white = tileEntity.white_paint.getFluidAmount();
+		this.paint_yellow = tileEntity.yellow_paint.getFluidAmount();
+		this.paint_red = tileEntity.red_paint.getFluidAmount();
 	}
 	
 	@SideOnly(Side.CLIENT)
 	public void updateProgressBar(int id, int data) {
-		if (this.isElectric) {
+		if (id == 0 && this.isElectric) {
 			PaintFillerElectricEntity pfee = (PaintFillerElectricEntity) tileEntity;
 			pfee.energy.setEnergy(data);
+		}
+		
+		if (id == 1 && tileEntity.white_paint.getFluid() != null) {
+			tileEntity.white_paint.getFluid().amount = data;
+		}
+		if (id == 2 && tileEntity.yellow_paint.getFluid() != null) {
+			tileEntity.yellow_paint.getFluid().amount = data;
+		}
+		if (id == 3 && tileEntity.red_paint.getFluid() != null) {
+			tileEntity.red_paint.getFluid().amount = data;
 		}
     }
 

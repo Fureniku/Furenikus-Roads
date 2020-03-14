@@ -12,9 +12,11 @@ import net.minecraftforge.items.ItemStackHandler;
 public class TarmacCutterStackHandler extends ItemStackHandler {
 	
 	private final ItemStackHandler internalStackHandler;
+	boolean electric;
 
-	public TarmacCutterStackHandler(ItemStackHandler ish) {
+	public TarmacCutterStackHandler(ItemStackHandler ish, boolean electric) {
 		super();
+		this.electric = electric;
 		internalStackHandler = ish;
 	}
 
@@ -40,7 +42,7 @@ public class TarmacCutterStackHandler extends ItemStackHandler {
 
 	@Override
 	public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
-		if (slot == TarmacCutterContainer.FUEL && TileEntityFurnace.getItemBurnTime(stack) > 0) {
+		if (slot == TarmacCutterContainer.FUEL && TileEntityFurnace.getItemBurnTime(stack) > 0 && !electric) {
 			return internalStackHandler.insertItem(slot, stack, simulate);
 		}
 		

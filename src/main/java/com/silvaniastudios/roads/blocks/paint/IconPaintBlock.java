@@ -41,7 +41,6 @@ public class IconPaintBlock extends PaintBlockBase {
 	public IBlockState getStateFromMeta(int meta) {
 		EnumFacing enumfacing = EnumFacing.getFront(meta);
 		if (enumfacing == EnumFacing.DOWN || enumfacing == EnumFacing.UP) {
-			System.out.println("[Fureniku's Roads] Something has gone wrong with getting state from meta for " + this.getUnlocalizedName() + " (" + meta + "). Please tell Fureniku at https://discord.gg/BPzpQk2");
 			return this.getDefaultState().withProperty(FACING, EnumFacing.NORTH);
 		}
 		return this.getDefaultState().withProperty(FACING, enumfacing);

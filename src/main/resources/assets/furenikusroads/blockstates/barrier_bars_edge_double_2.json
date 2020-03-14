@@ -1,0 +1,141 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "furenikusroads:barrier_bars_edge",
+		"uvlock": true,
+		"textures": {
+			"particle": "furenikusroads:blocks/machine_metal"
+		}
+	},
+	"variants": {
+		"inventory": [{
+			"model": "furenikusroads:barrier_bars_edge_2_inventory_double"
+		}],
+		"zpost": {
+			"true": {
+				"submodel": {
+	        		"post_main": { "model": "furenikusroads:barrier_bars_edge_post" },
+	        		"post_l":    { "model": "furenikusroads:barrier_bars_edge_post", "y": 270 },
+	        		"post_r":    { "model": "furenikusroads:barrier_bars_edge_post", "y": 90  },
+	        		"post_back": { "model": "furenikusroads:barrier_bars_edge_post", "y": 180 },
+	        		"back": { "model": "furenikusroads:barrier_bars_edge_2", "y": 180 },
+	    		    "back_l": {  "model": "furenikusroads:barrier_bars_edge_corner_2", "y": 180 },
+	   			    "back_r": {  "model": "furenikusroads:barrier_bars_edge_corner_2", "y": 270  }
+	        	}
+			},
+			"false": {
+				"submodel": {
+	        		"post_main": { "model": "furenikusroads:barrier_bars_edge_no_post_2" },
+	        		"post_l":    { "model": "furenikusroads:barrier_bars_edge_no_post_2", "y": 270 },
+	        		"post_r":    { "model": "furenikusroads:barrier_bars_edge_no_post_2", "y": 90  },
+	        		"post_back": { "model": "furenikusroads:barrier_bars_edge_no_post_2", "y": 180 },
+	        		"back": { "model": "furenikusroads:barrier_bars_edge_2", "y": 180 },
+	        		"back_l": {  "model": "furenikusroads:barrier_bars_edge_corner_2", "y": 180 },
+	        		"back_r": {  "model": "furenikusroads:barrier_bars_edge_corner_2", "y": 270  }
+	        	}
+			}
+		},
+		"left": {
+        	"normal": {
+        		"submodel": {
+	        		"corner_l": { "model": "furenikusroads:barrier_bars_edge_corner_2" },
+	        		"main": { "model": "furenikusroads:barrier_bars_edge_2" },
+	        		"side_l": { "model": "furenikusroads:nomodel" },
+	        		"side_end_l": { "model": "furenikusroads:nomodel" },
+	        		"post_l": { "model": "furenikusroads:nomodel" }
+	        	}
+        	},
+        	"down":  {
+        		"submodel": {
+	        		"corner_l": { "model": "furenikusroads:barrier_bars_edge_corner_2" },
+	        		"main": { "model": "furenikusroads:barrier_bars_edge_2" },
+	        		"side_l": { "model": "furenikusroads:barrier_bars_edge_2", "y": 270 },
+	        		"side_end_l": { "model": "furenikusroads:barrier_bars_edge_corner_2", "y": 270 },
+	        		"post_back": { "model": "furenikusroads:nomodel" },
+	        		"back": { "model": "furenikusroads:barrier_bars_edge_corner_2", "y": 180 },
+	        		"back_l": {  "model": "furenikusroads:nomodel" }
+	        	}
+	        },
+        	"corner": {
+        		"submodel": {
+	        		"corner_l": { "model": "furenikusroads:barrier_bars_edge_corner_2" },
+	        		"main": { "model": "furenikusroads:nomodel" },
+	        		"side_l": { "model": "furenikusroads:nomodel" },
+	        		"side_end_l": { "model": "furenikusroads:nomodel" },
+	        		"post_main": { "model": "furenikusroads:nomodel" },
+	        		"post_l": { "model": "furenikusroads:nomodel" },
+	        		"post_back": { "model": "furenikusroads:nomodel" },
+	        		"back": { "model": "furenikusroads:nomodel" },
+	        		"back_r": {  "model": "furenikusroads:nomodel" }
+	        	}
+	        },
+	        "none": {
+	        	"submodel": {
+	        		"corner_l": { "model": "furenikusroads:nomodel" },
+	        		"main": { "model": "furenikusroads:nomodel" },
+	        		"side_l": { "model": "furenikusroads:nomodel" },
+	        		"side_end_l": { "model": "furenikusroads:nomodel" },
+	        		"post_main": { "model": "furenikusroads:nomodel" },
+	        		"post_l": { "model": "furenikusroads:nomodel" },
+	        		"post_back": { "model": "furenikusroads:nomodel" },
+	        		"back": { "model": "furenikusroads:nomodel" },
+	        		"back_r": {  "model": "furenikusroads:nomodel" }
+	        	}
+	        }
+        },
+        "right": {
+        	"normal": {
+        		"submodel": {
+	        		"corner_r": { "model": "furenikusroads:barrier_bars_edge_corner_2", "y": 90 },
+	        		"main": { "model": "furenikusroads:barrier_bars_edge_2" },
+	        		"side_r": { "model": "furenikusroads:nomodel", "y": 90 },
+	        		"side_end_r": { "model": "furenikusroads:nomodel" },
+	        		"post_r": { "model": "furenikusroads:nomodel" }
+	        	}
+        	},
+        	"down":  {
+        		"submodel": {
+	        		"corner_r": { "model": "furenikusroads:barrier_bars_edge_corner_2", "y": 90 },
+	        		"main": { "model": "furenikusroads:barrier_bars_edge_2" },
+	        		"side_r": { "model": "furenikusroads:barrier_bars_edge_2", "y": 90 },
+	        		"side_end_r": { "model": "furenikusroads:barrier_bars_edge_corner_2", "y": 180 },
+	        		"post_back": { "model": "furenikusroads:nomodel" },
+	        		"back": { "model": "furenikusroads:barrier_bars_edge_corner_2", "y": 270 },
+	        		"back_r": {  "model": "furenikusroads:nomodel" }
+	        	}
+	        },
+        	"corner": {
+        		"submodel": {
+	        		"corner_r": { "model": "furenikusroads:barrier_bars_edge_corner_2", "y": 90 },
+	        		"main": { "model": "furenikusroads:nomodel" },
+	        		"side_r": { "model": "furenikusroads:nomodel", "y": 90 },
+	        		"side_end_r": { "model": "furenikusroads:nomodel" },
+	        		"post_main": { "model": "furenikusroads:nomodel" },
+	        		"post_r": { "model": "furenikusroads:nomodel" },
+	        		"post_back": { "model": "furenikusroads:nomodel" },
+	        		"back": { "model": "furenikusroads:nomodel" },
+	        		"back_r": {  "model": "furenikusroads:nomodel" }
+	        	}
+	        },
+	        "none": {
+	        	"submodel": {
+	        		"corner_l": { "model": "furenikusroads:nomodel" },
+	        		"main": { "model": "furenikusroads:nomodel" },
+	        		"side_l": { "model": "furenikusroads:nomodel" },
+	        		"side_end_l": { "model": "furenikusroads:nomodel" },
+	        		"post_main": { "model": "furenikusroads:nomodel" },
+	        		"post_r": { "model": "furenikusroads:nomodel" },
+	        		"post_back": { "model": "furenikusroads:nomodel" },
+	        		"back": { "model": "furenikusroads:nomodel" },
+	        		"back_r": {  "model": "furenikusroads:nomodel" }
+	        	}
+	        }
+        },
+        "rotation": {
+        	"north": { "model": "furenikusroads:nomodel" },
+        	"east":  { "model": "furenikusroads:nomodel", "y": 90  },
+        	"south": { "model": "furenikusroads:nomodel", "y": 180 },
+        	"west":  { "model": "furenikusroads:nomodel", "y": 270 }
+        }
+	}   	
+}

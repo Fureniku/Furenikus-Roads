@@ -1,0 +1,20 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern":
+	[
+		"i i",
+		"imi"
+	],
+	"key": {
+		"i": {
+			"item": "minecraft:iron_ingot"
+		},
+		"m": {
+			"item": "furenikusroads:machine_frame_electric"
+		}
+	},
+	"result": {
+		"item": "furenikusroads:tarmac_cutter_electric",
+		"data": 0
+	}
+}

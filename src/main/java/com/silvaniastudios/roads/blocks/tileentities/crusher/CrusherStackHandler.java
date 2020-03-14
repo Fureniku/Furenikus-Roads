@@ -13,12 +13,14 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.items.ItemStackHandler;
 
 public class CrusherStackHandler extends ItemStackHandler {
-	private final ItemStackHandler internalStackHandler;
 	
+	private final ItemStackHandler internalStackHandler;
+	boolean electric;
 	public ArrayList<ItemStack> validInputs = new ArrayList<ItemStack>();
 
-	public CrusherStackHandler(ItemStackHandler ish) {
+	public CrusherStackHandler(ItemStackHandler ish, boolean electric) {
 		super();
+		this.electric = electric;
 		internalStackHandler = ish;
 		
 		validInputs.add(new ItemStack(Blocks.STONE));
@@ -52,7 +54,7 @@ public class CrusherStackHandler extends ItemStackHandler {
 
 	@Override
 	public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
-		if (slot == CrusherContainer.FUEL && TileEntityFurnace.getItemBurnTime(stack) > 0) {
+		if (slot == CrusherContainer.FUEL && TileEntityFurnace.getItemBurnTime(stack) > 0 && !electric) {
 			return internalStackHandler.insertItem(slot, stack, simulate);
 		}
 

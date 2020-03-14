@@ -1,16 +1,27 @@
 package com.silvaniastudios.roads.client.gui;
 
+import org.lwjgl.opengl.GL11;
+
 import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.RoadsConfig;
-import com.silvaniastudios.roads.blocks.tileentities.crusher.CrusherElectricEntity;
 import com.silvaniastudios.roads.blocks.tileentities.paintfiller.PaintFillerContainer;
 import com.silvaniastudios.roads.blocks.tileentities.paintfiller.PaintFillerElectricEntity;
 import com.silvaniastudios.roads.blocks.tileentities.paintfiller.PaintFillerEntity;
+import com.silvaniastudios.roads.fluids.FRFluids;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTank;
 
 public class GuiPaintFiller extends GuiContainer {
 	
@@ -49,12 +60,23 @@ public class GuiPaintFiller extends GuiContainer {
         if (electric) {
         	drawTexturedModalRect(left+xSize-23, top, 196, 0, 23, 56);
         }
-        drawGunFillBar(0, left, top, tileEntity.gun_white);
-        drawGunFillBar(1, left, top, tileEntity.gun_yellow);
-        drawGunFillBar(2, left, top, tileEntity.gun_red);
-        drawFillerFillBar(0, left, top, tileEntity.white_paint.getFluidAmount());
-        drawFillerFillBar(1, left, top, tileEntity.yellow_paint.getFluidAmount());
-        drawFillerFillBar(2, left, top, tileEntity.red_paint.getFluidAmount());
+        
+        FluidTank gun_white = new FluidTank(PaintFillerEntity.GUN_TANK_CAP);
+        FluidTank gun_yellow = new FluidTank(PaintFillerEntity.GUN_TANK_CAP);
+        FluidTank gun_red = new FluidTank(PaintFillerEntity.GUN_TANK_CAP);
+        
+        gun_white.setFluid(new FluidStack(FRFluids.white_paint, tileEntity.gun_white));
+        gun_yellow.setFluid(new FluidStack(FRFluids.yellow_paint, tileEntity.gun_yellow));
+        gun_red.setFluid(new FluidStack(FRFluids.red_paint, tileEntity.gun_red));
+        
+        if (tileEntity.inventory.getStackInSlot(PaintFillerContainer.GUN) != ItemStack.EMPTY) {
+        	drawFluidSmall(left +  8, top + 60, gun_white);
+        	drawFluidSmall(left + 24, top + 60, gun_yellow);
+        	drawFluidSmall(left + 40, top + 60, gun_red);
+        }
+        drawFluid(left +  96, top + 8, tileEntity.white_paint);
+        drawFluid(left + 122, top + 8, tileEntity.yellow_paint);
+        drawFluid(left + 148, top + 8, tileEntity.red_paint);
         
         drawFuel(left, top);
         drawProgress(left, top);
@@ -69,16 +91,6 @@ public class GuiPaintFiller extends GuiContainer {
         this.renderHoveredToolTip(mouseX, mouseY);
     }
 	
-	private void drawGunFillBar(int col, int left, int top, int fill) {
-		int p = Math.round(getPercentage(fill, PaintFillerEntity.GUN_TANK_CAP)/2.0F);
-		drawTexturedModalRect(left + 8 + (col*16), top + 108 - p, 226 + (col*10), 100 + (50 - p), 10, p);
-	}
-	
-	private void drawFillerFillBar(int col, int left, int top, int fill) {
-		int p = getPercentage(fill, PaintFillerEntity.FILLER_TANK_CAP);
-		drawTexturedModalRect(left + 96 + (col*26), top + 108 - p, 196 + (col*20), 100 - p, 20, p);
-	}
-	
 	private void drawFuel(int left, int top) {
 		if (electric) {
 			PaintFillerElectricEntity pfee = (PaintFillerElectricEntity) tileEntity;
@@ -89,7 +101,7 @@ public class GuiPaintFiller extends GuiContainer {
 		} else {
 			int p = getPercentage(tileEntity.fuel_remaining, tileEntity.last_fuel_cap);
 			int x = Math.round(p / 7.0F);
-			drawTexturedModalRect(left + 75, top + 75 + (14-x), 176, 14-x, 14, x);
+			drawTexturedModalRect(left + 175, top + 13 + (14-x), 228, 14-x, 14, x);
 		}
 	}
 	
@@ -116,13 +128,66 @@ public class GuiPaintFiller extends GuiContainer {
 		}
 		
 		if (RoadsConfig.general.guiGuide) {
-			if (mouseX >= (left + 21)  && mouseX <= (left + 37) && mouseY >= (top + 36) && mouseY <= (top + 52)) { this.drawHoveringText(I18n.format("roads.gui.paint_filler.paint_gun_slot"), mouseX - left, mouseY - top + 15); }
+			if (mouseX >= (left + 21)  && mouseX <= (left + 37) && mouseY >= (top + 36) && mouseY <= (top + 52) && !tileEntity.has_gun) { this.drawHoveringText(I18n.format("roads.gui.paint_filler.paint_gun_slot"), mouseX - left, mouseY - top + 15); }
 			
-			if (mouseX >= (left + 74)  && mouseX <= (left +  90) && mouseY >= (top + 36) && mouseY <= (top +  52)) { this.drawHoveringText(I18n.format("roads.gui.paint_filler.white_slot"), mouseX - left, mouseY - top + 15); }
-			if (mouseX >= (left + 74)  && mouseX <= (left +  90) && mouseY >= (top + 64) && mouseY <= (top +  80)) { this.drawHoveringText(I18n.format("roads.gui.paint_filler.yellow_slot"), mouseX - left, mouseY - top + 15); }
-			if (mouseX >= (left + 74)  && mouseX <= (left +  90) && mouseY >= (top + 92) && mouseY <= (top + 108)) { this.drawHoveringText(I18n.format("roads.gui.paint_filler.red_slot"), mouseX - left, mouseY - top + 15); }
-			if (mouseX >= (left + 174) && mouseX <= (left + 190) && mouseY >= (top + 32) && mouseY <= (top +  48) && !electric) { this.drawHoveringText(I18n.format("roads.gui.fuelSlot"), mouseX - left, mouseY - top + 15); }
+			if (mouseX >= (left + 74)  && mouseX <= (left +  90) && mouseY >= (top + 36) && mouseY <= (top +  52) && tileEntity.inventory.getStackInSlot(PaintFillerContainer.WHITE_DYE).getCount()  == 0) { this.drawHoveringText(I18n.format("roads.gui.paint_filler.white_slot"), mouseX - left, mouseY - top + 15); }
+			if (mouseX >= (left + 74)  && mouseX <= (left +  90) && mouseY >= (top + 64) && mouseY <= (top +  80) && tileEntity.inventory.getStackInSlot(PaintFillerContainer.YELLOW_DYE).getCount() == 0) { this.drawHoveringText(I18n.format("roads.gui.paint_filler.yellow_slot"), mouseX - left, mouseY - top + 15); }
+			if (mouseX >= (left + 74)  && mouseX <= (left +  90) && mouseY >= (top + 92) && mouseY <= (top + 108) && tileEntity.inventory.getStackInSlot(PaintFillerContainer.RED_DYE).getCount()    == 0) { this.drawHoveringText(I18n.format("roads.gui.paint_filler.red_slot"), mouseX - left, mouseY - top + 15); }
+			if (mouseX >= (left + 174) && mouseX <= (left + 190) && mouseY >= (top + 32) && mouseY <= (top +  48) && !electric  && tileEntity.inventory.getStackInSlot(PaintFillerContainer.FUEL).getCount() == 0) { this.drawHoveringText(I18n.format("roads.gui.fuelSlot"), mouseX - left, mouseY - top + 15); }
 		}
+	}
+	
+	private void drawFluidSmall(int left, int top, FluidTank fluid) {
+		if (fluid.getFluidAmount() > 0) {
+			int fillPercent = getPercentage(fluid.getFluidAmount(), PaintFillerEntity.GUN_TANK_CAP) / 2;
+			if (fillPercent > 48) { fillPercent = 48; }
+			mc.getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+			TextureAtlasSprite texture = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(fluid.getFluid().getFluid().getStill(fluid.getFluid()).toString());
+	
+			for (int i = 0; i < 3; i++) {
+				drawFluidQuad(left, top+(i*16), 10, 16, texture);
+			}
+			
+			mc.getTextureManager().bindTexture(guiTextures);
+			drawTexturedModalRect(left, top, 8, 60, 10, 48-fillPercent);
+		}
+		drawTexturedModalRect(left, top, 246, 108, 10, 48);
+	}
+	
+	private void drawFluid(int left, int top, FluidTank fluid) {
+		if (fluid.getFluidAmount() > 0) {
+			int fillPercent = getPercentage(fluid.getFluidAmount(), PaintFillerEntity.FILLER_TANK_CAP);
+			mc.getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+			TextureAtlasSprite texture = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(fluid.getFluid().getFluid().getStill(fluid.getFluid()).toString());
+	
+			for (int i = 0; i < 6; i++) {
+				drawFluidQuad(left,    top+(i*16), 16, 16, texture);
+				drawFluidQuad(left+16, top+(i*16), 4, 16, texture);
+			}
+			
+			drawFluidQuad(left,    top+96, 16, 4, texture);
+			drawFluidQuad(left+16, top+96,  4, 4, texture);
+			
+			mc.getTextureManager().bindTexture(guiTextures);
+			drawTexturedModalRect(left, top, 96, 8, 20, 100-fillPercent);
+		}
+		drawTexturedModalRect(left, top, 236, 156, 20, 100);
+	}
+	
+	private void drawFluidQuad(int x, int y, int width, int height, TextureAtlasSprite texture) {
+		float minU = texture.getInterpolatedU(0);
+		float minV = texture.getInterpolatedV(0);
+		float maxU = texture.getInterpolatedU(width);
+		float maxV = texture.getInterpolatedV(height);
+		
+		Tessellator tessellator = Tessellator.getInstance();
+		BufferBuilder worldrenderer = tessellator.getBuffer();
+		worldrenderer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
+		worldrenderer.pos((double)x, (double)(y + height), (double)this.zLevel).tex(minU, maxV).endVertex();
+		worldrenderer.pos((double)(x + width), (double)(y + height), (double)this.zLevel).tex(maxU, maxV).endVertex();
+		worldrenderer.pos((double)(x + width), (double)y, (double)this.zLevel).tex(maxU, minV).endVertex();
+		worldrenderer.pos((double)x, (double)y, (double)this.zLevel).tex(minU, minV).endVertex();
+		tessellator.draw();
 	}
 	
 	private int getPercentage(int num, int max) {

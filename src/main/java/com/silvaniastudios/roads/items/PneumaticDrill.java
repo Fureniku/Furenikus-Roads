@@ -89,7 +89,7 @@ public class PneumaticDrill extends ItemTool {
 			if (meta > 0) {
 				world.setBlockState(pos, world.getBlockState(pos).withProperty(RoadBlock.ENUM_HEIGHT, RoadBlock.EnumRoadHeight.byMetadata(meta-1)));
 				if (!player.isCreative()) {
-					player.addItemStackToInventory(new ItemStack(roadBlock.fragmentItem));
+					player.addItemStackToInventory(new ItemStack(roadBlock.getFragmentItem()));
 				}
 				world.playSound(player, pos, FRSounds.pneumatic_drill, SoundCategory.BLOCKS, 1.0F, 1.0F);
 				return EnumActionResult.PASS;
@@ -107,7 +107,7 @@ public class PneumaticDrill extends ItemTool {
 					if (meta > 0) {
 						world.setBlockState(posBelow, world.getBlockState(posBelow).withProperty(RoadBlock.ENUM_HEIGHT, RoadBlock.EnumRoadHeight.byMetadata(meta-1)));
 						if (!player.isCreative()) {
-							player.addItemStackToInventory(new ItemStack(roadBlock.fragmentItem));
+							player.addItemStackToInventory(new ItemStack(roadBlock.getFragmentItem()));
 						}
 						world.playSound(player, pos, FRSounds.pneumatic_drill, SoundCategory.BLOCKS, 1.0F, 1.0F);
 						return EnumActionResult.PASS;

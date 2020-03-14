@@ -45,7 +45,7 @@ public class TarmacCutterBlock extends RoadTEBlock {
 	}
 	
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, new IProperty[] {ROTATION, FURNACE_ACTIVE});
+		return new BlockStateContainer(this, new IProperty[] {ROTATION, FURNACE_ACTIVE, BASE_PLATE});
 	}
 	
 	@Override
@@ -64,9 +64,9 @@ public class TarmacCutterBlock extends RoadTEBlock {
 		if (te instanceof RoadTileEntity) {
 			RoadTileEntity tileEntity = (RoadTileEntity) te;
 			if (tileEntity.fuel_remaining > 0) {
-				return state.withProperty(FURNACE_ACTIVE, true);
+				return state.withProperty(FURNACE_ACTIVE, true).withProperty(BASE_PLATE, hasBasePlate(world, pos));
 			} else {
-				return state.withProperty(FURNACE_ACTIVE, false);
+				return state.withProperty(FURNACE_ACTIVE, false).withProperty(BASE_PLATE, hasBasePlate(world, pos));
 			}
 		}
 		return super.getActualState(state, world, pos);

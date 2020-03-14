@@ -91,11 +91,13 @@ public class RoadFactoryCategory implements IRecipeCategory<RoadFactoryWrapper> 
 		IGuiItemStackGroup itemStack = recipeLayout.getItemStacks();
 		IGuiFluidStackGroup fluidStack = recipeLayout.getFluidStacks();
 		
-		itemStack.init(RoadFactoryContainer.INPUT_1, true, 25, 12);
+		itemStack.init(RoadFactoryContainer.INPUT_1, true, 26, 12);
+		itemStack.init(RoadFactoryContainer.MODIFIER, true, 74, 35);
 		itemStack.init(RoadFactoryContainer.OUTPUT_1, false, 99, 12);
 		fluidStack.init(12, true, 1, 1, 20, 100, RoadFactoryEntity.TANK_CAP, true, tankCover);
 		
 		itemStack.set(RoadFactoryContainer.INPUT_1, ingredients.getInputs(VanillaTypes.ITEM).get(0));
+		itemStack.set(RoadFactoryContainer.MODIFIER, ingredients.getInputs(VanillaTypes.ITEM).get(1));
 		fluidStack.set(12, ingredients.getInputs(VanillaTypes.FLUID).get(0));
 		itemStack.set(RoadFactoryContainer.OUTPUT_1, ingredients.getOutputs(VanillaTypes.ITEM).get(0));
 	}

@@ -6,12 +6,16 @@ import com.silvaniastudios.roads.blocks.FRBlocks;
 import com.silvaniastudios.roads.blocks.tileentities.crusher.CrusherEntity;
 import com.silvaniastudios.roads.blocks.tileentities.distiller.TarDistillerEntity;
 import com.silvaniastudios.roads.blocks.tileentities.paintfiller.PaintFillerEntity;
+import com.silvaniastudios.roads.blocks.tileentities.paintfiller.hopper.PaintFillerHopperEntity;
+import com.silvaniastudios.roads.blocks.tileentities.paintoven.PaintOvenEntity;
 import com.silvaniastudios.roads.blocks.tileentities.roadfactory.RoadFactoryEntity;
 import com.silvaniastudios.roads.blocks.tileentities.tarmaccutter.TarmacCutterEntity;
 import com.silvaniastudios.roads.client.gui.GuiPaintGun;
 import com.silvaniastudios.roads.client.model.CrusherRenderer;
 import com.silvaniastudios.roads.client.model.ModelBakeHandler;
+import com.silvaniastudios.roads.client.model.PaintFillerHopperRenderer;
 import com.silvaniastudios.roads.client.model.PaintFillerRenderer;
+import com.silvaniastudios.roads.client.model.PaintOvenRenderer;
 import com.silvaniastudios.roads.client.model.RoadFactoryRenderer;
 import com.silvaniastudios.roads.client.model.TarDistillerRenderer;
 import com.silvaniastudios.roads.client.model.TarmacCutterRenderer;
@@ -47,6 +51,9 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(RoadFactoryEntity.class, new RoadFactoryRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(CrusherEntity.class, new CrusherRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TarmacCutterEntity.class, new TarmacCutterRenderer());
+		
+		ClientRegistry.bindTileEntitySpecialRenderer(PaintFillerHopperEntity.class, new PaintFillerHopperRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(PaintOvenEntity.class, new PaintOvenRenderer());
 	}
 	
 	@Override

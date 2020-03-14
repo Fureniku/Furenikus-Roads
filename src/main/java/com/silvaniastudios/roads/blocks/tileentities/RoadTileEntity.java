@@ -2,16 +2,21 @@ package com.silvaniastudios.roads.blocks.tileentities;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class RoadTileEntity extends TileEntity {
 	
 	public int fuel_remaining = 0;
 	public int last_fuel_cap = 0;
+	
+	boolean hasBasePlate;
 	
 	public RoadTileEntity() {}
 
@@ -43,12 +48,14 @@ public class RoadTileEntity extends TileEntity {
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
+		nbt.setBoolean("base_plate", hasBasePlate);
 		return writeNBT(nbt);
 	}
 	
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
+		hasBasePlate = nbt.getBoolean("base_plate");
 		readNBT(nbt);
 	}
 	
@@ -64,6 +71,11 @@ public class RoadTileEntity extends TileEntity {
 		return nbt;
 	}
 	
+	@Override
+	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newSate) {
+        return oldState.getBlock() != newSate.getBlock();
+    }
+	
 	
 	@Override
 	public SPacketUpdateTileEntity getUpdatePacket() {
@@ -75,5 +87,16 @@ public class RoadTileEntity extends TileEntity {
 		super.onDataPacket(net, pkt);
 		this.readNBT(pkt.getNbtCompound());
 		this.getWorld().notifyBlockUpdate(this.pos, this.getState(), this.getState(), 3);
+	}
+	
+	public boolean isDye(ItemStack stack, String name) {
+		if (!stack.isEmpty()) {
+			for (int id : OreDictionary.getOreIDs(stack)) {
+				if (OreDictionary.getOreName(id).equals(name)) {
+	                return true;
+				}
+			}
+		}
+		return false;
 	}
 }

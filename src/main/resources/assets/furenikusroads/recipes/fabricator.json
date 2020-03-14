@@ -1,0 +1,23 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern":
+	[
+		"iri",
+		"imi"
+	],
+	"key": {
+		"r": {
+			"item": "minecraft:redstone"
+		},
+		"i": {
+			"item": "minecraft:iron_ingot"
+		},
+		"m": {
+			"item": "furenikusroads:machine_frame"
+		}
+	},
+	"result": {
+		"item": "furenikusroads:fabricator",
+		"data": 0
+	}
+}

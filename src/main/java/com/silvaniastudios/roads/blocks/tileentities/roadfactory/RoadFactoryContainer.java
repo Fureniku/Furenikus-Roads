@@ -15,6 +15,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.SlotItemHandler;
 
 public class RoadFactoryContainer extends Container {
 	
@@ -31,9 +32,11 @@ public class RoadFactoryContainer extends Container {
 	public static final int FUEL = 8;
 	public static final int FLUID_IN = 9;
 	public static final int FLUID_IN_BUCKET = 10;
+	public static final int MODIFIER = 11;
 	
 	private boolean isElectric = false;
 	private int energy;
+	private int tar;
 	
 	public RoadFactoryContainer(InventoryPlayer invPlayer, RoadFactoryEntity tileEntity, boolean isElectric) {
 		this.tileEntity = tileEntity;
@@ -49,6 +52,7 @@ public class RoadFactoryContainer extends Container {
 		if (!isElectric) { addSlotToContainer(new SlotFuel(itemHandler, FUEL, 152, 43)); }
 		addSlotToContainer(new SlotFluid(itemHandler, FLUID_IN, 34, 70));
 		addSlotToContainer(new SlotFluid(itemHandler, FLUID_IN_BUCKET, 34, 92));
+		if (itemHandler.getSlots() >= 12) { addSlotToContainer(new SlotItemHandler(itemHandler, MODIFIER, 82, 43)); }
 		
 		this.isElectric = isElectric;
 		addPlayerSlots(invPlayer);
@@ -81,16 +85,23 @@ public class RoadFactoryContainer extends Container {
 	        	if (this.energy != rfee.energy.getEnergyStored()) {
 	        		icontainerlistener.sendWindowProperty(this, 0, rfee.energy.getEnergyStored());
 	        	}
+	        	if (this.tar != tileEntity.tarFluid.getFluidAmount()) {
+	        		icontainerlistener.sendWindowProperty(this, 1, tileEntity.tarFluid.getFluidAmount());
+	        	}
 			}
+			this.tar = tileEntity.tarFluid.getFluidAmount();
 			this.energy = rfee.energy.getEnergyStored();
 		}
 	}
 	
 	@SideOnly(Side.CLIENT)
 	public void updateProgressBar(int id, int data) {
-		if (this.isElectric) {
+		if (this.isElectric && id == 0) {
 			RoadFactoryElectricEntity rfee = (RoadFactoryElectricEntity) tileEntity;
 			rfee.energy.setEnergy(data);
+		}
+		if (id == 1 && tileEntity.tarFluid.getFluid() != null) {
+			tileEntity.tarFluid.getFluid().amount = data;
 		}
     }
 

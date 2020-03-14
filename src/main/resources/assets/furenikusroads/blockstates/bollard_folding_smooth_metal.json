@@ -1,0 +1,62 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"transform": "forge:default-block",
+		"model": "furenikusroads:bollard_concrete_1",
+		"textures": {
+			"0": "furenikusroads:blocks/bollard_smooth_metal"
+		}
+	},
+	"variants": {
+		"meta": {
+			"0": {
+				"model": "furenikusroads:bollard_folding_1_upright"
+			},
+			"1": {
+				"model": "furenikusroads:bollard_folding_1_upright", "y": 90
+			},
+			"2": {
+				"model": "furenikusroads:bollard_folding_1_upright", "y": 180
+			},
+			"3": {
+				"model": "furenikusroads:bollard_folding_1_upright", "y": 270
+			},
+			"4": {
+				"model": "furenikusroads:bollard_folding_1_down"
+			},
+			"5": {
+				"model": "furenikusroads:bollard_folding_1_down", "y": 90
+			},
+			"6": {
+				"model": "furenikusroads:bollard_folding_1_down", "y": 180
+			},
+			"7": {
+				"model": "furenikusroads:bollard_folding_1_down", "y": 270
+			},
+			"8": {
+				"model": "furenikusroads:bollard_folding_2_upright"
+			},
+			"9": {
+				"model": "furenikusroads:bollard_folding_2_upright", "y": 90
+			},
+			"10": {
+				"model": "furenikusroads:bollard_folding_2_upright", "y": 180
+			},
+			"11": {
+				"model": "furenikusroads:bollard_folding_2_upright", "y": 270
+			},
+			"12": {
+				"model": "furenikusroads:bollard_folding_2_down"
+			},
+			"13": {
+				"model": "furenikusroads:bollard_folding_2_down", "y": 90
+			},
+			"14": {
+				"model": "furenikusroads:bollard_folding_2_down", "y": 180
+			},
+			"15": {
+				"model": "furenikusroads:bollard_folding_2_down", "y": 270
+			}
+		}
+	}
+}

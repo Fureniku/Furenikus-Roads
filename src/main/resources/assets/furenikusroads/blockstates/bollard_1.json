@@ -29,6 +29,10 @@
 				"1": "furenikusroads:blocks/traffic_bollard_right_2"
 			}
 		}],
+		"inventory_4": [{}],
+		"inventory_5": [{}],
+		"inventory_6": [{}],
+		"inventory_7": [{}],
 		"rotated": {
 			"true": {
 				"y": 90

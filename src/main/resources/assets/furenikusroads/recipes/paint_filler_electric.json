@@ -1,0 +1,27 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern":
+	[
+		"gri",
+		"gmr",
+		"gii"
+	],
+	"key": {
+		"g": {
+			"item": "furenikusroads:large_glass_tank"
+		},
+		"i": {
+			"item": "minecraft:iron_ingot"
+		},
+		"r": {
+			"item": "minecraft:redstone"
+		},
+		"m": {
+			"item": "furenikusroads:machine_frame_electric"
+		}
+	},
+	"result": {
+		"item": "furenikusroads:paint_filler_electric",
+		"data": 0
+	}
+}

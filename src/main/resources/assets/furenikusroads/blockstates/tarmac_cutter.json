@@ -20,12 +20,12 @@
 				"thirdperson_righthand": {
 					"rotation": [68, 0, 0],
 					"translation": [-6, 3.25, -6],
-					"scale": [1.25, 1.25, 1.25]
+					"scale": [0.75, 0.75, 0.75]
 				},
 				"thirdperson_lefthand": {
 					"rotation": [68, 0, 0],
 					"translation": [-6, 3.25, -6],
-					"scale": [1.25, 1.25, 1.25]
+					"scale": [0.75, 0.75, 0.75]
 				},
 				"firstperson_righthand": {
 					"translation": [-8.75, 0, 0]
@@ -56,6 +56,18 @@
 				}
 			},
 			"false": {
+			}
+		},
+		"base_plate": {
+			"true": {
+				"submodel": {
+	        		"baseplate": { "model": "furenikusroads:base_plate" }
+	        	}
+			},
+			"false": {
+				"submodel": {
+	        		"baseplate": { "model": "furenikusroads:base_plate_tarmac_cutter" }
+	        	}
 			}
 		},
 		"rotation": {

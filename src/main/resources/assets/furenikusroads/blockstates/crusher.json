@@ -42,6 +42,18 @@
 			"false": {
 			}
 		},
+		"base_plate": {
+			"true": {
+				"submodel": {
+	        		"baseplate": { "model": "furenikusroads:base_plate" }
+	        	}
+			},
+			"false": {
+				"submodel": {
+	        		"baseplate": { "model": "furenikusroads:base_plate_crusher" }
+	        	}
+			}
+		},
 		"rotation": {
 			"north": {
 				"model": "furenikusroads:crusher", "y": 0

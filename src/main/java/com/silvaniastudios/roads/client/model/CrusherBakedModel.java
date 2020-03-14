@@ -138,7 +138,7 @@ public class CrusherBakedModel implements IBakedModel {
 
 	@Override
 	public TextureAtlasSprite getParticleTexture() {
-		return null;
+		return model.getParticleTexture();
 	}
 
 	@Override

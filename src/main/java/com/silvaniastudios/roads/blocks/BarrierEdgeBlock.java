@@ -221,9 +221,6 @@ public class BarrierEdgeBlock extends BlockBase {
 	public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
 		EnumBarrierSide left  = canBarrierConnectTo(state, world, pos, true);
 		EnumBarrierSide right = canBarrierConnectTo(state, world, pos, false);
-		if (left != EnumBarrierSide.NORMAL || right != EnumBarrierSide.NORMAL) {
-			double_sided = false;
-		}
 		
 		return state.withProperty(LEFT, left).withProperty(RIGHT,  right);
 	}
@@ -258,55 +255,67 @@ public class BarrierEdgeBlock extends BlockBase {
 		EnumBarrierSide left  = state.getValue(LEFT);
 		EnumBarrierSide right = state.getValue(RIGHT);
 		
-		if (n) {
-			if (left .equals(EnumBarrierSide.DOWN)) { w = true; }
-			if (right.equals(EnumBarrierSide.DOWN)) { e = true; }
-		} else if (e) { 
-			if (left .equals(EnumBarrierSide.DOWN)) { n = true; }
-			if (right.equals(EnumBarrierSide.DOWN)) { s = true; }
-		} else if (s) {
-			if (left .equals(EnumBarrierSide.DOWN)) { e = true; }
-			if (right.equals(EnumBarrierSide.DOWN)) { w = true; }
-		} else if (w) {
-			if (left .equals(EnumBarrierSide.DOWN)) { s = true; }
-			if (right.equals(EnumBarrierSide.DOWN)) { n = true; }
-		}
-		
-		if (n && (left.equals(EnumBarrierSide.CORNER) || right.equals(EnumBarrierSide.CORNER))) { n = false; }
-		if (e && (left.equals(EnumBarrierSide.CORNER) || right.equals(EnumBarrierSide.CORNER))) { e = false; }
-		if (s && (left.equals(EnumBarrierSide.CORNER) || right.equals(EnumBarrierSide.CORNER))) { s = false; }
-		if (w && (left.equals(EnumBarrierSide.CORNER) || right.equals(EnumBarrierSide.CORNER))) { w = false; }
-		
-		if ((n && e && s) || (n && w && s) || (n && e && w) || (n && e && s && w)) { 
-			System.out.println("Broken! NESW: " + n + e + s + w);
+		if (double_sided) {
+			if (n) {
+				if (left .equals(EnumBarrierSide.DOWN)) { w = true; }
+				if (right.equals(EnumBarrierSide.DOWN)) { e = true; }
+				if (!left.equals(EnumBarrierSide.DOWN) && !right.equals(EnumBarrierSide.DOWN)) {
+					s = true;
+				}
+			} else if (e) {
+				if (left .equals(EnumBarrierSide.DOWN)) { n = true; }
+				if (right.equals(EnumBarrierSide.DOWN)) { s = true; }
+				if (!left.equals(EnumBarrierSide.DOWN) && !right.equals(EnumBarrierSide.DOWN)) {
+					w = true;
+				}
+			} else if (s) {
+				if (left .equals(EnumBarrierSide.DOWN)) { e = true; }
+				if (right.equals(EnumBarrierSide.DOWN)) { w = true; }
+				if (!left.equals(EnumBarrierSide.DOWN) && !right.equals(EnumBarrierSide.DOWN)) {
+					n = true;
+				}
+			} else if (w) {
+				if (left .equals(EnumBarrierSide.DOWN)) { s = true; }
+				if (right.equals(EnumBarrierSide.DOWN)) { n = true; }
+				if (!left.equals(EnumBarrierSide.DOWN) && !right.equals(EnumBarrierSide.DOWN)) {
+					e = true;
+				}
+			}
+		} else {
+			if (n) {
+				if (left .equals(EnumBarrierSide.DOWN)) { w = true; }
+				if (right.equals(EnumBarrierSide.DOWN)) { e = true; }
+			} else if (e) { 
+				if (left .equals(EnumBarrierSide.DOWN)) { n = true; }
+				if (right.equals(EnumBarrierSide.DOWN)) { s = true; }
+			} else if (s) {
+				if (left .equals(EnumBarrierSide.DOWN)) { e = true; }
+				if (right.equals(EnumBarrierSide.DOWN)) { w = true; }
+			} else if (w) {
+				if (left .equals(EnumBarrierSide.DOWN)) { s = true; }
+				if (right.equals(EnumBarrierSide.DOWN)) { n = true; }
+			}
+			
+			if (n && (left.equals(EnumBarrierSide.CORNER) || right.equals(EnumBarrierSide.CORNER))) { n = false; }
+			if (e && (left.equals(EnumBarrierSide.CORNER) || right.equals(EnumBarrierSide.CORNER))) { e = false; }
+			if (s && (left.equals(EnumBarrierSide.CORNER) || right.equals(EnumBarrierSide.CORNER))) { s = false; }
+			if (w && (left.equals(EnumBarrierSide.CORNER) || right.equals(EnumBarrierSide.CORNER))) { w = false; }
 		}
 		
 		if (n) {
 			addCollisionBoxToList(pos, entityBox, collidingBoxes, NORTH_AABB);
-			if (double_sided) {
-				addCollisionBoxToList(pos, entityBox, collidingBoxes, SOUTH_AABB);
-			}
 		}
 		
 		if (e) {
 			addCollisionBoxToList(pos, entityBox, collidingBoxes, EAST_AABB);
-			if (double_sided) {
-				addCollisionBoxToList(pos, entityBox, collidingBoxes, WEST_AABB);
-			}
 		}
 		
 		if (s) {
 			addCollisionBoxToList(pos, entityBox, collidingBoxes, SOUTH_AABB);
-			if (double_sided) {
-				addCollisionBoxToList(pos, entityBox, collidingBoxes, NORTH_AABB);
-			}
 		}
 		
 		if (w) {
 			addCollisionBoxToList(pos, entityBox, collidingBoxes, WEST_AABB);
-			if (double_sided) {
-				addCollisionBoxToList(pos, entityBox, collidingBoxes, EAST_AABB);
-			}
 		}
 	}
     

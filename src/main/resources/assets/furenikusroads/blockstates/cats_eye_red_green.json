@@ -1,0 +1,113 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"transform": "forge:default-block",
+		"textures": {
+			"left": "furenikusroads:blocks/cats_eye_red_e",
+			"right": "furenikusroads:blocks/cats_eye_green_e",
+			"particle": "furenikusroads:blocks/machine_metal_dark"
+		},
+		"model": "furenikusroads:cats_eye"
+	},
+	"variants": {
+		"inventory": [{
+			"model": "furenikusroads:cats_eye",
+			"transform": {
+				"thirdperson_righthand": {
+					"translation": [0, 8, 1.25]
+				},
+				"thirdperson_lefthand": {
+					"translation": [0, 8, 1.25]
+				},
+				"firstperson_righthand": {
+					"translation": [0, 16, 0],
+					"scale": [2, 2, 2]
+				},
+				"firstperson_lefthand": {
+					"translation": [0, 16, 0],
+					"scale": [2, 2, 2]
+				},
+				"ground": {
+					"translation": [0, 12.25, 0.25],
+					"scale": [2, 2, 2]
+				},
+				"gui": {
+					"rotation": [15, 45, 0],
+					"translation": [0, 30, 0],
+					"scale": [4, 4, 4]
+				},
+				"fixed": {
+					"rotation": [-90, 90, 0],
+					"translation": [0, 0, -31.75],
+					"scale": [4, 4, 4]
+				}
+            }
+		}],
+		"eye_type": {
+			"floor_n": {
+				"model": "furenikusroads:cats_eye", "y": 90
+			},
+			"floor_e": {
+				"model": "furenikusroads:cats_eye"
+			},
+			"floor_s": {
+				"model": "furenikusroads:cats_eye", "y": 270
+			},
+			"floor_w": {
+				"model": "furenikusroads:cats_eye", "y": 180
+			},
+			"wall_north_rg": {
+				"model": "furenikusroads:cats_eye", "x": 90
+			},
+			"wall_east_rg": {
+				"model": "furenikusroads:cats_eye", "x": 90, "y": 90
+			},
+			"wall_south_rg": {
+				"model": "furenikusroads:cats_eye", "x": 270
+			},
+			"wall_west_rg": {
+				"model": "furenikusroads:cats_eye", "x": 270, "y": 90
+			},
+			"wall_north_gr": {
+				"model": "furenikusroads:cats_eye", "x": 90,
+				"textures": {
+					"left": "furenikusroads:blocks/cats_eye_green_e",
+					"right": "furenikusroads:blocks/cats_eye_red_e"
+				}
+			},
+			"wall_east_gr": {
+				"model": "furenikusroads:cats_eye", "x": 90, "y": 90,
+				"textures": {
+					"left": "furenikusroads:blocks/cats_eye_green_e",
+					"right": "furenikusroads:blocks/cats_eye_red_e"
+				}
+			},
+			"wall_south_gr": {
+				"model": "furenikusroads:cats_eye", "x": 270,
+				"textures": {
+					"left": "furenikusroads:blocks/cats_eye_green_e",
+					"right": "furenikusroads:blocks/cats_eye_red_e"
+				}
+			},
+			"wall_west_gr": {
+				"model": "furenikusroads:cats_eye", "x": 270, "y": 90,
+				"textures": {
+					"left": "furenikusroads:blocks/cats_eye_green_e",
+					"right": "furenikusroads:blocks/cats_eye_red_e"
+				}
+			},
+			"roof_n": {
+				"model": "furenikusroads:cats_eye", "x": 180, "y": 90
+			},
+			"roof_e": {
+				"model": "furenikusroads:cats_eye", "x": 180
+			},
+			"roof_s": {
+				"model": "furenikusroads:cats_eye", "x": 180, "y": 270
+			},
+			"roof_w": {
+				"model": "furenikusroads:cats_eye", "x": 180, "y": 180
+			}
+		}
+	}
+}

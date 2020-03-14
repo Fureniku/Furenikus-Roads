@@ -65,7 +65,7 @@ public class TarmacRammer extends ItemTool {
 			if (meta < 15) {
 				if (!player.isCreative()) {
 					for (int i = 0; i < player.inventory.getSizeInventory(); i++) {
-						if (player.inventory.getStackInSlot(i).getItem().equals(roadBlock.fragmentItem)) {
+						if (player.inventory.getStackInSlot(i).getItem().equals(roadBlock.getFragmentItem())) {
 							world.setBlockState(pos, world.getBlockState(pos).withProperty(RoadBlock.ENUM_HEIGHT, RoadBlock.EnumRoadHeight.byMetadata(meta+1)));
 							player.inventory.decrStackSize(i, 1);
 							return EnumActionResult.PASS;
@@ -88,7 +88,7 @@ public class TarmacRammer extends ItemTool {
 					if (meta < 15) {
 						if (!player.isCreative()) {
 							for (int j = 0; j < player.inventory.getSizeInventory(); j++) {
-								if (player.inventory.getStackInSlot(j).getItem().equals(roadBlock.fragmentItem)) {
+								if (player.inventory.getStackInSlot(j).getItem().equals(roadBlock.getFragmentItem())) {
 									world.setBlockState(posBelow, stateBelow.withProperty(RoadBlock.ENUM_HEIGHT, RoadBlock.EnumRoadHeight.byMetadata(meta+1)));
 									player.inventory.decrStackSize(j, 1);
 									return EnumActionResult.PASS;

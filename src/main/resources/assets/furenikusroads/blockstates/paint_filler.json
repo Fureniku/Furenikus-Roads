@@ -47,6 +47,18 @@
 				}
 			}
 		},
+		"base_plate": {
+			"true": {
+				"submodel": {
+	        		"baseplate": { "model": "furenikusroads:base_plate" }
+	        	}
+			},
+			"false": {
+				"submodel": {
+	        		"baseplate": { "model": "furenikusroads:base_plate_paint_filler" }
+	        	}
+			}
+		},
 		"furnace_active": {
 			"true": {
 				"textures": {

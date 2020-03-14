@@ -23,30 +23,47 @@ import com.silvaniastudios.roads.blocks.paint.MultiIconPaintBlock;
 import com.silvaniastudios.roads.blocks.paint.PaintBlockBase;
 import com.silvaniastudios.roads.blocks.paint.SideLinePaintBlock;
 import com.silvaniastudios.roads.blocks.paint.SimpleLinePaintBlock;
+import com.silvaniastudios.roads.blocks.tileentities.compactor.CompactorBlock;
+import com.silvaniastudios.roads.blocks.tileentities.compactor.CompactorElectricEntity;
+import com.silvaniastudios.roads.blocks.tileentities.compactor.CompactorEntity;
 import com.silvaniastudios.roads.blocks.tileentities.crusher.CrusherBlock;
 import com.silvaniastudios.roads.blocks.tileentities.crusher.CrusherElectricEntity;
 import com.silvaniastudios.roads.blocks.tileentities.crusher.CrusherEntity;
 import com.silvaniastudios.roads.blocks.tileentities.distiller.TarDistillerBlock;
 import com.silvaniastudios.roads.blocks.tileentities.distiller.TarDistillerElectricEntity;
 import com.silvaniastudios.roads.blocks.tileentities.distiller.TarDistillerEntity;
+import com.silvaniastudios.roads.blocks.tileentities.fabricator.FabricatorBlock;
+import com.silvaniastudios.roads.blocks.tileentities.fabricator.FabricatorElectricEntity;
+import com.silvaniastudios.roads.blocks.tileentities.fabricator.FabricatorEntity;
 import com.silvaniastudios.roads.blocks.tileentities.paintfiller.PaintFillerBlock;
 import com.silvaniastudios.roads.blocks.tileentities.paintfiller.PaintFillerElectricEntity;
 import com.silvaniastudios.roads.blocks.tileentities.paintfiller.PaintFillerEntity;
+import com.silvaniastudios.roads.blocks.tileentities.paintfiller.hopper.PaintFillerHopperBlock;
+import com.silvaniastudios.roads.blocks.tileentities.paintfiller.hopper.PaintFillerHopperEntity;
+import com.silvaniastudios.roads.blocks.tileentities.paintoven.PaintOvenBlock;
+import com.silvaniastudios.roads.blocks.tileentities.paintoven.PaintOvenElectricEntity;
+import com.silvaniastudios.roads.blocks.tileentities.paintoven.PaintOvenEntity;
 import com.silvaniastudios.roads.blocks.tileentities.roadfactory.RoadFactoryBlock;
 import com.silvaniastudios.roads.blocks.tileentities.roadfactory.RoadFactoryElectricEntity;
 import com.silvaniastudios.roads.blocks.tileentities.roadfactory.RoadFactoryEntity;
 import com.silvaniastudios.roads.blocks.tileentities.tarmaccutter.TarmacCutterBlock;
 import com.silvaniastudios.roads.blocks.tileentities.tarmaccutter.TarmacCutterElectricEntity;
 import com.silvaniastudios.roads.blocks.tileentities.tarmaccutter.TarmacCutterEntity;
+import com.silvaniastudios.roads.fluids.FRFluids;
 import com.silvaniastudios.roads.items.FRItems;
 import com.silvaniastudios.roads.items.PaintGunItemRegistry;
 import com.silvaniastudios.roads.items.RoadItemBlock;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fluids.BlockFluidClassic;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
 
 public class FRBlocks {
@@ -85,16 +102,29 @@ public class FRBlocks {
 	public static RoadFactoryBlock road_factory = new RoadFactoryBlock("road_factory", false);
 	public static TarmacCutterBlock tarmac_cutter = new TarmacCutterBlock("tarmac_cutter", false);
 	public static CrusherBlock crusher = new CrusherBlock("crusher", false);
+	public static PaintOvenBlock paint_oven = new PaintOvenBlock("paint_oven", false);
+	public static CompactorBlock compactor = new CompactorBlock("compactor", false);
+	public static FabricatorBlock fabricator = new FabricatorBlock("fabricator", false);
 	
 	public static PaintFillerBlock paint_filler_electric = new PaintFillerBlock("paint_filler_electric", true);
 	public static TarDistillerBlock tar_distiller_electric = new TarDistillerBlock("tar_distiller_electric", true);
 	public static RoadFactoryBlock road_factory_electric = new RoadFactoryBlock("road_factory_electric", true);
 	public static TarmacCutterBlock tarmac_cutter_electric = new TarmacCutterBlock("tarmac_cutter_electric", true);
 	public static CrusherBlock crusher_electric = new CrusherBlock("crusher_electric", true);
+	public static PaintOvenBlock paint_oven_electric = new PaintOvenBlock("paint_oven_electric", true);
+	public static CompactorBlock compactor_electric = new CompactorBlock("compactor_electric", true);
+	public static FabricatorBlock fabricator_electric = new FabricatorBlock("fabricator_electric", true);
+	
+	public static PaintFillerHopperBlock paint_filler_hopper = new PaintFillerHopperBlock("paint_filler_hopper");
+	
+	public static BlockFluidClassic tar_fluid = (BlockFluidClassic) new BlockFluidClassic(FRFluids.tar, Material.WATER).setUnlocalizedName(FurenikusRoads.MODID + ".tar_fluid").setRegistryName("tar_fluid");
+	public static BlockFluidClassic paint_white_fluid = (BlockFluidClassic) new BlockFluidClassic(FRFluids.white_paint, Material.WATER).setUnlocalizedName(FurenikusRoads.MODID + ".paint_white_fluid").setRegistryName("paint_white_fluid");
+	public static BlockFluidClassic paint_yellow_fluid = (BlockFluidClassic) new BlockFluidClassic(FRFluids.yellow_paint, Material.WATER).setUnlocalizedName(FurenikusRoads.MODID + ".paint_yellow_fluid").setRegistryName("paint_yellow_fluid");
+	public static BlockFluidClassic paint_red_fluid = (BlockFluidClassic) new BlockFluidClassic(FRFluids.red_paint, Material.WATER).setUnlocalizedName(FurenikusRoads.MODID + ".paint_red_fluid").setRegistryName("paint_red_fluid");
 		
 	public static StreetBlock street_block_a = (StreetBlock) new StreetBlock("street_block_a", 16).setCreativeTab(FurenikusRoads.tab_sidewalks);
 	public static StreetBlock street_block_b = (StreetBlock) new StreetBlock("street_block_b", 16).setCreativeTab(FurenikusRoads.tab_sidewalks);
-	public static StreetBlock generic_blocks = (StreetBlock) new StreetBlock("generic_blocks", 4).setCreativeTab(FurenikusRoads.tab_tools);
+	public static StreetBlock generic_blocks = (StreetBlock) new StreetBlock("generic_blocks", 4).setCreativeTab(FurenikusRoads.tab_sidewalks);
 	
 	public static StreetRoadBlock sidewalk = new StreetRoadBlock("sidewalk", Material.ROCK, FRItems.sidewalk_fragment_standard);
 	public static StreetRoadBlock sidewalk_clean = new StreetRoadBlock("sidewalk_clean", Material.ROCK, FRItems.sidewalk_fragment_clean);
@@ -114,17 +144,19 @@ public class FRBlocks {
 	public static ConcreteBarrierBlock barrier_concrete_2_mid = new ConcreteBarrierBlock("barrier_concrete_2_mid");
 	public static BarsBarrierBlock barrier_bars_mid = new BarsBarrierBlock("barrier_bars_mid");
 	public static BarsBarrierBlock barrier_bars_mid_2 = new BarsBarrierBlock("barrier_bars_mid_2");
+	public static BarsBarrierBlock barrier_bars_mid_3 = new BarsBarrierBlock("barrier_bars_mid_3");
 	public static BarsBarrierBlock barrier_bars_mid_concrete_1 = new BarsBarrierBlock("barrier_bars_mid_concrete_1");
 	public static BarsBarrierBlock barrier_bars_mid_concrete_2 = new BarsBarrierBlock("barrier_bars_mid_concrete_2");
 	public static BarsBarrierBlock barrier_wall_mid_concrete_1 = new BarsBarrierBlock("barrier_wall_mid_concrete_1");
 	public static BarsBarrierBlock barrier_wall_mid_concrete_2 = new BarsBarrierBlock("barrier_wall_mid_concrete_2");
 	public static BarsBarrierBlock barrier_wall_pole_mid_concrete_1 = new BarsBarrierBlock("barrier_wall_pole_mid_concrete_1");
 	public static BarsBarrierBlock barrier_wall_pole_mid_concrete_2 = new BarsBarrierBlock("barrier_wall_pole_mid_concrete_2");
-	public static BarsBarrierBlock barrier_low_mid = new BarsBarrierBlock("barrier_low_mid");
+	public static BarsBarrierBlock barrier_low_mid = new BarsBarrierBlock("barrier_low_mid", 0.5F);
 	public static BarrierEndBlock barrier_end = new BarrierEndBlock("barrier_end");
 	
 	public static BarrierEdgeBlock barrier_bars_edge = new BarrierEdgeBlock("barrier_bars_edge", false);
 	public static BarrierEdgeBlock barrier_bars_edge_2 = new BarrierEdgeBlock("barrier_bars_edge_2", false);
+	public static BarrierEdgeBlock barrier_bars_edge_3 = new BarrierEdgeBlock("barrier_bars_edge_3", false);
 	public static BarrierEdgeBlock barrier_wall_edge_concrete_1 = new BarrierEdgeBlock("barrier_wall_edge_concrete_1", false);
 	public static BarrierEdgeBlock barrier_wall_edge_concrete_2 = new BarrierEdgeBlock("barrier_wall_edge_concrete_2", false);
 	public static BarrierEdgeBlock barrier_bars_edge_concrete_1 = new BarrierEdgeBlock("barrier_bars_edge_concrete_1", false);
@@ -138,26 +170,49 @@ public class FRBlocks {
 	public static BarrierLowEdgeBlock barrier_low_edge = new BarrierLowEdgeBlock("barrier_low_edge", false);
 	
 	public static BarrierEdgeBlock barrier_bars_edge_double = new BarrierEdgeBlock("barrier_bars_edge_double", true);
+	public static BarrierEdgeBlock barrier_bars_edge_double_2 = new BarrierEdgeBlock("barrier_bars_edge_double_2", true);
+	public static BarrierEdgeBlock barrier_bars_edge_double_3 = new BarrierEdgeBlock("barrier_bars_edge_double_3", true);
 	public static BarrierEdgeBlock barrier_wall_edge_concrete_1_double = new BarrierEdgeBlock("barrier_wall_edge_concrete_1_double", true);
 	public static BarrierEdgeBlock barrier_wall_edge_concrete_2_double = new BarrierEdgeBlock("barrier_wall_edge_concrete_2_double", true);
+	public static BarrierEdgeBlock barrier_bars_edge_concrete_1_double = new BarrierEdgeBlock("barrier_bars_edge_concrete_1_double", true);
+	public static BarrierEdgeBlock barrier_bars_edge_concrete_2_double = new BarrierEdgeBlock("barrier_bars_edge_concrete_2_double", true);
+	public static BarrierEdgeBlock barrier_wall_pole_edge_concrete_1_double = new BarrierEdgeBlock("barrier_wall_pole_edge_concrete_1_double", true);
+	public static BarrierEdgeBlock barrier_wall_pole_edge_concrete_2_double = new BarrierEdgeBlock("barrier_wall_pole_edge_concrete_2_double", true);
 	public static BarrierEdgeBlock barrier_standard_edge_double = new BarrierEdgeBlock("barrier_standard_edge_double", true);
 	public static BarrierEdgeBlock barrier_tall_edge_double = new BarrierEdgeBlock("barrier_tall_edge_double", true);
 	
 	
 	public static BollardBlock bollard_1 = new BollardBlock("bollard_1");
-	public static GenericDecorativeBlock bollard_2 = new GenericDecorativeBlock("bollard_2");
+	public static StandardBollardBlock bollard_2 = new StandardBollardBlock("bollard_2");
 	public static RetractableBollardBlock bollard_3 = new RetractableBollardBlock("bollard_3");
+	public static FoldingBollardBlock bollard_folding_smooth_metal = new FoldingBollardBlock("bollard_folding_smooth_metal");
+	public static FoldingBollardBlock bollard_folding_black = new FoldingBollardBlock("bollard_folding_black");
+	public static FoldingBollardBlock bollard_folding_yellow = new FoldingBollardBlock("bollard_folding_yellow");
+	
+	public static WheelStopBlock wheel_stop = new WheelStopBlock("wheel_stop");
+	public static SpeedBumpBlock speed_bump = new SpeedBumpBlock("speed_bump");
 	
 	public static CatsEyeBlock cats_eye_white  = new CatsEyeBlock("cats_eye_white", false);
 	public static CatsEyeBlock cats_eye_yellow = new CatsEyeBlock("cats_eye_yellow", false);
 	public static CatsEyeBlock cats_eye_red    = new CatsEyeBlock("cats_eye_red", false);
 	public static CatsEyeBlock cats_eye_green  = new CatsEyeBlock("cats_eye_green", false);
 	public static CatsEyeBlock cats_eye_blue  = new CatsEyeBlock("cats_eye_blue", false);
+	public static CatsEyeBlockFourWay cats_eye_red_green = new CatsEyeBlockFourWay("cats_eye_red_green", false);
+	public static CatsEyeBlockFourWay cats_eye_white_red = new CatsEyeBlockFourWay("cats_eye_white_red", false);
+	public static CatsEyeBlockFourWay cats_eye_white_yellow = new CatsEyeBlockFourWay("cats_eye_white_yellow", false);
+	public static CatsEyeBlockFourWay cats_eye_white_green = new CatsEyeBlockFourWay("cats_eye_white_green", false);
+	public static CatsEyeBlockFourWay cats_eye_yellow_red = new CatsEyeBlockFourWay("cats_eye_yellow_red", false);
+	
 	public static CatsEyeBlock cats_eye_white_double  = new CatsEyeBlock("cats_eye_white_double", true);
 	public static CatsEyeBlock cats_eye_yellow_double = new CatsEyeBlock("cats_eye_yellow_double", true);
 	public static CatsEyeBlock cats_eye_red_double    = new CatsEyeBlock("cats_eye_red_double", true);
 	public static CatsEyeBlock cats_eye_green_double  = new CatsEyeBlock("cats_eye_green_double", true);
 	public static CatsEyeBlock cats_eye_blue_double  = new CatsEyeBlock("cats_eye_blue_double", true);
+	public static CatsEyeBlockFourWay cats_eye_red_green_double = new CatsEyeBlockFourWay("cats_eye_red_green_double", true);
+	public static CatsEyeBlockFourWay cats_eye_white_red_double = new CatsEyeBlockFourWay("cats_eye_white_red_double", true);
+	public static CatsEyeBlockFourWay cats_eye_white_yellow_double = new CatsEyeBlockFourWay("cats_eye_white_yellow_double", true);
+	public static CatsEyeBlockFourWay cats_eye_white_green_double = new CatsEyeBlockFourWay("cats_eye_white_green_double", true);
+	public static CatsEyeBlockFourWay cats_eye_yellow_red_double = new CatsEyeBlockFourWay("cats_eye_yellow_red_double", true);
 	
 	public static MetalPost post_small_vertical = new MetalPost("post_small_vertical", false, 0.125);
 	public static MetalPost post_small_horizontal = new MetalPost("post_small_horizontal", true, 0.125);
@@ -166,12 +221,19 @@ public class FRBlocks {
 	public static MetalPost post_large_vertical = new MetalPost("post_large_vertical", false, 0.375);
 	public static MetalPost post_large_horizontal = new MetalPost("post_large_horizontal", true, 0.375);
 	
-	public static StreetLight street_light_1 = new StreetLight("street_light_1");
+	public static MetalPost post_small_vertical_2 = new MetalPost("post_small_vertical_2", false, 0.125);
+	public static MetalPost post_medium_vertical_2 = new MetalPost("post_medium_vertical_2", false, 0.25);
+	public static MetalPost post_large_vertical_2 = new MetalPost("post_large_vertical_2", false, 0.375);
+	
+	public static StreetLight street_light_1 = new StreetLight("street_light_1", 10, 3, 2);
+	public static StreetLight street_light_2 = new StreetLight("street_light_2", 16, 5, 2);
+	public static StreetLight street_light_3 = new StreetLight("street_light_3", 10, 2.5, 2);
+	public static StreetLight street_light_4 = new StreetLight("street_light_4", 16, 2.5, 2);
+	public static StreetLight street_light_5 = new StreetLight("street_light_5", 16, 3, 5);
+	public static StreetLight street_light_6 = new StreetLight("street_light_6", 16, 3, 5);
 	//pedestrian crossing metal markers
 	
 	public static BlockFakeLight fake_light_source = new BlockFakeLight("fake_light_source");
-	
-	
 	
 	public static LinePaintBlock line_white_straight_full = new LinePaintBlock("line_white_straight_full");
 	public static LinePaintBlock line_white_straight_thick = new LinePaintBlock("line_white_straight_thick");
@@ -497,12 +559,20 @@ public class FRBlocks {
 		GameRegistry.registerTileEntity(RoadFactoryEntity.class, new ResourceLocation(FurenikusRoads.MODID, "road_factory_entity"));
 		GameRegistry.registerTileEntity(TarmacCutterEntity.class, new ResourceLocation(FurenikusRoads.MODID, "tarmac_cutter_entity"));
 		GameRegistry.registerTileEntity(CrusherEntity.class, new ResourceLocation(FurenikusRoads.MODID, "crusher_entity"));
+		GameRegistry.registerTileEntity(PaintOvenEntity.class, new ResourceLocation(FurenikusRoads.MODID, "paint_oven_entity"));
+		GameRegistry.registerTileEntity(CompactorEntity.class, new ResourceLocation(FurenikusRoads.MODID, "compactor_entity"));
+		GameRegistry.registerTileEntity(FabricatorEntity.class, new ResourceLocation(FurenikusRoads.MODID, "fabricator_entity"));
 		
 		GameRegistry.registerTileEntity(PaintFillerElectricEntity.class, new ResourceLocation(FurenikusRoads.MODID, "paint_filler_electric_entity"));
 		GameRegistry.registerTileEntity(TarDistillerElectricEntity.class, new ResourceLocation(FurenikusRoads.MODID, "tar_distiller_electric_entity"));
 		GameRegistry.registerTileEntity(RoadFactoryElectricEntity.class, new ResourceLocation(FurenikusRoads.MODID, "road_factory_electric_entity"));
 		GameRegistry.registerTileEntity(TarmacCutterElectricEntity.class, new ResourceLocation(FurenikusRoads.MODID, "tarmac_cutter_electric_entity"));
 		GameRegistry.registerTileEntity(CrusherElectricEntity.class, new ResourceLocation(FurenikusRoads.MODID, "crusher_electric_entity"));
+		GameRegistry.registerTileEntity(PaintOvenElectricEntity.class, new ResourceLocation(FurenikusRoads.MODID, "paint_oven_electric_entity"));
+		GameRegistry.registerTileEntity(CompactorElectricEntity.class, new ResourceLocation(FurenikusRoads.MODID, "compactor_electric_entity"));
+		GameRegistry.registerTileEntity(FabricatorElectricEntity.class, new ResourceLocation(FurenikusRoads.MODID, "fabricator_electric_entity"));
+		
+		GameRegistry.registerTileEntity(PaintFillerHopperEntity.class, new ResourceLocation(FurenikusRoads.MODID, "paint_filler_hopper_entity"));
 	}
 
 	public static void register(IForgeRegistry<Block> registry) {
@@ -861,11 +931,22 @@ public class FRBlocks {
 		catsEyeList.add(cats_eye_red);
 		catsEyeList.add(cats_eye_green);
 		catsEyeList.add(cats_eye_blue);
+		catsEyeList.add(cats_eye_red_green);
+		catsEyeList.add(cats_eye_white_red);
+		catsEyeList.add(cats_eye_white_yellow);
+		catsEyeList.add(cats_eye_white_green);
+		catsEyeList.add(cats_eye_yellow_red);
+		
 		catsEyeList.add(cats_eye_white_double);
 		catsEyeList.add(cats_eye_yellow_double);
 		catsEyeList.add(cats_eye_red_double);
 		catsEyeList.add(cats_eye_green_double);
 		catsEyeList.add(cats_eye_blue_double);
+		catsEyeList.add(cats_eye_red_green_double);
+		catsEyeList.add(cats_eye_white_red_double);
+		catsEyeList.add(cats_eye_white_yellow_double);
+		catsEyeList.add(cats_eye_white_green_double);
+		catsEyeList.add(cats_eye_yellow_red_double);
 		
 		genericList.add(post_small_vertical);
 		genericList.add(post_small_horizontal);
@@ -874,7 +955,16 @@ public class FRBlocks {
 		genericList.add(post_large_vertical);
 		genericList.add(post_large_horizontal);
 		
+		genericList.add(post_small_vertical_2);
+		genericList.add(post_medium_vertical_2);
+		genericList.add(post_large_vertical_2);
+		
 		genericList.add(street_light_1);
+		genericList.add(street_light_2);
+		genericList.add(street_light_3);
+		genericList.add(street_light_4);
+		genericList.add(street_light_5);
+		genericList.add(street_light_6);
 		genericList.add(barrier_end);
 		
 		genericList.add(barrier_standard_mid);
@@ -884,6 +974,7 @@ public class FRBlocks {
 		
 		genericList.add(barrier_bars_mid);
 		genericList.add(barrier_bars_mid_2);
+		genericList.add(barrier_bars_mid_3);
 		genericList.add(barrier_wall_mid_concrete_1);
 		genericList.add(barrier_wall_mid_concrete_2);
 		genericList.add(barrier_bars_mid_concrete_1);
@@ -899,6 +990,7 @@ public class FRBlocks {
 		
 		genericList.add(barrier_bars_edge);
 		genericList.add(barrier_bars_edge_2);
+		genericList.add(barrier_bars_edge_3);
 		genericList.add(barrier_wall_edge_concrete_1);
 		genericList.add(barrier_wall_edge_concrete_2);
 		genericList.add(barrier_bars_edge_concrete_1);
@@ -908,14 +1000,26 @@ public class FRBlocks {
 		genericList.add(barrier_low_edge);
 		
 		genericList.add(barrier_bars_edge_double);
+		genericList.add(barrier_bars_edge_double_2);
+		genericList.add(barrier_bars_edge_double_3);
 		genericList.add(barrier_wall_edge_concrete_1_double);
 		genericList.add(barrier_wall_edge_concrete_2_double);
+		genericList.add(barrier_bars_edge_concrete_1_double);
+		genericList.add(barrier_bars_edge_concrete_2_double);
+		genericList.add(barrier_wall_pole_edge_concrete_1_double);
+		genericList.add(barrier_wall_pole_edge_concrete_2_double);
 		genericList.add(barrier_standard_edge_double);
 		genericList.add(barrier_tall_edge_double);
 		
 		genericList.add(bollard_1);
 		genericList.add(bollard_2);
 		genericList.add(bollard_3);
+		genericList.add(bollard_folding_smooth_metal);
+		genericList.add(bollard_folding_black);
+		genericList.add(bollard_folding_yellow);
+		
+		genericList.add(wheel_stop);
+		genericList.add(speed_bump);
 		
 		genericList.add(fake_light_source);
 
@@ -925,12 +1029,25 @@ public class FRBlocks {
 			road_factory,
 			tarmac_cutter,
 			crusher,
+			paint_oven,
+			compactor,
+			fabricator,
 			
 			paint_filler_electric,
 			tar_distiller_electric,
 			road_factory_electric,
 			tarmac_cutter_electric,
 			crusher_electric,
+			paint_oven_electric,
+			compactor_electric,
+			fabricator_electric,
+			
+			paint_filler_hopper,
+			
+			tar_fluid,
+			paint_white_fluid,
+			paint_yellow_fluid,
+			paint_red_fluid,
 			
 			kerb_standard,
 			
@@ -963,12 +1080,25 @@ public class FRBlocks {
 		registry.register(new RoadItemBlock(road_factory).setRegistryName(road_factory.getRegistryName()));
 		registry.register(new RoadItemBlock(tarmac_cutter).setRegistryName(tarmac_cutter.getRegistryName()));
 		registry.register(new RoadItemBlock(crusher).setRegistryName(crusher.getRegistryName()));
+		registry.register(new RoadItemBlock(paint_oven).setRegistryName(paint_oven.getRegistryName()));
+		registry.register(new RoadItemBlock(compactor).setRegistryName(compactor.getRegistryName()));
+		registry.register(new RoadItemBlock(fabricator).setRegistryName(fabricator.getRegistryName()));
 		
 		registry.register(new RoadItemBlock(paint_filler_electric).setRegistryName(paint_filler_electric.getRegistryName()));
 		registry.register(new RoadItemBlock(tar_distiller_electric).setRegistryName(tar_distiller_electric.getRegistryName()));
 		registry.register(new RoadItemBlock(road_factory_electric).setRegistryName(road_factory_electric.getRegistryName()));
 		registry.register(new RoadItemBlock(tarmac_cutter_electric).setRegistryName(tarmac_cutter_electric.getRegistryName()));
 		registry.register(new RoadItemBlock(crusher_electric).setRegistryName(crusher_electric.getRegistryName()));
+		registry.register(new RoadItemBlock(paint_oven_electric).setRegistryName(paint_oven_electric.getRegistryName()));
+		registry.register(new RoadItemBlock(compactor_electric).setRegistryName(compactor_electric.getRegistryName()));
+		registry.register(new RoadItemBlock(fabricator_electric).setRegistryName(fabricator_electric.getRegistryName()));
+		
+		registry.register(new RoadItemBlock(paint_filler_hopper).setRegistryName(paint_filler_hopper.getRegistryName()));
+		
+		registry.register(new RoadItemBlock(tar_fluid).setRegistryName(tar_fluid.getRegistryName()));
+		registry.register(new RoadItemBlock(paint_white_fluid).setRegistryName(paint_white_fluid.getRegistryName()));
+		registry.register(new RoadItemBlock(paint_yellow_fluid).setRegistryName(paint_yellow_fluid.getRegistryName()));
+		registry.register(new RoadItemBlock(paint_red_fluid).setRegistryName(paint_red_fluid.getRegistryName()));
 		
 		registry.register(new RoadItemBlock(kerb_standard).setRegistryName(kerb_standard.getRegistryName()));
 		
@@ -995,12 +1125,25 @@ public class FRBlocks {
 		road_factory.initModel();
 		tarmac_cutter.initModel();
 		crusher.initModel();
+		paint_oven.initModel();
+		compactor.initModel();
+		fabricator.initModel();
 		
 		paint_filler_electric.initModel();
 		tar_distiller_electric.initModel();
 		road_factory_electric.initModel();
 		tarmac_cutter_electric.initModel();
 		crusher_electric.initModel();
+		paint_oven_electric.initModel();
+		compactor_electric.initModel();
+		fabricator_electric.initModel();
+		
+		paint_filler_hopper.initModel();
+		
+		registerBlockModel(tar_fluid);
+		registerBlockModel(paint_white_fluid);
+		registerBlockModel(paint_yellow_fluid);
+		registerBlockModel(paint_red_fluid);
 		
 		kerb_standard.initModel();
 		
@@ -1014,6 +1157,11 @@ public class FRBlocks {
 		drain_cover_1.initModel();
 		drain_cover_2.initModel();
 		road_snow.initModel();
+	}
+	
+	@SideOnly(Side.CLIENT)
+	public static void registerBlockModel(Block block) {
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(block.getRegistryName(), "inventory"));
 	}
 	
 	//We only register white variants. Yellow and red can be taken from the white.

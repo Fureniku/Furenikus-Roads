@@ -54,16 +54,6 @@ public class CatsEyeBlock extends NonPaintRoadTopBlock {
 		
 		return this.getDefaultState().withProperty(ENUM_EYE, CatsEyeBlock.EnumCatsEye.floor_ns);
 	}
-	
-	@Override
-	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        return new ItemStack(state.getBlock(), 1, this.getMetaFromState(state));
-    }
-
-    @Override
-    public int damageDropped(IBlockState state) {
-    	return this.getMetaFromState(state);
-    }
     
 	@Override
 	protected BlockStateContainer createBlockState() {

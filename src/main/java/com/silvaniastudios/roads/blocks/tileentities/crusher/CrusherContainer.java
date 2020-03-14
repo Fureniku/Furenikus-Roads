@@ -102,7 +102,6 @@ public class CrusherContainer extends Container {
 		if (id == 3) {
 			tileEntity.last_fuel_cap = data;
 		}
-		
     }
 
 	@Override

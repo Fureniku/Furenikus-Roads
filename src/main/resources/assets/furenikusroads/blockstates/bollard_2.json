@@ -83,17 +83,12 @@
 				"model": "furenikusroads:bollard_topped_ringed"
 			},
 			"12": {
-				"model": "furenikusroads:bollard_stumpy",
-				"textures": {
-					"0": "furenikusroads:blocks/bollard_yellow",
-					"1": "furenikusroads:blocks/bollard_yellow"
-				}
+				"model": "furenikusroads:bollard_smooth_light"
 			},
 			"13": {
-				"model": "furenikusroads:bollard_stumpy",
+				"model": "furenikusroads:bollard_smooth_light",
 				"textures": {
-					"0": "furenikusroads:blocks/bollard_yellow",
-					"1": "furenikusroads:blocks/bollard_yellow"
+					"0": "furenikusroads:blocks/bollard_black"
 				}
 			},
 			"14": {

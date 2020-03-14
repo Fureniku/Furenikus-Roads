@@ -1,0 +1,55 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"3": "furenikusroads:blocks/machine_metal_patterned",
+		"5": "furenikusroads:blocks/machine_part_plain",
+		"particle": "furenikusroads:blocks/machine_metal"
+	},
+	"elements": [
+		{
+			"from": [2, 0, 2],
+			"to": [14, 0.25, 14],
+			"faces": {
+				"north": {"uv": [2, 15.75, 14, 16], "texture": "#3"},
+				"east": {"uv": [2, 15.75, 14, 16], "texture": "#3"},
+				"south": {"uv": [2, 15.75, 14, 16], "texture": "#3"},
+				"west": {"uv": [2, 15.75, 14, 16], "texture": "#3"},
+				"down": {"uv": [2, 2, 14, 14], "texture": "#5"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"translation": [0, 1.75, -2.75],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"thirdperson_lefthand": {
+			"translation": [0, 1.75, -2.75],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"firstperson_righthand": {
+			"rotation": [0, -75, 0],
+			"translation": [0, 3, 0],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"firstperson_lefthand": {
+			"rotation": [0, -75, 0],
+			"translation": [0, 3, 0],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"ground": {
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"gui": {
+			"rotation": [15, -45, 0],
+			"scale": [0.6, 0.6, 0.6]
+		},
+		"head": {
+			"rotation": [0, 180, 0],
+			"scale": [1.2, 1.2, 1.2]
+		},
+		"fixed": {
+			"rotation": [0, 180, 0]
+		}
+	}
+}

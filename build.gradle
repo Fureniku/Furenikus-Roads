@@ -60,13 +60,12 @@ dependencies {
     // at runtime, use the full JEI jar
     runtime "mezz.jei:jei_1.12.2:4.15.0.289"
     
-    //Easy way to get CoFH stuff into dev environment for testing. Not needed for building etc so commented out, it actually causes problems with JEI.
-    //deobfCompile "cofh:RedstoneFlux:1.12-2.1.0.6:universal"
-    //deobfCompile "cofh:CoFHCore:1.12.2-4.6.0.+:universal"
-    //deobfCompile "cofh:CoFHWorld:1.12.2-1.2.0.+:universal"
-    //deobfCompile "cofh:ThermalFoundation:1.12.2-2.6.0.+:universal"
-    //deobfCompile "cofh:ThermalDynamics:1.12.2-2.5.5.+:universal"
-    //deobfCompile "cofh:ThermalExpansion:1.12.2-5.5.4.+:universal"
+    deobfCompile ("cofh:RedstoneFlux:1.12-2.1.0.6:universal") { transitive = false }
+    deobfCompile ("cofh:CoFHCore:1.12.2-4.6.0.+:universal") { transitive = false }
+    deobfCompile ("cofh:CoFHWorld:1.12.2-1.2.0.+:universal") { transitive = false }
+    deobfCompile ("cofh:ThermalFoundation:1.12.2-2.6.0.+:universal") { transitive = false }
+    deobfCompile ("cofh:ThermalDynamics:1.12.2-2.5.5.+:universal") { transitive = false }
+    deobfCompile ("cofh:ThermalExpansion:1.12.2-5.5.4.+:universal") { transitive = false }
 
     //deobfCompile "codechicken:CodeChickenLib:1.12.2-3.2.2.+:universal"
     // you may put jars on which you depend on in ./libs
