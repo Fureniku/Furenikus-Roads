@@ -208,7 +208,6 @@ public class RoadFactoryEntity extends RoadTileEntity implements ITickable, ICap
 		}
 	}
 	
-	@SideOnly(Side.CLIENT)
 	public void renderUpdate() {
 		if (world.isRemote) {
 			if (fillCheckTick < RoadsConfig.machine.roadFactoryTickRate) {

@@ -128,9 +128,7 @@ public class TarDistillerEntity extends RoadTileEntity implements ITickable, ICa
 				if (fluidOutput1.getFluidAmount() > 0) {
 					if (facing == sideRight || facing == sideDown)  { return CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY.cast(fluidOutput1); }
 				}
-				if (fluidOutput2.getFluidAmount() > 0) {
-					if (facing == sideRight || facing == sideDown) { return CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY.cast(fluidOutput2); }
-				}
+				if (facing == sideRight || facing == sideDown) { return CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY.cast(fluidOutput2); }
 				
 				if (facing == sideLeft || facing == sideUp)  { return CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY.cast(fluidInput); }
 			}
