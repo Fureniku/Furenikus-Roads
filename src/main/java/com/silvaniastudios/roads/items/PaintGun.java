@@ -11,6 +11,7 @@ import com.silvaniastudios.roads.blocks.paint.PaintBlockBase;
 import com.silvaniastudios.roads.blocks.tileentities.paintfiller.PaintFillerEntity;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockSnow;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
@@ -179,9 +180,9 @@ public class PaintGun extends RoadItemBase {
 		
 		BlockPos placePos = pos.offset(facing);
 		
-		if (!world.getBlockState(pos).getBlock().isReplaceable(world, placePos)) { return false; }
+		if (!world.getBlockState(placePos).getBlock().isReplaceable(world, placePos)) { return false; }
 		if (!(world.getBlockState(placePos.offset(EnumFacing.DOWN)).getBlock() instanceof PaintBlockBase) && player.isSneaking()) { return false; }
-		
+
 		PaintBlockBase block = null;
 		
 		if (pageId == 1) { block = PaintGunItemRegistry.lines.get(selection); }
@@ -207,6 +208,10 @@ public class PaintGun extends RoadItemBase {
 					placePos = placePos.offset(EnumFacing.UP);
 					offsetCount++;
 				}
+			}
+			
+			if (world.getBlockState(placePos.offset(EnumFacing.DOWN)).getBlock() instanceof BlockSnow) {
+				return world.setBlockState(placePos.offset(EnumFacing.DOWN), block.getStateForPlacement(world, placePos, facing, hitX, hitY, hitZ, meta, player, hand));
 			}
 			
 			return world.setBlockState(placePos, block.getStateForPlacement(world, placePos, facing, hitX, hitY, hitZ, meta, player, hand));
