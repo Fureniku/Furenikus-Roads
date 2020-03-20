@@ -28,7 +28,7 @@ public class CrusherElectricEntity extends CrusherEntity implements ITickable, I
 	@Override
 	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
 		if (capability == CapabilityEnergy.ENERGY) {
-			return true;
+			return getCapability(capability, facing) != null;
 		}
 		
 		return super.hasCapability(capability, facing);
@@ -37,9 +37,7 @@ public class CrusherElectricEntity extends CrusherEntity implements ITickable, I
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
 		if (capability == CapabilityEnergy.ENERGY) {
-			if (facing != null) {
-				return CapabilityEnergy.ENERGY.cast(energy);
-			}
+			return CapabilityEnergy.ENERGY.cast(energy);
 		}
 		return super.getCapability(capability, facing);
 	}

@@ -2,6 +2,7 @@ package com.silvaniastudios.roads.blocks.tileentities.paintoven;
 
 import javax.annotation.Nonnull;
 
+import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.RoadsConfig;
 import com.silvaniastudios.roads.blocks.tileentities.RoadTileEntity;
 import com.silvaniastudios.roads.fluids.FRFluids;
@@ -121,8 +122,9 @@ public class PaintOvenEntity extends RoadTileEntity implements ITickable, ICapab
 	}
 	
 	public void process() {
+		FurenikusRoads.debug(2, "Paint Oven at" + formatPosition(pos) + "processing");
 		if (!world.isRemote) {
-			if (water.getFluidAmount() > 1000 && paint.getFluidAmount() + 1000 <= paint.getCapacity()) {
+			if (water.getFluidAmount() >= 1000 && paint.getFluidAmount() + 1000 <= paint.getCapacity()) {
 				int dyeCol = -1;
 				boolean filled = false;
 				ItemStack dye = inventory.getStackInSlot(PaintOvenContainer.DYE);
@@ -166,7 +168,7 @@ public class PaintOvenEntity extends RoadTileEntity implements ITickable, ICapab
 	}
 	
 	public boolean shouldTick() {
-		if (water.getFluidAmount() > 1000 &&
+		if (water.getFluidAmount() >= 1000 &&
 				(fuel_remaining > 0 || hasCapability(CapabilityEnergy.ENERGY, null)) &&
 				inventory.getStackInSlot(PaintOvenContainer.DYE).getCount() >= 1 &&
 				paint.getFluidAmount() + 1000 <= paint.getCapacity()) {

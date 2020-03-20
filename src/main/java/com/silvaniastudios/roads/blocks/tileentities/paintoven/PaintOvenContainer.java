@@ -1,9 +1,12 @@
 package com.silvaniastudios.roads.blocks.tileentities.paintoven;
 
+import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.blocks.tileentities.SlotFuel;
 import com.silvaniastudios.roads.blocks.tileentities.paintfiller.SlotDye;
+import com.silvaniastudios.roads.network.ClientGuiUpdatePacket;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
@@ -24,8 +27,11 @@ public class PaintOvenContainer extends Container {
 	private int energy;
 	private int water;
 	private int paint;
+	private int tick;
+	private int fuel;
+	private int fuelCap;
 	
-	private PaintOvenEntity tileEntity;
+	public PaintOvenEntity tileEntity;
 	
 	
 	public PaintOvenContainer(InventoryPlayer invPlayer, PaintOvenEntity tileEntity, boolean isElectric) {
@@ -66,40 +72,51 @@ public class PaintOvenContainer extends Container {
 		super.detectAndSendChanges();
 
 		for (int i = 0; i < this.listeners.size(); ++i) {
-			IContainerListener icontainerlistener = this.listeners.get(i);
-			if (this.isElectric) {
+			IContainerListener listener = this.listeners.get(i);
+			if (poee != null) {
 	        	if (this.energy != poee.energy.getEnergyStored()) {
-	        		icontainerlistener.sendWindowProperty(this, 0, poee.energy.getEnergyStored());
+	        		FurenikusRoads.PACKET_CHANNEL.sendTo(new ClientGuiUpdatePacket(0, poee.energy.getEnergyStored()), (EntityPlayerMP) listener); 
 	        	}
 			}
 			
 			if (this.paint != tileEntity.paint.getFluidAmount()) {
-        		icontainerlistener.sendWindowProperty(this, 1, tileEntity.paint.getFluidAmount());
+				FurenikusRoads.PACKET_CHANNEL.sendTo(new ClientGuiUpdatePacket(1, tileEntity.paint.getFluidAmount()), (EntityPlayerMP) listener); 
         	}
 			if (this.water != tileEntity.water.getFluidAmount()) {
-        		icontainerlistener.sendWindowProperty(this, 2, tileEntity.water.getFluidAmount());
+				FurenikusRoads.PACKET_CHANNEL.sendTo(new ClientGuiUpdatePacket(2, tileEntity.water.getFluidAmount()), (EntityPlayerMP) listener); 
+        	}
+			if (this.tick != tileEntity.timerCount) {
+        		listener.sendWindowProperty(this, 10, tileEntity.timerCount);
+        	}
+        	if (this.fuel != tileEntity.fuel_remaining) {
+        		listener.sendWindowProperty(this, 11, tileEntity.fuel_remaining);
+        	}
+        	if (this.fuelCap != tileEntity.last_fuel_cap) {
+        		listener.sendWindowProperty(this, 12, tileEntity.last_fuel_cap);
         	}
 		}
 		
-		if (this.isElectric) { this.energy = poee.energy.getEnergyStored(); }
+		if (poee != null) { this.energy = poee.energy.getEnergyStored(); }
 		this.paint = tileEntity.paint.getFluidAmount();
 		this.water = tileEntity.water.getFluidAmount();
+		this.tick = tileEntity.timerCount;
+		this.fuel = tileEntity.fuel_remaining;
+		this.fuelCap = tileEntity.last_fuel_cap;
 	}
 	
 	@SideOnly(Side.CLIENT)
 	public void updateProgressBar(int id, int data) {
-		if (id == 0 && this.isElectric) {
-			PaintOvenElectricEntity poee = (PaintOvenElectricEntity) tileEntity;
-			poee.energy.setEnergy(data);
+		FurenikusRoads.debug(1, "Paint Oven syncing ID: " + id + ", data: " + data);
+		if (id == 10) {
+			tileEntity.timerCount = data;
 		}
-		
-		if (id == 1 && tileEntity.paint.getFluid() != null) {
-			tileEntity.paint.getFluid().amount = data;
+		if (id == 11) {
+			tileEntity.fuel_remaining = data;
 		}
-		if (id == 2 && tileEntity.water.getFluid() != null) {
-			tileEntity.water.getFluid().amount = data;
+		if (id == 12) {
+			tileEntity.last_fuel_cap = data;
 		}
-	}
+    }
 	
 	@Override
 	public boolean canInteractWith(EntityPlayer playerIn) {
