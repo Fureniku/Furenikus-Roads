@@ -2,6 +2,7 @@ package com.silvaniastudios.roads.blocks.tileentities.fabricator;
 
 import javax.annotation.Nonnull;
 
+import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.RoadsConfig;
 import com.silvaniastudios.roads.blocks.tileentities.RoadTileEntity;
 import com.silvaniastudios.roads.blocks.tileentities.recipes.FabricatorRecipes;
@@ -109,6 +110,7 @@ public class FabricatorEntity extends RoadTileEntity implements ITickable, ICapa
 	}
 	
 	public void process() {
+		FurenikusRoads.debug(2, "Fabricator at" + formatPosition(pos) + "processing");
 		for (int i = 0; i < RecipeRegistry.fabricatorRecipes.size(); i++) {
 			FabricatorRecipes recipe = RecipeRegistry.fabricatorRecipes.get(i);
 			recipe.processRecipe(inventory, recipeId);

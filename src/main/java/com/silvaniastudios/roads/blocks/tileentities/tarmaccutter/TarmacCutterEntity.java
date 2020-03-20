@@ -2,6 +2,7 @@ package com.silvaniastudios.roads.blocks.tileentities.tarmaccutter;
 
 import javax.annotation.Nonnull;
 
+import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.RoadsConfig;
 import com.silvaniastudios.roads.blocks.RoadBlock;
 import com.silvaniastudios.roads.blocks.tileentities.RoadTileEntity;
@@ -102,6 +103,7 @@ public class TarmacCutterEntity extends RoadTileEntity implements ITickable, ICa
 	}
 	
 	public void process() {
+		FurenikusRoads.debug(2, "Tarmac Cutter at" + formatPosition(pos) + "processing");
 		if (!world.isRemote) {
 			ItemStack in = inventory.getStackInSlot(TarmacCutterContainer.INPUT);
 			ItemStack blade = inventory.getStackInSlot(TarmacCutterContainer.BLADE);

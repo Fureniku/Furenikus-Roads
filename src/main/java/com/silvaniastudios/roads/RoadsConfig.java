@@ -31,6 +31,9 @@ public class RoadsConfig {
 		
 		@Config.Comment("Print a full list of all fluids in your game on startup, useful for adding tar variants.")
 		public boolean printFluidListOnStartup = false;
+		
+		@Config.Comment("Debug level: 0 (only essential info), 1 (print things about current bugs), 2 (print machine processes), 3 (print everything)")
+		public int debugLevel = 0;
 	}
 	
 	public static class Machines {

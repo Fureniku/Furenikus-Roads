@@ -99,4 +99,8 @@ public class RoadTileEntity extends TileEntity {
 		}
 		return false;
 	}
+	
+	public String formatPosition(BlockPos pos) {
+		return " X: " + pos.getX() + ", Y: " + pos.getY() + ", Z: " + pos.getZ() + " ";
+	}
 }

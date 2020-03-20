@@ -2,6 +2,7 @@ package com.silvaniastudios.roads.blocks.tileentities.roadfactory;
 
 import javax.annotation.Nonnull;
 
+import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.RoadsConfig;
 import com.silvaniastudios.roads.blocks.tileentities.RoadTileEntity;
 import com.silvaniastudios.roads.blocks.tileentities.recipes.RecipeRegistry;
@@ -24,8 +25,6 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
@@ -157,6 +156,7 @@ public class RoadFactoryEntity extends RoadTileEntity implements ITickable, ICap
 	}
 	
 	public void process() {
+		FurenikusRoads.debug(2, "Road Factory at" + formatPosition(pos) + "processing");
 		if (!world.isRemote) {
 			boolean hasChanges = false;
 			ItemStack result = getRecipeResult();

@@ -2,6 +2,7 @@ package com.silvaniastudios.roads.blocks.tileentities.crusher;
 
 import javax.annotation.Nonnull;
 
+import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.RoadsConfig;
 import com.silvaniastudios.roads.blocks.tileentities.RoadTileEntity;
 import com.silvaniastudios.roads.blocks.tileentities.recipes.CrusherRecipes;
@@ -116,8 +117,9 @@ public class CrusherEntity extends RoadTileEntity implements ITickable, ICapabil
 		return false;
 	}
 	
-	public void process() {		
+	public void process() {
 		if (!world.isRemote) {
+			FurenikusRoads.debug(2, "Crusher at" + formatPosition(pos) + "processing");
 			ItemStack itemIn = inventory.getStackInSlot(0);
 			
 			if (!itemIn.isEmpty()) {

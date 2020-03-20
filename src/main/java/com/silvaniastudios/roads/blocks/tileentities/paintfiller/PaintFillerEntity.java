@@ -2,6 +2,7 @@ package com.silvaniastudios.roads.blocks.tileentities.paintfiller;
 
 import javax.annotation.Nonnull;
 
+import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.RoadsConfig;
 import com.silvaniastudios.roads.blocks.tileentities.RoadTileEntity;
 import com.silvaniastudios.roads.fluids.FRFluids;
@@ -146,25 +147,29 @@ public class PaintFillerEntity extends RoadTileEntity implements ITickable, ICap
 	}
 	
 	public void process() {
+		FurenikusRoads.debug(2, "Paint Filler at" + formatPosition(pos) + "processing");
 		if (!world.isRemote) {
 			int paintPerDye = RoadsConfig.machine.fillerPaintPerDye;
 			boolean hasChanges = false;
 			
-			if ((!inventory.getStackInSlot(0).isEmpty() || !inventory.getStackInSlot(2).isEmpty() || !inventory.getStackInSlot(3).isEmpty()) && fuel_remaining > 0) {
-				if (isDye(inventory.getStackInSlot(0), "dyeWhite") && white_paint.getFluidAmount() + paintPerDye <= white_paint.getCapacity()) {
-					inventory.extractItem(0, 1, false);
+			if ((!inventory.getStackInSlot(PaintFillerContainer.WHITE_DYE).isEmpty() || !inventory.getStackInSlot(PaintFillerContainer.YELLOW_DYE).isEmpty() || !inventory.getStackInSlot(PaintFillerContainer.RED_DYE).isEmpty())) {
+				if (isDye(inventory.getStackInSlot(PaintFillerContainer.WHITE_DYE), "dyeWhite") && white_paint.getFluidAmount() + paintPerDye <= white_paint.getCapacity()) {
+					FurenikusRoads.debug(2, "Paint Filler: Create white paint");
+					inventory.extractItem(PaintFillerContainer.WHITE_DYE, 1, false);
 					white_paint.fill(new FluidStack(FRFluids.white_paint, paintPerDye), true);
 					hasChanges = true;
 				}
 
-				if (isDye(inventory.getStackInSlot(2), "dyeYellow") && yellow_paint.getFluidAmount() + paintPerDye <= yellow_paint.getCapacity()) {
-					inventory.extractItem(2, 1, false);
+				if (isDye(inventory.getStackInSlot(PaintFillerContainer.YELLOW_DYE), "dyeYellow") && yellow_paint.getFluidAmount() + paintPerDye <= yellow_paint.getCapacity()) {
+					FurenikusRoads.debug(2, "Paint Filler: Create yellow paint");
+					inventory.extractItem(PaintFillerContainer.YELLOW_DYE, 1, false);
 					yellow_paint.fill(new FluidStack(FRFluids.yellow_paint, paintPerDye), true);
 					hasChanges = true;
 				}
 			
-				if (isDye(inventory.getStackInSlot(3), "dyeRed") && red_paint.getFluidAmount() + paintPerDye <= red_paint.getCapacity()) {
-					inventory.extractItem(3, 1, false);
+				if (isDye(inventory.getStackInSlot(PaintFillerContainer.RED_DYE), "dyeRed") && red_paint.getFluidAmount() + paintPerDye <= red_paint.getCapacity()) {
+					FurenikusRoads.debug(2, "Paint Filler: Create red paint");
+					inventory.extractItem(PaintFillerContainer.RED_DYE, 1, false);
 					red_paint.fill(new FluidStack(FRFluids.red_paint, paintPerDye), true);
 					hasChanges = true;
 				}
@@ -210,16 +215,16 @@ public class PaintFillerEntity extends RoadTileEntity implements ITickable, ICap
 	public boolean shouldTick() {
 		int paintPerDye = RoadsConfig.machine.fillerPaintPerDye;
 		
-		if ((!inventory.getStackInSlot(0).isEmpty() || !inventory.getStackInSlot(2).isEmpty() || !inventory.getStackInSlot(3).isEmpty()) && (fuel_remaining > 0 || hasCapability(CapabilityEnergy.ENERGY, null))) {
-			if (isDye(inventory.getStackInSlot(0), "dyeWhite") && white_paint.getFluidAmount() + paintPerDye <= white_paint.getCapacity()) {
+		if ((!inventory.getStackInSlot(PaintFillerContainer.WHITE_DYE).isEmpty() || !inventory.getStackInSlot(PaintFillerContainer.YELLOW_DYE).isEmpty() || !inventory.getStackInSlot(PaintFillerContainer.RED_DYE).isEmpty()) && (fuel_remaining > 0 || hasCapability(CapabilityEnergy.ENERGY, null))) {
+			if (isDye(inventory.getStackInSlot(PaintFillerContainer.WHITE_DYE), "dyeWhite") && white_paint.getFluidAmount() + paintPerDye <= white_paint.getCapacity()) {
 				return true;
 			}
 
-			if (isDye(inventory.getStackInSlot(2), "dyeYellow") && yellow_paint.getFluidAmount() + paintPerDye <= yellow_paint.getCapacity()) {
+			if (isDye(inventory.getStackInSlot(PaintFillerContainer.YELLOW_DYE), "dyeYellow") && yellow_paint.getFluidAmount() + paintPerDye <= yellow_paint.getCapacity()) {
 				return true;
 			}
 
-			if (isDye(inventory.getStackInSlot(3), "dyeRed") && red_paint.getFluidAmount() + paintPerDye <= red_paint.getCapacity()) {
+			if (isDye(inventory.getStackInSlot(PaintFillerContainer.RED_DYE), "dyeRed") && red_paint.getFluidAmount() + paintPerDye <= red_paint.getCapacity()) {
 				return true;
 			}
 		}

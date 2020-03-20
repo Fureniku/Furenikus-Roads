@@ -2,6 +2,7 @@ package com.silvaniastudios.roads.blocks.tileentities.distiller;
 
 import javax.annotation.Nonnull;
 
+import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.RoadsConfig;
 import com.silvaniastudios.roads.blocks.tileentities.RoadTileEntity;
 import com.silvaniastudios.roads.blocks.tileentities.recipes.RecipeRegistry;
@@ -182,6 +183,7 @@ public class TarDistillerEntity extends RoadTileEntity implements ITickable, ICa
 	}
 	
 	public void process() {
+		FurenikusRoads.debug(2, "Tar Distiller at" + formatPosition(pos) + "processing");
 		if (!world.isRemote) {
 			boolean hasChanges = false;
 			

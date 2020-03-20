@@ -2,6 +2,7 @@ package com.silvaniastudios.roads.blocks.tileentities.compactor;
 
 import javax.annotation.Nonnull;
 
+import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.RoadsConfig;
 import com.silvaniastudios.roads.blocks.tileentities.RoadTileEntity;
 import com.silvaniastudios.roads.blocks.tileentities.paintoven.PaintOvenContainer;
@@ -99,6 +100,7 @@ public class CompactorEntity extends RoadTileEntity implements ITickable, ICapab
 	
 	public void process() {
 		if (!world.isRemote) {
+			FurenikusRoads.debug(2, "Compactor at" + formatPosition(pos) + "processing");
 			ItemStack in = inventory.getStackInSlot(CompactorContainer.FRAGMENTS);
 			if (in.getCount() > road_size) {
 				ItemStack out = inventory.getStackInSlot(CompactorContainer.ROADS);
