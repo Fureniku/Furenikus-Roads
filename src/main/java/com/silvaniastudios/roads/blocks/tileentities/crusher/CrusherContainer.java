@@ -1,9 +1,12 @@
 package com.silvaniastudios.roads.blocks.tileentities.crusher;
 
+import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.blocks.tileentities.SlotFuel;
 import com.silvaniastudios.roads.blocks.tileentities.SlotOutput;
+import com.silvaniastudios.roads.network.ClientGuiUpdatePacket;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
@@ -18,7 +21,7 @@ import net.minecraftforge.items.SlotItemHandler;
 
 public class CrusherContainer extends Container {
 	
-	private CrusherEntity tileEntity;
+	public CrusherEntity tileEntity;
 	
 	public static final int INPUT_1 = 0;
 	public static final int OUTPUT_1 = 1;
@@ -63,22 +66,22 @@ public class CrusherContainer extends Container {
 		super.detectAndSendChanges();
 
 		for (int i = 0; i < this.listeners.size(); ++i) {
-			IContainerListener icontainerlistener = this.listeners.get(i);
+			IContainerListener listener = this.listeners.get(i);
 			if (this.isElectric) {
 				CrusherElectricEntity cee = (CrusherElectricEntity) tileEntity;
 	        	if (this.energy != cee.energy.getEnergyStored()) {
-	        		icontainerlistener.sendWindowProperty(this, 0, cee.energy.getEnergyStored());
+	        		FurenikusRoads.PACKET_CHANNEL.sendTo(new ClientGuiUpdatePacket(0, cee.energy.getEnergyStored()), (EntityPlayerMP) listener); 
 	        	}
 	        	this.energy = cee.energy.getEnergyStored();
 			}
-        	if (this.tick != tileEntity.timerCount) {
-        		icontainerlistener.sendWindowProperty(this, 1, tileEntity.timerCount);
+			if (this.tick != tileEntity.timerCount) {
+        		listener.sendWindowProperty(this, 10, tileEntity.timerCount);
         	}
         	if (this.fuel != tileEntity.fuel_remaining) {
-        		icontainerlistener.sendWindowProperty(this, 2, tileEntity.fuel_remaining);
+        		listener.sendWindowProperty(this, 11, tileEntity.fuel_remaining);
         	}
         	if (this.fuelCap != tileEntity.last_fuel_cap) {
-        		icontainerlistener.sendWindowProperty(this, 3, tileEntity.last_fuel_cap);
+        		listener.sendWindowProperty(this, 12, tileEntity.last_fuel_cap);
         	}
 		}
 		
@@ -89,17 +92,14 @@ public class CrusherContainer extends Container {
 	
 	@SideOnly(Side.CLIENT)
 	public void updateProgressBar(int id, int data) {
-		if (this.isElectric && id == 0) {
-			CrusherElectricEntity cee = (CrusherElectricEntity) tileEntity;
-			cee.energy.setEnergy(data);
-		}
-		if (id == 1) {
+		FurenikusRoads.debug(1, "Crusher syncing ID: " + id + ", data: " + data);
+		if (id == 10) {
 			tileEntity.timerCount = data;
 		}
-		if (id == 2) {
+		if (id == 11) {
 			tileEntity.fuel_remaining = data;
 		}
-		if (id == 3) {
+		if (id == 12) {
 			tileEntity.last_fuel_cap = data;
 		}
     }

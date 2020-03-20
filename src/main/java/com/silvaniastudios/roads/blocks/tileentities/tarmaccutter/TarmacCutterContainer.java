@@ -1,10 +1,13 @@
 package com.silvaniastudios.roads.blocks.tileentities.tarmaccutter;
 
 
+import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.blocks.tileentities.SlotFuel;
 import com.silvaniastudios.roads.blocks.tileentities.SlotOutput;
+import com.silvaniastudios.roads.network.ClientGuiUpdatePacket;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
@@ -18,7 +21,7 @@ import net.minecraftforge.items.IItemHandler;
 
 public class TarmacCutterContainer extends Container {
 	
-	private TarmacCutterEntity tileEntity;
+	public TarmacCutterEntity tileEntity;
 	
 	public static final int INPUT = 0;
 	public static final int BLADE = 1;
@@ -28,6 +31,9 @@ public class TarmacCutterContainer extends Container {
 	
 	private boolean isElectric = false;
 	private int energy;
+	private int tick;
+	private int fuel;
+	private int fuelCap;
 	
 	public TarmacCutterContainer(InventoryPlayer invPlayer, TarmacCutterEntity tileEntity, boolean isElectric) {
 		this.tileEntity = tileEntity;
@@ -61,25 +67,46 @@ public class TarmacCutterContainer extends Container {
 	
 	@Override
 	public void detectAndSendChanges() {
+		TarmacCutterElectricEntity tcee = null;
 		if (this.isElectric) {
-			TarmacCutterElectricEntity tcee = (TarmacCutterElectricEntity) tileEntity;
-			super.detectAndSendChanges();
-	
-			for (int i = 0; i < this.listeners.size(); ++i) {
-				IContainerListener icontainerlistener = this.listeners.get(i);
+			tcee = (TarmacCutterElectricEntity) tileEntity;
+		}
+		super.detectAndSendChanges();
+
+		for (int i = 0; i < this.listeners.size(); ++i) {
+			IContainerListener listener = this.listeners.get(i);
+			if (tcee != null) { 
 	        	if (this.energy != tcee.energy.getEnergyStored()) {
-	        		icontainerlistener.sendWindowProperty(this, 0, tcee.energy.getEnergyStored());
+	        		FurenikusRoads.PACKET_CHANNEL.sendTo(new ClientGuiUpdatePacket(0, tcee.energy.getEnergyStored()), (EntityPlayerMP) listener); 
 	        	}
 			}
-			this.energy = tcee.energy.getEnergyStored();
+        	if (this.tick != tileEntity.timerCount) {
+        		listener.sendWindowProperty(this, 10, tileEntity.timerCount);
+        	}
+        	if (this.fuel != tileEntity.fuel_remaining) {
+        		listener.sendWindowProperty(this, 11, tileEntity.fuel_remaining);
+        	}
+        	if (this.fuelCap != tileEntity.last_fuel_cap) {
+        		listener.sendWindowProperty(this, 12, tileEntity.last_fuel_cap);
+        	}
 		}
+		if (tcee != null) { this.energy = tcee.energy.getEnergyStored(); }
+		this.tick = tileEntity.timerCount;
+		this.fuel = tileEntity.fuel_remaining;
+		this.fuelCap = tileEntity.last_fuel_cap;
 	}
 	
 	@SideOnly(Side.CLIENT)
 	public void updateProgressBar(int id, int data) {
-		if (this.isElectric) {
-			TarmacCutterElectricEntity tcee = (TarmacCutterElectricEntity) tileEntity;
-			tcee.energy.setEnergy(data);
+		FurenikusRoads.debug(1, "Tarmac Cutter syncing ID: " + id + ", data: " + data);
+		if (id == 10) {
+			tileEntity.timerCount = data;
+		}
+		if (id == 11) {
+			tileEntity.fuel_remaining = data;
+		}
+		if (id == 12) {
+			tileEntity.last_fuel_cap = data;
 		}
     }
 
@@ -113,4 +140,10 @@ public class TarmacCutterContainer extends Container {
 		}
 		return stack;
 	}
+	
+	@Override
+	public void onContainerClosed(EntityPlayer playerIn) {
+		tileEntity.sendUpdates();
+		super.onContainerClosed(playerIn);
+    }
 }

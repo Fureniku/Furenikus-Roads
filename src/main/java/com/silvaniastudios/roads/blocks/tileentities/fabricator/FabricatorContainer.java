@@ -1,9 +1,12 @@
 package com.silvaniastudios.roads.blocks.tileentities.fabricator;
 
+import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.blocks.tileentities.SlotFuel;
 import com.silvaniastudios.roads.blocks.tileentities.SlotOutput;
+import com.silvaniastudios.roads.network.ClientGuiUpdatePacket;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
@@ -75,25 +78,25 @@ public class FabricatorContainer extends Container {
 		super.detectAndSendChanges();
 
 		for (int i = 0; i < this.listeners.size(); ++i) {
-			IContainerListener icontainerlistener = this.listeners.get(i);
+			IContainerListener listener = this.listeners.get(i);
 			if (this.isElectric) {
 				FabricatorElectricEntity fee = (FabricatorElectricEntity) tileEntity;
 	        	if (this.energy != fee.energy.getEnergyStored()) {
-	        		icontainerlistener.sendWindowProperty(this, 0, fee.energy.getEnergyStored());
+	        		FurenikusRoads.PACKET_CHANNEL.sendTo(new ClientGuiUpdatePacket(0, fee.energy.getEnergyStored()), (EntityPlayerMP) listener); 
 	        	}
 	        	this.energy = fee.energy.getEnergyStored();
 			}
         	if (this.tick != tileEntity.timerCount) {
-        		icontainerlistener.sendWindowProperty(this, 1, tileEntity.timerCount);
+        		listener.sendWindowProperty(this, 10, tileEntity.timerCount);
         	}
         	if (this.fuel != tileEntity.fuel_remaining) {
-        		icontainerlistener.sendWindowProperty(this, 2, tileEntity.fuel_remaining);
+        		listener.sendWindowProperty(this, 11, tileEntity.fuel_remaining);
         	}
         	if (this.fuelCap != tileEntity.last_fuel_cap) {
-        		icontainerlistener.sendWindowProperty(this, 3, tileEntity.last_fuel_cap);
+        		listener.sendWindowProperty(this, 12, tileEntity.last_fuel_cap);
         	}
         	if (this.recipeId != tileEntity.recipeId) {
-        		icontainerlistener.sendWindowProperty(this, 4, tileEntity.recipeId);
+        		listener.sendWindowProperty(this, 4, tileEntity.recipeId);
         	}
 		}
 		
@@ -105,17 +108,14 @@ public class FabricatorContainer extends Container {
 	
 	@SideOnly(Side.CLIENT)
 	public void updateProgressBar(int id, int data) {
-		if (this.isElectric && id == 0) {
-			FabricatorElectricEntity fee = (FabricatorElectricEntity) tileEntity;
-			fee.energy.setEnergy(data);
-		}
-		if (id == 1) {
+		FurenikusRoads.debug(1, "Fabricator syncing ID: " + id + ", data: " + data);
+		if (id == 10) {
 			tileEntity.timerCount = data;
 		}
-		if (id == 2) {
+		if (id == 11) {
 			tileEntity.fuel_remaining = data;
 		}
-		if (id == 3) {
+		if (id == 12) {
 			tileEntity.last_fuel_cap = data;
 		}
 		if (id == 4) {

@@ -1,10 +1,13 @@
 package com.silvaniastudios.roads.blocks.tileentities.roadfactory;
 
+import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.blocks.tileentities.SlotFluid;
 import com.silvaniastudios.roads.blocks.tileentities.SlotFuel;
 import com.silvaniastudios.roads.blocks.tileentities.SlotOutput;
+import com.silvaniastudios.roads.network.ClientGuiUpdatePacket;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
@@ -19,7 +22,7 @@ import net.minecraftforge.items.SlotItemHandler;
 
 public class RoadFactoryContainer extends Container {
 	
-	private RoadFactoryEntity tileEntity;
+	public RoadFactoryEntity tileEntity;
 	
 	public static final int INPUT_1 = 0;
 	public static final int INPUT_2 = 1;
@@ -37,6 +40,9 @@ public class RoadFactoryContainer extends Container {
 	private boolean isElectric = false;
 	private int energy;
 	private int tar;
+	private int tick;
+	private int fuel;
+	private int fuelCap;
 	
 	public RoadFactoryContainer(InventoryPlayer invPlayer, RoadFactoryEntity tileEntity, boolean isElectric) {
 		this.tileEntity = tileEntity;
@@ -76,35 +82,53 @@ public class RoadFactoryContainer extends Container {
 	
 	@Override
 	public void detectAndSendChanges() {
+		RoadFactoryElectricEntity rfee = null;
 		if (this.isElectric) {
-			RoadFactoryElectricEntity rfee = (RoadFactoryElectricEntity) tileEntity;
-			super.detectAndSendChanges();
-	
-			for (int i = 0; i < this.listeners.size(); ++i) {
-				IContainerListener icontainerlistener = this.listeners.get(i);
+			rfee = (RoadFactoryElectricEntity) tileEntity;
+		}
+		super.detectAndSendChanges();
+
+		for (int i = 0; i < this.listeners.size(); ++i) {
+			IContainerListener listener = this.listeners.get(i);
+			if (this.isElectric) {
 	        	if (this.energy != rfee.energy.getEnergyStored()) {
-	        		icontainerlistener.sendWindowProperty(this, 0, rfee.energy.getEnergyStored());
-	        	}
-	        	if (this.tar != tileEntity.tarFluid.getFluidAmount()) {
-	        		icontainerlistener.sendWindowProperty(this, 1, tileEntity.tarFluid.getFluidAmount());
+	        		FurenikusRoads.PACKET_CHANNEL.sendTo(new ClientGuiUpdatePacket(0, rfee.energy.getEnergyStored()), (EntityPlayerMP) listener); 
 	        	}
 			}
-			this.tar = tileEntity.tarFluid.getFluidAmount();
-			this.energy = rfee.energy.getEnergyStored();
+        	if (this.tar != tileEntity.tarFluid.getFluidAmount()) {
+        		FurenikusRoads.PACKET_CHANNEL.sendTo(new ClientGuiUpdatePacket(1, tileEntity.tarFluid.getFluidAmount()), (EntityPlayerMP) listener); 
+        	}
+        	if (this.tick != tileEntity.timerCount) {
+        		listener.sendWindowProperty(this, 10, tileEntity.timerCount);
+        	}
+        	if (this.fuel != tileEntity.fuel_remaining) {
+        		listener.sendWindowProperty(this, 11, tileEntity.fuel_remaining);
+        	}
+        	if (this.fuelCap != tileEntity.last_fuel_cap) {
+        		listener.sendWindowProperty(this, 12, tileEntity.last_fuel_cap);
+        	}
 		}
+		this.tar = tileEntity.tarFluid.getFluidAmount();
+		this.tick = tileEntity.timerCount;
+		this.fuel = tileEntity.fuel_remaining;
+		this.fuelCap = tileEntity.last_fuel_cap;
+		if (rfee != null) { this.energy = rfee.energy.getEnergyStored(); }
 	}
 	
 	@SideOnly(Side.CLIENT)
 	public void updateProgressBar(int id, int data) {
-		if (this.isElectric && id == 0) {
-			RoadFactoryElectricEntity rfee = (RoadFactoryElectricEntity) tileEntity;
-			rfee.energy.setEnergy(data);
+		FurenikusRoads.debug(1, "Road Factory syncing ID: " + id + ", data: " + data);
+		if (id == 10) {
+			tileEntity.timerCount = data;
 		}
-		if (id == 1 && tileEntity.tarFluid.getFluid() != null) {
-			tileEntity.tarFluid.getFluid().amount = data;
+		if (id == 11) {
+			tileEntity.fuel_remaining = data;
+		}
+		if (id == 12) {
+			tileEntity.last_fuel_cap = data;
 		}
     }
-
+	
 	@Override
 	public boolean canInteractWith(EntityPlayer playerIn) {
 		return tileEntity.canInteractWith(playerIn);

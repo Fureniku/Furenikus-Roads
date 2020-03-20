@@ -1,24 +1,25 @@
 package com.silvaniastudios.roads.blocks.tileentities.distiller;
 
+import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.blocks.tileentities.SlotBucket;
 import com.silvaniastudios.roads.blocks.tileentities.SlotFluid;
 import com.silvaniastudios.roads.blocks.tileentities.SlotOutput;
+import com.silvaniastudios.roads.network.ClientGuiUpdatePacket;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 public class TarDistillerContainer extends Container {
 	
-	private TarDistillerEntity tileEntity;
+	public TarDistillerEntity tileEntity;
 	
 	public static final int INPUT = 0;
 	public static final int OUTPUT_1 = 1;
@@ -36,6 +37,9 @@ public class TarDistillerContainer extends Container {
 	private int fluid_in;
 	private int fluid_out_1;
 	private int fluid_out_2;
+	private int tick;
+	private int fuel;
+	private int fuelCap;
 	
 	public TarDistillerContainer(InventoryPlayer invPlayer, TarDistillerEntity tileEntity, boolean isElectric) {
 		this.tileEntity = tileEntity;
@@ -84,45 +88,41 @@ public class TarDistillerContainer extends Container {
 		super.detectAndSendChanges();
 
 		for (int i = 0; i < this.listeners.size(); ++i) {
-			IContainerListener icontainerlistener = this.listeners.get(i);
-			if (this.isElectric) {
-				if (this.energy != tdee.energy.getEnergyStored()) {
-	        		icontainerlistener.sendWindowProperty(this, 0, tdee.energy.getEnergyStored());
+			IContainerListener listener = this.listeners.get(i);
+			if (listener instanceof EntityPlayer) {
+				if (tdee != null) {
+					if (this.energy != tdee.energy.getEnergyStored()) {
+						FurenikusRoads.PACKET_CHANNEL.sendTo(new ClientGuiUpdatePacket(0, tdee.energy.getEnergyStored()), (EntityPlayerMP) listener); 
+		        	}
+				}
+	        	if (this.fluid_in != tileEntity.fluidInput.getFluidAmount()) {
+	        		FurenikusRoads.PACKET_CHANNEL.sendTo(new ClientGuiUpdatePacket(1, tileEntity.fluidInput.getFluidAmount()), (EntityPlayerMP) listener); 
+	        	}
+	        	if (this.fluid_out_1 != tileEntity.fluidOutput1.getFluidAmount()) {
+	        		FurenikusRoads.PACKET_CHANNEL.sendTo(new ClientGuiUpdatePacket(2, tileEntity.fluidOutput1.getFluidAmount()), (EntityPlayerMP) listener); 
+	        	}
+	        	if (this.fluid_out_2 != tileEntity.fluidOutput2.getFluidAmount()) {
+	        		FurenikusRoads.PACKET_CHANNEL.sendTo(new ClientGuiUpdatePacket(3, tileEntity.fluidOutput2.getFluidAmount()), (EntityPlayerMP) listener); 
+	        	}
+	        	if (this.tick != tileEntity.timerCount) {
+	        		listener.sendWindowProperty(this, 10, tileEntity.timerCount);
+	        	}
+	        	if (this.fuel != tileEntity.fuel_remaining) {
+	        		listener.sendWindowProperty(this, 11, tileEntity.fuel_remaining);
+	        	}
+	        	if (this.fuelCap != tileEntity.last_fuel_cap) {
+	        		listener.sendWindowProperty(this, 12, tileEntity.last_fuel_cap);
 	        	}
 			}
-        	if (this.fluid_in != tileEntity.fluidInput.getFluidAmount()) {
-        		icontainerlistener.sendWindowProperty(this, 1, tileEntity.fluidInput.getFluidAmount());
-        	}
-        	if (this.fluid_out_1 != tileEntity.fluidOutput1.getFluidAmount()) {
-        		icontainerlistener.sendWindowProperty(this, 2, tileEntity.fluidOutput1.getFluidAmount());
-        	}
-        	if (this.fluid_out_2 != tileEntity.fluidOutput2.getFluidAmount()) {
-        		icontainerlistener.sendWindowProperty(this, 3, tileEntity.fluidOutput2.getFluidAmount());
-        	}
 		}
 		if (this.isElectric) { this.energy = tdee.energy.getEnergyStored(); }
 		this.fluid_in = tileEntity.fluidInput.getFluidAmount();
 		this.fluid_out_1 = tileEntity.fluidOutput1.getFluidAmount();
 		this.fluid_out_2 = tileEntity.fluidOutput2.getFluidAmount();
+		this.tick = tileEntity.timerCount;
+		this.fuel = tileEntity.fuel_remaining;
+		this.fuelCap = tileEntity.last_fuel_cap;
 	}
-	
-	@SideOnly(Side.CLIENT)
-	public void updateProgressBar(int id, int data) {
-		if (this.isElectric && id == 0) {
-			TarDistillerElectricEntity tdee = (TarDistillerElectricEntity) tileEntity;
-			tdee.energy.setEnergy(data);
-		}
-		
-		if (id == 1 && tileEntity.fluidInput.getFluid() != null) {
-			tileEntity.fluidInput.getFluid().amount = data;
-		}
-		if (id == 2 && tileEntity.fluidOutput1.getFluid() != null) {
-			tileEntity.fluidOutput1.getFluid().amount = data;
-		}
-		if (id == 3 && tileEntity.fluidOutput2.getFluid() != null) {
-			tileEntity.fluidOutput2.getFluid().amount = data;
-		}
-    }
 
 	@Override
 	public boolean canInteractWith(EntityPlayer playerIn) {
