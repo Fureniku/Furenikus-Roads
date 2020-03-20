@@ -167,7 +167,7 @@ public class GuiFabricator extends GuiContainer {
 	}
 	
 	private void drawProgress(int left, int top) {
-		int p = getPercentage(tileEntity.timerCount, electric ? RoadsConfig.machine.electricCompactorTickRate : RoadsConfig.machine.compactorTickRate);
+		int p = getPercentage(tileEntity.timerCount, electric ? RoadsConfig.machine.electricFabricatorTickRate : RoadsConfig.machine.fabricatorTickRate);
 		int x = Math.round(p * 1.6F);
 		drawTexturedModalRect(left + 8, top + 60, 0, 252, x, 4);
 	}

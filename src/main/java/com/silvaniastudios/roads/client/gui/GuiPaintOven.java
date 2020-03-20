@@ -122,7 +122,7 @@ public class GuiPaintOven extends GuiContainer {
 	}
 	
 	private void drawProgress(int left, int top) {
-		int p = getPercentage(tileEntity.timerCount, electric ? RoadsConfig.machine.electricFillerTickRate : RoadsConfig.machine.fillerTickRate);
+		int p = getPercentage(tileEntity.timerCount, electric ? RoadsConfig.machine.electricPaintOvenTickRate : RoadsConfig.machine.paintOvenTickRate);
 		int x = Math.round(p * 1.6F);
 		drawTexturedModalRect(left + 8, top + 64, 0, 252, x, 4);
 	}

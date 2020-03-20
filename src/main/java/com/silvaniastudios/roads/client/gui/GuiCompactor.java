@@ -56,7 +56,7 @@ public class GuiCompactor extends GuiContainer {
 		
 		drawTooltip(2, left, top, mouseX, mouseY);
 		if (electric) {
-			fontRenderer.drawString(I18n.format("roads.gui.electric_compactor.name"), 6, 6, 4210752);
+			fontRenderer.drawString(I18n.format("roads.gui.compactor_electric.name"), 6, 6, 4210752);
 		} else {
 			fontRenderer.drawString(I18n.format("roads.gui.compactor.name"), 6, 6, 4210752);
 		}
