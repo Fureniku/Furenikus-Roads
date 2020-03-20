@@ -58,6 +58,48 @@
 			"false": {
 			}
 		},
+		"blade": {
+			"none": {
+				"submodel": {
+					"blade": {
+						"model": "furenikusroads:tarmac_cutter_blade",
+						"textures": {
+							"blade": "furenikusroads:blocks/blank"
+						}
+					}
+				}
+			},
+			"iron": {
+				"submodel": {
+					"blade": {
+						"model": "furenikusroads:tarmac_cutter_blade",
+						"textures": {
+							"blade": "furenikusroads:blocks/tarmac_cutter_blade_iron"
+						}
+					}
+				}
+			},
+			"gold": {
+				"submodel": {
+					"blade": {
+						"model": "furenikusroads:tarmac_cutter_blade",
+						"textures": {
+							"blade": "furenikusroads:blocks/tarmac_cutter_blade_gold"
+						}
+					}
+				}
+			},
+			"diamond": {
+				"submodel": {
+					"blade": {
+						"model": "furenikusroads:tarmac_cutter_blade",
+						"textures": {
+							"blade": "furenikusroads:blocks/tarmac_cutter_blade_diamond"
+						}
+					}
+				}
+			}
+		},
 		"base_plate": {
 			"true": {
 				"submodel": {

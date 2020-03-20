@@ -13,12 +13,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class TarmacCutterBlade extends RoadItemBase {
 
 	public int size;
+	public String type;
 	
-	public TarmacCutterBlade(String name, int maxDmg, int size) {
+	public TarmacCutterBlade(String name, int maxDmg, int size, String type) {
 		super(name, 1);
 		this.setMaxDamage(maxDmg);
 		this.size = size;
 		this.setNoRepair();
+		this.type = type;
 	}
 	
 	@Override
@@ -28,6 +30,10 @@ public class TarmacCutterBlade extends RoadItemBase {
 		}
 		return false;
     }
+	
+	public String getType() {
+		return type;
+	}
 	
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
