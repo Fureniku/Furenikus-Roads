@@ -110,13 +110,13 @@ public class PaintFillerEntity extends RoadTileEntity implements ITickable, ICap
 		if (fuel_remaining > 0) {
 			fuel_remaining--;
 		} else if (fuel_remaining <= 0) {
-			if (!inventory.getStackInSlot(4).isEmpty()) {
-				fuel_remaining = TileEntityFurnace.getItemBurnTime(inventory.getStackInSlot(4));
+			if (!inventory.getStackInSlot(PaintFillerContainer.FUEL).isEmpty()) {
+				fuel_remaining = TileEntityFurnace.getItemBurnTime(inventory.getStackInSlot(PaintFillerContainer.FUEL));
 				last_fuel_cap = fuel_remaining;
-				if (inventory.getStackInSlot(4).getItem() == Items.LAVA_BUCKET) {
-					inventory.setStackInSlot(4, new ItemStack(Items.BUCKET));
+				if (inventory.getStackInSlot(PaintFillerContainer.FUEL).getItem() == Items.LAVA_BUCKET) {
+					inventory.setStackInSlot(PaintFillerContainer.FUEL, new ItemStack(Items.BUCKET));
 				} else {
-					inventory.extractItem(4, 1, false);
+					inventory.extractItem(PaintFillerContainer.FUEL, 1, false);
 				}
 				sendUpdates();
 			} else {

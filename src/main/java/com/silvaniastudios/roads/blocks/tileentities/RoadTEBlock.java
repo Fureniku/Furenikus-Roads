@@ -2,7 +2,6 @@ package com.silvaniastudios.roads.blocks.tileentities;
 
 import com.google.common.collect.ImmutableList;
 import com.silvaniastudios.roads.FurenikusRoads;
-import com.silvaniastudios.roads.blocks.tileentities.paintfiller.PaintFillerBlock;
 import com.silvaniastudios.roads.items.ItemWrench;
 
 import net.minecraft.block.Block;
@@ -38,7 +37,7 @@ import net.minecraftforge.items.IItemHandler;
 public class RoadTEBlock extends Block {
 
 	protected String name;
-	public static final PropertyEnum<RoadTEBlock.EnumRotation> ROTATION = PropertyEnum.create("rotation", RoadTEBlock.EnumRotation.class);
+	public static final PropertyEnum<EnumRotation> ROTATION = PropertyEnum.create("rotation", EnumRotation.class);
 	public static final PropertyBool FURNACE_ACTIVE = PropertyBool.create("furnace_active");
 	public static final PropertyBool BASE_PLATE = PropertyBool.create("base_plate");
 	private int guiId = 0;
@@ -59,10 +58,10 @@ public class RoadTEBlock extends Block {
 	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-		if (placer.getHorizontalFacing() == EnumFacing.NORTH) { return this.getDefaultState().withProperty(ROTATION, PaintFillerBlock.EnumRotation.north); }
-		if (placer.getHorizontalFacing() == EnumFacing.EAST)  { return this.getDefaultState().withProperty(ROTATION, PaintFillerBlock.EnumRotation.east); }
-		if (placer.getHorizontalFacing() == EnumFacing.SOUTH) { return this.getDefaultState().withProperty(ROTATION, PaintFillerBlock.EnumRotation.south); }
-		if (placer.getHorizontalFacing() == EnumFacing.WEST)  { return this.getDefaultState().withProperty(ROTATION, PaintFillerBlock.EnumRotation.west); }
+		if (placer.getHorizontalFacing() == EnumFacing.NORTH) { return this.getDefaultState().withProperty(ROTATION, EnumRotation.north); }
+		if (placer.getHorizontalFacing() == EnumFacing.EAST)  { return this.getDefaultState().withProperty(ROTATION, EnumRotation.east); }
+		if (placer.getHorizontalFacing() == EnumFacing.SOUTH) { return this.getDefaultState().withProperty(ROTATION, EnumRotation.south); }
+		if (placer.getHorizontalFacing() == EnumFacing.WEST)  { return this.getDefaultState().withProperty(ROTATION, EnumRotation.west); }
 		return super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer);
 	}
 	

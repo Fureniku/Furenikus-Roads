@@ -40,6 +40,9 @@ public class SimpleLinePaintBlock extends PaintBlockBase {
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
 		EnumFacing enumfacing = EnumFacing.getFront(meta);
+		if (enumfacing == EnumFacing.DOWN || enumfacing == EnumFacing.UP) {
+			return this.getDefaultState().withProperty(FACING, EnumFacing.NORTH);
+		}
 		return this.getDefaultState().withProperty(FACING, enumfacing);
 	}
 	

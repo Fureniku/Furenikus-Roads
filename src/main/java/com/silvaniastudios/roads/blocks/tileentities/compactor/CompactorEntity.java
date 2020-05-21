@@ -5,7 +5,6 @@ import javax.annotation.Nonnull;
 import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.RoadsConfig;
 import com.silvaniastudios.roads.blocks.tileentities.RoadTileEntity;
-import com.silvaniastudios.roads.blocks.tileentities.paintoven.PaintOvenContainer;
 import com.silvaniastudios.roads.blocks.tileentities.recipes.CompactorRecipes;
 import com.silvaniastudios.roads.blocks.tileentities.recipes.RecipeRegistry;
 import com.silvaniastudios.roads.items.ItemFragment;
@@ -72,13 +71,13 @@ public class CompactorEntity extends RoadTileEntity implements ITickable, ICapab
 		if (fuel_remaining > 0) {
 			fuel_remaining--;
 		} else if (fuel_remaining <= 0) {
-			if (!inventory.getStackInSlot(PaintOvenContainer.FUEL).isEmpty()) {
-				fuel_remaining = TileEntityFurnace.getItemBurnTime(inventory.getStackInSlot(4));
+			if (!inventory.getStackInSlot(CompactorContainer.FUEL).isEmpty()) {
+				fuel_remaining = TileEntityFurnace.getItemBurnTime(inventory.getStackInSlot(CompactorContainer.FUEL));
 				last_fuel_cap = fuel_remaining;
-				if (inventory.getStackInSlot(PaintOvenContainer.FUEL).getItem() == Items.LAVA_BUCKET) {
-					inventory.setStackInSlot(PaintOvenContainer.FUEL, new ItemStack(Items.BUCKET));
+				if (inventory.getStackInSlot(CompactorContainer.FUEL).getItem() == Items.LAVA_BUCKET) {
+					inventory.setStackInSlot(CompactorContainer.FUEL, new ItemStack(Items.BUCKET));
 				} else {
-					inventory.extractItem(PaintOvenContainer.FUEL, 1, false);
+					inventory.extractItem(CompactorContainer.FUEL, 1, false);
 				}
 				sendUpdates();
 			} else {
