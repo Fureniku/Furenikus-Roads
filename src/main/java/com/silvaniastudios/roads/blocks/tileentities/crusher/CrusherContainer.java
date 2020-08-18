@@ -67,22 +67,24 @@ public class CrusherContainer extends Container {
 
 		for (int i = 0; i < this.listeners.size(); ++i) {
 			IContainerListener listener = this.listeners.get(i);
-			if (this.isElectric) {
-				CrusherElectricEntity cee = (CrusherElectricEntity) tileEntity;
-	        	if (this.energy != cee.energy.getEnergyStored()) {
-	        		FurenikusRoads.PACKET_CHANNEL.sendTo(new ClientGuiUpdatePacket(0, cee.energy.getEnergyStored()), (EntityPlayerMP) listener); 
+			if (listener instanceof EntityPlayer) {
+				if (this.isElectric) {
+					CrusherElectricEntity cee = (CrusherElectricEntity) tileEntity;
+		        	if (this.energy != cee.energy.getEnergyStored()) {
+		        		FurenikusRoads.PACKET_CHANNEL.sendTo(new ClientGuiUpdatePacket(0, cee.energy.getEnergyStored()), (EntityPlayerMP) listener); 
+		        	}
+		        	this.energy = cee.energy.getEnergyStored();
+				}
+				if (this.tick != tileEntity.timerCount) {
+	        		listener.sendWindowProperty(this, 10, tileEntity.timerCount);
 	        	}
-	        	this.energy = cee.energy.getEnergyStored();
+	        	if (this.fuel != tileEntity.fuel_remaining) {
+	        		listener.sendWindowProperty(this, 11, tileEntity.fuel_remaining);
+	        	}
+	        	if (this.fuelCap != tileEntity.last_fuel_cap) {
+	        		listener.sendWindowProperty(this, 12, tileEntity.last_fuel_cap);
+	        	}
 			}
-			if (this.tick != tileEntity.timerCount) {
-        		listener.sendWindowProperty(this, 10, tileEntity.timerCount);
-        	}
-        	if (this.fuel != tileEntity.fuel_remaining) {
-        		listener.sendWindowProperty(this, 11, tileEntity.fuel_remaining);
-        	}
-        	if (this.fuelCap != tileEntity.last_fuel_cap) {
-        		listener.sendWindowProperty(this, 12, tileEntity.last_fuel_cap);
-        	}
 		}
 		
 		this.tick = tileEntity.timerCount;

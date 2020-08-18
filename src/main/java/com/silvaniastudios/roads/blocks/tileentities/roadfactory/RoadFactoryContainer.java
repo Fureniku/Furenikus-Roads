@@ -90,23 +90,25 @@ public class RoadFactoryContainer extends Container {
 
 		for (int i = 0; i < this.listeners.size(); ++i) {
 			IContainerListener listener = this.listeners.get(i);
-			if (this.isElectric) {
-	        	if (this.energy != rfee.energy.getEnergyStored()) {
-	        		FurenikusRoads.PACKET_CHANNEL.sendTo(new ClientGuiUpdatePacket(0, rfee.energy.getEnergyStored()), (EntityPlayerMP) listener); 
+			if (listener instanceof EntityPlayer) {
+				if (this.isElectric) {
+		        	if (this.energy != rfee.energy.getEnergyStored()) {
+		        		FurenikusRoads.PACKET_CHANNEL.sendTo(new ClientGuiUpdatePacket(0, rfee.energy.getEnergyStored()), (EntityPlayerMP) listener); 
+		        	}
+				}
+	        	if (this.tar != tileEntity.tarFluid.getFluidAmount()) {
+	        		FurenikusRoads.PACKET_CHANNEL.sendTo(new ClientGuiUpdatePacket(1, tileEntity.tarFluid.getFluidAmount()), (EntityPlayerMP) listener); 
+	        	}
+	        	if (this.tick != tileEntity.timerCount) {
+	        		listener.sendWindowProperty(this, 10, tileEntity.timerCount);
+	        	}
+	        	if (this.fuel != tileEntity.fuel_remaining) {
+	        		listener.sendWindowProperty(this, 11, tileEntity.fuel_remaining);
+	        	}
+	        	if (this.fuelCap != tileEntity.last_fuel_cap) {
+	        		listener.sendWindowProperty(this, 12, tileEntity.last_fuel_cap);
 	        	}
 			}
-        	if (this.tar != tileEntity.tarFluid.getFluidAmount()) {
-        		FurenikusRoads.PACKET_CHANNEL.sendTo(new ClientGuiUpdatePacket(1, tileEntity.tarFluid.getFluidAmount()), (EntityPlayerMP) listener); 
-        	}
-        	if (this.tick != tileEntity.timerCount) {
-        		listener.sendWindowProperty(this, 10, tileEntity.timerCount);
-        	}
-        	if (this.fuel != tileEntity.fuel_remaining) {
-        		listener.sendWindowProperty(this, 11, tileEntity.fuel_remaining);
-        	}
-        	if (this.fuelCap != tileEntity.last_fuel_cap) {
-        		listener.sendWindowProperty(this, 12, tileEntity.last_fuel_cap);
-        	}
 		}
 		this.tar = tileEntity.tarFluid.getFluidAmount();
 		this.tick = tileEntity.timerCount;

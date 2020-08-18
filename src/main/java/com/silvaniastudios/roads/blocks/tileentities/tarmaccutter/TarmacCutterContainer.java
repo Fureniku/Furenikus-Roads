@@ -75,20 +75,22 @@ public class TarmacCutterContainer extends Container {
 
 		for (int i = 0; i < this.listeners.size(); ++i) {
 			IContainerListener listener = this.listeners.get(i);
-			if (tcee != null) { 
-	        	if (this.energy != tcee.energy.getEnergyStored()) {
-	        		FurenikusRoads.PACKET_CHANNEL.sendTo(new ClientGuiUpdatePacket(0, tcee.energy.getEnergyStored()), (EntityPlayerMP) listener); 
+			if (listener instanceof EntityPlayer) {
+				if (tcee != null) { 
+		        	if (this.energy != tcee.energy.getEnergyStored()) {
+		        		FurenikusRoads.PACKET_CHANNEL.sendTo(new ClientGuiUpdatePacket(0, tcee.energy.getEnergyStored()), (EntityPlayerMP) listener); 
+		        	}
+				}
+	        	if (this.tick != tileEntity.timerCount) {
+	        		listener.sendWindowProperty(this, 10, tileEntity.timerCount);
+	        	}
+	        	if (this.fuel != tileEntity.fuel_remaining) {
+	        		listener.sendWindowProperty(this, 11, tileEntity.fuel_remaining);
+	        	}
+	        	if (this.fuelCap != tileEntity.last_fuel_cap) {
+	        		listener.sendWindowProperty(this, 12, tileEntity.last_fuel_cap);
 	        	}
 			}
-        	if (this.tick != tileEntity.timerCount) {
-        		listener.sendWindowProperty(this, 10, tileEntity.timerCount);
-        	}
-        	if (this.fuel != tileEntity.fuel_remaining) {
-        		listener.sendWindowProperty(this, 11, tileEntity.fuel_remaining);
-        	}
-        	if (this.fuelCap != tileEntity.last_fuel_cap) {
-        		listener.sendWindowProperty(this, 12, tileEntity.last_fuel_cap);
-        	}
 		}
 		if (tcee != null) { this.energy = tcee.energy.getEnergyStored(); }
 		this.tick = tileEntity.timerCount;

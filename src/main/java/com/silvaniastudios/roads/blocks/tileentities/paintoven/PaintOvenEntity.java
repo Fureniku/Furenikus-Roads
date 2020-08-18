@@ -87,7 +87,7 @@ public class PaintOvenEntity extends RoadTileEntity implements ITickable, ICapab
 			fuel_remaining--;
 		} else if (fuel_remaining <= 0) {
 			if (!inventory.getStackInSlot(PaintOvenContainer.FUEL).isEmpty()) {
-				fuel_remaining = TileEntityFurnace.getItemBurnTime(inventory.getStackInSlot(4));
+				fuel_remaining = TileEntityFurnace.getItemBurnTime(inventory.getStackInSlot(PaintOvenContainer.FUEL));
 				last_fuel_cap = fuel_remaining;
 				if (inventory.getStackInSlot(PaintOvenContainer.FUEL).getItem() == Items.LAVA_BUCKET) {
 					inventory.setStackInSlot(PaintOvenContainer.FUEL, new ItemStack(Items.BUCKET));

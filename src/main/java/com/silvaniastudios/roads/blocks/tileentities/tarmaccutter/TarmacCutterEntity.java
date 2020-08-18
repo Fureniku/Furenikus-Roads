@@ -75,8 +75,8 @@ public class TarmacCutterEntity extends RoadTileEntity implements ITickable, ICa
 		if (fuel_remaining > 0) {
 			fuel_remaining--;
 		} else if (fuel_remaining <= 0) {
-			if (!inventory.getStackInSlot(4).isEmpty()) {
-				fuel_remaining = TileEntityFurnace.getItemBurnTime(inventory.getStackInSlot(4));
+			if (!inventory.getStackInSlot(TarmacCutterContainer.FUEL).isEmpty()) {
+				fuel_remaining = TileEntityFurnace.getItemBurnTime(inventory.getStackInSlot(TarmacCutterContainer.FUEL));
 				last_fuel_cap = fuel_remaining;
 				if (inventory.getStackInSlot(4).getItem() == Items.LAVA_BUCKET) {
 					inventory.setStackInSlot(4, new ItemStack(Items.BUCKET));

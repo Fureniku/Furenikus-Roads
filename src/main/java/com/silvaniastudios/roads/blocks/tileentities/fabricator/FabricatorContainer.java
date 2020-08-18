@@ -79,25 +79,27 @@ public class FabricatorContainer extends Container {
 
 		for (int i = 0; i < this.listeners.size(); ++i) {
 			IContainerListener listener = this.listeners.get(i);
-			if (this.isElectric) {
-				FabricatorElectricEntity fee = (FabricatorElectricEntity) tileEntity;
-	        	if (this.energy != fee.energy.getEnergyStored()) {
-	        		FurenikusRoads.PACKET_CHANNEL.sendTo(new ClientGuiUpdatePacket(0, fee.energy.getEnergyStored()), (EntityPlayerMP) listener); 
+			if (listener instanceof EntityPlayer) {
+				if (this.isElectric) {
+					FabricatorElectricEntity fee = (FabricatorElectricEntity) tileEntity;
+		        	if (this.energy != fee.energy.getEnergyStored()) {
+		        		FurenikusRoads.PACKET_CHANNEL.sendTo(new ClientGuiUpdatePacket(0, fee.energy.getEnergyStored()), (EntityPlayerMP) listener); 
+		        	}
+		        	this.energy = fee.energy.getEnergyStored();
+				}
+	        	if (this.tick != tileEntity.timerCount) {
+	        		listener.sendWindowProperty(this, 10, tileEntity.timerCount);
 	        	}
-	        	this.energy = fee.energy.getEnergyStored();
+	        	if (this.fuel != tileEntity.fuel_remaining) {
+	        		listener.sendWindowProperty(this, 11, tileEntity.fuel_remaining);
+	        	}
+	        	if (this.fuelCap != tileEntity.last_fuel_cap) {
+	        		listener.sendWindowProperty(this, 12, tileEntity.last_fuel_cap);
+	        	}
+	        	if (this.recipeId != tileEntity.recipeId) {
+	        		listener.sendWindowProperty(this, 4, tileEntity.recipeId);
+	        	}
 			}
-        	if (this.tick != tileEntity.timerCount) {
-        		listener.sendWindowProperty(this, 10, tileEntity.timerCount);
-        	}
-        	if (this.fuel != tileEntity.fuel_remaining) {
-        		listener.sendWindowProperty(this, 11, tileEntity.fuel_remaining);
-        	}
-        	if (this.fuelCap != tileEntity.last_fuel_cap) {
-        		listener.sendWindowProperty(this, 12, tileEntity.last_fuel_cap);
-        	}
-        	if (this.recipeId != tileEntity.recipeId) {
-        		listener.sendWindowProperty(this, 4, tileEntity.recipeId);
-        	}
 		}
 		
 		this.tick = tileEntity.timerCount;

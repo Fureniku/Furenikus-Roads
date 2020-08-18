@@ -71,7 +71,7 @@ public class FabricatorEntity extends RoadTileEntity implements ITickable, ICapa
 			fuel_remaining--;
 		} else if (fuel_remaining <= 0) {
 			if (!inventory.getStackInSlot(FabricatorContainer.FUEL).isEmpty()) {
-				fuel_remaining = TileEntityFurnace.getItemBurnTime(inventory.getStackInSlot(4));
+				fuel_remaining = TileEntityFurnace.getItemBurnTime(inventory.getStackInSlot(FabricatorContainer.FUEL));
 				last_fuel_cap = fuel_remaining;
 				if (inventory.getStackInSlot(FabricatorContainer.FUEL).getItem() == Items.LAVA_BUCKET) {
 					inventory.setStackInSlot(FabricatorContainer.FUEL, new ItemStack(Items.BUCKET));

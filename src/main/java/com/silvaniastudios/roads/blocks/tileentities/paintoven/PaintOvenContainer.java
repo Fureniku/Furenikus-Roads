@@ -73,27 +73,29 @@ public class PaintOvenContainer extends Container {
 
 		for (int i = 0; i < this.listeners.size(); ++i) {
 			IContainerListener listener = this.listeners.get(i);
-			if (poee != null) {
-	        	if (this.energy != poee.energy.getEnergyStored()) {
-	        		FurenikusRoads.PACKET_CHANNEL.sendTo(new ClientGuiUpdatePacket(0, poee.energy.getEnergyStored()), (EntityPlayerMP) listener); 
+			if (listener instanceof EntityPlayer) {
+				if (poee != null) {
+		        	if (this.energy != poee.energy.getEnergyStored()) {
+		        		FurenikusRoads.PACKET_CHANNEL.sendTo(new ClientGuiUpdatePacket(0, poee.energy.getEnergyStored()), (EntityPlayerMP) listener); 
+		        	}
+				}
+				
+				if (this.paint != tileEntity.paint.getFluidAmount()) {
+					FurenikusRoads.PACKET_CHANNEL.sendTo(new ClientGuiUpdatePacket(1, tileEntity.paint.getFluidAmount()), (EntityPlayerMP) listener); 
+	        	}
+				if (this.water != tileEntity.water.getFluidAmount()) {
+					FurenikusRoads.PACKET_CHANNEL.sendTo(new ClientGuiUpdatePacket(2, tileEntity.water.getFluidAmount()), (EntityPlayerMP) listener); 
+	        	}
+				if (this.tick != tileEntity.timerCount) {
+	        		listener.sendWindowProperty(this, 10, tileEntity.timerCount);
+	        	}
+	        	if (this.fuel != tileEntity.fuel_remaining) {
+	        		listener.sendWindowProperty(this, 11, tileEntity.fuel_remaining);
+	        	}
+	        	if (this.fuelCap != tileEntity.last_fuel_cap) {
+	        		listener.sendWindowProperty(this, 12, tileEntity.last_fuel_cap);
 	        	}
 			}
-			
-			if (this.paint != tileEntity.paint.getFluidAmount()) {
-				FurenikusRoads.PACKET_CHANNEL.sendTo(new ClientGuiUpdatePacket(1, tileEntity.paint.getFluidAmount()), (EntityPlayerMP) listener); 
-        	}
-			if (this.water != tileEntity.water.getFluidAmount()) {
-				FurenikusRoads.PACKET_CHANNEL.sendTo(new ClientGuiUpdatePacket(2, tileEntity.water.getFluidAmount()), (EntityPlayerMP) listener); 
-        	}
-			if (this.tick != tileEntity.timerCount) {
-        		listener.sendWindowProperty(this, 10, tileEntity.timerCount);
-        	}
-        	if (this.fuel != tileEntity.fuel_remaining) {
-        		listener.sendWindowProperty(this, 11, tileEntity.fuel_remaining);
-        	}
-        	if (this.fuelCap != tileEntity.last_fuel_cap) {
-        		listener.sendWindowProperty(this, 12, tileEntity.last_fuel_cap);
-        	}
 		}
 		
 		if (poee != null) { this.energy = poee.energy.getEnergyStored(); }

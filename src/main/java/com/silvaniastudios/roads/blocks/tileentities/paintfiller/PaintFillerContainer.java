@@ -77,30 +77,33 @@ public class PaintFillerContainer extends Container {
 
 		for (int i = 0; i < this.listeners.size(); ++i) {
 			IContainerListener listener = this.listeners.get(i);
-			if (pfee != null) {
-	        	if (this.energy != pfee.energy.getEnergyStored()) {
-	        		FurenikusRoads.PACKET_CHANNEL.sendTo(new ClientGuiUpdatePacket(0, pfee.energy.getEnergyStored()), (EntityPlayerMP) listener); 
+			if (listener instanceof EntityPlayer) {
+				if (pfee != null) {
+		        	if (this.energy != pfee.energy.getEnergyStored()) {
+		        		FurenikusRoads.PACKET_CHANNEL.sendTo(new ClientGuiUpdatePacket(0, pfee.energy.getEnergyStored()), (EntityPlayerMP) listener); 
+		        	}
+				}
+				
+				if (this.paint_white != tileEntity.white_paint.getFluidAmount()) {
+					FurenikusRoads.PACKET_CHANNEL.sendTo(new ClientGuiUpdatePacket(1, tileEntity.white_paint.getFluidAmount()), (EntityPlayerMP) listener);
+	        	}
+	        	if (this.paint_yellow != tileEntity.yellow_paint.getFluidAmount()) {
+	        		FurenikusRoads.PACKET_CHANNEL.sendTo(new ClientGuiUpdatePacket(2, tileEntity.yellow_paint.getFluidAmount()), (EntityPlayerMP) listener);
+	        	}
+	        	if (this.paint_red != tileEntity.red_paint.getFluidAmount()) {
+	        		FurenikusRoads.PACKET_CHANNEL.sendTo(new ClientGuiUpdatePacket(3, tileEntity.red_paint.getFluidAmount()), (EntityPlayerMP) listener);
+	        	}
+	        	if (this.tick != tileEntity.timerCount) {
+	        		listener.sendWindowProperty(this, 10, tileEntity.timerCount);
+	        	}
+	        	if (this.fuel != tileEntity.fuel_remaining) {
+	        		listener.sendWindowProperty(this, 11, tileEntity.fuel_remaining);
+	        	}
+	        	if (this.fuelCap != tileEntity.last_fuel_cap) {
+	        		listener.sendWindowProperty(this, 12, tileEntity.last_fuel_cap);
 	        	}
 			}
 			
-			if (this.paint_white != tileEntity.white_paint.getFluidAmount()) {
-				FurenikusRoads.PACKET_CHANNEL.sendTo(new ClientGuiUpdatePacket(1, tileEntity.white_paint.getFluidAmount()), (EntityPlayerMP) listener);
-        	}
-        	if (this.paint_yellow != tileEntity.yellow_paint.getFluidAmount()) {
-        		FurenikusRoads.PACKET_CHANNEL.sendTo(new ClientGuiUpdatePacket(2, tileEntity.yellow_paint.getFluidAmount()), (EntityPlayerMP) listener);
-        	}
-        	if (this.paint_red != tileEntity.red_paint.getFluidAmount()) {
-        		FurenikusRoads.PACKET_CHANNEL.sendTo(new ClientGuiUpdatePacket(3, tileEntity.red_paint.getFluidAmount()), (EntityPlayerMP) listener);
-        	}
-        	if (this.tick != tileEntity.timerCount) {
-        		listener.sendWindowProperty(this, 10, tileEntity.timerCount);
-        	}
-        	if (this.fuel != tileEntity.fuel_remaining) {
-        		listener.sendWindowProperty(this, 11, tileEntity.fuel_remaining);
-        	}
-        	if (this.fuelCap != tileEntity.last_fuel_cap) {
-        		listener.sendWindowProperty(this, 12, tileEntity.last_fuel_cap);
-        	}
 		}
 		if (pfee != null) { this.energy = pfee.energy.getEnergyStored(); }
 		this.paint_white = tileEntity.white_paint.getFluidAmount();
