@@ -75,7 +75,7 @@ public class CrusherEntity extends RoadTileEntity implements ITickable, ICapabil
 		if (fuel_remaining > 0) {
 			fuel_remaining--;
 		} else if (fuel_remaining <= 0) {
-			if (!inventory.getStackInSlot(2).isEmpty()) {
+			if (!inventory.getStackInSlot(CrusherContainer.FUEL).isEmpty()) {
 				fuel_remaining = TileEntityFurnace.getItemBurnTime(inventory.getStackInSlot(CrusherContainer.FUEL));
 				last_fuel_cap = fuel_remaining;
 				if (inventory.getStackInSlot(2).getItem() == Items.LAVA_BUCKET) {

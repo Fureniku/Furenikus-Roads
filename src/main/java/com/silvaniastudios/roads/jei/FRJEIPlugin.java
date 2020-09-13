@@ -2,6 +2,7 @@ package com.silvaniastudios.roads.jei;
 
 import java.util.ArrayList;
 
+import com.silvaniastudios.roads.RoadsConfig;
 import com.silvaniastudios.roads.blocks.FRBlocks;
 import com.silvaniastudios.roads.blocks.paint.PaintBlockBase;
 import com.silvaniastudios.roads.blocks.tileentities.recipes.CompactorRecipes;
@@ -45,7 +46,9 @@ public class FRJEIPlugin implements IModPlugin {
 		registry.addRecipes(compactorRecipes(), "fr_electric_compactor");
 		registry.addRecipes(fabricatorRecipes(), "fr_electric_fabricator");
 		
-		blacklistedIngredients(registry.getJeiHelpers().getIngredientBlacklist());
+		if (RoadsConfig.general.hideJEIPaints) {
+			blacklistedIngredients(registry.getJeiHelpers().getIngredientBlacklist());
+		}
 	}
 	
 	@Override

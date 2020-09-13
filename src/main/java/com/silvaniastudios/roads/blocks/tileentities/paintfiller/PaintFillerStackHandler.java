@@ -1,5 +1,6 @@
 package com.silvaniastudios.roads.blocks.tileentities.paintfiller;
 
+import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.items.FRItems;
 
 import net.minecraft.item.ItemStack;
@@ -58,6 +59,7 @@ public class PaintFillerStackHandler extends ItemStackHandler {
 		if (slot == PaintFillerContainer.GUN && stack.getItem() == FRItems.paint_gun) {
 			return internalStackHandler.insertItem(slot, stack, simulate);
 		}
+		FurenikusRoads.debug(1, "[#30] Paint filler insertItem called, slot: " + slot + ", stack" + stack.getDisplayName() + " x" + stack.getCount());
 		return super.insertItem(slot, stack, simulate);
 	}
 

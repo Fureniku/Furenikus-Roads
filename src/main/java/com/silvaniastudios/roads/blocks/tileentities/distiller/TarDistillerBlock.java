@@ -70,7 +70,10 @@ public class TarDistillerBlock extends RoadTEBlock {
 					}
 					te.fluidOutput1.drain(1000, true);
 					te.sendUpdates();
-					player.addItemStackToInventory(FluidUtil.getFilledBucket(te.fluidOutput1.getFluid()));
+					ItemStack fluidBucket = FluidUtil.getFilledBucket(te.fluidOutput1.getFluid());
+					if (fluidBucket != null) {
+						player.addItemStackToInventory(fluidBucket);
+					}
 					return true;
 				} else if (te.fluidOutput2.getFluidAmount() >= 1000) {
 					if (held.getCount() > 1) {

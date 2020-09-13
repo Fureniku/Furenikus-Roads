@@ -22,7 +22,7 @@ public class StandardBollardBlock extends GenericDecorativeBlock {
     @Nullable
     public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
     	int meta = getMetaFromState(state);
-        return new AxisAlignedBB(0.5-(getWidth(meta)/2), -1+getBlockBelowHeight(worldIn, pos), 0.5-(getWidth(meta)/2), 0.5+(getWidth(meta)/2), -1+getBlockBelowHeight(worldIn, pos)+getHeight(meta), 0.5+(getWidth(meta)/2));
+        return new AxisAlignedBB(0.5-(getWidth(meta)/2), -1+getBlockBelowHeight(worldIn, pos), 0.5-(getWidth(meta)/2), 0.5+(getWidth(meta)/2), -1+getBlockBelowHeight(worldIn, pos)+1.5, 0.5+(getWidth(meta)/2));
     }
     
     float v = 1.0F/16.0F;

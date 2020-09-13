@@ -34,6 +34,12 @@ public class RoadsConfig {
 		
 		@Config.Comment("Debug level: 0 (only essential info), 1 (print things about current bugs), 2 (print machine processes), 3 (print everything)")
 		public int debugLevel = 0;
+		
+		@Config.Comment("Hide all paints from JEI. On by default, as they clutter a lot and are confusing for survival players in modpacks. Use the paint gun!")
+		public boolean hideJEIPaints = true;
+		
+		@Config.Comment("Should limestone generate naturally in the world")
+		public boolean genLimestone = true;
 	}
 	
 	public static class Machines {

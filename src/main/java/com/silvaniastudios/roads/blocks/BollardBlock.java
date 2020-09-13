@@ -85,7 +85,7 @@ public class BollardBlock extends NonPaintRoadTopBlock implements IMetaBlockName
 
     @Nullable
     public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-    	return new AxisAlignedBB(0.25, -1+getBlockBelowHeight(worldIn, pos), 0.25, 0.75, -1+getBlockBelowHeight(worldIn, pos)+1, 0.75);
+    	return new AxisAlignedBB(0.25, -1+getBlockBelowHeight(worldIn, pos), 0.25, 0.75, -1+getBlockBelowHeight(worldIn, pos)+1.5, 0.75);
     }
 	
 	public IBlockState getStateFromMeta(int meta) {

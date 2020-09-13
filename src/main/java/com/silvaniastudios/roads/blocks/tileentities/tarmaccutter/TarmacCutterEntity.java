@@ -163,7 +163,7 @@ public class TarmacCutterEntity extends RoadTileEntity implements ITickable, ICa
 				
 				if (ib.getBlock() instanceof RoadBlock) {
 					RoadBlock block = (RoadBlock) ib.getBlock();
-					if (blockOut.isEmpty() || (blockOut.getItem() == in.getItem() && blockOut.getItemDamage() == in.getItemDamage() - cutSize)) {
+					if (blockOut.isEmpty() || (blockOut.getItem() == in.getItem() && blockOut.getItemDamage() == in.getItemDamage() - cutSize && blockOut.getCount() <= blockOut.getMaxStackSize() + in.getCount())) {
 						if (fragOut.isEmpty() || (fragOut.getItem() == block.getFragmentItem() && fragOut.getCount() <= fragOut.getMaxStackSize() - cutSize)) {
 							return true;
 						}

@@ -51,7 +51,7 @@ public class RetractableBollardBlock extends GenericDecorativeBlock {
     @Nullable
     public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
     	int meta = getMetaFromState(state);
-        return new AxisAlignedBB(0.5-(getWidth(meta)/2), -1+getBlockBelowHeight(worldIn, pos), 0.5-(getWidth(meta)/2), 0.5+(getWidth(meta)/2), -1+getBlockBelowHeight(worldIn, pos)+getHeight(meta), 0.5+(getWidth(meta)/2));
+        return new AxisAlignedBB(0.5-(getWidth(meta)/2), -1+getBlockBelowHeight(worldIn, pos), 0.5-(getWidth(meta)/2), 0.5+(getWidth(meta)/2), -1+getBlockBelowHeight(worldIn, pos)+getCollisionHeight(meta), 0.5+(getWidth(meta)/2));
     }
     float v = 1.0F/16.0F;
     
@@ -64,6 +64,11 @@ public class RetractableBollardBlock extends GenericDecorativeBlock {
     	if (meta == 0 || meta == 2) { return 12*v; }
     	if (meta == 4 || meta == 6) { return 1.0D; }
     	if (meta == 8 || meta == 10 || meta == 12 || meta == 14) { return 1.0D; }
+    	return meta < 8 ? 0.5*v : 1*v;
+    }
+    
+    private double getCollisionHeight(int meta) {
+    	if (meta == 0 || meta == 2 || meta == 4 || meta == 6 || meta == 8 || meta == 10 || meta == 12 || meta == 14) { return 1.5; }
     	return meta < 8 ? 0.5*v : 1*v;
     }
 }
