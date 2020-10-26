@@ -29,7 +29,12 @@
 			"13_16ths": { "model": "furenikusroads:road_13_16" },
 			"14_16ths": { "model": "furenikusroads:road_14_16" },
 			"15_16ths": { "model": "furenikusroads:road_15_16" },
-			"full_block": { "model": "furenikusroads:road_16_16" }
+			"full_block": { 
+				"model": "cube_all",
+				"textures": {
+					"all": "furenikusroads:blocks/sidewalk"
+				}
+			}
 		}
 	}
 }
