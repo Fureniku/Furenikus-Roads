@@ -518,22 +518,42 @@ public class GuiPaintGun extends GuiScreen {
 	public void makeSelection(GuiButton button) {
 		int x = button.id - 5;
 		if (pageId == 1) {
+			if (x > PaintGunItemRegistry.lines.size()) {
+				FurenikusRoads.debug(1, "Lines array should be " + PaintGunItemRegistry.lines.size() + " but GUI is trying to select " + x);
+				return;
+			}
 			selection = PaintGunItemRegistry.lines.get(x);
 			selMeta = PaintGunItemRegistry.linesMeta.get(x);
 		}
 		if (pageId == 2) {
+			if (x > PaintGunItemRegistry.icons.size()) {
+				FurenikusRoads.debug(1, "icons array should be " + PaintGunItemRegistry.icons.size() + " but GUI is trying to select " + x);
+				return;
+			}
 			selection = PaintGunItemRegistry.icons.get(x);
 			selMeta = PaintGunItemRegistry.iconsMeta.get(x);
 		}
 		if (pageId == 3) {
+			if (x > PaintGunItemRegistry.letters.size()) {
+				FurenikusRoads.debug(1, "letters array should be " + PaintGunItemRegistry.letters.size() + " but GUI is trying to select " + x);
+				return;
+			}
 			selection = PaintGunItemRegistry.letters.get(x);
 			selMeta = PaintGunItemRegistry.lettersMeta.get(x);
 		}
 		if (pageId == 4) {
+			if (x > PaintGunItemRegistry.text.size()) {
+				FurenikusRoads.debug(1, "text array should be " + PaintGunItemRegistry.text.size() + " but GUI is trying to select " + x);
+				return;
+			}
 			selection = PaintGunItemRegistry.text.get(x);
 			selMeta = PaintGunItemRegistry.textMeta.get(x);
 		}
 		if (pageId == 5) {
+			if (x > PaintGunItemRegistry.junction.size()) {
+				FurenikusRoads.debug(1, "junction array should be " + PaintGunItemRegistry.junction.size() + " but GUI is trying to select " + x);
+				return;
+			}
 			selection = PaintGunItemRegistry.junction.get(x);
 			selMeta = PaintGunItemRegistry.junctionMeta.get(x);
 		}
