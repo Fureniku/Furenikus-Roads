@@ -60,7 +60,7 @@ public class PaintFillerStackHandler extends ItemStackHandler {
 			return internalStackHandler.insertItem(slot, stack, simulate);
 		}
 		FurenikusRoads.debug(1, "[#30] Paint filler insertItem called, slot: " + slot + ", stack" + stack.getDisplayName() + " x" + stack.getCount());
-		return super.insertItem(slot, stack, simulate);
+		return stack;
 	}
 
 	@Override
