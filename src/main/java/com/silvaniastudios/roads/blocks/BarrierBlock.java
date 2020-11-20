@@ -49,20 +49,21 @@ public class BarrierBlock extends BlockBase implements IConnectable {
 	}
 
 	@SuppressWarnings("deprecation")
-	public boolean canConnectTo(IBlockAccess worldIn, BlockPos pos, EnumFacing oppositeFace) {
+	public boolean canConnectTo(IBlockAccess worldIn, BlockPos pos, boolean checkingLevel) {
 		IBlockState state = worldIn.getBlockState(pos);
-		return state.getBlock() instanceof IConnectable || (!state.getBlock().isAir(state, worldIn, pos) && getBlockFaceShape(worldIn, state, pos, oppositeFace) == BlockFaceShape.SOLID);
+		Block block = state.getBlock();
+		if (checkingLevel) {
+			if (block instanceof IConnectable || block.isOpaqueCube(state)) {
+				return true;
+			}
+		} 
+		
+		return block instanceof IConnectable;
 	}
 	
-	public boolean canConnectTo(IBlockAccess worldIn, BlockPos pos) {
-		IBlockState state = worldIn.getBlockState(pos);
-		return state.getBlock() instanceof IConnectable;
-	}
-
 	private boolean canBarrierConnectTo(IBlockAccess world, BlockPos pos, EnumFacing facing) {
 		BlockPos offset = pos.offset(facing);
-		EnumFacing oppositeFacing = facing.getOpposite();
-		return canConnectTo(world, offset, oppositeFacing) || canConnectTo(world, offset.offset(EnumFacing.DOWN)) || canConnectTo(world, offset.offset(EnumFacing.UP));
+		return canConnectTo(world, offset, true) || canConnectTo(world, offset.offset(EnumFacing.DOWN), false) || canConnectTo(world, offset.offset(EnumFacing.UP), false);
 	}
 	
 	@Override
