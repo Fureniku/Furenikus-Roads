@@ -80,19 +80,20 @@ public class DiagonalBakedModelBase implements IBakedModel {
 		List<BakedQuad> quadsLeft = Minecraft.getMinecraft().getBlockRendererDispatcher().getModelForState(stateLeft).getQuads(stateLeft, EnumFacing.UP, rand);
 		List<BakedQuad> quadsRight = Minecraft.getMinecraft().getBlockRendererDispatcher().getModelForState(stateRight).getQuads(stateRight, EnumFacing.UP, rand);
 
-		TextureAtlasSprite spriteLeft = null;
-		TextureAtlasSprite spriteRight = null;
+		//Fallback to sprite particle
+		TextureAtlasSprite spriteLeft = Minecraft.getMinecraft().getBlockRendererDispatcher().getModelForState(stateLeft).getParticleTexture();
+		TextureAtlasSprite spriteRight = Minecraft.getMinecraft().getBlockRendererDispatcher().getModelForState(stateRight).getParticleTexture();
 
 		if (quadsLeft.size() > 0) {
 			spriteLeft = quadsLeft.get(0).getSprite();
 		} else {
-			leftHeight = 0;
+			System.out.println("Left using fallback texture. height: " + leftHeight);
 		}
 
 		if (quadsRight.size() > 0) {
 			spriteRight = quadsRight.get(0).getSprite();
 		} else {
-			rightHeight = 0;
+			System.out.println("Right using fallback texture. height: " + rightHeight);
 		}
 
 		if (stateLeft.getBlock().isAir(stateLeft, Minecraft.getMinecraft().world, this.getLeftPos(facing, pos))) { 
@@ -111,48 +112,6 @@ public class DiagonalBakedModelBase implements IBakedModel {
 	protected List<BakedQuad> packQuads(EnumFacing facing, TextureAtlasSprite spriteLeft, TextureAtlasSprite spriteRight, float leftHeight, float rightHeight) {
 		List<BakedQuad> quads = new ArrayList<>();
 		return quads;
-	}
-
-	protected BakedQuad createTriangle(Vec3d vec1, Vec3d vec2, Vec3d vec3, Vec3d vec4, TextureAtlasSprite sprite) {
-		Vec3d normal = vec3.subtract(vec2).crossProduct(vec1.subtract(vec2)).normalize();
-
-		UnpackedBakedQuad.Builder builder = new UnpackedBakedQuad.Builder(format);
-		builder.setTexture(sprite);
-		float f = 16.0f;
-
-		putVertex(builder, normal, vec1.x, vec1.y, vec1.z, (float) vec1.x*f, (float) vec1.z*f, sprite);
-		putVertex(builder, normal, vec2.x, vec2.y, vec2.z, (float) vec2.x*f, (float) vec2.z*f, sprite);
-		putVertex(builder, normal, vec3.x, vec3.y, vec3.z, (float) vec3.x*f, (float) vec3.z*f, sprite);
-		putVertex(builder, normal, vec4.x, vec4.y, vec4.z, (float) vec4.x*f, (float) vec4.z*f, sprite);
-		return builder.build();
-	}
-
-	//UVs are reversed when the triangle is drawn upside down, hence 16f-
-	protected BakedQuad createTriangleUpsideDown(Vec3d vec1, Vec3d vec2, Vec3d vec3, Vec3d vec4,TextureAtlasSprite sprite) {
-		Vec3d normal = vec3.subtract(vec2).crossProduct(vec1.subtract(vec2)).normalize();
-
-		UnpackedBakedQuad.Builder builder = new UnpackedBakedQuad.Builder(format);
-		builder.setTexture(sprite);
-		float f = 16.0f;
-
-		putVertex(builder, normal, vec1.x, vec1.y, vec1.z, (float) vec1.x*f, 16.f - (float) vec1.z*f, sprite);
-		putVertex(builder, normal, vec2.x, vec2.y, vec2.z, (float) vec2.x*f, 16.f - (float) vec2.z*f, sprite);
-		putVertex(builder, normal, vec3.x, vec3.y, vec3.z, (float) vec3.x*f, 16.f - (float) vec3.z*f, sprite);
-		putVertex(builder, normal, vec4.x, vec4.y, vec4.z, (float) vec4.x*f, 16.f - (float) vec4.z*f, sprite);
-		return builder.build();
-	}
-
-	protected BakedQuad createQuadUV(Vec3d vec1, float u1, float v1, Vec3d vec2, float u2, float v2, Vec3d vec3, float u3, float v3, Vec3d vec4, float u4, float v4, TextureAtlasSprite sprite) {
-		Vec3d normal = vec3.subtract(vec2).crossProduct(vec1.subtract(vec2)).normalize();
-
-		UnpackedBakedQuad.Builder builder = new UnpackedBakedQuad.Builder(format);
-		builder.setTexture(sprite);
-
-		putVertex(builder, normal, vec1.x, vec1.y, vec1.z, u1, v1, sprite);
-		putVertex(builder, normal, vec2.x, vec2.y, vec2.z, u2, v2, sprite);
-		putVertex(builder, normal, vec3.x, vec3.y, vec3.z, u3, v3, sprite);
-		putVertex(builder, normal, vec4.x, vec4.y, vec4.z, u4, v4, sprite);
-		return builder.build();
 	}
 
 	protected BlockPos getLeftPos(EnumFacing facing, BlockPos pos) {
@@ -266,11 +225,11 @@ public class DiagonalBakedModelBase implements IBakedModel {
 				new Vec3d(0, 0, 0.5),				
 				sprite, format);
 		
-		Quad north = new Quad(  //North side
-				new Vec3d(1-width, heightL, 0), (float) width*16f, 0,
-				new Vec3d(1-width, 0, 0), (float) width*16f, heightL*16f,
-				new Vec3d(0, 0, 0), 16, heightL*16f,
-				new Vec3d(0, heightL, 0), 16, 0,
+		Quad north = new Quad( 
+				new Vec3d(1-width, heightL, 0), 	(float) width*16f, 	16-heightL*16f,
+				new Vec3d(1-width, 0, 0), 			(float) width*16f,	16,
+				new Vec3d(0, 0, 0),					16, 				16,
+				new Vec3d(0, heightL, 0), 			16, 				16-heightL*16f,
 				sprite, format);
 		
 		quads.add(top);
@@ -308,10 +267,10 @@ public class DiagonalBakedModelBase implements IBakedModel {
 				sprite, format);
 
 		Quad north = new Quad(  //North side
-				new Vec3d(0, heightL, 1), (float) width*16f, 0,
-				new Vec3d(0, 0, 1), (float) width*16f, heightL*16f,
-				new Vec3d(1-width, 0, 1), 16, heightL*16f,
-				new Vec3d(1-width, heightL, 1), 16, 0,
+				new Vec3d(0, heightL, 1), 		0, 					16-heightL*16f,
+				new Vec3d(0, 0, 1), 			0, 					16,
+				new Vec3d(1-width, 0, 1), 		(float) width*16f, 	16,
+				new Vec3d(1-width, heightL, 1), (float) width*16f, 	16-heightL*16f,
 				sprite, format);
 		
 		quads.add(top);
@@ -347,16 +306,16 @@ public class DiagonalBakedModelBase implements IBakedModel {
 				new Vec3d(widthW, 0, 0), 
 				sprite, format);
 		Quad south = new Quad(
-				new Vec3d(widthN, heightR, 1.0), (float) (16f*widthN), 0,//south west
-				new Vec3d(0, heightR, 1.0), 0, 0,//south east
-				new Vec3d(0, 0.0, 1.0), 0, 16,//north east
-				new Vec3d(widthN, 0.0, 1.0), (float) (16f*widthN), 16, //north west
+				new Vec3d(widthN, heightR, 1.0), 		(float) (16f*widthN), 	16 - (float) (16f * heightR),//south west
+				new Vec3d(0, heightR, 1.0), 			0, 						16 - (float) (16f * heightR),//south east
+				new Vec3d(0, 0.0, 1.0), 				0, 						16,//north east
+				new Vec3d(widthN, 0.0, 1.0), 			(float) (16f*widthN), 	16, //north west
 				sprite, format);
 		Quad north = new Quad(
 				new Vec3d(widthW, 0, 0), 0, 16,//south west
 				new Vec3d(0, 0, 0), (float) (16f*widthW), 16,//south east
-				new Vec3d(0, heightR, 0), (float) (16f*widthW), 0,//north east
-				new Vec3d(widthW, heightR, 0), 0, 0, //north west
+				new Vec3d(0, heightR, 0), (float) (16f*widthW), 16 - (float) (16f * heightR),//north east
+				new Vec3d(widthW, heightR, 0), 0, 16 - (float) (16f * heightR), //north west
 				sprite, format);
 
 		quads.add(top);
@@ -392,16 +351,16 @@ public class DiagonalBakedModelBase implements IBakedModel {
 				new Vec3d(widthN, 0, 0), 
 				sprite, format);
 		Quad south = new Quad(
-				new Vec3d(widthW, heightR, 1.0), (float) (16f*widthW), 0,//south west
-				new Vec3d(0, heightR, 1.0), 0, 0,//south east
-				new Vec3d(0, 0.0, 1.0), 0, 16,//north east
-				new Vec3d(widthW, 0.0, 1.0), (float) (16f*widthW), 16, //north west
+				new Vec3d(widthW, heightR, 1.0), 	(float) (16f*widthW), 			16 - (float) (16f * heightR),//south west
+				new Vec3d(0, heightR, 1.0), 		0, 								16 - (float) (16f * heightR),//south east
+				new Vec3d(0, 0.0, 1.0), 			0, 								16,//north east
+				new Vec3d(widthW, 0.0, 1.0), 		(float) (16f*widthW), 			16, //north west
 				sprite, format);
 		Quad north = new Quad(
-				new Vec3d(widthN, 0, 0), 0, 16,//south west
-				new Vec3d(0, 0, 0), (float) (16f*widthN), 16,//south east
-				new Vec3d(0, heightR, 0), (float) (16f*widthN), 0,//north east
-				new Vec3d(widthN, heightR, 0), 0, 0, //north west
+				new Vec3d(widthN, 0, 0), 			16 - (float) (16f*widthN), 		16,//south west
+				new Vec3d(0, 0, 0), 				16, 			16,//south east
+				new Vec3d(0, heightR, 0), 			16, 			16 - (float) (16f * heightR),//north east
+				new Vec3d(widthN, heightR, 0), 		16 - (float) (16f*widthN), 		16 - (float) (16f * heightR), //north west
 				sprite, format);
 
 		quads.add(top);
