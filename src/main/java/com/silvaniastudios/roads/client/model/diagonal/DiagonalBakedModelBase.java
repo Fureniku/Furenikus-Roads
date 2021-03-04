@@ -244,6 +244,14 @@ public class DiagonalBakedModelBase implements IBakedModel {
 					new Vec3d(1-width, heightL, 0), 16, 16-heightL*16f,//TL
 					sprite, format);
 			quads.add(east);
+		} else {
+			Quad east = new Quad( //East (long) side
+					new Vec3d(0, heightL, 1), 0, 16-heightL*16f, //TL
+					new Vec3d(0, 0, 1), 0, 16, //BL
+					new Vec3d(1-width, 0, 0), 16, 16, //BR
+					new Vec3d(1-width, heightL, 0), 16, 16-heightL*16f,//TL
+					sprite, format);
+			quads.add(east);
 		}
 		return quads;
 	}
@@ -282,6 +290,14 @@ public class DiagonalBakedModelBase implements IBakedModel {
 					new Vec3d(1-width, heightL, 1), 0, 16-heightL*16f, //TL
 					new Vec3d(1-width, heightR, 1), 0, 16-heightR*16f, //BL
 					new Vec3d(0, heightR, 0), 16, 16-heightR*16f, //BR
+					new Vec3d(0, heightL, 0), 16, 16-heightL*16f,//TL
+					sprite, format);
+			quads.add(east);
+		} else {
+			Quad east = new Quad( //East (long) side
+					new Vec3d(1-width, heightL, 1), 0, 16-heightL*16f, //TL
+					new Vec3d(1-width, 0, 1), 0, 16, //BL
+					new Vec3d(0, 0, 0), 16, 16, //BR
 					new Vec3d(0, heightL, 0), 16, 16-heightL*16f,//TL
 					sprite, format);
 			quads.add(east);
@@ -331,6 +347,14 @@ public class DiagonalBakedModelBase implements IBakedModel {
 					new Vec3d(widthN, heightR, 1.0), 0, 16-heightR * 16f,//north west
 					sprite, format);
 			quads.add(front);
+		} else {
+			Quad front = new Quad( //Front (long side)
+					new Vec3d(widthN, 0, 1.0), 			0, 	16,//south west
+					new Vec3d(widthW, 0, 0.0), 			16, 16,//south east
+					new Vec3d(widthW, heightR, 0.0), 	16, 16-heightR * 16f,//north east
+					new Vec3d(widthN, heightR, 1.0), 	0, 	16-heightR * 16f,//north west
+					sprite, format);
+			quads.add(front);
 		}
 		return quads;
 	}
@@ -374,6 +398,14 @@ public class DiagonalBakedModelBase implements IBakedModel {
 					new Vec3d(widthN, heightL, 0.0), 16, 16-heightL * 16f,//south east
 					new Vec3d(widthN, heightR, 0.0), 16, 16-heightR * 16f,//north east
 					new Vec3d(widthW, heightR, 1.0), 0, 16-heightR * 16f,//north west
+					sprite, format);
+			quads.add(front);
+		} else {
+			Quad front = new Quad( //Front (long side)
+					new Vec3d(widthW, 0, 1.0), 			0, 	16,//south west
+					new Vec3d(widthN, 0, 0.0), 			16, 16,//south east
+					new Vec3d(widthN, heightR, 0.0), 	16, 16-heightR * 16f,//north east
+					new Vec3d(widthW, heightR, 1.0), 	0, 	16-heightR * 16f,//north west
 					sprite, format);
 			quads.add(front);
 		}
