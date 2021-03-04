@@ -32,7 +32,7 @@
 			"15": { 
 				"model": "cube_all",
 				"textures": {
-					"all": "furenikusroads:blocks/road_block_standard"
+					"all": "blocks/dirt"
 				}
 			}
 		}
