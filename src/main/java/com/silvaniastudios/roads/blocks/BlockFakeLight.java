@@ -4,6 +4,7 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
@@ -42,6 +43,12 @@ public class BlockFakeLight extends BlockBase {
     public boolean isOpaqueCube(IBlockState state) {
         return false;
     }
+    
+    @Override
+	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+		//if (this.getMetaFromState(state) < 15 && face != EnumFacing.DOWN && face != EnumFacing.UP) { //TODO checks for the sake of other blocks culling.
+		return BlockFaceShape.UNDEFINED;
+	}
     
     @Override
     public void updateTick(World world, BlockPos pos, IBlockState state, Random rnd) {

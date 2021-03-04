@@ -2,6 +2,7 @@ package com.silvaniastudios.roads.blocks;
 
 import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.RoadsConfig;
+import com.silvaniastudios.roads.blocks.enums.EnumMeta;
 import com.silvaniastudios.roads.blocks.paint.PaintBlockBase;
 import com.silvaniastudios.roads.items.FRItems;
 import com.silvaniastudios.roads.items.RoadItemBase;
@@ -11,6 +12,7 @@ import net.minecraft.block.BlockSnow;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -31,7 +33,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class RoadBlock extends BlockBase {
 	
-	public static final PropertyEnum<RoadBlock.EnumRoadHeight> ENUM_HEIGHT = PropertyEnum.create("road_block", RoadBlock.EnumRoadHeight.class);
+	public static final PropertyEnum<EnumMeta> ENUM_HEIGHT = PropertyEnum.create("road_block", EnumMeta.class);
 	
 	public static final AxisAlignedBB ROAD_1_16_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0625D, 1.0D);
 	public static final AxisAlignedBB ROAD_2_16_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.125D, 1.0D);
@@ -54,7 +56,7 @@ public class RoadBlock extends BlockBase {
 	
 	public RoadBlock(String name, Material mat, RoadItemBase fragment) {
 		super(name, mat);
-		setDefaultState(this.blockState.getBaseState().withProperty(ENUM_HEIGHT, RoadBlock.EnumRoadHeight.id0));
+		setDefaultState(this.blockState.getBaseState().withProperty(ENUM_HEIGHT, EnumMeta.id0));
 		this.setCreativeTab(FurenikusRoads.tab_roads);
 		this.fragmentItem = fragment;
 		this.setHarvestLevel("pneumatic_drill", 0);
@@ -81,7 +83,7 @@ public class RoadBlock extends BlockBase {
 	@SideOnly(Side.CLIENT)
 	@Override
     public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> items) {
-        for (RoadBlock.EnumRoadHeight height : RoadBlock.EnumRoadHeight.values()) {
+        for (EnumMeta height : EnumMeta.values()) {
             items.add(new ItemStack(this, 1, height.getMetadata()));
         }
     }
@@ -117,12 +119,12 @@ public class RoadBlock extends BlockBase {
 	
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(ENUM_HEIGHT, RoadBlock.EnumRoadHeight.byMetadata(meta));
+        return this.getDefaultState().withProperty(ENUM_HEIGHT, EnumMeta.byMetadata(meta));
     }
 	
 	@Override
     public int getMetaFromState(IBlockState state) {
-        return ((RoadBlock.EnumRoadHeight)state.getValue(ENUM_HEIGHT)).getMetadata();
+        return ((EnumMeta)state.getValue(ENUM_HEIGHT)).getMetadata();
     }
 	
     @Override
@@ -158,62 +160,61 @@ public class RoadBlock extends BlockBase {
 	
     @Override
     public boolean isFullCube(IBlockState state) {
-        return getMetaFromState(state) == 15;
+        return this.getMetaFromState(state) == 15;
     }
     
     @Override
     public boolean isOpaqueCube(IBlockState state) {
-        return getMetaFromState(state) == 15;
+        return this.getMetaFromState(state) == 15;
     }
-	
-	public static enum EnumRoadHeight implements IStringSerializable {
-		id0(0, "1_16th"),
-		id1(1, "1_8th"),
-		id2(2, "3_16ths"),
-		id3(3, "quarter_block"),
-		id4(4, "5_16ths"),
-		id5(5, "6_16ths"),
-		id6(6, "7_16ths"),
-		id7(7, "half_block"),
-		id8(8, "9_16ths"),
-		id9(9, "10_16ths"),
-		id10(10, "11_16ths"),
-		id11(11, "three_quarter_block"),
-		id12(12, "13_16ths"),
-		id13(13, "14_16ths"),
-		id14(14, "15_16ths"),
-		id15(15, "full_block");
-		
-		private static final EnumRoadHeight[] META_LOOKUP = new EnumRoadHeight[values().length];
-		private final int meta;
-		private final String name;
-		
-		private EnumRoadHeight(int meta, String name) {
-			this.meta = meta;
-			this.name = name;
-		}
+    
+    //Checks on full-size blocks
+    public boolean shouldSideBeRendered(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face) {
+    	return checkSideRendering(state, world, pos, face);
+    }
+    
+    //Checks on non-full-size blocks
+    public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face) {
+		return checkSideRendering(state, world, pos, face);
+    }
+    
+    private boolean checkSideRendering(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face) {
+    	IBlockState offsetState = world.getBlockState(pos.offset(face));
+    	
+    	if (face == EnumFacing.UP && this.getMetaFromState(state) < 15) {
+    		return true; //There's no reason for non-full height road blocks to ever cull.
+    	}
+    	
+    	//I have to check this because apparently other mods aren't setting their block face shape properly, annoying and worse for performance but
+    	//nothing more I can do. Go shout at other mods to set their block face shapes (if it's not a full, solid face, it shouldn't be set to solid!!).
+    	//I am only doing this on the top face. If you're getting culling issues with other sides either tell me and I'll shout at the dev, or go show them this comment.
+    	// :)
+    	if (face == EnumFacing.UP && (!offsetState.isFullCube() || !offsetState.isOpaqueCube()) && !offsetState.getBlock().isAir(offsetState, world, pos.offset(face))) {
+    		return false;
+    	}
+    	
+    	
+    	if (face == EnumFacing.DOWN && offsetState.getBlock() instanceof RoadBlock && offsetState.getBlock().getMetaFromState(offsetState) < 15) {
+    		return true;
+    	}
 
-		@Override
-		public String getName() {
-			return this.name;
+		if (offsetState.getBlock() instanceof RoadBlock && offsetState.getBlock().getMetaFromState(offsetState) >= this.getMetaFromState(state)) {
+			return false;
 		}
 		
-		public int getMetadata() {
-	        return this.meta;
-	    }
+		if (offsetState.getBlockFaceShape(world, pos.offset(face), face.getOpposite()) == BlockFaceShape.SOLID) {
+			return false;
+		}
 		
-		public static EnumRoadHeight byMetadata(int meta) {
-	        if (meta < 0 || meta >= META_LOOKUP.length) {
-	            meta = 0;
-	        }
-	        
-	        return META_LOOKUP[meta];
-	    }
-		
-		static {
-	        for (EnumRoadHeight type: values()) {
-	            META_LOOKUP[type.getMetadata()] = type;
-	        }
-	    }
+		return true;
 	}
+    
+    @Override
+    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+    	if (this.getMetaFromState(state) < 15 && face != EnumFacing.DOWN && face != EnumFacing.UP) {
+    		return BlockFaceShape.UNDEFINED;
+    	}
+    	
+        return BlockFaceShape.SOLID;
+    }
 }

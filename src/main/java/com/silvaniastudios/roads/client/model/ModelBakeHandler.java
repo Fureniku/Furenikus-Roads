@@ -1,8 +1,8 @@
 package com.silvaniastudios.roads.client.model;
 
 import com.silvaniastudios.roads.FurenikusRoads;
-import com.silvaniastudios.roads.blocks.CatsEyeBlock;
-import com.silvaniastudios.roads.blocks.CatsEyeBlockFourWay;
+import com.silvaniastudios.roads.blocks.decorative.CatsEyeBlock;
+import com.silvaniastudios.roads.blocks.decorative.CatsEyeBlockFourWay;
 import com.silvaniastudios.roads.blocks.paint.PaintBlockBase;
 import com.silvaniastudios.roads.items.PaintGunItemRegistry;
 
@@ -38,6 +38,21 @@ public class ModelBakeHandler {
 			IBakedModel existingModel = (IBakedModel) model;
 			PaintGunModel customModel = new PaintGunModel(existingModel);
 			event.getModelRegistry().putObject(PaintGunModel.modelResourceLocation, customModel);
+		}
+	}
+	
+	private void bakeDiagonalRoads(ModelBakeEvent event) {
+		String[] facing = new String[] {"north", "east", "south", "west"};
+		
+		for (int i = 0; i < facing.length; i++) {
+			ModelResourceLocation mrl = new ModelResourceLocation(FurenikusRoads.MODID + ":road_block_diagonal_1_1", "facing=" + facing[i]);
+			Object model = event.getModelRegistry().getObject(mrl);
+			
+			if (model instanceof IBakedModel) {
+				IBakedModel existingModel = (IBakedModel) model;
+				CrusherBakedModel customModel = new CrusherBakedModel(existingModel, facing[i]);
+				event.getModelRegistry().putObject(mrl, customModel);
+			}
 		}
 	}
 	

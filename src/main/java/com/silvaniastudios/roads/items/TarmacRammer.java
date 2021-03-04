@@ -8,6 +8,7 @@ import javax.annotation.Nullable;
 import com.google.common.collect.Sets;
 import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.blocks.RoadBlock;
+import com.silvaniastudios.roads.blocks.enums.EnumMeta;
 import com.silvaniastudios.roads.blocks.paint.PaintBlockBase;
 
 import net.minecraft.block.Block;
@@ -66,13 +67,13 @@ public class TarmacRammer extends ItemTool {
 				if (!player.isCreative()) {
 					for (int i = 0; i < player.inventory.getSizeInventory(); i++) {
 						if (player.inventory.getStackInSlot(i).getItem().equals(roadBlock.getFragmentItem())) {
-							world.setBlockState(pos, world.getBlockState(pos).withProperty(RoadBlock.ENUM_HEIGHT, RoadBlock.EnumRoadHeight.byMetadata(meta+1)));
+							world.setBlockState(pos, world.getBlockState(pos).withProperty(RoadBlock.ENUM_HEIGHT, EnumMeta.byMetadata(meta+1)));
 							player.inventory.decrStackSize(i, 1);
 							return EnumActionResult.PASS;
 						}
 					}
 				} else {
-					world.setBlockState(pos, world.getBlockState(pos).withProperty(RoadBlock.ENUM_HEIGHT, RoadBlock.EnumRoadHeight.byMetadata(meta+1)));
+					world.setBlockState(pos, world.getBlockState(pos).withProperty(RoadBlock.ENUM_HEIGHT, EnumMeta.byMetadata(meta+1)));
 					return EnumActionResult.PASS;
 				}
 			}
@@ -89,13 +90,13 @@ public class TarmacRammer extends ItemTool {
 						if (!player.isCreative()) {
 							for (int j = 0; j < player.inventory.getSizeInventory(); j++) {
 								if (player.inventory.getStackInSlot(j).getItem().equals(roadBlock.getFragmentItem())) {
-									world.setBlockState(posBelow, stateBelow.withProperty(RoadBlock.ENUM_HEIGHT, RoadBlock.EnumRoadHeight.byMetadata(meta+1)));
+									world.setBlockState(posBelow, stateBelow.withProperty(RoadBlock.ENUM_HEIGHT, EnumMeta.byMetadata(meta+1)));
 									player.inventory.decrStackSize(j, 1);
 									return EnumActionResult.PASS;
 								}
 							}
 						} else {
-							world.setBlockState(posBelow, stateBelow.withProperty(RoadBlock.ENUM_HEIGHT, RoadBlock.EnumRoadHeight.byMetadata(meta+1)));
+							world.setBlockState(posBelow, stateBelow.withProperty(RoadBlock.ENUM_HEIGHT, EnumMeta.byMetadata(meta+1)));
 							return EnumActionResult.PASS;
 						}
 					}

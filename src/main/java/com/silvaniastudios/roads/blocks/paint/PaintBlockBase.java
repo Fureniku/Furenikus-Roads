@@ -8,7 +8,8 @@ import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.RoadsConfig;
 import com.silvaniastudios.roads.blocks.BlockBase;
 import com.silvaniastudios.roads.blocks.NonPaintRoadTopBlock;
-import com.silvaniastudios.roads.blocks.CurbBlock;
+import com.silvaniastudios.roads.blocks.decorative.CurbBlock;
+import com.silvaniastudios.roads.blocks.diagonal.RoadBlockDiagonal;
 import com.silvaniastudios.roads.items.FRItems;
 import com.silvaniastudios.roads.items.PaintGun;
 import com.silvaniastudios.roads.items.PaintGunItemRegistry;
@@ -181,6 +182,12 @@ public class PaintBlockBase extends BlockBase {
     	IBlockState underState = worldIn.getBlockState(pos.offset(EnumFacing.DOWN));
         Block underBlock = underState.getBlock();
         double extraOffset = 0.0;
+        
+        if (underBlock instanceof RoadBlockDiagonal) {
+        	RoadBlockDiagonal rbd = (RoadBlockDiagonal) underBlock;
+        	
+        	return rbd.getBlockHeight(worldIn, rbd.getRoad(worldIn, pos.offset(EnumFacing.DOWN)), rbd.getRoadPos(worldIn, pos.offset(EnumFacing.DOWN)));
+        }
         
         if (underBlock instanceof PaintBlockBase || underBlock instanceof NonPaintRoadTopBlock || underBlock instanceof CurbBlock) {
         	extraOffset = 0.062;

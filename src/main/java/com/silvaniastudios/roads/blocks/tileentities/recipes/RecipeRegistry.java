@@ -36,7 +36,7 @@ public class RecipeRegistry {
 			String[] tarAlts = RoadsConfig.general.tarAlternatives;
 			for (int i = 0; i < tarAlts.length; i++) {
 				if (k.equalsIgnoreCase(tarAlts[i])) {
-					tar.add(new FluidStack(v, 1000));
+					tar.add(new FluidStack(v, 100));
 				}
 			}
 		}

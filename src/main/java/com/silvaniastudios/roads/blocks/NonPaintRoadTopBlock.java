@@ -3,6 +3,7 @@ package com.silvaniastudios.roads.blocks;
 import javax.annotation.Nullable;
 
 import com.silvaniastudios.roads.FurenikusRoads;
+import com.silvaniastudios.roads.blocks.decorative.CurbBlock;
 import com.silvaniastudios.roads.blocks.paint.PaintBlockBase;
 
 import net.minecraft.block.Block;

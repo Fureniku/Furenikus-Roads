@@ -1,0 +1,11 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+        "all": "furenikusroads:blocks/nomodel"
+    },
+  	"variants": {
+  	    "normal": {
+  	    	"model": "furenikusroads:nomodel"
+  	    }
+  	}
+}

@@ -21,6 +21,7 @@ public class CommonProxy {
 	public void openGui(int guiId) {}
 	
 	public void preInit() {}
+	public void postInit() {}
 	
 	public void init() {
 		oreDictRegistry();

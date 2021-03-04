@@ -11,7 +11,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.primitives.Ints;
 import com.silvaniastudios.roads.FurenikusRoads;
-import com.silvaniastudios.roads.blocks.CatsEyeBlockFourWay;
+import com.silvaniastudios.roads.blocks.decorative.CatsEyeBlockFourWay;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;

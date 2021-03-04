@@ -12,6 +12,7 @@ import com.silvaniastudios.roads.blocks.tileentities.paintfiller.PaintFillerEnti
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSnow;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
@@ -31,10 +32,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class PaintGun extends RoadItemBase {
-		
+
 	public PaintBlockBase selection;
 	public int selMeta;
-	
+
 	public int white_paint = 0;
 	public int yellow_paint = 0;
 	public int red_paint = 0;
@@ -42,15 +43,15 @@ public class PaintGun extends RoadItemBase {
 	public PaintGun(String name) {
 		super(name, 1);
 	}
-	
+
 	@Override
 	public EnumAction getItemUseAction(ItemStack stack) {
-        return EnumAction.NONE;
-    }
-	
+		return EnumAction.NONE;
+	}
+
 	@Override
 	@SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 		tooltip.add("Place paint in the world!");
 		tooltip.add("Shift right click to open UI.");
 		if (stack.hasTagCompound()) {
@@ -58,10 +59,10 @@ public class PaintGun extends RoadItemBase {
 				NBTTagCompound nbt = stack.getTagCompound();
 				int selectId = nbt.getInteger("selectedId");
 				int pageId = nbt.getInteger("pageId");
-				
+
 				selection = getBlockFromSelection(selectId, pageId);
 				selMeta = nbt.getInteger("selMeta");
-	
+
 				tooltip.add("Selection: " + new ItemStack(selection, 1, selMeta).getDisplayName());
 				tooltip.add(" ");
 				tooltip.add("White level: " + nbt.getInteger("white_paint"));
@@ -71,8 +72,8 @@ public class PaintGun extends RoadItemBase {
 				tooltip.add("Press Shift to see more information");
 			}
 		}
-    }
-	
+	}
+
 	public static PaintBlockBase getBlockFromSelection(int sel, int page) {
 		if (page == 1) { return PaintGunItemRegistry.lines.get(sel); }
 		if (page == 2) { return PaintGunItemRegistry.icons.get(sel); }
@@ -81,11 +82,11 @@ public class PaintGun extends RoadItemBase {
 		if (page == 5) { return PaintGunItemRegistry.junction.get(sel); }
 		return PaintGunItemRegistry.lines.get(0);
 	}
-	
+
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
 		if (this.isInCreativeTab(tab)) {
 			items.add(new ItemStack(this));
-			
+
 			ItemStack stackFilled = new ItemStack(this);
 			NBTTagCompound nbt = new NBTTagCompound();
 			nbt.setInteger("selectedId", 1);
@@ -93,37 +94,37 @@ public class PaintGun extends RoadItemBase {
 			nbt.setInteger("white_paint", PaintFillerEntity.GUN_TANK_CAP);
 			nbt.setInteger("yellow_paint", PaintFillerEntity.GUN_TANK_CAP);
 			nbt.setInteger("red_paint", PaintFillerEntity.GUN_TANK_CAP);
-			
+
 			stackFilled.setTagCompound(nbt);
-			
+
 			items.add(stackFilled);
 		}
 	}
-	
+
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		ItemStack stack = player.getHeldItem(hand);
-		
+
 		if (stack.getItem() != this) {
 			return EnumActionResult.FAIL;
 		}
-		
+
 		NBTTagCompound nbt;
-		
+
 		if (!stack.hasTagCompound()) {
 			nbt = new NBTTagCompound();
 		} else {
 			nbt = stack.getTagCompound();
-			
+
 			white_paint = nbt.getInteger("white_paint");
 			yellow_paint = nbt.getInteger("yellow_paint");
 			red_paint = nbt.getInteger("red_paint");
 		}
-		
+
 		int colourId = nbt.getInteger("colour");
 		boolean creative = player.isCreative();
 		int cost = RoadsConfig.general.costToPaint;
-		
+
 		if (colourId == 0 && (white_paint >= cost || creative)) {
 			if (selectBlockToPlace(nbt, world, pos, facing, hitX, hitY, hitZ, player, hand, colourId)) { 
 				if (!creative) { white_paint = white_paint - cost; }
@@ -139,22 +140,22 @@ public class PaintGun extends RoadItemBase {
 				if (!creative) { red_paint = red_paint - cost; }
 			}
 		}
-		
+
 		nbt.setInteger("white_paint", white_paint);
 		nbt.setInteger("yellow_paint", yellow_paint);
 		nbt.setInteger("red_paint", red_paint);
 
-        return EnumActionResult.PASS;
-    }
-	
+		return EnumActionResult.PASS;
+	}
+
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer player, EnumHand handIn) {
 		RayTraceResult rtr = this.rayTrace(worldIn, player, true);
-		
+
 		if (rtr != null) {
 			if (rtr.typeOfHit == RayTraceResult.Type.BLOCK) {
 				BlockPos hitPos = rtr.getBlockPos();
 				Block block = worldIn.getBlockState(hitPos).getBlock();
-				
+
 				//Check if it's somewhere we'll probably be trying to put paint. If it is, we won't open the GUI to avoid frustrations.
 				if (block instanceof PaintBlockBase || block instanceof RoadBlock) {
 					return new ActionResult<ItemStack>(EnumActionResult.PASS, player.getHeldItem(handIn));
@@ -165,26 +166,35 @@ public class PaintGun extends RoadItemBase {
 			FurenikusRoads.proxy.openGui(0);
 			return new ActionResult<ItemStack>(EnumActionResult.PASS, player.getHeldItem(handIn));
 		}
-		
+
 		if (player.isSneaking()) {
 			FurenikusRoads.proxy.openGui(0);
 		}
-		
+
 		return new ActionResult<ItemStack>(EnumActionResult.PASS, player.getHeldItem(handIn));
-	 }
-	
+	}
+
 	public boolean selectBlockToPlace(NBTTagCompound nbt, World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, EntityPlayer player, EnumHand hand, int col) {
+		if (RoadsConfig.general.debugLevel >= 1) {
+			System.out.println("PaintGun#selectBlockToPlace called. Trying to find where it's called from...");
+			StackTraceElement[] ste = Thread.currentThread().getStackTrace();
+			for (int i = 0; i < ste.length; i++) {
+				System.out.println("Class: " + ste[i].getClassName() + ", method: " + ste[i].getMethodName() + " line: " + ste[i].getLineNumber());
+			}
+		}
+
+
 		int selection = nbt.getInteger("selectedId");
 		int pageId = nbt.getInteger("pageId");
 		int meta = nbt.getInteger("selMeta");
-		
+
 		BlockPos placePos = pos.offset(facing);
-		
+
 		if (!world.getBlockState(placePos).getBlock().isReplaceable(world, placePos)) { return false; }
 		if (!(world.getBlockState(placePos.offset(EnumFacing.DOWN)).getBlock() instanceof PaintBlockBase) && player.isSneaking()) { return false; }
 
 		PaintBlockBase block = null;
-		
+
 		if (pageId == 1) { block = PaintGunItemRegistry.lines.get(selection); }
 		if (pageId == 2) { block = PaintGunItemRegistry.icons.get(selection); }
 		if (pageId == 3) { block = PaintGunItemRegistry.letters.get(selection); }
@@ -200,23 +210,29 @@ public class PaintGun extends RoadItemBase {
 			if (col == 0) { block = PaintGunItemRegistry.getWhite(block); }
 			if (col == 1) { block = PaintGunItemRegistry.getYellow(block); }
 			if (col == 2) { block = PaintGunItemRegistry.getRed(block); }
-			
+
 			int offsetCount = 0;
-			
+
 			if (player.isSneaking()) {
 				while (world.getBlockState(placePos).getBlock() instanceof PaintBlockBase && offsetCount < 3) {
 					placePos = placePos.offset(EnumFacing.UP);
 					offsetCount++;
 				}
 			}
-			
+
 			if (world.getBlockState(placePos.offset(EnumFacing.DOWN)).getBlock() instanceof BlockSnow) {
-				return world.setBlockState(placePos.offset(EnumFacing.DOWN), block.getStateForPlacement(world, placePos, facing, hitX, hitY, hitZ, meta, player, hand));
+				return placeBlock(world, placePos.offset(EnumFacing.DOWN), block.getStateForPlacement(world, placePos, facing, hitX, hitY, hitZ, meta, player, hand));
 			}
-			
-			return world.setBlockState(placePos, block.getStateForPlacement(world, placePos, facing, hitX, hitY, hitZ, meta, player, hand));
+
+			return placeBlock(world, placePos, block.getStateForPlacement(world, placePos, facing, hitX, hitY, hitZ, meta, player, hand));
 		}
-		
+
 		return false;
+	}
+
+	public boolean placeBlock(World world, BlockPos pos, IBlockState state) {
+		boolean b = world.setBlockState(pos, state);
+		world.notifyBlockUpdate(pos, state, state, 2); //People were getting desync issues, so try forcing a resync after placing paint.
+		return b;
 	}
 }

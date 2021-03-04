@@ -10,7 +10,8 @@ import com.silvaniastudios.roads.FRSounds;
 import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.blocks.FRBlocks;
 import com.silvaniastudios.roads.blocks.RoadBlock;
-import com.silvaniastudios.roads.blocks.CurbBlock;
+import com.silvaniastudios.roads.blocks.decorative.CurbBlock;
+import com.silvaniastudios.roads.blocks.enums.EnumMeta;
 import com.silvaniastudios.roads.blocks.paint.PaintBlockBase;
 
 import net.minecraft.block.Block;
@@ -87,7 +88,7 @@ public class PneumaticDrill extends ItemTool {
 			int meta = roadBlock.getMetaFromState(world.getBlockState(pos));
 
 			if (meta > 0) {
-				world.setBlockState(pos, world.getBlockState(pos).withProperty(RoadBlock.ENUM_HEIGHT, RoadBlock.EnumRoadHeight.byMetadata(meta-1)));
+				world.setBlockState(pos, world.getBlockState(pos).withProperty(RoadBlock.ENUM_HEIGHT, EnumMeta.byMetadata(meta-1)));
 				if (!player.isCreative()) {
 					player.addItemStackToInventory(new ItemStack(roadBlock.getFragmentItem()));
 				}
@@ -105,7 +106,7 @@ public class PneumaticDrill extends ItemTool {
 					int meta = roadBlock.getMetaFromState(world.getBlockState(posBelow));
 					
 					if (meta > 0) {
-						world.setBlockState(posBelow, world.getBlockState(posBelow).withProperty(RoadBlock.ENUM_HEIGHT, RoadBlock.EnumRoadHeight.byMetadata(meta-1)));
+						world.setBlockState(posBelow, world.getBlockState(posBelow).withProperty(RoadBlock.ENUM_HEIGHT, EnumMeta.byMetadata(meta-1)));
 						if (!player.isCreative()) {
 							player.addItemStackToInventory(new ItemStack(roadBlock.getFragmentItem()));
 						}
