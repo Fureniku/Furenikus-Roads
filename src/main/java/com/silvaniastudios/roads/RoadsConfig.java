@@ -40,6 +40,9 @@ public class RoadsConfig {
 		
 		@Config.Comment("Should limestone generate naturally in the world")
 		public boolean genLimestone = true;
+		
+		@Config.Comment("Set to true for low-end machines. This will disable custom rendering on machines and may improve framerate. \nOnly really applicable to survival worlds as it only impacts machines, and not road blocks themselves.")
+		public boolean performanceMode = false;
 	}
 	
 	public static class Machines {

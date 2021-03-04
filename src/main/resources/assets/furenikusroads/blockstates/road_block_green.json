@@ -14,22 +14,22 @@
 		}],
 		"road_block":
 		{
-			"1_16th": { "model": "furenikusroads:road_1_16" },
-			"1_8th": { "model": "furenikusroads:road_2_16" },
-			"3_16ths": { "model": "furenikusroads:road_3_16" },
-			"quarter_block": { "model": "furenikusroads:road_4_16" },
-			"5_16ths": { "model": "furenikusroads:road_5_16" },
-			"6_16ths": { "model": "furenikusroads:road_6_16" },
-			"7_16ths": { "model": "furenikusroads:road_7_16" },
-			"half_block": { "model": "furenikusroads:road_8_16" },
-			"9_16ths": { "model": "furenikusroads:road_9_16" },
-			"10_16ths": { "model": "furenikusroads:road_10_16" },
-			"11_16ths": { "model": "furenikusroads:road_11_16" },
-			"three_quarter_block": { "model": "furenikusroads:road_12_16" },
-			"13_16ths": { "model": "furenikusroads:road_13_16" },
-			"14_16ths": { "model": "furenikusroads:road_14_16" },
-			"15_16ths": { "model": "furenikusroads:road_15_16" },
-			"full_block": { 
+			"0": { "model": "furenikusroads:road_1_16" },
+			"1": { "model": "furenikusroads:road_2_16" },
+			"2": { "model": "furenikusroads:road_3_16" },
+			"3": { "model": "furenikusroads:road_4_16" },
+			"4": { "model": "furenikusroads:road_5_16" },
+			"5": { "model": "furenikusroads:road_6_16" },
+			"6": { "model": "furenikusroads:road_7_16" },
+			"7": { "model": "furenikusroads:road_8_16" },
+			"8": { "model": "furenikusroads:road_9_16" },
+			"9": { "model": "furenikusroads:road_10_16" },
+			"10": { "model": "furenikusroads:road_11_16" },
+			"11": { "model": "furenikusroads:road_12_16" },
+			"12": { "model": "furenikusroads:road_13_16" },
+			"13": { "model": "furenikusroads:road_14_16" },
+			"14": { "model": "furenikusroads:road_15_16" },
+			"15": { 
 				"model": "cube_all",
 				"textures": {
 					"all": "furenikusroads:blocks/road_block_green"

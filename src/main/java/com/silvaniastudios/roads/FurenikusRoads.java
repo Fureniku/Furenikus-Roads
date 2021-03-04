@@ -38,7 +38,7 @@ import net.minecraftforge.fml.relauncher.Side;
 public class FurenikusRoads {
 	
 	public static final String MODID = "furenikusroads";
-	public static final String VERSION = "1.1.9";
+	public static final String VERSION = "1.2.0";
 	
 	@Instance(MODID)
 	public static FurenikusRoads instance;
@@ -75,6 +75,13 @@ public class FurenikusRoads {
 		@Override
 		public ItemStack getTabIconItem() {
 			return new ItemStack(FRItems.paint_gun, 1, 0);
+		}
+	};
+	
+	public static CreativeTabs tab_diagonals = new CreativeTabs("tab_diagonals") {
+		@Override
+		public ItemStack getTabIconItem() {
+			return new ItemStack(FRBlocks.road_block_diagonal_1_2, 1, 0);
 		}
 	};
 	
@@ -144,6 +151,7 @@ public class FurenikusRoads {
 	
 	@EventHandler
     public void postInit(FMLPostInitializationEvent event) {
+		proxy.postInit();
 		RecipeRegistry.init();
 	}
     

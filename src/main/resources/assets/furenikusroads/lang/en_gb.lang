@@ -219,6 +219,13 @@ tile.furenikusroads.road_block_sand.name=Sand Road Fragment
 tile.furenikusroads.road_block_gravel.name=Gravel Road Fragment
 
 
-itemGroup.tab_roads=[FlenixRoads] Roads
-itemGroup.tab_paint=[FlenixRoads] Paints
-itemGroup.tab_tools=[FlenixRoads] Tools
+itemGroup.tab_roads=[Fureniku's Roads] Roads
+itemGroup.tab_sidewalks=[Fureniku's Roads] Sidewalks
+itemGroup.tab_tools=[Fureniku's Roads] Tools
+itemGroup.tab_road_parts=[Fureniku's Roads] Road Parts
+itemGroup.tab_diagonals=[Fureniku's Roads] Diagonal Connectors
+itemGroup.tab_paint_lines=[Fureniku's Roads] Line Paints
+itemGroup.tab_paint_icons=[Fureniku's Roads] Icon Paints
+itemGroup.tab_paint_letters=[Fureniku's Roads] Letter Paints
+itemGroup.tab_paint_text=[Fureniku's Roads] Text Paints
+itemGroup.tab_paint_junction=[Fureniku's Roads] Junction Paints

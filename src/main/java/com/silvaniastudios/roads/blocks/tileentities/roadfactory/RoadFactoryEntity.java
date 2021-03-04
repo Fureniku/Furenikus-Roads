@@ -155,32 +155,40 @@ public class RoadFactoryEntity extends RoadTileEntity implements ITickable, ICap
 		}
 	}
 	
+	public void extract(int iterations) {
+		for (int i = 0; i < iterations; i++) {
+			if (inventory.extractItem(RoadFactoryContainer.INPUT_1, 8, false) == ItemStack.EMPTY) {
+				if (inventory.extractItem(RoadFactoryContainer.INPUT_2, 8, false) == ItemStack.EMPTY) {
+					if (inventory.extractItem(RoadFactoryContainer.INPUT_3, 8, false) == ItemStack.EMPTY) {
+						if (inventory.extractItem(RoadFactoryContainer.INPUT_4, 8, false) == ItemStack.EMPTY) {
+							FurenikusRoads.debug(0, "WARNING! A road factory is creating free resources. Please report to Fureniku https://discord.gg/BPzpQk2");
+						}
+					}
+				}
+			}
+		}
+	}
+	
 	public void process() {
 		FurenikusRoads.debug(2, "Road Factory at" + formatPosition(pos) + "processing");
 		if (!world.isRemote) {
 			boolean hasChanges = false;
 			ItemStack result = getRecipeResult();
-			if (result != ItemStack.EMPTY && tarFluid.getFluidAmount() >= 1000 * result.getCount()/8) {
+			if (result != ItemStack.EMPTY && tarFluid.getFluidAmount() >= 100 * result.getCount()/8) {
 				if (result.getCount() == 8) {
-					inventory.extractItem(RoadFactoryContainer.INPUT_1, 8, false);
+					extract(1);
 				} else if (result.getCount() == 16) {
-					inventory.extractItem(RoadFactoryContainer.INPUT_1, 8, false);
-					inventory.extractItem(RoadFactoryContainer.INPUT_2, 8, false);
+					extract(2);
 				} else if (result.getCount() == 24) {
-					inventory.extractItem(RoadFactoryContainer.INPUT_1, 8, false);
-					inventory.extractItem(RoadFactoryContainer.INPUT_2, 8, false);
-					inventory.extractItem(RoadFactoryContainer.INPUT_3, 8, false);
+					extract(3);
 				} else if (result.getCount() == 32) {
-					inventory.extractItem(RoadFactoryContainer.INPUT_1, 8, false);
-					inventory.extractItem(RoadFactoryContainer.INPUT_2, 8, false);
-					inventory.extractItem(RoadFactoryContainer.INPUT_3, 8, false);
-					inventory.extractItem(RoadFactoryContainer.INPUT_4, 8, false);
+					extract(4);
 				}
 				
 				putItemsInSlot(result, false);
 
 				hasChanges = true;
-				tarFluid.drain(new FluidStack(tarFluid.getFluid().getFluid(), 1000 * result.getCount()/8), true);
+				tarFluid.drain(new FluidStack(tarFluid.getFluid().getFluid(), 100 * result.getCount()/8), true);
 			}
 			
 			ItemStack fluid_in = inventory.getStackInSlot(RoadFactoryContainer.FLUID_IN);
@@ -225,7 +233,7 @@ public class RoadFactoryEntity extends RoadTileEntity implements ITickable, ICap
 	}
 	
 	public boolean shouldTick() {
-		if (tarFluid.getFluidAmount() >= 1000 && getRecipeResult() != ItemStack.EMPTY) {
+		if (tarFluid.getFluidAmount() >= 100 && getRecipeResult() != ItemStack.EMPTY) {
 			return true;
 		}
 		
@@ -233,7 +241,7 @@ public class RoadFactoryEntity extends RoadTileEntity implements ITickable, ICap
 		ItemStack bucket_out = inventory.getStackInSlot(RoadFactoryContainer.FLUID_IN_BUCKET);
 
 		if (fluid_in.getUnlocalizedName().compareTo("item.forge.bucketFilled") == 0) {
-			if (tarFluid.getFluidAmount() <= TANK_CAP - 1000 && (bucket_out.isEmpty() || bucket_out.getCount() < bucket_out.getMaxStackSize())) {
+			if (tarFluid.getFluidAmount() <= TANK_CAP - 100 && (bucket_out.isEmpty() || bucket_out.getCount() < bucket_out.getMaxStackSize())) {
 				return true;
 			}
 		}

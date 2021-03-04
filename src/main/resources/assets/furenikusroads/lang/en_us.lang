@@ -770,6 +770,24 @@ tile.furenikusroads.red_junction_mid_line_connection.12.name=Thick Mid Line to T
 
 tile.furenikusroads.road_snow.name=Snow (But magic snow that settles on roads)
 
+tile.furenikusroads.road_block_diagonal_1_1.name=Diagonal Connector (1/1)
+tile.furenikusroads.road_block_diagonal_1_2.name=Diagonal Connector (1/2)
+tile.furenikusroads.road_block_diagonal_1_4.name=Diagonal Connector (1/4)
+tile.furenikusroads.road_block_diagonal_2_4.name=Diagonal Connector (2/4)
+tile.furenikusroads.road_block_diagonal_1_8.name=Diagonal Connector (1/8)
+tile.furenikusroads.road_block_diagonal_2_8.name=Diagonal Connector (2/8)
+tile.furenikusroads.road_block_diagonal_3_8.name=Diagonal Connector (3/8)
+tile.furenikusroads.road_block_diagonal_4_8.name=Diagonal Connector (4/8)
+
+tile.furenikusroads.road_block_diagonal_1_1_mirror.name=Diagonal Connector (1/1 Mirrored)
+tile.furenikusroads.road_block_diagonal_1_2_mirror.name=Diagonal Connector (1/2 Mirrored)
+tile.furenikusroads.road_block_diagonal_1_4_mirror.name=Diagonal Connector (1/4 Mirrored)
+tile.furenikusroads.road_block_diagonal_2_4_mirror.name=Diagonal Connector (2/4 Mirrored)
+tile.furenikusroads.road_block_diagonal_1_8_mirror.name=Diagonal Connector (1/8 Mirrored)
+tile.furenikusroads.road_block_diagonal_2_8_mirror.name=Diagonal Connector (2/8 Mirrored)
+tile.furenikusroads.road_block_diagonal_3_8_mirror.name=Diagonal Connector (3/8 Mirrored)
+tile.furenikusroads.road_block_diagonal_4_8_mirror.name=Diagonal Connector (4/8 Mirrored)
+
 item.pneumatic_drill.name=Pneumatic Drill
 item.tarmac_rammer.name=Tarmac Rammer
 item.paint_gun.name=Paint Gun
@@ -836,6 +854,7 @@ itemGroup.tab_roads=[Fureniku's Roads] Roads
 itemGroup.tab_sidewalks=[Fureniku's Roads] Sidewalks
 itemGroup.tab_tools=[Fureniku's Roads] Tools
 itemGroup.tab_road_parts=[Fureniku's Roads] Road Parts
+itemGroup.tab_diagonals=[Fureniku's Roads] Diagonal Connectors
 itemGroup.tab_paint_lines=[Fureniku's Roads] Line Paints
 itemGroup.tab_paint_icons=[Fureniku's Roads] Icon Paints
 itemGroup.tab_paint_letters=[Fureniku's Roads] Letter Paints
