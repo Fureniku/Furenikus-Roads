@@ -25,21 +25,21 @@ public class DiagonalQuadQuadBakedModel extends DiagonalBakedModelBase {
 	}
 	
 	@Override
-	protected List<BakedQuad> packQuads(EnumFacing facing, TextureAtlasSprite spriteLeft, TextureAtlasSprite spriteRight, float leftHeight, float rightHeight) {
+	protected List<BakedQuad> packQuads(EnumFacing facing, TextureAtlasSprite spriteLeft, TextureAtlasSprite spriteRight, int colLeft, int colRight, float leftHeight, float rightHeight) {
 		List<BakedQuad> quads = new ArrayList<>();
 		
 		if (facing == EnumFacing.NORTH) {
-			if (spriteLeft  != null) quads = createTrapezium(quads, left, rightHeight, leftHeight, spriteLeft, widthN, widthW, 0); //0.25 0.5
-			if (spriteRight != null) quads = createTrapezium(quads, left, leftHeight, rightHeight, spriteRight, 1-widthW, 1-widthN, 180); //1-0.5, 1-0.25 = 0.5, 0.75, inverted because upside down.
+			if (spriteLeft  != null) quads = createTrapezium(quads, left, rightHeight, leftHeight, spriteLeft, widthN, widthW, 0, colLeft); //0.25 0.5
+			if (spriteRight != null) quads = createTrapezium(quads, left, leftHeight, rightHeight, spriteRight, 1-widthW, 1-widthN, 180, colRight); //1-0.5, 1-0.25 = 0.5, 0.75, inverted because upside down.
 		} else if (facing == EnumFacing.EAST) {
-			if (spriteLeft  != null) quads = createTrapezium(quads, left, rightHeight, leftHeight, spriteLeft, widthN, widthW, 270);
-			if (spriteRight != null) quads = createTrapezium(quads, left, leftHeight, rightHeight, spriteRight, 1-widthW, 1-widthN, 90);
+			if (spriteLeft  != null) quads = createTrapezium(quads, left, rightHeight, leftHeight, spriteLeft, widthN, widthW, 270, colLeft);
+			if (spriteRight != null) quads = createTrapezium(quads, left, leftHeight, rightHeight, spriteRight, 1-widthW, 1-widthN, 90, colRight);
 		} else if (facing == EnumFacing.SOUTH) {
-			if (spriteLeft  != null) quads = createTrapezium(quads, left, rightHeight, leftHeight, spriteLeft, widthN, widthW, 180);
-			if (spriteRight != null) quads = createTrapezium(quads, left, leftHeight, rightHeight, spriteRight, 1-widthW, 1-widthN, 0);
+			if (spriteLeft  != null) quads = createTrapezium(quads, left, rightHeight, leftHeight, spriteLeft, widthN, widthW, 180, colLeft);
+			if (spriteRight != null) quads = createTrapezium(quads, left, leftHeight, rightHeight, spriteRight, 1-widthW, 1-widthN, 0, colRight);
 		} else {
-			if (spriteLeft  != null) quads = createTrapezium(quads, left, rightHeight, leftHeight, spriteLeft, widthN, widthW, 90);
-			if (spriteRight != null) quads = createTrapezium(quads, left, leftHeight, rightHeight, spriteRight, 1-widthW, 1-widthN, 270);
+			if (spriteLeft  != null) quads = createTrapezium(quads, left, rightHeight, leftHeight, spriteLeft, widthN, widthW, 90, colLeft);
+			if (spriteRight != null) quads = createTrapezium(quads, left, leftHeight, rightHeight, spriteRight, 1-widthW, 1-widthN, 270, colRight);
 		}
 
 		return quads;

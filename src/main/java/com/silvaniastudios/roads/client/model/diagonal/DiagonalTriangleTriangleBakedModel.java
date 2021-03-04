@@ -25,21 +25,21 @@ public class DiagonalTriangleTriangleBakedModel extends DiagonalBakedModelBase {
 	}
 	
 	@Override
-	protected List<BakedQuad> packQuads(EnumFacing facing, TextureAtlasSprite spriteLeft, TextureAtlasSprite spriteRight, float leftHeight, float rightHeight) {
+	protected List<BakedQuad> packQuads(EnumFacing facing, TextureAtlasSprite spriteLeft, TextureAtlasSprite spriteRight, int colLeft, int colRight, float leftHeight, float rightHeight) {
 		List<BakedQuad> quads = new ArrayList<>();
 		
 		if (facing == EnumFacing.NORTH) {
-			if (spriteLeft  != null) quads = createTriangle(quads, left, leftHeight, rightHeight, spriteLeft, widthN, 0);
-			if (spriteRight != null) quads = createTriangle(quads, left, rightHeight, leftHeight, spriteRight, widthN, 180);
+			if (spriteLeft  != null) quads = createTriangle(quads, left, leftHeight, rightHeight, spriteLeft, widthN, 0, colLeft);
+			if (spriteRight != null) quads = createTriangle(quads, left, rightHeight, leftHeight, spriteRight, widthN, 180, colRight);
 		} else if (facing == EnumFacing.EAST) {
-			if (spriteLeft  != null) quads = createTriangle(quads, left, leftHeight, rightHeight, spriteLeft, widthN, 270);
-			if (spriteRight != null) quads = createTriangle(quads, left, rightHeight, leftHeight, spriteRight, widthN, 90);
+			if (spriteLeft  != null) quads = createTriangle(quads, left, leftHeight, rightHeight, spriteLeft, widthN, 270, colLeft);
+			if (spriteRight != null) quads = createTriangle(quads, left, rightHeight, leftHeight, spriteRight, widthN, 90, colRight);
 		} else if (facing == EnumFacing.SOUTH) {
-			if (spriteLeft  != null) quads = createTriangle(quads, left, leftHeight, rightHeight, spriteLeft, widthN, 180);
-			if (spriteRight != null) quads = createTriangle(quads, left, rightHeight, leftHeight, spriteRight, widthN, 0);
+			if (spriteLeft  != null) quads = createTriangle(quads, left, leftHeight, rightHeight, spriteLeft, widthN, 180, colLeft);
+			if (spriteRight != null) quads = createTriangle(quads, left, rightHeight, leftHeight, spriteRight, widthN, 0, colRight);
 		} else {
-			if (spriteLeft  != null) quads = createTriangle(quads, left, leftHeight, rightHeight, spriteLeft, widthN, 90);
-			if (spriteRight != null) quads = createTriangle(quads, left, rightHeight, leftHeight, spriteRight, widthN, 270);
+			if (spriteLeft  != null) quads = createTriangle(quads, left, leftHeight, rightHeight, spriteLeft, widthN, 90, colLeft);
+			if (spriteRight != null) quads = createTriangle(quads, left, rightHeight, leftHeight, spriteRight, widthN, 270, colRight);
 		}
 
 		return quads;

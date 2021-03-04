@@ -1,5 +1,7 @@
 package com.silvaniastudios.roads.client.render;
 
+import java.awt.Color;
+
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.VertexFormat;
@@ -93,28 +95,33 @@ public class Quad {
 		flipV = flip;
 	}
 
-	public BakedQuad createQuad() {
+	public BakedQuad createQuad(int col) {
 		Vec3d normal = vec3.subtract(vec2).crossProduct(vec1.subtract(vec2)).normalize();
 
 		UnpackedBakedQuad.Builder builder = new UnpackedBakedQuad.Builder(format);
 		builder.setTexture(sprite);
 
-		putVertex(builder, normal, vec1.x, vec1.y, vec1.z, u1, v1, sprite);
-		putVertex(builder, normal, vec2.x, vec2.y, vec2.z, u2, v2, sprite);
-		putVertex(builder, normal, vec3.x, vec3.y, vec3.z, u3, v3, sprite);
-		putVertex(builder, normal, vec4.x, vec4.y, vec4.z, u4, v4, sprite);
+		putVertex(builder, normal, vec1.x, vec1.y, vec1.z, u1, v1, sprite, col);
+		putVertex(builder, normal, vec2.x, vec2.y, vec2.z, u2, v2, sprite, col);
+		putVertex(builder, normal, vec3.x, vec3.y, vec3.z, u3, v3, sprite, col);
+		putVertex(builder, normal, vec4.x, vec4.y, vec4.z, u4, v4, sprite, col);
 		return builder.build();
 	}
 
 	//Direct from mcjty's tutorial on IModel usage https://wiki.mcjty.eu/modding/index.php?title=Render_Block_Baked_Model-1.12
-	protected void putVertex(UnpackedBakedQuad.Builder builder, Vec3d normal, double x, double y, double z, float u, float v, TextureAtlasSprite sprite) {
+	protected void putVertex(UnpackedBakedQuad.Builder builder, Vec3d normal, double x, double y, double z, float u, float v, TextureAtlasSprite sprite, int col) {
 		for (int e = 0; e < format.getElementCount(); e++) {
 			switch (format.getElement(e).getUsage()) {
 			case POSITION:
 				builder.put(e, (float)x, (float)y, (float)z, 1.0f);
 				break;
 			case COLOR:
-				builder.put(e, 1.0f, 1.0f, 1.0f, 1.0f);
+				if (col == 0) {
+					builder.put(e, 1.0f, 1.0f, 1.0f, 1.0f);
+				} else {
+					Color color = new Color(col);
+					builder.put(e, color.getRed()/255.0f, color.getGreen()/255.0f, color.getBlue()/255.0f, color.getAlpha()/255.0f);
+				}
 				break;
 			case UV:
 				if (format.getElement(e).getIndex() == 0) {

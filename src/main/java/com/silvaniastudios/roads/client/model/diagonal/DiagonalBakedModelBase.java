@@ -9,6 +9,8 @@ import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.blocks.diagonal.RoadBlockDiagonal;
 import com.silvaniastudios.roads.client.render.Quad;
 
+import net.minecraft.block.BlockGrass;
+import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.BakedQuad;
@@ -83,17 +85,26 @@ public class DiagonalBakedModelBase implements IBakedModel {
 		//Fallback to sprite particle
 		TextureAtlasSprite spriteLeft = Minecraft.getMinecraft().getBlockRendererDispatcher().getModelForState(stateLeft).getParticleTexture();
 		TextureAtlasSprite spriteRight = Minecraft.getMinecraft().getBlockRendererDispatcher().getModelForState(stateRight).getParticleTexture();
+		
+		int colLeft = 0;
+		int colRight = 0;
+		
+		if (stateLeft.getBlock() instanceof BlockGrass || stateLeft.getBlock() instanceof BlockLeaves) {
+			colLeft = Minecraft.getMinecraft().world.getBiome(pos).getGrassColorAtPos(pos);
+			System.out.println("Got grass or leaves. Colour: " + colLeft);
+		}
+		
+		if (stateRight.getBlock() instanceof BlockGrass || stateRight.getBlock() instanceof BlockLeaves) {
+			colRight = Minecraft.getMinecraft().world.getBiome(pos).getGrassColorAtPos(pos);
+			System.out.println("Got grass or leaves. Colour: " + colRight);
+		}
 
 		if (quadsLeft.size() > 0) {
 			spriteLeft = quadsLeft.get(0).getSprite();
-		} else {
-			System.out.println("Left using fallback texture. height: " + leftHeight);
 		}
 
 		if (quadsRight.size() > 0) {
 			spriteRight = quadsRight.get(0).getSprite();
-		} else {
-			System.out.println("Right using fallback texture. height: " + rightHeight);
 		}
 
 		if (stateLeft.getBlock().isAir(stateLeft, Minecraft.getMinecraft().world, this.getLeftPos(facing, pos))) { 
@@ -106,10 +117,11 @@ public class DiagonalBakedModelBase implements IBakedModel {
 			rightHeight = 0;
 		}
 
-		return packQuads(facing, spriteLeft, spriteRight, leftHeight, rightHeight);
+		return packQuads(facing, spriteLeft, spriteRight, colLeft, colRight, leftHeight, rightHeight);
 	}
 
-	protected List<BakedQuad> packQuads(EnumFacing facing, TextureAtlasSprite spriteLeft, TextureAtlasSprite spriteRight, float leftHeight, float rightHeight) {
+	//Overriden in subclasses
+	protected List<BakedQuad> packQuads(EnumFacing facing, TextureAtlasSprite spriteLeft, TextureAtlasSprite spriteRight, int colLeft, int colRight, float leftHeight, float rightHeight) {
 		List<BakedQuad> quads = new ArrayList<>();
 		return quads;
 	}
@@ -153,7 +165,7 @@ public class DiagonalBakedModelBase implements IBakedModel {
 	//THIS ONLY WORKS ON MINECRAFT LOCKED ROTATIONS (0 90 180 270). If we're doing weird rotations we can't do this. F in chat.
 	//Finally convert to a baked quad and add to the list to return (Can do this in the first loop if we're not doing UV things)
 	
-	protected List<BakedQuad> createTriangle(List<BakedQuad> quads, boolean left, float heightL, float heightR, TextureAtlasSprite sprite, double width, int rotation) {
+	protected List<BakedQuad> createTriangle(List<BakedQuad> quads, boolean left, float heightL, float heightR, TextureAtlasSprite sprite, double width, int rotation, int colour) {
 		List<Quad> rawQuads = new ArrayList<>();
 		
 		if (left) {
@@ -162,11 +174,11 @@ public class DiagonalBakedModelBase implements IBakedModel {
 			rawQuads = shapeTriangleRight(heightL, heightR, sprite, width);
 		}
 		
-		return shapeBuilder(rawQuads, quads, rotation);
+		return shapeBuilder(rawQuads, quads, rotation, colour);
 	}
 	
 	
-	protected List<BakedQuad> createTrapezium(List<BakedQuad> quads, boolean left, float heightL, float heightR, TextureAtlasSprite sprite, double widthN, double widthW, int rotation) {
+	protected List<BakedQuad> createTrapezium(List<BakedQuad> quads, boolean left, float heightL, float heightR, TextureAtlasSprite sprite, double widthN, double widthW, int rotation, int colour) {
 		List<Quad> rawQuads = new ArrayList<>();
 
 		if (left) {
@@ -175,11 +187,11 @@ public class DiagonalBakedModelBase implements IBakedModel {
 			rawQuads = shapeTrapeziumRight(heightL, heightR, sprite, widthN, widthW);
 		}
 
-		return shapeBuilder(rawQuads, quads, rotation);
+		return shapeBuilder(rawQuads, quads, rotation, colour);
 	}
 	
 	//Works for most default shapes that assume 90 degree rotations.
-	protected List<BakedQuad> shapeBuilder(List<Quad> rawQuads, List<BakedQuad> quads, int rotation) {
+	protected List<BakedQuad> shapeBuilder(List<Quad> rawQuads, List<BakedQuad> quads, int rotation, int colour) {
 		for (int i = 0; i < rawQuads.size(); i++) {
 			rawQuads.set(i, Quad.rotateQuadY(rawQuads.get(i), rotation));
 		}
@@ -189,7 +201,9 @@ public class DiagonalBakedModelBase implements IBakedModel {
 		rawQuads.get(1).updateUVs(); //Prevent UV rotation on bottom face
 
 		for (int i = 0; i < rawQuads.size(); i++) {
-			quads.add(rawQuads.get(i).createQuad());
+			quads.add(rawQuads.get(i).createQuad(colour));
+			
+			//quads.get(i).
 		}
 
 		return quads;
