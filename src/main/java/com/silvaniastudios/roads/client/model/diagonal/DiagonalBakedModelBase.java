@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.function.Function;
 
 import com.silvaniastudios.roads.FurenikusRoads;
+import com.silvaniastudios.roads.blocks.FRBlocks;
 import com.silvaniastudios.roads.blocks.diagonal.RoadBlockDiagonal;
 import com.silvaniastudios.roads.client.render.Quad;
 
@@ -30,9 +31,11 @@ import net.minecraftforge.common.property.IExtendedBlockState;
 public class DiagonalBakedModelBase implements IBakedModel {
 
 	protected VertexFormat format;
+	Minecraft mc;
 
 	public DiagonalBakedModelBase(IModelState state, VertexFormat format, Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
 		this.format = format;
+		mc = Minecraft.getMinecraft();
 	}
 
 	//Direct from mcjty's tutorial on IModel usage https://wiki.mcjty.eu/modding/index.php?title=Render_Block_Baked_Model-1.12
@@ -89,14 +92,18 @@ public class DiagonalBakedModelBase implements IBakedModel {
 		int colLeft = 0;
 		int colRight = 0;
 		
-		if (stateLeft.getBlock() instanceof BlockGrass || stateLeft.getBlock() instanceof BlockLeaves) {
+		BlockPos posLeft = pos.offset(facing.rotateYCCW());
+		BlockPos posRight = pos.offset(facing.rotateY());
+		
+		//May revisit this to make it more robust later for other mods, but for now it works with roads/vanilla and maybe some mods.
+		if (stateLeft.getBlock() instanceof BlockGrass || stateLeft.getBlock() instanceof BlockLeaves || stateLeft.getBlock() == FRBlocks.road_block_grass) {
+			//colLeft = mc.getBlockColors().getColor(stateLeft, mc.world, posLeft);
 			colLeft = Minecraft.getMinecraft().world.getBiome(pos).getGrassColorAtPos(pos);
-			System.out.println("Got grass or leaves. Colour: " + colLeft);
 		}
 		
-		if (stateRight.getBlock() instanceof BlockGrass || stateRight.getBlock() instanceof BlockLeaves) {
+		if (stateRight.getBlock() instanceof BlockGrass || stateRight.getBlock() instanceof BlockLeaves || stateRight.getBlock() == FRBlocks.road_block_grass) {
+			//colRight = mc.getBlockColors().getColor(stateRight, mc.world, posRight);
 			colRight = Minecraft.getMinecraft().world.getBiome(pos).getGrassColorAtPos(pos);
-			System.out.println("Got grass or leaves. Colour: " + colRight);
 		}
 
 		if (quadsLeft.size() > 0) {
@@ -202,8 +209,6 @@ public class DiagonalBakedModelBase implements IBakedModel {
 
 		for (int i = 0; i < rawQuads.size(); i++) {
 			quads.add(rawQuads.get(i).createQuad(colour));
-			
-			//quads.get(i).
 		}
 
 		return quads;

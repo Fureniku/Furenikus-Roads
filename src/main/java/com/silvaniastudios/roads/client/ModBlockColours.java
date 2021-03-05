@@ -9,6 +9,10 @@ public class ModBlockColours implements IBlockColor {
 
 	@Override
 	public int colorMultiplier(IBlockState state, IBlockAccess worldIn, BlockPos pos, int tintIndex) {
+		if (worldIn == null) {
+			System.out.println("world null");
+		}
+		
 		return worldIn.getBiome(pos).getGrassColorAtPos(pos);
 	}
 }
