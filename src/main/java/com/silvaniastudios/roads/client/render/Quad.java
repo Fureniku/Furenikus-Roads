@@ -105,6 +105,22 @@ public class Quad {
 		putVertex(builder, normal, vec2.x, vec2.y, vec2.z, u2, v2, sprite, col);
 		putVertex(builder, normal, vec3.x, vec3.y, vec3.z, u3, v3, sprite, col);
 		putVertex(builder, normal, vec4.x, vec4.y, vec4.z, u4, v4, sprite, col);
+
+		return builder.build();
+	}
+	
+	//Pretty much just used for viewing the top of fluid from underneath because thats a weird edge case
+	public BakedQuad createUnnormalizedQuad(int col) {
+		Vec3d normal = new Vec3d(1,1,1);
+
+		UnpackedBakedQuad.Builder builder = new UnpackedBakedQuad.Builder(format);
+		builder.setTexture(sprite);
+
+		putVertex(builder, normal, vec1.x, vec1.y, vec1.z, u1, v1, sprite, col);
+		putVertex(builder, normal, vec2.x, vec2.y, vec2.z, u2, v2, sprite, col);
+		putVertex(builder, normal, vec3.x, vec3.y, vec3.z, u3, v3, sprite, col);
+		putVertex(builder, normal, vec4.x, vec4.y, vec4.z, u4, v4, sprite, col);
+
 		return builder.build();
 	}
 

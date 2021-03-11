@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
+import com.silvaniastudios.roads.blocks.diagonal.HalfBlock;
+
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.VertexFormat;
@@ -25,21 +27,21 @@ public class DiagonalTriangleQuadBakedModel extends DiagonalBakedModelBase {
 	}
 	
 	@Override
-	protected List<BakedQuad> packQuads(EnumFacing facing, TextureAtlasSprite spriteLeft, TextureAtlasSprite spriteRight, int colLeft, int colRight, float leftHeight, float rightHeight) {
+	protected List<BakedQuad> packQuads(EnumFacing facing, HalfBlock blockLeft, HalfBlock blockRight) {
 		List<BakedQuad> quads = new ArrayList<>();
 		
 		if (facing == EnumFacing.NORTH) {
-			if (spriteLeft  != null) quads = createTriangle(quads, left, leftHeight, rightHeight, spriteLeft, widthN, 0, colLeft);
-			if (spriteRight != null) quads = createTrapezium(quads, left, leftHeight, rightHeight, spriteRight, widthN, widthW, 180, colRight);
+			if (blockLeft.getSprite()  != null) quads = createTriangle(quads, left, blockLeft, widthN);
+			if (blockRight.getSprite() != null) quads = createTrapezium(quads, left, blockRight, widthN, widthW);
 		} else if (facing == EnumFacing.EAST) {
-			if (spriteLeft  != null) quads = createTriangle(quads, left, leftHeight, rightHeight, spriteLeft, widthN, 270, colLeft);
-			if (spriteRight != null) quads = createTrapezium(quads, left, leftHeight, rightHeight, spriteRight, widthN, widthW, 90, colRight);
+			if (blockLeft.getSprite()  != null) quads = createTriangle(quads, left, blockLeft, widthN);
+			if (blockRight.getSprite() != null) quads = createTrapezium(quads, left, blockRight, widthN, widthW);
 		} else if (facing == EnumFacing.SOUTH) {
-			if (spriteLeft  != null) quads = createTriangle(quads, left, leftHeight, rightHeight, spriteLeft, widthN, 180, colLeft);
-			if (spriteRight != null) quads = createTrapezium(quads, left, leftHeight, rightHeight, spriteRight, widthN, widthW, 0, colRight);
+			if (blockLeft.getSprite()  != null) quads = createTriangle(quads, left, blockLeft, widthN);
+			if (blockRight.getSprite() != null) quads = createTrapezium(quads, left, blockRight, widthN, widthW);
 		} else {
-			if (spriteLeft  != null) quads = createTriangle(quads, left, leftHeight, rightHeight, spriteLeft, widthN, 90, colLeft);
-			if (spriteRight != null) quads = createTrapezium(quads, left, leftHeight, rightHeight, spriteRight, widthN, widthW, 270, colRight);
+			if (blockLeft.getSprite()  != null) quads = createTriangle(quads, left, blockLeft, widthN);
+			if (blockRight.getSprite() != null) quads = createTrapezium(quads, left, blockRight, widthN, widthW);
 		}
 
 		return quads;

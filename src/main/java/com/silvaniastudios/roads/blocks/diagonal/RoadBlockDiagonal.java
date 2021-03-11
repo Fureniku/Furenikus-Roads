@@ -2,7 +2,6 @@ package com.silvaniastudios.roads.blocks.diagonal;
 
 import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.blocks.BlockBase;
-import com.silvaniastudios.roads.blocks.FRBlocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -84,6 +83,7 @@ public class RoadBlockDiagonal extends BlockBase {
 		return this.getDefaultState().withProperty(FACING, EnumFacing.WEST); 	
 	}
 
+	@SuppressWarnings("rawtypes")
 	protected BlockStateContainer createBlockState() {
 		IProperty[] listedProperties = new IProperty[] {FACING};
 		IUnlistedProperty[] unlistedProperties = new IUnlistedProperty[] {LEFT, RIGHT, POS};
@@ -205,12 +205,43 @@ public class RoadBlockDiagonal extends BlockBase {
 	
 	@SideOnly(Side.CLIENT)
 	public BlockRenderLayer getBlockLayer() {
-		return BlockRenderLayer.CUTOUT;
+		return BlockRenderLayer.TRANSLUCENT;
 	}
 
 	@Override
 	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
 		//if (this.getMetaFromState(state) < 15 && face != EnumFacing.DOWN && face != EnumFacing.UP) { //TODO checks for the sake of other blocks culling.
 		return BlockFaceShape.UNDEFINED;
+	}
+	
+	//Prevent water rendering when up against this
+	@SuppressWarnings("deprecation")
+	@Override
+	public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face) {
+		if (world.getBlockState(pos.offset(face)).getBlock().getMaterial(world.getBlockState(pos.offset(face))) == Material.WATER) {
+			return true;
+		}
+        return super.doesSideBlockRendering(state, world, pos, face);
+    }
+	
+	@SuppressWarnings("deprecation")
+	public float getSideHeight(IBlockState state, World world, BlockPos pos, HalfBlock.HalfBlockSide side) {
+		EnumFacing facing = state.getValue(RoadBlockDiagonal.FACING);
+		BlockPos posSide = (side == HalfBlock.HalfBlockSide.LEFT) ? pos.offset(facing.rotateYCCW()) : pos.offset(facing.rotateY());
+		IBlockState stateSide = world.getBlockState(posSide);
+		if (stateSide.getBlock().isAir(stateSide, world, posSide)) {
+			return 0;
+		}
+		return (float) stateSide.getBlock().getBoundingBox(stateSide, Minecraft.getMinecraft().world, posSide).maxY;
+	}
+	
+	public HalfBlock getHalfBlock(IBlockState state, HalfBlock.HalfBlockSide side, BlockPos pos, EnumFacing facing) {
+		IExtendedBlockState extendedState = (IExtendedBlockState) state;
+		if (extendedState == null) {
+			System.out.println("reeeee");
+		}
+		
+		System.out.printf("Creating half block in diagonal block. \nStatus: \nstate: %s\nside: %s\npos: %s %s %s\nfacing: %s\n", extendedState != null, side == HalfBlock.HalfBlockSide.LEFT ? "Left" : "Right", pos.getX(), pos.getY(), pos.getZ(), facing.getName());
+		return new HalfBlock(extendedState, side, pos, facing);
 	}
 }
