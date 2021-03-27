@@ -1,7 +1,14 @@
 package com.silvaniastudios.roads.blocks.diagonal;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.Nullable;
+
+import com.google.common.collect.Lists;
 import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.blocks.BlockBase;
+import com.silvaniastudios.roads.blocks.diagonal.HalfBlock.HalfBlockSide;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -14,13 +21,17 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
@@ -41,8 +52,10 @@ public class RoadBlockDiagonal extends BlockBase {
 	private String modelName;
 
 	boolean mirror;
+	float minWidth;
+	float maxWidth;
 
-	public RoadBlockDiagonal(String name, boolean mirror, String modelName) {
+	public RoadBlockDiagonal(String name, boolean mirror, String modelName, float minWidth, float maxWidth) {
 		super(name, Material.ROCK);
 		setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 		this.mirror = mirror;
@@ -50,6 +63,8 @@ public class RoadBlockDiagonal extends BlockBase {
 		this.setHarvestLevel("pneumatic_drill", 0);
 		this.setHardness(1.0F);
 		this.modelName = modelName;
+		this.minWidth = minWidth;
+		this.maxWidth = maxWidth;
 	}
 
 	@SuppressWarnings("deprecation")
@@ -75,6 +90,327 @@ public class RoadBlockDiagonal extends BlockBase {
 
 		return 0;
 	}
+	
+	public RayTraceResult collisionRayTrace(IBlockState blockState, World worldIn, BlockPos pos, Vec3d start, Vec3d end)
+    {
+        List<RayTraceResult> list = Lists.<RayTraceResult>newArrayList();
+
+        for (AxisAlignedBB axisalignedbb : getBoxList(pos, worldIn, blockState))
+        {
+            list.add(this.rayTrace(pos, start, end, axisalignedbb));
+        }
+
+        RayTraceResult raytraceresult1 = null;
+        double d1 = 0.0D;
+
+        for (RayTraceResult raytraceresult : list)
+        {
+            if (raytraceresult != null)
+            {
+                double d0 = raytraceresult.hitVec.squareDistanceTo(end);
+
+                if (d0 > d1)
+                {
+                    raytraceresult1 = raytraceresult;
+                    d1 = d0;
+                }
+            }
+        }
+
+        return raytraceresult1;
+    }
+
+	@Override
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos) {
+		return new AxisAlignedBB(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+	}
+	
+	public ArrayList<AxisAlignedBB> getBoxList(BlockPos pos, World world, IBlockState state) {
+		ArrayList<AxisAlignedBB> list = new ArrayList<>();
+		
+		EnumFacing facing = state.getValue(FACING);
+		BlockPos posLeft = pos.offset(facing.rotateYCCW());
+		BlockPos posRight = pos.offset(facing.rotateY());
+		
+		double leftHeight = getBlockHeight(world, getLeftBlock(state, world, pos), posLeft);
+		double rightHeight = getBlockHeight(world, getRightBlock(state, world, pos), posRight);
+		
+		boolean leftFluid = getHalfBlock(state, HalfBlockSide.LEFT, posLeft, facing).isFluid();
+		boolean rightFluid = getHalfBlock(state, HalfBlockSide.RIGHT, posRight, facing).isFluid();
+		
+		if (leftHeight == rightHeight && !leftFluid && !rightFluid) {
+			list.add(new AxisAlignedBB(0.0f, 0.0f, 0.0f, 1.0f, leftHeight, 1.0f));
+			return list;
+		}
+		
+		float min = minWidth;
+		float max = maxWidth;
+		
+		float width = max - min;
+		float eighth = width/8f;
+		
+		float step1 = 1.00f;
+		float step2 = 0.75f;
+		float step3 = 0.50f;
+		float step4 = 0.25f;
+		
+		float step = 0.25f;
+		
+		if (mirror) {
+			step1 = 0.25f;
+			step2 = 0.50f;
+			step3 = 0.75f;
+			step4 = 1.00f;
+		}
+
+		if (facing.equals(EnumFacing.NORTH)) {
+			if (!leftFluid) {
+				list.add(new AxisAlignedBB(min, 0.0f, step1 - step, min + (width*0.25) - eighth, leftHeight, step1));
+				list.add(new AxisAlignedBB(min, 0.0f, step2 - step, min + (width*0.50) - eighth, leftHeight, step2));
+				list.add(new AxisAlignedBB(min, 0.0f, step3 - step, min + (width*0.75) - eighth, leftHeight, step3));
+				list.add(new AxisAlignedBB(min, 0.0f, step4 - step, max                - eighth, leftHeight, step4));
+			}
+			
+			if (!rightFluid) {
+				list.add(new AxisAlignedBB(min                + eighth, 0.0f, step1 - step, 1.0f, rightHeight, step1));
+				list.add(new AxisAlignedBB(min + (width*0.25) + eighth, 0.0f, step2 - step, 1.0f, rightHeight, step2));
+				list.add(new AxisAlignedBB(min + (width*0.50) + eighth, 0.0f, step3 - step, 1.0f, rightHeight, step3));
+				list.add(new AxisAlignedBB(min + (width*0.75) + eighth, 0.0f, step4 - step, 1.0f, rightHeight, step4));
+			}
+		}
+		
+		if (facing.equals(EnumFacing.EAST)) {
+			if (!leftFluid) {
+				list.add(new AxisAlignedBB(step4 - step, 0.0f, min, step4, leftHeight, min + (width*0.25) - eighth));
+				list.add(new AxisAlignedBB(step3 - step, 0.0f, min, step3, leftHeight, min + (width*0.50) - eighth));
+				list.add(new AxisAlignedBB(step2 - step, 0.0f, min, step2, leftHeight, min + (width*0.75) - eighth));
+				list.add(new AxisAlignedBB(step1 - step, 0.0f, min, step1, leftHeight, max                - eighth));
+			}
+			
+			if (!rightFluid) {
+				list.add(new AxisAlignedBB(step4 - step, 0.0f, min +                eighth, step4, rightHeight, 1.0f));
+				list.add(new AxisAlignedBB(step3 - step, 0.0f, min + (width*0.25) + eighth, step3, rightHeight, 1.0f));
+				list.add(new AxisAlignedBB(step2 - step, 0.0f, min + (width*0.50) + eighth, step2, rightHeight, 1.0f));
+				list.add(new AxisAlignedBB(step1 - step, 0.0f, min + (width*0.75) + eighth, step1, rightHeight, 1.0f));
+			}
+		}
+
+		if (facing.equals(EnumFacing.SOUTH)) {
+			if (!leftFluid) {
+				list.add(new AxisAlignedBB(1.0 - (min                + eighth), 0.0f, step4 - step, 1, leftHeight, step4));
+				list.add(new AxisAlignedBB(1.0 - (min + (width*0.25) + eighth), 0.0f, step3 - step, 1, leftHeight, step3));
+				list.add(new AxisAlignedBB(1.0 - (min + (width*0.50) + eighth), 0.0f, step2 - step, 1, leftHeight, step2));
+				list.add(new AxisAlignedBB(1.0 - (min + (width*0.75) + eighth), 0.0f, step1 - step, 1, leftHeight, step1));
+			}
+
+			if (!rightFluid) {
+				list.add(new AxisAlignedBB(min, 0.0, step4 - step, 1.0 - (min + (width*0.25) - eighth), rightHeight, step4));
+				list.add(new AxisAlignedBB(min, 0.0, step3 - step, 1.0 - (min + (width*0.50) - eighth), rightHeight, step3));
+				list.add(new AxisAlignedBB(min, 0.0, step2 - step, 1.0 - (min + (width*0.75) - eighth), rightHeight, step2));
+				list.add(new AxisAlignedBB(min, 0.0, step1 - step, 1.0 - (max                - eighth), rightHeight, step1));
+			}
+		}
+		
+		if (facing.equals(EnumFacing.WEST)) {
+			if (!leftFluid) {
+				list.add(new AxisAlignedBB(step1 - step, 0.0, 1.0 - (min +                eighth), step1, leftHeight, 1));
+				list.add(new AxisAlignedBB(step2 - step, 0.0, 1.0 - (min + (width*0.25) + eighth), step2, leftHeight, 1));
+				list.add(new AxisAlignedBB(step3 - step, 0.0, 1.0 - (min + (width*0.50) + eighth), step3, leftHeight, 1));
+				list.add(new AxisAlignedBB(step4 - step, 0.0, 1.0 - (min + (width*0.75) + eighth), step4, leftHeight, 1));
+			}
+
+			if (!rightFluid) {
+				list.add(new AxisAlignedBB(step1 - step, 0.0, min, step1, rightHeight, 1.0 - (min + (width*0.25) - eighth)));
+				list.add(new AxisAlignedBB(step2 - step, 0.0, min, step2, rightHeight, 1.0 - (min + (width*0.50) - eighth)));
+				list.add(new AxisAlignedBB(step3 - step, 0.0, min, step3, rightHeight, 1.0 - (min + (width*0.75) - eighth)));
+				list.add(new AxisAlignedBB(step4 - step, 0.0, min, step4, rightHeight, 1.0 - (max                - eighth)));
+			}
+		}
+		
+		return list;
+	}
+	
+	public Vec3d[] getLeftVecs(World world, IBlockState state, BlockPos pos) {
+		Vec3d vecs[] = new Vec3d[16];
+		EnumFacing facing = state.getValue(FACING);
+		BlockPos posLeft = pos.offset(facing.rotateYCCW());
+		
+		if (getHalfBlock(state, HalfBlockSide.LEFT, posLeft, facing).isFluid() || world.getBlockState(posLeft).getBlock().isAir(world.getBlockState(posLeft), world, posLeft)) {
+			for (int i = 0; i < vecs.length; i++) {
+				vecs[i] = new Vec3d(0,0,0);
+			}
+			return vecs;
+		}
+		
+		double height = getBlockHeight(world, getLeftBlock(state, world, pos), posLeft);
+		
+		double g = 0.0020000000949949026D; //The amount a vanilla drawn box is bigger than the actual collision box
+		
+		if (mirror) {
+			vecs[0] = new Vec3d(0-g, 			0-g, 		0-g);
+			vecs[1] = new Vec3d(minWidth+g, 	0-g, 		0-g);
+			vecs[2] = new Vec3d(maxWidth+g, 	0-g, 		1+g);
+			vecs[3] = new Vec3d(0-g, 			0-g, 		1+g);
+			
+			vecs[4] = new Vec3d(0-g, 			0-g, 		0-g);
+			
+			vecs[5] = new Vec3d(0-g, 			height+g, 	0-g);
+			vecs[6] = new Vec3d(minWidth+g, 	height+g, 	0-g);
+			vecs[7] = new Vec3d(maxWidth+g, 	height+g, 	1+g);
+			vecs[8] = new Vec3d(0-g, 			height+g, 	1+g);
+			
+			vecs[9] = new Vec3d(0-g, 			height+g, 	0-g);
+			
+			vecs[10] = new Vec3d(0-g, 			height+g, 	1+g);
+			
+			vecs[11] = new Vec3d(0-g, 			0-g, 		1+g);
+			vecs[12] = new Vec3d(maxWidth+g, 	0-g, 		1+g);
+			
+			vecs[13] = new Vec3d(maxWidth+g, 	height+g, 	1+g);
+			vecs[14] = new Vec3d(minWidth+g, 	height+g, 	0-g);
+			vecs[15] = new Vec3d(minWidth+g, 	0-g, 		0-g);
+		} else {
+			vecs[0] = new Vec3d(0-g, 			0-g, 		0-g);
+			vecs[1] = new Vec3d(maxWidth+g, 	0-g, 		0-g);
+			vecs[2] = new Vec3d(minWidth+g, 	0-g, 		1+g);
+			vecs[3] = new Vec3d(0-g, 			0-g, 		1+g);
+			
+			vecs[4] = new Vec3d(0-g, 			0-g, 		0-g);
+			
+			vecs[5] = new Vec3d(0-g, 			height+g, 	0-g);
+			vecs[6] = new Vec3d(maxWidth+g, 	height+g, 	0-g);
+			vecs[7] = new Vec3d(minWidth+g, 	height+g, 	1+g);
+			vecs[8] = new Vec3d(0-g, 			height+g, 	1+g);
+			
+			vecs[9] = new Vec3d(0-g, 			height+g, 	0-g);
+			
+			vecs[10] = new Vec3d(0-g, 			height+g, 	1+g);
+			
+			vecs[11] = new Vec3d(0-g, 			0-g, 		1+g);
+			vecs[12] = new Vec3d(minWidth+g, 	0-g, 		1+g);
+			
+			vecs[13] = new Vec3d(minWidth+g, 	height+g, 	1+g);
+			vecs[14] = new Vec3d(maxWidth+g, 	height+g, 	0-g);
+			vecs[15] = new Vec3d(maxWidth+g, 	0-g, 		0-g);
+		}
+		
+		
+		if (facing.equals(EnumFacing.EAST)) {
+			vecs = getRotatedVecs(vecs, 270, new Vec3d(2,0,0));
+		}
+		
+		if (facing.equals(EnumFacing.SOUTH)) {
+			vecs = getRotatedVecs(vecs, 180, new Vec3d(2,0,2));
+		}
+		
+		if (facing.equals(EnumFacing.WEST)) {
+			vecs = getRotatedVecs(vecs, 90, new Vec3d(0,0,2));
+		}
+		
+		return vecs;
+	}
+	
+	public Vec3d[] getRightVecs(World world, IBlockState state, BlockPos pos) {
+		Vec3d vecs[] = new Vec3d[16];
+		EnumFacing facing = state.getValue(FACING);
+		BlockPos posRight = pos.offset(facing.rotateY());
+		
+		double height = getBlockHeight(world, getRightBlock(state, world, pos), posRight);
+		
+		if (getHalfBlock(state, HalfBlockSide.RIGHT, posRight, facing).isFluid() || world.getBlockState(posRight).getBlock().isAir(world.getBlockState(posRight), world, posRight)) {
+			for (int i = 0; i < vecs.length; i++) {
+				vecs[i] = new Vec3d(0,0,0);
+			}
+			return vecs;
+		}
+		
+		double g = 0.0020000000949949026D; //The amount a vanilla drawn box is bigger than the actual collision box
+
+		if (mirror) {
+			vecs[0] = new Vec3d(minWidth-g, 	0-g, 		0-g);
+			vecs[1] = new Vec3d(1+g, 			0-g, 		0-g);
+			vecs[2] = new Vec3d(1+g, 			0-g, 		1+g);
+			vecs[3] = new Vec3d(maxWidth-g, 	0-g, 		1+g);
+			
+			vecs[4] = new Vec3d(minWidth-g, 	0-g, 		0-g);
+			
+			vecs[5] = new Vec3d(minWidth-g, 	height+g, 	0-g);
+			vecs[6] = new Vec3d(1+g, 			height+g, 	0-g);
+			vecs[7] = new Vec3d(1+g, 			height+g, 	1+g);
+			vecs[8] = new Vec3d(maxWidth-g, 	height+g, 	1+g);
+			
+			vecs[9] = new Vec3d(minWidth-g, 	height+g, 	0-g);
+			
+			vecs[10] = new Vec3d(maxWidth-g, 	height+g, 	1+g);
+			
+			vecs[11] = new Vec3d(maxWidth-g, 	0-g, 		1+g);
+			vecs[12] = new Vec3d(1+g, 			0-g, 		1+g);
+			
+			vecs[13] = new Vec3d(1+g, 			height+g, 	1+g);
+			vecs[14] = new Vec3d(1+g, 			height+g, 	0-g);
+			vecs[15] = new Vec3d(1+g, 			0-g, 		0-g);
+		} else {
+			vecs[0] = new Vec3d(maxWidth-g, 	0-g, 		0-g);
+			vecs[1] = new Vec3d(1+g, 			0-g, 		0-g);
+			vecs[2] = new Vec3d(1+g, 			0-g, 		1+g);
+			vecs[3] = new Vec3d(minWidth-g, 	0-g, 		1+g);
+			
+			vecs[4] = new Vec3d(maxWidth-g, 	0-g, 		0-g);
+			
+			vecs[5] = new Vec3d(maxWidth-g, 	height+g, 	0-g);
+			vecs[6] = new Vec3d(1+g, 			height+g, 	0-g);
+			vecs[7] = new Vec3d(1+g, 			height+g, 	1+g);
+			vecs[8] = new Vec3d(minWidth-g, 	height+g, 	1+g);
+			
+			vecs[9] = new Vec3d(maxWidth-g, 	height+g, 	0-g);
+			
+			vecs[10] = new Vec3d(minWidth-g, 	height+g, 	1+g);
+			
+			vecs[11] = new Vec3d(minWidth-g, 	0-g, 		1+g);
+			vecs[12] = new Vec3d(1+g, 			0-g, 		1+g);
+			
+			vecs[13] = new Vec3d(1+g, 			height+g, 	1+g);
+			vecs[14] = new Vec3d(1+g, 			height+g, 	0-g);
+			vecs[15] = new Vec3d(1+g, 			0-g, 		0-g);
+		}
+		
+
+		if (facing.equals(EnumFacing.EAST)) {
+			vecs = getRotatedVecs(vecs, 270, new Vec3d(2,0,0));
+		}
+		
+		if (facing.equals(EnumFacing.SOUTH)) {
+			vecs = getRotatedVecs(vecs, 180, new Vec3d(2,0,2));
+		}
+		
+		if (facing.equals(EnumFacing.WEST)) {
+			vecs = getRotatedVecs(vecs, 90, new Vec3d(0,0,2));
+		}
+		
+		return vecs;
+	}
+	
+	//idk why its being dumb and needing different offsets depending on the rotation but oh well
+	public Vec3d[] getRotatedVecs(Vec3d[] vecsIn, int rot, Vec3d offset) {
+		Vec3d vecs[] = new Vec3d[vecsIn.length];
+		
+		for (int i = 0; i < vecsIn.length; i++) {
+			Vec3d offsetVec = new Vec3d(vecsIn[i].x + 0.5, vecsIn[i].y + 0.5, vecsIn[i].z + 0.5).rotateYaw((float) Math.toRadians(rot));
+			vecs[i] = new Vec3d(offsetVec.x - 0.5 + offset.x, offsetVec.y - 0.5, offsetVec.z - 0.5 + offset.z);
+		}
+		
+		return vecs;
+	}
+
+
+	@Override
+	public void addCollisionBoxToList(IBlockState state, World world, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean isActualState) {
+		ArrayList<AxisAlignedBB> list = getBoxList(pos, world, state);
+		for (int i = 0; i < list.size(); i++) {
+			addCollisionBoxToList(pos, entityBox, collidingBoxes, list.get(i));
+		}
+	}	
+
 
 	public IBlockState getStateFromMeta(int meta) {
 		if (meta == 0) { return this.getDefaultState().withProperty(FACING, EnumFacing.NORTH); }
@@ -139,6 +475,9 @@ public class RoadBlockDiagonal extends BlockBase {
 	@SuppressWarnings("deprecation")
 	public double getBlockHeight(IBlockAccess world, IBlockState state, BlockPos pos) {
 		Block block = state.getBlock();
+		if (block instanceof RoadBlockDiagonal || !block.isCollidable()) {
+			return 0.0d;
+		}
 		return block.getBoundingBox(state, world, pos).maxY;
 	}
 
@@ -202,7 +541,7 @@ public class RoadBlockDiagonal extends BlockBase {
 	public boolean isOpaqueCube(IBlockState state) {
 		return false;
 	}
-	
+
 	@SideOnly(Side.CLIENT)
 	public BlockRenderLayer getBlockLayer() {
 		return BlockRenderLayer.TRANSLUCENT;
@@ -213,7 +552,7 @@ public class RoadBlockDiagonal extends BlockBase {
 		//if (this.getMetaFromState(state) < 15 && face != EnumFacing.DOWN && face != EnumFacing.UP) { //TODO checks for the sake of other blocks culling.
 		return BlockFaceShape.UNDEFINED;
 	}
-	
+
 	//Prevent water rendering when up against this
 	@SuppressWarnings("deprecation")
 	@Override
@@ -221,9 +560,9 @@ public class RoadBlockDiagonal extends BlockBase {
 		if (world.getBlockState(pos.offset(face)).getBlock().getMaterial(world.getBlockState(pos.offset(face))) == Material.WATER) {
 			return true;
 		}
-        return super.doesSideBlockRendering(state, world, pos, face);
-    }
-	
+		return super.doesSideBlockRendering(state, world, pos, face);
+	}
+
 	@SuppressWarnings("deprecation")
 	public float getSideHeight(IBlockState state, World world, BlockPos pos, HalfBlock.HalfBlockSide side) {
 		EnumFacing facing = state.getValue(RoadBlockDiagonal.FACING);
@@ -234,14 +573,9 @@ public class RoadBlockDiagonal extends BlockBase {
 		}
 		return (float) stateSide.getBlock().getBoundingBox(stateSide, Minecraft.getMinecraft().world, posSide).maxY;
 	}
-	
+
 	public HalfBlock getHalfBlock(IBlockState state, HalfBlock.HalfBlockSide side, BlockPos pos, EnumFacing facing) {
 		IExtendedBlockState extendedState = (IExtendedBlockState) state;
-		if (extendedState == null) {
-			System.out.println("reeeee");
-		}
-		
-		System.out.printf("Creating half block in diagonal block. \nStatus: \nstate: %s\nside: %s\npos: %s %s %s\nfacing: %s\n", extendedState != null, side == HalfBlock.HalfBlockSide.LEFT ? "Left" : "Right", pos.getX(), pos.getY(), pos.getZ(), facing.getName());
 		return new HalfBlock(extendedState, side, pos, facing);
 	}
 }

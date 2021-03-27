@@ -36,6 +36,7 @@ import com.silvaniastudios.roads.client.model.diagonal.loaders.Diagonal38MirrorM
 import com.silvaniastudios.roads.client.model.diagonal.loaders.Diagonal38ModelLoader;
 import com.silvaniastudios.roads.client.model.diagonal.loaders.Diagonal48MirrorModelLoader;
 import com.silvaniastudios.roads.client.model.diagonal.loaders.Diagonal48ModelLoader;
+import com.silvaniastudios.roads.items.FRItems;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -80,6 +81,8 @@ public class ClientProxy extends CommonProxy {
 		super.init();
 		Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler(new ModBlockColours(), FRBlocks.road_block_grass);
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ModItemColours(), FRBlocks.road_block_grass);
+		
+		MinecraftForge.EVENT_BUS.register(BoundingBoxDraw.class);
 
 		if (!RoadsConfig.general.performanceMode) {
 			ClientRegistry.bindTileEntitySpecialRenderer(PaintFillerEntity.class, new PaintFillerRenderer());

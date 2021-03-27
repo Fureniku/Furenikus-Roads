@@ -74,7 +74,6 @@ public class DiagonalBakedModelBase implements IBakedModel {
 		}
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public List<BakedQuad> getQuads(IBlockState state, EnumFacing side, long rand) {
 
@@ -82,54 +81,11 @@ public class DiagonalBakedModelBase implements IBakedModel {
 			return Collections.emptyList();
 		}
 
-		RoadBlockDiagonal block = (RoadBlockDiagonal) state.getBlock();
-
 		IExtendedBlockState extendedState = (IExtendedBlockState) state;
 		EnumFacing facing = extendedState.getValue(RoadBlockDiagonal.FACING);
-		IBlockState stateLeft = extendedState.getValue(RoadBlockDiagonal.LEFT);
-		IBlockState stateRight = extendedState.getValue(RoadBlockDiagonal.RIGHT);
-		BlockPos pos = extendedState.getValue(RoadBlockDiagonal.POS);
-		BlockPos posLeft = pos.offset(facing.rotateYCCW());
-		BlockPos posRight = pos.offset(facing.rotateY());
-		BlockPos posFront = pos.offset(facing);
-		BlockPos posBack = pos.offset(facing.getOpposite());
 		
 		HalfBlock blockLeft = new HalfBlock(extendedState, HalfBlock.HalfBlockSide.LEFT);
 		HalfBlock blockRight = new HalfBlock(extendedState, HalfBlock.HalfBlockSide.RIGHT);
-
-		System.out.println("Get quads called");
-		
-
-		/* 
-		 *  Side culling
-		 */
-
-
-		/*//Near (back)
-		leftShape[0] = leftHeight != rightHeight ? true : renderSide(pos, posBack, extendedState, true);
-		rightShape[0] = leftHeight != rightHeight ? true : renderSide(pos, posBack, extendedState, false);
-
-		//Far (front)
-		leftShape[1] = leftHeight != rightHeight ? true : renderSide(pos, posFront, extendedState, true);
-		rightShape[1] = leftHeight != rightHeight ? true : renderSide(pos, posFront, extendedState, false);
-
-		//Left
-		rightShape[2] = leftHeight != rightHeight;
-		leftShape[2] = leftHeight != rightHeight;
-
-		//Top
-		if (leftHeight >= 1) {
-			leftShape[3] = renderSide(pos, pos.offset(EnumFacing.UP), extendedState, true);
-		}
-		if (rightHeight >= 1) {
-			rightShape[3] = renderSide(pos, pos.offset(EnumFacing.UP), extendedState, false);
-		}
-
-		//Bottom
-		if (facingSolidBlock(pos.offset(EnumFacing.DOWN), extendedState)) {
-			leftShape[4] = false;
-			rightShape[4] = false;
-		}*/
 		
 		blockLeft.setPartnerBlock(blockRight);
 		blockRight.setPartnerBlock(blockLeft);
@@ -142,33 +98,6 @@ public class DiagonalBakedModelBase implements IBakedModel {
 		List<BakedQuad> quads = new ArrayList<>();
 		return quads;
 	}
-
-	/*public boolean facingSolidBlock(BlockPos other, IExtendedBlockState state) {
-		IBlockState stateOther = mc.world.getBlockState(other);
-		if (stateOther.getBlock().isOpaqueCube(stateOther) || stateOther.getBlock().isFullBlock(stateOther)) {
-			return true;
-		}
-		return false;
-	}
-
-	public boolean renderSide(BlockPos pos, BlockPos posOther, IExtendedBlockState state, boolean checkingLeft) {
-		IBlockState stateOther = mc.world.getBlockState(posOther);
-		if (facingSolidBlock(posOther, state)) {
-			return false;
-		}
-
-		if (stateOther.getBlock() instanceof RoadBlockDiagonal) {
-			RoadBlockDiagonal rbd = (RoadBlockDiagonal) stateOther.getBlock();
-
-			if (rbd.getLeftHeight(state, mc.world, pos) == rbd.getLeftHeight(stateOther, mc.world, pos) && checkingLeft) {
-				return false;
-			} else if (rbd.getRightHeight(state, mc.world, pos) == rbd.getRightHeight(stateOther, mc.world, pos) && !checkingLeft) {
-				return false;
-			}
-		}
-
-		return true;
-	}*/
 
 	@Override public ItemOverrideList getOverrides() { return null; }
 	@Override public boolean isAmbientOcclusion() { return true; }
@@ -237,10 +166,7 @@ public class DiagonalBakedModelBase implements IBakedModel {
 		if (rawQuads.get(1) != null) {
 			rawQuads.get(1).setFlipV(true); //Flip UVs for bottom face
 			rawQuads.get(1).updateUVs(); //Prevent UV rotation on bottom face
-			
-			
 		}
-
 
 		for (int i = 0; i < rawQuads.size(); i++) {
 			if (rawQuads.get(i) != null) {

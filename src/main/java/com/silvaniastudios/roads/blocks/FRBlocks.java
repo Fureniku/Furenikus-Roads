@@ -115,23 +115,23 @@ public class FRBlocks {
 	public static RoadBlock road_block_gravel = new RoadBlock("road_block_gravel", Material.SAND, FRItems.tarmac_fragment_gravel);
 	public static RoadBlock road_block_sand = new RoadBlock("road_block_sand", Material.SAND, FRItems.tarmac_fragment_sand);
 
-	public static RoadBlockDiagonal road_block_diagonal_1_1 = new RoadBlockDiagonal("road_block_diagonal_1_1", false, "diagonal_11");
-	public static RoadBlockDiagonal road_block_diagonal_1_2 = new RoadBlockDiagonal("road_block_diagonal_1_2", false, "diagonal_12");
-	public static RoadBlockDiagonal road_block_diagonal_1_4 = new RoadBlockDiagonal("road_block_diagonal_1_4", false, "diagonal_14");
-	public static RoadBlockDiagonal road_block_diagonal_2_4 = new RoadBlockDiagonal("road_block_diagonal_2_4", false, "diagonal_24");
-	public static RoadBlockDiagonal road_block_diagonal_1_8 = new RoadBlockDiagonal("road_block_diagonal_1_8", false, "diagonal_18");
-	public static RoadBlockDiagonal road_block_diagonal_2_8 = new RoadBlockDiagonal("road_block_diagonal_2_8", false, "diagonal_28");
-	public static RoadBlockDiagonal road_block_diagonal_3_8 = new RoadBlockDiagonal("road_block_diagonal_3_8", false, "diagonal_38");
-	public static RoadBlockDiagonal road_block_diagonal_4_8 = new RoadBlockDiagonal("road_block_diagonal_4_8", false, "diagonal_48");
+	public static RoadBlockDiagonal road_block_diagonal_1_1 = new RoadBlockDiagonal("road_block_diagonal_1_1", false, "diagonal_11", 0, 1);
+	public static RoadBlockDiagonal road_block_diagonal_1_2 = new RoadBlockDiagonal("road_block_diagonal_1_2", false, "diagonal_12", 0, 0.5f);
+	public static RoadBlockDiagonal road_block_diagonal_1_4 = new RoadBlockDiagonal("road_block_diagonal_1_4", false, "diagonal_14", 0, 0.25f);
+	public static RoadBlockDiagonal road_block_diagonal_2_4 = new RoadBlockDiagonal("road_block_diagonal_2_4", false, "diagonal_24", 0.25f, 0.5f);
+	public static RoadBlockDiagonal road_block_diagonal_1_8 = new RoadBlockDiagonal("road_block_diagonal_1_8", false, "diagonal_18", 0, 0.125f);
+	public static RoadBlockDiagonal road_block_diagonal_2_8 = new RoadBlockDiagonal("road_block_diagonal_2_8", false, "diagonal_28", 0.125f, 0.25f);
+	public static RoadBlockDiagonal road_block_diagonal_3_8 = new RoadBlockDiagonal("road_block_diagonal_3_8", false, "diagonal_38", 0.25f, 0.375f);
+	public static RoadBlockDiagonal road_block_diagonal_4_8 = new RoadBlockDiagonal("road_block_diagonal_4_8", false, "diagonal_48", 0.375f, 0.5f);
 
-	public static RoadBlockDiagonal road_block_diagonal_1_1_mirror = new RoadBlockDiagonal("road_block_diagonal_1_1_mirror", true, "diagonal_11_mirror");
-	public static RoadBlockDiagonal road_block_diagonal_1_2_mirror = new RoadBlockDiagonal("road_block_diagonal_1_2_mirror", true, "diagonal_12_mirror");
-	public static RoadBlockDiagonal road_block_diagonal_1_4_mirror = new RoadBlockDiagonal("road_block_diagonal_1_4_mirror", true, "diagonal_14_mirror");
-	public static RoadBlockDiagonal road_block_diagonal_2_4_mirror = new RoadBlockDiagonal("road_block_diagonal_2_4_mirror", true, "diagonal_24_mirror");
-	public static RoadBlockDiagonal road_block_diagonal_1_8_mirror = new RoadBlockDiagonal("road_block_diagonal_1_8_mirror", true, "diagonal_18_mirror");
-	public static RoadBlockDiagonal road_block_diagonal_2_8_mirror = new RoadBlockDiagonal("road_block_diagonal_2_8_mirror", true, "diagonal_28_mirror");
-	public static RoadBlockDiagonal road_block_diagonal_3_8_mirror = new RoadBlockDiagonal("road_block_diagonal_3_8_mirror", true, "diagonal_38_mirror");
-	public static RoadBlockDiagonal road_block_diagonal_4_8_mirror = new RoadBlockDiagonal("road_block_diagonal_4_8_mirror", true, "diagonal_48_mirror");
+	public static RoadBlockDiagonal road_block_diagonal_1_1_mirror = new RoadBlockDiagonal("road_block_diagonal_1_1_mirror", true, "diagonal_11_mirror", 0, 1);
+	public static RoadBlockDiagonal road_block_diagonal_1_2_mirror = new RoadBlockDiagonal("road_block_diagonal_1_2_mirror", true, "diagonal_12_mirror", 0, 0.5f);
+	public static RoadBlockDiagonal road_block_diagonal_1_4_mirror = new RoadBlockDiagonal("road_block_diagonal_1_4_mirror", true, "diagonal_14_mirror", 0, 0.25f);
+	public static RoadBlockDiagonal road_block_diagonal_2_4_mirror = new RoadBlockDiagonal("road_block_diagonal_2_4_mirror", true, "diagonal_24_mirror", 0.25f, 0.5f);
+	public static RoadBlockDiagonal road_block_diagonal_1_8_mirror = new RoadBlockDiagonal("road_block_diagonal_1_8_mirror", true, "diagonal_18_mirror", 0, 0.125f);
+	public static RoadBlockDiagonal road_block_diagonal_2_8_mirror = new RoadBlockDiagonal("road_block_diagonal_2_8_mirror", true, "diagonal_28_mirror", 0.125f, 0.25f);
+	public static RoadBlockDiagonal road_block_diagonal_3_8_mirror = new RoadBlockDiagonal("road_block_diagonal_3_8_mirror", true, "diagonal_38_mirror", 0.25f, 0.375f);
+	public static RoadBlockDiagonal road_block_diagonal_4_8_mirror = new RoadBlockDiagonal("road_block_diagonal_4_8_mirror", true, "diagonal_48_mirror", 0.375f, 0.5f);
 
 	public static CurbBlock kerb_standard = new CurbBlock("kerb_standard", Material.ROCK);
 
