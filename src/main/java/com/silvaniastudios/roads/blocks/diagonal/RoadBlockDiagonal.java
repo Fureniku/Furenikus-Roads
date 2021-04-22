@@ -11,6 +11,7 @@ import com.silvaniastudios.roads.blocks.BlockBase;
 import com.silvaniastudios.roads.blocks.diagonal.HalfBlock.HalfBlockSide;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
@@ -38,6 +39,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.property.ExtendedBlockState;
 import net.minecraftforge.common.property.IExtendedBlockState;
 import net.minecraftforge.common.property.IUnlistedProperty;
+import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -135,8 +137,12 @@ public class RoadBlockDiagonal extends BlockBase {
 		double leftHeight = getBlockHeight(world, getLeftBlock(state, world, pos), posLeft);
 		double rightHeight = getBlockHeight(world, getRightBlock(state, world, pos), posRight);
 		
-		boolean leftFluid = getHalfBlock(state, HalfBlockSide.LEFT, posLeft, facing).isFluid();
-		boolean rightFluid = getHalfBlock(state, HalfBlockSide.RIGHT, posRight, facing).isFluid();
+		IExtendedBlockState sharedState = (IExtendedBlockState) state;
+		IBlockState leftState = sharedState.getValue(RoadBlockDiagonal.LEFT);
+		IBlockState rightState = sharedState.getValue(RoadBlockDiagonal.RIGHT);
+		
+		boolean leftFluid = leftState != null ? leftState.getBlock() instanceof BlockFluidBase || leftState.getBlock() instanceof BlockLiquid : false;//getHalfBlock(state, HalfBlockSide.LEFT, posLeft, facing, world).isFluid();
+		boolean rightFluid = rightState != null ? rightState.getBlock() instanceof BlockFluidBase || rightState.getBlock() instanceof BlockLiquid : false;//getHalfBlock(state, HalfBlockSide.RIGHT, posRight, facing, world).isFluid();
 		
 		if (leftHeight == rightHeight && !leftFluid && !rightFluid) {
 			list.add(new AxisAlignedBB(0.0f, 0.0f, 0.0f, 1.0f, leftHeight, 1.0f));
@@ -235,7 +241,7 @@ public class RoadBlockDiagonal extends BlockBase {
 		EnumFacing facing = state.getValue(FACING);
 		BlockPos posLeft = pos.offset(facing.rotateYCCW());
 		
-		if (getHalfBlock(state, HalfBlockSide.LEFT, posLeft, facing).isFluid() || world.getBlockState(posLeft).getBlock().isAir(world.getBlockState(posLeft), world, posLeft)) {
+		if (getHalfBlock(state, HalfBlockSide.LEFT, posLeft, facing, world).isFluid() || world.getBlockState(posLeft).getBlock().isAir(world.getBlockState(posLeft), world, posLeft)) {
 			for (int i = 0; i < vecs.length; i++) {
 				vecs[i] = new Vec3d(0,0,0);
 			}
@@ -317,7 +323,7 @@ public class RoadBlockDiagonal extends BlockBase {
 		
 		double height = getBlockHeight(world, getRightBlock(state, world, pos), posRight);
 		
-		if (getHalfBlock(state, HalfBlockSide.RIGHT, posRight, facing).isFluid() || world.getBlockState(posRight).getBlock().isAir(world.getBlockState(posRight), world, posRight)) {
+		if (getHalfBlock(state, HalfBlockSide.RIGHT, posRight, facing, world).isFluid() || world.getBlockState(posRight).getBlock().isAir(world.getBlockState(posRight), world, posRight)) {
 			for (int i = 0; i < vecs.length; i++) {
 				vecs[i] = new Vec3d(0,0,0);
 			}
@@ -574,8 +580,8 @@ public class RoadBlockDiagonal extends BlockBase {
 		return (float) stateSide.getBlock().getBoundingBox(stateSide, Minecraft.getMinecraft().world, posSide).maxY;
 	}
 
-	public HalfBlock getHalfBlock(IBlockState state, HalfBlock.HalfBlockSide side, BlockPos pos, EnumFacing facing) {
+	public HalfBlock getHalfBlock(IBlockState state, HalfBlock.HalfBlockSide side, BlockPos pos, EnumFacing facing, World world) {
 		IExtendedBlockState extendedState = (IExtendedBlockState) state;
-		return new HalfBlock(extendedState, side, pos, facing);
+		return new HalfBlock(extendedState, side, pos, facing, world);
 	}
 }

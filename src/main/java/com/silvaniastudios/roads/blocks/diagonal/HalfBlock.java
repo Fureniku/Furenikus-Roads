@@ -14,6 +14,7 @@ import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.common.property.IExtendedBlockState;
 import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fluids.Fluid;
@@ -23,7 +24,7 @@ import net.minecraftforge.fluids.FluidStack;
 public class HalfBlock {
 	
 	RoadBlockDiagonal block;
-	Minecraft mc;
+	private World world;
 	
 	private IBlockState stateSide;
 	private List<BakedQuad> quadsSide;
@@ -44,15 +45,47 @@ public class HalfBlock {
 		this(sharedState, side, sharedState.getValue(RoadBlockDiagonal.POS), sharedState.getValue(RoadBlockDiagonal.FACING));
 	}
 	
-	public HalfBlock(IExtendedBlockState sharedState, HalfBlockSide side, BlockPos pos, EnumFacing facing) {
+	public HalfBlock(IExtendedBlockState sharedState, HalfBlockSide side, BlockPos pos, EnumFacing facing, World world) {
 		block = (RoadBlockDiagonal) sharedState.getBlock();
-		mc = Minecraft.getMinecraft();
 		
-		sharedState = (IExtendedBlockState) block.getExtendedState(sharedState, mc.world, pos);
+		sharedState = (IExtendedBlockState) block.getExtendedState(sharedState, world, pos);
 		
 		this.side = side;
 		this.pos = pos;
 		this.facing = facing;
+		this.world = world;
+		
+		if (side == HalfBlockSide.LEFT) {
+			this.posSide = pos.offset(facing.rotateYCCW());
+			this.stateSide = sharedState.getValue(RoadBlockDiagonal.LEFT);
+		} else if (side == HalfBlockSide.RIGHT) {
+			this.posSide = pos.offset(facing.rotateY());
+			this.stateSide = sharedState.getValue(RoadBlockDiagonal.RIGHT);
+		}
+		
+		this.height = block.getSideHeight(sharedState, world, pos, side);
+		
+		if (stateSide.getBlock() instanceof BlockFluidBase) {
+			isFluid = true;
+		}
+		
+		if (stateSide.getBlock() instanceof BlockLiquid) {
+
+			height = BlockLiquid.getBlockLiquidHeight(stateSide, world, posSide);
+		}
+	}
+
+	public HalfBlock(IExtendedBlockState sharedState, HalfBlockSide side, BlockPos pos, EnumFacing facing) {
+		block = (RoadBlockDiagonal) sharedState.getBlock();
+		this.world = Minecraft.getMinecraft().world;
+		Minecraft mc = Minecraft.getMinecraft();
+		
+		sharedState = (IExtendedBlockState) block.getExtendedState(sharedState, world, pos);
+		
+		this.side = side;
+		this.pos = pos;
+		this.facing = facing;
+		
 		
 		if (side == HalfBlockSide.LEFT) {
 			this.posSide = pos.offset(
@@ -64,7 +97,7 @@ public class HalfBlock {
 			this.stateSide = sharedState.getValue(RoadBlockDiagonal.RIGHT);
 		}
 		
-		this.height = block.getSideHeight(sharedState, mc.world, pos, side);
+		this.height = block.getSideHeight(sharedState, world, pos, side);
 		this.quadsSide = mc.getBlockRendererDispatcher().getModelForState(stateSide).getQuads(stateSide, EnumFacing.UP, 0);
 		
 		
@@ -78,7 +111,7 @@ public class HalfBlock {
 		//May revisit this to make it more robust later for other mods, but for now it works with roads/vanilla and maybe some mods.
 		if (stateSide.getBlock() instanceof BlockGrass || stateSide.getBlock() instanceof BlockLeaves || stateSide.getBlock() == FRBlocks.road_block_grass) {
 			//blockColour = mc.getBlockColors().getColor(stateSide, mc.world, posSide);
-			blockColour = mc.world.getBiome(posSide).getGrassColorAtPos(posSide);
+			blockColour = world.getBiome(posSide).getGrassColorAtPos(posSide);
 		}
 		
 		if (stateSide.getBlock() instanceof BlockFluidBase) {
@@ -93,7 +126,7 @@ public class HalfBlock {
 				fluid = FluidRegistry.LAVA;
 			}
 
-			height = BlockLiquid.getBlockLiquidHeight(stateSide, mc.world, posSide);
+			height = BlockLiquid.getBlockLiquidHeight(stateSide, world, posSide);
 
 			if (fluid != null) {
 				sprite = mc.getTextureMapBlocks().getAtlasSprite(fluid.getStill(new FluidStack(fluid, 1000)).toString());
@@ -139,7 +172,7 @@ public class HalfBlock {
 			if (this.side == HalfBlockSide.LEFT) {
 				return renderFar();
 			}
-			IBlockState near = mc.world.getBlockState(pos.offset(facing.getOpposite()));
+			IBlockState near = world.getBlockState(pos.offset(facing.getOpposite()));
 			return !checkStateForFluid(near, pos.offset(facing.getOpposite()));
 		}
 		return true;
@@ -150,7 +183,7 @@ public class HalfBlock {
 			if (this.side == HalfBlockSide.RIGHT) {
 				return renderFarMirrored();
 			}
-			IBlockState near = mc.world.getBlockState(pos.offset(facing.getOpposite()));
+			IBlockState near = world.getBlockState(pos.offset(facing.getOpposite()));
 			return !checkStateForFluid(near, pos.offset(facing.getOpposite()));
 		}
 		return true;
@@ -161,7 +194,7 @@ public class HalfBlock {
 			if (this.side == HalfBlockSide.RIGHT) {
 				return renderNear();
 			}
-			IBlockState far = mc.world.getBlockState(pos.offset(facing));
+			IBlockState far = world.getBlockState(pos.offset(facing));
 			return !checkStateForFluid(far, pos.offset(facing));
 		}
 		return true;
@@ -172,7 +205,7 @@ public class HalfBlock {
 			if (this.side == HalfBlockSide.LEFT) {
 				return renderNearMirrored();
 			}
-			IBlockState far = mc.world.getBlockState(pos.offset(facing));
+			IBlockState far = world.getBlockState(pos.offset(facing));
 			return !checkStateForFluid(far, pos.offset(facing));
 		}
 		return true;
@@ -180,7 +213,7 @@ public class HalfBlock {
 	
 	public boolean renderTop() {
 		if (isFluid) {
-			IBlockState above = mc.world.getBlockState(pos.offset(EnumFacing.UP));
+			IBlockState above = world.getBlockState(pos.offset(EnumFacing.UP));
 			return !checkStateForFluid(above, pos.offset(EnumFacing.UP));
 		}
 		return true;
