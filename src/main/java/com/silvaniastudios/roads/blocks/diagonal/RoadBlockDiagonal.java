@@ -134,15 +134,18 @@ public class RoadBlockDiagonal extends BlockBase {
 		BlockPos posLeft = pos.offset(facing.rotateYCCW());
 		BlockPos posRight = pos.offset(facing.rotateY());
 		
-		double leftHeight = getBlockHeight(world, getLeftBlock(state, world, pos), posLeft);
-		double rightHeight = getBlockHeight(world, getRightBlock(state, world, pos), posRight);
+		IBlockState leftState = getLeftBlock(state, world, pos);
+		IBlockState rightState = getRightBlock(state, world, pos);
 		
-		IExtendedBlockState sharedState = (IExtendedBlockState) state;
-		IBlockState leftState = sharedState.getValue(RoadBlockDiagonal.LEFT);
-		IBlockState rightState = sharedState.getValue(RoadBlockDiagonal.RIGHT);
+		double leftHeight = getBlockHeight(world, leftState, posLeft);
+		double rightHeight = getBlockHeight(world, rightState, posRight);
 		
-		boolean leftFluid = leftState != null ? leftState.getBlock() instanceof BlockFluidBase || leftState.getBlock() instanceof BlockLiquid : false;//getHalfBlock(state, HalfBlockSide.LEFT, posLeft, facing, world).isFluid();
-		boolean rightFluid = rightState != null ? rightState.getBlock() instanceof BlockFluidBase || rightState.getBlock() instanceof BlockLiquid : false;//getHalfBlock(state, HalfBlockSide.RIGHT, posRight, facing, world).isFluid();
+		boolean leftFluid = leftState != null ? leftState.getBlock() instanceof BlockFluidBase || leftState.getBlock() instanceof BlockLiquid : false;
+		boolean rightFluid = rightState != null ? rightState.getBlock() instanceof BlockFluidBase || rightState.getBlock() instanceof BlockLiquid : false;
+		
+		//air is basically fluid right?
+		if (isAir(leftState, world, posLeft)) { leftFluid = true; }
+		if (isAir(rightState, world, posRight)) { rightFluid = true; }
 		
 		if (leftHeight == rightHeight && !leftFluid && !rightFluid) {
 			list.add(new AxisAlignedBB(0.0f, 0.0f, 0.0f, 1.0f, leftHeight, 1.0f));
