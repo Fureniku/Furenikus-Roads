@@ -1,6 +1,7 @@
 package com.silvaniastudios.roads.blocks.tileentities.recipes;
 
 import com.silvaniastudios.roads.blocks.tileentities.distiller.TarDistillerContainer;
+import com.silvaniastudios.roads.blocks.tileentities.distiller.TarDistillerEntity;
 
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
@@ -63,8 +64,7 @@ public class TarDistillerRecipes {
 		if (tank == null || recipeOut == null) {
 			return true;
 		}
-		
-		if (tank.getFluid() == recipeOut.getFluid() && tank.amount <= tank.amount + recipeOut.amount) {
+		if (tank.getFluid() == recipeOut.getFluid() && tank.amount + recipeOut.amount <= TarDistillerEntity.TANK_CAP) {
 			return true;
 		}
 		return false;
