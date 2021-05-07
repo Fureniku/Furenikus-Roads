@@ -63,10 +63,12 @@ public class TarDistillerBlock extends RoadTEBlock {
 			if (held.getItem() == Items.BUCKET) {
 
 				if (te.fluidOutput1.getFluidAmount() >= 1000) {
-					if (held.getCount() > 1) {
-						held.setCount(held.getCount() - 1);
-					} else {
-						player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStack.EMPTY);
+					if (!player.isCreative()) {
+						if (held.getCount() > 1) {
+							held.setCount(held.getCount() - 1);
+						} else {
+							player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStack.EMPTY);
+						}
 					}
 					te.fluidOutput1.drain(1000, true);
 					te.sendUpdates();
@@ -76,24 +78,28 @@ public class TarDistillerBlock extends RoadTEBlock {
 					}
 					return true;
 				} else if (te.fluidOutput2.getFluidAmount() >= 1000) {
-					if (held.getCount() > 1) {
-						held.setCount(held.getCount() - 1);
-					} else {
-						player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStack.EMPTY);
+					if (!player.isCreative()) {
+						if (held.getCount() > 1) {
+							held.setCount(held.getCount() - 1);
+						} else {
+							player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStack.EMPTY);
+						}
 					}
 					te.fluidOutput2.drain(1000, true);
 					te.sendUpdates();
 					player.addItemStackToInventory(FluidUtil.getFilledBucket(te.fluidOutput2.getFluid()));
 					return true;
 				} else if (te.fluidInput.getFluidAmount() >= 1000) {
-					if (held.getCount() > 1) {
-						held.setCount(held.getCount() - 1);
-					} else {
-						player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStack.EMPTY);
+					if (!player.isCreative()) {
+						if (held.getCount() > 1) {
+							held.setCount(held.getCount() - 1);
+						} else {
+							player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStack.EMPTY);
+						}
 					}
+					player.addItemStackToInventory(FluidUtil.getFilledBucket(te.fluidInput.getFluid()));
 					te.fluidInput.drain(1000, true);
 					te.sendUpdates();
-					player.addItemStackToInventory(FluidUtil.getFilledBucket(te.fluidInput.getFluid()));
 					return true;
 				}
 			}
@@ -102,10 +108,13 @@ public class TarDistillerBlock extends RoadTEBlock {
 				FluidStack fluidStack = FluidUtil.getFluidContained(held);
 				if (te.fluidInput.getFluidAmount() + 1000 <= PaintOvenEntity.FILLER_TANK_CAP ) {
 					if ((te.fluidInput.getFluidAmount() > 0 && te.fluidInput.getFluid().getFluid() == fluidStack.getFluid()) || te.fluidInput.getFluidAmount() == 0) {
-						if (held.getCount() > 1) {
-							held.setCount(held.getCount() - 1);
-						} else {
-							player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStack.EMPTY);
+						if (!player.isCreative()) {
+							if (held.getCount() > 1) {
+								held.setCount(held.getCount() - 1);
+							} else {
+								player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStack.EMPTY);
+							}
+							player.addItemStackToInventory(new ItemStack(Items.BUCKET));
 						}
 						if (te.fluidInput.getFluidAmount() > 0) {
 							te.fluidInput.fill(fluidStack, true);
@@ -114,7 +123,7 @@ public class TarDistillerBlock extends RoadTEBlock {
 						}
 					}
 					te.sendUpdates();
-					player.addItemStackToInventory(new ItemStack(Items.BUCKET));
+					
 					return true;
 				}
 			}
@@ -126,13 +135,15 @@ public class TarDistillerBlock extends RoadTEBlock {
 					} else {
 						te.fluidInput.setFluid(new FluidStack(FluidRegistry.WATER, 1000));
 					}
-					if (held.getCount() > 1) {
-						held.setCount(held.getCount() - 1);
-					} else {
-						player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStack.EMPTY);
+					if (!player.isCreative()) {
+						if (held.getCount() > 1) {
+							held.setCount(held.getCount() - 1);
+						} else {
+							player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStack.EMPTY);
+						}
+						player.addItemStackToInventory(new ItemStack(Items.BUCKET));
 					}
 					te.sendUpdates();
-					player.addItemStackToInventory(new ItemStack(Items.BUCKET));
 					return true;
 				}
 			}

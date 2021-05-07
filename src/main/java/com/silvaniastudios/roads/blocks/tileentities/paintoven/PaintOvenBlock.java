@@ -52,14 +52,17 @@ public class PaintOvenBlock extends RoadTEBlock {
 			if (world.getTileEntity(pos) != null && world.getTileEntity(pos) instanceof PaintOvenEntity) {
 				PaintOvenEntity te = (PaintOvenEntity) world.getTileEntity(pos);
 				if (te.paint.getFluidAmount() >= 1000) {
-					if (held.getCount() > 1) {
-						held.setCount(held.getCount() - 1);
-					} else {
-						player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStack.EMPTY);
+					if (!player.isCreative()) {
+						if (held.getCount() > 1) {
+							held.setCount(held.getCount() - 1);
+						} else {
+							player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStack.EMPTY);
+						}
 					}
+					player.addItemStackToInventory(FluidUtil.getFilledBucket(te.paint.getFluid()));
 					te.paint.drain(1000, true);
 					te.sendUpdates();
-					player.addItemStackToInventory(FluidUtil.getFilledBucket(te.paint.getFluid()));
+					
 					return true;
 				}
 			}
@@ -69,10 +72,13 @@ public class PaintOvenBlock extends RoadTEBlock {
 			if (world.getTileEntity(pos) != null && world.getTileEntity(pos) instanceof PaintOvenEntity) {
 				PaintOvenEntity te = (PaintOvenEntity) world.getTileEntity(pos);
 				if (te.water.getFluidAmount() + 1000 <= PaintOvenEntity.FILLER_TANK_CAP ) {
-					if (held.getCount() > 1) {
-						held.setCount(held.getCount() - 1);
-					} else {
-						player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStack.EMPTY);
+					if (!player.isCreative()) {
+						if (held.getCount() > 1) {
+							held.setCount(held.getCount() - 1);
+						} else {
+							player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStack.EMPTY);
+						}
+						player.addItemStackToInventory(new ItemStack(Items.BUCKET));
 					}
 					if (te.water.getFluidAmount() > 0) {
 						te.water.fill(new FluidStack(te.water.getFluid().getFluid(), 1000), true);
@@ -80,7 +86,7 @@ public class PaintOvenBlock extends RoadTEBlock {
 						te.water.setFluid(new FluidStack(FluidRegistry.WATER, 1000));
 					}
 					te.sendUpdates();
-					player.addItemStackToInventory(new ItemStack(Items.BUCKET));
+					
 					return true;
 				}
 			}

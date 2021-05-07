@@ -59,14 +59,16 @@ public class RoadFactoryBlock extends RoadTEBlock {
 			if (held.getItem() == Items.BUCKET) {
 
 				if (te.tarFluid.getFluidAmount() >= 1000) {
-					if (held.getCount() > 1) {
-						held.setCount(held.getCount() - 1);
-					} else {
-						player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStack.EMPTY);
+					if (!player.isCreative()) {
+						if (held.getCount() > 1) {
+							held.setCount(held.getCount() - 1);
+						} else {
+							player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStack.EMPTY);
+						}
 					}
+					player.addItemStackToInventory(FluidUtil.getFilledBucket(te.tarFluid.getFluid()));
 					te.tarFluid.drain(1000, true);
 					te.sendUpdates();
-					player.addItemStackToInventory(FluidUtil.getFilledBucket(te.tarFluid.getFluid()));
 					return true;
 				}
 			}
@@ -75,10 +77,13 @@ public class RoadFactoryBlock extends RoadTEBlock {
 				FluidStack fluidStack = FluidUtil.getFluidContained(held);
 				if (te.tarFluid.getFluidAmount() + 1000 <= PaintOvenEntity.FILLER_TANK_CAP ) {
 					if ((te.tarFluid.getFluidAmount() > 0 && te.tarFluid.getFluid().getFluid() == fluidStack.getFluid()) || te.tarFluid.getFluidAmount() == 0) {
-						if (held.getCount() > 1) {
-							held.setCount(held.getCount() - 1);
-						} else {
-							player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStack.EMPTY);
+						if (!player.isCreative()) {
+							if (held.getCount() > 1) {
+								held.setCount(held.getCount() - 1);
+							} else {
+								player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStack.EMPTY);
+							}
+							player.addItemStackToInventory(new ItemStack(Items.BUCKET));
 						}
 						if (te.tarFluid.getFluidAmount() > 0) {
 							te.tarFluid.fill(fluidStack, true);
@@ -87,7 +92,7 @@ public class RoadFactoryBlock extends RoadTEBlock {
 						}
 					}
 					te.sendUpdates();
-					player.addItemStackToInventory(new ItemStack(Items.BUCKET));
+					
 					return true;
 				}
 			}

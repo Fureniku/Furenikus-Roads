@@ -247,47 +247,6 @@ public class TarDistillerEntity extends RoadTileEntity implements ITickable, ICa
 					return;
 				}
 			}
-			
-			
-			/*boolean hasChanges = false;
-			ItemStack input = inventory.getStackInSlot(TarDistillerContainer.INPUT);
-			ItemStack output_1 = inventory.getStackInSlot(TarDistillerContainer.OUTPUT_1);
-			
-			if (validInput(input, null)) {
-				ItemStack itemOut1 = output1(input, null);
-				FluidStack fluidOut1 = fluidOut1(input, null);
-				
-				if (output_1.isEmpty() || output_1.getCount() + itemOut1.getCount() <= inventory.getSlotLimit(TarDistillerContainer.OUTPUT_1)) {
-					boolean process = false;
-					if (fluidOutput1.getFluid() == null) {
-						fluidOutput1.setFluid(fluidOut1);
-						process = true;
-					} else if ((fluidOutput1.getFluidAmount() <= TANK_CAP - fluidOut1.amount && (fluidOutput1.getFluid().getFluid().equals(FRFluids.tar)) || fluidOutput1.getFluidAmount() <= 0)) {
-						fluidOutput1.fill(fluidOut1, true);
-						process = true;
-					}
-					
-					if (process) {
-						inventory.extractItem(TarDistillerContainer.INPUT, 1, false);
-						
-						if (output_1.isEmpty()) { 
-							inventory.setStackInSlot(TarDistillerContainer.OUTPUT_1, itemOut1);
-						} else {
-							output_1.setCount(output_1.getCount()+itemOut1.getCount());
-						}
-						hasChanges = true;
-					}
-				}
-			}
-			
-			ItemStack fluid_in = inventory.getStackInSlot(TarDistillerContainer.FLUID_IN);
-			
-			if (fluid_in.getUnlocalizedName().compareTo("item.forge.bucketFilled") == 0) {
-
-				//When we support other fluids, this is where we'll import tham.
-			}
-			
-				*/
 		}
 	}
 	
