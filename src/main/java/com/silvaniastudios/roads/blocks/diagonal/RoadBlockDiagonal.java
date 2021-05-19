@@ -553,7 +553,7 @@ public class RoadBlockDiagonal extends BlockBase {
 
 	@SideOnly(Side.CLIENT)
 	public BlockRenderLayer getBlockLayer() {
-		return BlockRenderLayer.TRANSLUCENT;
+		return BlockRenderLayer.CUTOUT_MIPPED;
 	}
 
 	@Override
