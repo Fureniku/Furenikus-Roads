@@ -14,6 +14,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockFaceShape;
@@ -46,7 +47,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class RoadBlockDiagonal extends BlockBase {
 
 	public static final PropertyEnum<EnumFacing> FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
-
+	public static final PropertyBool TRANSPARENCY = PropertyBool.create("transparency");
+			
 	public static final UnlistedPropertySideBlock LEFT = new UnlistedPropertySideBlock("left");
 	public static final UnlistedPropertySideBlock RIGHT = new UnlistedPropertySideBlock("right");
 	public static final UnlistedPropertyBlockPos POS = new UnlistedPropertyBlockPos("pos");
@@ -59,7 +61,7 @@ public class RoadBlockDiagonal extends BlockBase {
 
 	public RoadBlockDiagonal(String name, boolean mirror, String modelName, float minWidth, float maxWidth) {
 		super(name, Material.ROCK);
-		setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+		setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(TRANSPARENCY, false));
 		this.mirror = mirror;
 		this.setCreativeTab(FurenikusRoads.tab_diagonals);
 		this.setHarvestLevel("pneumatic_drill", 0);
@@ -69,50 +71,103 @@ public class RoadBlockDiagonal extends BlockBase {
 		this.maxWidth = maxWidth;
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-		if (placer.getHorizontalFacing() == EnumFacing.NORTH) { return this.getDefaultState().withProperty(FACING, EnumFacing.NORTH); }
-		if (placer.getHorizontalFacing() == EnumFacing.EAST)  { return this.getDefaultState().withProperty(FACING, EnumFacing.EAST); }
-		if (placer.getHorizontalFacing() == EnumFacing.SOUTH) { return this.getDefaultState().withProperty(FACING, EnumFacing.SOUTH); }
-		if (placer.getHorizontalFacing() == EnumFacing.WEST)  { return this.getDefaultState().withProperty(FACING, EnumFacing.WEST); }
-		return super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer);
+		BlockPos left = pos.offset(placer.getHorizontalFacing().rotateYCCW());
+		BlockPos right = pos.offset(placer.getHorizontalFacing().rotateY());
+		
+		IBlockState stateLeft = world.getBlockState(left);
+		IBlockState stateRight = world.getBlockState(right);
+		
+		boolean trans = false;
+		
+		if (stateLeft.getBlock().getBlockLayer() == BlockRenderLayer.TRANSLUCENT || stateRight.getBlock().getBlockLayer() == BlockRenderLayer.TRANSLUCENT) {
+			trans = true;
+		}
+		
+		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing()).withProperty(TRANSPARENCY, trans);
 	}
 
 	public int getMetaFromState(IBlockState state) {
+		int add = state.getValue(TRANSPARENCY) ? 4 : 0;
+		
 		if (state.getValue(FACING).equals(EnumFacing.NORTH)) {
-			return 0;
+			return 0 + add;
 		} else if (state.getValue(FACING).equals(EnumFacing.EAST)) {
-			return 1;
+			return 1 + add;
 		} else if (state.getValue(FACING).equals(EnumFacing.SOUTH)) {
-			return 2;
+			return 2 + add;
 		} else if (state.getValue(FACING).equals(EnumFacing.WEST)) {
-			return 3;
+			return 3 + add;
 		}
 
-		return 0;
+		return 0 + add;
 	}
 	
-	public RayTraceResult collisionRayTrace(IBlockState blockState, World worldIn, BlockPos pos, Vec3d start, Vec3d end)
-    {
+	public IBlockState getStateFromMeta(int meta) {
+		int m = meta;
+		boolean t = false;
+		
+		if (meta > 3) {
+			m = meta-4;
+			t = true;
+		}
+		
+		if (m == 0) { return this.getDefaultState().withProperty(FACING, EnumFacing.NORTH).withProperty(TRANSPARENCY, t); }
+		if (m == 1) { return this.getDefaultState().withProperty(FACING, EnumFacing.EAST).withProperty(TRANSPARENCY, t);  }
+		if (m == 2) { return this.getDefaultState().withProperty(FACING, EnumFacing.SOUTH).withProperty(TRANSPARENCY, t); }
+		return this.getDefaultState().withProperty(FACING, EnumFacing.WEST).withProperty(TRANSPARENCY, t);
+	}
+	
+	@Override
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+		BlockPos left = pos.offset(state.getValue(FACING).rotateYCCW());
+		BlockPos right = pos.offset(state.getValue(FACING).rotateY());
+		
+		IBlockState stateLeft = worldIn.getBlockState(left);
+		IBlockState stateRight = worldIn.getBlockState(right);
+		
+		boolean trans = false;
+		
+		if (stateLeft.getBlock().getBlockLayer() == BlockRenderLayer.TRANSLUCENT || stateRight.getBlock().getBlockLayer() == BlockRenderLayer.TRANSLUCENT) {
+			trans = true;
+		}
+		
+		worldIn.setBlockState(pos, state.withProperty(TRANSPARENCY, trans));
+	}
+
+	@SuppressWarnings("rawtypes")
+	protected BlockStateContainer createBlockState() {
+		IProperty[] listedProperties = new IProperty[] {FACING, TRANSPARENCY};
+		IUnlistedProperty[] unlistedProperties = new IUnlistedProperty[] {LEFT, RIGHT, POS};
+
+		return new ExtendedBlockState(this, listedProperties, unlistedProperties);
+	}
+
+	@Override
+	public IBlockState getExtendedState(IBlockState state, IBlockAccess world, BlockPos pos) {
+		IExtendedBlockState extendedBlockState = (IExtendedBlockState) state;
+		IBlockState l = getLeftBlock(state, world, pos);
+		IBlockState r = getRightBlock(state, world, pos);
+
+		return extendedBlockState.withProperty(LEFT, l).withProperty(RIGHT, r).withProperty(POS, pos);
+	}
+	
+	public RayTraceResult collisionRayTrace(IBlockState blockState, World worldIn, BlockPos pos, Vec3d start, Vec3d end) {
         List<RayTraceResult> list = Lists.<RayTraceResult>newArrayList();
 
-        for (AxisAlignedBB axisalignedbb : getBoxList(pos, worldIn, blockState))
-        {
+        for (AxisAlignedBB axisalignedbb : getBoxList(pos, worldIn, blockState)) {
             list.add(this.rayTrace(pos, start, end, axisalignedbb));
         }
 
         RayTraceResult raytraceresult1 = null;
         double d1 = 0.0D;
 
-        for (RayTraceResult raytraceresult : list)
-        {
-            if (raytraceresult != null)
-            {
+        for (RayTraceResult raytraceresult : list) {
+            if (raytraceresult != null) {
                 double d0 = raytraceresult.hitVec.squareDistanceTo(end);
 
-                if (d0 > d1)
-                {
+                if (d0 > d1) {
                     raytraceresult1 = raytraceresult;
                     d1 = d0;
                 }
@@ -421,30 +476,6 @@ public class RoadBlockDiagonal extends BlockBase {
 	}	
 
 
-	public IBlockState getStateFromMeta(int meta) {
-		if (meta == 0) { return this.getDefaultState().withProperty(FACING, EnumFacing.NORTH); }
-		if (meta == 1) { return this.getDefaultState().withProperty(FACING, EnumFacing.EAST);  }
-		if (meta == 2) { return this.getDefaultState().withProperty(FACING, EnumFacing.SOUTH); }
-		return this.getDefaultState().withProperty(FACING, EnumFacing.WEST); 	
-	}
-
-	@SuppressWarnings("rawtypes")
-	protected BlockStateContainer createBlockState() {
-		IProperty[] listedProperties = new IProperty[] {FACING};
-		IUnlistedProperty[] unlistedProperties = new IUnlistedProperty[] {LEFT, RIGHT, POS};
-
-		return new ExtendedBlockState(this, listedProperties, unlistedProperties);
-	}
-
-	@Override
-	public IBlockState getExtendedState(IBlockState state, IBlockAccess world, BlockPos pos) {
-		IExtendedBlockState extendedBlockState = (IExtendedBlockState) state;
-		IBlockState l = getLeftBlock(state, world, pos);
-		IBlockState r = getRightBlock(state, world, pos);
-
-		return extendedBlockState.withProperty(LEFT, l).withProperty(RIGHT, r).withProperty(POS, pos);
-	}
-
 	public IBlockState getLeftBlock(IBlockState state, IBlockAccess world, BlockPos pos) {
 		EnumFacing facingLeft;
 
@@ -549,6 +580,18 @@ public class RoadBlockDiagonal extends BlockBase {
 	@Override
 	public boolean isOpaqueCube(IBlockState state) {
 		return false;
+	}
+	
+	@SideOnly(Side.CLIENT)
+	public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {
+		if (state != null) {
+			System.out.println(state.getProperties());
+			if (state.getValue(TRANSPARENCY)) {
+				return BlockRenderLayer.TRANSLUCENT == layer;
+			}
+		}
+		
+		return getBlockLayer() == layer;
 	}
 
 	@SideOnly(Side.CLIENT)
