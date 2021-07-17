@@ -30,8 +30,8 @@ public class ArrowPaintBlock extends PaintBlockBase implements IMetaBlockName {
 	public static final PropertyEnum<EnumMeta> META_ID = PropertyEnum.create("meta", EnumMeta.class);
 	//Meta 0-3 normal arrow, 4-7 side arrow, 8-11 vertical left, 12-15 vertical right.
 
-	public ArrowPaintBlock(String name) {
-		super(name);
+	public ArrowPaintBlock(String name, String category, int[] coreMetas, boolean dynamic) {
+		super(name, category, coreMetas, dynamic);
 		setDefaultState(this.blockState.getBaseState().withProperty(META_ID, EnumMeta.id0));
 		this.setCreativeTab(FurenikusRoads.tab_paint_icons);
 	}

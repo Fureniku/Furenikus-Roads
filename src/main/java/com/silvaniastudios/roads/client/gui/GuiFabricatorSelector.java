@@ -1,5 +1,6 @@
 package com.silvaniastudios.roads.client.gui;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import com.silvaniastudios.roads.FurenikusRoads;
@@ -45,6 +46,12 @@ public class GuiFabricatorSelector extends GuiScreen {
         tooltipList.clear();
         
         recipeList.drawScreen(mouseX, mouseY, partialTicks);
+        
+        try {
+			recipeList.handleMouseInput(mouseX, mouseY);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
         if (tooltipList.size() > 0) {
 			drawHoveringText(tooltipList, mouseX, mouseY);

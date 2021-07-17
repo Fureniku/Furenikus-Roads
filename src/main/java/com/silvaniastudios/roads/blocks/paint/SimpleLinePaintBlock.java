@@ -21,8 +21,8 @@ public class SimpleLinePaintBlock extends PaintBlockBase {
 
 	public static final PropertyDirection FACING =  PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 	
-	public SimpleLinePaintBlock(String name) {
-		super(name);
+	public SimpleLinePaintBlock(String name, String category, int[] coreMetas, boolean dynamic) {
+		super(name, category, coreMetas, dynamic);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 		this.setCreativeTab(FurenikusRoads.tab_paint_lines);
 	}

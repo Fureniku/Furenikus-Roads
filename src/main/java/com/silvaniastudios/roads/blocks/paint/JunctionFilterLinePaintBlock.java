@@ -1,7 +1,6 @@
 package com.silvaniastudios.roads.blocks.paint;
 
 import com.silvaniastudios.roads.FurenikusRoads;
-import com.silvaniastudios.roads.blocks.FRBlocks;
 import com.silvaniastudios.roads.blocks.enums.EnumFourLengthConnectable;
 
 import net.minecraft.block.Block;
@@ -30,8 +29,8 @@ public class JunctionFilterLinePaintBlock extends PaintBlockBase {
 	
 	boolean leftSide = false;
 
-	public JunctionFilterLinePaintBlock(String name, boolean leftSide) {
-		super(name);
+	public JunctionFilterLinePaintBlock(String name, boolean leftSide, String category, int[] coreMetas, boolean dynamic) {
+		super(name, category, coreMetas, dynamic);
 		this.leftSide = leftSide;
 		this.setDefaultState(this.blockState.getBaseState().withProperty(TYPE_ROT, EnumFourLengthConnectable.NORTH_TOP).withProperty(CONNECT, EnumChevronConnections.NONE));
 		this.setCreativeTab(FurenikusRoads.tab_paint_junction);
@@ -188,7 +187,7 @@ public class JunctionFilterLinePaintBlock extends PaintBlockBase {
 	
 	private boolean isMidChevron(IBlockAccess world, BlockPos pos, EnumFacing facing) {
 		Block block = world.getBlockState(pos.offset(facing)).getBlock();
-		if (block == FRBlocks.white_chevron_mid || block == FRBlocks.yellow_chevron_mid || block == FRBlocks.red_chevron_mid) {
+		if (block.getUnlocalizedName().contains("_chevron_mid")) {
 			return true;
 		}
 		

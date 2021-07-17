@@ -14,7 +14,7 @@ import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.blocks.paint.PaintBlockBase;
 import com.silvaniastudios.roads.blocks.tileentities.paintfiller.PaintFillerEntity;
 import com.silvaniastudios.roads.items.PaintGun;
-import com.silvaniastudios.roads.items.PaintGunItemRegistry;
+import com.silvaniastudios.roads.registries.PaintGunItemRegistry;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -84,8 +84,7 @@ public class PaintGunModel implements IBakedModel {
 		TextureAtlasSprite texture = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(FurenikusRoads.MODID + ":blocks/blank");
 		
 		if (block != null) {
-			if (col == 1) { block = PaintGunItemRegistry.getYellow(block); }
-			if (col == 2) { block = PaintGunItemRegistry.getRed(block); }
+			//TODO
 			
 			String name = block.getUnlocalizedName().substring(20);
 			String location = "items/paint_gun_display/";

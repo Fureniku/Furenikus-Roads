@@ -25,8 +25,8 @@ public class ChevronSidePaintBlock extends ChevronMidPaintBlock {
 	public static final PropertyEnum<EnumMeta> META_ID = PropertyEnum.create("meta", EnumMeta.class);
 	public static final PropertyEnum<EnumConnectJunctionChevron> EDGE = PropertyEnum.create("edge", EnumConnectJunctionChevron.class);
 	
-	public ChevronSidePaintBlock(String name) {
-		super(name, false);
+	public ChevronSidePaintBlock(String name, String category, int[] coreMetas, boolean dynamic) {
+		super(name, false, category, coreMetas, dynamic);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(META_ID, EnumMeta.id0).withProperty(EDGE, EnumConnectJunctionChevron.NONE));
 		this.setCreativeTab(FurenikusRoads.tab_paint_junction);
 	}

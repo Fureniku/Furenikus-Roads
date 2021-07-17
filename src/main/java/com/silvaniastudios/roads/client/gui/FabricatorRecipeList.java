@@ -25,17 +25,16 @@ public class FabricatorRecipeList extends GuiScrollingList_Mod {
 	private Minecraft client;
 	private GuiScreen gui;
 	private FabricatorEntity te;
-	private ArrayList<String> tooltipList;
+	
 	
 	private static final ResourceLocation TEXTURE_WIDGET = new ResourceLocation(FurenikusRoads.MODID, "textures/gui/fabricator_list.png");
 
 	public FabricatorRecipeList(int width, int height, int top, int left, int entryHeight, int screenWidth, int screenHeight, FontRenderer font, Minecraft mc, GuiScreen gui, FabricatorEntity te, ArrayList<String> tooltipList) {
-		super(mc, width, height, top, height+top, left, entryHeight, screenWidth, screenHeight);
+		super(mc, width, height, top, height+top, left, entryHeight, screenWidth, screenHeight, tooltipList);
 		this.fontRenderer = font;
 		this.client = mc;
 		this.gui = gui;
 		this.te = te;
-		this.tooltipList = tooltipList;
 	}
 
 	@Override
@@ -79,21 +78,21 @@ public class FabricatorRecipeList extends GuiScrollingList_Mod {
 			
 		fontRenderer.drawString("" + output.getDisplayName(), left + 25, slotTop + 10, 0x404040);
 		
-		drawItemStack(output, left + 6, slotTop + 6);
+		drawItemStack(fontRenderer, output, left + 6, slotTop + 6);
 		
-		if (in1 != ItemStack.EMPTY) { drawItemStack(in1, left + 222, slotTop + 6); }
-		if (in2 != ItemStack.EMPTY) { drawItemStack(in2, left + 240, slotTop + 6); }
-		if (in3 != ItemStack.EMPTY) { drawItemStack(in3, left + 258, slotTop + 6); }
-		if (in4 != ItemStack.EMPTY) { drawItemStack(in4, left + 276, slotTop + 6); }
-		if (in5 != ItemStack.EMPTY) { drawItemStack(in5, left + 294, slotTop + 6); }
-		if (in6 != ItemStack.EMPTY) { drawItemStack(in6, left + 312, slotTop + 6); }
+		if (in1 != ItemStack.EMPTY) { drawItemStack(fontRenderer, in1, left + 222, slotTop + 6); }
+		if (in2 != ItemStack.EMPTY) { drawItemStack(fontRenderer, in2, left + 240, slotTop + 6); }
+		if (in3 != ItemStack.EMPTY) { drawItemStack(fontRenderer, in3, left + 258, slotTop + 6); }
+		if (in4 != ItemStack.EMPTY) { drawItemStack(fontRenderer, in4, left + 276, slotTop + 6); }
+		if (in5 != ItemStack.EMPTY) { drawItemStack(fontRenderer, in5, left + 294, slotTop + 6); }
+		if (in6 != ItemStack.EMPTY) { drawItemStack(fontRenderer, in6, left + 312, slotTop + 6); }
 		
 		if (mouseX >= left + 1 && mouseX <= entryRight && mouseY >= slotTop && mouseY <= slotTop + 27) {
 			createTooltip(slotIdx, recipe);
 		}
 	}
 	
-	protected void createTooltip(int shopId, FabricatorRecipes recipe) {
+	protected void createTooltip(int slotId, FabricatorRecipes recipe) {
 		if (!recipe.getOutput().isEmpty()) {
 
 			tooltipList.add(recipe.getOutput().getCount() + "x " + recipe.getOutput().getDisplayName());
@@ -106,19 +105,4 @@ public class FabricatorRecipeList extends GuiScrollingList_Mod {
 			if (recipe.getInput6() != ItemStack.EMPTY) { tooltipList.add("Slot 6: " + recipe.getInput6().getCount() + "x " + recipe.getInput6().getDisplayName()); }
 		}
 	}
-	
-	private void drawItemStack(ItemStack stack, int x, int y) {
-		RenderHelper.disableStandardItemLighting();
-		RenderHelper.enableGUIStandardItemLighting();
-		
-		GlStateManager.translate(0.0F, 0.0F, 32.0F);
-        client.getRenderItem().renderItemAndEffectIntoGUI(stack, x, y);
-        
-        GlStateManager.scale(0.5, 0.5, 0.5);
-        fontRenderer.drawString("" + stack.getCount(), (x+12)*2, (y+12)*2, 0xFFFFFF);
-        GlStateManager.scale(2.0, 2.0, 2.0);
-        GlStateManager.translate(0.0F, 0.0F, -32.0F);
-        
-        RenderHelper.enableStandardItemLighting();
-    }
 }

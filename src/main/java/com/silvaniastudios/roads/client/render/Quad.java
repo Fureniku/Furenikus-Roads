@@ -199,7 +199,6 @@ public class Quad {
 		double cos = Math.cos(Math.toRadians(rot));
 		double sin = Math.sin(Math.toRadians(rot));
 
-		double vecX = vec.x;
 		double vecY = (cos * vec.y) + ((-sin) * vec.z);
 		double vecZ = (sin * vec.y) + (cos    * vec.z);
 
@@ -223,7 +222,6 @@ public class Quad {
 	}
 
 	public static Vec3d dotProductZ(Vec3d vec, int rot) {
-		Vec3d vecOut = new Vec3d(0,0,0);
 		//[cos -sin 0] [x]
 		//[sin  cos 0] [y]
 		//[0    0   1] [z]

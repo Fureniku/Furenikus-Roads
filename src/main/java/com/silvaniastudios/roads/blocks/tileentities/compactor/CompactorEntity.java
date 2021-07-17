@@ -99,7 +99,6 @@ public class CompactorEntity extends RoadTileEntity implements ITickable, ICapab
 	
 	public void process() {
 		if (!world.isRemote) {
-			FurenikusRoads.debug(2, "Compactor at" + formatPosition(pos) + "processing");
 			ItemStack in = inventory.getStackInSlot(CompactorContainer.FRAGMENTS);
 			if (in.getCount() > road_size) {
 				ItemStack out = inventory.getStackInSlot(CompactorContainer.ROADS);
@@ -109,6 +108,7 @@ public class CompactorEntity extends RoadTileEntity implements ITickable, ICapab
 						if (out == ItemStack.EMPTY || (out.getItem() == recipeOut.getItem() && out.getCount() < out.getMaxStackSize())) {
 							inventory.extractItem(CompactorContainer.FRAGMENTS, road_size+1, false);
 							inventory.insertItem(CompactorContainer.ROADS, recipeOut, false);
+							FurenikusRoads.debug(2, "Compactor at" + formatPosition(pos) + "processing");
 							sendUpdates();
 						}
 					}

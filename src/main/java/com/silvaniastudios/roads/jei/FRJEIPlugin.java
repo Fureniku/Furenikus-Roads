@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import com.silvaniastudios.roads.RoadsConfig;
 import com.silvaniastudios.roads.blocks.FRBlocks;
-import com.silvaniastudios.roads.blocks.paint.PaintBlockBase;
 import com.silvaniastudios.roads.blocks.tileentities.recipes.CompactorRecipes;
 import com.silvaniastudios.roads.blocks.tileentities.recipes.CrusherRecipes;
 import com.silvaniastudios.roads.blocks.tileentities.recipes.FabricatorRecipes;
@@ -13,7 +12,6 @@ import com.silvaniastudios.roads.blocks.tileentities.recipes.RoadFactoryRecipes;
 import com.silvaniastudios.roads.blocks.tileentities.recipes.TarDistillerRecipes;
 import com.silvaniastudios.roads.fluids.FRFluids;
 import com.silvaniastudios.roads.items.FRItems;
-import com.silvaniastudios.roads.items.PaintGunItemRegistry;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
@@ -71,64 +69,11 @@ public class FRJEIPlugin implements IModPlugin {
 	}
 	
 	private void blacklistedIngredients(IIngredientBlacklist blacklist) {
-		for (int i = 0; i < PaintGunItemRegistry.lines.size(); i++) {
-			PaintBlockBase white = PaintGunItemRegistry.lines.get(i);
-			int meta = PaintGunItemRegistry.linesMeta.get(i);
-			removePaint(white, meta, blacklist);
+		for (int i = 0; i < FRBlocks.paintBlockList.size(); i++) {
+			blacklist.addIngredientToBlacklist(new ItemStack(FRBlocks.paintBlockList.get(i), 1));
 		}
-		
-		for (int i = 0; i < PaintGunItemRegistry.icons.size(); i++) {
-			PaintBlockBase white = PaintGunItemRegistry.icons.get(i);
-			int meta = PaintGunItemRegistry.iconsMeta.get(i);
-			removePaint(white, meta, blacklist);
-		}
-		
-		for (int i = 0; i < PaintGunItemRegistry.letters.size(); i++) {
-			PaintBlockBase white = PaintGunItemRegistry.letters.get(i);
-			int meta = PaintGunItemRegistry.lettersMeta.get(i);
-			removePaint(white, meta, blacklist);
-		}
-		
-		for (int i = 0; i < PaintGunItemRegistry.text.size(); i++) {
-			PaintBlockBase white = PaintGunItemRegistry.text.get(i);
-			int meta = PaintGunItemRegistry.textMeta.get(i);
-			removePaint(white, meta, blacklist);
-		}
-		
-		for (int i = 0; i < PaintGunItemRegistry.junction.size(); i++) {
-			PaintBlockBase white = PaintGunItemRegistry.junction.get(i);
-			int meta = PaintGunItemRegistry.junctionMeta.get(i);
-			removePaint(white, meta, blacklist);
-		}
-		
-		for (int i = 0; i < PaintGunItemRegistry.other.size(); i++) {
-			PaintBlockBase white = PaintGunItemRegistry.other.get(i);
-			int meta = PaintGunItemRegistry.otherMeta.get(i);
-			removePaint(white, meta, blacklist);
-		}
-		
-		//extras which don't show in the gun anyway so we cant steal them from the gun lists
-		removePaint(FRBlocks.white_chevron_mid, 4, blacklist);
-		removePaint(FRBlocks.white_chevron_mid, 12, blacklist);
-		removePaint(FRBlocks.white_chevron_mid_left, 4, blacklist);
-		removePaint(FRBlocks.white_chevron_mid_left, 12, blacklist);
-		removePaint(FRBlocks.white_chevron_mid_right, 4, blacklist);
-		removePaint(FRBlocks.white_chevron_mid_right, 12, blacklist);
-		
-		removePaint(FRBlocks.white_chevron_left_b, 0, blacklist);
-		removePaint(FRBlocks.white_chevron_left_b_thin, 0, blacklist);
-		removePaint(FRBlocks.white_chevron_right_b, 0, blacklist);
-		removePaint(FRBlocks.white_chevron_right_b_thin, 0, blacklist);
 		
 		blacklist.addIngredientToBlacklist(new ItemStack(FRBlocks.road_snow));
-	}
-	
-	private void removePaint(PaintBlockBase paint, int meta, IIngredientBlacklist blacklist) {
-		PaintBlockBase yellow = PaintGunItemRegistry.getYellow(paint);
-		PaintBlockBase red = PaintGunItemRegistry.getRed(paint);
-		blacklist.addIngredientToBlacklist(new ItemStack(paint, 1, meta));
-		blacklist.addIngredientToBlacklist(new ItemStack(yellow, 1, meta));
-		blacklist.addIngredientToBlacklist(new ItemStack(red, 1, meta));
 	}
 	
 	private ArrayList<PaintOvenWrapper> paintOvenRecipes() {

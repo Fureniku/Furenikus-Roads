@@ -12,8 +12,8 @@ import com.silvaniastudios.roads.blocks.decorative.CurbBlock;
 import com.silvaniastudios.roads.blocks.diagonal.RoadBlockDiagonal;
 import com.silvaniastudios.roads.items.FRItems;
 import com.silvaniastudios.roads.items.PaintGun;
-import com.silvaniastudios.roads.items.PaintGunItemRegistry;
 import com.silvaniastudios.roads.network.PaintGunUpdatePacket;
+import com.silvaniastudios.roads.registries.PaintGunItemRegistry;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockAir;
@@ -36,9 +36,28 @@ import net.minecraft.world.World;
 
 public class PaintBlockBase extends BlockBase {
 	
-	public PaintBlockBase(String name) {
+	private String categoryName;
+	private int[] coreMetas;
+	private boolean dynamic = false;
+	
+	public PaintBlockBase(String name, String catName, int[] coreMetas, boolean dynamic) {
 		super(name, Material.CLOTH);
+		this.categoryName = catName;
+		this.coreMetas = coreMetas;
 		this.setHardness(2.0F);
+		this.dynamic = dynamic;
+	}
+	
+	public String getCategory() {
+		return categoryName;
+	}
+	
+	public int[] getCoreMetas() {
+		return coreMetas;
+	}
+	
+	public boolean canConnect() {
+		return dynamic;
 	}
 	
 	@Override
@@ -73,7 +92,8 @@ public class PaintBlockBase extends BlockBase {
 	}
 	
 	@SuppressWarnings("deprecation")
-	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+	//TODO this has always been buggy anyway, reimplement later.
+	/*public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
 		ItemStack item = player.getHeldItem(EnumHand.MAIN_HAND);
 		if (item.getItem() instanceof PaintGun) {
 			if (getItem(world, pos, state).getItem() instanceof ItemBlock && item.hasTagCompound()) {
@@ -133,7 +153,7 @@ public class PaintBlockBase extends BlockBase {
 			}
 		}
 		return getItem(world, pos, state);
-	}
+	}*/
 	
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {

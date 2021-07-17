@@ -45,7 +45,7 @@
 				}
             }
 		}],
-		"letter_paint": {
+		"wall_paint": {
 			"flat_north": { "model": "furenikusroads:tile_letter_m" },
 			"flat_east":  { "model": "furenikusroads:tile_letter_m", "y": 90 },
 			"flat_south": { "model": "furenikusroads:tile_letter_m", "y": 180 },

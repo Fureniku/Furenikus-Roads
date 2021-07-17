@@ -26,17 +26,21 @@
 package com.silvaniastudios.roads.client.gui;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.client.config.GuiUtils;
 
 public abstract class GuiScrollingList_Mod
@@ -63,8 +67,9 @@ public abstract class GuiScrollingList_Mod
     private boolean hasHeader;
     private int headerHeight;
     protected boolean captureMouse = true;
+    protected ArrayList<String> tooltipList;
 
-    public GuiScrollingList_Mod(Minecraft client, int width, int height, int top, int bottom, int left, int entryHeight, int screenWidth, int screenHeight)
+    public GuiScrollingList_Mod(Minecraft client, int width, int height, int top, int bottom, int left, int entryHeight, int screenWidth, int screenHeight, ArrayList<String> tooltipList)
     {
         this.client = client;
         this.listWidth = width;
@@ -76,6 +81,7 @@ public abstract class GuiScrollingList_Mod
         this.right = width + this.left;
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
+		this.tooltipList = tooltipList;
     }
 
     @Deprecated // Unused, remove in 1.9.3?
@@ -163,8 +169,7 @@ public abstract class GuiScrollingList_Mod
         }
     }
 
-    public void drawScreen(int mouseX, int mouseY, float partialTicks)
-    {
+    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         this.mouseX = mouseX;
         this.mouseY = mouseY;
         this.drawBackground();
@@ -179,8 +184,6 @@ public abstract class GuiScrollingList_Mod
         int entryRight     = scrollBarLeft - 1;
         int viewHeight     = this.bottom - this.top;
         int border         = 0;
-
-        this.scrollDistance += -(Mouse.getDWheel()/2);
         
         if (Mouse.isButtonDown(0))
         {
@@ -204,21 +207,7 @@ public abstract class GuiScrollingList_Mod
 
                     if (mouseX >= scrollBarLeft && mouseX <= scrollBarRight)
                     {
-                        this.scrollFactor = -1.0F;
-                        int scrollHeight = this.getContentHeight() - viewHeight - border;
-                        if (scrollHeight < 1) scrollHeight = 1;
-
-                        int var13 = (int)((float)(viewHeight * viewHeight) / (float)this.getContentHeight());
-
-                        if (var13 < 32) var13 = 32;
-                        if (var13 > viewHeight - border*2)
-                            var13 = viewHeight - border*2;
-
-                        this.scrollFactor /= (float)(viewHeight - var13) / (float)scrollHeight;
-                    }
-                    else
-                    {
-                        this.scrollFactor = 1.0F;
+                    	resetScrollbar(viewHeight, border);
                     }
 
                     this.initialMouseClickY = mouseY;
@@ -253,20 +242,6 @@ public abstract class GuiScrollingList_Mod
         if (this.client.world != null)
         {
             this.drawGradientRect(this.left, this.top, this.right, this.bottom, 0xC0101010, 0xD0101010);
-        }
-        else // Draw dark dirt background
-        {
-            GlStateManager.disableLighting();
-            GlStateManager.disableFog();
-            this.client.renderEngine.bindTexture(Gui.OPTIONS_BACKGROUND);
-            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-            final float scale = 32.0F;
-            worldr.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX_COLOR);
-            worldr.pos(this.left,  this.bottom, 0.0D).tex(this.left  / scale, (this.bottom + (int)this.scrollDistance) / scale).color(0x20, 0x20, 0x20, 0xFF).endVertex();
-            worldr.pos(this.right, this.bottom, 0.0D).tex(this.right / scale, (this.bottom + (int)this.scrollDistance) / scale).color(0x20, 0x20, 0x20, 0xFF).endVertex();
-            worldr.pos(this.right, this.top,    0.0D).tex(this.right / scale, (this.top    + (int)this.scrollDistance) / scale).color(0x20, 0x20, 0x20, 0xFF).endVertex();
-            worldr.pos(this.left,  this.top,    0.0D).tex(this.left  / scale, (this.top    + (int)this.scrollDistance) / scale).color(0x20, 0x20, 0x20, 0xFF).endVertex();
-            tess.draw();
         }
 
         int baseY = this.top + border - (int)this.scrollDistance;
@@ -352,9 +327,53 @@ public abstract class GuiScrollingList_Mod
         GlStateManager.disableBlend();
         GL11.glDisable(GL11.GL_SCISSOR_TEST);
     }
+    
+    private void resetScrollbar(int viewHeight, int border) {
+    	System.out.println("Reset Scrollbar");
+        this.scrollFactor = -1.0F;
+        int scrollHeight = this.getContentHeight() - viewHeight - border;
+        if (scrollHeight < 1) scrollHeight = 1;
+
+        int var13 = (int)((float)(viewHeight * viewHeight) / (float)this.getContentHeight());
+
+        if (var13 < 32) var13 = 32;
+        if (var13 > viewHeight - border*2)
+            var13 = viewHeight - border*2;
+
+        this.scrollFactor /= (float)(viewHeight - var13) / (float)scrollHeight;
+    }
 
     protected void drawGradientRect(int left, int top, int right, int bottom, int color1, int color2)
     {
         GuiUtils.drawGradientRect(0, left, top, right, bottom, color1, color2);
+    }
+    
+    protected void drawItemStack(FontRenderer fontRenderer, ItemStack stack, int x, int y) {
+		RenderHelper.disableStandardItemLighting();
+		RenderHelper.enableGUIStandardItemLighting();
+		
+		GlStateManager.translate(0.0F, 0.0F, 32.0F);
+        client.getRenderItem().renderItemAndEffectIntoGUI(stack, x, y);
+        
+        GlStateManager.scale(0.5, 0.5, 0.5);
+        fontRenderer.drawString("" + stack.getCount(), (x+12)*2, (y+12)*2, 0xFFFFFF);
+        GlStateManager.scale(2.0, 2.0, 2.0);
+        GlStateManager.translate(0.0F, 0.0F, -32.0F);
+        
+        RenderHelper.enableStandardItemLighting();
+    }
+    
+    protected void drawItemStack(ItemStack stack, int x, int y, float r, float g, float b) {
+		RenderHelper.disableStandardItemLighting();
+		RenderHelper.enableGUIStandardItemLighting();
+		
+		GlStateManager.translate(0.0F, 0.0F, 32.0F);
+		GlStateManager.color(0.0f, 0.0f, 0.0f);
+        client.getRenderItem().renderItemAndEffectIntoGUI(stack, x, y);
+        GlStateManager.color(1.0f, 1.0f, 1.0f);
+
+        GlStateManager.translate(0.0F, 0.0F, -32.0F);
+        
+        RenderHelper.enableStandardItemLighting();
     }
 }

@@ -24,12 +24,12 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class Connected3x1PaintBlock extends PaintBlockBase {
+public class LargeTextPaintBlock extends PaintBlockBase {
 	
 	public static final PropertyEnum<EnumMeta> META_ID = PropertyEnum.create("meta", EnumMeta.class);
 
-	public Connected3x1PaintBlock(String name) {
-		super(name);
+	public LargeTextPaintBlock(String name, String category, int[] coreMetas, boolean dynamic) {
+		super(name, category, coreMetas, dynamic);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(META_ID, EnumMeta.id0));
 		this.setCreativeTab(FurenikusRoads.tab_paint_text);
 	}
@@ -50,7 +50,7 @@ public class Connected3x1PaintBlock extends PaintBlockBase {
 		
 		if (meta > 3) {
 			if (placerFacing.equals(EnumFacing.NORTH)) {
-				if (westBlock.getBlock() instanceof Connected3x1PaintBlock) {
+				if (westBlock.getBlock() instanceof LargeTextPaintBlock) {
 					if (getMetaFromState(westBlock) < 12 && getMetaFromState(westBlock) > 3) {
 						returnMeta = getMetaFromState(westBlock) + 4;
 					}
@@ -58,7 +58,7 @@ public class Connected3x1PaintBlock extends PaintBlockBase {
 			}
 			
 			if (placerFacing.equals(EnumFacing.EAST)) {
-				if (northBlock.getBlock() instanceof Connected3x1PaintBlock) {
+				if (northBlock.getBlock() instanceof LargeTextPaintBlock) {
 					if (getMetaFromState(northBlock) < 12 && getMetaFromState(northBlock) > 3) {
 						returnMeta = getMetaFromState(northBlock) + 4;
 					}
@@ -66,7 +66,7 @@ public class Connected3x1PaintBlock extends PaintBlockBase {
 			}
 			
 			if (placerFacing.equals(EnumFacing.SOUTH)) {
-				if (eastBlock.getBlock() instanceof Connected3x1PaintBlock) {
+				if (eastBlock.getBlock() instanceof LargeTextPaintBlock) {
 					if (getMetaFromState(eastBlock) < 12 && getMetaFromState(eastBlock) > 3) {
 						returnMeta = getMetaFromState(eastBlock) + 4;
 					}
@@ -74,7 +74,7 @@ public class Connected3x1PaintBlock extends PaintBlockBase {
 			}
 			
 			if (placerFacing.equals(EnumFacing.WEST)) {
-				if (southBlock.getBlock() instanceof Connected3x1PaintBlock) {
+				if (southBlock.getBlock() instanceof LargeTextPaintBlock) {
 					if (getMetaFromState(southBlock) < 12 && getMetaFromState(southBlock) > 3) {
 						returnMeta = getMetaFromState(southBlock) + 4;
 					}

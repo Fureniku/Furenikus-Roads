@@ -34,6 +34,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
@@ -89,9 +90,9 @@ public class PaintFillerHopperBlock extends Block {
 			if (tileEntity instanceof PaintFillerHopperEntity) {
 				PaintFillerHopperEntity te = (PaintFillerHopperEntity) tileEntity;
 				if (wrench.getMode(player.getHeldItem(hand)) == 1) {
-					te.toggleOutputMode();
+					te.toggleOutputMode(player);
 				} else {
-					te.updateSide(facing);
+					te.updateSide(facing, player);
 				}
 			}
 		}

@@ -1,7 +1,6 @@
 package com.silvaniastudios.roads.blocks.paint;
 
 import com.silvaniastudios.roads.FurenikusRoads;
-import com.silvaniastudios.roads.blocks.FRBlocks;
 import com.silvaniastudios.roads.blocks.enums.EnumMeta;
 import com.silvaniastudios.roads.blocks.enums.IMetaBlockName;
 
@@ -31,8 +30,8 @@ public class MultiIconPaintBlock extends PaintBlockBase implements IMetaBlockNam
 
 	boolean multiType = true;
 	
-	public MultiIconPaintBlock(String name, boolean multiType) {
-		super(name);
+	public MultiIconPaintBlock(String name, boolean multiType, String category, int[] coreMetas, boolean dynamic) {
+		super(name, category, coreMetas, dynamic);
 		this.multiType = multiType;
 		setDefaultState(this.blockState.getBaseState().withProperty(META_ID, EnumMeta.id0));
 		this.setCreativeTab(FurenikusRoads.tab_paint_junction);
@@ -65,9 +64,9 @@ public class MultiIconPaintBlock extends PaintBlockBase implements IMetaBlockNam
 			boolean checkLeft = false;
 			boolean checkRight = false;
 			
-			if (this.equals(FRBlocks.white_chevron_mid) || this.equals(FRBlocks.yellow_chevron_mid) || this.equals(FRBlocks.red_chevron_mid)) { checkLeft = true; checkRight = true; }
-			if (this.equals(FRBlocks.white_chevron_mid_left) || this.equals(FRBlocks.yellow_chevron_mid_left) || this.equals(FRBlocks.red_chevron_mid_left)) { checkLeft = true; }
-			if (this.equals(FRBlocks.white_chevron_mid_right) || this.equals(FRBlocks.yellow_chevron_mid_right) || this.equals(FRBlocks.red_chevron_mid_right)) { checkRight = true; }
+			if (this.getUnlocalizedName().contains("_chevron_mid")) { checkLeft = true; checkRight = true; }
+			if (this.getUnlocalizedName().contains("_chevron_mid_left")) { checkLeft = true; }
+			if (this.getUnlocalizedName().contains("_chevron_mid_right")) { checkRight = true; }
 			
 			if (placer.getHorizontalFacing().equals(EnumFacing.EAST)) {
 				leftBlock = northBlock.getBlock();

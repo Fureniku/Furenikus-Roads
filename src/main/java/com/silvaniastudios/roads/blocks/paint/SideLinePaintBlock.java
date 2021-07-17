@@ -28,8 +28,8 @@ public class SideLinePaintBlock extends PaintBlockBase implements IMetaBlockName
 	public static final PropertyEnum<EnumConnectSideLine> CONNECT_RIGHT = PropertyEnum.create("connect_right", EnumConnectSideLine.class);
 	public static final PropertyDirection FACING =  PropertyDirection.create("zz_facing", EnumFacing.Plane.HORIZONTAL);
 
-	public SideLinePaintBlock(String name) {
-		super(name);
+	public SideLinePaintBlock(String name, String category, int[] coreMetas, boolean dynamic) {
+		super(name, category, coreMetas, dynamic);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(CONNECT_LEFT, EnumConnectSideLine.NONE).withProperty(CONNECT_RIGHT, EnumConnectSideLine.NONE));
 		this.setCreativeTab(FurenikusRoads.tab_paint_lines);
 	}

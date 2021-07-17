@@ -585,7 +585,6 @@ public class RoadBlockDiagonal extends BlockBase {
 	@SideOnly(Side.CLIENT)
 	public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {
 		if (state != null) {
-			System.out.println(state.getProperties());
 			if (state.getValue(TRANSPARENCY)) {
 				return BlockRenderLayer.TRANSLUCENT == layer;
 			}

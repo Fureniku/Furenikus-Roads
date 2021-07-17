@@ -9,6 +9,8 @@ import com.silvaniastudios.roads.RoadsConfig;
 import com.silvaniastudios.roads.blocks.RoadBlock;
 import com.silvaniastudios.roads.blocks.paint.PaintBlockBase;
 import com.silvaniastudios.roads.blocks.tileentities.paintfiller.PaintFillerEntity;
+import com.silvaniastudios.roads.registries.PaintCategoryList;
+import com.silvaniastudios.roads.registries.PaintGunItemRegistry;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSnow;
@@ -75,12 +77,15 @@ public class PaintGun extends RoadItemBase {
 	}
 
 	public static PaintBlockBase getBlockFromSelection(int sel, int page) {
-		if (page == 1) { return PaintGunItemRegistry.lines.get(sel); }
-		if (page == 2) { return PaintGunItemRegistry.icons.get(sel); }
-		if (page == 3) { return PaintGunItemRegistry.letters.get(sel); }
-		if (page == 4) { return PaintGunItemRegistry.text.get(sel); }
-		if (page == 5) { return PaintGunItemRegistry.junction.get(sel); }
-		return PaintGunItemRegistry.lines.get(0);
+		if (PaintGunItemRegistry.categoryList.size() >= page) {
+			PaintCategoryList cat = PaintGunItemRegistry.categoryList.get(page);
+			if (cat.size() >= sel) {
+				return cat.getPaint(sel);
+			} else {
+				return cat.getPaint(0);
+			}
+		}
+		return PaintGunItemRegistry.categoryList.get(0).getPaint(0);
 	}
 
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
@@ -175,41 +180,36 @@ public class PaintGun extends RoadItemBase {
 	}
 
 	public boolean selectBlockToPlace(NBTTagCompound nbt, World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, EntityPlayer player, EnumHand hand, int col) {
-		if (RoadsConfig.general.debugLevel >= 1) {
+		/*if (RoadsConfig.general.debugLevel >= 1) {
 			System.out.println("PaintGun#selectBlockToPlace called. Trying to find where it's called from...");
 			StackTraceElement[] ste = Thread.currentThread().getStackTrace();
 			for (int i = 0; i < ste.length; i++) {
 				System.out.println("Class: " + ste[i].getClassName() + ", method: " + ste[i].getMethodName() + " line: " + ste[i].getLineNumber());
 			}
-		}
+		}*/
 
 
 		int selection = nbt.getInteger("selectedId");
 		int pageId = nbt.getInteger("pageId");
-		int meta = nbt.getInteger("selMeta");
 
 		BlockPos placePos = pos.offset(facing);
 
 		if (!world.getBlockState(placePos).getBlock().isReplaceable(world, placePos)) { return false; }
 		if (!(world.getBlockState(placePos.offset(EnumFacing.DOWN)).getBlock() instanceof PaintBlockBase) && player.isSneaking()) { return false; }
 
-		PaintBlockBase block = null;
+		PaintBlockBase block = PaintGunItemRegistry.getSelectedPaint(pageId, selection);
+		int meta = PaintGunItemRegistry.getSelectedPaintMeta(pageId, selection);
 
-		if (pageId == 1) { block = PaintGunItemRegistry.lines.get(selection); }
-		if (pageId == 2) { block = PaintGunItemRegistry.icons.get(selection); }
-		if (pageId == 3) { block = PaintGunItemRegistry.letters.get(selection); }
-		if (pageId == 5) { block = PaintGunItemRegistry.junction.get(selection); }
-
-		if (pageId == 4) {
-			block = PaintGunItemRegistry.text.get(selection);
+		if (PaintGunItemRegistry.getCategory(pageId) != null && PaintGunItemRegistry.getCategory(pageId).getCategoryName().equalsIgnoreCase(PaintGunItemRegistry.TEXT)) {
 			if (nbt.getBoolean("isLarge")) {
 				meta = 4;
 			}
 		}
+		
 		if (block != null) {
-			if (col == 0) { block = PaintGunItemRegistry.getWhite(block); }
+			/*TODO if (col == 0) { block = PaintGunItemRegistry.getWhite(block); }
 			if (col == 1) { block = PaintGunItemRegistry.getYellow(block); }
-			if (col == 2) { block = PaintGunItemRegistry.getRed(block); }
+			if (col == 2) { block = PaintGunItemRegistry.getRed(block); }*/
 
 			int offsetCount = 0;
 

@@ -29,7 +29,7 @@ import com.silvaniastudios.roads.blocks.paint.ChevronPaintBlock;
 import com.silvaniastudios.roads.blocks.paint.ChevronSideLinePaintBlock;
 import com.silvaniastudios.roads.blocks.paint.Connected1x2PaintBlock;
 import com.silvaniastudios.roads.blocks.paint.Connected1x4PaintBlock;
-import com.silvaniastudios.roads.blocks.paint.Connected3x1PaintBlock;
+import com.silvaniastudios.roads.blocks.paint.LargeTextPaintBlock;
 import com.silvaniastudios.roads.blocks.paint.CrossingPaintBlock;
 import com.silvaniastudios.roads.blocks.paint.FarSideLinePaintBlock;
 import com.silvaniastudios.roads.blocks.paint.HatchBoxPaintBlock;
@@ -70,8 +70,9 @@ import com.silvaniastudios.roads.blocks.tileentities.tarmaccutter.TarmacCutterEl
 import com.silvaniastudios.roads.blocks.tileentities.tarmaccutter.TarmacCutterEntity;
 import com.silvaniastudios.roads.fluids.FRFluids;
 import com.silvaniastudios.roads.items.FRItems;
-import com.silvaniastudios.roads.items.PaintGunItemRegistry;
 import com.silvaniastudios.roads.items.RoadItemBlock;
+import com.silvaniastudios.roads.registries.DynamicBlockRegistry;
+import com.silvaniastudios.roads.registries.PaintGunItemRegistry;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -86,6 +87,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
 
 public class FRBlocks {
+	
+	public static final String[] col = {"white", "yellow", "red"};
 
 	public static ArrayList<RoadBlock> roadBlockList = new ArrayList<RoadBlock>();
 	public static ArrayList<RoadBlockDiagonal> roadBlockDiagonalList = new ArrayList<RoadBlockDiagonal>();
@@ -269,325 +272,8 @@ public class FRBlocks {
 	public static StreetLight street_light_4 = new StreetLight("street_light_4", 16, 2.5, 2);
 	public static StreetLight street_light_5 = new StreetLight("street_light_5", 16, 3, 5);
 	public static StreetLight street_light_6 = new StreetLight("street_light_6", 16, 3, 5);
-	//pedestrian crossing metal markers
 
 	public static BlockFakeLight fake_light_source = new BlockFakeLight("fake_light_source");
-
-	public static LinePaintBlock line_white_straight_full = new LinePaintBlock("line_white_straight_full");
-	public static LinePaintBlock line_white_straight_thick = new LinePaintBlock("line_white_straight_thick");
-	public static LinePaintBlock line_white_straight_double = new LinePaintBlock("line_white_straight_double");
-	public static LinePaintBlock line_white_straight_double_thick = new LinePaintBlock("line_white_straight_double_thick");
-	public static SideLinePaintBlock line_white_side_double = new SideLinePaintBlock("line_white_side_double");
-	public static SideLinePaintBlock line_white_side_double_thick = new SideLinePaintBlock("line_white_side_double_thick");
-	public static SideLinePaintBlock line_white_side_single = new SideLinePaintBlock("line_white_side_single");
-	public static SideLinePaintBlock line_white_side_single_thick = new SideLinePaintBlock("line_white_side_single_thick");
-	public static FarSideLinePaintBlock line_white_far_side = new FarSideLinePaintBlock("line_white_far_side");
-	public static FarSideLinePaintBlock line_white_far_side_thick = new FarSideLinePaintBlock("line_white_far_side_thick");
-	public static HatchBoxPaintBlock hatch_box_white = new HatchBoxPaintBlock("hatch_box_white");
-	public static Connected1x4PaintBlock line_white_crossing_diagonal = new Connected1x4PaintBlock("line_white_crossing_diagonal", true);
-	public static CrossingPaintBlock white_crossing_paint = new CrossingPaintBlock("white_crossing_paint");
-	public static SimpleLinePaintBlock line_white_middle_half_double = new SimpleLinePaintBlock("line_white_middle_half_double");
-	public static SimpleLinePaintBlock line_white_middle_dash_double = new SimpleLinePaintBlock("line_white_middle_dash_double");
-	public static SimpleLinePaintBlock line_white_middle_short = new SimpleLinePaintBlock("line_white_middle_short");
-	public static SimpleLinePaintBlock line_white_filter_lane = new SimpleLinePaintBlock("line_white_filter_lane");
-	public static SimpleLinePaintBlock line_white_side_short = new SimpleLinePaintBlock("line_white_side_short");
-	public static ArrowPaintBlock white_arrow = new ArrowPaintBlock("white_arrow");
-	public static ArrowLinePaintBlock white_arrow_line = new ArrowLinePaintBlock("white_arrow_line");
-	public static ArrowDiagonalPaintBlock white_arrow_diagonal = new ArrowDiagonalPaintBlock("white_arrow_diagonal");
-	public static IconPaintBlock white_wheelchair_icon = new IconPaintBlock("white_wheelchair_icon");
-	public static JunctionPaintBlock white_junction_a = new JunctionPaintBlock("white_junction_a");
-	public static JunctionPaintBlock white_junction_b = new JunctionPaintBlock("white_junction_b");
-	public static IconPaintBlock white_chevron = new IconPaintBlock("white_chevron");
-	public static SimpleLinePaintBlock line_white_thin_crossing = new SimpleLinePaintBlock("line_white_thin_crossing");
-
-	public static Connected1x2PaintBlock white_pedestrian = new Connected1x2PaintBlock("white_pedestrian");
-	public static Connected1x2PaintBlock white_merge_arrow = new Connected1x2PaintBlock("white_merge_arrow");
-	public static Connected1x2PaintBlock white_give_way = new Connected1x2PaintBlock("white_give_way");
-
-	public static JunctionFilterLinePaintBlock white_junction_filter_left = new JunctionFilterLinePaintBlock("white_junction_filter_left", true);
-	public static JunctionFilterLinePaintBlock white_junction_filter_left_thin  = new JunctionFilterLinePaintBlock("white_junction_filter_left_thin", true);
-	public static JunctionFilterLinePaintBlock white_junction_filter_left_empty = new JunctionFilterLinePaintBlock("white_junction_filter_left_empty", true);
-	public static JunctionFilterLinePaintBlock white_junction_filter_right = new JunctionFilterLinePaintBlock("white_junction_filter_right", false);
-	public static JunctionFilterLinePaintBlock white_junction_filter_right_thin  = new JunctionFilterLinePaintBlock("white_junction_filter_right_thin", false);
-	public static JunctionFilterLinePaintBlock white_junction_filter_right_empty = new JunctionFilterLinePaintBlock("white_junction_filter_right_empty", false);
-
-	public static ChevronSideLinePaintBlock white_chevron_side_line = new ChevronSideLinePaintBlock("white_chevron_side_line");
-
-	public static ChevronPaintBlock white_chevron_left_a = new ChevronPaintBlock("white_chevron_left_a", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_A, true);
-	public static ChevronPaintBlock white_chevron_left_b = new ChevronPaintBlock("white_chevron_left_b", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_B, false);
-	public static ChevronPaintBlock white_chevron_left_a_thin = new ChevronPaintBlock("white_chevron_left_a_thin", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_THIN_A, true);
-	public static ChevronPaintBlock white_chevron_left_b_thin = new ChevronPaintBlock("white_chevron_left_b_thin", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_THIN_B, false);
-
-	public static ChevronPaintBlock white_chevron_right_a = new ChevronPaintBlock("white_chevron_right_a", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_A, true);
-	public static ChevronPaintBlock white_chevron_right_b = new ChevronPaintBlock("white_chevron_right_b", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_B, false);
-	public static ChevronPaintBlock white_chevron_right_a_thin = new ChevronPaintBlock("white_chevron_right_a_thin", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_THIN_A, true);
-	public static ChevronPaintBlock white_chevron_right_b_thin = new ChevronPaintBlock("white_chevron_right_b_thin", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_THIN_B, false);
-
-	public static MultiIconPaintBlock white_chevron_mid = new MultiIconPaintBlock("white_chevron_mid", true);
-	public static Connected1x4PaintBlock white_junction_fork_mid = new Connected1x4PaintBlock("white_junction_fork_mid", false);
-	public static Connected1x4PaintBlock white_junction_fork_mid_thin = new Connected1x4PaintBlock("white_junction_fork_mid_thin", false);
-	public static Connected1x4PaintBlock white_junction_fork_chevron_mid = new Connected1x4PaintBlock("white_junction_fork_chevron_mid", false);
-	public static Connected1x4PaintBlock white_junction_fork_chevron_mid_thin = new Connected1x4PaintBlock("white_junction_fork_chevron_mid_thin", false);
-
-	public static MultiIconPaintBlock white_chevron_mid_left = new MultiIconPaintBlock("white_chevron_mid_left", true);
-	public static MultiIconPaintBlock white_chevron_mid_right = new MultiIconPaintBlock("white_chevron_mid_right", true);
-
-	public static MultiIconPaintBlock white_junction_side_line_connection = new MultiIconPaintBlock("white_junction_side_line_connection", true);
-	public static MultiIconPaintBlock white_junction_side_line_connection_thin = new MultiIconPaintBlock("white_junction_side_line_connection_thin", true);
-	public static MultiIconPaintBlock white_junction_side_line_connection_thick_thick = new MultiIconPaintBlock("white_junction_side_line_connection_thick_thick", true);
-	public static MultiIconPaintBlock white_junction_mid_line_connection = new MultiIconPaintBlock("white_junction_mid_line_connection", true);
-
-	public static Connected3x1PaintBlock white_slow  = new Connected3x1PaintBlock("white_slow");
-	public static Connected3x1PaintBlock white_stop  = new Connected3x1PaintBlock("white_stop");
-	public static Connected3x1PaintBlock white_bike  = new Connected3x1PaintBlock("white_bike");
-	public static Connected3x1PaintBlock white_bus   = new Connected3x1PaintBlock("white_bus");
-	public static Connected3x1PaintBlock white_taxi  = new Connected3x1PaintBlock("white_taxi");
-	public static Connected3x1PaintBlock white_lane  = new Connected3x1PaintBlock("white_lane");
-	public static Connected3x1PaintBlock white_keep  = new Connected3x1PaintBlock("white_keep");
-	public static Connected3x1PaintBlock white_clear = new Connected3x1PaintBlock("white_clear");
-	public static Connected3x1PaintBlock white_turn  = new Connected3x1PaintBlock("white_turn");
-	public static Connected3x1PaintBlock white_left  = new Connected3x1PaintBlock("white_left");
-	public static Connected3x1PaintBlock white_right = new Connected3x1PaintBlock("white_right");
-	public static Connected3x1PaintBlock white_only  = new Connected3x1PaintBlock("white_only");
-	public static Connected3x1PaintBlock white_no    = new Connected3x1PaintBlock("white_no");
-	public static Connected3x1PaintBlock white_entry = new Connected3x1PaintBlock("white_entry");
-	public static Connected3x1PaintBlock white_bike_icon = new Connected3x1PaintBlock("white_bike_icon");
-	public static Connected3x1PaintBlock white_town = new Connected3x1PaintBlock("white_town");
-	public static Connected3x1PaintBlock white_city = new Connected3x1PaintBlock("white_city");
-	public static Connected3x1PaintBlock white_ctre = new Connected3x1PaintBlock("white_ctre");
-
-	public static LetterPaintBlock paint_letter_white_ab = new LetterPaintBlock("paint_letter_white_ab");
-	public static LetterPaintBlock paint_letter_white_cd = new LetterPaintBlock("paint_letter_white_cd");
-	public static LetterPaintBlock paint_letter_white_ef = new LetterPaintBlock("paint_letter_white_ef");
-	public static LetterPaintBlock paint_letter_white_gh = new LetterPaintBlock("paint_letter_white_gh");
-	public static LetterPaintBlock paint_letter_white_ij = new LetterPaintBlock("paint_letter_white_ij");
-	public static LetterPaintBlock paint_letter_white_kl = new LetterPaintBlock("paint_letter_white_kl");
-	public static LetterPaintBlock paint_letter_white_mn = new LetterPaintBlock("paint_letter_white_mn");
-	public static LetterPaintBlock paint_letter_white_op = new LetterPaintBlock("paint_letter_white_op");
-	public static LetterPaintBlock paint_letter_white_qr = new LetterPaintBlock("paint_letter_white_qr");
-	public static LetterPaintBlock paint_letter_white_st = new LetterPaintBlock("paint_letter_white_st");
-	public static LetterPaintBlock paint_letter_white_uv = new LetterPaintBlock("paint_letter_white_uv");
-	public static LetterPaintBlock paint_letter_white_wx = new LetterPaintBlock("paint_letter_white_wx");
-	public static LetterPaintBlock paint_letter_white_yz = new LetterPaintBlock("paint_letter_white_yz");
-	public static LetterPaintBlock paint_letter_white_01 = new LetterPaintBlock("paint_letter_white_01");
-	public static LetterPaintBlock paint_letter_white_23 = new LetterPaintBlock("paint_letter_white_23");
-	public static LetterPaintBlock paint_letter_white_45 = new LetterPaintBlock("paint_letter_white_45");
-	public static LetterPaintBlock paint_letter_white_67 = new LetterPaintBlock("paint_letter_white_67");
-	public static LetterPaintBlock paint_letter_white_89 = new LetterPaintBlock("paint_letter_white_89");
-	public static LetterPaintBlock paint_letter_white_punct_question_exclamation = new LetterPaintBlock("paint_letter_white_punct_question_exclamation");
-	public static LetterPaintBlock paint_letter_white_punct_hash_slash = new LetterPaintBlock("paint_letter_white_punct_hash_slash");
-
-
-
-	public static LinePaintBlock line_yellow_straight_full = new LinePaintBlock("line_yellow_straight_full");
-	public static LinePaintBlock line_yellow_straight_thick = new LinePaintBlock("line_yellow_straight_thick");
-	public static LinePaintBlock line_yellow_straight_double = new LinePaintBlock("line_yellow_straight_double");
-	public static LinePaintBlock line_yellow_straight_double_thick = new LinePaintBlock("line_yellow_straight_double_thick");
-	public static SideLinePaintBlock line_yellow_side_double = new SideLinePaintBlock("line_yellow_side_double");
-	public static SideLinePaintBlock line_yellow_side_double_thick = new SideLinePaintBlock("line_yellow_side_double_thick");
-	public static SideLinePaintBlock line_yellow_side_single = new SideLinePaintBlock("line_yellow_side_single");
-	public static SideLinePaintBlock line_yellow_side_single_thick = new SideLinePaintBlock("line_yellow_side_single_thick");
-	public static FarSideLinePaintBlock line_yellow_far_side = new FarSideLinePaintBlock("line_yellow_far_side");
-	public static FarSideLinePaintBlock line_yellow_far_side_thick = new FarSideLinePaintBlock("line_yellow_far_side_thick");
-	public static HatchBoxPaintBlock hatch_box_yellow = new HatchBoxPaintBlock("hatch_box_yellow");
-	public static Connected1x4PaintBlock line_yellow_crossing_diagonal = new Connected1x4PaintBlock("line_yellow_crossing_diagonal", true);
-	public static CrossingPaintBlock yellow_crossing_paint = new CrossingPaintBlock("yellow_crossing_paint");
-	public static SimpleLinePaintBlock line_yellow_middle_half_double = new SimpleLinePaintBlock("line_yellow_middle_half_double");
-	public static SimpleLinePaintBlock line_yellow_middle_dash_double = new SimpleLinePaintBlock("line_yellow_middle_dash_double");
-	public static SimpleLinePaintBlock line_yellow_middle_short = new SimpleLinePaintBlock("line_yellow_middle_short");
-	public static SimpleLinePaintBlock line_yellow_filter_lane = new SimpleLinePaintBlock("line_yellow_filter_lane");
-	public static SimpleLinePaintBlock line_yellow_side_short = new SimpleLinePaintBlock("line_yellow_side_short");
-	public static ArrowPaintBlock yellow_arrow = new ArrowPaintBlock("yellow_arrow");
-	public static ArrowLinePaintBlock yellow_arrow_line = new ArrowLinePaintBlock("yellow_arrow_line");
-	public static ArrowDiagonalPaintBlock yellow_arrow_diagonal = new ArrowDiagonalPaintBlock("yellow_arrow_diagonal");
-	public static IconPaintBlock yellow_wheelchair_icon = new IconPaintBlock("yellow_wheelchair_icon");
-	public static JunctionPaintBlock yellow_junction_a = new JunctionPaintBlock("yellow_junction_a");
-	public static JunctionPaintBlock yellow_junction_b = new JunctionPaintBlock("yellow_junction_b");
-	public static IconPaintBlock yellow_chevron = new IconPaintBlock("yellow_chevron");
-	public static SimpleLinePaintBlock line_yellow_thin_crossing = new SimpleLinePaintBlock("line_yellow_thin_crossing");
-
-	public static Connected1x2PaintBlock yellow_pedestrian = new Connected1x2PaintBlock("yellow_pedestrian");
-	public static Connected1x2PaintBlock yellow_merge_arrow = new Connected1x2PaintBlock("yellow_merge_arrow");
-	public static Connected1x2PaintBlock yellow_give_way = new Connected1x2PaintBlock("yellow_give_way");
-
-	public static JunctionFilterLinePaintBlock yellow_junction_filter_left = new JunctionFilterLinePaintBlock("yellow_junction_filter_left", true);
-	public static JunctionFilterLinePaintBlock yellow_junction_filter_left_thin  = new JunctionFilterLinePaintBlock("yellow_junction_filter_left_thin", true);
-	public static JunctionFilterLinePaintBlock yellow_junction_filter_left_empty = new JunctionFilterLinePaintBlock("yellow_junction_filter_left_empty", true);
-	public static JunctionFilterLinePaintBlock yellow_junction_filter_right = new JunctionFilterLinePaintBlock("yellow_junction_filter_right", false);
-	public static JunctionFilterLinePaintBlock yellow_junction_filter_right_thin  = new JunctionFilterLinePaintBlock("yellow_junction_filter_right_thin", false);
-	public static JunctionFilterLinePaintBlock yellow_junction_filter_right_empty = new JunctionFilterLinePaintBlock("yellow_junction_filter_right_empty", false);
-
-	public static ChevronSideLinePaintBlock yellow_chevron_side_line = new ChevronSideLinePaintBlock("yellow_chevron_side_line");
-
-	public static ChevronPaintBlock yellow_chevron_left_a = new ChevronPaintBlock("yellow_chevron_left_a", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_A, true);
-	public static ChevronPaintBlock yellow_chevron_left_b = new ChevronPaintBlock("yellow_chevron_left_b", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_B, false);
-	public static ChevronPaintBlock yellow_chevron_left_a_thin = new ChevronPaintBlock("yellow_chevron_left_a_thin", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_THIN_A, true);
-	public static ChevronPaintBlock yellow_chevron_left_b_thin = new ChevronPaintBlock("yellow_chevron_left_b_thin", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_THIN_B, false);
-
-	public static ChevronPaintBlock yellow_chevron_right_a = new ChevronPaintBlock("yellow_chevron_right_a", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_A, true);
-	public static ChevronPaintBlock yellow_chevron_right_b = new ChevronPaintBlock("yellow_chevron_right_b", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_B, false);
-	public static ChevronPaintBlock yellow_chevron_right_a_thin = new ChevronPaintBlock("yellow_chevron_right_a_thin", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_THIN_A, true);
-	public static ChevronPaintBlock yellow_chevron_right_b_thin = new ChevronPaintBlock("yellow_chevron_right_b_thin", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_THIN_B, false);
-
-	public static MultiIconPaintBlock yellow_chevron_mid = new MultiIconPaintBlock("yellow_chevron_mid", true);
-	public static Connected1x4PaintBlock yellow_junction_fork_mid = new Connected1x4PaintBlock("yellow_junction_fork_mid", false);
-	public static Connected1x4PaintBlock yellow_junction_fork_mid_thin = new Connected1x4PaintBlock("yellow_junction_fork_mid_thin", false);
-	public static Connected1x4PaintBlock yellow_junction_fork_chevron_mid = new Connected1x4PaintBlock("yellow_junction_fork_chevron_mid", false);
-	public static Connected1x4PaintBlock yellow_junction_fork_chevron_mid_thin = new Connected1x4PaintBlock("yellow_junction_fork_chevron_mid_thin", false);
-
-	public static MultiIconPaintBlock yellow_chevron_mid_left = new MultiIconPaintBlock("yellow_chevron_mid_left", true);
-	public static MultiIconPaintBlock yellow_chevron_mid_right = new MultiIconPaintBlock("yellow_chevron_mid_right", true);
-
-	public static MultiIconPaintBlock yellow_junction_side_line_connection = new MultiIconPaintBlock("yellow_junction_side_line_connection", true);
-	public static MultiIconPaintBlock yellow_junction_side_line_connection_thin = new MultiIconPaintBlock("yellow_junction_side_line_connection_thin", true);
-	public static MultiIconPaintBlock yellow_junction_side_line_connection_thick_thick = new MultiIconPaintBlock("yellow_junction_side_line_connection_thick_thick", true);
-	public static MultiIconPaintBlock yellow_junction_mid_line_connection = new MultiIconPaintBlock("yellow_junction_mid_line_connection", true);
-
-	public static Connected3x1PaintBlock yellow_slow  = new Connected3x1PaintBlock("yellow_slow");
-	public static Connected3x1PaintBlock yellow_stop  = new Connected3x1PaintBlock("yellow_stop");
-	public static Connected3x1PaintBlock yellow_bike  = new Connected3x1PaintBlock("yellow_bike");
-	public static Connected3x1PaintBlock yellow_bus   = new Connected3x1PaintBlock("yellow_bus");
-	public static Connected3x1PaintBlock yellow_taxi  = new Connected3x1PaintBlock("yellow_taxi");
-	public static Connected3x1PaintBlock yellow_lane  = new Connected3x1PaintBlock("yellow_lane");
-	public static Connected3x1PaintBlock yellow_keep  = new Connected3x1PaintBlock("yellow_keep");
-	public static Connected3x1PaintBlock yellow_clear = new Connected3x1PaintBlock("yellow_clear");
-	public static Connected3x1PaintBlock yellow_turn  = new Connected3x1PaintBlock("yellow_turn");
-	public static Connected3x1PaintBlock yellow_left  = new Connected3x1PaintBlock("yellow_left");
-	public static Connected3x1PaintBlock yellow_right = new Connected3x1PaintBlock("yellow_right");
-	public static Connected3x1PaintBlock yellow_only  = new Connected3x1PaintBlock("yellow_only");
-	public static Connected3x1PaintBlock yellow_no    = new Connected3x1PaintBlock("yellow_no");
-	public static Connected3x1PaintBlock yellow_entry = new Connected3x1PaintBlock("yellow_entry");
-	public static Connected3x1PaintBlock yellow_bike_icon = new Connected3x1PaintBlock("yellow_bike_icon");
-	public static Connected3x1PaintBlock yellow_town = new Connected3x1PaintBlock("yellow_town");
-	public static Connected3x1PaintBlock yellow_city = new Connected3x1PaintBlock("yellow_city");
-	public static Connected3x1PaintBlock yellow_ctre = new Connected3x1PaintBlock("yellow_ctre");
-
-	public static LetterPaintBlock paint_letter_yellow_ab = new LetterPaintBlock("paint_letter_yellow_ab");
-	public static LetterPaintBlock paint_letter_yellow_cd = new LetterPaintBlock("paint_letter_yellow_cd");
-	public static LetterPaintBlock paint_letter_yellow_ef = new LetterPaintBlock("paint_letter_yellow_ef");
-	public static LetterPaintBlock paint_letter_yellow_gh = new LetterPaintBlock("paint_letter_yellow_gh");
-	public static LetterPaintBlock paint_letter_yellow_ij = new LetterPaintBlock("paint_letter_yellow_ij");
-	public static LetterPaintBlock paint_letter_yellow_kl = new LetterPaintBlock("paint_letter_yellow_kl");
-	public static LetterPaintBlock paint_letter_yellow_mn = new LetterPaintBlock("paint_letter_yellow_mn");
-	public static LetterPaintBlock paint_letter_yellow_op = new LetterPaintBlock("paint_letter_yellow_op");
-	public static LetterPaintBlock paint_letter_yellow_qr = new LetterPaintBlock("paint_letter_yellow_qr");
-	public static LetterPaintBlock paint_letter_yellow_st = new LetterPaintBlock("paint_letter_yellow_st");
-	public static LetterPaintBlock paint_letter_yellow_uv = new LetterPaintBlock("paint_letter_yellow_uv");
-	public static LetterPaintBlock paint_letter_yellow_wx = new LetterPaintBlock("paint_letter_yellow_wx");
-	public static LetterPaintBlock paint_letter_yellow_yz = new LetterPaintBlock("paint_letter_yellow_yz");
-	public static LetterPaintBlock paint_letter_yellow_01 = new LetterPaintBlock("paint_letter_yellow_01");
-	public static LetterPaintBlock paint_letter_yellow_23 = new LetterPaintBlock("paint_letter_yellow_23");
-	public static LetterPaintBlock paint_letter_yellow_45 = new LetterPaintBlock("paint_letter_yellow_45");
-	public static LetterPaintBlock paint_letter_yellow_67 = new LetterPaintBlock("paint_letter_yellow_67");
-	public static LetterPaintBlock paint_letter_yellow_89 = new LetterPaintBlock("paint_letter_yellow_89");
-	public static LetterPaintBlock paint_letter_yellow_punct_question_exclamation = new LetterPaintBlock("paint_letter_yellow_punct_question_exclamation");
-	public static LetterPaintBlock paint_letter_yellow_punct_hash_slash = new LetterPaintBlock("paint_letter_yellow_punct_hash_slash");
-
-
-
-	public static LinePaintBlock line_red_straight_full = new LinePaintBlock("line_red_straight_full");
-	public static LinePaintBlock line_red_straight_thick = new LinePaintBlock("line_red_straight_thick");
-	public static LinePaintBlock line_red_straight_double = new LinePaintBlock("line_red_straight_double");
-	public static LinePaintBlock line_red_straight_double_thick = new LinePaintBlock("line_red_straight_double_thick");
-	public static SideLinePaintBlock line_red_side_double = new SideLinePaintBlock("line_red_side_double");
-	public static SideLinePaintBlock line_red_side_double_thick = new SideLinePaintBlock("line_red_side_double_thick");
-	public static SideLinePaintBlock line_red_side_single = new SideLinePaintBlock("line_red_side_single");
-	public static SideLinePaintBlock line_red_side_single_thick = new SideLinePaintBlock("line_red_side_single_thick");
-	public static FarSideLinePaintBlock line_red_far_side = new FarSideLinePaintBlock("line_red_far_side");
-	public static FarSideLinePaintBlock line_red_far_side_thick = new FarSideLinePaintBlock("line_red_far_side_thick");
-	public static HatchBoxPaintBlock hatch_box_red = new HatchBoxPaintBlock("hatch_box_red");
-	public static Connected1x4PaintBlock line_red_crossing_diagonal = new Connected1x4PaintBlock("line_red_crossing_diagonal", true);
-	public static CrossingPaintBlock red_crossing_paint = new CrossingPaintBlock("red_crossing_paint");
-	public static SimpleLinePaintBlock line_red_middle_half_double = new SimpleLinePaintBlock("line_red_middle_half_double");
-	public static SimpleLinePaintBlock line_red_middle_dash_double = new SimpleLinePaintBlock("line_red_middle_dash_double");
-	public static SimpleLinePaintBlock line_red_middle_short = new SimpleLinePaintBlock("line_red_middle_short");
-	public static SimpleLinePaintBlock line_red_filter_lane = new SimpleLinePaintBlock("line_red_filter_lane");
-	public static SimpleLinePaintBlock line_red_side_short = new SimpleLinePaintBlock("line_red_side_short");
-	public static ArrowPaintBlock red_arrow = new ArrowPaintBlock("red_arrow");
-	public static ArrowLinePaintBlock red_arrow_line = new ArrowLinePaintBlock("red_arrow_line");
-	public static ArrowDiagonalPaintBlock red_arrow_diagonal = new ArrowDiagonalPaintBlock("red_arrow_diagonal");
-	public static IconPaintBlock red_wheelchair_icon = new IconPaintBlock("red_wheelchair_icon");
-	public static JunctionPaintBlock red_junction_a = new JunctionPaintBlock("red_junction_a");
-	public static JunctionPaintBlock red_junction_b = new JunctionPaintBlock("red_junction_b");
-	public static IconPaintBlock red_chevron = new IconPaintBlock("red_chevron");
-
-	public static Connected1x2PaintBlock red_pedestrian = new Connected1x2PaintBlock("red_pedestrian");
-	public static Connected1x2PaintBlock red_merge_arrow = new Connected1x2PaintBlock("red_merge_arrow");
-	public static Connected1x2PaintBlock red_give_way = new Connected1x2PaintBlock("red_give_way");
-
-	public static JunctionFilterLinePaintBlock red_junction_filter_left = new JunctionFilterLinePaintBlock("red_junction_filter_left", true);
-	public static JunctionFilterLinePaintBlock red_junction_filter_left_thin  = new JunctionFilterLinePaintBlock("red_junction_filter_left_thin", true);
-	public static JunctionFilterLinePaintBlock red_junction_filter_left_empty = new JunctionFilterLinePaintBlock("red_junction_filter_left_empty", true);
-	public static JunctionFilterLinePaintBlock red_junction_filter_right = new JunctionFilterLinePaintBlock("red_junction_filter_right", false);
-	public static JunctionFilterLinePaintBlock red_junction_filter_right_thin  = new JunctionFilterLinePaintBlock("red_junction_filter_right_thin", false);
-	public static JunctionFilterLinePaintBlock red_junction_filter_right_empty = new JunctionFilterLinePaintBlock("red_junction_filter_right_empty", false);
-
-	public static ChevronSideLinePaintBlock red_chevron_side_line = new ChevronSideLinePaintBlock("red_chevron_side_line");
-	public static SimpleLinePaintBlock line_red_thin_crossing = new SimpleLinePaintBlock("line_red_thin_crossing");
-
-	public static ChevronPaintBlock red_chevron_left_a = new ChevronPaintBlock("red_chevron_left_a", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_A, true);
-	public static ChevronPaintBlock red_chevron_left_b = new ChevronPaintBlock("red_chevron_left_b", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_B, false);
-	public static ChevronPaintBlock red_chevron_left_a_thin = new ChevronPaintBlock("red_chevron_left_a_thin", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_THIN_A, true);
-	public static ChevronPaintBlock red_chevron_left_b_thin = new ChevronPaintBlock("red_chevron_left_b_thin", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_THIN_B, false);
-
-	public static ChevronPaintBlock red_chevron_right_a = new ChevronPaintBlock("red_chevron_right_a", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_A, true);
-	public static ChevronPaintBlock red_chevron_right_b = new ChevronPaintBlock("red_chevron_right_b", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_B, false);
-	public static ChevronPaintBlock red_chevron_right_a_thin = new ChevronPaintBlock("red_chevron_right_a_thin", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_THIN_A, true);
-	public static ChevronPaintBlock red_chevron_right_b_thin = new ChevronPaintBlock("red_chevron_right_b_thin", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_THIN_B, false);
-
-	public static MultiIconPaintBlock red_chevron_mid = new MultiIconPaintBlock("red_chevron_mid", true);
-	public static Connected1x4PaintBlock red_junction_fork_mid = new Connected1x4PaintBlock("red_junction_fork_mid", false);
-	public static Connected1x4PaintBlock red_junction_fork_mid_thin = new Connected1x4PaintBlock("red_junction_fork_mid_thin", false);
-	public static Connected1x4PaintBlock red_junction_fork_chevron_mid = new Connected1x4PaintBlock("red_junction_fork_chevron_mid", false);
-	public static Connected1x4PaintBlock red_junction_fork_chevron_mid_thin = new Connected1x4PaintBlock("red_junction_fork_chevron_mid_thin", false);
-
-	public static MultiIconPaintBlock red_chevron_mid_left = new MultiIconPaintBlock("red_chevron_mid_left", true);
-	public static MultiIconPaintBlock red_chevron_mid_right = new MultiIconPaintBlock("red_chevron_mid_right", true);
-
-	public static MultiIconPaintBlock red_junction_side_line_connection = new MultiIconPaintBlock("red_junction_side_line_connection", true);
-	public static MultiIconPaintBlock red_junction_side_line_connection_thin = new MultiIconPaintBlock("red_junction_side_line_connection_thin", true);
-	public static MultiIconPaintBlock red_junction_side_line_connection_thick_thick = new MultiIconPaintBlock("red_junction_side_line_connection_thick_thick", true);
-	public static MultiIconPaintBlock red_junction_mid_line_connection = new MultiIconPaintBlock("red_junction_mid_line_connection", true);
-
-	public static Connected3x1PaintBlock red_slow  = new Connected3x1PaintBlock("red_slow");
-	public static Connected3x1PaintBlock red_stop  = new Connected3x1PaintBlock("red_stop");
-	public static Connected3x1PaintBlock red_bike  = new Connected3x1PaintBlock("red_bike");
-	public static Connected3x1PaintBlock red_bus   = new Connected3x1PaintBlock("red_bus");
-	public static Connected3x1PaintBlock red_taxi  = new Connected3x1PaintBlock("red_taxi");
-	public static Connected3x1PaintBlock red_lane  = new Connected3x1PaintBlock("red_lane");
-	public static Connected3x1PaintBlock red_keep  = new Connected3x1PaintBlock("red_keep");
-	public static Connected3x1PaintBlock red_clear = new Connected3x1PaintBlock("red_clear");
-	public static Connected3x1PaintBlock red_turn  = new Connected3x1PaintBlock("red_turn");
-	public static Connected3x1PaintBlock red_left  = new Connected3x1PaintBlock("red_left");
-	public static Connected3x1PaintBlock red_right = new Connected3x1PaintBlock("red_right");
-	public static Connected3x1PaintBlock red_only  = new Connected3x1PaintBlock("red_only");
-	public static Connected3x1PaintBlock red_no    = new Connected3x1PaintBlock("red_no");
-	public static Connected3x1PaintBlock red_entry = new Connected3x1PaintBlock("red_entry");
-	public static Connected3x1PaintBlock red_bike_icon = new Connected3x1PaintBlock("red_bike_icon");
-	public static Connected3x1PaintBlock red_town = new Connected3x1PaintBlock("red_town");
-	public static Connected3x1PaintBlock red_city = new Connected3x1PaintBlock("red_city");
-	public static Connected3x1PaintBlock red_ctre = new Connected3x1PaintBlock("red_ctre");
-
-	public static LetterPaintBlock paint_letter_red_ab = new LetterPaintBlock("paint_letter_red_ab");
-	public static LetterPaintBlock paint_letter_red_cd = new LetterPaintBlock("paint_letter_red_cd");
-	public static LetterPaintBlock paint_letter_red_ef = new LetterPaintBlock("paint_letter_red_ef");
-	public static LetterPaintBlock paint_letter_red_gh = new LetterPaintBlock("paint_letter_red_gh");
-	public static LetterPaintBlock paint_letter_red_ij = new LetterPaintBlock("paint_letter_red_ij");
-	public static LetterPaintBlock paint_letter_red_kl = new LetterPaintBlock("paint_letter_red_kl");
-	public static LetterPaintBlock paint_letter_red_mn = new LetterPaintBlock("paint_letter_red_mn");
-	public static LetterPaintBlock paint_letter_red_op = new LetterPaintBlock("paint_letter_red_op");
-	public static LetterPaintBlock paint_letter_red_qr = new LetterPaintBlock("paint_letter_red_qr");
-	public static LetterPaintBlock paint_letter_red_st = new LetterPaintBlock("paint_letter_red_st");
-	public static LetterPaintBlock paint_letter_red_uv = new LetterPaintBlock("paint_letter_red_uv");
-	public static LetterPaintBlock paint_letter_red_wx = new LetterPaintBlock("paint_letter_red_wx");
-	public static LetterPaintBlock paint_letter_red_yz = new LetterPaintBlock("paint_letter_red_yz");
-	public static LetterPaintBlock paint_letter_red_01 = new LetterPaintBlock("paint_letter_red_01");
-	public static LetterPaintBlock paint_letter_red_23 = new LetterPaintBlock("paint_letter_red_23");
-	public static LetterPaintBlock paint_letter_red_45 = new LetterPaintBlock("paint_letter_red_45");
-	public static LetterPaintBlock paint_letter_red_67 = new LetterPaintBlock("paint_letter_red_67");
-	public static LetterPaintBlock paint_letter_red_89 = new LetterPaintBlock("paint_letter_red_89");
-	public static LetterPaintBlock paint_letter_red_punct_question_exclamation = new LetterPaintBlock("paint_letter_red_punct_question_exclamation");
-	public static LetterPaintBlock paint_letter_red_punct_hash_slash = new LetterPaintBlock("paint_letter_red_punct_hash_slash");
 
 	public static BlockRoadSnow road_snow = new BlockRoadSnow("road_snow");
 
@@ -657,330 +343,121 @@ public class FRBlocks {
 		roadBlockList.add(sidewalk_clean);
 		roadBlockList.add(sidewalk_dark);
 		roadBlockList.add(sidewalk_tan);
+		
+		for (int i = 0; i < col.length; i++) {
+			paintBlockList.add(new LinePaintBlock("line_" + col[i] + "_straight_full", PaintGunItemRegistry.LINES, new int[] {0, 2}, true));
+			paintBlockList.add(new LinePaintBlock("line_" + col[i] + "_straight_thick", PaintGunItemRegistry.LINES, new int[] {0, 2}, true));
+			paintBlockList.add(new LinePaintBlock("line_" + col[i] + "_straight_double", PaintGunItemRegistry.LINES, new int[] {0, 2}, true));
+			paintBlockList.add(new LinePaintBlock("line_" + col[i] + "_straight_double_thick", PaintGunItemRegistry.LINES, new int[] {0, 2}, true));
+			
+			paintBlockList.add(new SideLinePaintBlock("line_" + col[i] + "_side_double", PaintGunItemRegistry.LINES, new int[] {0}, true));
+			paintBlockList.add(new SideLinePaintBlock("line_" + col[i] + "_side_double_thick", PaintGunItemRegistry.LINES, new int[] {0}, true));
+			paintBlockList.add(new SideLinePaintBlock("line_" + col[i] + "_side_single", PaintGunItemRegistry.LINES, new int[] {0}, true));
+			paintBlockList.add(new SideLinePaintBlock("line_" + col[i] + "_side_single_thick", PaintGunItemRegistry.LINES, new int[] {0}, true));
+			
+			paintBlockList.add(new FarSideLinePaintBlock("line_" + col[i] + "_far_side", PaintGunItemRegistry.LINES, new int[] {0}, true));
+			paintBlockList.add(new FarSideLinePaintBlock("line_" + col[i] + "_far_side_thick", PaintGunItemRegistry.LINES, new int[] {0}, true));
+			
+			paintBlockList.add(new SimpleLinePaintBlock("line_" + col[i] + "_middle_half_double", PaintGunItemRegistry.LINES, new int[] {0}, false));
+			paintBlockList.add(new SimpleLinePaintBlock("line_" + col[i] + "_middle_dash_double", PaintGunItemRegistry.LINES, new int[] {0}, false));
+			paintBlockList.add(new SimpleLinePaintBlock("line_" + col[i] + "_middle_short", PaintGunItemRegistry.LINES, new int[] {0}, false));
+			paintBlockList.add(new SimpleLinePaintBlock("line_" + col[i] + "_filter_lane", PaintGunItemRegistry.LINES, new int[] {0}, false));
+			paintBlockList.add(new SimpleLinePaintBlock("line_" + col[i] + "_side_short", PaintGunItemRegistry.LINES, new int[] {0}, false));
+			paintBlockList.add(new SimpleLinePaintBlock("line_" + col[i] + "_thin_crossing", PaintGunItemRegistry.LINES, new int[] {0}, false));
+			
+			paintBlockList.add(new IconPaintBlock(col[i] + "_wheelchair_icon", PaintGunItemRegistry.ICONS, new int[] {0}, false));
+			paintBlockList.add(new IconPaintBlock(col[i] + "_chevron", PaintGunItemRegistry.ICONS, new int[] {0}, false));
+			
+			paintBlockList.add(new Connected1x2PaintBlock(col[i] + "_pedestrian", PaintGunItemRegistry.ICONS, new int[] {0}, true));
+			paintBlockList.add(new Connected1x2PaintBlock(col[i] + "_merge_arrow", PaintGunItemRegistry.ICONS, new int[] {0}, true));
+			paintBlockList.add(new Connected1x2PaintBlock(col[i] + "_give_way", PaintGunItemRegistry.ICONS, new int[] {0}, true));
+			
+			paintBlockList.add(new JunctionFilterLinePaintBlock(col[i] + "_junction_filter_left", true, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true));
+			paintBlockList.add(new JunctionFilterLinePaintBlock(col[i] + "_junction_filter_left_thin", true, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true));
+			paintBlockList.add(new JunctionFilterLinePaintBlock(col[i] + "_junction_filter_left_empty", true, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true));
+			
+			paintBlockList.add(new JunctionFilterLinePaintBlock(col[i] + "_junction_filter_right", false, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true));
+			paintBlockList.add(new JunctionFilterLinePaintBlock(col[i] + "_junction_filter_right_thin", false, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true));
+			paintBlockList.add(new JunctionFilterLinePaintBlock(col[i] + "_junction_filter_right_empty", false, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true));
+			
+			paintBlockList.add(new Connected1x4PaintBlock(col[i] + "_junction_fork_mid", false, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true));
+			paintBlockList.add(new Connected1x4PaintBlock(col[i] + "_junction_fork_mid_thin", false, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true));
+			paintBlockList.add(new Connected1x4PaintBlock(col[i] + "_junction_fork_chevron_mid", false, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true));
+			paintBlockList.add(new Connected1x4PaintBlock(col[i] + "_junction_fork_chevron_mid_thin", false, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true));
+			
+			paintBlockList.add(new ChevronPaintBlock(col[i] + "_chevron_left_a", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_A, true, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true));
+			paintBlockList.add(new ChevronPaintBlock(col[i] + "_chevron_left_b", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_B, false, PaintGunItemRegistry.JUNCTIONS, null, true));
+			paintBlockList.add(new ChevronPaintBlock(col[i] + "_chevron_left_a_thin", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_THIN_A, true, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true));
+			paintBlockList.add(new ChevronPaintBlock(col[i] + "_chevron_left_b_thin", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_THIN_B, false, PaintGunItemRegistry.JUNCTIONS, null, true));
 
-		paintBlockList.add(line_white_straight_full);
-		paintBlockList.add(line_white_straight_thick);
-		paintBlockList.add(line_white_straight_double);
-		paintBlockList.add(line_white_straight_double_thick);
-		paintBlockList.add(line_yellow_straight_full);
-		paintBlockList.add(line_yellow_straight_thick);
-		paintBlockList.add(line_yellow_straight_double);
-		paintBlockList.add(line_yellow_straight_double_thick);
-		paintBlockList.add(line_red_straight_full);
-		paintBlockList.add(line_red_straight_thick);
-		paintBlockList.add(line_red_straight_double);
-		paintBlockList.add(line_red_straight_double_thick);
+			paintBlockList.add(new ChevronPaintBlock(col[i] + "_chevron_right_a", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_A, true, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true));
+			paintBlockList.add(new ChevronPaintBlock(col[i] + "_chevron_right_b", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_B, false, PaintGunItemRegistry.JUNCTIONS, null, true));
+			paintBlockList.add(new ChevronPaintBlock(col[i] + "_chevron_right_a_thin", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_THIN_A, true, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true));
+			paintBlockList.add(new ChevronPaintBlock(col[i] + "_chevron_right_b_thin", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_THIN_B, false, PaintGunItemRegistry.JUNCTIONS, null, true));
+			
+			paintBlockList.add(new MultiIconPaintBlock(col[i] + "_junction_side_line_connection", true, PaintGunItemRegistry.JUNCTIONS, new int[] {12, 8, 0, 4}, false));
+			paintBlockList.add(new MultiIconPaintBlock(col[i] + "_junction_side_line_connection_thin", true, PaintGunItemRegistry.JUNCTIONS, new int[] {4, 12, 0, 8}, false));
+			paintBlockList.add(new MultiIconPaintBlock(col[i] + "_junction_side_line_connection_thick_thick", true, PaintGunItemRegistry.JUNCTIONS, new int[] {0, 4, 8, 12}, false));
+			paintBlockList.add(new MultiIconPaintBlock(col[i] + "_junction_mid_line_connection", true, PaintGunItemRegistry.JUNCTIONS, new int[] {0, 4, 8, 12}, false));
+			
+			paintBlockList.add(new MultiIconPaintBlock(col[i] + "_chevron_mid", true, PaintGunItemRegistry.JUNCTIONS, new int[] {0, 8}, false));
+			
+			paintBlockList.add(new MultiIconPaintBlock(col[i] + "_chevron_mid_left", true, PaintGunItemRegistry.JUNCTIONS, new int[] {0, 8}, false));
+			paintBlockList.add(new MultiIconPaintBlock(col[i] + "_chevron_mid_right", true, PaintGunItemRegistry.JUNCTIONS, new int[] {0, 8}, false));
+			
+			paintBlockList.add(new ChevronSideLinePaintBlock(col[i] + "_chevron_side_line", PaintGunItemRegistry.JUNCTIONS, new int[] {0}, false));
+			
+			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_slow", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false));
+			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_stop", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false));
+			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_bike", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false));
+			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_bus", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false));
+			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_taxi", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false));
+			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_lane", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false));
+			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_keep", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false));
+			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_clear", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false));
+			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_turn", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false));
+			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_left", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false));
+			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_right", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false));
+			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_only", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false));
+			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_no", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false));
+			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_entry", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false));
+			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_bike_icon", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false));
+			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_town", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false));
+			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_city", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false));
+			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_ctre", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false));
 
-		paintBlockList.add(line_white_side_double);
-		paintBlockList.add(line_white_side_double_thick);
-		paintBlockList.add(line_white_side_single);
-		paintBlockList.add(line_white_side_single_thick);
-		paintBlockList.add(line_yellow_side_double);
-		paintBlockList.add(line_yellow_side_double_thick);
-		paintBlockList.add(line_yellow_side_single);
-		paintBlockList.add(line_yellow_side_single_thick);
-		paintBlockList.add(line_red_side_double);
-		paintBlockList.add(line_red_side_double_thick);
-		paintBlockList.add(line_red_side_single);
-		paintBlockList.add(line_red_side_single_thick);
-
-		paintBlockList.add(line_white_far_side);
-		paintBlockList.add(line_white_far_side_thick);
-		paintBlockList.add(line_yellow_far_side);
-		paintBlockList.add(line_yellow_far_side_thick);
-		paintBlockList.add(line_red_far_side);
-		paintBlockList.add(line_red_far_side_thick);
-
-		paintBlockList.add(line_white_middle_half_double);
-		paintBlockList.add(line_white_middle_dash_double);
-		paintBlockList.add(line_white_middle_short);
-		paintBlockList.add(line_white_filter_lane);
-		paintBlockList.add(line_white_side_short);
-		paintBlockList.add(line_white_thin_crossing);
-
-		paintBlockList.add(line_yellow_middle_half_double);
-		paintBlockList.add(line_yellow_middle_dash_double);
-		paintBlockList.add(line_yellow_middle_short);
-		paintBlockList.add(line_yellow_filter_lane);
-		paintBlockList.add(line_yellow_side_short);
-		paintBlockList.add(line_yellow_thin_crossing);
-
-		paintBlockList.add(line_red_middle_half_double);
-		paintBlockList.add(line_red_middle_dash_double);
-		paintBlockList.add(line_red_middle_short);
-		paintBlockList.add(line_red_filter_lane);
-		paintBlockList.add(line_red_side_short);
-		paintBlockList.add(line_red_thin_crossing);
-
-		paintBlockList.add(white_wheelchair_icon);
-		paintBlockList.add(white_chevron);
-		paintBlockList.add(white_pedestrian);
-		paintBlockList.add(white_merge_arrow);
-		paintBlockList.add(white_give_way);
-
-		paintBlockList.add(yellow_wheelchair_icon);
-		paintBlockList.add(yellow_chevron);
-		paintBlockList.add(yellow_pedestrian);
-		paintBlockList.add(yellow_merge_arrow);
-		paintBlockList.add(yellow_give_way);
-
-		paintBlockList.add(red_wheelchair_icon);
-		paintBlockList.add(red_chevron);
-		paintBlockList.add(red_pedestrian);
-		paintBlockList.add(red_merge_arrow);
-		paintBlockList.add(red_give_way);
-
-		paintBlockList.add(white_junction_filter_left);
-		paintBlockList.add(white_junction_filter_left_thin);
-		paintBlockList.add(white_junction_filter_left_empty);
-
-		paintBlockList.add(white_junction_filter_right);
-		paintBlockList.add(white_junction_filter_right_thin);
-		paintBlockList.add(white_junction_filter_right_empty);
-
-		paintBlockList.add(white_junction_fork_mid);
-		paintBlockList.add(white_junction_fork_mid_thin);
-		paintBlockList.add(white_junction_fork_chevron_mid);
-		paintBlockList.add(white_junction_fork_chevron_mid_thin);
-
-		paintBlockList.add(white_chevron_left_a);
-		paintBlockList.add(white_chevron_left_b);
-		paintBlockList.add(white_chevron_left_a_thin);
-		paintBlockList.add(white_chevron_left_b_thin);
-
-		paintBlockList.add(white_chevron_right_a);
-		paintBlockList.add(white_chevron_right_b);
-		paintBlockList.add(white_chevron_right_a_thin);
-		paintBlockList.add(white_chevron_right_b_thin);
-
-		paintBlockList.add(white_junction_side_line_connection);
-		paintBlockList.add(white_junction_side_line_connection_thin);
-		paintBlockList.add(white_junction_side_line_connection_thick_thick);
-		paintBlockList.add(white_junction_mid_line_connection);
-
-		paintBlockList.add(white_chevron_mid);
-		paintBlockList.add(white_chevron_mid_left);
-		paintBlockList.add(white_chevron_mid_right);
-
-		paintBlockList.add(white_chevron_side_line);
-
-
-		paintBlockList.add(yellow_junction_filter_left);
-		paintBlockList.add(yellow_junction_filter_left_thin);
-		paintBlockList.add(yellow_junction_filter_left_empty);
-
-		paintBlockList.add(yellow_junction_filter_right);
-		paintBlockList.add(yellow_junction_filter_right_thin);
-		paintBlockList.add(yellow_junction_filter_right_empty);
-
-		paintBlockList.add(yellow_junction_fork_mid);
-		paintBlockList.add(yellow_junction_fork_mid_thin);
-		paintBlockList.add(yellow_junction_fork_chevron_mid);
-		paintBlockList.add(yellow_junction_fork_chevron_mid_thin);
-
-		paintBlockList.add(yellow_chevron_left_a);
-		paintBlockList.add(yellow_chevron_left_b);
-		paintBlockList.add(yellow_chevron_left_a_thin);
-		paintBlockList.add(yellow_chevron_left_b_thin);
-
-		paintBlockList.add(yellow_chevron_right_a);
-		paintBlockList.add(yellow_chevron_right_b);
-		paintBlockList.add(yellow_chevron_right_a_thin);
-		paintBlockList.add(yellow_chevron_right_b_thin);
-
-		paintBlockList.add(yellow_junction_side_line_connection);
-		paintBlockList.add(yellow_junction_side_line_connection_thin);
-		paintBlockList.add(yellow_junction_side_line_connection_thick_thick);
-		paintBlockList.add(yellow_junction_mid_line_connection);
-
-		paintBlockList.add(yellow_chevron_mid);
-		paintBlockList.add(yellow_chevron_mid_left);
-		paintBlockList.add(yellow_chevron_mid_right);
-
-		paintBlockList.add(yellow_chevron_side_line);
-
-
-		paintBlockList.add(red_junction_filter_left);
-		paintBlockList.add(red_junction_filter_left_thin);
-		paintBlockList.add(red_junction_filter_left_empty);
-
-		paintBlockList.add(red_junction_filter_right);
-		paintBlockList.add(red_junction_filter_right_thin);
-		paintBlockList.add(red_junction_filter_right_empty);
-
-		paintBlockList.add(red_junction_fork_mid);
-		paintBlockList.add(red_junction_fork_mid_thin);
-		paintBlockList.add(red_junction_fork_chevron_mid);
-		paintBlockList.add(red_junction_fork_chevron_mid_thin);
-
-		paintBlockList.add(red_chevron_left_a);
-		paintBlockList.add(red_chevron_left_b);
-		paintBlockList.add(red_chevron_left_a_thin);
-		paintBlockList.add(red_chevron_left_b_thin);
-
-		paintBlockList.add(red_chevron_right_a);
-		paintBlockList.add(red_chevron_right_b);
-		paintBlockList.add(red_chevron_right_a_thin);
-		paintBlockList.add(red_chevron_right_b_thin);
-
-		paintBlockList.add(red_junction_side_line_connection);
-		paintBlockList.add(red_junction_side_line_connection_thin);
-		paintBlockList.add(red_junction_side_line_connection_thick_thick);
-		paintBlockList.add(red_junction_mid_line_connection);
-
-		paintBlockList.add(red_chevron_mid);
-		paintBlockList.add(red_chevron_mid_left);
-		paintBlockList.add(red_chevron_mid_right);
-
-		paintBlockList.add(red_chevron_side_line);
-
-
-		paintBlockList.add(white_slow);
-		paintBlockList.add(white_stop);
-		paintBlockList.add(white_bike);
-		paintBlockList.add(white_bus);
-		paintBlockList.add(white_taxi);
-		paintBlockList.add(white_lane);
-		paintBlockList.add(white_keep);
-		paintBlockList.add(white_clear);
-		paintBlockList.add(white_turn);
-		paintBlockList.add(white_left);
-		paintBlockList.add(white_right);
-		paintBlockList.add(white_only);
-		paintBlockList.add(white_no);
-		paintBlockList.add(white_entry);
-		paintBlockList.add(white_bike_icon);
-		paintBlockList.add(white_town);
-		paintBlockList.add(white_city);
-		paintBlockList.add(white_ctre);
-
-		paintBlockList.add(yellow_slow);
-		paintBlockList.add(yellow_stop);
-		paintBlockList.add(yellow_bike);
-		paintBlockList.add(yellow_bus);
-		paintBlockList.add(yellow_taxi);
-		paintBlockList.add(yellow_lane);
-		paintBlockList.add(yellow_keep);
-		paintBlockList.add(yellow_clear);
-		paintBlockList.add(yellow_turn);
-		paintBlockList.add(yellow_left);
-		paintBlockList.add(yellow_right);
-		paintBlockList.add(yellow_only);
-		paintBlockList.add(yellow_no);
-		paintBlockList.add(yellow_entry);
-		paintBlockList.add(yellow_bike_icon);
-		paintBlockList.add(yellow_town);
-		paintBlockList.add(yellow_city);
-		paintBlockList.add(yellow_ctre);
-
-		paintBlockList.add(red_slow);
-		paintBlockList.add(red_stop);
-		paintBlockList.add(red_bike);
-		paintBlockList.add(red_bus);
-		paintBlockList.add(red_taxi);
-		paintBlockList.add(red_lane);
-		paintBlockList.add(red_keep);
-		paintBlockList.add(red_clear);
-		paintBlockList.add(red_turn);
-		paintBlockList.add(red_left);
-		paintBlockList.add(red_right);
-		paintBlockList.add(red_only);
-		paintBlockList.add(red_no);
-		paintBlockList.add(red_entry);
-		paintBlockList.add(red_bike_icon);
-		paintBlockList.add(red_town);
-		paintBlockList.add(red_city);
-		paintBlockList.add(red_ctre);
-
-		paintBlockList.add(paint_letter_white_ab);
-		paintBlockList.add(paint_letter_white_cd);
-		paintBlockList.add(paint_letter_white_ef);
-		paintBlockList.add(paint_letter_white_gh);
-		paintBlockList.add(paint_letter_white_ij);
-		paintBlockList.add(paint_letter_white_kl);
-		paintBlockList.add(paint_letter_white_mn);
-		paintBlockList.add(paint_letter_white_op);
-		paintBlockList.add(paint_letter_white_qr);
-		paintBlockList.add(paint_letter_white_st);
-		paintBlockList.add(paint_letter_white_uv);
-		paintBlockList.add(paint_letter_white_wx);
-		paintBlockList.add(paint_letter_white_yz);
-		paintBlockList.add(paint_letter_white_01);
-		paintBlockList.add(paint_letter_white_23);
-		paintBlockList.add(paint_letter_white_45);
-		paintBlockList.add(paint_letter_white_67);
-		paintBlockList.add(paint_letter_white_89);
-		paintBlockList.add(paint_letter_white_punct_question_exclamation);
-		paintBlockList.add(paint_letter_white_punct_hash_slash);
-
-		paintBlockList.add(paint_letter_yellow_ab);
-		paintBlockList.add(paint_letter_yellow_cd);
-		paintBlockList.add(paint_letter_yellow_ef);
-		paintBlockList.add(paint_letter_yellow_gh);
-		paintBlockList.add(paint_letter_yellow_ij);
-		paintBlockList.add(paint_letter_yellow_kl);
-		paintBlockList.add(paint_letter_yellow_mn);
-		paintBlockList.add(paint_letter_yellow_op);
-		paintBlockList.add(paint_letter_yellow_qr);
-		paintBlockList.add(paint_letter_yellow_st);
-		paintBlockList.add(paint_letter_yellow_uv);
-		paintBlockList.add(paint_letter_yellow_wx);
-		paintBlockList.add(paint_letter_yellow_yz);
-		paintBlockList.add(paint_letter_yellow_01);
-		paintBlockList.add(paint_letter_yellow_23);
-		paintBlockList.add(paint_letter_yellow_45);
-		paintBlockList.add(paint_letter_yellow_67);
-		paintBlockList.add(paint_letter_yellow_89);
-		paintBlockList.add(paint_letter_yellow_punct_question_exclamation);
-		paintBlockList.add(paint_letter_yellow_punct_hash_slash);
-
-		paintBlockList.add(paint_letter_red_ab);
-		paintBlockList.add(paint_letter_red_cd);
-		paintBlockList.add(paint_letter_red_ef);
-		paintBlockList.add(paint_letter_red_gh);
-		paintBlockList.add(paint_letter_red_ij);
-		paintBlockList.add(paint_letter_red_kl);
-		paintBlockList.add(paint_letter_red_mn);
-		paintBlockList.add(paint_letter_red_op);
-		paintBlockList.add(paint_letter_red_qr);
-		paintBlockList.add(paint_letter_red_st);
-		paintBlockList.add(paint_letter_red_uv);
-		paintBlockList.add(paint_letter_red_wx);
-		paintBlockList.add(paint_letter_red_yz);
-		paintBlockList.add(paint_letter_red_01);
-		paintBlockList.add(paint_letter_red_23);
-		paintBlockList.add(paint_letter_red_45);
-		paintBlockList.add(paint_letter_red_67);
-		paintBlockList.add(paint_letter_red_89);
-		paintBlockList.add(paint_letter_red_punct_question_exclamation);
-		paintBlockList.add(paint_letter_red_punct_hash_slash);
-
-		paintBlockList.add(hatch_box_white);
-		paintBlockList.add(line_white_crossing_diagonal);
-		paintBlockList.add(white_crossing_paint);
-		paintBlockList.add(white_arrow);
-		paintBlockList.add(white_arrow_line);
-		paintBlockList.add(white_arrow_diagonal);
-		paintBlockList.add(white_junction_a);
-		paintBlockList.add(white_junction_b);
-
-		paintBlockList.add(hatch_box_yellow);
-		paintBlockList.add(line_yellow_crossing_diagonal);
-		paintBlockList.add(yellow_crossing_paint);
-		paintBlockList.add(yellow_arrow);
-		paintBlockList.add(yellow_arrow_line);
-		paintBlockList.add(yellow_arrow_diagonal);
-		paintBlockList.add(yellow_junction_a);
-		paintBlockList.add(yellow_junction_b);
-
-		paintBlockList.add(hatch_box_red);
-		paintBlockList.add(line_red_crossing_diagonal);
-		paintBlockList.add(red_crossing_paint);
-		paintBlockList.add(red_arrow);
-		paintBlockList.add(red_arrow_line);
-		paintBlockList.add(red_arrow_diagonal);
-		paintBlockList.add(red_junction_a);
-		paintBlockList.add(red_junction_b);
+			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_ab", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false));
+			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_cd", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false));
+			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_ef", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false));
+			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_gh", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false));
+			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_ij", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false));
+			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_kl", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false));
+			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_mn", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false));
+			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_op", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false));
+			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_qr", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false));
+			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_st", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false));
+			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_uv", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false));
+			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_wx", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false));
+			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_yz", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false));
+			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_01", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false));
+			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_23", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false));
+			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_45", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false));
+			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_67", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false));
+			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_89", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false));
+			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_punct_question_exclamation", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false));
+			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_punct_hash_slash", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false));
+			
+			paintBlockList.add(new HatchBoxPaintBlock("hatch_box_" + col[i], PaintGunItemRegistry.ICONS, new int[] {0}, true));
+			paintBlockList.add(new Connected1x4PaintBlock("line_" + col[i] + "_crossing_diagonal", true, PaintGunItemRegistry.ICONS, new int[] {0}, true));
+			paintBlockList.add(new CrossingPaintBlock(col[i] + "_crossing_paint", PaintGunItemRegistry.ICONS, new int[] {0}, true));
+			
+			paintBlockList.add(new ArrowPaintBlock(col[i] + "_arrow", PaintGunItemRegistry.ICONS, new int[] {0, 4}, true));
+			paintBlockList.add(new ArrowLinePaintBlock(col[i] + "_arrow_line", PaintGunItemRegistry.ICONS, new int[] {0}, true));
+			paintBlockList.add(new ArrowDiagonalPaintBlock(col[i] + "_arrow_diagonal", PaintGunItemRegistry.ICONS, new int[] {0, 4}, true));
+			
+			paintBlockList.add(new JunctionPaintBlock(col[i] + "_junction_a", PaintGunItemRegistry.ICONS, new int[] {4, 8, 0}, false));
+			paintBlockList.add(new JunctionPaintBlock(col[i] + "_junction_b", PaintGunItemRegistry.ICONS, new int[] {0, 8, 4}, false));
+		}
 
 		catsEyeList.add(cats_eye_white);
 		catsEyeList.add(cats_eye_yellow);
@@ -1124,6 +601,7 @@ public class FRBlocks {
 		for (int i = 0; i < paintBlockList.size(); i++)  { registry.register(paintBlockList.get(i)); }
 		for (int i = 0; i < genericList.size(); i++)  { registry.register(genericList.get(i)); }
 		for (int i = 0; i < catsEyeList.size(); i++)  { registry.register(catsEyeList.get(i)); }
+		for (int i = 0; i < DynamicBlockRegistry.customPaints.size(); i++) { registry.register(DynamicBlockRegistry.customPaints.get(i)); }
 	}
 
 	public static void registerItemBlocks(IForgeRegistry<Item> registry) {
@@ -1132,7 +610,8 @@ public class FRBlocks {
 		for (int i = 0; i < paintBlockList.size(); i++)  { registry.register(new RoadItemBlock(paintBlockList.get(i)).setRegistryName(paintBlockList.get(i).getRegistryName())); }
 		for (int i = 0; i < genericList.size(); i++)  { registry.register(new RoadItemBlock(genericList.get(i)).setRegistryName(genericList.get(i).getRegistryName())); }
 		for (int i = 0; i < catsEyeList.size(); i++)  { registry.register(new RoadItemBlock(catsEyeList.get(i)).setRegistryName(catsEyeList.get(i).getRegistryName())); }
-
+		for (int i = 0; i < DynamicBlockRegistry.customPaints.size(); i++) { registry.register(new RoadItemBlock(DynamicBlockRegistry.customPaints.get(i)).setRegistryName(DynamicBlockRegistry.customPaints.get(i).getRegistryName())); }
+		
 		registry.register(new RoadItemBlock(paint_filler).setRegistryName(paint_filler.getRegistryName()));
 		registry.register(new RoadItemBlock(tar_distiller).setRegistryName(tar_distiller.getRegistryName()));
 		registry.register(new RoadItemBlock(road_factory).setRegistryName(road_factory.getRegistryName()));
@@ -1184,6 +663,7 @@ public class FRBlocks {
 		for (int i = 0; i < paintBlockList.size(); i++)  { paintBlockList.get(i).initModel(); }
 		for (int i = 0; i < genericList.size(); i++)  { genericList.get(i).initModel(); }
 		for (int i = 0; i < catsEyeList.size(); i++)  { catsEyeList.get(i).initModel(); }
+		for (int i = 0; i < DynamicBlockRegistry.customPaints.size(); i++) { DynamicBlockRegistry.customPaints.get(i).initModel(); }
 
 		paint_filler.initModel();
 		tar_distiller.initModel();
@@ -1231,168 +711,36 @@ public class FRBlocks {
 
 	//We only register white variants. Yellow and red can be taken from the white.
 	public static void registerPaintGunEntries() {
-		PaintGunItemRegistry.registerLine(line_white_straight_full);
-		PaintGunItemRegistry.registerLine(line_white_straight_full, 2);
-		PaintGunItemRegistry.registerLine(line_white_straight_thick);
-		PaintGunItemRegistry.registerLine(line_white_straight_thick, 2);
-		PaintGunItemRegistry.registerLine(line_white_straight_double);
-		PaintGunItemRegistry.registerLine(line_white_straight_double, 2);
-		PaintGunItemRegistry.registerLine(line_white_straight_double_thick);
-		PaintGunItemRegistry.registerLine(line_white_straight_double_thick, 2);
-
-		PaintGunItemRegistry.registerLine(line_white_side_double);
-		PaintGunItemRegistry.registerLine(line_white_side_double_thick);
-		PaintGunItemRegistry.registerLine(line_white_side_single);
-		PaintGunItemRegistry.registerLine(line_white_side_single_thick);
-
-		PaintGunItemRegistry.registerLine(line_white_far_side);
-		PaintGunItemRegistry.registerLine(line_white_far_side_thick);
-
-		PaintGunItemRegistry.registerLine(line_white_middle_half_double);
-		PaintGunItemRegistry.registerLine(line_white_middle_dash_double);
-		PaintGunItemRegistry.registerLine(line_white_middle_short);
-		PaintGunItemRegistry.registerLine(line_white_filter_lane);
-		PaintGunItemRegistry.registerLine(line_white_side_short);
-
-		//-----------------------------------------------------
-
-		PaintGunItemRegistry.registerIcons(white_wheelchair_icon);
-		PaintGunItemRegistry.registerIcons(white_chevron);
-		PaintGunItemRegistry.registerIcons(white_pedestrian);
-		PaintGunItemRegistry.registerIcons(white_merge_arrow);
-		PaintGunItemRegistry.registerIcons(white_give_way);
-
-		PaintGunItemRegistry.registerIcons(white_arrow_line);
-		PaintGunItemRegistry.registerIcons(white_arrow);
-		PaintGunItemRegistry.registerIcons(white_arrow, 4);
-		PaintGunItemRegistry.registerIcons(white_arrow_diagonal, 4);
-		PaintGunItemRegistry.registerIcons(white_arrow_diagonal);
-
-		PaintGunItemRegistry.registerIcons(white_crossing_paint);
-		PaintGunItemRegistry.registerIcons(line_white_crossing_diagonal);
-
-		PaintGunItemRegistry.registerIcons(white_junction_a, 4);
-		PaintGunItemRegistry.registerIcons(white_junction_a, 8);
-		PaintGunItemRegistry.registerIcons(white_junction_a, 0);
-		PaintGunItemRegistry.registerIcons(white_junction_b, 0);
-		PaintGunItemRegistry.registerIcons(white_junction_b, 8);
-		PaintGunItemRegistry.registerIcons(white_junction_b, 4);
-
-		PaintGunItemRegistry.registerIcons(hatch_box_white);
-
-		PaintGunItemRegistry.registerIcons(line_white_thin_crossing);
-
-		//-----------------------------------------------------
-
-		PaintGunItemRegistry.registerLetters(paint_letter_white_ab);
-		PaintGunItemRegistry.registerLetters(paint_letter_white_cd);
-		PaintGunItemRegistry.registerLetters(paint_letter_white_ef);
-		PaintGunItemRegistry.registerLetters(paint_letter_white_gh);
-		PaintGunItemRegistry.registerLetters(paint_letter_white_ij);
-		PaintGunItemRegistry.registerLetters(paint_letter_white_kl);
-		PaintGunItemRegistry.registerLetters(paint_letter_white_mn);
-		PaintGunItemRegistry.registerLetters(paint_letter_white_op);
-		PaintGunItemRegistry.registerLetters(paint_letter_white_qr);
-		PaintGunItemRegistry.registerLetters(paint_letter_white_st);
-		PaintGunItemRegistry.registerLetters(paint_letter_white_uv);
-		PaintGunItemRegistry.registerLetters(paint_letter_white_wx);
-		PaintGunItemRegistry.registerLetters(paint_letter_white_yz);
-		PaintGunItemRegistry.registerLetters(paint_letter_white_01);
-		PaintGunItemRegistry.registerLetters(paint_letter_white_23);
-		PaintGunItemRegistry.registerLetters(paint_letter_white_45);
-		PaintGunItemRegistry.registerLetters(paint_letter_white_67);
-		PaintGunItemRegistry.registerLetters(paint_letter_white_89);
-		PaintGunItemRegistry.registerLetters(paint_letter_white_punct_question_exclamation);
-		PaintGunItemRegistry.registerLetters(paint_letter_white_punct_hash_slash);
-
-		//-----------------------------------------------------
-
-		PaintGunItemRegistry.registerText(white_slow);
-		PaintGunItemRegistry.registerText(white_stop);
-		PaintGunItemRegistry.registerText(white_bike);
-		PaintGunItemRegistry.registerText(white_bus);
-		PaintGunItemRegistry.registerText(white_taxi);
-		PaintGunItemRegistry.registerText(white_lane);
-		PaintGunItemRegistry.registerText(white_keep);
-		PaintGunItemRegistry.registerText(white_clear);
-		PaintGunItemRegistry.registerText(white_turn);
-		PaintGunItemRegistry.registerText(white_left);
-		PaintGunItemRegistry.registerText(white_right);
-		PaintGunItemRegistry.registerText(white_only);
-		PaintGunItemRegistry.registerText(white_no);
-		PaintGunItemRegistry.registerText(white_entry);
-		PaintGunItemRegistry.registerText(white_town);
-		PaintGunItemRegistry.registerText(white_city);
-		PaintGunItemRegistry.registerText(white_ctre);
-		PaintGunItemRegistry.registerText(white_bike_icon);
-
-		PaintGunItemRegistry.registerText(white_slow, 4);
-		PaintGunItemRegistry.registerText(white_stop, 4);
-		PaintGunItemRegistry.registerText(white_bike, 4);
-		PaintGunItemRegistry.registerText(white_bus, 4);
-		PaintGunItemRegistry.registerText(white_taxi, 4);
-		PaintGunItemRegistry.registerText(white_lane, 4);
-		PaintGunItemRegistry.registerText(white_keep, 4);
-		PaintGunItemRegistry.registerText(white_clear, 4);
-		PaintGunItemRegistry.registerText(white_turn, 4);
-		PaintGunItemRegistry.registerText(white_left, 4);
-		PaintGunItemRegistry.registerText(white_right, 4);
-		PaintGunItemRegistry.registerText(white_only, 4);
-		PaintGunItemRegistry.registerText(white_no, 4);
-		PaintGunItemRegistry.registerText(white_entry, 4);
-		PaintGunItemRegistry.registerText(white_town, 4);
-		PaintGunItemRegistry.registerText(white_city, 4);
-		PaintGunItemRegistry.registerText(white_ctre, 4);
-		PaintGunItemRegistry.registerText(white_bike_icon, 4);
-
-		//-----------------------------------------------------
-
-		PaintGunItemRegistry.registerJunction(white_chevron_left_a);
-		PaintGunItemRegistry.registerJunction(white_chevron_mid);
-		PaintGunItemRegistry.registerJunction(white_chevron_right_a);
-		PaintGunItemRegistry.registerJunction(white_chevron_left_a_thin);
-		PaintGunItemRegistry.registerJunction(white_chevron_mid, 8);
-		PaintGunItemRegistry.registerJunction(white_chevron_right_a_thin);
-
-		PaintGunItemRegistry.registerJunction(white_junction_filter_left);
-		PaintGunItemRegistry.registerJunction(white_junction_filter_right);
-		PaintGunItemRegistry.registerJunction(white_junction_filter_left_thin);
-		PaintGunItemRegistry.registerJunction(white_junction_filter_right_thin);
-		PaintGunItemRegistry.registerJunction(white_junction_filter_left_empty);
-		PaintGunItemRegistry.registerJunction(white_junction_filter_right_empty);
-
-		PaintGunItemRegistry.registerJunction(white_chevron_mid_right);
-		PaintGunItemRegistry.registerJunction(white_chevron_mid_left);
-		PaintGunItemRegistry.registerJunction(white_chevron_mid_right, 8);
-		PaintGunItemRegistry.registerJunction(white_chevron_mid_left, 8);
-
-		PaintGunItemRegistry.registerJunction(white_chevron_side_line);
-
-		PaintGunItemRegistry.registerJunction(white_junction_fork_mid);
-		PaintGunItemRegistry.registerJunction(white_junction_fork_mid_thin);
-		PaintGunItemRegistry.registerJunction(white_junction_fork_chevron_mid);
-		PaintGunItemRegistry.registerJunction(white_junction_fork_chevron_mid_thin);
-
-		PaintGunItemRegistry.registerJunction(white_junction_side_line_connection, 12);
-		PaintGunItemRegistry.registerJunction(white_junction_side_line_connection, 8);
-		PaintGunItemRegistry.registerJunction(white_junction_side_line_connection, 0);
-		PaintGunItemRegistry.registerJunction(white_junction_side_line_connection, 4);
-
-		PaintGunItemRegistry.registerJunction(white_junction_side_line_connection_thin, 4);
-		PaintGunItemRegistry.registerJunction(white_junction_side_line_connection_thin, 12);
-		PaintGunItemRegistry.registerJunction(white_junction_side_line_connection_thin, 0);
-		PaintGunItemRegistry.registerJunction(white_junction_side_line_connection_thin, 8);
-
-		PaintGunItemRegistry.registerJunction(white_junction_side_line_connection_thick_thick, 0);
-		PaintGunItemRegistry.registerJunction(white_junction_side_line_connection_thick_thick, 4);
-		PaintGunItemRegistry.registerJunction(white_junction_side_line_connection_thick_thick, 8);
-		PaintGunItemRegistry.registerJunction(white_junction_side_line_connection_thick_thick, 12);
-
-		PaintGunItemRegistry.registerJunction(white_junction_mid_line_connection, 0);
-		PaintGunItemRegistry.registerJunction(white_junction_mid_line_connection, 4);
-		PaintGunItemRegistry.registerJunction(white_junction_mid_line_connection, 8);
-		PaintGunItemRegistry.registerJunction(white_junction_mid_line_connection, 12);
-
-		FurenikusRoads.logger.info("REGISTRATION COMPLETE! " + PaintGunItemRegistry.lines.size() + " lines, " + PaintGunItemRegistry.icons.size() + " icons, " + PaintGunItemRegistry.letters.size() + " letters, " + PaintGunItemRegistry.text.size() + " texts, " + PaintGunItemRegistry.junction.size() + " junctions.");
+		System.out.println("#############################");
+		System.out.println("#############################");
+		System.out.println("#############################");
+		System.out.println("Registering paint gun entries. Will check " + paintBlockList.size() + " entries.");
+		System.out.println("#############################");
+		System.out.println("#############################");
+		System.out.println("#############################");
+		int count = 0;
+		for (int i = 0; i < paintBlockList.size(); i++) {
+			PaintBlockBase block = paintBlockList.get(i);
+			
+			if (block.getUnlocalizedName().contains("white")) {
+				if (block.getCoreMetas() != null) {
+					for (int j = 0; j < block.getCoreMetas().length; j++) {
+						PaintGunItemRegistry.registerPaint(block, block.getCoreMetas()[j]);
+						count++;
+					}
+				}
+			}
+		}
+		
+		for (int i = 0; i < DynamicBlockRegistry.customPaints.size(); i++) {
+			PaintBlockBase block = DynamicBlockRegistry.customPaints.get(i);
+			
+			if (block.getUnlocalizedName().contains("white")) {
+				PaintGunItemRegistry.registerPaint(block);
+				count++;
+			}
+		}
+		
+		FurenikusRoads.logger.info("REGISTRATION COMPLETE! " + count + "Paints registered");
 	}
 }

@@ -1,11 +1,11 @@
 package com.silvaniastudios.roads.blocks.paint;
 
-
 import java.util.ArrayList;
 
 import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.blocks.FRBlocks;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyEnum;
@@ -22,6 +22,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -36,8 +37,10 @@ public class ChevronPaintBlock extends PaintBlockBase {
 	public static final PropertyBool EDGE = PropertyBool.create("edge");
 	public static final PropertyBool HIDE = PropertyBool.create("hide");
 	
-	public ChevronPaintBlock(String name, EnumJunctionConnections type, boolean aType) {
-		super(name);
+	
+	
+	public ChevronPaintBlock(String name, EnumJunctionConnections type, boolean aType, String category, int[] coreMetas, boolean dynamic) {
+		super(name, category, coreMetas, dynamic);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(META_ID, EnumType.NORTH).withProperty(TYPE, type).withProperty(EDGE, false).withProperty(HIDE, false));
 		if (!aType) { this.setCreativeTab(null); } else { this.setCreativeTab(FurenikusRoads.tab_paint_junction); }
 	}
@@ -93,18 +96,20 @@ public class ChevronPaintBlock extends PaintBlockBase {
 		ArrayList<ChevronPaintBlock> chevronBLeft = new ArrayList<ChevronPaintBlock>();
 		ArrayList<ChevronPaintBlock> chevronBRight = new ArrayList<ChevronPaintBlock>();
 		
-		chevronALeft.add(FRBlocks.white_chevron_left_a);
-		chevronALeft.add(FRBlocks.white_chevron_left_a_thin);
-		chevronARight.add(FRBlocks.white_chevron_right_a);
-		chevronARight.add(FRBlocks.white_chevron_right_a_thin);
-		
-		chevronBLeft.add(FRBlocks.white_chevron_left_b);
-		chevronBLeft.add(FRBlocks.white_chevron_left_b_thin);
-		chevronBRight.add(FRBlocks.white_chevron_right_b);
-		chevronBRight.add(FRBlocks.white_chevron_right_b_thin);
+		for (int i = 0; i < FRBlocks.col.length; i++) { 
+			chevronALeft.add((ChevronPaintBlock) Block.REGISTRY.getObject(new ResourceLocation(FurenikusRoads.MODID, FRBlocks.col[i] + "_chevron_left_a")));
+			chevronALeft.add((ChevronPaintBlock) Block.REGISTRY.getObject(new ResourceLocation(FurenikusRoads.MODID, FRBlocks.col[i] + "_chevron_left_a_thin")));
+			chevronARight.add((ChevronPaintBlock) Block.REGISTRY.getObject(new ResourceLocation(FurenikusRoads.MODID, FRBlocks.col[i] + "_chevron_right_a")));
+			chevronARight.add((ChevronPaintBlock) Block.REGISTRY.getObject(new ResourceLocation(FurenikusRoads.MODID, FRBlocks.col[i] + "_chevron_right_a_thin")));
+			
+			chevronBLeft.add((ChevronPaintBlock) Block.REGISTRY.getObject(new ResourceLocation(FurenikusRoads.MODID, FRBlocks.col[i] + "_chevron_left_b")));
+			chevronBLeft.add((ChevronPaintBlock) Block.REGISTRY.getObject(new ResourceLocation(FurenikusRoads.MODID, FRBlocks.col[i] + "_chevron_left_b_thin")));
+			chevronBRight.add((ChevronPaintBlock) Block.REGISTRY.getObject(new ResourceLocation(FurenikusRoads.MODID, FRBlocks.col[i] + "_chevron_right_b")));
+			chevronBRight.add((ChevronPaintBlock) Block.REGISTRY.getObject(new ResourceLocation(FurenikusRoads.MODID, FRBlocks.col[i] + "_chevron_right_b_thin")));
+		}
 		
 		for (int i = 0; i < chevronALeft.size(); i++) {
-			//If we are placing left, and left is null, and right is right, then place left to match right.
+			//If we are placing left, and left is null, and right is right, then place left to match right. (ok read this comment like 2 years later and wtf fureniku this makes no sense)
 			if (chevronALeft.contains(this) || chevronBLeft.contains(this)) {
 				if (!(stateLeft.getBlock() instanceof ChevronPaintBlock)) {
 					if (chevronARight.contains(stateRight.getBlock())) {

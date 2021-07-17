@@ -11,11 +11,14 @@ import com.silvaniastudios.roads.network.ClientGuiUpdatePacket;
 import com.silvaniastudios.roads.network.CompactorUpdatePacket;
 import com.silvaniastudios.roads.network.FabricatorUpdatePacket;
 import com.silvaniastudios.roads.network.PaintGunUpdatePacket;
+import com.silvaniastudios.roads.registries.DynamicBlockRegistry;
+import com.silvaniastudios.roads.registries.PaintGunItemRegistry;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -88,35 +91,42 @@ public class FurenikusRoads {
 	public static CreativeTabs tab_paint_lines = new CreativeTabs("tab_paint_lines") {
 		@Override
 		public ItemStack getTabIconItem() {
-			return new ItemStack(FRBlocks.line_white_straight_thick, 1, 0);
+			return new ItemStack(Block.REGISTRY.getObject(new ResourceLocation(MODID, "line_white_straight_thick")), 1, 0);
 		}
 	};
 	
 	public static CreativeTabs tab_paint_icons = new CreativeTabs("tab_paint_icons") {
 		@Override
 		public ItemStack getTabIconItem() {
-			return new ItemStack(FRBlocks.white_wheelchair_icon, 1, 0);
+			return new ItemStack(Block.REGISTRY.getObject(new ResourceLocation(MODID, "white_wheelchair_icon")), 1, 0);
 		}
 	};
 	
 	public static CreativeTabs tab_paint_letters = new CreativeTabs("tab_paint_letters") {
 		@Override
 		public ItemStack getTabIconItem() {
-			return new ItemStack(FRBlocks.paint_letter_white_ab, 1, 0);
+			return new ItemStack(Block.REGISTRY.getObject(new ResourceLocation(MODID, "paint_letter_white_ab")), 1, 0);
 		}
 	};
 	
 	public static CreativeTabs tab_paint_text = new CreativeTabs("tab_paint_text") {
 		@Override
 		public ItemStack getTabIconItem() {
-			return new ItemStack(FRBlocks.white_slow, 1, 0);
+			return new ItemStack(Block.REGISTRY.getObject(new ResourceLocation(MODID, "white_slow")), 1, 0);
 		}
 	};
 	
 	public static CreativeTabs tab_paint_junction = new CreativeTabs("tab_paint_junction") {
 		@Override
 		public ItemStack getTabIconItem() {
-			return new ItemStack(FRBlocks.white_junction_fork_chevron_mid, 1, 0);
+			return new ItemStack(Block.REGISTRY.getObject(new ResourceLocation(MODID, "white_junction_fork_chevron_mid")), 1, 0);
+		}
+	};
+	
+	public static CreativeTabs tab_paint_customs = new CreativeTabs("tab_paint_customs") {
+		@Override
+		public ItemStack getTabIconItem() {
+			return new ItemStack(Block.REGISTRY.getObject(new ResourceLocation(MODID, "white_junction_fork_chevron_mid")), 1, 0);
 		}
 	};
 	
@@ -128,10 +138,11 @@ public class FurenikusRoads {
 	public void preInit(FMLPreInitializationEvent event) {
 		proxy.preInit();
 		logger = event.getModLog();
-		FRBlocks.registerPaintGunEntries();
 		if (RoadsConfig.general.genLimestone) { 
 			GameRegistry.registerWorldGenerator(new WorldGen(), 3);
 		}
+		
+		DynamicBlockRegistry.register();
 	}
 	
 	@EventHandler
@@ -152,6 +163,8 @@ public class FurenikusRoads {
 	@EventHandler
     public void postInit(FMLPostInitializationEvent event) {
 		proxy.postInit();
+		PaintGunItemRegistry.init();
+		FRBlocks.registerPaintGunEntries();
 		RecipeRegistry.init();
 	}
     

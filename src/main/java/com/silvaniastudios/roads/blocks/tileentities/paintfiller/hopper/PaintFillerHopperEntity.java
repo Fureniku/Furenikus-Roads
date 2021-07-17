@@ -7,10 +7,12 @@ import com.silvaniastudios.roads.blocks.tileentities.paintfiller.PaintFillerCont
 import com.silvaniastudios.roads.blocks.tileentities.paintfiller.PaintFillerEntity;
 import com.silvaniastudios.roads.fluids.FRFluids;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.energy.CapabilityEnergy;
@@ -108,10 +110,12 @@ public class PaintFillerHopperEntity extends RoadTileEntity implements ITickable
 		return super.getCapability(capability, facing);
 	}
 	
-	public void updateSide(EnumFacing facing) {
+	public void updateSide(EnumFacing facing, EntityPlayer player) {
+		int id = 0;
 		if (facing == EnumFacing.UP) {
 			if (up < 4) {
 				up++;
+				id = up;
 			} else {
 				up = 0;
 			}
@@ -119,6 +123,7 @@ public class PaintFillerHopperEntity extends RoadTileEntity implements ITickable
 		if (facing == EnumFacing.NORTH) {
 			if (north < 4) {
 				north++;
+				id = north;
 			} else {
 				north = 0;
 			}
@@ -126,6 +131,7 @@ public class PaintFillerHopperEntity extends RoadTileEntity implements ITickable
 		if (facing == EnumFacing.EAST) {
 			if (east < 4) {
 				east++;
+				id = east;
 			} else {
 				east = 0;
 			}
@@ -133,6 +139,7 @@ public class PaintFillerHopperEntity extends RoadTileEntity implements ITickable
 		if (facing == EnumFacing.SOUTH) {
 			if (south < 4) {
 				south++;
+				id = south;
 			} else {
 				south = 0;
 			}
@@ -140,10 +147,31 @@ public class PaintFillerHopperEntity extends RoadTileEntity implements ITickable
 		if (facing == EnumFacing.WEST) {
 			if (west < 4) {
 				west++;
+				id = west;
 			} else {
 				west = 0;
 			}
 		}
+		if (player.world.isRemote) {
+			switch(id) {
+			case 0:
+				player.sendMessage(new TextComponentString("Transfer port closed"));
+				break;
+			case 1:
+				player.sendMessage(new TextComponentString("Transfer port set to White Paint"));
+				break;
+			case 2:
+				player.sendMessage(new TextComponentString("Transfer port set to Yellow Paint"));
+				break;
+			case 3:
+				player.sendMessage(new TextComponentString("Transfer port set to Red Paint"));
+				break;
+			case 4:
+				player.sendMessage(new TextComponentString("Transfer port set to Items"));
+				break;
+			}
+		}
+		
 		sendUpdates();
 	}
 
@@ -229,8 +257,12 @@ public class PaintFillerHopperEntity extends RoadTileEntity implements ITickable
 		return is_output;
 	}
 	
-	public void toggleOutputMode() {
+	public void toggleOutputMode(EntityPlayer player) {
 		is_output = !is_output;
+		if (player.world.isRemote) {
+			player.sendMessage(new TextComponentString("Output mode: " + is_output));
+		}
+		sendUpdates();
 	}
 	
 	public PaintFillerHopperBlock.EnumIO getIOFromSide(EnumFacing facing) {

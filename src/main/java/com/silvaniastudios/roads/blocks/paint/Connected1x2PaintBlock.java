@@ -22,8 +22,8 @@ public class Connected1x2PaintBlock extends PaintBlockBase {
 	
 	public static final PropertyEnum<Connected1x2PaintBlock.Enum1x2Block> CONNECT = PropertyEnum.create("position_rotation", Connected1x2PaintBlock.Enum1x2Block.class);
 
-	public Connected1x2PaintBlock(String name) {
-		super(name);
+	public Connected1x2PaintBlock(String name, String category, int[] coreMetas, boolean dynamic) {
+		super(name, category, coreMetas, dynamic);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(CONNECT, Connected1x2PaintBlock.Enum1x2Block.n1));
 		this.setCreativeTab(FurenikusRoads.tab_paint_icons);
 	}

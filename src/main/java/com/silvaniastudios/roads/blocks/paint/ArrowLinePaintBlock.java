@@ -28,8 +28,8 @@ public class ArrowLinePaintBlock extends PaintBlockBase implements IMetaBlockNam
 	public static final PropertyEnum<EnumConnectArrows> CONNECT = PropertyEnum.create("connect", EnumConnectArrows.class);
 	public static final PropertyDirection FACING =  PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 
-	public ArrowLinePaintBlock(String name) {
-		super(name);
+	public ArrowLinePaintBlock(String name, String category, int[] coreMetas, boolean dynamic) {
+		super(name, category, coreMetas, dynamic);
 		this.setCreativeTab(FurenikusRoads.tab_paint_icons);
 		this.setDefaultState(this.blockState.getBaseState()
 				.withProperty(CONNECT, EnumConnectArrows.CONNECT_NONE)

@@ -4,7 +4,8 @@ import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.blocks.decorative.CatsEyeBlock;
 import com.silvaniastudios.roads.blocks.decorative.CatsEyeBlockFourWay;
 import com.silvaniastudios.roads.blocks.paint.PaintBlockBase;
-import com.silvaniastudios.roads.items.PaintGunItemRegistry;
+import com.silvaniastudios.roads.registries.PaintCategoryList;
+import com.silvaniastudios.roads.registries.PaintGunItemRegistry;
 
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -290,56 +291,12 @@ public class ModelBakeHandler {
 		event.getMap().registerSprite(sprite_light_item);
 		event.getMap().registerSprite(sprite_light_none);
 		
-		for (int i = 0; i < PaintGunItemRegistry.lines.size(); i++) {
-			PaintBlockBase block = PaintGunItemRegistry.lines.get(i);
-			for (int j = 0; j < 3; j++) {
-				if (j == 1) { block = PaintGunItemRegistry.getYellow(block); }
-				if (j == 2) { block = PaintGunItemRegistry.getRed(block); }
-				String name = block.getUnlocalizedName().substring(20);
-				if (PaintGunItemRegistry.linesMeta.get(i) > 0) { name = name + "_" + PaintGunItemRegistry.linesMeta.get(i); }
-				ResourceLocation sprite = new ResourceLocation(FurenikusRoads.MODID + ":items/paint_gun_display/" + name);
-				event.getMap().registerSprite(sprite);
-			}
-		}
-		for (int i = 0; i < PaintGunItemRegistry.icons.size(); i++) {
-			PaintBlockBase block = PaintGunItemRegistry.icons.get(i);
-			for (int j = 0; j < 3; j++) {
-				if (j == 1) { block = PaintGunItemRegistry.getYellow(block); }
-				if (j == 2) { block = PaintGunItemRegistry.getRed(block); }
-				String name = block.getUnlocalizedName().substring(20);
-				if (PaintGunItemRegistry.iconsMeta.get(i) > 0) { name = name + "_" + PaintGunItemRegistry.iconsMeta.get(i); }
-				ResourceLocation sprite = new ResourceLocation(FurenikusRoads.MODID + ":items/paint_gun_display/" + name);
-				event.getMap().registerSprite(sprite);
-			}
-		}
-		for (int i = 0; i < PaintGunItemRegistry.letters.size(); i++) {
-			PaintBlockBase block = PaintGunItemRegistry.letters.get(i);
-			for (int j = 0; j < 3; j++) {
-				if (j == 1) { block = PaintGunItemRegistry.getYellow(block); }
-				if (j == 2) { block = PaintGunItemRegistry.getRed(block); }
-				String name = block.getUnlocalizedName().substring(20);
-				if (PaintGunItemRegistry.lettersMeta.get(i) > 0) { name = name + "_" + PaintGunItemRegistry.lettersMeta.get(i); }
-				ResourceLocation sprite = new ResourceLocation(FurenikusRoads.MODID + ":items/paint_gun_display/" + name);
-				event.getMap().registerSprite(sprite);
-			}
-		}
-		for (int i = 0; i < PaintGunItemRegistry.text.size(); i++) {
-			PaintBlockBase block = PaintGunItemRegistry.text.get(i);
-			for (int j = 0; j < 3; j++) {
-				if (j == 1) { block = PaintGunItemRegistry.getYellow(block); }
-				if (j == 2) { block = PaintGunItemRegistry.getRed(block); }
-				String name = block.getUnlocalizedName().substring(20);
-				ResourceLocation sprite = new ResourceLocation(FurenikusRoads.MODID + ":items/paint_gun_display/" + name);
-				event.getMap().registerSprite(sprite);
-			}
-		}
-		for (int i = 0; i < PaintGunItemRegistry.junction.size(); i++) {
-			PaintBlockBase block = PaintGunItemRegistry.junction.get(i);
-			for (int j = 0; j < 3; j++) {
-				if (j == 1) { block = PaintGunItemRegistry.getYellow(block); }
-				if (j == 2) { block = PaintGunItemRegistry.getRed(block); }
-				String name = block.getUnlocalizedName().substring(20);
-				if (PaintGunItemRegistry.junctionMeta.get(i) > 0) { name = name + "_" + PaintGunItemRegistry.junctionMeta.get(i); }
+		for (int i = 0; i < PaintGunItemRegistry.categoryList.size(); i++) {
+			PaintCategoryList category = PaintGunItemRegistry.categoryList.get(i);
+			for (int j = 0; j < category.size(); j++) {
+				PaintBlockBase block = category.getPaint(j);
+				String name = block.getUnlocalizedName().substring(20); //tile.furenikusroads: ...
+				if (category.getMeta(j) > 0) { name = name + "_" + category.getMeta(j); }
 				ResourceLocation sprite = new ResourceLocation(FurenikusRoads.MODID + ":items/paint_gun_display/" + name);
 				event.getMap().registerSprite(sprite);
 			}

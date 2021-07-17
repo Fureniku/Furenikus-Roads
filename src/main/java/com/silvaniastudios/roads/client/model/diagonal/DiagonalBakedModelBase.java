@@ -6,16 +6,11 @@ import java.util.List;
 import java.util.function.Function;
 
 import com.silvaniastudios.roads.FurenikusRoads;
-import com.silvaniastudios.roads.blocks.FRBlocks;
 import com.silvaniastudios.roads.blocks.diagonal.HalfBlock;
 import com.silvaniastudios.roads.blocks.diagonal.RoadBlockDiagonal;
 import com.silvaniastudios.roads.blocks.diagonal.ShapeLibrary;
 import com.silvaniastudios.roads.client.render.Quad;
 
-import net.minecraft.block.BlockGrass;
-import net.minecraft.block.BlockLeaves;
-import net.minecraft.block.BlockLiquid;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.BakedQuad;
@@ -26,16 +21,10 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.client.model.pipeline.UnpackedBakedQuad;
 import net.minecraftforge.common.model.IModelState;
 import net.minecraftforge.common.property.IExtendedBlockState;
-import net.minecraftforge.fluids.BlockFluidBase;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidUtil;
 
 public class DiagonalBakedModelBase implements IBakedModel {
 

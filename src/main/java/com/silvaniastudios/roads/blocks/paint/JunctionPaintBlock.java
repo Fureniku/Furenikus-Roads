@@ -26,8 +26,8 @@ public class JunctionPaintBlock extends PaintBlockBase implements IMetaBlockName
 
 	public static final PropertyEnum<EnumMeta> META_ID = PropertyEnum.create("meta", EnumMeta.class);
 	
-	public JunctionPaintBlock(String name) {
-		super(name);
+	public JunctionPaintBlock(String name, String category, int[] coreMetas, boolean dynamic) {
+		super(name, category, coreMetas, dynamic);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(META_ID, EnumMeta.id0));
 		this.setCreativeTab(FurenikusRoads.tab_paint_icons);
 	}

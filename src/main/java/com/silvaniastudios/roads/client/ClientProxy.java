@@ -11,7 +11,7 @@ import com.silvaniastudios.roads.blocks.tileentities.paintfiller.hopper.PaintFil
 import com.silvaniastudios.roads.blocks.tileentities.paintoven.PaintOvenEntity;
 import com.silvaniastudios.roads.blocks.tileentities.roadfactory.RoadFactoryEntity;
 import com.silvaniastudios.roads.blocks.tileentities.tarmaccutter.TarmacCutterEntity;
-import com.silvaniastudios.roads.client.gui.GuiPaintGun;
+import com.silvaniastudios.roads.client.gui.paintgun.GuiPaintGun;
 import com.silvaniastudios.roads.client.model.CrusherRenderer;
 import com.silvaniastudios.roads.client.model.ModelBakeHandler;
 import com.silvaniastudios.roads.client.model.PaintFillerHopperRenderer;
@@ -36,7 +36,8 @@ import com.silvaniastudios.roads.client.model.diagonal.loaders.Diagonal38MirrorM
 import com.silvaniastudios.roads.client.model.diagonal.loaders.Diagonal38ModelLoader;
 import com.silvaniastudios.roads.client.model.diagonal.loaders.Diagonal48MirrorModelLoader;
 import com.silvaniastudios.roads.client.model.diagonal.loaders.Diagonal48ModelLoader;
-import com.silvaniastudios.roads.items.FRItems;
+import com.silvaniastudios.roads.client.model.paint.loaders.CustomPaintModelLoader;
+import com.silvaniastudios.roads.client.model.paint.loaders.LinePaintModelLoader;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -74,6 +75,11 @@ public class ClientProxy extends CommonProxy {
 		ModelLoaderRegistry.registerLoader(new Diagonal28MirrorModelLoader());
 		ModelLoaderRegistry.registerLoader(new Diagonal38MirrorModelLoader());
 		ModelLoaderRegistry.registerLoader(new Diagonal48MirrorModelLoader());
+		
+		//paints
+		ModelLoaderRegistry.registerLoader(new CustomPaintModelLoader());
+		
+		//ModelLoaderRegistry.registerLoader(new LinePaintModelLoader());
 	}
 
 	@Override
@@ -91,9 +97,10 @@ public class ClientProxy extends CommonProxy {
 			ClientRegistry.bindTileEntitySpecialRenderer(CrusherEntity.class, new CrusherRenderer());
 			ClientRegistry.bindTileEntitySpecialRenderer(TarmacCutterEntity.class, new TarmacCutterRenderer());
 
-			ClientRegistry.bindTileEntitySpecialRenderer(PaintFillerHopperEntity.class, new PaintFillerHopperRenderer());
+			
 			ClientRegistry.bindTileEntitySpecialRenderer(PaintOvenEntity.class, new PaintOvenRenderer());
 		}
+		ClientRegistry.bindTileEntitySpecialRenderer(PaintFillerHopperEntity.class, new PaintFillerHopperRenderer()); //Has actual utilisation in the renderer so needs to always be enabled
 	}
 
 	public void postInit() {

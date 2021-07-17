@@ -21,8 +21,8 @@ public class IconPaintBlock extends PaintBlockBase {
 
 	public static final PropertyDirection FACING =  PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 	
-	public IconPaintBlock(String name) {
-		super(name);
+	public IconPaintBlock(String name, String category, int[] coreMetas, boolean dynamic) {
+		super(name, category, coreMetas, dynamic);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 		this.setCreativeTab(FurenikusRoads.tab_paint_icons);
 	}

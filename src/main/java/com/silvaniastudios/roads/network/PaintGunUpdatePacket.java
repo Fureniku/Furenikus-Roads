@@ -16,14 +16,12 @@ public class PaintGunUpdatePacket implements IMessage {
 	public PaintGunUpdatePacket(){}
 	
 	private int selection;
-	private int selMeta;
 	private int selectedColour;
 	private int pageId;
 	private boolean isLarge;
 	
-	public PaintGunUpdatePacket(int selection, int selMeta, int selectedColour, int pageId, boolean isLarge) {
+	public PaintGunUpdatePacket(int selection, int selectedColour, int pageId, boolean isLarge) {
 		this.selection = selection;
-		this.selMeta = selMeta;
 		this.selectedColour = selectedColour;
 		this.pageId = pageId;
 		this.isLarge = isLarge;
@@ -32,7 +30,6 @@ public class PaintGunUpdatePacket implements IMessage {
 	@Override
 	public void toBytes(ByteBuf buf) {
 		buf.writeInt(selection);
-		buf.writeInt(selMeta);
 		buf.writeInt(selectedColour);
 		buf.writeInt(pageId);
 		buf.writeBoolean(isLarge);
@@ -41,7 +38,6 @@ public class PaintGunUpdatePacket implements IMessage {
 	@Override
 	public void fromBytes(ByteBuf buf) {
 		selection = buf.readInt();
-		selMeta = buf.readInt();
 		selectedColour = buf.readInt();
 		pageId = buf.readInt();
 		isLarge = buf.readBoolean();
@@ -54,7 +50,6 @@ public class PaintGunUpdatePacket implements IMessage {
 			EntityPlayerMP player = ctx.getServerHandler().player;
 			
 			int selection = message.selection;
-			int selMeta = message.selMeta;
 			int selectedColour = message.selectedColour;
 			int pageId = message.pageId;
 			boolean isLarge = message.isLarge;
@@ -71,7 +66,6 @@ public class PaintGunUpdatePacket implements IMessage {
 					}
 					
 					nbt.setInteger("selectedId", selection);
-					nbt.setInteger("selMeta", selMeta);
 					nbt.setInteger("colour", selectedColour);
 					nbt.setInteger("pageId", pageId);
 					nbt.setBoolean("isLarge", isLarge);

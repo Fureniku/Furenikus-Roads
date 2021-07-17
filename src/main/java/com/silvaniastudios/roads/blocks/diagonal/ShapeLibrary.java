@@ -23,6 +23,76 @@ public class ShapeLibrary {
 	 *  
 	 */
 	
+	public static List<Quad> shapeFromTexture(TextureAtlasSprite tex) {
+		List<Quad> quads = new ArrayList<>();
+		
+		return quads;
+	}
+	
+	public static List<Quad> shapeFromGrid(boolean[][] grid, float top, TextureAtlasSprite sprite, VertexFormat format) {
+		List<Quad> quads = new ArrayList<>();
+		float p = 1.0f / grid.length;
+		float p2 = 1.0f / 32.0f;
+		
+		for (int i = 0; i < grid.length; i++) {
+			for (int j = 0; j < grid[i].length; j++) {
+				if (grid[j][i]) {
+					//north edge
+					if (i == 0 || (i-1 >= 0 && !grid[j][i-1])) {
+						quads.add(new Quad(
+								new Vec3d(j*p+p, top-p2, i*p), 0,    0.5f, //BL
+								new Vec3d(j*p,   top-p2, i*p), 0.5f, 0.5f, //BR
+								new Vec3d(j*p,   top,    i*p), 0.5f, 0, //TR
+								new Vec3d(j*p+p, top,    i*p), 0,    0, //TL
+								sprite, format));
+					}
+					
+					//east side
+					if (j+1 == grid.length || (j+1 < grid.length && !grid[j+1][i])) {
+						quads.add(new Quad(
+								new Vec3d(j*p+p, top-p2, i*p+p),   0,    0.5f, //BL
+								new Vec3d(j*p+p, top-p2, i*p), 0.5f, 0.5f, //BR
+								new Vec3d(j*p+p, top,    i*p), 0.5f, 0, //TR
+								new Vec3d(j*p+p, top,    i*p+p),   0,    0, //TL
+								sprite, format));
+					}
+					
+					//south side
+					if (i+1 == grid.length || (i+1 < grid.length && !grid[j][i+1])) {
+						quads.add(new Quad(
+								new Vec3d(j*p,   top-p2, i*p+p), 0,    0.5f, //BL
+								new Vec3d(j*p+p, top-p2, i*p+p), 0.5f, 0.5f, //BR
+								new Vec3d(j*p+p, top,    i*p+p), 0.5f, 0, //TR
+								new Vec3d(j*p,   top,    i*p+p), 0,    0, //TL
+								sprite, format));
+					}
+					
+					//west side
+					if (j == 0 || (j-1 >= 0 && !grid[j-1][i])) {
+						quads.add(new Quad(
+								new Vec3d(j*p, top-p2, i*p), 0,    0.5f, //BL
+								new Vec3d(j*p, top-p2, i*p+p),   0.5f, 0.5f, //BR
+								new Vec3d(j*p, top,    i*p+p),   0.5f, 0, //TR
+								new Vec3d(j*p, top,    i*p), 0,    0, //TL
+								sprite, format));
+					}
+					
+					
+					
+					quads.add(new Quad( //Top
+							new Vec3d(j*p, top, i*p+p),   //BL
+							new Vec3d(j*p+p, top, i*p+p),     //BR
+							new Vec3d(j*p+p, top, i*p), //TR
+							new Vec3d(j*p, top, i*p),     //TL
+							sprite, format));
+				}
+			}
+		}
+		
+		return quads;
+	}
+	
+	
 	public static List<Quad> shapeTriangleLeft(HalfBlock block, double width, VertexFormat format) {
 		List<Quad> quads = new ArrayList<>();
 		float height = block.getHeight();
@@ -70,9 +140,9 @@ public class ShapeLibrary {
 		if (block.renderNear()) {
 			north = new Quad( 
 					new Vec3d(1-width, height, 0), 	(float) width*16f, 	16-height*16f,
-					new Vec3d(1-width, 0, 0), 			(float) width*16f,	16,
-					new Vec3d(0, 0, 0),					16, 				16,
-					new Vec3d(0, height, 0), 			16, 				16-height*16f,
+					new Vec3d(1-width, 0, 0), 		(float) width*16f,	16,
+					new Vec3d(0, 0, 0),				16, 				16,
+					new Vec3d(0, height, 0), 		16, 				16-height*16f,
 					sprite, format);
 			
 		}
