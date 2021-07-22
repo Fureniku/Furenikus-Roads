@@ -81,9 +81,9 @@ public class RoadBlockDiagonal extends BlockBase {
 		
 		boolean trans = false;
 		
-		if (stateLeft.getBlock().getBlockLayer() == BlockRenderLayer.TRANSLUCENT || stateRight.getBlock().getBlockLayer() == BlockRenderLayer.TRANSLUCENT) {
-			trans = true;
-		}
+		//TODO if (stateLeft.getBlock().getBlockLayer() == BlockRenderLayer.TRANSLUCENT || stateRight.getBlock().getBlockLayer() == BlockRenderLayer.TRANSLUCENT) {
+			//trans = true;
+		//}
 		
 		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing()).withProperty(TRANSPARENCY, trans);
 	}
@@ -129,9 +129,9 @@ public class RoadBlockDiagonal extends BlockBase {
 		
 		boolean trans = false;
 		
-		if (stateLeft.getBlock().getBlockLayer() == BlockRenderLayer.TRANSLUCENT || stateRight.getBlock().getBlockLayer() == BlockRenderLayer.TRANSLUCENT) {
-			trans = true;
-		}
+		//TODO if (stateLeft.getBlock().getBlockLayer() == BlockRenderLayer.TRANSLUCENT || stateRight.getBlock().getBlockLayer() == BlockRenderLayer.TRANSLUCENT) {
+			//trans = true;
+		//}
 		
 		worldIn.setBlockState(pos, state.withProperty(TRANSPARENCY, trans));
 	}
