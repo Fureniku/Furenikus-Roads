@@ -45,21 +45,6 @@
 				}
             }
 		}],
-		"zz_default_stuff": {
-			"true": {
-			},
-			"false": {
-			}
-		},
-		"east": {
-			"true": {
-				"submodel": {
-					"paint_east": { "model": "furenikusroads:single_line_n", "y": 90 }
-				}
-			},
-			"false": {
-			}
-		},
 		"facing": {
 			"east_west": {
 				"submodel": {
@@ -74,33 +59,6 @@
 				}
 			},
 			"connect": {
-			}
-		},
-		"north": {
-			"true": {
-				"submodel": {
-					"paint_north": { "model": "furenikusroads:single_line_n" }
-				}
-			},
-			"false": {
-			}
-		},
-		"south": {
-			"true": {
-				"submodel": {
-					"paint_south": { "model": "furenikusroads:single_line_n", "y": 180 }
-				}
-			},
-			"false": {
-			}
-		},
-		"west": {
-			"true": {
-				"submodel": {
-					"paint_west": { "model": "furenikusroads:single_line_n", "y": 270 }
-				}
-			},
-			"false": {
 			}
 		}
 	}

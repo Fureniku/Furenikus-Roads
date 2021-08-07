@@ -2,10 +2,10 @@ package com.silvaniastudios.roads.blocks.paint;
 
 import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.blocks.enums.IMetaBlockName;
+import com.silvaniastudios.roads.blocks.paint.properties.UnlistedPropertyConnection;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -22,32 +22,23 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.property.ExtendedBlockState;
 import net.minecraftforge.common.property.IExtendedBlockState;
+import net.minecraftforge.common.property.IUnlistedProperty;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class LinePaintBlock extends PaintBlockBase implements IMetaBlockName {
 	
-	public static final PropertyBool NORTH = PropertyBool.create("north");
-	public static final PropertyBool EAST = PropertyBool.create("east");
-	public static final PropertyBool SOUTH = PropertyBool.create("south");
-	public static final PropertyBool WEST = PropertyBool.create("west");
-	/*public static final UnlistedPropertyConnection NORTH = new UnlistedPropertyConnection("north");
+	public static final UnlistedPropertyConnection NORTH = new UnlistedPropertyConnection("north");
 	public static final UnlistedPropertyConnection EAST = new UnlistedPropertyConnection("east");
 	public static final UnlistedPropertyConnection SOUTH = new UnlistedPropertyConnection("south");
-	public static final UnlistedPropertyConnection WEST = new UnlistedPropertyConnection("west");*/
-	//public static final PropertyBool SIDES = PropertyBool.create("sides");
-	public static final PropertyBool DEFAULTS = PropertyBool.create("zz_default_stuff");
+	public static final UnlistedPropertyConnection WEST = new UnlistedPropertyConnection("west");
 	public static final PropertyEnum<LinePaintBlock.EnumRotation> FACING = PropertyEnum.create("facing", LinePaintBlock.EnumRotation.class);
 
 	public LinePaintBlock(String name, String category, int[] coreMetas, boolean dynamic) {
 		super(name, category, coreMetas, dynamic);
 		this.setDefaultState(this.blockState.getBaseState()
-				.withProperty(NORTH, false) //TODO remove
-				.withProperty(EAST, false) //TODO remove
-				.withProperty(SOUTH, false) //TODO remove
-				.withProperty(WEST, false) //TODO remove
-				.withProperty(DEFAULTS, true)
 				.withProperty(FACING, LinePaintBlock.EnumRotation.ns));
 		this.setCreativeTab(FurenikusRoads.tab_paint_lines);
 	}
@@ -95,53 +86,41 @@ public class LinePaintBlock extends PaintBlockBase implements IMetaBlockName {
 		return this.getDefaultState().withProperty(FACING, LinePaintBlock.EnumRotation.connect);
 	}
 	
-	/* TODO replace below with this 
+	@SuppressWarnings("rawtypes")
 	protected BlockStateContainer createBlockState() {
-		IProperty[] listedProperties = new IProperty[] {DEFAULTS, FACING};
+		IProperty[] listedProperties = new IProperty[] {FACING};
 		IUnlistedProperty[] unlistedProperties = new IUnlistedProperty[] {NORTH, EAST, WEST, SOUTH};
 
 		return new ExtendedBlockState(this, listedProperties, unlistedProperties);
-	}*/
-	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, new IProperty[] {NORTH, EAST, WEST, SOUTH, DEFAULTS, FACING});
 	}
 	
-	//TODO replace below with this
-
-	/*@Override
+	@Override
 	public IBlockState getExtendedState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
 		IExtendedBlockState extendedBlockState = (IExtendedBlockState) state;
 		boolean n = canLineConnectTo(worldIn, pos, EnumFacing.NORTH);
 		boolean e = canLineConnectTo(worldIn, pos, EnumFacing.EAST);
 		boolean s = canLineConnectTo(worldIn, pos, EnumFacing.SOUTH);
 		boolean w = canLineConnectTo(worldIn, pos, EnumFacing.WEST);
+		
+		if (state.getValue(FACING) == EnumRotation.ns) {
+			n = true;
+			s = true;
+		}
+		
+		if (state.getValue(FACING) == EnumRotation.ew) {
+			e = true;
+			w = true;
+		}
 
 		return extendedBlockState.withProperty(NORTH, n).withProperty(EAST, e).withProperty(SOUTH, s).withProperty(WEST, w);
-	}*/
+	}
 	
-	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-        return state.withProperty(NORTH, canLineConnectTo(worldIn, pos, EnumFacing.NORTH))
-                .withProperty(EAST,  canLineConnectTo(worldIn, pos, EnumFacing.EAST))
-                .withProperty(SOUTH, canLineConnectTo(worldIn, pos, EnumFacing.SOUTH))
-                .withProperty(WEST,  canLineConnectTo(worldIn, pos, EnumFacing.WEST));
-    }
-	
-	
-    
     @SideOnly(Side.CLIENT)
 	@Override
 	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> items) {
     	items.add(new ItemStack(this, 1, 0));
     	items.add(new ItemStack(this, 1, 2));
     }
-	
-    @SideOnly(Side.CLIENT)
-	@Override
-	public void initModel() {
-    	ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "inventory"));
-    	ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 2, new ModelResourceLocation(getRegistryName(), "inventory_2"));
-    	ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 3, new ModelResourceLocation(getRegistryName(), "inventory_2"));
-	}
     
     public static enum EnumRotation implements IStringSerializable {
     	ns("north_south"),

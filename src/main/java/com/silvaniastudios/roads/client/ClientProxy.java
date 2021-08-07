@@ -79,7 +79,7 @@ public class ClientProxy extends CommonProxy {
 		//paints
 		ModelLoaderRegistry.registerLoader(new CustomPaintModelLoader());
 		
-		//ModelLoaderRegistry.registerLoader(new LinePaintModelLoader());
+		ModelLoaderRegistry.registerLoader(new LinePaintModelLoader());
 	}
 
 	@Override
