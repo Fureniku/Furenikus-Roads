@@ -282,19 +282,19 @@ public class ShapeLibrary {
 
 		if (block.renderFar()) {
 			south = new Quad(
-					new Vec3d(widthN, height, 1.0), 		(float) (16f*widthN), 	16 - (float) (16f * height),//south west
-					new Vec3d(0, height, 1.0), 			0, 						16 - (float) (16f * height),//south east
-					new Vec3d(0, 0.0, 1.0), 				0, 						16,//north east
-					new Vec3d(widthN, 0.0, 1.0), 			(float) (16f*widthN), 	16, //north west
+					new Vec3d(widthN, height, 1.0),	(float) (16f*widthN), 	16 - (float) (16f * height),//south west
+					new Vec3d(0,      height, 1.0), 0, 						16 - (float) (16f * height),//south east
+					new Vec3d(0,      0.0, 1.0), 	0, 						16,//north east
+					new Vec3d(widthN, 0.0, 1.0), 	(float) (16f*widthN), 	16, //north west
 					sprite, format);
 		}
 
 		if (block.renderNear()) {
 			north = new Quad(
-					new Vec3d(widthW, 0, 0), 0, 16,//south west
-					new Vec3d(0, 0, 0), (float) (16f*widthW), 16,//south east
-					new Vec3d(0, height, 0), (float) (16f*widthW), 16 - (float) (16f * height),//north east
-					new Vec3d(widthW, height, 0), 0, 16 - (float) (16f * height), //north west
+					new Vec3d(widthW, 0,      0), 0,                    16,//south west
+					new Vec3d(0,      0,      0), (float) (16f*widthW), 16,//south east
+					new Vec3d(0,      height, 0), (float) (16f*widthW), 16 - (float) (16f * height),//north east
+					new Vec3d(widthW, height, 0), 0,                    16 - (float) (16f * height), //north west
 					sprite, format);
 		}
 

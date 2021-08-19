@@ -9,7 +9,10 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
+import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
@@ -18,6 +21,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -121,6 +125,27 @@ public class LinePaintBlock extends PaintBlockBase implements IMetaBlockName {
     	items.add(new ItemStack(this, 1, 0));
     	items.add(new ItemStack(this, 1, 2));
     }
+    
+    @SideOnly(Side.CLIENT)
+	public void initModel() {
+		StateMapperBase b = new StateMapperBase() {
+			@Override
+			protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
+				StateMapperBase b = new DefaultStateMapper();
+				return new ModelResourceLocation(state.getBlock().getRegistryName(), b.getPropertyString(state.getProperties()));
+			}
+		};
+
+		ModelLoader.setCustomStateMapper(this, b);
+	}
+
+	@SideOnly(Side.CLIENT)
+	public void initItemModel() {
+		Item itemBlock = Item.REGISTRY.getObject(new ResourceLocation(FurenikusRoads.MODID, this.name));
+		ModelResourceLocation itemModelResourceLocation = new ModelResourceLocation(getRegistryName(), "inventory");
+		final int DEFAULT_ITEM_SUBTYPE = 0;
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(itemBlock, DEFAULT_ITEM_SUBTYPE, itemModelResourceLocation);
+	}
     
     public static enum EnumRotation implements IStringSerializable {
     	ns("north_south"),

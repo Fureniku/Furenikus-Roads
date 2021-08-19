@@ -227,6 +227,10 @@ public class ModelBakeHandler {
 		ResourceLocation yellow_paint = new ResourceLocation(FurenikusRoads.MODID + ":items/paint_yellow");
 		ResourceLocation red_paint = new ResourceLocation(FurenikusRoads.MODID + ":items/paint_red");
 		
+		ResourceLocation block_white_paint = new ResourceLocation(FurenikusRoads.MODID + ":blocks/paint_white");
+		ResourceLocation block_yellow_paint = new ResourceLocation(FurenikusRoads.MODID + ":blocks/paint_yellow");
+		ResourceLocation block_red_paint = new ResourceLocation(FurenikusRoads.MODID + ":blocks/paint_red");
+		
 		ResourceLocation tar_flowing = new ResourceLocation(FurenikusRoads.MODID + ":fluids/tar_flowing");
 		ResourceLocation tar_still = new ResourceLocation(FurenikusRoads.MODID + ":fluids/tar_still");
 		ResourceLocation white_paint_flowing = new ResourceLocation(FurenikusRoads.MODID + ":fluids/white_paint_flowing");
@@ -260,6 +264,10 @@ public class ModelBakeHandler {
 		event.getMap().registerSprite(white_paint);
 		event.getMap().registerSprite(yellow_paint);
 		event.getMap().registerSprite(red_paint);
+		
+		event.getMap().registerSprite(block_white_paint);
+		event.getMap().registerSprite(block_yellow_paint);
+		event.getMap().registerSprite(block_red_paint);
 		
 		event.getMap().registerSprite(tar_flowing);
 		event.getMap().registerSprite(tar_still);
