@@ -329,7 +329,6 @@ public abstract class GuiScrollingList_Mod
     }
     
     private void resetScrollbar(int viewHeight, int border) {
-    	System.out.println("Reset Scrollbar");
         this.scrollFactor = -1.0F;
         int scrollHeight = this.getContentHeight() - viewHeight - border;
         if (scrollHeight < 1) scrollHeight = 1;

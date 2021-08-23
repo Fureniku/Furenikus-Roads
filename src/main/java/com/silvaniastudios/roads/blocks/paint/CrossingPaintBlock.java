@@ -23,8 +23,8 @@ public class CrossingPaintBlock extends PaintBlockBase {
 	public static final PropertyBool SOUTH = PropertyBool.create("south");
 	public static final PropertyBool WEST = PropertyBool.create("west");
 
-	public CrossingPaintBlock(String name, String category, int[] coreMetas, boolean dynamic) {
-		super(name, category, coreMetas, dynamic);
+	public CrossingPaintBlock(String name, String category, int[] coreMetas, boolean dynamic, String colour) {
+		super(name, category, coreMetas, dynamic, colour);
 		this.setDefaultState(this.blockState.getBaseState()
 				.withProperty(NORTH, false)
 				.withProperty(EAST, false)

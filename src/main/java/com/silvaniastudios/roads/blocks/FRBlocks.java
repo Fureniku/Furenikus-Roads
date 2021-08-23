@@ -345,118 +345,118 @@ public class FRBlocks {
 		roadBlockList.add(sidewalk_tan);
 		
 		for (int i = 0; i < col.length; i++) {
-			paintBlockList.add(new LinePaintBlock("line_" + col[i] + "_straight_full", PaintGunItemRegistry.LINES, new int[] {0, 2}, true));
-			paintBlockList.add(new LinePaintBlock("line_" + col[i] + "_straight_thick", PaintGunItemRegistry.LINES, new int[] {0, 2}, true));
-			paintBlockList.add(new LinePaintBlock("line_" + col[i] + "_straight_double", PaintGunItemRegistry.LINES, new int[] {0, 2}, true));
-			paintBlockList.add(new LinePaintBlock("line_" + col[i] + "_straight_double_thick", PaintGunItemRegistry.LINES, new int[] {0, 2}, true));
+			paintBlockList.add(new LinePaintBlock("line_" + col[i] + "_straight_full", PaintGunItemRegistry.LINES, new int[] {0, 2}, true, col[i]));
+			paintBlockList.add(new LinePaintBlock("line_" + col[i] + "_straight_thick", PaintGunItemRegistry.LINES, new int[] {0, 2}, true, col[i]));
+			paintBlockList.add(new LinePaintBlock("line_" + col[i] + "_straight_double", PaintGunItemRegistry.LINES, new int[] {0, 2}, true, col[i]));
+			paintBlockList.add(new LinePaintBlock("line_" + col[i] + "_straight_double_thick", PaintGunItemRegistry.LINES, new int[] {0, 2}, true, col[i]));
 			
-			paintBlockList.add(new SideLinePaintBlock("line_" + col[i] + "_side_double", PaintGunItemRegistry.LINES, new int[] {0}, true));
-			paintBlockList.add(new SideLinePaintBlock("line_" + col[i] + "_side_double_thick", PaintGunItemRegistry.LINES, new int[] {0}, true));
-			paintBlockList.add(new SideLinePaintBlock("line_" + col[i] + "_side_single", PaintGunItemRegistry.LINES, new int[] {0}, true));
-			paintBlockList.add(new SideLinePaintBlock("line_" + col[i] + "_side_single_thick", PaintGunItemRegistry.LINES, new int[] {0}, true));
+			paintBlockList.add(new SideLinePaintBlock("line_" + col[i] + "_side_double", PaintGunItemRegistry.LINES, new int[] {0}, true, col[i]));
+			paintBlockList.add(new SideLinePaintBlock("line_" + col[i] + "_side_double_thick", PaintGunItemRegistry.LINES, new int[] {0}, true, col[i]));
+			paintBlockList.add(new SideLinePaintBlock("line_" + col[i] + "_side_single", PaintGunItemRegistry.LINES, new int[] {0}, true, col[i]));
+			paintBlockList.add(new SideLinePaintBlock("line_" + col[i] + "_side_single_thick", PaintGunItemRegistry.LINES, new int[] {0}, true, col[i]));
 			
-			paintBlockList.add(new FarSideLinePaintBlock("line_" + col[i] + "_far_side", PaintGunItemRegistry.LINES, new int[] {0}, true));
-			paintBlockList.add(new FarSideLinePaintBlock("line_" + col[i] + "_far_side_thick", PaintGunItemRegistry.LINES, new int[] {0}, true));
+			paintBlockList.add(new FarSideLinePaintBlock("line_" + col[i] + "_far_side", PaintGunItemRegistry.LINES, new int[] {0}, true, col[i]));
+			paintBlockList.add(new FarSideLinePaintBlock("line_" + col[i] + "_far_side_thick", PaintGunItemRegistry.LINES, new int[] {0}, true, col[i]));
 			
-			paintBlockList.add(new SimpleLinePaintBlock("line_" + col[i] + "_middle_half_double", PaintGunItemRegistry.LINES, new int[] {0}, false));
-			paintBlockList.add(new SimpleLinePaintBlock("line_" + col[i] + "_middle_dash_double", PaintGunItemRegistry.LINES, new int[] {0}, false));
-			paintBlockList.add(new SimpleLinePaintBlock("line_" + col[i] + "_middle_short", PaintGunItemRegistry.LINES, new int[] {0}, false));
-			paintBlockList.add(new SimpleLinePaintBlock("line_" + col[i] + "_filter_lane", PaintGunItemRegistry.LINES, new int[] {0}, false));
-			paintBlockList.add(new SimpleLinePaintBlock("line_" + col[i] + "_side_short", PaintGunItemRegistry.LINES, new int[] {0}, false));
-			paintBlockList.add(new SimpleLinePaintBlock("line_" + col[i] + "_thin_crossing", PaintGunItemRegistry.LINES, new int[] {0}, false));
+			paintBlockList.add(new SimpleLinePaintBlock("line_" + col[i] + "_middle_half_double", PaintGunItemRegistry.LINES, new int[] {0}, false, col[i]));
+			paintBlockList.add(new SimpleLinePaintBlock("line_" + col[i] + "_middle_dash_double", PaintGunItemRegistry.LINES, new int[] {0}, false, col[i]));
+			paintBlockList.add(new SimpleLinePaintBlock("line_" + col[i] + "_middle_short", PaintGunItemRegistry.LINES, new int[] {0}, false, col[i]));
+			paintBlockList.add(new SimpleLinePaintBlock("line_" + col[i] + "_filter_lane", PaintGunItemRegistry.LINES, new int[] {0}, false, col[i]));
+			paintBlockList.add(new SimpleLinePaintBlock("line_" + col[i] + "_side_short", PaintGunItemRegistry.LINES, new int[] {0}, false, col[i]));
+			paintBlockList.add(new SimpleLinePaintBlock("line_" + col[i] + "_thin_crossing", PaintGunItemRegistry.LINES, new int[] {0}, false, col[i]));
 			
-			paintBlockList.add(new IconPaintBlock(col[i] + "_wheelchair_icon", PaintGunItemRegistry.ICONS, new int[] {0}, false));
-			paintBlockList.add(new IconPaintBlock(col[i] + "_chevron", PaintGunItemRegistry.ICONS, new int[] {0}, false));
+			paintBlockList.add(new IconPaintBlock(col[i] + "_wheelchair_icon", PaintGunItemRegistry.ICONS, new int[] {0}, false, col[i]));
+			paintBlockList.add(new IconPaintBlock(col[i] + "_chevron", PaintGunItemRegistry.ICONS, new int[] {0}, false, col[i]));
 			
-			paintBlockList.add(new Connected1x2PaintBlock(col[i] + "_pedestrian", PaintGunItemRegistry.ICONS, new int[] {0}, true));
-			paintBlockList.add(new Connected1x2PaintBlock(col[i] + "_merge_arrow", PaintGunItemRegistry.ICONS, new int[] {0}, true));
-			paintBlockList.add(new Connected1x2PaintBlock(col[i] + "_give_way", PaintGunItemRegistry.ICONS, new int[] {0}, true));
+			paintBlockList.add(new Connected1x2PaintBlock(col[i] + "_pedestrian", PaintGunItemRegistry.ICONS, new int[] {0}, true, col[i]));
+			paintBlockList.add(new Connected1x2PaintBlock(col[i] + "_merge_arrow", PaintGunItemRegistry.ICONS, new int[] {0}, true, col[i]));
+			paintBlockList.add(new Connected1x2PaintBlock(col[i] + "_give_way", PaintGunItemRegistry.ICONS, new int[] {0}, true, col[i]));
 			
-			paintBlockList.add(new JunctionFilterLinePaintBlock(col[i] + "_junction_filter_left", true, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true));
-			paintBlockList.add(new JunctionFilterLinePaintBlock(col[i] + "_junction_filter_left_thin", true, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true));
-			paintBlockList.add(new JunctionFilterLinePaintBlock(col[i] + "_junction_filter_left_empty", true, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true));
+			paintBlockList.add(new JunctionFilterLinePaintBlock(col[i] + "_junction_filter_left", true, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true, col[i]));
+			paintBlockList.add(new JunctionFilterLinePaintBlock(col[i] + "_junction_filter_left_thin", true, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true, col[i]));
+			paintBlockList.add(new JunctionFilterLinePaintBlock(col[i] + "_junction_filter_left_empty", true, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true, col[i]));
 			
-			paintBlockList.add(new JunctionFilterLinePaintBlock(col[i] + "_junction_filter_right", false, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true));
-			paintBlockList.add(new JunctionFilterLinePaintBlock(col[i] + "_junction_filter_right_thin", false, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true));
-			paintBlockList.add(new JunctionFilterLinePaintBlock(col[i] + "_junction_filter_right_empty", false, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true));
+			paintBlockList.add(new JunctionFilterLinePaintBlock(col[i] + "_junction_filter_right", false, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true, col[i]));
+			paintBlockList.add(new JunctionFilterLinePaintBlock(col[i] + "_junction_filter_right_thin", false, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true, col[i]));
+			paintBlockList.add(new JunctionFilterLinePaintBlock(col[i] + "_junction_filter_right_empty", false, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true, col[i]));
 			
-			paintBlockList.add(new Connected1x4PaintBlock(col[i] + "_junction_fork_mid", false, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true));
-			paintBlockList.add(new Connected1x4PaintBlock(col[i] + "_junction_fork_mid_thin", false, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true));
-			paintBlockList.add(new Connected1x4PaintBlock(col[i] + "_junction_fork_chevron_mid", false, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true));
-			paintBlockList.add(new Connected1x4PaintBlock(col[i] + "_junction_fork_chevron_mid_thin", false, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true));
+			paintBlockList.add(new Connected1x4PaintBlock(col[i] + "_junction_fork_mid", false, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true, col[i]));
+			paintBlockList.add(new Connected1x4PaintBlock(col[i] + "_junction_fork_mid_thin", false, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true, col[i]));
+			paintBlockList.add(new Connected1x4PaintBlock(col[i] + "_junction_fork_chevron_mid", false, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true, col[i]));
+			paintBlockList.add(new Connected1x4PaintBlock(col[i] + "_junction_fork_chevron_mid_thin", false, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true, col[i]));
 			
-			paintBlockList.add(new ChevronPaintBlock(col[i] + "_chevron_left_a", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_A, true, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true));
-			paintBlockList.add(new ChevronPaintBlock(col[i] + "_chevron_left_b", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_B, false, PaintGunItemRegistry.JUNCTIONS, null, true));
-			paintBlockList.add(new ChevronPaintBlock(col[i] + "_chevron_left_a_thin", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_THIN_A, true, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true));
-			paintBlockList.add(new ChevronPaintBlock(col[i] + "_chevron_left_b_thin", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_THIN_B, false, PaintGunItemRegistry.JUNCTIONS, null, true));
+			paintBlockList.add(new ChevronPaintBlock(col[i] + "_chevron_left_a", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_A, true, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true, col[i]));
+			paintBlockList.add(new ChevronPaintBlock(col[i] + "_chevron_left_b", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_B, false, PaintGunItemRegistry.JUNCTIONS, null, true, col[i]));
+			paintBlockList.add(new ChevronPaintBlock(col[i] + "_chevron_left_a_thin", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_THIN_A, true, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true, col[i]));
+			paintBlockList.add(new ChevronPaintBlock(col[i] + "_chevron_left_b_thin", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_THIN_B, false, PaintGunItemRegistry.JUNCTIONS, null, true, col[i]));
 
-			paintBlockList.add(new ChevronPaintBlock(col[i] + "_chevron_right_a", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_A, true, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true));
-			paintBlockList.add(new ChevronPaintBlock(col[i] + "_chevron_right_b", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_B, false, PaintGunItemRegistry.JUNCTIONS, null, true));
-			paintBlockList.add(new ChevronPaintBlock(col[i] + "_chevron_right_a_thin", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_THIN_A, true, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true));
-			paintBlockList.add(new ChevronPaintBlock(col[i] + "_chevron_right_b_thin", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_THIN_B, false, PaintGunItemRegistry.JUNCTIONS, null, true));
+			paintBlockList.add(new ChevronPaintBlock(col[i] + "_chevron_right_a", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_A, true, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true, col[i]));
+			paintBlockList.add(new ChevronPaintBlock(col[i] + "_chevron_right_b", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_B, false, PaintGunItemRegistry.JUNCTIONS, null, true, col[i]));
+			paintBlockList.add(new ChevronPaintBlock(col[i] + "_chevron_right_a_thin", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_THIN_A, true, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true, col[i]));
+			paintBlockList.add(new ChevronPaintBlock(col[i] + "_chevron_right_b_thin", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_THIN_B, false, PaintGunItemRegistry.JUNCTIONS, null, true, col[i]));
 			
-			paintBlockList.add(new MultiIconPaintBlock(col[i] + "_junction_side_line_connection", true, PaintGunItemRegistry.JUNCTIONS, new int[] {12, 8, 0, 4}, false));
-			paintBlockList.add(new MultiIconPaintBlock(col[i] + "_junction_side_line_connection_thin", true, PaintGunItemRegistry.JUNCTIONS, new int[] {4, 12, 0, 8}, false));
-			paintBlockList.add(new MultiIconPaintBlock(col[i] + "_junction_side_line_connection_thick_thick", true, PaintGunItemRegistry.JUNCTIONS, new int[] {0, 4, 8, 12}, false));
-			paintBlockList.add(new MultiIconPaintBlock(col[i] + "_junction_mid_line_connection", true, PaintGunItemRegistry.JUNCTIONS, new int[] {0, 4, 8, 12}, false));
+			paintBlockList.add(new MultiIconPaintBlock(col[i] + "_junction_side_line_connection", true, PaintGunItemRegistry.JUNCTIONS, new int[] {12, 8, 0, 4}, false, col[i]));
+			paintBlockList.add(new MultiIconPaintBlock(col[i] + "_junction_side_line_connection_thin", true, PaintGunItemRegistry.JUNCTIONS, new int[] {4, 12, 0, 8}, false, col[i]));
+			paintBlockList.add(new MultiIconPaintBlock(col[i] + "_junction_side_line_connection_thick_thick", true, PaintGunItemRegistry.JUNCTIONS, new int[] {0, 4, 8, 12}, false, col[i]));
+			paintBlockList.add(new MultiIconPaintBlock(col[i] + "_junction_mid_line_connection", true, PaintGunItemRegistry.JUNCTIONS, new int[] {0, 4, 8, 12}, false, col[i]));
 			
-			paintBlockList.add(new MultiIconPaintBlock(col[i] + "_chevron_mid", true, PaintGunItemRegistry.JUNCTIONS, new int[] {0, 8}, false));
+			paintBlockList.add(new MultiIconPaintBlock(col[i] + "_chevron_mid", true, PaintGunItemRegistry.JUNCTIONS, new int[] {0, 8}, false, col[i]));
 			
-			paintBlockList.add(new MultiIconPaintBlock(col[i] + "_chevron_mid_left", true, PaintGunItemRegistry.JUNCTIONS, new int[] {0, 8}, false));
-			paintBlockList.add(new MultiIconPaintBlock(col[i] + "_chevron_mid_right", true, PaintGunItemRegistry.JUNCTIONS, new int[] {0, 8}, false));
+			paintBlockList.add(new MultiIconPaintBlock(col[i] + "_chevron_mid_left", true, PaintGunItemRegistry.JUNCTIONS, new int[] {0, 8}, false, col[i]));
+			paintBlockList.add(new MultiIconPaintBlock(col[i] + "_chevron_mid_right", true, PaintGunItemRegistry.JUNCTIONS, new int[] {0, 8}, false, col[i]));
 			
-			paintBlockList.add(new ChevronSideLinePaintBlock(col[i] + "_chevron_side_line", PaintGunItemRegistry.JUNCTIONS, new int[] {0}, false));
+			paintBlockList.add(new ChevronSideLinePaintBlock(col[i] + "_chevron_side_line", PaintGunItemRegistry.JUNCTIONS, new int[] {0}, false, col[i]));
 			
-			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_slow", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false));
-			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_stop", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false));
-			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_bike", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false));
-			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_bus", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false));
-			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_taxi", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false));
-			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_lane", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false));
-			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_keep", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false));
-			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_clear", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false));
-			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_turn", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false));
-			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_left", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false));
-			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_right", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false));
-			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_only", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false));
-			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_no", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false));
-			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_entry", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false));
-			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_bike_icon", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false));
-			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_town", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false));
-			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_city", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false));
-			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_ctre", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false));
+			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_slow", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false, col[i]));
+			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_stop", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false, col[i]));
+			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_bike", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false, col[i]));
+			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_bus", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false, col[i]));
+			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_taxi", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false, col[i]));
+			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_lane", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false, col[i]));
+			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_keep", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false, col[i]));
+			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_clear", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false, col[i]));
+			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_turn", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false, col[i]));
+			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_left", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false, col[i]));
+			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_right", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false, col[i]));
+			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_only", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false, col[i]));
+			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_no", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false, col[i]));
+			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_entry", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false, col[i]));
+			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_bike_icon", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false, col[i]));
+			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_town", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false, col[i]));
+			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_city", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false, col[i]));
+			paintBlockList.add(new LargeTextPaintBlock(col[i] + "_ctre", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false, col[i]));
 
-			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_ab", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false));
-			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_cd", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false));
-			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_ef", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false));
-			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_gh", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false));
-			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_ij", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false));
-			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_kl", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false));
-			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_mn", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false));
-			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_op", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false));
-			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_qr", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false));
-			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_st", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false));
-			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_uv", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false));
-			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_wx", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false));
-			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_yz", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false));
-			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_01", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false));
-			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_23", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false));
-			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_45", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false));
-			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_67", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false));
-			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_89", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false));
-			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_punct_question_exclamation", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false));
-			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_punct_hash_slash", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false));
+			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_ab", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false, col[i]));
+			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_cd", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false, col[i]));
+			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_ef", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false, col[i]));
+			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_gh", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false, col[i]));
+			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_ij", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false, col[i]));
+			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_kl", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false, col[i]));
+			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_mn", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false, col[i]));
+			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_op", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false, col[i]));
+			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_qr", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false, col[i]));
+			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_st", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false, col[i]));
+			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_uv", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false, col[i]));
+			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_wx", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false, col[i]));
+			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_yz", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false, col[i]));
+			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_01", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false, col[i]));
+			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_23", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false, col[i]));
+			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_45", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false, col[i]));
+			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_67", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false, col[i]));
+			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_89", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false, col[i]));
+			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_punct_question_exclamation", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false, col[i]));
+			paintBlockList.add(new LetterPaintBlock("paint_letter_" + col[i] + "_punct_hash_slash", PaintGunItemRegistry.LETTERS, new int[] {0, 8}, false, col[i]));
 			
-			paintBlockList.add(new HatchBoxPaintBlock("hatch_box_" + col[i], PaintGunItemRegistry.ICONS, new int[] {0}, true));
-			paintBlockList.add(new Connected1x4PaintBlock("line_" + col[i] + "_crossing_diagonal", true, PaintGunItemRegistry.ICONS, new int[] {0}, true));
-			paintBlockList.add(new CrossingPaintBlock(col[i] + "_crossing_paint", PaintGunItemRegistry.ICONS, new int[] {0}, true));
+			paintBlockList.add(new HatchBoxPaintBlock("hatch_box_" + col[i], PaintGunItemRegistry.ICONS, new int[] {0}, true, col[i]));
+			paintBlockList.add(new Connected1x4PaintBlock("line_" + col[i] + "_crossing_diagonal", true, PaintGunItemRegistry.ICONS, new int[] {0}, true, col[i]));
+			paintBlockList.add(new CrossingPaintBlock(col[i] + "_crossing_paint", PaintGunItemRegistry.ICONS, new int[] {0}, true, col[i]));
 			
-			paintBlockList.add(new ArrowPaintBlock(col[i] + "_arrow", PaintGunItemRegistry.ICONS, new int[] {0, 4}, true));
-			paintBlockList.add(new ArrowLinePaintBlock(col[i] + "_arrow_line", PaintGunItemRegistry.ICONS, new int[] {0}, true));
-			paintBlockList.add(new ArrowDiagonalPaintBlock(col[i] + "_arrow_diagonal", PaintGunItemRegistry.ICONS, new int[] {0, 4}, true));
+			paintBlockList.add(new ArrowPaintBlock(col[i] + "_arrow", PaintGunItemRegistry.ICONS, new int[] {0, 4}, true, col[i]));
+			paintBlockList.add(new ArrowLinePaintBlock(col[i] + "_arrow_line", PaintGunItemRegistry.ICONS, new int[] {0}, true, col[i]));
+			paintBlockList.add(new ArrowDiagonalPaintBlock(col[i] + "_arrow_diagonal", PaintGunItemRegistry.ICONS, new int[] {0, 4}, true, col[i]));
 			
-			paintBlockList.add(new JunctionPaintBlock(col[i] + "_junction_a", PaintGunItemRegistry.ICONS, new int[] {4, 8, 0}, false));
-			paintBlockList.add(new JunctionPaintBlock(col[i] + "_junction_b", PaintGunItemRegistry.ICONS, new int[] {0, 8, 4}, false));
+			paintBlockList.add(new JunctionPaintBlock(col[i] + "_junction_a", PaintGunItemRegistry.ICONS, new int[] {4, 8, 0}, false, col[i]));
+			paintBlockList.add(new JunctionPaintBlock(col[i] + "_junction_b", PaintGunItemRegistry.ICONS, new int[] {0, 8, 4}, false, col[i]));
 		}
 
 		catsEyeList.add(cats_eye_white);

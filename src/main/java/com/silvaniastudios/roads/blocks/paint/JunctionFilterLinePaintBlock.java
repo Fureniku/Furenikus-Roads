@@ -29,8 +29,8 @@ public class JunctionFilterLinePaintBlock extends PaintBlockBase {
 	
 	boolean leftSide = false;
 
-	public JunctionFilterLinePaintBlock(String name, boolean leftSide, String category, int[] coreMetas, boolean dynamic) {
-		super(name, category, coreMetas, dynamic);
+	public JunctionFilterLinePaintBlock(String name, boolean leftSide, String category, int[] coreMetas, boolean dynamic, String colour) {
+		super(name, category, coreMetas, dynamic, colour);
 		this.leftSide = leftSide;
 		this.setDefaultState(this.blockState.getBaseState().withProperty(TYPE_ROT, EnumFourLengthConnectable.NORTH_TOP).withProperty(CONNECT, EnumChevronConnections.NONE));
 		this.setCreativeTab(FurenikusRoads.tab_paint_junction);

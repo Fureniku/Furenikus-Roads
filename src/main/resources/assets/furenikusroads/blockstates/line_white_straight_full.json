@@ -6,7 +6,7 @@
 			"0": "furenikusroads:blocks/paint_white",
 			"particle": "furenikusroads:blocks/paint_white"
 		},
-		"model": "furenikusroads:single_middle"
+		"model": "furenikusroads:nomodel"
 	},
 	"variants": {
 		"inventory": [{
@@ -47,18 +47,13 @@
 		}],
 		"facing": {
 			"east_west": {
-				"submodel": {
-					"paint_east": { "model": "furenikusroads:single_line_n", "y": 90 },
-					"paint_west": { "model": "furenikusroads:single_line_n", "y": 270 }
-				}
+				"model": "furenikusroads:nomodel"
 			},
 			"north_south": {
-				"submodel": {
-					"paint_north": { "model": "furenikusroads:single_line_n" },
-					"paint_south": { "model": "furenikusroads:single_line_n", "y": 180 }
-				}
+				"model": "furenikusroads:nomodel"
 			},
 			"connect": {
+				"model": "furenikusroads:nomodel"
 			}
 		}
 	}

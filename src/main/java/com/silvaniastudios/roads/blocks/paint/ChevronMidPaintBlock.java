@@ -27,8 +27,8 @@ public class ChevronMidPaintBlock extends PaintBlockBase {
 	public static final PropertyEnum<EnumMeta> META_ID = PropertyEnum.create("meta", EnumMeta.class);
 	public boolean fourType = false;
 	
-	public ChevronMidPaintBlock(String name, boolean fourType, String category, int[] coreMetas, boolean dynamic) {
-		super(name, category, coreMetas, dynamic);
+	public ChevronMidPaintBlock(String name, boolean fourType, String category, int[] coreMetas, boolean dynamic, String colour) {
+		super(name, category, coreMetas, dynamic, colour);
 		this.fourType = fourType;
 		this.setDefaultState(this.blockState.getBaseState().withProperty(META_ID, EnumMeta.id0));
 		this.setCreativeTab(FurenikusRoads.tab_paint_junction);

@@ -30,8 +30,8 @@ public class WallPaintBlock extends PaintBlockBase implements IMetaBlockName {
 	
 	public static final PropertyEnum<EnumRotatable> ROTATE_ID = PropertyEnum.create("wall_paint", EnumRotatable.class);
 	
-	public WallPaintBlock(String name, String category, int[] coreMetas, boolean dynamic) {
-		super(name, category, coreMetas, dynamic);
+	public WallPaintBlock(String name, String category, int[] coreMetas, boolean dynamic, String colour) {
+		super(name, category, coreMetas, dynamic, colour);
 		setDefaultState(this.blockState.getBaseState().withProperty(ROTATE_ID, EnumRotatable.FLAT_NORTH));
 	}
 	

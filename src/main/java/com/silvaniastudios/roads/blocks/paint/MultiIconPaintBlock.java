@@ -30,8 +30,8 @@ public class MultiIconPaintBlock extends PaintBlockBase implements IMetaBlockNam
 
 	boolean multiType = true;
 	
-	public MultiIconPaintBlock(String name, boolean multiType, String category, int[] coreMetas, boolean dynamic) {
-		super(name, category, coreMetas, dynamic);
+	public MultiIconPaintBlock(String name, boolean multiType, String category, int[] coreMetas, boolean dynamic, String colour) {
+		super(name, category, coreMetas, dynamic, colour);
 		this.multiType = multiType;
 		setDefaultState(this.blockState.getBaseState().withProperty(META_ID, EnumMeta.id0));
 		this.setCreativeTab(FurenikusRoads.tab_paint_junction);

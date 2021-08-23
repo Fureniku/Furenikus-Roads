@@ -37,7 +37,10 @@ import com.silvaniastudios.roads.client.model.diagonal.loaders.Diagonal38ModelLo
 import com.silvaniastudios.roads.client.model.diagonal.loaders.Diagonal48MirrorModelLoader;
 import com.silvaniastudios.roads.client.model.diagonal.loaders.Diagonal48ModelLoader;
 import com.silvaniastudios.roads.client.model.paint.loaders.CustomPaintModelLoader;
-import com.silvaniastudios.roads.client.model.paint.loaders.LinePaintModelLoader;
+import com.silvaniastudios.roads.client.model.paint.loaders.lines.LineStraightDoubleModelLoader;
+import com.silvaniastudios.roads.client.model.paint.loaders.lines.LineStraightDoubleThickModelLoader;
+import com.silvaniastudios.roads.client.model.paint.loaders.lines.LineStraightFullModelLoader;
+import com.silvaniastudios.roads.client.model.paint.loaders.lines.LineStraightThickModelLoader;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -79,7 +82,10 @@ public class ClientProxy extends CommonProxy {
 		//paints
 		ModelLoaderRegistry.registerLoader(new CustomPaintModelLoader());
 		
-		ModelLoaderRegistry.registerLoader(new LinePaintModelLoader());
+		ModelLoaderRegistry.registerLoader(new LineStraightFullModelLoader());
+		ModelLoaderRegistry.registerLoader(new LineStraightDoubleModelLoader());
+		ModelLoaderRegistry.registerLoader(new LineStraightThickModelLoader());
+		ModelLoaderRegistry.registerLoader(new LineStraightDoubleThickModelLoader());
 	}
 
 	@Override

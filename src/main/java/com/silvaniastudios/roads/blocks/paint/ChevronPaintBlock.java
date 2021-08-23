@@ -39,8 +39,8 @@ public class ChevronPaintBlock extends PaintBlockBase {
 	
 	
 	
-	public ChevronPaintBlock(String name, EnumJunctionConnections type, boolean aType, String category, int[] coreMetas, boolean dynamic) {
-		super(name, category, coreMetas, dynamic);
+	public ChevronPaintBlock(String name, EnumJunctionConnections type, boolean aType, String category, int[] coreMetas, boolean dynamic, String colour) {
+		super(name, category, coreMetas, dynamic, colour);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(META_ID, EnumType.NORTH).withProperty(TYPE, type).withProperty(EDGE, false).withProperty(HIDE, false));
 		if (!aType) { this.setCreativeTab(null); } else { this.setCreativeTab(FurenikusRoads.tab_paint_junction); }
 	}

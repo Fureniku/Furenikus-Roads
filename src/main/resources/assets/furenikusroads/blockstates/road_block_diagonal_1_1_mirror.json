@@ -6,7 +6,7 @@
 	},
 	"variants": {
 		"inventory": [{
-			"model": "furenikusroads:1_1_diagonal", "y": 0
+			"model": "furenikusroads:1_1_diagonal", "y": 0,
 			"transform": {
 				"ground": {
 					"scale": [0.5, 0.5, 0.5],

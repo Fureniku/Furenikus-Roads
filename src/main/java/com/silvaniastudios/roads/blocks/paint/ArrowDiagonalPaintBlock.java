@@ -26,8 +26,8 @@ public class ArrowDiagonalPaintBlock extends PaintBlockBase implements IMetaBloc
 	
 	public static final PropertyEnum<ArrowDiagonalPaintBlock.EnumDiagonalArrow> META_ID = PropertyEnum.create("meta", ArrowDiagonalPaintBlock.EnumDiagonalArrow.class);
 
-	public ArrowDiagonalPaintBlock(String name, String category, int[] coreMetas, boolean dynamic) {
-		super(name, category, coreMetas, dynamic);
+	public ArrowDiagonalPaintBlock(String name, String category, int[] coreMetas, boolean dynamic, String colour) {
+		super(name, category, coreMetas, dynamic, colour);
 		setDefaultState(this.blockState.getBaseState().withProperty(META_ID, ArrowDiagonalPaintBlock.EnumDiagonalArrow.id0));
 		this.setCreativeTab(FurenikusRoads.tab_paint_icons);
 	}

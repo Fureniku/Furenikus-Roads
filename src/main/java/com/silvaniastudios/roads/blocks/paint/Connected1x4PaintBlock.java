@@ -22,8 +22,8 @@ public class Connected1x4PaintBlock extends PaintBlockBase {
 	
 	public static final PropertyEnum<EnumFourLengthConnectable> CONNECT = PropertyEnum.create("position_rotation", EnumFourLengthConnectable.class);
 
-	public Connected1x4PaintBlock(String name, boolean icon, String category, int[] coreMetas, boolean dynamic) {
-		super(name, category, coreMetas, dynamic);
+	public Connected1x4PaintBlock(String name, boolean icon, String category, int[] coreMetas, boolean dynamic, String colour) {
+		super(name, category, coreMetas, dynamic, colour);
 		if (icon) { this.setCreativeTab(FurenikusRoads.tab_paint_icons); } else { this.setCreativeTab(FurenikusRoads.tab_paint_junction); }
 		this.setDefaultState(this.blockState.getBaseState().withProperty(CONNECT, EnumFourLengthConnectable.NORTH_TOP));
 	}

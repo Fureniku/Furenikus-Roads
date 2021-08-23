@@ -33,13 +33,11 @@ public class CustomPaintBlock extends PaintBlockBase {
 	
 	private boolean[][] paintGrid;
 	private String localizedName;
-	private String colour;
 
 	public CustomPaintBlock(String name, String localName, boolean[][] grid, String category, String colour) {
-		super(name, category, new int[] {0}, false);
+		super(name, category, new int[] {0}, false, colour);
 		this.paintGrid = grid;
 		this.localizedName = localName;
-		this.colour = colour;
 		this.setCreativeTab(FurenikusRoads.tab_paint_customs);
 	}
 	
@@ -52,9 +50,6 @@ public class CustomPaintBlock extends PaintBlockBase {
 		return localizedName;
 	}
 	
-	public String getColour() {
-		return colour;
-	}
 	
 	@Override
 	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {

@@ -40,10 +40,9 @@ public class LinePaintBlock extends PaintBlockBase implements IMetaBlockName {
 	public static final UnlistedPropertyConnection WEST = new UnlistedPropertyConnection("west");
 	public static final PropertyEnum<LinePaintBlock.EnumRotation> FACING = PropertyEnum.create("facing", LinePaintBlock.EnumRotation.class);
 
-	public LinePaintBlock(String name, String category, int[] coreMetas, boolean dynamic) {
-		super(name, category, coreMetas, dynamic);
-		this.setDefaultState(this.blockState.getBaseState()
-				.withProperty(FACING, LinePaintBlock.EnumRotation.ns));
+	public LinePaintBlock(String name, String category, int[] coreMetas, boolean dynamic, String colour) {
+		super(name, category, coreMetas, dynamic, colour);
+		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, LinePaintBlock.EnumRotation.ns));
 		this.setCreativeTab(FurenikusRoads.tab_paint_lines);
 	}
 	
@@ -115,6 +114,8 @@ public class LinePaintBlock extends PaintBlockBase implements IMetaBlockName {
 			e = true;
 			w = true;
 		}
+		
+		System.out.printf("Block at %s %s %s has states N: %s E: %s S: %s W: %s \n", pos.getX(), pos.getY(), pos.getZ(), n, e, s, w);
 
 		return extendedBlockState.withProperty(NORTH, n).withProperty(EAST, e).withProperty(SOUTH, s).withProperty(WEST, w);
 	}

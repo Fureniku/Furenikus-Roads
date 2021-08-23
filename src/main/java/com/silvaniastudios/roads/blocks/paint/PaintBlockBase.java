@@ -10,6 +10,7 @@ import com.silvaniastudios.roads.blocks.BlockBase;
 import com.silvaniastudios.roads.blocks.NonPaintRoadTopBlock;
 import com.silvaniastudios.roads.blocks.decorative.CurbBlock;
 import com.silvaniastudios.roads.blocks.diagonal.RoadBlockDiagonal;
+import com.silvaniastudios.roads.blocks.paint.LinePaintBlock.EnumRotation;
 import com.silvaniastudios.roads.items.FRItems;
 import com.silvaniastudios.roads.items.PaintGun;
 import com.silvaniastudios.roads.network.PaintGunUpdatePacket;
@@ -27,6 +28,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
@@ -39,13 +41,19 @@ public class PaintBlockBase extends BlockBase {
 	private String categoryName;
 	private int[] coreMetas;
 	private boolean dynamic = false;
+	private String colour;
 	
-	public PaintBlockBase(String name, String catName, int[] coreMetas, boolean dynamic) {
+	public PaintBlockBase(String name, String catName, int[] coreMetas, boolean dynamic, String colour) {
 		super(name, Material.CLOTH);
 		this.categoryName = catName;
 		this.coreMetas = coreMetas;
 		this.setHardness(2.0F);
 		this.dynamic = dynamic;
+		this.colour = colour;
+	}
+	
+	public String getColour() {
+		return this.colour;
 	}
 	
 	public String getCategory() {

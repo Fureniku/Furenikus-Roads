@@ -29,8 +29,8 @@ public class FarSideLinePaintBlock extends PaintBlockBase implements IMetaBlockN
 	public static final PropertyEnum<EnumConnectDirectional_FarSide> CONNECT_DIRECTIONAL = PropertyEnum.create("directional_connections", EnumConnectDirectional_FarSide.class);
 	public static final PropertyDirection FACING =  PropertyDirection.create("zz_facing", EnumFacing.Plane.HORIZONTAL);
 
-	public FarSideLinePaintBlock(String name, String category, int[] coreMetas, boolean dynamic) {
-		super(name, category, coreMetas, dynamic);
+	public FarSideLinePaintBlock(String name, String category, int[] coreMetas, boolean dynamic, String colour) {
+		super(name, category, coreMetas, dynamic, colour);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 		this.setCreativeTab(FurenikusRoads.tab_paint_lines);
 	}

@@ -25,8 +25,8 @@ public class ChevronSideLinePaintBlock extends PaintBlockBase {
 	public static final PropertyEnum<EnumTypeRotation> TYPE_ROT = PropertyEnum.create("type_rotation", EnumTypeRotation.class);
 	public static final PropertyEnum<EnumConnections> CONNECT = PropertyEnum.create("connect", EnumConnections.class);
 
-	public ChevronSideLinePaintBlock(String name, String category, int[] coreMetas, boolean dynamic) {
-		super(name, category, coreMetas, dynamic);
+	public ChevronSideLinePaintBlock(String name, String category, int[] coreMetas, boolean dynamic, String colour) {
+		super(name, category, coreMetas, dynamic, colour);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(TYPE_ROT, EnumTypeRotation.DOWN_N_A).withProperty(CONNECT, EnumConnections.NONE));
 		this.setCreativeTab(FurenikusRoads.tab_paint_junction);
 	}
