@@ -261,6 +261,38 @@ public class ModelBakeHandler {
 		ResourceLocation sprite_light_item = new ResourceLocation(FurenikusRoads.MODID + ":blocks/hopper_type_item");
 		ResourceLocation sprite_light_none = new ResourceLocation(FurenikusRoads.MODID + ":blocks/hopper_type_none");
 		
+		ResourceLocation line_straight_full_0 = new ResourceLocation(FurenikusRoads.MODID + ":paints/line_straight_full_0");
+		ResourceLocation line_straight_full_1 = new ResourceLocation(FurenikusRoads.MODID + ":paints/line_straight_full_1");
+		ResourceLocation line_straight_full_2 = new ResourceLocation(FurenikusRoads.MODID + ":paints/line_straight_full_2");
+		
+		ResourceLocation line_straight_thick_0 = new ResourceLocation(FurenikusRoads.MODID + ":paints/line_straight_thick_0");
+		ResourceLocation line_straight_thick_1 = new ResourceLocation(FurenikusRoads.MODID + ":paints/line_straight_thick_1");
+		ResourceLocation line_straight_thick_2 = new ResourceLocation(FurenikusRoads.MODID + ":paints/line_straight_thick_2");
+		
+		ResourceLocation line_straight_double_0 = new ResourceLocation(FurenikusRoads.MODID + ":paints/line_straight_double_0");
+		ResourceLocation line_straight_double_1 = new ResourceLocation(FurenikusRoads.MODID + ":paints/line_straight_double_1");
+		ResourceLocation line_straight_double_2 = new ResourceLocation(FurenikusRoads.MODID + ":paints/line_straight_double_2");
+		
+		ResourceLocation line_straight_double_thick_0 = new ResourceLocation(FurenikusRoads.MODID + ":paints/line_straight_double_thick_0");
+		ResourceLocation line_straight_double_thick_1 = new ResourceLocation(FurenikusRoads.MODID + ":paints/line_straight_double_thick_1");
+		ResourceLocation line_straight_double_thick_2 = new ResourceLocation(FurenikusRoads.MODID + ":paints/line_straight_double_thick_2");
+		
+		event.getMap().registerSprite(line_straight_full_0);
+		event.getMap().registerSprite(line_straight_full_1);
+		event.getMap().registerSprite(line_straight_full_2);
+		
+		event.getMap().registerSprite(line_straight_thick_0);
+		event.getMap().registerSprite(line_straight_thick_1);
+		event.getMap().registerSprite(line_straight_thick_2);
+		
+		event.getMap().registerSprite(line_straight_double_0);
+		event.getMap().registerSprite(line_straight_double_1);
+		event.getMap().registerSprite(line_straight_double_2);
+		
+		event.getMap().registerSprite(line_straight_double_thick_0);
+		event.getMap().registerSprite(line_straight_double_thick_1);
+		event.getMap().registerSprite(line_straight_double_thick_2);
+		
 		event.getMap().registerSprite(white_paint);
 		event.getMap().registerSprite(yellow_paint);
 		event.getMap().registerSprite(red_paint);

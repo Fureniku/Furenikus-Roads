@@ -1,11 +1,13 @@
 package com.silvaniastudios.roads.client.model.paint;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 
 import com.silvaniastudios.roads.FurenikusRoads;
+import com.silvaniastudios.roads.blocks.paint.PaintBlockBase;
 import com.silvaniastudios.roads.client.render.Quad;
 
 import net.minecraft.block.state.IBlockState;
@@ -16,21 +18,29 @@ import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.block.model.ItemOverrideList;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.VertexFormat;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
 import net.minecraftforge.client.model.pipeline.UnpackedBakedQuad;
 import net.minecraftforge.common.model.IModelState;
 import net.minecraftforge.common.property.IExtendedBlockState;
 
 public class PaintBakedModelBase implements IBakedModel {
 
+	private final PaintOverrideList overrideList;
+	protected ItemStack stack;
 	protected VertexFormat format;
 	Minecraft mc;
 
 	public PaintBakedModelBase(IModelState state, VertexFormat format, Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
 		this.format = format;
+		overrideList = new PaintOverrideList(this);
 		mc = Minecraft.getMinecraft();
+		stack = null;
 	}
 
 	//Direct from mcjty's tutorial on IModel usage https://wiki.mcjty.eu/modding/index.php?title=Render_Block_Baked_Model-1.12
@@ -77,14 +87,17 @@ public class PaintBakedModelBase implements IBakedModel {
 		return quads;
 	}
 
-	@Override public ItemOverrideList getOverrides() { return null; }
+	@Override
+	public ItemOverrideList getOverrides() {
+		return this.overrideList;
+	}
 	@Override public boolean isAmbientOcclusion() { return true; }
 	@Override public boolean isGui3d() { return false; }
 	@Override public boolean isBuiltInRenderer() { return false; }
 	@Override public TextureAtlasSprite getParticleTexture() { return Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(FurenikusRoads.MODID + ":blocks/road_block_standard"); }
 	@Override public ItemCameraTransforms getItemCameraTransforms() { return ItemCameraTransforms.DEFAULT; }
 	
-	protected List<BakedQuad> shapeBuilder(List<Quad> rawQuads, List<BakedQuad> quads) {
+	protected List<BakedQuad> shapeBuilder(List<Quad> rawQuads, List<BakedQuad> quads, int col) {
 		for (int i = 0; i < rawQuads.size(); i++) {
 			if (rawQuads.get(i) != null) {
 				rawQuads.set(i, Quad.rotateQuadY(rawQuads.get(i), 0));
@@ -93,7 +106,7 @@ public class PaintBakedModelBase implements IBakedModel {
 
 		for (int i = 0; i < rawQuads.size(); i++) {
 			if (rawQuads.get(i) != null) {
-				BakedQuad baked = rawQuads.get(i).createQuad(0);
+				BakedQuad baked = rawQuads.get(i).createQuad(col);
 				
 				quads.add(baked);
 			}
@@ -184,5 +197,64 @@ public class PaintBakedModelBase implements IBakedModel {
 		quads.add(south);
 		quads.add(west);
 		return quads;
+	}
+	
+	public List<Quad> getSpriteQuads() {
+		List<Quad> quads = new ArrayList<>();
+		PaintBlockBase paintBlock = (PaintBlockBase) ((ItemBlock) stack.getItem()).getBlock();
+		System.out.println("Checking for " + paintBlock.getIconName());
+		TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(FurenikusRoads.MODID + ":paints/" + paintBlock.getIconName() + "_" + stack.getItemDamage());
+		
+		Quad front = new Quad(
+				new Vec3d(1, 0, 0.5), 16f, 0f, //BL
+				new Vec3d(0, 0, 0.5), 0f, 0f,//BR
+				new Vec3d(0, 1, 0.5), 0f, 16f, //TR
+				new Vec3d(1, 1, 0.5), 16f, 16f, //TL
+				sprite, format);
+		
+		Quad back = new Quad(
+				new Vec3d(0, 0, 0.5), 16f, 0f, //BL
+				new Vec3d(1, 0, 0.5), 0f, 0f,//BR
+				new Vec3d(1, 1, 0.5), 0f, 16f, //TR
+				new Vec3d(0, 1, 0.5), 16f, 16f, //TL
+				sprite, format);
+		
+		quads.add(front);
+		quads.add(back);
+		
+		return quads;
+	}
+	
+	public PaintBakedModelBase setCurrentItemStack(ItemStack stack) {
+		this.stack = stack;
+		return this;
+	}
+	
+	public int getColIntFromName(String col) {
+		if (col.equalsIgnoreCase("white")) {
+			return 0;
+		} else if (col.equalsIgnoreCase("yellow")) {
+			return Color.YELLOW.getRGB();
+		} else if (col.equalsIgnoreCase("red")) {
+			return Color.RED.getRGB();
+		} else if (col.equalsIgnoreCase("blue")) {
+			return Color.BLUE.getRGB();
+		}
+		
+		return 0;
+	}
+	
+	private static class PaintOverrideList extends ItemOverrideList {
+		private PaintBakedModelBase model;
+		
+		public PaintOverrideList(PaintBakedModelBase model) {
+			super(Collections.emptyList());
+			this.model = model;
+		}
+		
+		@Override
+		public IBakedModel handleItemState(IBakedModel originalModel, ItemStack stack, World world, EntityLivingBase entity) {
+			return this.model.setCurrentItemStack(stack);
+		}
 	}
 }

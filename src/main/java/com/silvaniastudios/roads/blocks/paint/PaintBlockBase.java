@@ -7,6 +7,7 @@ import javax.annotation.Nullable;
 import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.RoadsConfig;
 import com.silvaniastudios.roads.blocks.BlockBase;
+import com.silvaniastudios.roads.blocks.FRBlocks;
 import com.silvaniastudios.roads.blocks.NonPaintRoadTopBlock;
 import com.silvaniastudios.roads.blocks.decorative.CurbBlock;
 import com.silvaniastudios.roads.blocks.diagonal.RoadBlockDiagonal;
@@ -66,6 +67,20 @@ public class PaintBlockBase extends BlockBase {
 	
 	public boolean canConnect() {
 		return dynamic;
+	}
+	
+	//Searches through the unlocalized name, removes reference of colour and returns a name of the icon which should be uniform across all colours.
+	//Used for the item and paint gun icons
+	public String getIconName() {
+		for (int i = 0; i < FRBlocks.col.length; i++) {
+			if (this.name.contains(FRBlocks.col[i] + "_")) {
+				return this.name.replace(FRBlocks.col[i] + "_", "");
+			} else if (this.name.contains("_" + FRBlocks.col[i])) { //for if the name ends with the colour for any reason which it never should but y'know
+				return this.name.replace("_" + FRBlocks.col[i], "");
+			}
+		}
+		
+		return "";
 	}
 	
 	@Override

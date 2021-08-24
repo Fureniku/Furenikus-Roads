@@ -655,6 +655,12 @@ public class FRBlocks {
 		for (int i = 0; i < roadBlockDiagonalList.size(); i++)  { 
 			roadBlockDiagonalList.get(i).initItemModel();
 		}
+		for (int i = 0; i < paintBlockList.size(); i++) {
+			if (paintBlockList.get(i) instanceof LinePaintBlock) {
+				LinePaintBlock block = (LinePaintBlock) paintBlockList.get(i);
+				block.initItemModel();
+			}
+		}
 	}
 
 	public static void registerModels() {

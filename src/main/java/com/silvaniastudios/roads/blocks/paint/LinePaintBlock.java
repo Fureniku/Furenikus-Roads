@@ -114,8 +114,6 @@ public class LinePaintBlock extends PaintBlockBase implements IMetaBlockName {
 			e = true;
 			w = true;
 		}
-		
-		System.out.printf("Block at %s %s %s has states N: %s E: %s S: %s W: %s \n", pos.getX(), pos.getY(), pos.getZ(), n, e, s, w);
 
 		return extendedBlockState.withProperty(NORTH, n).withProperty(EAST, e).withProperty(SOUTH, s).withProperty(WEST, w);
 	}
@@ -144,8 +142,9 @@ public class LinePaintBlock extends PaintBlockBase implements IMetaBlockName {
 	public void initItemModel() {
 		Item itemBlock = Item.REGISTRY.getObject(new ResourceLocation(FurenikusRoads.MODID, this.name));
 		ModelResourceLocation itemModelResourceLocation = new ModelResourceLocation(getRegistryName(), "inventory");
-		final int DEFAULT_ITEM_SUBTYPE = 0;
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(itemBlock, DEFAULT_ITEM_SUBTYPE, itemModelResourceLocation);
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(itemBlock, 0, itemModelResourceLocation);
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(itemBlock, 1, itemModelResourceLocation);
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(itemBlock, 2, itemModelResourceLocation);
 	}
     
     public static enum EnumRotation implements IStringSerializable {
