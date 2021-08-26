@@ -1,6 +1,7 @@
 package com.silvaniastudios.roads.blocks.paint;
 
 import com.silvaniastudios.roads.FurenikusRoads;
+import com.silvaniastudios.roads.blocks.PaintColour;
 import com.silvaniastudios.roads.blocks.enums.IMetaBlockName;
 
 import net.minecraft.block.properties.IProperty;
@@ -26,7 +27,7 @@ public class ArrowDiagonalPaintBlock extends PaintBlockBase implements IMetaBloc
 	
 	public static final PropertyEnum<ArrowDiagonalPaintBlock.EnumDiagonalArrow> META_ID = PropertyEnum.create("meta", ArrowDiagonalPaintBlock.EnumDiagonalArrow.class);
 
-	public ArrowDiagonalPaintBlock(String name, String category, int[] coreMetas, boolean dynamic, String colour) {
+	public ArrowDiagonalPaintBlock(String name, String category, int[] coreMetas, boolean dynamic, PaintColour colour) {
 		super(name, category, coreMetas, dynamic, colour);
 		setDefaultState(this.blockState.getBaseState().withProperty(META_ID, ArrowDiagonalPaintBlock.EnumDiagonalArrow.id0));
 		this.setCreativeTab(FurenikusRoads.tab_paint_icons);

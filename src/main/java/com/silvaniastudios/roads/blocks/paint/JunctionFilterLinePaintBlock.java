@@ -1,6 +1,7 @@
 package com.silvaniastudios.roads.blocks.paint;
 
 import com.silvaniastudios.roads.FurenikusRoads;
+import com.silvaniastudios.roads.blocks.PaintColour;
 import com.silvaniastudios.roads.blocks.enums.EnumFourLengthConnectable;
 
 import net.minecraft.block.Block;
@@ -29,7 +30,7 @@ public class JunctionFilterLinePaintBlock extends PaintBlockBase {
 	
 	boolean leftSide = false;
 
-	public JunctionFilterLinePaintBlock(String name, boolean leftSide, String category, int[] coreMetas, boolean dynamic, String colour) {
+	public JunctionFilterLinePaintBlock(String name, boolean leftSide, String category, int[] coreMetas, boolean dynamic, PaintColour colour) {
 		super(name, category, coreMetas, dynamic, colour);
 		this.leftSide = leftSide;
 		this.setDefaultState(this.blockState.getBaseState().withProperty(TYPE_ROT, EnumFourLengthConnectable.NORTH_TOP).withProperty(CONNECT, EnumChevronConnections.NONE));

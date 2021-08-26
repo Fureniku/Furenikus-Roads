@@ -1,6 +1,7 @@
 package com.silvaniastudios.roads.blocks.paint;
 
 import com.silvaniastudios.roads.FurenikusRoads;
+import com.silvaniastudios.roads.blocks.PaintColour;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
@@ -23,7 +24,7 @@ public class CrossingPaintBlock extends PaintBlockBase {
 	public static final PropertyBool SOUTH = PropertyBool.create("south");
 	public static final PropertyBool WEST = PropertyBool.create("west");
 
-	public CrossingPaintBlock(String name, String category, int[] coreMetas, boolean dynamic, String colour) {
+	public CrossingPaintBlock(String name, String category, int[] coreMetas, boolean dynamic, PaintColour colour) {
 		super(name, category, coreMetas, dynamic, colour);
 		this.setDefaultState(this.blockState.getBaseState()
 				.withProperty(NORTH, false)

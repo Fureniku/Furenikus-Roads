@@ -3,11 +3,13 @@ package com.silvaniastudios.roads.registries;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.blocks.FRBlocks;
+import com.silvaniastudios.roads.blocks.PaintColour;
 import com.silvaniastudios.roads.blocks.paint.CustomPaintBlock;
 
 public class DynamicBlockRegistry {
@@ -63,7 +65,7 @@ public class DynamicBlockRegistry {
 		return jsonList;
 	}
 	
-	private static CustomPaintBlock importedBlock(File file, String col) {
+	private static CustomPaintBlock importedBlock(File file, PaintColour col) {
 		JsonParser parser = new JsonParser();
 		CustomPaintBlock block = null;
 		
@@ -77,8 +79,8 @@ public class DynamicBlockRegistry {
 			//type
 			
 			for (int i = 0; i < FRBlocks.col.length; i++) {
-				if (name.toLowerCase().contains(FRBlocks.col[i])) {
-					FurenikusRoads.debug(0, "Paint JSON file " + name + " contains illegal word. Please don't use " + FRBlocks.col[i] + "anywhere in your paint name.");
+				if (name.toLowerCase().contains(FRBlocks.col[i].getName())) {
+					FurenikusRoads.debug(0, "Paint JSON file " + name + " contains illegal word. Please don't use \"" + FRBlocks.col[i].getName() + "\" anywhere in your paint name.");
 				}
 			}
 			
@@ -105,7 +107,7 @@ public class DynamicBlockRegistry {
 					}
 				}
 				
-				block = new CustomPaintBlock(name + "_" + col, localName, gridArray, type, col);
+				block = new CustomPaintBlock(name + "_" + col.getName(), localName, gridArray, type, col);
 			}
 			
 		} catch (Exception e) {

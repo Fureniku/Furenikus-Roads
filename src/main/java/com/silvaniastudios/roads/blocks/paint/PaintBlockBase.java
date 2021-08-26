@@ -9,6 +9,7 @@ import com.silvaniastudios.roads.RoadsConfig;
 import com.silvaniastudios.roads.blocks.BlockBase;
 import com.silvaniastudios.roads.blocks.FRBlocks;
 import com.silvaniastudios.roads.blocks.NonPaintRoadTopBlock;
+import com.silvaniastudios.roads.blocks.PaintColour;
 import com.silvaniastudios.roads.blocks.decorative.CurbBlock;
 import com.silvaniastudios.roads.blocks.diagonal.RoadBlockDiagonal;
 import com.silvaniastudios.roads.blocks.paint.LinePaintBlock.EnumRotation;
@@ -42,9 +43,9 @@ public class PaintBlockBase extends BlockBase {
 	private String categoryName;
 	private int[] coreMetas;
 	private boolean dynamic = false;
-	private String colour;
+	private PaintColour colour;
 	
-	public PaintBlockBase(String name, String catName, int[] coreMetas, boolean dynamic, String colour) {
+	public PaintBlockBase(String name, String catName, int[] coreMetas, boolean dynamic, PaintColour colour) {
 		super(name, Material.CLOTH);
 		this.categoryName = catName;
 		this.coreMetas = coreMetas;
@@ -53,7 +54,7 @@ public class PaintBlockBase extends BlockBase {
 		this.colour = colour;
 	}
 	
-	public String getColour() {
+	public PaintColour getColour() {
 		return this.colour;
 	}
 	
@@ -73,10 +74,10 @@ public class PaintBlockBase extends BlockBase {
 	//Used for the item and paint gun icons
 	public String getIconName() {
 		for (int i = 0; i < FRBlocks.col.length; i++) {
-			if (this.name.contains(FRBlocks.col[i] + "_")) {
-				return this.name.replace(FRBlocks.col[i] + "_", "");
-			} else if (this.name.contains("_" + FRBlocks.col[i])) { //for if the name ends with the colour for any reason which it never should but y'know
-				return this.name.replace("_" + FRBlocks.col[i], "");
+			if (this.name.contains(FRBlocks.col[i].getName() + "_")) {
+				return this.name.replace(FRBlocks.col[i].getName() + "_", "");
+			} else if (this.name.contains("_" + FRBlocks.col[i].getName())) { //for if the name ends with the colour for any reason which it never should but y'know
+				return this.name.replace("_" + FRBlocks.col[i].getName(), "");
 			}
 		}
 		

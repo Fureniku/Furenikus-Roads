@@ -1,6 +1,7 @@
 package com.silvaniastudios.roads.blocks.paint;
 
 import com.silvaniastudios.roads.FurenikusRoads;
+import com.silvaniastudios.roads.blocks.PaintColour;
 import com.silvaniastudios.roads.blocks.enums.EnumMeta;
 
 import net.minecraft.block.Block;
@@ -27,7 +28,7 @@ public class ChevronMidPaintBlock extends PaintBlockBase {
 	public static final PropertyEnum<EnumMeta> META_ID = PropertyEnum.create("meta", EnumMeta.class);
 	public boolean fourType = false;
 	
-	public ChevronMidPaintBlock(String name, boolean fourType, String category, int[] coreMetas, boolean dynamic, String colour) {
+	public ChevronMidPaintBlock(String name, boolean fourType, String category, int[] coreMetas, boolean dynamic, PaintColour colour) {
 		super(name, category, coreMetas, dynamic, colour);
 		this.fourType = fourType;
 		this.setDefaultState(this.blockState.getBaseState().withProperty(META_ID, EnumMeta.id0));

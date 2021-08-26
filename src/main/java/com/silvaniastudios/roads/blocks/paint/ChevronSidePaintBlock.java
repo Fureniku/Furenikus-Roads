@@ -1,6 +1,7 @@
 package com.silvaniastudios.roads.blocks.paint;
 
 import com.silvaniastudios.roads.FurenikusRoads;
+import com.silvaniastudios.roads.blocks.PaintColour;
 import com.silvaniastudios.roads.blocks.enums.EnumConnectJunctionChevron;
 import com.silvaniastudios.roads.blocks.enums.EnumMeta;
 
@@ -25,7 +26,7 @@ public class ChevronSidePaintBlock extends ChevronMidPaintBlock {
 	public static final PropertyEnum<EnumMeta> META_ID = PropertyEnum.create("meta", EnumMeta.class);
 	public static final PropertyEnum<EnumConnectJunctionChevron> EDGE = PropertyEnum.create("edge", EnumConnectJunctionChevron.class);
 	
-	public ChevronSidePaintBlock(String name, String category, int[] coreMetas, boolean dynamic, String colour) {
+	public ChevronSidePaintBlock(String name, String category, int[] coreMetas, boolean dynamic, PaintColour colour) {
 		super(name, false, category, coreMetas, dynamic, colour);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(META_ID, EnumMeta.id0).withProperty(EDGE, EnumConnectJunctionChevron.NONE));
 		this.setCreativeTab(FurenikusRoads.tab_paint_junction);

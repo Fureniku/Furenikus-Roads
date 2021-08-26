@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.function.Function;
 
 import com.silvaniastudios.roads.FurenikusRoads;
+import com.silvaniastudios.roads.blocks.FRBlocks;
 import com.silvaniastudios.roads.blocks.diagonal.ShapeLibrary;
 import com.silvaniastudios.roads.blocks.paint.CustomPaintBlock;
 import com.silvaniastudios.roads.client.render.Quad;
@@ -23,20 +24,21 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.client.model.pipeline.UnpackedBakedQuad;
 import net.minecraftforge.common.model.IModelState;
-import net.minecraftforge.common.property.IExtendedBlockState;
 
 public class CustomPaintBakedModel  implements IBakedModel {
 
 	protected VertexFormat format;
 	Minecraft mc;
-	
-	TextureAtlasSprite paint_white = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(FurenikusRoads.MODID + ":blocks/paint_white");
-	TextureAtlasSprite paint_yellow = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(FurenikusRoads.MODID + ":blocks/paint_yellow");
-	TextureAtlasSprite paint_red = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(FurenikusRoads.MODID + ":blocks/paint_red");
+	TextureAtlasSprite[] sprites;
 
 	public CustomPaintBakedModel(IModelState state, VertexFormat format, Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
 		this.format = format;
 		mc = Minecraft.getMinecraft();
+		sprites = new TextureAtlasSprite[FRBlocks.col.length];
+		
+		for (int i = 0; i < FRBlocks.col.length; i++) {
+			sprites[i] = mc.getTextureMapBlocks().getAtlasSprite(FurenikusRoads.MODID + ":blocks/paint_" + FRBlocks.col[i].getName());
+		}
 	}
 
 	//Direct from mcjty's tutorial on IModel usage https://wiki.mcjty.eu/modding/index.php?title=Render_Block_Baked_Model-1.12
@@ -77,21 +79,7 @@ public class CustomPaintBakedModel  implements IBakedModel {
 	
 	protected List<BakedQuad> packQuads(IBlockState state) {
 		CustomPaintBlock block = (CustomPaintBlock) state.getBlock();
-		TextureAtlasSprite tex = null;
-		
-		switch (block.getColour()) {
-		case "white":
-			tex = paint_white;
-			break;
-		case "yellow":
-			tex = paint_yellow;
-			break;
-		case "red":
-			tex = paint_red;
-			break;
-		default:
-			tex = paint_white;
-		}
+		TextureAtlasSprite tex = sprites[block.getColour().getId()];
 		
 		List<Quad> rawQuads = ShapeLibrary.shapeFromGrid(block.getGrid(), 0.03125f, tex, format);
 		int rot = 45;

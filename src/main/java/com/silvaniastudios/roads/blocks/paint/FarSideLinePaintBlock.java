@@ -1,6 +1,7 @@
 package com.silvaniastudios.roads.blocks.paint;
 
 import com.silvaniastudios.roads.FurenikusRoads;
+import com.silvaniastudios.roads.blocks.PaintColour;
 import com.silvaniastudios.roads.blocks.enums.EnumConnectDiagonal;
 import com.silvaniastudios.roads.blocks.enums.EnumConnectDirectional_FarSide;
 import com.silvaniastudios.roads.blocks.enums.IMetaBlockName;
@@ -29,7 +30,7 @@ public class FarSideLinePaintBlock extends PaintBlockBase implements IMetaBlockN
 	public static final PropertyEnum<EnumConnectDirectional_FarSide> CONNECT_DIRECTIONAL = PropertyEnum.create("directional_connections", EnumConnectDirectional_FarSide.class);
 	public static final PropertyDirection FACING =  PropertyDirection.create("zz_facing", EnumFacing.Plane.HORIZONTAL);
 
-	public FarSideLinePaintBlock(String name, String category, int[] coreMetas, boolean dynamic, String colour) {
+	public FarSideLinePaintBlock(String name, String category, int[] coreMetas, boolean dynamic, PaintColour colour) {
 		super(name, category, coreMetas, dynamic, colour);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 		this.setCreativeTab(FurenikusRoads.tab_paint_lines);

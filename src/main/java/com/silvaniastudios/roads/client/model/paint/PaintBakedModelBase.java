@@ -1,6 +1,5 @@
 package com.silvaniastudios.roads.client.model.paint;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -202,7 +201,6 @@ public class PaintBakedModelBase implements IBakedModel {
 	public List<Quad> getSpriteQuads() {
 		List<Quad> quads = new ArrayList<>();
 		PaintBlockBase paintBlock = (PaintBlockBase) ((ItemBlock) stack.getItem()).getBlock();
-		System.out.println("Checking for " + paintBlock.getIconName());
 		TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(FurenikusRoads.MODID + ":paints/" + paintBlock.getIconName() + "_" + stack.getItemDamage());
 		
 		Quad front = new Quad(
@@ -228,20 +226,6 @@ public class PaintBakedModelBase implements IBakedModel {
 	public PaintBakedModelBase setCurrentItemStack(ItemStack stack) {
 		this.stack = stack;
 		return this;
-	}
-	
-	public int getColIntFromName(String col) {
-		if (col.equalsIgnoreCase("white")) {
-			return 0;
-		} else if (col.equalsIgnoreCase("yellow")) {
-			return Color.YELLOW.getRGB();
-		} else if (col.equalsIgnoreCase("red")) {
-			return Color.RED.getRGB();
-		} else if (col.equalsIgnoreCase("blue")) {
-			return Color.BLUE.getRGB();
-		}
-		
-		return 0;
 	}
 	
 	private static class PaintOverrideList extends ItemOverrideList {

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.blocks.FRBlocks;
+import com.silvaniastudios.roads.blocks.PaintColour;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
@@ -39,7 +40,7 @@ public class ChevronPaintBlock extends PaintBlockBase {
 	
 	
 	
-	public ChevronPaintBlock(String name, EnumJunctionConnections type, boolean aType, String category, int[] coreMetas, boolean dynamic, String colour) {
+	public ChevronPaintBlock(String name, EnumJunctionConnections type, boolean aType, String category, int[] coreMetas, boolean dynamic, PaintColour colour) {
 		super(name, category, coreMetas, dynamic, colour);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(META_ID, EnumType.NORTH).withProperty(TYPE, type).withProperty(EDGE, false).withProperty(HIDE, false));
 		if (!aType) { this.setCreativeTab(null); } else { this.setCreativeTab(FurenikusRoads.tab_paint_junction); }
@@ -97,15 +98,15 @@ public class ChevronPaintBlock extends PaintBlockBase {
 		ArrayList<ChevronPaintBlock> chevronBRight = new ArrayList<ChevronPaintBlock>();
 		
 		for (int i = 0; i < FRBlocks.col.length; i++) { 
-			chevronALeft.add((ChevronPaintBlock) Block.REGISTRY.getObject(new ResourceLocation(FurenikusRoads.MODID, FRBlocks.col[i] + "_chevron_left_a")));
-			chevronALeft.add((ChevronPaintBlock) Block.REGISTRY.getObject(new ResourceLocation(FurenikusRoads.MODID, FRBlocks.col[i] + "_chevron_left_a_thin")));
-			chevronARight.add((ChevronPaintBlock) Block.REGISTRY.getObject(new ResourceLocation(FurenikusRoads.MODID, FRBlocks.col[i] + "_chevron_right_a")));
-			chevronARight.add((ChevronPaintBlock) Block.REGISTRY.getObject(new ResourceLocation(FurenikusRoads.MODID, FRBlocks.col[i] + "_chevron_right_a_thin")));
+			chevronALeft.add((ChevronPaintBlock) Block.REGISTRY.getObject(new ResourceLocation(FurenikusRoads.MODID, FRBlocks.col[i].getName() + "_chevron_left_a")));
+			chevronALeft.add((ChevronPaintBlock) Block.REGISTRY.getObject(new ResourceLocation(FurenikusRoads.MODID, FRBlocks.col[i].getName() + "_chevron_left_a_thin")));
+			chevronARight.add((ChevronPaintBlock) Block.REGISTRY.getObject(new ResourceLocation(FurenikusRoads.MODID, FRBlocks.col[i].getName() + "_chevron_right_a")));
+			chevronARight.add((ChevronPaintBlock) Block.REGISTRY.getObject(new ResourceLocation(FurenikusRoads.MODID, FRBlocks.col[i].getName() + "_chevron_right_a_thin")));
 			
-			chevronBLeft.add((ChevronPaintBlock) Block.REGISTRY.getObject(new ResourceLocation(FurenikusRoads.MODID, FRBlocks.col[i] + "_chevron_left_b")));
-			chevronBLeft.add((ChevronPaintBlock) Block.REGISTRY.getObject(new ResourceLocation(FurenikusRoads.MODID, FRBlocks.col[i] + "_chevron_left_b_thin")));
-			chevronBRight.add((ChevronPaintBlock) Block.REGISTRY.getObject(new ResourceLocation(FurenikusRoads.MODID, FRBlocks.col[i] + "_chevron_right_b")));
-			chevronBRight.add((ChevronPaintBlock) Block.REGISTRY.getObject(new ResourceLocation(FurenikusRoads.MODID, FRBlocks.col[i] + "_chevron_right_b_thin")));
+			chevronBLeft.add((ChevronPaintBlock) Block.REGISTRY.getObject(new ResourceLocation(FurenikusRoads.MODID, FRBlocks.col[i].getName() + "_chevron_left_b")));
+			chevronBLeft.add((ChevronPaintBlock) Block.REGISTRY.getObject(new ResourceLocation(FurenikusRoads.MODID, FRBlocks.col[i].getName() + "_chevron_left_b_thin")));
+			chevronBRight.add((ChevronPaintBlock) Block.REGISTRY.getObject(new ResourceLocation(FurenikusRoads.MODID, FRBlocks.col[i].getName() + "_chevron_right_b")));
+			chevronBRight.add((ChevronPaintBlock) Block.REGISTRY.getObject(new ResourceLocation(FurenikusRoads.MODID, FRBlocks.col[i].getName() + "_chevron_right_b_thin")));
 		}
 		
 		for (int i = 0; i < chevronALeft.size(); i++) {

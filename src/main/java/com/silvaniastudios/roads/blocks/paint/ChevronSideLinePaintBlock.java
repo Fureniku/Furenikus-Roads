@@ -1,6 +1,7 @@
 package com.silvaniastudios.roads.blocks.paint;
 
 import com.silvaniastudios.roads.FurenikusRoads;
+import com.silvaniastudios.roads.blocks.PaintColour;
 
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
@@ -25,7 +26,7 @@ public class ChevronSideLinePaintBlock extends PaintBlockBase {
 	public static final PropertyEnum<EnumTypeRotation> TYPE_ROT = PropertyEnum.create("type_rotation", EnumTypeRotation.class);
 	public static final PropertyEnum<EnumConnections> CONNECT = PropertyEnum.create("connect", EnumConnections.class);
 
-	public ChevronSideLinePaintBlock(String name, String category, int[] coreMetas, boolean dynamic, String colour) {
+	public ChevronSideLinePaintBlock(String name, String category, int[] coreMetas, boolean dynamic, PaintColour colour) {
 		super(name, category, coreMetas, dynamic, colour);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(TYPE_ROT, EnumTypeRotation.DOWN_N_A).withProperty(CONNECT, EnumConnections.NONE));
 		this.setCreativeTab(FurenikusRoads.tab_paint_junction);

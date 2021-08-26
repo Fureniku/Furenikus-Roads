@@ -1,6 +1,7 @@
 package com.silvaniastudios.roads.blocks.paint;
 
 import com.silvaniastudios.roads.FurenikusRoads;
+import com.silvaniastudios.roads.blocks.PaintColour;
 import com.silvaniastudios.roads.blocks.enums.EnumRotatable;
 
 import net.minecraft.block.properties.IProperty;
@@ -34,7 +35,7 @@ public class CustomPaintBlock extends PaintBlockBase {
 	private boolean[][] paintGrid;
 	private String localizedName;
 
-	public CustomPaintBlock(String name, String localName, boolean[][] grid, String category, String colour) {
+	public CustomPaintBlock(String name, String localName, boolean[][] grid, String category, PaintColour colour) {
 		super(name, category, new int[] {0}, false, colour);
 		this.paintGrid = grid;
 		this.localizedName = localName;

@@ -33,7 +33,7 @@ public class LineStraightDoubleThickModelLoader implements ICustomModelLoader {
 	public boolean accepts(ResourceLocation modelLocation) {
 		if (modelLocation.getResourceDomain().equals(FurenikusRoads.MODID)) {
 			for (int i = 0; i < FRBlocks.col.length; i++) {
-				if (modelLocation.getResourcePath().equals("line_" + FRBlocks.col[i] + "_straight_double_thick")) {
+				if (modelLocation.getResourcePath().equals("line_" + FRBlocks.col[i].getName() + "_straight_double_thick")) {
 					return true;
 				}
 			}
@@ -73,7 +73,7 @@ class PaintLineDoubleThickBakedModel extends PaintBakedModelBase {
 		if (state != null) {
 			LinePaintBlock.EnumRotation facing = state.getValue(LinePaintBlock.FACING);
 			PaintBlockBase paintBlock = (PaintBlockBase) state.getBlock();
-			TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(FurenikusRoads.MODID + ":blocks/paint_" + paintBlock.getColour());
+			TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(FurenikusRoads.MODID + ":blocks/paint_" + paintBlock.getColour().getName());
 			
 			float v = 1.0f / 16.0f;
 			if (sprite != null) {
@@ -145,7 +145,7 @@ class PaintLineDoubleThickBakedModel extends PaintBakedModelBase {
 			List<Quad> spriteQuads = getSpriteQuads();
 			PaintBlockBase paintBlock = (PaintBlockBase) ((ItemBlock) stack.getItem()).getBlock();
 			rawQuads.addAll(spriteQuads);
-			quads = shapeBuilder(rawQuads, quads, getColIntFromName(paintBlock.getColour()));
+			quads = shapeBuilder(rawQuads, quads, paintBlock.getColour().getColourInt());
 		}
 		return quads;
 	}

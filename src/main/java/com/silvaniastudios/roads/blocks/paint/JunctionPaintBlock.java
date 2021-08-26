@@ -1,6 +1,7 @@
 package com.silvaniastudios.roads.blocks.paint;
 
 import com.silvaniastudios.roads.FurenikusRoads;
+import com.silvaniastudios.roads.blocks.PaintColour;
 import com.silvaniastudios.roads.blocks.enums.EnumMeta;
 import com.silvaniastudios.roads.blocks.enums.IMetaBlockName;
 
@@ -26,7 +27,7 @@ public class JunctionPaintBlock extends PaintBlockBase implements IMetaBlockName
 
 	public static final PropertyEnum<EnumMeta> META_ID = PropertyEnum.create("meta", EnumMeta.class);
 	
-	public JunctionPaintBlock(String name, String category, int[] coreMetas, boolean dynamic, String colour) {
+	public JunctionPaintBlock(String name, String category, int[] coreMetas, boolean dynamic, PaintColour colour) {
 		super(name, category, coreMetas, dynamic, colour);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(META_ID, EnumMeta.id0));
 		this.setCreativeTab(FurenikusRoads.tab_paint_icons);

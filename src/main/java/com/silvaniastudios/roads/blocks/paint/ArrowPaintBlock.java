@@ -1,6 +1,7 @@
 package com.silvaniastudios.roads.blocks.paint;
 
 import com.silvaniastudios.roads.FurenikusRoads;
+import com.silvaniastudios.roads.blocks.PaintColour;
 import com.silvaniastudios.roads.blocks.enums.EnumMeta;
 import com.silvaniastudios.roads.blocks.enums.IMetaBlockName;
 
@@ -30,7 +31,7 @@ public class ArrowPaintBlock extends PaintBlockBase implements IMetaBlockName {
 	public static final PropertyEnum<EnumMeta> META_ID = PropertyEnum.create("meta", EnumMeta.class);
 	//Meta 0-3 normal arrow, 4-7 side arrow, 8-11 vertical left, 12-15 vertical right.
 
-	public ArrowPaintBlock(String name, String category, int[] coreMetas, boolean dynamic, String colour) {
+	public ArrowPaintBlock(String name, String category, int[] coreMetas, boolean dynamic, PaintColour colour) {
 		super(name, category, coreMetas, dynamic, colour);
 		setDefaultState(this.blockState.getBaseState().withProperty(META_ID, EnumMeta.id0));
 		this.setCreativeTab(FurenikusRoads.tab_paint_icons);

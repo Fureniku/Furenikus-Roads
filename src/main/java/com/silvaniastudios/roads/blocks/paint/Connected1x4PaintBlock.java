@@ -1,6 +1,7 @@
 package com.silvaniastudios.roads.blocks.paint;
 
 import com.silvaniastudios.roads.FurenikusRoads;
+import com.silvaniastudios.roads.blocks.PaintColour;
 import com.silvaniastudios.roads.blocks.enums.EnumFourLengthConnectable;
 
 import net.minecraft.block.properties.IProperty;
@@ -22,7 +23,7 @@ public class Connected1x4PaintBlock extends PaintBlockBase {
 	
 	public static final PropertyEnum<EnumFourLengthConnectable> CONNECT = PropertyEnum.create("position_rotation", EnumFourLengthConnectable.class);
 
-	public Connected1x4PaintBlock(String name, boolean icon, String category, int[] coreMetas, boolean dynamic, String colour) {
+	public Connected1x4PaintBlock(String name, boolean icon, String category, int[] coreMetas, boolean dynamic, PaintColour colour) {
 		super(name, category, coreMetas, dynamic, colour);
 		if (icon) { this.setCreativeTab(FurenikusRoads.tab_paint_icons); } else { this.setCreativeTab(FurenikusRoads.tab_paint_junction); }
 		this.setDefaultState(this.blockState.getBaseState().withProperty(CONNECT, EnumFourLengthConnectable.NORTH_TOP));

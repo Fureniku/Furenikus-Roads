@@ -13,7 +13,6 @@ import com.google.common.primitives.Ints;
 import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.blocks.paint.PaintBlockBase;
 import com.silvaniastudios.roads.blocks.tileentities.paintfiller.PaintFillerEntity;
-import com.silvaniastudios.roads.items.PaintGun;
 import com.silvaniastudios.roads.registries.PaintGunItemRegistry;
 
 import net.minecraft.block.state.IBlockState;
@@ -61,7 +60,10 @@ public class PaintGunModel implements IBakedModel {
 		combinedQuadList.addAll(getTankFluid(1, yellow_paint));
 		combinedQuadList.addAll(getTankFluid(0, red_paint));
 		
-		combinedQuadList.add(createDisplay(getDisplayTexture(nbt.getInteger("selectedId"), nbt.getInteger("pageId"), nbt.getInteger("colour"), nbt.getInteger("selMeta"))));
+		int selId = nbt.getInteger("selectedId");
+		int pageId = nbt.getInteger("pageId");
+		
+		combinedQuadList.add(createDisplay(getDisplayTexture(selId, pageId), getColourId(selId, pageId)));
 		
 		return combinedQuadList;
 	}
@@ -79,21 +81,12 @@ public class PaintGunModel implements IBakedModel {
 		return y;
 	}
 	
-	private TextureAtlasSprite getDisplayTexture(int selection, int pageId, int col, int meta) {
-		PaintBlockBase block = PaintGun.getBlockFromSelection(selection, pageId);
-		TextureAtlasSprite texture = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(FurenikusRoads.MODID + ":blocks/blank");
-		
+	private int getColourId(int selection, int pageId) {
+		PaintBlockBase block = PaintGunItemRegistry.getSelectedPaint(pageId, selection);
 		if (block != null) {
-			//TODO
-			
-			String name = block.getUnlocalizedName().substring(20);
-			String location = "items/paint_gun_display/";
-			if (meta > 0 && pageId != 4) { name = name + "_" + meta; }
-			if (pageId == 4) { location = "blocks/"; }
-			texture = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(FurenikusRoads.MODID + ":" + location + name);
+			return block.getColour().getColourInt();
 		}
-		
-		return texture;
+		return 0;
 	}
 
 	private List<BakedQuad> getTankFluid(int col, int paintLevel) {
@@ -119,7 +112,14 @@ public class PaintGunModel implements IBakedModel {
 		return list;
 	}
 	
-	private BakedQuad createDisplay(TextureAtlasSprite texture) {
+	private TextureAtlasSprite getDisplayTexture(int selection, int pageId) {
+		PaintBlockBase block = PaintGunItemRegistry.getSelectedPaint(pageId, selection);
+		int meta = PaintGunItemRegistry.getSelectedPaintMeta(pageId, selection);
+		System.out.println("Getting display texture as " + "paints/" + block.getIconName() + "_" + meta);
+		return Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(FurenikusRoads.MODID + ":" + "paints/" + block.getIconName() + "_" + meta);
+	}
+	
+	private BakedQuad createDisplay(TextureAtlasSprite texture, int col) {
 		float x1, x2, x3, x4;
 		float y1, y2, y3, y4;
 		float z1, z2, z3, z4;
@@ -145,12 +145,14 @@ public class PaintGunModel implements IBakedModel {
 		y3 = 0.271875F;
 		z3 = 0.621875F;
 		
+		System.out.println("Creating display with texture");
+		
 		packednormal = calculatePackedNormal(x1, y1, z1,  x2, y2, z2,  x3, y3, z3,  x4, y4, z4);
 		return new BakedQuad(Ints.concat(
-				vertexToInts(x1, y1, z1, Color.WHITE.getRGB(), texture, 16, 16, packednormal),
-				vertexToInts(x2, y2, z2, Color.WHITE.getRGB(), texture, 16, 0, packednormal),
-				vertexToInts(x3, y3, z3, Color.WHITE.getRGB(), texture, 0, 0, packednormal),
-				vertexToInts(x4, y4, z4, Color.WHITE.getRGB(), texture, 0, 16, packednormal)),
+				vertexToInts(0, 1, 1, 0, texture, 16, 16, packednormal),
+				vertexToInts(1, 1, 1, 0, texture, 16, 0, packednormal),
+				vertexToInts(1, 0, 1, 0, texture, 0, 0, packednormal),
+				vertexToInts(0, 0, 1, 0, texture, 0, 16, packednormal)),
 				0, EnumFacing.SOUTH, texture, true, net.minecraft.client.renderer.vertex.DefaultVertexFormats.ITEM);
 	}
 	

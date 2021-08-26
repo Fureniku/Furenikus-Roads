@@ -1,6 +1,7 @@
 package com.silvaniastudios.roads.blocks.paint;
 
 import com.silvaniastudios.roads.FurenikusRoads;
+import com.silvaniastudios.roads.blocks.PaintColour;
 import com.silvaniastudios.roads.blocks.enums.IMetaBlockName;
 import com.silvaniastudios.roads.blocks.paint.properties.UnlistedPropertyConnection;
 
@@ -40,7 +41,7 @@ public class LinePaintBlock extends PaintBlockBase implements IMetaBlockName {
 	public static final UnlistedPropertyConnection WEST = new UnlistedPropertyConnection("west");
 	public static final PropertyEnum<LinePaintBlock.EnumRotation> FACING = PropertyEnum.create("facing", LinePaintBlock.EnumRotation.class);
 
-	public LinePaintBlock(String name, String category, int[] coreMetas, boolean dynamic, String colour) {
+	public LinePaintBlock(String name, String category, int[] coreMetas, boolean dynamic, PaintColour colour) {
 		super(name, category, coreMetas, dynamic, colour);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, LinePaintBlock.EnumRotation.ns));
 		this.setCreativeTab(FurenikusRoads.tab_paint_lines);
@@ -91,8 +92,8 @@ public class LinePaintBlock extends PaintBlockBase implements IMetaBlockName {
 	
 	@SuppressWarnings("rawtypes")
 	protected BlockStateContainer createBlockState() {
-		IProperty[] listedProperties = new IProperty[] {FACING};
-		IUnlistedProperty[] unlistedProperties = new IUnlistedProperty[] {NORTH, EAST, WEST, SOUTH};
+		IProperty[] listedProperties = new IProperty[] { FACING };
+		IUnlistedProperty[] unlistedProperties = new IUnlistedProperty[] { NORTH, EAST, WEST, SOUTH };
 
 		return new ExtendedBlockState(this, listedProperties, unlistedProperties);
 	}

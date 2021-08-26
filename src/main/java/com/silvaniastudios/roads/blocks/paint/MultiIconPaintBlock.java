@@ -1,6 +1,7 @@
 package com.silvaniastudios.roads.blocks.paint;
 
 import com.silvaniastudios.roads.FurenikusRoads;
+import com.silvaniastudios.roads.blocks.PaintColour;
 import com.silvaniastudios.roads.blocks.enums.EnumMeta;
 import com.silvaniastudios.roads.blocks.enums.IMetaBlockName;
 
@@ -30,7 +31,7 @@ public class MultiIconPaintBlock extends PaintBlockBase implements IMetaBlockNam
 
 	boolean multiType = true;
 	
-	public MultiIconPaintBlock(String name, boolean multiType, String category, int[] coreMetas, boolean dynamic, String colour) {
+	public MultiIconPaintBlock(String name, boolean multiType, String category, int[] coreMetas, boolean dynamic, PaintColour colour) {
 		super(name, category, coreMetas, dynamic, colour);
 		this.multiType = multiType;
 		setDefaultState(this.blockState.getBaseState().withProperty(META_ID, EnumMeta.id0));

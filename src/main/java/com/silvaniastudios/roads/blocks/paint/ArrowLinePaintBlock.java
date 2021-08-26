@@ -1,6 +1,7 @@
 package com.silvaniastudios.roads.blocks.paint;
 
 import com.silvaniastudios.roads.FurenikusRoads;
+import com.silvaniastudios.roads.blocks.PaintColour;
 import com.silvaniastudios.roads.blocks.enums.EnumConnectArrows;
 import com.silvaniastudios.roads.blocks.enums.IMetaBlockName;
 
@@ -28,7 +29,7 @@ public class ArrowLinePaintBlock extends PaintBlockBase implements IMetaBlockNam
 	public static final PropertyEnum<EnumConnectArrows> CONNECT = PropertyEnum.create("connect", EnumConnectArrows.class);
 	public static final PropertyDirection FACING =  PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 
-	public ArrowLinePaintBlock(String name, String category, int[] coreMetas, boolean dynamic, String colour) {
+	public ArrowLinePaintBlock(String name, String category, int[] coreMetas, boolean dynamic, PaintColour colour) {
 		super(name, category, coreMetas, dynamic, colour);
 		this.setCreativeTab(FurenikusRoads.tab_paint_icons);
 		this.setDefaultState(this.blockState.getBaseState()

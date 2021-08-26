@@ -1,5 +1,6 @@
 package com.silvaniastudios.roads.blocks.paint;
 
+import com.silvaniastudios.roads.blocks.PaintColour;
 import com.silvaniastudios.roads.blocks.enums.EnumRotatable;
 import com.silvaniastudios.roads.blocks.enums.IMetaBlockName;
 
@@ -30,7 +31,7 @@ public class WallPaintBlock extends PaintBlockBase implements IMetaBlockName {
 	
 	public static final PropertyEnum<EnumRotatable> ROTATE_ID = PropertyEnum.create("wall_paint", EnumRotatable.class);
 	
-	public WallPaintBlock(String name, String category, int[] coreMetas, boolean dynamic, String colour) {
+	public WallPaintBlock(String name, String category, int[] coreMetas, boolean dynamic, PaintColour colour) {
 		super(name, category, coreMetas, dynamic, colour);
 		setDefaultState(this.blockState.getBaseState().withProperty(ROTATE_ID, EnumRotatable.FLAT_NORTH));
 	}
