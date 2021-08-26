@@ -4,7 +4,6 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
-import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.RoadsConfig;
 import com.silvaniastudios.roads.blocks.BlockBase;
 import com.silvaniastudios.roads.blocks.FRBlocks;
@@ -12,11 +11,7 @@ import com.silvaniastudios.roads.blocks.NonPaintRoadTopBlock;
 import com.silvaniastudios.roads.blocks.PaintColour;
 import com.silvaniastudios.roads.blocks.decorative.CurbBlock;
 import com.silvaniastudios.roads.blocks.diagonal.RoadBlockDiagonal;
-import com.silvaniastudios.roads.blocks.paint.LinePaintBlock.EnumRotation;
 import com.silvaniastudios.roads.items.FRItems;
-import com.silvaniastudios.roads.items.PaintGun;
-import com.silvaniastudios.roads.network.PaintGunUpdatePacket;
-import com.silvaniastudios.roads.registries.PaintGunItemRegistry;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockAir;
@@ -25,15 +20,11 @@ import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -115,7 +106,7 @@ public class PaintBlockBase extends BlockBase {
 		return BlockFaceShape.UNDEFINED;
 	}
 	
-	@SuppressWarnings("deprecation")
+	//@SuppressWarnings("deprecation")
 	//TODO this has always been buggy anyway, reimplement later.
 	/*public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
 		ItemStack item = player.getHeldItem(EnumHand.MAIN_HAND);

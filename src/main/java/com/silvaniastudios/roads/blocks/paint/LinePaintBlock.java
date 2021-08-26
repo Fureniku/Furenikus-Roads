@@ -2,7 +2,6 @@ package com.silvaniastudios.roads.blocks.paint;
 
 import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.blocks.PaintColour;
-import com.silvaniastudios.roads.blocks.enums.IMetaBlockName;
 import com.silvaniastudios.roads.blocks.paint.properties.UnlistedPropertyConnection;
 
 import net.minecraft.block.Block;
@@ -10,30 +9,18 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
-import net.minecraft.client.renderer.block.statemap.StateMapperBase;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.IStringSerializable;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.property.ExtendedBlockState;
 import net.minecraftforge.common.property.IExtendedBlockState;
 import net.minecraftforge.common.property.IUnlistedProperty;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class LinePaintBlock extends PaintBlockBase implements IMetaBlockName {
+public class LinePaintBlock extends PaintBlockCustomRenderBase {
 	
 	public static final UnlistedPropertyConnection NORTH = new UnlistedPropertyConnection("north");
 	public static final UnlistedPropertyConnection EAST = new UnlistedPropertyConnection("east");
@@ -45,11 +32,7 @@ public class LinePaintBlock extends PaintBlockBase implements IMetaBlockName {
 		super(name, category, coreMetas, dynamic, colour);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, LinePaintBlock.EnumRotation.ns));
 		this.setCreativeTab(FurenikusRoads.tab_paint_lines);
-	}
-	
-	@Override
-	public String getSpecialName(ItemStack stack) {
-		return stack.getItemDamage() + "";
+		subBlocks = new int[] { 0, 2 };
 	}
 	
 	@Override
@@ -117,35 +100,6 @@ public class LinePaintBlock extends PaintBlockBase implements IMetaBlockName {
 		}
 
 		return extendedBlockState.withProperty(NORTH, n).withProperty(EAST, e).withProperty(SOUTH, s).withProperty(WEST, w);
-	}
-	
-    @SideOnly(Side.CLIENT)
-	@Override
-	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> items) {
-    	items.add(new ItemStack(this, 1, 0));
-    	items.add(new ItemStack(this, 1, 2));
-    }
-    
-    @SideOnly(Side.CLIENT)
-	public void initModel() {
-		StateMapperBase b = new StateMapperBase() {
-			@Override
-			protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
-				StateMapperBase b = new DefaultStateMapper();
-				return new ModelResourceLocation(state.getBlock().getRegistryName(), b.getPropertyString(state.getProperties()));
-			}
-		};
-
-		ModelLoader.setCustomStateMapper(this, b);
-	}
-
-	@SideOnly(Side.CLIENT)
-	public void initItemModel() {
-		Item itemBlock = Item.REGISTRY.getObject(new ResourceLocation(FurenikusRoads.MODID, this.name));
-		ModelResourceLocation itemModelResourceLocation = new ModelResourceLocation(getRegistryName(), "inventory");
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(itemBlock, 0, itemModelResourceLocation);
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(itemBlock, 1, itemModelResourceLocation);
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(itemBlock, 2, itemModelResourceLocation);
 	}
     
     public static enum EnumRotation implements IStringSerializable {

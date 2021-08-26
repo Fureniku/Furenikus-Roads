@@ -6,7 +6,7 @@ import java.util.function.Function;
 
 import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.blocks.FRBlocks;
-import com.silvaniastudios.roads.blocks.paint.LinePaintBlock;
+import com.silvaniastudios.roads.blocks.paint.FarSideLinePaintBlock;
 import com.silvaniastudios.roads.blocks.paint.PaintBlockBase;
 import com.silvaniastudios.roads.client.model.paint.PaintBakedModelBase;
 import com.silvaniastudios.roads.client.model.paint.PaintModelBase;
@@ -19,21 +19,22 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ICustomModelLoader;
 import net.minecraftforge.client.model.IModel;
 import net.minecraftforge.common.model.IModelState;
 import net.minecraftforge.common.property.IExtendedBlockState;
 
-public class LineStraightFullModelLoader implements ICustomModelLoader {
+public class LineFarSideModelLoader implements ICustomModelLoader {
 	
-	public static final PaintLineModel MODEL = new PaintLineModel();
+	public static final PaintLineFarSideModel MODEL = new PaintLineFarSideModel();
 	
 	@Override
 	public boolean accepts(ResourceLocation modelLocation) {
 		if (modelLocation.getResourceDomain().equals(FurenikusRoads.MODID)) {
 			for (int i = 0; i < FRBlocks.col.length; i++) {
-				if (modelLocation.getResourcePath().equals("line_" + FRBlocks.col[i].getName() + "_straight_full")) {
+				if (modelLocation.getResourcePath().equals("line_" + FRBlocks.col[i].getName() + "_far_side")) {
 					return true;
 				}
 			}
@@ -51,17 +52,17 @@ public class LineStraightFullModelLoader implements ICustomModelLoader {
 	public void onResourceManagerReload(IResourceManager resourceManager) {}
 }
 
-class PaintLineModel extends PaintModelBase {
+class PaintLineFarSideModel extends PaintModelBase {
 	
 	@Override
 	public IBakedModel bake(IModelState state, VertexFormat format, Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
-		return new PaintLineBakedModel(state, format, bakedTextureGetter);
+		return new PaintLineFarSideBakedModel(state, format, bakedTextureGetter);
 	}
 }
 
-class PaintLineBakedModel extends PaintBakedModelBase {
+class PaintLineFarSideBakedModel extends PaintBakedModelBase {
 
-	public PaintLineBakedModel(IModelState state, VertexFormat format, Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
+	public PaintLineFarSideBakedModel(IModelState state, VertexFormat format, Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
 		super(state, format, bakedTextureGetter);
 	}
 	
@@ -71,32 +72,55 @@ class PaintLineBakedModel extends PaintBakedModelBase {
 		List<Quad> rawQuads = new ArrayList<>();
 		
 		if (state != null) {
-			LinePaintBlock.EnumRotation facing = state.getValue(LinePaintBlock.FACING);
+			EnumFacing facing = state.getValue(FarSideLinePaintBlock.FACING);
 			PaintBlockBase paintBlock = (PaintBlockBase) state.getBlock();
 			TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(FurenikusRoads.MODID + ":blocks/paint_" + paintBlock.getColour().getName());
 			float v = 1.0f / 16.0f;
 			
 			if (sprite != null) {
-				rawQuads.addAll(shapeLine(format, sprite, v*7, v*7, v*9, v*9, 0f, 0f, 0f, 0f)); //centre
+				List<Quad> central_a = shapeLine(format, sprite, v*2, v*0, v*14, v*2, 0f, 0f, 0f, 0f);
 				
-				List<Quad> north = shapeLine(format, sprite, v*7, v*0, v*9,  v*7,  0f, 0f, 0f, 0f);
-				List<Quad> east  = shapeLine(format, sprite, v*9, v*7, v*16, v*9,  0f, 0f, 0f, 0f);
-				List<Quad> south = shapeLine(format, sprite, v*7, v*9, v*9,  v*16, 0f, 0f, 0f, 0f);
-				List<Quad> west  = shapeLine(format, sprite, v*0, v*7, v*7,  v*9,  0f, 0f, 0f, 0f);
-	
-				if (facing == LinePaintBlock.EnumRotation.ns) {
-					rawQuads.addAll(north);
-					rawQuads.addAll(south);
-				} else if (facing == LinePaintBlock.EnumRotation.ew) {
-					rawQuads.addAll(east);
-					rawQuads.addAll(west);
-				} else if (facing == LinePaintBlock.EnumRotation.connect) {
-					if (state.getValue(LinePaintBlock.NORTH)) { rawQuads.addAll(north); }
-					if (state.getValue(LinePaintBlock.EAST))  { rawQuads.addAll(east); }
-					if (state.getValue(LinePaintBlock.SOUTH)) { rawQuads.addAll(south); }
-					if (state.getValue(LinePaintBlock.WEST))  { rawQuads.addAll(west); }
+				List<Quad> connect_left = shapeLine(format, sprite, v*0, v*0, v*2, v*2, 0f, 0f, 0f, 0f);
+				List<Quad> left_down = shapeLine(format, sprite, v*0, v*2, v*2, v*16, 0f, 0f, 0f, 0f);
+				
+				List<Quad> connect_right = shapeLine(format, sprite, v*14, v*0, v*16, v*2, 0f, 0f, 0f, 0f);
+				List<Quad> right_down = shapeLine(format, sprite, v*14, v*2, v*16, v*16, 0f, 0f, 0f, 0f);
+				
+				boolean lm = state.getValue(FarSideLinePaintBlock.LEFT_MID);
+				boolean ld = state.getValue(FarSideLinePaintBlock.LEFT_DOWN);
+				
+				boolean rm = state.getValue(FarSideLinePaintBlock.RIGHT_MID);
+				boolean rd = state.getValue(FarSideLinePaintBlock.RIGHT_DOWN);
+				
+				boolean central = state.getValue(FarSideLinePaintBlock.CENTRAL);
+				
+				if (central) {
+					rawQuads.addAll(central_a);
 				}
-				quads = shapeBuilder(rawQuads, quads, 0);
+				
+				if (lm || ld) {
+					rawQuads.addAll(connect_left);
+
+					if (ld) {
+						rawQuads.addAll(left_down);
+					}
+				}
+				
+				if (rm || rd) {
+					rawQuads.addAll(connect_right);
+
+					if (rd) {
+						rawQuads.addAll(right_down);
+					}
+				}
+
+				int rot = 0;
+				
+				if (facing == EnumFacing.EAST) { rot = 270; }
+				if (facing == EnumFacing.SOUTH) { rot = 180; }
+				if (facing == EnumFacing.WEST) { rot = 90; }
+				
+				quads = shapeBuilder(rawQuads, quads, 0, rot);
 			}
 		} else if (stack != null) {
 			List<Quad> spriteQuads = getSpriteQuads();

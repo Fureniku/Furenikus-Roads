@@ -97,9 +97,15 @@ public class PaintBakedModelBase implements IBakedModel {
 	@Override public ItemCameraTransforms getItemCameraTransforms() { return ItemCameraTransforms.DEFAULT; }
 	
 	protected List<BakedQuad> shapeBuilder(List<Quad> rawQuads, List<BakedQuad> quads, int col) {
-		for (int i = 0; i < rawQuads.size(); i++) {
-			if (rawQuads.get(i) != null) {
-				rawQuads.set(i, Quad.rotateQuadY(rawQuads.get(i), 0));
+		return shapeBuilder(rawQuads, quads, col, 0);
+	}
+	
+	protected List<BakedQuad> shapeBuilder(List<Quad> rawQuads, List<BakedQuad> quads, int col, int rotation) {
+		if (rotation != 0) {
+			for (int i = 0; i < rawQuads.size(); i++) {
+				if (rawQuads.get(i) != null) {
+					rawQuads.set(i, Quad.rotateQuadY(rawQuads.get(i), rotation));
+				}
 			}
 		}
 
@@ -203,18 +209,20 @@ public class PaintBakedModelBase implements IBakedModel {
 		PaintBlockBase paintBlock = (PaintBlockBase) ((ItemBlock) stack.getItem()).getBlock();
 		TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(FurenikusRoads.MODID + ":paints/" + paintBlock.getIconName() + "_" + stack.getItemDamage());
 		
+		//System.out.println("Paint name is " + paintBlock.getIconName() + "_" + stack.getItemDamage());
+		
 		Quad front = new Quad(
-				new Vec3d(1, 0, 0.5), 16f, 0f, //BL
-				new Vec3d(0, 0, 0.5), 0f, 0f,//BR
-				new Vec3d(0, 1, 0.5), 0f, 16f, //TR
-				new Vec3d(1, 1, 0.5), 16f, 16f, //TL
+				new Vec3d(0, 1, 0.5), 16f, 0f, //BL
+				new Vec3d(1, 1, 0.5), 0f, 0f,//BR
+				new Vec3d(1, 0, 0.5), 0f, 16f, //TR
+				new Vec3d(0, 0, 0.5), 16f, 16f, //TL
 				sprite, format);
 		
 		Quad back = new Quad(
-				new Vec3d(0, 0, 0.5), 16f, 0f, //BL
-				new Vec3d(1, 0, 0.5), 0f, 0f,//BR
-				new Vec3d(1, 1, 0.5), 0f, 16f, //TR
-				new Vec3d(0, 1, 0.5), 16f, 16f, //TL
+				new Vec3d(1, 1, 0.5), 16f, 0f, //BL
+				new Vec3d(0, 1, 0.5), 0f, 0f,//BR
+				new Vec3d(0, 0, 0.5), 0f, 16f, //TR
+				new Vec3d(1, 0, 0.5), 16f, 16f, //TL
 				sprite, format);
 		
 		quads.add(front);

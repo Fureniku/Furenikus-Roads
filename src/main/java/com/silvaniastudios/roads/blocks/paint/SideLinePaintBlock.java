@@ -2,31 +2,23 @@ package com.silvaniastudios.roads.blocks.paint;
 
 import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.blocks.PaintColour;
-import com.silvaniastudios.roads.blocks.enums.IMetaBlockName;
 import com.silvaniastudios.roads.blocks.paint.properties.UnlistedPropertyConnection;
 
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
-import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.property.ExtendedBlockState;
 import net.minecraftforge.common.property.IExtendedBlockState;
 import net.minecraftforge.common.property.IUnlistedProperty;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class SideLinePaintBlock extends PaintBlockBase implements IMetaBlockName {
+public class SideLinePaintBlock extends PaintBlockCustomRenderBase {
 	
 	public static final UnlistedPropertyConnection LEFT_UP = new UnlistedPropertyConnection("left_up");
 	public static final UnlistedPropertyConnection LEFT_MID = new UnlistedPropertyConnection("left_mid");
@@ -36,17 +28,12 @@ public class SideLinePaintBlock extends PaintBlockBase implements IMetaBlockName
 	public static final UnlistedPropertyConnection RIGHT_MID = new UnlistedPropertyConnection("right_mid");
 	public static final UnlistedPropertyConnection RIGHT_DOWN = new UnlistedPropertyConnection("right_down");
 	
-	public static final PropertyDirection FACING =  PropertyDirection.create("zz_facing", EnumFacing.Plane.HORIZONTAL);
+	public static final PropertyDirection FACING =  PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 
 	public SideLinePaintBlock(String name, String category, int[] coreMetas, boolean dynamic, PaintColour colour) {
 		super(name, category, coreMetas, dynamic, colour);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 		this.setCreativeTab(FurenikusRoads.tab_paint_lines);
-	}
-	
-	@Override
-	public String getSpecialName(ItemStack stack) {
-		return stack.getItemDamage() + "";
 	}
 	
 	@Override
@@ -124,30 +111,22 @@ public class SideLinePaintBlock extends PaintBlockBase implements IMetaBlockName
 		IBlockState leftState = getOffsetState(world, posLeft);
 		IBlockState rightState = getOffsetState(world, posRight);
 		
-		boolean lu = upState != null ? upState.getValue(FACING) == state.getValue(FACING).rotateYCCW() : false;
-		boolean lm = leftState != null ? leftState.getValue(FACING) == state.getValue(FACING) : false;
-		boolean ld = downState != null ? downState.getValue(FACING) == state.getValue(FACING).rotateYCCW() : false;
-		boolean ru = upState != null ? upState.getValue(FACING) == state.getValue(FACING).rotateY() : false;
-		boolean rm = rightState != null ? rightState.getValue(FACING) == state.getValue(FACING) : false;
-		boolean rd = downState != null ? downState.getValue(FACING) == state.getValue(FACING).rotateY() : false;
+		boolean lu = upState != null ? upState.getValue(FACING) != state.getValue(FACING).rotateY() : false;
+		boolean lm = leftState != null ? leftState.getValue(FACING) != state.getValue(FACING).getOpposite() : false;
+		boolean ld = downState != null ? downState.getValue(FACING) != state.getValue(FACING).rotateY() : false;
+		boolean ru = upState != null ? upState.getValue(FACING) != state.getValue(FACING).rotateYCCW() : false;
+		boolean rm = rightState != null ? rightState.getValue(FACING) != state.getValue(FACING).getOpposite() : false;
+		boolean rd = downState != null ? downState.getValue(FACING) != state.getValue(FACING).rotateYCCW() : false;
 		
 		boolean central = (lu || lm || ld) && (ru || rm || rd);
+		
+		if (!lu && !lm && !ld && !ru && !rm && !rd) {
+			central = true;
+			lm = true;
+			rm = true;
+		}
 
 		return extendedBlockState.withProperty(LEFT_UP, lu).withProperty(LEFT_MID, lm).withProperty(LEFT_DOWN, ld)
 				.withProperty(CENTRAL, central).withProperty(RIGHT_UP, ru).withProperty(RIGHT_MID, rm).withProperty(RIGHT_DOWN, rd);
-	}
-	
-	@SideOnly(Side.CLIENT)
-	@Override
-	public void initModel() {
-		StateMapperBase b = new StateMapperBase() {
-			@Override
-			protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
-				StateMapperBase b = new DefaultStateMapper();
-				return new ModelResourceLocation(state.getBlock().getRegistryName(), b.getPropertyString(state.getProperties()));
-			}
-		};
-
-		ModelLoader.setCustomStateMapper(this, b);
 	}
 }

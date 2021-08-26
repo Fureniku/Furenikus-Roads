@@ -115,7 +115,6 @@ public class PaintGunModel implements IBakedModel {
 	private TextureAtlasSprite getDisplayTexture(int selection, int pageId) {
 		PaintBlockBase block = PaintGunItemRegistry.getSelectedPaint(pageId, selection);
 		int meta = PaintGunItemRegistry.getSelectedPaintMeta(pageId, selection);
-		System.out.println("Getting display texture as " + "paints/" + block.getIconName() + "_" + meta);
 		return Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(FurenikusRoads.MODID + ":" + "paints/" + block.getIconName() + "_" + meta);
 	}
 	
@@ -144,8 +143,6 @@ public class PaintGunModel implements IBakedModel {
 		x3 = 0.2578125F;
 		y3 = 0.271875F;
 		z3 = 0.621875F;
-		
-		System.out.println("Creating display with texture");
 		
 		packednormal = calculatePackedNormal(x1, y1, z1,  x2, y2, z2,  x3, y3, z3,  x4, y4, z4);
 		return new BakedQuad(Ints.concat(

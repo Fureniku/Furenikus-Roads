@@ -20,6 +20,7 @@ import com.silvaniastudios.roads.client.model.PaintOvenRenderer;
 import com.silvaniastudios.roads.client.model.RoadFactoryRenderer;
 import com.silvaniastudios.roads.client.model.TarDistillerRenderer;
 import com.silvaniastudios.roads.client.model.TarmacCutterRenderer;
+import com.silvaniastudios.roads.client.model.TextureRegistryHandler;
 import com.silvaniastudios.roads.client.model.diagonal.loaders.Diagonal11MirrorModelLoader;
 import com.silvaniastudios.roads.client.model.diagonal.loaders.Diagonal11ModelLoader;
 import com.silvaniastudios.roads.client.model.diagonal.loaders.Diagonal12MirrorModelLoader;
@@ -37,6 +38,12 @@ import com.silvaniastudios.roads.client.model.diagonal.loaders.Diagonal38ModelLo
 import com.silvaniastudios.roads.client.model.diagonal.loaders.Diagonal48MirrorModelLoader;
 import com.silvaniastudios.roads.client.model.diagonal.loaders.Diagonal48ModelLoader;
 import com.silvaniastudios.roads.client.model.paint.loaders.CustomPaintModelLoader;
+import com.silvaniastudios.roads.client.model.paint.loaders.lines.LineFarSideModelLoader;
+import com.silvaniastudios.roads.client.model.paint.loaders.lines.LineFarSideThickModelLoader;
+import com.silvaniastudios.roads.client.model.paint.loaders.lines.LineSideDoubleModelLoader;
+import com.silvaniastudios.roads.client.model.paint.loaders.lines.LineSideDoubleThickModelLoader;
+import com.silvaniastudios.roads.client.model.paint.loaders.lines.LineSideSingleModelLoader;
+import com.silvaniastudios.roads.client.model.paint.loaders.lines.LineSideSingleThickModelLoader;
 import com.silvaniastudios.roads.client.model.paint.loaders.lines.LineStraightDoubleModelLoader;
 import com.silvaniastudios.roads.client.model.paint.loaders.lines.LineStraightDoubleThickModelLoader;
 import com.silvaniastudios.roads.client.model.paint.loaders.lines.LineStraightFullModelLoader;
@@ -60,6 +67,7 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void preInit() {
 		MinecraftForge.EVENT_BUS.register(ModelBakeHandler.instance);
+		MinecraftForge.EVENT_BUS.register(TextureRegistryHandler.instance);
 
 		ModelLoaderRegistry.registerLoader(new Diagonal11ModelLoader());
 		ModelLoaderRegistry.registerLoader(new Diagonal12ModelLoader());
@@ -86,6 +94,14 @@ public class ClientProxy extends CommonProxy {
 		ModelLoaderRegistry.registerLoader(new LineStraightDoubleModelLoader());
 		ModelLoaderRegistry.registerLoader(new LineStraightThickModelLoader());
 		ModelLoaderRegistry.registerLoader(new LineStraightDoubleThickModelLoader());
+		
+		ModelLoaderRegistry.registerLoader(new LineSideDoubleModelLoader());
+		ModelLoaderRegistry.registerLoader(new LineSideDoubleThickModelLoader());
+		ModelLoaderRegistry.registerLoader(new LineSideSingleModelLoader());
+		ModelLoaderRegistry.registerLoader(new LineSideSingleThickModelLoader());
+		
+		ModelLoaderRegistry.registerLoader(new LineFarSideModelLoader());
+		ModelLoaderRegistry.registerLoader(new LineFarSideThickModelLoader());
 	}
 
 	@Override

@@ -30,17 +30,18 @@ import com.silvaniastudios.roads.blocks.paint.ChevronPaintBlock;
 import com.silvaniastudios.roads.blocks.paint.ChevronSideLinePaintBlock;
 import com.silvaniastudios.roads.blocks.paint.Connected1x2PaintBlock;
 import com.silvaniastudios.roads.blocks.paint.Connected1x4PaintBlock;
-import com.silvaniastudios.roads.blocks.paint.LargeTextPaintBlock;
 import com.silvaniastudios.roads.blocks.paint.CrossingPaintBlock;
 import com.silvaniastudios.roads.blocks.paint.FarSideLinePaintBlock;
 import com.silvaniastudios.roads.blocks.paint.HatchBoxPaintBlock;
 import com.silvaniastudios.roads.blocks.paint.IconPaintBlock;
 import com.silvaniastudios.roads.blocks.paint.JunctionFilterLinePaintBlock;
 import com.silvaniastudios.roads.blocks.paint.JunctionPaintBlock;
+import com.silvaniastudios.roads.blocks.paint.LargeTextPaintBlock;
 import com.silvaniastudios.roads.blocks.paint.LetterPaintBlock;
 import com.silvaniastudios.roads.blocks.paint.LinePaintBlock;
 import com.silvaniastudios.roads.blocks.paint.MultiIconPaintBlock;
 import com.silvaniastudios.roads.blocks.paint.PaintBlockBase;
+import com.silvaniastudios.roads.blocks.paint.PaintBlockCustomRenderBase;
 import com.silvaniastudios.roads.blocks.paint.SideLinePaintBlock;
 import com.silvaniastudios.roads.blocks.paint.SimpleLinePaintBlock;
 import com.silvaniastudios.roads.blocks.tileentities.compactor.CompactorBlock;
@@ -661,8 +662,8 @@ public class FRBlocks {
 			roadBlockDiagonalList.get(i).initItemModel();
 		}
 		for (int i = 0; i < paintBlockList.size(); i++) {
-			if (paintBlockList.get(i) instanceof LinePaintBlock) {
-				LinePaintBlock block = (LinePaintBlock) paintBlockList.get(i);
+			if (paintBlockList.get(i) instanceof PaintBlockCustomRenderBase) {
+				PaintBlockCustomRenderBase block = (PaintBlockCustomRenderBase) paintBlockList.get(i);
 				block.initItemModel();
 			}
 		}

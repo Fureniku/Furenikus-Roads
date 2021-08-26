@@ -2,43 +2,36 @@ package com.silvaniastudios.roads.blocks.paint;
 
 import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.blocks.PaintColour;
-import com.silvaniastudios.roads.blocks.enums.EnumConnectDiagonal;
-import com.silvaniastudios.roads.blocks.enums.EnumConnectDirectional_FarSide;
-import com.silvaniastudios.roads.blocks.enums.IMetaBlockName;
+import com.silvaniastudios.roads.blocks.paint.properties.UnlistedPropertyConnection;
 
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
-import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.common.property.ExtendedBlockState;
+import net.minecraftforge.common.property.IExtendedBlockState;
+import net.minecraftforge.common.property.IUnlistedProperty;
 
-public class FarSideLinePaintBlock extends PaintBlockBase implements IMetaBlockName {
+public class FarSideLinePaintBlock extends PaintBlockCustomRenderBase {
 	
-	public static final PropertyEnum<EnumConnectDiagonal> CONNECT_DIAGONAL = PropertyEnum.create("diagonal_connections", EnumConnectDiagonal.class);
-	public static final PropertyEnum<EnumConnectDirectional_FarSide> CONNECT_DIRECTIONAL = PropertyEnum.create("directional_connections", EnumConnectDirectional_FarSide.class);
-	public static final PropertyDirection FACING =  PropertyDirection.create("zz_facing", EnumFacing.Plane.HORIZONTAL);
+	public static final UnlistedPropertyConnection LEFT_MID = new UnlistedPropertyConnection("left_mid");
+	public static final UnlistedPropertyConnection LEFT_DOWN = new UnlistedPropertyConnection("left_down");
+	public static final UnlistedPropertyConnection CENTRAL = new UnlistedPropertyConnection("central");
+	public static final UnlistedPropertyConnection RIGHT_MID = new UnlistedPropertyConnection("right_mid");
+	public static final UnlistedPropertyConnection RIGHT_DOWN = new UnlistedPropertyConnection("right_down");
+	
+	public static final PropertyDirection FACING =  PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 
 	public FarSideLinePaintBlock(String name, String category, int[] coreMetas, boolean dynamic, PaintColour colour) {
 		super(name, category, coreMetas, dynamic, colour);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 		this.setCreativeTab(FurenikusRoads.tab_paint_lines);
-	}
-	
-	@Override
-	public String getSpecialName(ItemStack stack) {
-		return stack.getItemDamage() + "";
 	}
 	
 	@Override
@@ -60,106 +53,71 @@ public class FarSideLinePaintBlock extends PaintBlockBase implements IMetaBlockN
 		return this.getDefaultState().withProperty(FACING, enumfacing);
 	}
 	
+	@SuppressWarnings("rawtypes")
 	@Override
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, new IProperty[] {FACING, CONNECT_DIRECTIONAL, CONNECT_DIAGONAL});
+		IProperty[] listedProperties = new IProperty[] { FACING };
+		IUnlistedProperty[] unlistedProperties = new IUnlistedProperty[] { LEFT_MID, LEFT_DOWN, CENTRAL, RIGHT_MID, RIGHT_DOWN };
+		
+		return new ExtendedBlockState(this, listedProperties, unlistedProperties);
 	}
+	
+	//Checks if the block at the position, or directly above/below, is relevant.
+		private IBlockState getOffsetState(IBlockAccess world, BlockPos pos) {
+			if (world.getBlockState(pos).getBlock() instanceof FarSideLinePaintBlock) {
+				return world.getBlockState(pos);
+			} else if (world.getBlockState(pos.offset(EnumFacing.DOWN)).getBlock() instanceof FarSideLinePaintBlock) {
+				return world.getBlockState(pos.offset(EnumFacing.DOWN));
+			} else if (world.getBlockState(pos.offset(EnumFacing.UP)).getBlock() instanceof FarSideLinePaintBlock) {
+				return world.getBlockState(pos.offset(EnumFacing.UP));
+			}
+			return null;
+		}
 
-	public EnumConnectDirectional_FarSide getFacingForConnectedBlock(IBlockAccess world, BlockPos pos) {
-		int rootBlockMeta = getMetaFromState(world.getBlockState(pos));
-		IBlockState offsetBlockNorth = world.getBlockState(pos.offset(EnumFacing.NORTH));
-		IBlockState offsetBlockEast  = world.getBlockState(pos.offset(EnumFacing.EAST));
-		IBlockState offsetBlockSouth = world.getBlockState(pos.offset(EnumFacing.SOUTH));
-		IBlockState offsetBlockWest  = world.getBlockState(pos.offset(EnumFacing.WEST));
-		int offsetMetaNorth = offsetBlockNorth.getBlock() instanceof FarSideLinePaintBlock ? offsetBlockNorth.getBlock().getMetaFromState(offsetBlockNorth) : -1;
-		int offsetMetaEast  = offsetBlockEast.getBlock()  instanceof FarSideLinePaintBlock ? offsetBlockEast.getBlock().getMetaFromState(offsetBlockEast) : -1;
-		int offsetMetaSouth = offsetBlockSouth.getBlock() instanceof FarSideLinePaintBlock ? offsetBlockSouth.getBlock().getMetaFromState(offsetBlockSouth) : -1;
-		int offsetMetaWest  = offsetBlockWest.getBlock()  instanceof FarSideLinePaintBlock ? offsetBlockWest.getBlock().getMetaFromState(offsetBlockWest) : -1;
-		
-		//NORTH
-		if (rootBlockMeta == 2) {
-			if (offsetMetaSouth == 4) {
-				return EnumConnectDirectional_FarSide.CONNECT_SOUTH_LEFT_DOWN;
+		@Override
+		public IBlockState getExtendedState(IBlockState state, IBlockAccess world, BlockPos pos) {
+			IExtendedBlockState extendedBlockState = (IExtendedBlockState) state;
+			
+			BlockPos posLeft = pos.offset(EnumFacing.WEST);
+			BlockPos posRight = pos.offset(EnumFacing.EAST);
+			BlockPos posDown = pos.offset(EnumFacing.SOUTH);
+			
+			if (state.getValue(FACING) == EnumFacing.EAST) {
+				posLeft = pos.offset(EnumFacing.NORTH);
+				posRight = pos.offset(EnumFacing.SOUTH);
+				posDown = pos.offset(EnumFacing.WEST);
 			}
-			if (offsetMetaSouth == 5) {
-				return EnumConnectDirectional_FarSide.CONNECT_SOUTH_RIGHT_DOWN;
+			
+			if (state.getValue(FACING) == EnumFacing.SOUTH) {
+				posLeft = pos.offset(EnumFacing.EAST);
+				posRight = pos.offset(EnumFacing.WEST);
+				posDown = pos.offset(EnumFacing.NORTH);
 			}
-		}	
-		//SOUTH
-		if (rootBlockMeta == 3) {
-			if (offsetMetaNorth == 4) {
-				return EnumConnectDirectional_FarSide.CONNECT_NORTH_RIGHT_DOWN;
+			
+			if (state.getValue(FACING) == EnumFacing.WEST) {
+				posLeft = pos.offset(EnumFacing.SOUTH);
+				posRight = pos.offset(EnumFacing.NORTH);
+				posDown = pos.offset(EnumFacing.EAST);
 			}
-			if (offsetMetaNorth == 5) {
-				return EnumConnectDirectional_FarSide.CONNECT_NORTH_LEFT_DOWN;
+			
+			IBlockState downState = getOffsetState(world, posDown);
+			IBlockState leftState = getOffsetState(world, posLeft);
+			IBlockState rightState = getOffsetState(world, posRight);
+			
+			boolean lm = leftState != null ? leftState.getValue(FACING) != state.getValue(FACING).getOpposite() : false;
+			boolean ld = downState != null ? downState.getValue(FACING) != state.getValue(FACING).rotateY() : false;
+			boolean rm = rightState != null ? rightState.getValue(FACING) != state.getValue(FACING).getOpposite() : false;
+			boolean rd = downState != null ? downState.getValue(FACING) != state.getValue(FACING).rotateYCCW() : false;
+			
+			boolean central = (lm || ld) && (rm || rd);
+			
+			if (!lm && !ld && !rm && !rd) {
+				central = true;
+				lm = true;
+				rm = true;
 			}
-		}		
-		//WEST
-		if (rootBlockMeta == 4) {
-			if (offsetMetaEast == 2) {
-				return EnumConnectDirectional_FarSide.CONNECT_EAST_RIGHT_DOWN;
-			}
-			if (offsetMetaEast == 3) {
-				return EnumConnectDirectional_FarSide.CONNECT_EAST_LEFT_DOWN;
-			}
+
+			return extendedBlockState.withProperty(LEFT_MID, lm).withProperty(LEFT_DOWN, ld)
+					.withProperty(CENTRAL, central).withProperty(RIGHT_MID, rm).withProperty(RIGHT_DOWN, rd);
 		}
-		//EAST
-		if (rootBlockMeta == 5) {
-			if (offsetMetaWest == 2) {
-				return EnumConnectDirectional_FarSide.CONNECT_WEST_LEFT_DOWN;
-			}
-			if (offsetMetaWest == 3) {
-				return EnumConnectDirectional_FarSide.CONNECT_WEST_RIGHT_DOWN;
-			}
-		}
-		return EnumConnectDirectional_FarSide.CONNECT_NONE;
-	}
-	
-	public EnumConnectDiagonal getInnerCorner(IBlockAccess world, BlockPos pos) {
-		int rootBlockMeta = getMetaFromState(world.getBlockState(pos));
-		IBlockState offsetBlockNorth = world.getBlockState(pos.offset(EnumFacing.NORTH));
-		IBlockState offsetBlockEast  = world.getBlockState(pos.offset(EnumFacing.EAST));
-		IBlockState offsetBlockSouth = world.getBlockState(pos.offset(EnumFacing.SOUTH));
-		IBlockState offsetBlockWest  = world.getBlockState(pos.offset(EnumFacing.WEST));
-		int offsetMetaNorth = offsetBlockNorth.getBlock() instanceof FarSideLinePaintBlock ? offsetBlockNorth.getBlock().getMetaFromState(offsetBlockNorth) : -1;
-		int offsetMetaEast  = offsetBlockEast.getBlock()  instanceof FarSideLinePaintBlock ? offsetBlockEast.getBlock().getMetaFromState(offsetBlockEast) : -1;
-		int offsetMetaSouth = offsetBlockSouth.getBlock() instanceof FarSideLinePaintBlock ? offsetBlockSouth.getBlock().getMetaFromState(offsetBlockSouth) : -1;
-		int offsetMetaWest  = offsetBlockWest.getBlock()  instanceof FarSideLinePaintBlock ? offsetBlockWest.getBlock().getMetaFromState(offsetBlockWest) : -1;
-		if (rootBlockMeta == 2 || rootBlockMeta == 5) {
-			if (offsetMetaNorth == 5 && offsetMetaEast == 2) {
-				return EnumConnectDiagonal.NORTH_EAST;
-			}
-		}
-		
-		if (rootBlockMeta == 2 || rootBlockMeta == 4) {
-			if (offsetMetaNorth == 4 && offsetMetaWest == 2) {
-				return EnumConnectDiagonal.NORTH_WEST;
-			}
-		}
-		
-		if (rootBlockMeta == 3 || rootBlockMeta == 5) {
-			if (offsetMetaSouth == 5 && offsetMetaEast == 3) {
-				return EnumConnectDiagonal.SOUTH_EAST;
-			}
-		}
-		
-		if (rootBlockMeta == 3 || rootBlockMeta == 4) {
-			if (offsetMetaSouth == 4 && offsetMetaWest == 3) {
-				return EnumConnectDiagonal.SOUTH_WEST;
-			}
-		}
-		return EnumConnectDiagonal.NONE;
-	}
-	
-	@Override
-	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-		return state.withProperty(CONNECT_DIAGONAL, getInnerCorner(worldIn, pos))
-			.withProperty(CONNECT_DIRECTIONAL, getFacingForConnectedBlock(worldIn, pos));
-	}
-	
-	@SideOnly(Side.CLIENT)
-	@Override
-	public void initModel() {
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "inventory"));
-	}
 }
