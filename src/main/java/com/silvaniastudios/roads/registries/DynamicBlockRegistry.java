@@ -10,7 +10,9 @@ import com.google.gson.JsonParser;
 import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.blocks.FRBlocks;
 import com.silvaniastudios.roads.blocks.PaintColour;
-import com.silvaniastudios.roads.blocks.paint.CustomPaintBlock;
+import com.silvaniastudios.roads.blocks.paint.customs.CustomPaintBlock;
+import com.silvaniastudios.roads.blocks.paint.customs.CustomPaintWallBlock;
+import com.silvaniastudios.roads.blocks.paint.properties.PaintGrid;
 
 public class DynamicBlockRegistry {
 	
@@ -22,7 +24,7 @@ public class DynamicBlockRegistry {
 		jsonList = getJsonFiles("./mods/RoadPaints/", jsonList);
 		
 		if (jsonList.size() > 0) {
-			FurenikusRoads.debug(0, "Found " + jsonList.size() + " custom road files. Loading...");
+			FurenikusRoads.debug(0, "Found " + jsonList.size() + " custom paint files. Loading...");
 			int success = 0;
 			for (int a = 0; a < FRBlocks.col.length; a++) {
 				for (int i = 0; i < jsonList.size(); i++) {
@@ -38,10 +40,8 @@ public class DynamicBlockRegistry {
 			
 			FurenikusRoads.debug(0, "Custom paint files loading complete, " + success + "/" + jsonList.size()*FRBlocks.col.length + " (with " + FRBlocks.col.length + " colour variants) files loaded successfully.");
 		} else {
-			FurenikusRoads.debug(0, "No custom paint files found; skipping custom road loading.");
+			FurenikusRoads.debug(0, "No custom paint files found; skipping custom paint loading.");
 		}
-		
-		
 	}
 	
 	private static ArrayList<File> getJsonFiles(String dir, ArrayList<File> jsonList) {
@@ -74,7 +74,8 @@ public class DynamicBlockRegistry {
 			
 			String name = json.has("blockName") ? json.get("blockName").getAsString() : file.getName();
 			String localName = json.has("localName") ? json.get("localName").getAsString() : "NAME_READ_FAILED";
-			String type = json.has("category") ? json.get("category").getAsString() : "line";
+			String category = json.has("category") ? json.get("category").getAsString() : "line";
+			String type = json.has("type") ? json.get("type").getAsString() : "1x1";
 			JsonArray grid = json.has("grid") ? json.get("grid").getAsJsonArray() : null;
 			//type
 			
@@ -85,8 +86,8 @@ public class DynamicBlockRegistry {
 			}
 			
 			if (grid != null) {
-				if (!(grid.size() == 16 || grid.size() == 32)) {
-					FurenikusRoads.debug(0, "Paint JSON file " + name + " has malformed Y axis grid. Make sure there are exactly 16 or 32 entries.");
+				if (!(grid.size() == 16 || grid.size() == 32 || grid.size() == 64)) {
+					FurenikusRoads.debug(0, "Paint JSON file " + name + " has malformed Y axis grid. Make sure there are exactly 16, 32 or 64 entries; it has " + grid.size());
 					return null;
 				}
 				boolean[][] gridArray = new boolean[grid.size()][grid.size()];
@@ -94,7 +95,7 @@ public class DynamicBlockRegistry {
 				for (int i = 0; i < grid.size(); i++) {
 					JsonArray gridRow = grid.get(i).getAsJsonArray();
 					if (gridRow.size() != grid.size()) {
-						FurenikusRoads.debug(0, "Paint JSON file " + name + " has malformed X axis grid. Make sure there are exactly " + grid.size() + " entries.");
+						FurenikusRoads.debug(0, "Paint JSON file " + name + " has malformed X axis grid. Make sure there are exactly " + grid.size() + " entries; it has " + gridRow.size());
 						return null;
 					}
 					for (int j = 0; j < gridRow.size(); j++) {
@@ -106,8 +107,16 @@ public class DynamicBlockRegistry {
 						}
 					}
 				}
-				
-				block = new CustomPaintBlock(name + "_" + col.getName(), localName, gridArray, type, col);
+				CustomPaintBlock.EnumPaintType paintType = CustomPaintBlock.EnumPaintType.getFromString(type);
+
+				switch (paintType) {
+					case ICON_1x1:
+						block = new CustomPaintBlock(name + "_" + col.getName(), localName, paintType, new PaintGrid[] {new PaintGrid(gridArray)}, category, new int[] {0}, col);
+						break;
+					case WALL_ICON_1x1:
+						block = new CustomPaintWallBlock(name + "_" + col.getName(), localName, new PaintGrid[] {new PaintGrid(gridArray)}, category, new int[] {0}, col);
+						break;
+				}
 			}
 			
 		} catch (Exception e) {

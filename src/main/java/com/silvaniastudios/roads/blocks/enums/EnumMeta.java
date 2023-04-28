@@ -50,6 +50,32 @@ public enum EnumMeta implements IStringSerializable {
         
         return META_LOOKUP[meta];
     }
+
+	public static int getRotation(int meta) {
+		if (meta == 0 || meta == 4 || meta == 8 || meta == 12) {
+			return 0;
+		}
+		if (meta == 1 || meta == 5 || meta == 9 || meta == 13) {
+			return 270;
+		}
+		if (meta == 2 || meta == 6 || meta == 10 || meta == 14) {
+			return 180;
+		}
+		return 90;
+	}
+
+	public int getRotation() {
+		if (meta == 0 || meta == 4 || meta == 8 || meta == 12) {
+			return 0;
+		}
+		if (meta == 1 || meta == 5 || meta == 9 || meta == 13) {
+			return 270;
+		}
+		if (meta == 2 || meta == 6 || meta == 10 || meta == 14) {
+			return 180;
+		}
+		return 90;
+	}
 	
 	static {
         for (EnumMeta type: values()) {

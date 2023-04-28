@@ -19,10 +19,12 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class PaintBlockCustomRenderBase extends PaintBlockBase implements IMetaBlockName {
-	
-	int[] subBlocks = { 0 };
-	
+
 	public PaintBlockCustomRenderBase(String name, String catName, int[] coreMetas, boolean dynamic, PaintColour colour) {
+		super(name, catName, coreMetas, dynamic, colour);
+	}
+	
+	public PaintBlockCustomRenderBase(String name, String catName, int[] coreMetas, boolean[] dynamic, PaintColour colour) {
 		super(name, catName, coreMetas, dynamic, colour);
 	}
 
@@ -30,15 +32,7 @@ public class PaintBlockCustomRenderBase extends PaintBlockBase implements IMetaB
 	public String getSpecialName(ItemStack stack) {
 		return stack.getItemDamage() + "";
 	}
-	
-    @SideOnly(Side.CLIENT)
-	@Override
-	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> items) {
-    	for (int i = 0; i < subBlocks.length; i++) {
-    		items.add(new ItemStack(this, 1, subBlocks[i]));
-    	}
-    }
-	
+
     @SideOnly(Side.CLIENT)
 	public void initModel() {
 		StateMapperBase b = new StateMapperBase() {
@@ -56,8 +50,8 @@ public class PaintBlockCustomRenderBase extends PaintBlockBase implements IMetaB
 	public void initItemModel() {
 		Item itemBlock = Item.REGISTRY.getObject(new ResourceLocation(FurenikusRoads.MODID, this.name));
 		ModelResourceLocation itemModelResourceLocation = new ModelResourceLocation(getRegistryName(), "inventory");
-		for (int i = 0; i < subBlocks.length; i++) {
-			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(itemBlock, subBlocks[i], itemModelResourceLocation);
+		for (int i = 0; i < getCoreMetas().length; i++) {
+			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(itemBlock, getCoreMetas()[i], itemModelResourceLocation);
     	}
 	}
 }

@@ -30,7 +30,6 @@ public class FabricatorWrapper implements IRecipeWrapper {
 	
 	@Override
 	public void getIngredients(IIngredients ingredients) {
-		@SuppressWarnings("unchecked")
 		List <List<ItemStack>> list = asList(
 				asList(input1),
 				asList(input2),

@@ -28,11 +28,10 @@ public class LinePaintBlock extends PaintBlockCustomRenderBase {
 	public static final UnlistedPropertyConnection WEST = new UnlistedPropertyConnection("west");
 	public static final PropertyEnum<LinePaintBlock.EnumRotation> FACING = PropertyEnum.create("facing", LinePaintBlock.EnumRotation.class);
 
-	public LinePaintBlock(String name, String category, int[] coreMetas, boolean dynamic, PaintColour colour) {
-		super(name, category, coreMetas, dynamic, colour);
+	public LinePaintBlock(String name, String category, PaintColour colour) {
+		super(name, category, new int[] { 0, 2 }, true, colour);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, LinePaintBlock.EnumRotation.ns));
 		this.setCreativeTab(FurenikusRoads.tab_paint_lines);
-		subBlocks = new int[] { 0, 2 };
 	}
 	
 	@Override
@@ -102,14 +101,14 @@ public class LinePaintBlock extends PaintBlockCustomRenderBase {
 		return extendedBlockState.withProperty(NORTH, n).withProperty(EAST, e).withProperty(SOUTH, s).withProperty(WEST, w);
 	}
     
-    public static enum EnumRotation implements IStringSerializable {
+    public enum EnumRotation implements IStringSerializable {
     	ns("north_south"),
 		ew("east_west"),
 		connect("connect");
     	
 		private final String name;
 		
-		private EnumRotation(String name) {
+		EnumRotation(String name) {
 			this.name = name;
 		}
 

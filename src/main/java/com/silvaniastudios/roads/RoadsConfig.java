@@ -43,6 +43,9 @@ public class RoadsConfig {
 		
 		@Config.Comment("Set to true for low-end machines. This will disable custom rendering on machines and may improve framerate. \nOnly really applicable to survival worlds as it only impacts machines, and not road blocks themselves.")
 		public boolean performanceMode = false;
+
+		@Config.Comment("Whether barriers should work like fences and prevent you from jumping over them.")
+		public boolean barriersLikeFences = false;
 	}
 	
 	public static class Machines {

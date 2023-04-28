@@ -3,6 +3,7 @@ package com.silvaniastudios.roads.blocks.decorative;
 import javax.annotation.Nullable;
 
 import com.silvaniastudios.roads.FurenikusRoads;
+import com.silvaniastudios.roads.RoadsConfig;
 import com.silvaniastudios.roads.blocks.BlockBase;
 import com.silvaniastudios.roads.blocks.NonPaintRoadTopBlock;
 import com.silvaniastudios.roads.blocks.enums.IConnectable;
@@ -149,15 +150,17 @@ public class BarrierBlock extends BlockBase implements IConnectable {
     	boolean east  = canBarrierConnectTo(world, pos, EnumFacing.EAST);
     	boolean south = canBarrierConnectTo(world, pos, EnumFacing.SOUTH);
     	boolean west  = canBarrierConnectTo(world, pos, EnumFacing.WEST);
-    	
+
+		double collisionBoxHeight = RoadsConfig.general.barriersLikeFences ? 1.5 : 1.0;
+
     	double xLow = 0.0;
     	double zLow = 0.0;
-    	double xHigh = 1.0;
-    	double zHigh = 1.0;
+    	double xHigh = collisionBoxHeight;
+    	double zHigh = collisionBoxHeight;
     	
     	if (north) { zLow  = 0.0; } else { zLow  = (1.0/16.0)*5.375; }
-    	if (east)  { xHigh = 1.0; } else { xHigh = 1.0-((1.0/16.0)*5.375); }
-    	if (south) { zHigh = 1.0; } else { zHigh = 1.0-((1.0/16.0)*5.375); }
+    	if (east)  { xHigh = 1.0; } else { xHigh = collisionBoxHeight-((1.0/16.0)*5.375); }
+    	if (south) { zHigh = 1.0; } else { zHigh = collisionBoxHeight-((1.0/16.0)*5.375); }
     	if (west)  { xLow  = 0.0; } else { xLow  = (1.0/16.0)*5.375; }
     	return new AxisAlignedBB(xLow, -1+getBlockBelowHeight(world, pos), zLow, xHigh, -1+getBlockBelowHeight(world, pos)+1.0, zHigh);
     }

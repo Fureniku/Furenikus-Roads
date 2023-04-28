@@ -5,6 +5,7 @@ import com.silvaniastudios.roads.blocks.PaintColour;
 import com.silvaniastudios.roads.blocks.paint.properties.UnlistedPropertyConnection;
 
 import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -29,36 +30,39 @@ public class SideLinePaintBlock extends PaintBlockCustomRenderBase {
 	public static final UnlistedPropertyConnection RIGHT_DOWN = new UnlistedPropertyConnection("right_down");
 	
 	public static final PropertyDirection FACING =  PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
+	public static final PropertyBool CONNECTING = PropertyBool.create("connect");
 
-	public SideLinePaintBlock(String name, String category, int[] coreMetas, boolean dynamic, PaintColour colour) {
-		super(name, category, coreMetas, dynamic, colour);
+	public SideLinePaintBlock(String name, String category, PaintColour colour) {
+		super(name, category, new int[] {0, 6}, new boolean[] {true, false}, colour);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 		this.setCreativeTab(FurenikusRoads.tab_paint_lines);
 	}
 	
 	@Override
 	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing());
+		boolean connect = meta <= 5;
+		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing()).withProperty(CONNECTING, connect);
 	}
 	
 	@Override
 	public int getMetaFromState(IBlockState state) {
-		return ((EnumFacing)state.getValue(FACING)).getIndex();
+		return ((EnumFacing)state.getValue(FACING)).getIndex() + (state.getValue(CONNECTING) ? 0 : 4);
 	}
 	
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		EnumFacing enumfacing = EnumFacing.getFront(meta);
+		boolean connect = meta <= 5;
+		EnumFacing enumfacing = EnumFacing.getFront(connect ? meta : meta-4);
 		if (enumfacing == EnumFacing.DOWN || enumfacing == EnumFacing.UP) {
-			return this.getDefaultState().withProperty(FACING, EnumFacing.NORTH);
+			return this.getDefaultState().withProperty(FACING, EnumFacing.NORTH).withProperty(CONNECTING, connect);
 		}
-		return this.getDefaultState().withProperty(FACING, enumfacing);
+		return this.getDefaultState().withProperty(FACING, enumfacing).withProperty(CONNECTING, connect);
 	}
 	
 	@SuppressWarnings("rawtypes")
 	@Override
 	protected BlockStateContainer createBlockState() {
-		IProperty[] listedProperties = new IProperty[] { FACING };
+		IProperty[] listedProperties = new IProperty[] { FACING, CONNECTING };
 		IUnlistedProperty[] unlistedProperties = new IUnlistedProperty[] { LEFT_UP, LEFT_MID, LEFT_DOWN, CENTRAL, RIGHT_UP, RIGHT_MID, RIGHT_DOWN };
 		
 		return new ExtendedBlockState(this, listedProperties, unlistedProperties);
@@ -80,53 +84,60 @@ public class SideLinePaintBlock extends PaintBlockCustomRenderBase {
 	public IBlockState getExtendedState(IBlockState state, IBlockAccess world, BlockPos pos) {
 		IExtendedBlockState extendedBlockState = (IExtendedBlockState) state;
 		
-		BlockPos posUp = pos.offset(EnumFacing.NORTH);
-		BlockPos posLeft = pos.offset(EnumFacing.WEST);
-		BlockPos posRight = pos.offset(EnumFacing.EAST);
-		BlockPos posDown = pos.offset(EnumFacing.SOUTH);
+		boolean connect = state.getValue(CONNECTING);
 		
-		if (state.getValue(FACING) == EnumFacing.EAST) {
-			posUp = pos.offset(EnumFacing.EAST);
-			posLeft = pos.offset(EnumFacing.NORTH);
-			posRight = pos.offset(EnumFacing.SOUTH);
-			posDown = pos.offset(EnumFacing.WEST);
+		if (connect) {
+			BlockPos posUp = pos.offset(EnumFacing.NORTH);
+			BlockPos posLeft = pos.offset(EnumFacing.WEST);
+			BlockPos posRight = pos.offset(EnumFacing.EAST);
+			BlockPos posDown = pos.offset(EnumFacing.SOUTH);
+			
+			if (state.getValue(FACING) == EnumFacing.EAST) {
+				posUp = pos.offset(EnumFacing.EAST);
+				posLeft = pos.offset(EnumFacing.NORTH);
+				posRight = pos.offset(EnumFacing.SOUTH);
+				posDown = pos.offset(EnumFacing.WEST);
+			}
+			
+			if (state.getValue(FACING) == EnumFacing.SOUTH) {
+				posUp = pos.offset(EnumFacing.SOUTH);
+				posLeft = pos.offset(EnumFacing.EAST);
+				posRight = pos.offset(EnumFacing.WEST);
+				posDown = pos.offset(EnumFacing.NORTH);
+			}
+			
+			if (state.getValue(FACING) == EnumFacing.WEST) {
+				posUp = pos.offset(EnumFacing.WEST);
+				posLeft = pos.offset(EnumFacing.SOUTH);
+				posRight = pos.offset(EnumFacing.NORTH);
+				posDown = pos.offset(EnumFacing.EAST);
+			}
+			
+			IBlockState upState = getOffsetState(world, posUp);
+			IBlockState downState = getOffsetState(world, posDown);
+			IBlockState leftState = getOffsetState(world, posLeft);
+			IBlockState rightState = getOffsetState(world, posRight);
+			
+			boolean lu = upState != null ? upState.getValue(FACING) != state.getValue(FACING).rotateY() : false;
+			boolean lm = leftState != null ? leftState.getValue(FACING) != state.getValue(FACING).getOpposite() : false;
+			boolean ld = downState != null ? downState.getValue(FACING) != state.getValue(FACING).rotateY() : false;
+			boolean ru = upState != null ? upState.getValue(FACING) != state.getValue(FACING).rotateYCCW() : false;
+			boolean rm = rightState != null ? rightState.getValue(FACING) != state.getValue(FACING).getOpposite() : false;
+			boolean rd = downState != null ? downState.getValue(FACING) != state.getValue(FACING).rotateYCCW() : false;
+			
+			boolean central = (lu || lm || ld) && (ru || rm || rd);
+			
+			if (!lu && !lm && !ld && !ru && !rm && !rd) {
+				central = true;
+				lm = true;
+				rm = true;
+			}
+	
+			return extendedBlockState.withProperty(LEFT_UP, lu).withProperty(LEFT_MID, lm).withProperty(LEFT_DOWN, ld)
+					.withProperty(CENTRAL, central).withProperty(RIGHT_UP, ru).withProperty(RIGHT_MID, rm).withProperty(RIGHT_DOWN, rd);
 		}
 		
-		if (state.getValue(FACING) == EnumFacing.SOUTH) {
-			posUp = pos.offset(EnumFacing.SOUTH);
-			posLeft = pos.offset(EnumFacing.EAST);
-			posRight = pos.offset(EnumFacing.WEST);
-			posDown = pos.offset(EnumFacing.NORTH);
-		}
-		
-		if (state.getValue(FACING) == EnumFacing.WEST) {
-			posUp = pos.offset(EnumFacing.WEST);
-			posLeft = pos.offset(EnumFacing.SOUTH);
-			posRight = pos.offset(EnumFacing.NORTH);
-			posDown = pos.offset(EnumFacing.EAST);
-		}
-		
-		IBlockState upState = getOffsetState(world, posUp);
-		IBlockState downState = getOffsetState(world, posDown);
-		IBlockState leftState = getOffsetState(world, posLeft);
-		IBlockState rightState = getOffsetState(world, posRight);
-		
-		boolean lu = upState != null ? upState.getValue(FACING) != state.getValue(FACING).rotateY() : false;
-		boolean lm = leftState != null ? leftState.getValue(FACING) != state.getValue(FACING).getOpposite() : false;
-		boolean ld = downState != null ? downState.getValue(FACING) != state.getValue(FACING).rotateY() : false;
-		boolean ru = upState != null ? upState.getValue(FACING) != state.getValue(FACING).rotateYCCW() : false;
-		boolean rm = rightState != null ? rightState.getValue(FACING) != state.getValue(FACING).getOpposite() : false;
-		boolean rd = downState != null ? downState.getValue(FACING) != state.getValue(FACING).rotateYCCW() : false;
-		
-		boolean central = (lu || lm || ld) && (ru || rm || rd);
-		
-		if (!lu && !lm && !ld && !ru && !rm && !rd) {
-			central = true;
-			lm = true;
-			rm = true;
-		}
-
-		return extendedBlockState.withProperty(LEFT_UP, lu).withProperty(LEFT_MID, lm).withProperty(LEFT_DOWN, ld)
-				.withProperty(CENTRAL, central).withProperty(RIGHT_UP, ru).withProperty(RIGHT_MID, rm).withProperty(RIGHT_DOWN, rd);
+		return extendedBlockState.withProperty(LEFT_UP, false).withProperty(LEFT_MID, true).withProperty(LEFT_DOWN, false)
+				.withProperty(CENTRAL, true).withProperty(RIGHT_UP, false).withProperty(RIGHT_MID, true).withProperty(RIGHT_DOWN, false);
 	}
 }

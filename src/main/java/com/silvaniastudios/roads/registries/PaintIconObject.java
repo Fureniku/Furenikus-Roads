@@ -6,10 +6,12 @@ public class PaintIconObject {
 	
 	PaintBlockBase paint;
 	int meta;
-
-	public PaintIconObject(PaintBlockBase paint, int meta) {
+	int index;
+	
+	public PaintIconObject(PaintBlockBase paint, int meta, int index) {
 		this.paint = paint;
 		this.meta = meta;
+		this.index = index;
 	}
 	
 	public PaintBlockBase getPaint() {
@@ -18,6 +20,10 @@ public class PaintIconObject {
 	
 	public int getMeta() {
 		return meta;
+	}
+	
+	public int getIndex() {
+		return index;
 	}
 
 }

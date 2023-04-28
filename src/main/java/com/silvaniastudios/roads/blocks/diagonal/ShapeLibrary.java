@@ -1,13 +1,20 @@
 package com.silvaniastudios.roads.blocks.diagonal;
 
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.silvaniastudios.roads.blocks.paint.properties.PaintGrid;
 import com.silvaniastudios.roads.client.render.Quad;
 
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.util.math.Vec3d;
+
+import javax.imageio.ImageIO;
 
 public class ShapeLibrary {
 	
@@ -22,17 +29,17 @@ public class ShapeLibrary {
 	 *  ####   #   #  #   #  #      #####  #### 
 	 *  
 	 */
-	
-	public static List<Quad> shapeFromTexture(TextureAtlasSprite tex) {
-		List<Quad> quads = new ArrayList<>();
-		
-		return quads;
+
+
+	public static List<Quad> shapeFromGrid(boolean[][] grid, float top, TextureAtlasSprite sprite, VertexFormat format, boolean drawBottom) {
+		return shapeFromGrid(grid, top, sprite, format, drawBottom, 1.0f);
 	}
 	
-	public static List<Quad> shapeFromGrid(boolean[][] grid, float top, TextureAtlasSprite sprite, VertexFormat format) {
+	public static List<Quad> shapeFromGrid(boolean[][] grid, float top, TextureAtlasSprite sprite, VertexFormat format, boolean drawBottom, float scale) {
+		sprite.setFramesTextureData(null);
 		List<Quad> quads = new ArrayList<>();
-		float p = 1.0f / grid.length;
-		float p2 = 1.0f / 32.0f;
+		float p = scale / grid.length;
+		float p2 = scale / 64.0f;
 		
 		for (int i = 0; i < grid.length; i++) {
 			for (int j = 0; j < grid[i].length; j++) {
@@ -85,6 +92,15 @@ public class ShapeLibrary {
 							new Vec3d(j*p+p, top, i*p), //TR
 							new Vec3d(j*p, top, i*p),     //TL
 							sprite, format));
+
+					if (drawBottom) {
+						quads.add(new Quad( //Bottom
+								new Vec3d(j*p+p, top-p2, i*p+p),   //BL
+								new Vec3d(j*p, top-p2, i*p+p),     //BR
+								new Vec3d(j*p, top-p2, i*p), //TR
+								new Vec3d(j*p+p, top-p2, i*p),     //TL
+								sprite, format));
+					}
 				}
 			}
 		}
@@ -397,4 +413,34 @@ public class ShapeLibrary {
 		return quads;
 	}
 
+	public static BufferedImage getImageFromGrid(String name, PaintGrid grid, int id) throws IOException {
+		BufferedImage image = new BufferedImage(grid.size(), grid.size(), BufferedImage.TYPE_INT_ARGB);
+		Color myWhite = new Color(255, 255, 255); // Color white
+		int rgb = myWhite.getRGB();
+		for (int i = 0; i < grid.size(); i++ ){
+			for (int j = 0; j < grid.size(); j++) {
+				if (grid.getGrid()[j][i]) {
+					image.setRGB(j, i, rgb);
+				}
+			}
+		}
+
+		File outputfile = new File(name + "_" + id + ".png");
+		ImageIO.write(image, "png", outputfile);
+
+		System.out.println("Path: " + outputfile.getAbsolutePath());
+		return image;
+	}
+
+	public static int[][] get2DIntArrayFromImage(BufferedImage img) {
+		int[][] image = new int[img.getHeight()][img.getWidth()];
+
+		for (int i = 0; i < img.getHeight(); i++) {
+			for (int j = 0; j < img.getWidth(); j++) {
+				image[j][i] = img.getRGB(j, i);
+			}
+		}
+
+		return image;
+	}
 }

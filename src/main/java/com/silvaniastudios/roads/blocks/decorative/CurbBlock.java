@@ -322,12 +322,8 @@ public class CurbBlock extends BlockBase implements IMetaBlockName {
     @SuppressWarnings("deprecation")
 	private double getBlockConnectedHeight(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
     	int meta = getMetaFromState(state);
-    	EnumFacing checkDir = null;
-    	
-    	if (meta == 0 || meta == 4 || meta == 8  || meta == 12) { checkDir = EnumFacing.NORTH; }
-		if (meta == 3 || meta == 7 || meta == 11 || meta == 15) { checkDir = EnumFacing.EAST;  }
-		if (meta == 1 || meta == 5 || meta == 9  || meta == 13) { checkDir = EnumFacing.SOUTH; }
-		if (meta == 2 || meta == 6 || meta == 10 || meta == 14) { checkDir = EnumFacing.WEST;  }
+    	EnumFacing checkDir = state.getValue(FACING);
+
 		BlockPos downOffset = pos.offset(EnumFacing.DOWN);
 		IBlockState downState = worldIn.getBlockState(downOffset);
 		int countDown = 0;
@@ -342,13 +338,11 @@ public class CurbBlock extends BlockBase implements IMetaBlockName {
 			IBlockState endBlock = worldIn.getBlockState(sideOffset);
 			if (endBlock.getBlock() != Blocks.AIR) {
 				IBlockState endState = worldIn.getBlockState(sideOffset.offset(EnumFacing.UP));
-				System.out.println("endstate: " + endState.getBlock().getLocalizedName());
 				if (endState.getBlock() instanceof BlockBase &&
 						!(endState.getBlock() instanceof PaintBlockBase) &&
 						!(endState.getBlock() instanceof IConnectable) &&
 						!(endState.getBlock() instanceof IPostConnectable) &&
-						!(endState.getBlock() instanceof BlockFakeLight) &&
-						(endState.getBlock().isFullBlock(endState))) {
+						!(endState.getBlock() instanceof BlockFakeLight)) {
 					return endState.getBoundingBox(worldIn, sideOffset.offset(EnumFacing.UP)).maxY-countDown;
 				}
 				return endBlock.getBoundingBox(worldIn, sideOffset).maxY-countDown-1;

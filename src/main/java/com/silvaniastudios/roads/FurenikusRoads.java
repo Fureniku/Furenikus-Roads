@@ -1,5 +1,6 @@
 package com.silvaniastudios.roads;
 
+import com.silvaniastudios.roads.blocks.CustomPaintModelRegistry;
 import org.apache.logging.log4j.Logger;
 
 import com.silvaniastudios.roads.blocks.FRBlocks;
@@ -51,7 +52,8 @@ public class FurenikusRoads {
     public static CommonProxy proxy;
     
     public static final SimpleNetworkWrapper PACKET_CHANNEL = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
-    
+
+	public static final boolean genInternalTextures = false; //Set to true to generate a texture set from internal json paint files.
     
     public static CreativeTabs tab_roads = new CreativeTabs("tab_roads") {
 		@Override
@@ -136,13 +138,13 @@ public class FurenikusRoads {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
+		CustomPaintModelRegistry.register(event);
+		DynamicBlockRegistry.register();
 		proxy.preInit();
 		logger = event.getModLog();
 		if (RoadsConfig.general.genLimestone) { 
 			GameRegistry.registerWorldGenerator(new WorldGen(), 3);
 		}
-		
-		DynamicBlockRegistry.register();
 	}
 	
 	@EventHandler

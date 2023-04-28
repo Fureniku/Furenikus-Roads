@@ -15,15 +15,17 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.property.ExtendedBlockState;
+import net.minecraftforge.common.property.IUnlistedProperty;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class SimpleLinePaintBlock extends PaintBlockBase {
+public class SimpleLinePaintBlock extends PaintBlockCustomRenderBase {
 
 	public static final PropertyDirection FACING =  PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 	
-	public SimpleLinePaintBlock(String name, String category, int[] coreMetas, boolean dynamic, PaintColour colour) {
-		super(name, category, coreMetas, dynamic, colour);
+	public SimpleLinePaintBlock(String name, String category, PaintColour colour) {
+		super(name, category, new int[]{0}, false, colour);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 		this.setCreativeTab(FurenikusRoads.tab_paint_lines);
 	}
@@ -49,7 +51,8 @@ public class SimpleLinePaintBlock extends PaintBlockBase {
 	
 	@Override
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, new IProperty[] {FACING});
+		IUnlistedProperty[] unlistedProperties = new IUnlistedProperty[] {};
+		return new ExtendedBlockState(this, new IProperty[] {FACING}, unlistedProperties);
 	}
 	
 	@SideOnly(Side.CLIENT)

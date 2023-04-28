@@ -21,10 +21,5 @@ build
 eclipse
 run
 
-CREDITS.txt
-*changelog.txt
-LICENSE*.txt
-marketing
-config
-README.txt
-discord_emoji
+# Files from Forge MDK
+forge*changelog.txt

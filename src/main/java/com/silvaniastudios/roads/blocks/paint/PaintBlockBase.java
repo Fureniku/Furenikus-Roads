@@ -1,5 +1,6 @@
 package com.silvaniastudios.roads.blocks.paint;
 
+import java.util.Arrays;
 import java.util.Random;
 
 import javax.annotation.Nullable;
@@ -18,31 +19,46 @@ import net.minecraft.block.BlockAir;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class PaintBlockBase extends BlockBase {
 	
 	private String categoryName;
 	private int[] coreMetas;
-	private boolean dynamic = false;
+	private boolean[] dynamic;
 	private PaintColour colour;
 	
-	public PaintBlockBase(String name, String catName, int[] coreMetas, boolean dynamic, PaintColour colour) {
+	public PaintBlockBase(String name, String catName, int[] coreMetas, boolean[] dynamic, PaintColour colour) {
 		super(name, Material.CLOTH);
 		this.categoryName = catName;
 		this.coreMetas = coreMetas;
 		this.setHardness(2.0F);
 		this.dynamic = dynamic;
 		this.colour = colour;
+	}
+	
+	public PaintBlockBase(String name, String catName, int[] coreMetas, boolean dynamic, PaintColour colour) {
+		this(name, catName, coreMetas, null, colour);
+		if (coreMetas != null) {
+			this.dynamic = new boolean[coreMetas.length];
+			if (dynamic) {
+				Arrays.fill(this.dynamic, true);
+			}
+		}
 	}
 	
 	public PaintColour getColour() {
@@ -57,8 +73,8 @@ public class PaintBlockBase extends BlockBase {
 		return coreMetas;
 	}
 	
-	public boolean canConnect() {
-		return dynamic;
+	public boolean canConnect(int id) {
+		return dynamic[id];
 	}
 	
 	//Searches through the unlocalized name, removes reference of colour and returns a name of the icon which should be uniform across all colours.
@@ -104,6 +120,25 @@ public class PaintBlockBase extends BlockBase {
 	@Override
 	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
 		return BlockFaceShape.UNDEFINED;
+	}
+
+	//Get pick block from the provided core meta options.
+	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+		int closest = 0;
+		for (int i = 0; i < getCoreMetas().length; i++) {
+			if (getCoreMetas()[i] <= getMetaFromState(state) && getCoreMetas()[i] > closest) {
+				closest = getCoreMetas()[i];
+			}
+		}
+		return new ItemStack(this, 1, closest);
+	}
+
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> items) {
+		for (int i = 0; i < getCoreMetas().length; i++) {
+			items.add(new ItemStack(this, 1, getCoreMetas()[i]));
+		}
 	}
 	
 	//@SuppressWarnings("deprecation")

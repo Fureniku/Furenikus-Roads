@@ -86,7 +86,9 @@ public class PaintGunPaintList extends GuiScrollingList_Mod {
 					}
 				}
 				
-				if (paints.get(slot+horizontal).getPaint().canConnect() || paints.get(slot+horizontal).getPaint() instanceof LargeTextPaintBlock && paints.get(slot+horizontal).getMeta() != 0) {
+				PaintIconObject paint = paints.get(slot+horizontal);
+				
+				if (paint.getPaint().canConnect(paint.getIndex()) || paint.getPaint() instanceof LargeTextPaintBlock && paint.getMeta() != 0) {
 					gui.drawTexturedModalRect(left + (horizontal*25), slotTop, 24, yOffset, 24, 24);
 				} else {
 					gui.drawTexturedModalRect(left + (horizontal*25), slotTop, 0, yOffset, 24, 24);

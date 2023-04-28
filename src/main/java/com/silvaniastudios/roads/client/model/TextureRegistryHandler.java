@@ -1,13 +1,25 @@
 package com.silvaniastudios.roads.client.model;
 
 import com.silvaniastudios.roads.FurenikusRoads;
+import com.silvaniastudios.roads.RoadsConfig;
+import com.silvaniastudios.roads.blocks.FRBlocks;
+import com.silvaniastudios.roads.blocks.diagonal.ShapeLibrary;
+import com.silvaniastudios.roads.blocks.paint.customs.CustomPaintBlock;
 import com.silvaniastudios.roads.blocks.paint.PaintBlockBase;
+import com.silvaniastudios.roads.blocks.paint.PaintBlockCustomRenderBase;
+import com.silvaniastudios.roads.registries.DynamicBlockRegistry;
 import com.silvaniastudios.roads.registries.PaintCategoryList;
 import com.silvaniastudios.roads.registries.PaintGunItemRegistry;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.texture.*;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class TextureRegistryHandler {
 	
@@ -54,9 +66,7 @@ public class TextureRegistryHandler {
 		ResourceLocation sprite_light_red = new ResourceLocation(FurenikusRoads.MODID + ":blocks/hopper_type_red");
 		ResourceLocation sprite_light_item = new ResourceLocation(FurenikusRoads.MODID + ":blocks/hopper_type_item");
 		ResourceLocation sprite_light_none = new ResourceLocation(FurenikusRoads.MODID + ":blocks/hopper_type_none");
-		
-		
-		
+
 		event.getMap().registerSprite(white_paint);
 		event.getMap().registerSprite(yellow_paint);
 		event.getMap().registerSprite(red_paint);
@@ -109,44 +119,49 @@ public class TextureRegistryHandler {
 
 	@SubscribeEvent
 	public void paintTextures(TextureStitchEvent.Pre event) {
-		ResourceLocation line_straight_full_0 = new ResourceLocation(FurenikusRoads.MODID + ":paints/line_straight_full_0");
-		ResourceLocation line_straight_full_2 = new ResourceLocation(FurenikusRoads.MODID + ":paints/line_straight_full_2");
-		
-		ResourceLocation line_straight_thick_0 = new ResourceLocation(FurenikusRoads.MODID + ":paints/line_straight_thick_0");
-		ResourceLocation line_straight_thick_2 = new ResourceLocation(FurenikusRoads.MODID + ":paints/line_straight_thick_2");
-		
-		ResourceLocation line_straight_double_0 = new ResourceLocation(FurenikusRoads.MODID + ":paints/line_straight_double_0");
-		ResourceLocation line_straight_double_2 = new ResourceLocation(FurenikusRoads.MODID + ":paints/line_straight_double_2");
-		
-		ResourceLocation line_straight_double_thick_0 = new ResourceLocation(FurenikusRoads.MODID + ":paints/line_straight_double_thick_0");
-		ResourceLocation line_straight_double_thick_2 = new ResourceLocation(FurenikusRoads.MODID + ":paints/line_straight_double_thick_2");
-		
-		ResourceLocation line_side_double = new ResourceLocation(FurenikusRoads.MODID + ":paints/line_side_double_0");
-		ResourceLocation line_side_double_thick = new ResourceLocation(FurenikusRoads.MODID + ":paints/line_side_double_thick_0");
-		ResourceLocation line_side_single = new ResourceLocation(FurenikusRoads.MODID + ":paints/line_side_single_0");
-		ResourceLocation line_side_single_thick = new ResourceLocation(FurenikusRoads.MODID + ":paints/line_side_single_thick_0");
-		
-		ResourceLocation line_far_side = new ResourceLocation(FurenikusRoads.MODID + ":paints/line_far_side_0");
-		ResourceLocation line_far_side_thick = new ResourceLocation(FurenikusRoads.MODID + ":paints/line_far_side_thick_0");
-		
-		event.getMap().registerSprite(line_straight_full_0);
-		event.getMap().registerSprite(line_straight_full_2);
-		
-		event.getMap().registerSprite(line_straight_thick_0);
-		event.getMap().registerSprite(line_straight_thick_2);
-		
-		event.getMap().registerSprite(line_straight_double_0);
-		event.getMap().registerSprite(line_straight_double_2);
-		
-		event.getMap().registerSprite(line_straight_double_thick_0);
-		event.getMap().registerSprite(line_straight_double_thick_2);
-		
-		event.getMap().registerSprite(line_side_double);
-		event.getMap().registerSprite(line_side_double_thick);
-		event.getMap().registerSprite(line_side_single);
-		event.getMap().registerSprite(line_side_single_thick);
-		
-		event.getMap().registerSprite(line_far_side);
-		event.getMap().registerSprite(line_far_side_thick);
+		ArrayList<PaintBlockBase> paints = FRBlocks.paintBlockList;
+		ArrayList<String> registry = new ArrayList<>();
+
+		for (int i = 0; i < paints.size(); i++) {
+			if (paints.get(i) instanceof PaintBlockCustomRenderBase) {
+				PaintBlockCustomRenderBase paint = (PaintBlockCustomRenderBase) paints.get(i);
+				if (paint instanceof CustomPaintBlock && FurenikusRoads.genInternalTextures) {
+					FurenikusRoads.debug(0, "Generating internal texture set is enabled. If you're seeing this spammed, and this isn't a dev build, please tell me coz I forgot to turn it off!!");
+					CustomPaintBlock customPaint = (CustomPaintBlock) paint;
+					if (customPaint.isInternal() && customPaint.getUnlocalizedName().contains("white")) {
+						for (int j = 0; j < customPaint.getCoreMetas().length; j++) {
+							try {
+								ShapeLibrary.getImageFromGrid(getTextureNameFromUnloc(customPaint.getUnlocalizedName()), customPaint.getGrid(j), customPaint.getCoreMetas()[j]);
+							} catch (IOException e) {
+								throw new RuntimeException(e);
+							}
+						}
+
+					}
+				}
+				if (paint.getUnlocalizedName().contains("white")) {
+					for (int j = 0; j < paint.getCoreMetas().length; j++) {
+						registry.add(getTextureNameFromUnloc(paint.getUnlocalizedName()) + "_" + paint.getCoreMetas()[j]);
+					}
+				}
+			}
+		}
+
+		for (int i = 0; i < registry.size(); i++) {
+			ResourceLocation rl = new ResourceLocation(FurenikusRoads.MODID + ":paints/" + registry.get(i));
+			event.getMap().registerSprite(rl);
+		}
 	}
+
+	/**
+	 * Only for use on white paints. Doesn't check/verify the colours.
+	 * @param unlocalizedName the unlocalized name of the block
+	 * @return the same string, without the tile.furenikusroads. bit and without white_
+	 */
+	public static String getTextureNameFromUnloc(String unlocalizedName) {
+		return unlocalizedName.replace("white_", "").replace("tile.furenikusroads.", "");
+	}
+
+	public static ArrayList<TextureAtlasSprite> customSprites = new ArrayList<>();
+	public static ArrayList<ResourceLocation> customLocations = new ArrayList<>();
 }

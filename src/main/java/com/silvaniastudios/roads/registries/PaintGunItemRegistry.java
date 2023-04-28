@@ -58,23 +58,23 @@ public class PaintGunItemRegistry {
 	}
 	
 	public static void registerPaint(PaintBlockBase block) {
-		registerPaint(block, 0);
+		registerPaint(block, 0, 0);
 	}
 	
-	public static void registerPaint(PaintBlockBase block, int meta) {
+	public static void registerPaint(PaintBlockBase block, int meta, int index) {
 		String cat = block.getCategory();
 		
 		
 		for (int i = 0; i < categoryList.size(); i++) {
 			if (categoryList.get(i).getCategoryName().equalsIgnoreCase(cat)) {
-				categoryList.get(i).add(block, meta);
+				categoryList.get(i).add(block, meta, index);
 				return;
 			}
 		}
 		
 		//Category doesn't exist yet; create.
 		PaintCategoryList list = new PaintCategoryList(cat);
-		list.add(block, meta);
+		list.add(block, meta, index);
 		categoryList.add(list);
 		System.out.println("Creating category " + list.name + " for block " + block.getLocalizedName() + " and registering.");
 		
