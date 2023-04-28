@@ -339,6 +339,25 @@ public class RecipeRegistry {
 		fabricatorRecipes.add(new FabricatorRecipes(i++, iron_ingot, new ItemStack(FRItems.tool_handle), iron_ingot, empty, empty, empty, new ItemStack(FRBlocks.manhole_cover_square, 4)));
 		fabricatorRecipes.add(new FabricatorRecipes(i++, iron_ingot, new ItemStack(FRItems.tool_handle), iron_ingot, empty, empty, empty, new ItemStack(FRBlocks.drain_cover_1, 4)));
 		fabricatorRecipes.add(new FabricatorRecipes(i++, iron_ingot, new ItemStack(FRItems.tool_handle), iron_ingot, empty, empty, empty, new ItemStack(FRBlocks.drain_cover_2, 4)));
+
+		fabricatorRecipes.add(new FabricatorRecipes(i++, new ItemStack(Blocks.STONE, 8), empty, empty, empty, empty, empty, new ItemStack(FRBlocks.road_block_diagonal_1_1, 8)));
+		fabricatorRecipes.add(new FabricatorRecipes(i++, new ItemStack(Blocks.STONE, 8), empty, empty, empty, empty, empty, new ItemStack(FRBlocks.road_block_diagonal_1_2, 8)));
+		fabricatorRecipes.add(new FabricatorRecipes(i++, new ItemStack(Blocks.STONE, 8), empty, empty, empty, empty, empty, new ItemStack(FRBlocks.road_block_diagonal_1_4, 8)));
+		fabricatorRecipes.add(new FabricatorRecipes(i++, new ItemStack(Blocks.STONE, 8), empty, empty, empty, empty, empty, new ItemStack(FRBlocks.road_block_diagonal_2_4, 8)));
+		fabricatorRecipes.add(new FabricatorRecipes(i++, new ItemStack(Blocks.STONE, 8), empty, empty, empty, empty, empty, new ItemStack(FRBlocks.road_block_diagonal_1_8, 8)));
+		fabricatorRecipes.add(new FabricatorRecipes(i++, new ItemStack(Blocks.STONE, 8), empty, empty, empty, empty, empty, new ItemStack(FRBlocks.road_block_diagonal_2_8, 8)));
+		fabricatorRecipes.add(new FabricatorRecipes(i++, new ItemStack(Blocks.STONE, 8), empty, empty, empty, empty, empty, new ItemStack(FRBlocks.road_block_diagonal_3_8, 8)));
+		fabricatorRecipes.add(new FabricatorRecipes(i++, new ItemStack(Blocks.STONE, 8), empty, empty, empty, empty, empty, new ItemStack(FRBlocks.road_block_diagonal_4_8, 8)));
+
+		fabricatorRecipes.add(new FabricatorRecipes(i++, new ItemStack(Blocks.STONE, 8), empty, empty, empty, empty, empty, new ItemStack(FRBlocks.road_block_diagonal_1_1_mirror, 8)));
+		fabricatorRecipes.add(new FabricatorRecipes(i++, new ItemStack(Blocks.STONE, 8), empty, empty, empty, empty, empty, new ItemStack(FRBlocks.road_block_diagonal_1_2_mirror, 8)));
+		fabricatorRecipes.add(new FabricatorRecipes(i++, new ItemStack(Blocks.STONE, 8), empty, empty, empty, empty, empty, new ItemStack(FRBlocks.road_block_diagonal_1_4_mirror, 8)));
+		fabricatorRecipes.add(new FabricatorRecipes(i++, new ItemStack(Blocks.STONE, 8), empty, empty, empty, empty, empty, new ItemStack(FRBlocks.road_block_diagonal_2_4_mirror, 8)));
+		fabricatorRecipes.add(new FabricatorRecipes(i++, new ItemStack(Blocks.STONE, 8), empty, empty, empty, empty, empty, new ItemStack(FRBlocks.road_block_diagonal_1_8_mirror, 8)));
+		fabricatorRecipes.add(new FabricatorRecipes(i++, new ItemStack(Blocks.STONE, 8), empty, empty, empty, empty, empty, new ItemStack(FRBlocks.road_block_diagonal_2_8_mirror, 8)));
+		fabricatorRecipes.add(new FabricatorRecipes(i++, new ItemStack(Blocks.STONE, 8), empty, empty, empty, empty, empty, new ItemStack(FRBlocks.road_block_diagonal_3_8_mirror, 8)));
+		fabricatorRecipes.add(new FabricatorRecipes(i++, new ItemStack(Blocks.STONE, 8), empty, empty, empty, empty, empty, new ItemStack(FRBlocks.road_block_diagonal_4_8_mirror, 8)));
+
 		//fabricatorRecipes.add(new FabricatorRecipes(i++, empty, empty, empty, empty, empty, empty, empty));
 	}
 }
