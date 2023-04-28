@@ -152,7 +152,7 @@ public class RoadBlockDiagonal extends BlockBase {
 
 		return extendedBlockState.withProperty(LEFT, l).withProperty(RIGHT, r).withProperty(POS, pos);
 	}
-	
+
 	public RayTraceResult collisionRayTrace(IBlockState blockState, World worldIn, BlockPos pos, Vec3d start, Vec3d end) {
         List<RayTraceResult> list = Lists.<RayTraceResult>newArrayList();
 
@@ -197,7 +197,12 @@ public class RoadBlockDiagonal extends BlockBase {
 		
 		boolean leftFluid = leftState != null ? leftState.getBlock() instanceof BlockFluidBase || leftState.getBlock() instanceof BlockLiquid : false;
 		boolean rightFluid = rightState != null ? rightState.getBlock() instanceof BlockFluidBase || rightState.getBlock() instanceof BlockLiquid : false;
-		
+
+		if (isAir(leftState, world, posLeft) && isAir(rightState, world, posRight)) {
+			list.add(new AxisAlignedBB(0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f));
+			return list;
+		}
+
 		//air is basically fluid right?
 		if (isAir(leftState, world, posLeft)) { leftFluid = true; }
 		if (isAir(rightState, world, posRight)) { rightFluid = true; }
@@ -297,16 +302,25 @@ public class RoadBlockDiagonal extends BlockBase {
 	public Vec3d[] getLeftVecs(World world, IBlockState state, BlockPos pos) {
 		Vec3d vecs[] = new Vec3d[16];
 		EnumFacing facing = state.getValue(FACING);
+
 		BlockPos posLeft = pos.offset(facing.rotateYCCW());
-		
-		if (getHalfBlock(state, HalfBlockSide.LEFT, posLeft, facing, world).isFluid() || world.getBlockState(posLeft).getBlock().isAir(world.getBlockState(posLeft), world, posLeft)) {
+		BlockPos posRight = pos.offset(facing.rotateY());
+
+		boolean airLeft = world.getBlockState(posLeft).getBlock().isAir(world.getBlockState(posLeft), world, posLeft);
+		boolean airRight = world.getBlockState(posRight).getBlock().isAir(world.getBlockState(posRight), world, posRight);
+
+		double height = getBlockHeight(world, getLeftBlock(state, world, pos), posLeft);
+
+		if (airLeft) {
+			height = airRight ? 1 : 0;
+		}
+
+		if (getHalfBlock(state, HalfBlockSide.LEFT, posLeft, facing, world).isFluid()) {
 			for (int i = 0; i < vecs.length; i++) {
 				vecs[i] = new Vec3d(0,0,0);
 			}
 			return vecs;
 		}
-		
-		double height = getBlockHeight(world, getLeftBlock(state, world, pos), posLeft);
 		
 		double g = 0.0020000000949949026D; //The amount a vanilla drawn box is bigger than the actual collision box
 		
@@ -377,11 +391,20 @@ public class RoadBlockDiagonal extends BlockBase {
 	public Vec3d[] getRightVecs(World world, IBlockState state, BlockPos pos) {
 		Vec3d vecs[] = new Vec3d[16];
 		EnumFacing facing = state.getValue(FACING);
+
+		BlockPos posLeft = pos.offset(facing.rotateYCCW());
 		BlockPos posRight = pos.offset(facing.rotateY());
-		
+
+		boolean airLeft = world.getBlockState(posLeft).getBlock().isAir(world.getBlockState(posLeft), world, posLeft);
+		boolean airRight = world.getBlockState(posRight).getBlock().isAir(world.getBlockState(posRight), world, posRight);
+
 		double height = getBlockHeight(world, getRightBlock(state, world, pos), posRight);
+
+		if (airRight) {
+			height = airLeft ? 1 : 0;
+		}
 		
-		if (getHalfBlock(state, HalfBlockSide.RIGHT, posRight, facing, world).isFluid() || world.getBlockState(posRight).getBlock().isAir(world.getBlockState(posRight), world, posRight)) {
+		if (getHalfBlock(state, HalfBlockSide.RIGHT, posRight, facing, world).isFluid()) {
 			for (int i = 0; i < vecs.length; i++) {
 				vecs[i] = new Vec3d(0,0,0);
 			}
