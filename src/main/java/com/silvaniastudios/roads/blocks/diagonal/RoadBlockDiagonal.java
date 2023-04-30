@@ -212,10 +212,7 @@ public class RoadBlockDiagonal extends BlockBase {
 			return list;
 		}
 		
-		float min = minWidth;
-		float max = maxWidth;
-		
-		float width = max - min;
+		float width = maxWidth - minWidth;
 		float eighth = width/8f;
 		
 		float step1 = 1.00f;
@@ -234,65 +231,70 @@ public class RoadBlockDiagonal extends BlockBase {
 
 		if (facing.equals(EnumFacing.NORTH)) {
 			if (!leftFluid) {
-				list.add(new AxisAlignedBB(min, 0.0f, step1 - step, min + (width*0.25) - eighth, leftHeight, step1));
-				list.add(new AxisAlignedBB(min, 0.0f, step2 - step, min + (width*0.50) - eighth, leftHeight, step2));
-				list.add(new AxisAlignedBB(min, 0.0f, step3 - step, min + (width*0.75) - eighth, leftHeight, step3));
-				list.add(new AxisAlignedBB(min, 0.0f, step4 - step, max                - eighth, leftHeight, step4));
+				list.add(new AxisAlignedBB(0.0f, 0.0f, step1 - step, minWidth + (width*0.25) - eighth, leftHeight, step1));
+				list.add(new AxisAlignedBB(0.0f, 0.0f, step2 - step, minWidth + (width*0.50) - eighth, leftHeight, step2));
+				list.add(new AxisAlignedBB(0.0f, 0.0f, step3 - step, minWidth + (width*0.75) - eighth, leftHeight, step3));
+				list.add(new AxisAlignedBB(0.0f, 0.0f, step4 - step, minWidth                - eighth, leftHeight, step4));
 			}
 			
 			if (!rightFluid) {
-				list.add(new AxisAlignedBB(min                + eighth, 0.0f, step1 - step, 1.0f, rightHeight, step1));
-				list.add(new AxisAlignedBB(min + (width*0.25) + eighth, 0.0f, step2 - step, 1.0f, rightHeight, step2));
-				list.add(new AxisAlignedBB(min + (width*0.50) + eighth, 0.0f, step3 - step, 1.0f, rightHeight, step3));
-				list.add(new AxisAlignedBB(min + (width*0.75) + eighth, 0.0f, step4 - step, 1.0f, rightHeight, step4));
+				list.add(new AxisAlignedBB(minWidth                + eighth, 0.0f, step1 - step, 1.0f, rightHeight, step1));
+				list.add(new AxisAlignedBB(minWidth + (width*0.25) + eighth, 0.0f, step2 - step, 1.0f, rightHeight, step2));
+				list.add(new AxisAlignedBB(minWidth + (width*0.50) + eighth, 0.0f, step3 - step, 1.0f, rightHeight, step3));
+				list.add(new AxisAlignedBB(minWidth + (width*0.75) + eighth, 0.0f, step4 - step, 1.0f, rightHeight, step4));
 			}
 		}
 		
 		if (facing.equals(EnumFacing.EAST)) {
 			if (!leftFluid) {
-				list.add(new AxisAlignedBB(step4 - step, 0.0f, min, step4, leftHeight, min + (width*0.25) - eighth));
-				list.add(new AxisAlignedBB(step3 - step, 0.0f, min, step3, leftHeight, min + (width*0.50) - eighth));
-				list.add(new AxisAlignedBB(step2 - step, 0.0f, min, step2, leftHeight, min + (width*0.75) - eighth));
-				list.add(new AxisAlignedBB(step1 - step, 0.0f, min, step1, leftHeight, max                - eighth));
+				list.add(new AxisAlignedBB(step4 - step, 0.0f, 0.0f, step4, leftHeight, minWidth + (width*0.25) - eighth));
+				list.add(new AxisAlignedBB(step3 - step, 0.0f, 0.0f, step3, leftHeight, minWidth + (width*0.50) - eighth));
+				list.add(new AxisAlignedBB(step2 - step, 0.0f, 0.0f, step2, leftHeight, minWidth + (width*0.75) - eighth));
+				list.add(new AxisAlignedBB(step1 - step, 0.0f, 0.0f, step1, leftHeight, minWidth                - eighth));
 			}
 			
 			if (!rightFluid) {
-				list.add(new AxisAlignedBB(step4 - step, 0.0f, min +                eighth, step4, rightHeight, 1.0f));
-				list.add(new AxisAlignedBB(step3 - step, 0.0f, min + (width*0.25) + eighth, step3, rightHeight, 1.0f));
-				list.add(new AxisAlignedBB(step2 - step, 0.0f, min + (width*0.50) + eighth, step2, rightHeight, 1.0f));
-				list.add(new AxisAlignedBB(step1 - step, 0.0f, min + (width*0.75) + eighth, step1, rightHeight, 1.0f));
+				list.add(new AxisAlignedBB(step4 - step, 0.0f, minWidth +                eighth, step4, rightHeight, 1.0f));
+				list.add(new AxisAlignedBB(step3 - step, 0.0f, minWidth + (width*0.25) + eighth, step3, rightHeight, 1.0f));
+				list.add(new AxisAlignedBB(step2 - step, 0.0f, minWidth + (width*0.50) + eighth, step2, rightHeight, 1.0f));
+				list.add(new AxisAlignedBB(step1 - step, 0.0f, minWidth + (width*0.75) + eighth, step1, rightHeight, 1.0f));
 			}
 		}
 
+		double h100 = 1.0 - maxWidth + ((width*1.00) - eighth);
+		double h075 = 1.0 - maxWidth + ((width*0.75) - eighth);
+		double h050 = 1.0 - maxWidth + ((width*0.50) - eighth);
+		double h025 = 1.0 - maxWidth + ((width*0.25) - eighth);
+
 		if (facing.equals(EnumFacing.SOUTH)) {
 			if (!leftFluid) {
-				list.add(new AxisAlignedBB(1.0 - (min                + eighth), 0.0f, step4 - step, 1, leftHeight, step4));
-				list.add(new AxisAlignedBB(1.0 - (min + (width*0.25) + eighth), 0.0f, step3 - step, 1, leftHeight, step3));
-				list.add(new AxisAlignedBB(1.0 - (min + (width*0.50) + eighth), 0.0f, step2 - step, 1, leftHeight, step2));
-				list.add(new AxisAlignedBB(1.0 - (min + (width*0.75) + eighth), 0.0f, step1 - step, 1, leftHeight, step1));
+				list.add(new AxisAlignedBB(1.0 - (minWidth                + eighth), 0.0f, step4 - step, 1, leftHeight, step4));
+				list.add(new AxisAlignedBB(1.0 - (minWidth + (width*0.25) + eighth), 0.0f, step3 - step, 1, leftHeight, step3));
+				list.add(new AxisAlignedBB(1.0 - (minWidth + (width*0.50) + eighth), 0.0f, step2 - step, 1, leftHeight, step2));
+				list.add(new AxisAlignedBB(1.0 - (minWidth + (width*0.75) + eighth), 0.0f, step1 - step, 1, leftHeight, step1));
 			}
 
 			if (!rightFluid) {
-				list.add(new AxisAlignedBB(min, 0.0, step4 - step, 1.0 - (min + (width*0.25) - eighth), rightHeight, step4));
-				list.add(new AxisAlignedBB(min, 0.0, step3 - step, 1.0 - (min + (width*0.50) - eighth), rightHeight, step3));
-				list.add(new AxisAlignedBB(min, 0.0, step2 - step, 1.0 - (min + (width*0.75) - eighth), rightHeight, step2));
-				list.add(new AxisAlignedBB(min, 0.0, step1 - step, 1.0 - (max                - eighth), rightHeight, step1));
+				list.add(new AxisAlignedBB(0.0, 0.0, step4 - step, h100, rightHeight, step4));
+				list.add(new AxisAlignedBB(0.0, 0.0, step3 - step, h075, rightHeight, step3));
+				list.add(new AxisAlignedBB(0.0, 0.0, step2 - step, h050, rightHeight, step2));
+				list.add(new AxisAlignedBB(0.0, 0.0, step1 - step, h025, rightHeight, step1));
 			}
 		}
 		
 		if (facing.equals(EnumFacing.WEST)) {
 			if (!leftFluid) {
-				list.add(new AxisAlignedBB(step1 - step, 0.0, 1.0 - (min +                eighth), step1, leftHeight, 1));
-				list.add(new AxisAlignedBB(step2 - step, 0.0, 1.0 - (min + (width*0.25) + eighth), step2, leftHeight, 1));
-				list.add(new AxisAlignedBB(step3 - step, 0.0, 1.0 - (min + (width*0.50) + eighth), step3, leftHeight, 1));
-				list.add(new AxisAlignedBB(step4 - step, 0.0, 1.0 - (min + (width*0.75) + eighth), step4, leftHeight, 1));
+				list.add(new AxisAlignedBB(step1 - step, 0.0, 1.0 - (minWidth +                eighth), step1, leftHeight, 1));
+				list.add(new AxisAlignedBB(step2 - step, 0.0, 1.0 - (minWidth + (width*0.25) + eighth), step2, leftHeight, 1));
+				list.add(new AxisAlignedBB(step3 - step, 0.0, 1.0 - (minWidth + (width*0.50) + eighth), step3, leftHeight, 1));
+				list.add(new AxisAlignedBB(step4 - step, 0.0, 1.0 - (minWidth + (width*0.75) + eighth), step4, leftHeight, 1));
 			}
 
 			if (!rightFluid) {
-				list.add(new AxisAlignedBB(step1 - step, 0.0, min, step1, rightHeight, 1.0 - (min + (width*0.25) - eighth)));
-				list.add(new AxisAlignedBB(step2 - step, 0.0, min, step2, rightHeight, 1.0 - (min + (width*0.50) - eighth)));
-				list.add(new AxisAlignedBB(step3 - step, 0.0, min, step3, rightHeight, 1.0 - (min + (width*0.75) - eighth)));
-				list.add(new AxisAlignedBB(step4 - step, 0.0, min, step4, rightHeight, 1.0 - (max                - eighth)));
+				list.add(new AxisAlignedBB(step1 - step, 0.0, 0.0, step1, rightHeight, h100));
+				list.add(new AxisAlignedBB(step2 - step, 0.0, 0.0, step2, rightHeight, h075));
+				list.add(new AxisAlignedBB(step3 - step, 0.0, 0.0, step3, rightHeight, h050));
+				list.add(new AxisAlignedBB(step4 - step, 0.0, 0.0, step4, rightHeight, h025));
 			}
 		}
 		

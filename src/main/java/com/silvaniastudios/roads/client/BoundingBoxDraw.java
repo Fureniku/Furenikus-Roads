@@ -42,8 +42,6 @@ public class BoundingBoxDraw {
 			}
 		}
 	}
-
-
 	
 	public static void drawBoundingBox(BlockPos pos, Vec3d[] vecsLeft, Vec3d[] vecsRight, float r, float g, float b, float a, double pX, double pY, double pZ) {
 		Tessellator tessellator = Tessellator.getInstance();
