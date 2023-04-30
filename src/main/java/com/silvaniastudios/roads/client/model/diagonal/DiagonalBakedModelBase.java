@@ -36,33 +36,6 @@ public class DiagonalBakedModelBase implements IBakedModel {
 		mc = Minecraft.getMinecraft();
 	}
 
-	//Direct from mcjty's tutorial on IModel usage https://wiki.mcjty.eu/modding/index.php?title=Render_Block_Baked_Model-1.12
-	protected void putVertex(UnpackedBakedQuad.Builder builder, Vec3d normal, double x, double y, double z, float u, float v, TextureAtlasSprite sprite) {
-		for (int e = 0; e < format.getElementCount(); e++) {
-			switch (format.getElement(e).getUsage()) {
-			case POSITION:
-				builder.put(e, (float)x, (float)y, (float)z, 1.0f);
-				break;
-			case COLOR:
-				builder.put(e, 1.0f, 1.0f, 1.0f, 1.0f);
-				break;
-			case UV:
-				if (format.getElement(e).getIndex() == 0) {
-					u = sprite.getInterpolatedU(u);
-					v = sprite.getInterpolatedV(v);
-					builder.put(e, u, v, 0f, 1f);
-					break;
-				}
-			case NORMAL:
-				builder.put(e, (float) normal.x, (float) normal.y, (float) normal.z, 0f);
-				break;
-			default:
-				builder.put(e);
-				break;
-			}
-		}
-	}
-
 	@Override
 	public List<BakedQuad> getQuads(IBlockState state, EnumFacing side, long rand) {
 

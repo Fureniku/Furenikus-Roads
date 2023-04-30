@@ -81,9 +81,9 @@ public class RoadBlockDiagonal extends BlockBase {
 		
 		boolean trans = false;
 		
-		//TODO if (stateLeft.getBlock().getBlockLayer() == BlockRenderLayer.TRANSLUCENT || stateRight.getBlock().getBlockLayer() == BlockRenderLayer.TRANSLUCENT) {
-			//trans = true;
-		//}
+		if (stateLeft.getBlock().getBlockLayer() == BlockRenderLayer.TRANSLUCENT || stateRight.getBlock().getBlockLayer() == BlockRenderLayer.TRANSLUCENT) {
+			trans = true;
+		}
 		
 		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing()).withProperty(TRANSPARENCY, trans);
 	}
@@ -129,9 +129,9 @@ public class RoadBlockDiagonal extends BlockBase {
 		
 		boolean trans = false;
 		
-		//TODO if (stateLeft.getBlock().getBlockLayer() == BlockRenderLayer.TRANSLUCENT || stateRight.getBlock().getBlockLayer() == BlockRenderLayer.TRANSLUCENT) {
-			//trans = true;
-		//}
+		if (stateLeft.getBlock().getBlockLayer() == BlockRenderLayer.TRANSLUCENT || stateRight.getBlock().getBlockLayer() == BlockRenderLayer.TRANSLUCENT) {
+			trans = true;
+		}
 		
 		worldIn.setBlockState(pos, state.withProperty(TRANSPARENCY, trans));
 	}
@@ -619,6 +619,7 @@ public class RoadBlockDiagonal extends BlockBase {
 	}
 
 	@SideOnly(Side.CLIENT)
+	@Override
 	public BlockRenderLayer getBlockLayer() {
 		return BlockRenderLayer.CUTOUT_MIPPED;
 	}
@@ -633,9 +634,15 @@ public class RoadBlockDiagonal extends BlockBase {
 	@SuppressWarnings("deprecation")
 	@Override
 	public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face) {
-		if (world.getBlockState(pos.offset(face)).getBlock().getMaterial(world.getBlockState(pos.offset(face))) == Material.WATER) {
+		Block block = world.getBlockState(pos.offset(face)).getBlock();
+		if (block.getMaterial(world.getBlockState(pos.offset(face))) == Material.WATER) {
 			return true;
 		}
+
+		if (block.getBlockLayer() == BlockRenderLayer.TRANSLUCENT) {
+			return true;
+		}
+
 		return super.doesSideBlockRendering(state, world, pos, face);
 	}
 

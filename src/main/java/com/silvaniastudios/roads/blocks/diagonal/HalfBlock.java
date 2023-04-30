@@ -227,6 +227,11 @@ public class HalfBlock {
 		if (isFluid && this.partnerBlock.isFluid) {
 			return false;
 		}
+
+		if (world.getBlockState(pos).getValue(RoadBlockDiagonal.TRANSPARENCY)) {
+			return true;
+		}
+
 		if (this.height == this.partnerBlock.height && !this.partnerBlock.isFluid) {
 			return false;
 		}
