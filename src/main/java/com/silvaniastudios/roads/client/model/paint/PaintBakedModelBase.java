@@ -147,6 +147,33 @@ public abstract class PaintBakedModelBase implements IBakedModel {
 		return this;
 	}
 
+	protected List<BakedQuad> shapeBuilder(List<Quad> rawQuads, List<BakedQuad> quads, int rotX, int rotY) {
+		for (int i = 0; i < rawQuads.size(); i++) {
+			if (rawQuads.get(i) != null) {
+				rawQuads.set(i, Quad.rotateQuadX(rawQuads.get(i), rotX).rotateQuadY(rawQuads.get(i), rotY));
+			}
+		}
+
+		if (rawQuads.get(0) != null) {
+			rawQuads.get(0).updateUVs(); //Prevent UV rotation on top face
+		}
+
+		if (rawQuads.get(1) != null) {
+			rawQuads.get(1).setFlipV(true); //Flip UVs for bottom face
+			rawQuads.get(1).updateUVs(); //Prevent UV rotation on bottom face
+		}
+
+		for (int i = 0; i < rawQuads.size(); i++) {
+			if (rawQuads.get(i) != null) {
+				BakedQuad baked = rawQuads.get(i).createQuad(0);
+
+				quads.add(baked);
+			}
+		}
+
+		return quads;
+	}
+
 	private static class PaintOverrideList extends ItemOverrideList {
 		private PaintBakedModelBase model;
 

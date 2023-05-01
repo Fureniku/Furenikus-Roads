@@ -39,6 +39,7 @@ import com.silvaniastudios.roads.client.model.diagonal.loaders.Diagonal38ModelLo
 import com.silvaniastudios.roads.client.model.diagonal.loaders.Diagonal48MirrorModelLoader;
 import com.silvaniastudios.roads.client.model.diagonal.loaders.Diagonal48ModelLoader;
 import com.silvaniastudios.roads.client.model.paint.loaders.customs.CustomMetaPaintModel;
+import com.silvaniastudios.roads.client.model.paint.loaders.customs.CustomPaint2x1Model;
 import com.silvaniastudios.roads.client.model.paint.loaders.customs.CustomPaintModel;
 import com.silvaniastudios.roads.client.model.paint.loaders.CustomPaintModelLoader;
 import com.silvaniastudios.roads.client.model.paint.loaders.PaintLoaderBase;
@@ -131,10 +132,20 @@ public class ClientProxy extends CommonProxy {
 		ModelLoaderRegistry.registerLoader(new PaintLoaderBase(new CustomPaintModel(), "", "_wheelchair_icon"));
 		ModelLoaderRegistry.registerLoader(new PaintLoaderBase(new CustomPaintModel(), "", "_chevron"));
 
+		ModelLoaderRegistry.registerLoader(new PaintLoaderBase(new CustomPaint2x1Model(), "", "_pedestrian"));
+		ModelLoaderRegistry.registerLoader(new PaintLoaderBase(new CustomPaint2x1Model(), "", "_merge_arrow"));
+		ModelLoaderRegistry.registerLoader(new PaintLoaderBase(new CustomPaint2x1Model(), "", "_give_way"));
+
+		ModelLoaderRegistry.registerLoader(new PaintLoaderBase(new CustomMetaPaintModel(), "", "_chevron_mid"));
+		ModelLoaderRegistry.registerLoader(new PaintLoaderBase(new CustomMetaPaintModel(), "", "_chevron_mid_left"));
+		ModelLoaderRegistry.registerLoader(new PaintLoaderBase(new CustomMetaPaintModel(), "", "_chevron_mid_right"));
+
 		ModelLoaderRegistry.registerLoader(new PaintLoaderBase(new CustomMetaPaintModel(), "", "_junction_side_line_connection"));
 		ModelLoaderRegistry.registerLoader(new PaintLoaderBase(new CustomMetaPaintModel(), "", "_junction_side_line_connection_thin"));
 		ModelLoaderRegistry.registerLoader(new PaintLoaderBase(new CustomMetaPaintModel(), "", "_junction_side_line_connection_thick_thick"));
 		ModelLoaderRegistry.registerLoader(new PaintLoaderBase(new CustomMetaPaintModel(), "", "_junction_mid_line_connection"));
+		ModelLoaderRegistry.registerLoader(new PaintLoaderBase(new CustomMetaPaintModel(), "", "_junction_a"));
+		ModelLoaderRegistry.registerLoader(new PaintLoaderBase(new CustomMetaPaintModel(), "", "_junction_b"));
 
 		ModelLoaderRegistry.registerLoader(new PaintLoaderBase(new CustomWallPaintModel(), "paint_letter_", "_ab"));
 		ModelLoaderRegistry.registerLoader(new PaintLoaderBase(new CustomWallPaintModel(), "paint_letter_", "_cd"));

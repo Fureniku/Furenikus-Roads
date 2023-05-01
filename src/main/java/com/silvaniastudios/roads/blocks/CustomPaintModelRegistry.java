@@ -15,140 +15,102 @@ public class CustomPaintModelRegistry {
 
     static ArrayList<File> jsonList = new ArrayList<>();
 
-    public PaintGrid wheelchair_icon;
-    public PaintGrid chevron_icon;
+    public PaintGrid wheelchair_icon = importedGrid("wheelchair_icon");
+    public PaintGrid chevron_icon = importedGrid("chevron_icon");
 
-    public PaintGrid letter_a;
-    public PaintGrid letter_b;
-    public PaintGrid letter_c;
-    public PaintGrid letter_d;
-    public PaintGrid letter_e;
-    public PaintGrid letter_f;
-    public PaintGrid letter_g;
-    public PaintGrid letter_h;
-    public PaintGrid letter_i;
-    public PaintGrid letter_j;
-    public PaintGrid letter_k;
-    public PaintGrid letter_l;
-    public PaintGrid letter_m;
-    public PaintGrid letter_n;
-    public PaintGrid letter_o;
-    public PaintGrid letter_p;
-    public PaintGrid letter_q;
-    public PaintGrid letter_r;
-    public PaintGrid letter_s;
-    public PaintGrid letter_t;
-    public PaintGrid letter_u;
-    public PaintGrid letter_v;
-    public PaintGrid letter_w;
-    public PaintGrid letter_x;
-    public PaintGrid letter_y;
-    public PaintGrid letter_z;
+    public PaintGrid pedestrian_low = importedGrid("pedestrian_low");
+    public PaintGrid pedestrian_high = importedGrid("pedestrian_high");
+    public PaintGrid merge_arrow_low = importedGrid("merge_arrow_low");
+    public PaintGrid merge_arrow_high = importedGrid("merge_arrow_high");
+    public PaintGrid give_way_low = importedGrid("give_way_low");
+    public PaintGrid give_way_high = importedGrid("give_way_high");
 
-    public PaintGrid number_0;
-    public PaintGrid number_1;
-    public PaintGrid number_2;
-    public PaintGrid number_3;
-    public PaintGrid number_4;
-    public PaintGrid number_5;
-    public PaintGrid number_6;
-    public PaintGrid number_7;
-    public PaintGrid number_8;
-    public PaintGrid number_9;
+    public PaintGrid junction_in_a = importedGrid("junction_in_a");
+    public PaintGrid junction_in_b = importedGrid("junction_in_b");
+    public PaintGrid junction_out_a = importedGrid("junction_out_a");
+    public PaintGrid junction_out_b = importedGrid("junction_out_b");
+    public PaintGrid junction_mid_a = importedGrid("junction_mid_a");
+    public PaintGrid junction_mid_b = importedGrid("junction_mid_b");
 
-    public PaintGrid punct_question;
-    public PaintGrid punct_exclamation;
-    public PaintGrid punct_hash;
-    public PaintGrid punct_slash;
+    public PaintGrid chevron_mid_1 = importedGrid("chevron_mid_1");
+    public PaintGrid chevron_mid_2 = importedGrid("chevron_mid_2");
+    public PaintGrid chevron_mid_thin_1 = importedGrid("chevron_mid_thin_1");
+    public PaintGrid chevron_mid_thin_2 = importedGrid("chevron_mid_thin_2");
 
-    public PaintGrid junction_side_line_connection_a;
-    public PaintGrid junction_side_line_connection_b;
-    public PaintGrid junction_side_line_connection_c;
-    public PaintGrid junction_side_line_connection_d;
+    public PaintGrid chevron_mid_left_1 = importedGrid("chevron_mid_left_1");
+    public PaintGrid chevron_mid_left_2 = importedGrid("chevron_mid_left_2");
+    public PaintGrid chevron_mid_thin_left_1 = importedGrid("chevron_mid_thin_left_1");
+    public PaintGrid chevron_mid_thin_left_2 = importedGrid("chevron_mid_thin_left_2");
 
-    public PaintGrid junction_side_line_connection_thin_a;
-    public PaintGrid junction_side_line_connection_thin_b;
-    public PaintGrid junction_side_line_connection_thin_c;
-    public PaintGrid junction_side_line_connection_thin_d;
+    public PaintGrid chevron_mid_right_1 = importedGrid("chevron_mid_right_1");
+    public PaintGrid chevron_mid_right_2 = importedGrid("chevron_mid_right_2");
+    public PaintGrid chevron_mid_thin_right_1 = importedGrid("chevron_mid_thin_right_1");
+    public PaintGrid chevron_mid_thin_right_2 = importedGrid("chevron_mid_thin_right_2");
 
-    public PaintGrid junction_side_line_connection_thick_thick_a;
-    public PaintGrid junction_side_line_connection_thick_thick_b;
-    public PaintGrid junction_side_line_connection_thick_thick_c;
-    public PaintGrid junction_side_line_connection_thick_thick_d;
+    public PaintGrid letter_a = importedGrid("letter_a");
+    public PaintGrid letter_b = importedGrid("letter_b");
+    public PaintGrid letter_c = importedGrid("letter_c");
+    public PaintGrid letter_d = importedGrid("letter_d");
+    public PaintGrid letter_e = importedGrid("letter_e");
+    public PaintGrid letter_f = importedGrid("letter_f");
+    public PaintGrid letter_g = importedGrid("letter_g");
+    public PaintGrid letter_h = importedGrid("letter_h");
+    public PaintGrid letter_i = importedGrid("letter_i");
+    public PaintGrid letter_j = importedGrid("letter_j");
+    public PaintGrid letter_k = importedGrid("letter_k");
+    public PaintGrid letter_l = importedGrid("letter_l");
+    public PaintGrid letter_m = importedGrid("letter_m");
+    public PaintGrid letter_n = importedGrid("letter_n");
+    public PaintGrid letter_o = importedGrid("letter_o");
+    public PaintGrid letter_p = importedGrid("letter_p");
+    public PaintGrid letter_q = importedGrid("letter_q");
+    public PaintGrid letter_r = importedGrid("letter_r");
+    public PaintGrid letter_s = importedGrid("letter_s");
+    public PaintGrid letter_t = importedGrid("letter_t");
+    public PaintGrid letter_u = importedGrid("letter_u");
+    public PaintGrid letter_v = importedGrid("letter_v");
+    public PaintGrid letter_w = importedGrid("letter_w");
+    public PaintGrid letter_x = importedGrid("letter_x");
+    public PaintGrid letter_y = importedGrid("letter_y");
+    public PaintGrid letter_z = importedGrid("letter_z");
 
-    public PaintGrid junction_mid_line_connection_a;
-    public PaintGrid junction_mid_line_connection_b;
-    public PaintGrid junction_mid_line_connection_c;
-    public PaintGrid junction_mid_line_connection_d;
+    public PaintGrid number_0 = importedGrid("number_0");
+    public PaintGrid number_1 = importedGrid("number_1");
+    public PaintGrid number_2 = importedGrid("number_2");
+    public PaintGrid number_3 = importedGrid("number_3");
+    public PaintGrid number_4 = importedGrid("number_4");
+    public PaintGrid number_5 = importedGrid("number_5");
+    public PaintGrid number_6 = importedGrid("number_6");
+    public PaintGrid number_7 = importedGrid("number_7");
+    public PaintGrid number_8 = importedGrid("number_8");
+    public PaintGrid number_9 = importedGrid("number_9");
 
-    public CustomPaintModelRegistry() {
-        wheelchair_icon = importedGrid("wheelchair_icon");
-        chevron_icon = importedGrid("chevron_icon");
+    public PaintGrid punct_question = importedGrid("punct_question");
+    public PaintGrid punct_exclamation = importedGrid("punct_exclaim");
+    public PaintGrid punct_hash = importedGrid("punct_hash");
+    public PaintGrid punct_slash = importedGrid("punct_slash");
 
-        letter_a = importedGrid("letter_a");
-        letter_b = importedGrid("letter_b");
-        letter_c = importedGrid("letter_c");
-        letter_d = importedGrid("letter_d");
-        letter_e = importedGrid("letter_e");
-        letter_f = importedGrid("letter_f");
-        letter_g = importedGrid("letter_g");
-        letter_h = importedGrid("letter_h");
-        letter_i = importedGrid("letter_i");
-        letter_j = importedGrid("letter_j");
-        letter_k = importedGrid("letter_k");
-        letter_l = importedGrid("letter_l");
-        letter_m = importedGrid("letter_m");
-        letter_n = importedGrid("letter_n");
-        letter_o = importedGrid("letter_o");
-        letter_p = importedGrid("letter_p");
-        letter_q = importedGrid("letter_q");
-        letter_r = importedGrid("letter_r");
-        letter_s = importedGrid("letter_s");
-        letter_t = importedGrid("letter_t");
-        letter_u = importedGrid("letter_u");
-        letter_v = importedGrid("letter_v");
-        letter_w = importedGrid("letter_w");
-        letter_x = importedGrid("letter_x");
-        letter_y = importedGrid("letter_y");
-        letter_z = importedGrid("letter_z");
+    public PaintGrid junction_side_line_connection_a = importedGrid("junction_side_line_connection_a");
+    public PaintGrid junction_side_line_connection_b = importedGrid("junction_side_line_connection_b");
+    public PaintGrid junction_side_line_connection_c = importedGrid("junction_side_line_connection_c");
+    public PaintGrid junction_side_line_connection_d = importedGrid("junction_side_line_connection_d");
 
-        number_0 = importedGrid("number_0");
-        number_1 = importedGrid("number_1");
-        number_2 = importedGrid("number_2");
-        number_3 = importedGrid("number_3");
-        number_4 = importedGrid("number_4");
-        number_5 = importedGrid("number_5");
-        number_6 = importedGrid("number_6");
-        number_7 = importedGrid("number_7");
-        number_8 = importedGrid("number_8");
-        number_9 = importedGrid("number_9");
+    public PaintGrid junction_side_line_connection_thin_a = importedGrid("junction_side_line_connection_thin_a");
+    public PaintGrid junction_side_line_connection_thin_b = importedGrid("junction_side_line_connection_thin_b");
+    public PaintGrid junction_side_line_connection_thin_c = importedGrid("junction_side_line_connection_thin_c");
+    public PaintGrid junction_side_line_connection_thin_d = importedGrid("junction_side_line_connection_thin_d");
 
-        punct_question = importedGrid("punct_question");
-        punct_exclamation = importedGrid("punct_exclaim");
-        punct_hash = importedGrid("punct_hash");
-        punct_slash = importedGrid("punct_slash");
+    public PaintGrid junction_side_line_connection_thick_thick_a = importedGrid("junction_side_line_connection_thick_thick_a");
+    public PaintGrid junction_side_line_connection_thick_thick_b = importedGrid("junction_side_line_connection_thick_thick_b");
+    public PaintGrid junction_side_line_connection_thick_thick_c = importedGrid("junction_side_line_connection_thick_thick_c");
+    public PaintGrid junction_side_line_connection_thick_thick_d = importedGrid("junction_side_line_connection_thick_thick_d");
 
+    public PaintGrid junction_mid_line_connection_a = importedGrid("junction_mid_line_connection_a");
+    public PaintGrid junction_mid_line_connection_b = importedGrid("junction_mid_line_connection_b");
+    public PaintGrid junction_mid_line_connection_c = importedGrid("junction_mid_line_connection_c");
+    public PaintGrid junction_mid_line_connection_d = importedGrid("junction_mid_line_connection_d");
 
-        junction_side_line_connection_a = importedGrid("junction_side_line_connection_a");
-        junction_side_line_connection_b = importedGrid("junction_side_line_connection_b");
-        junction_side_line_connection_c = importedGrid("junction_side_line_connection_c");
-        junction_side_line_connection_d = importedGrid("junction_side_line_connection_d");
-
-        junction_side_line_connection_thin_a = importedGrid("junction_side_line_connection_thin_a");
-        junction_side_line_connection_thin_b = importedGrid("junction_side_line_connection_thin_b");
-        junction_side_line_connection_thin_c = importedGrid("junction_side_line_connection_thin_c");
-        junction_side_line_connection_thin_d = importedGrid("junction_side_line_connection_thin_d");
-
-        junction_side_line_connection_thick_thick_a = importedGrid("junction_side_line_connection_thick_thick_a");
-        junction_side_line_connection_thick_thick_b = importedGrid("junction_side_line_connection_thick_thick_b");
-        junction_side_line_connection_thick_thick_c = importedGrid("junction_side_line_connection_thick_thick_c");
-        junction_side_line_connection_thick_thick_d = importedGrid("junction_side_line_connection_thick_thick_d");
-
-        junction_mid_line_connection_a = importedGrid("junction_mid_line_connection_a");
-        junction_mid_line_connection_b = importedGrid("junction_mid_line_connection_b");
-        junction_mid_line_connection_c = importedGrid("junction_mid_line_connection_c");
-        junction_mid_line_connection_d = importedGrid("junction_mid_line_connection_d");
-    }
+    public CustomPaintModelRegistry() {}
 
     public static void register(FMLPreInitializationEvent event) {
         FurenikusRoads.debug(0, "Starting to load internal paint files");

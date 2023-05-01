@@ -4,6 +4,7 @@ import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.blocks.PaintColour;
 import com.silvaniastudios.roads.blocks.enums.EnumFourLengthConnectable;
 
+import com.silvaniastudios.roads.blocks.paint.uniques.ChevronIconPaintBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
@@ -275,8 +276,8 @@ public class JunctionFilterLinePaintBlock extends PaintBlockBase {
 			ChevronPaintBlock.EnumJunctionConnections cnct = null;
 			
 			
-			if (stateSide.getBlock() instanceof MultiIconPaintBlock) {
-				MultiIconPaintBlock mipb = (MultiIconPaintBlock) stateSide.getBlock();
+			if (stateSide.getBlock() instanceof ChevronIconPaintBlock) {
+				ChevronIconPaintBlock mipb = (ChevronIconPaintBlock) stateSide.getBlock();
 				int mipbMeta = mipb.getMetaFromState(stateSide);
 				
 				if (mipbMeta < 4) { cnct = ChevronPaintBlock.EnumJunctionConnections.CHEVRON_B;

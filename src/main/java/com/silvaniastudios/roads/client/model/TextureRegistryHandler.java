@@ -122,23 +122,20 @@ public class TextureRegistryHandler {
 		ArrayList<PaintBlockBase> paints = FRBlocks.paintBlockList;
 		ArrayList<String> registry = new ArrayList<>();
 
+		if (FurenikusRoads.genInternalTextures) {
+			FurenikusRoads.debug(0, "Generating internal texture set is enabled. If you're seeing this spammed, and this isn't a dev build, please tell me coz I forgot to turn it off!!");
+			for (int j = 0; j < FRBlocks.genTexturesList.size(); j++) {
+				try {
+					ShapeLibrary.getImageFromGrid(""+j, FRBlocks.genTexturesList.get(j), 0);
+				} catch (IOException e) {
+					throw new RuntimeException(e);
+				}
+			}
+		}
+
 		for (int i = 0; i < paints.size(); i++) {
 			if (paints.get(i) instanceof PaintBlockCustomRenderBase) {
 				PaintBlockCustomRenderBase paint = (PaintBlockCustomRenderBase) paints.get(i);
-				if (paint instanceof CustomPaintBlock && FurenikusRoads.genInternalTextures) {
-					FurenikusRoads.debug(0, "Generating internal texture set is enabled. If you're seeing this spammed, and this isn't a dev build, please tell me coz I forgot to turn it off!!");
-					CustomPaintBlock customPaint = (CustomPaintBlock) paint;
-					if (customPaint.isInternal() && customPaint.getUnlocalizedName().contains("white")) {
-						for (int j = 0; j < customPaint.getCoreMetas().length; j++) {
-							try {
-								ShapeLibrary.getImageFromGrid(getTextureNameFromUnloc(customPaint.getUnlocalizedName()), customPaint.getGrid(j), customPaint.getCoreMetas()[j]);
-							} catch (IOException e) {
-								throw new RuntimeException(e);
-							}
-						}
-
-					}
-				}
 				if (paint.getUnlocalizedName().contains("white")) {
 					for (int j = 0; j < paint.getCoreMetas().length; j++) {
 						registry.add(getTextureNameFromUnloc(paint.getUnlocalizedName()) + "_" + paint.getCoreMetas()[j]);
