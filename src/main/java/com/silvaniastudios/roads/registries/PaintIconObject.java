@@ -26,4 +26,8 @@ public class PaintIconObject {
 		return index;
 	}
 
+	public PaintBlockBase getRecolouredPaint(String col) {
+		return PaintGunItemRegistry.getAlternativeColour(paint, col);
+	}
+
 }

@@ -53,4 +53,23 @@ public class RoadItemBlock extends ItemBlock {
 		
         return super.getItemStackDisplayName(stack);
     }
+
+	public String getUnformattedDisplayName(ItemStack stack) {
+		String unloc = this.getUnlocalizedNameInefficiently(stack);
+
+		if (Block.getBlockFromItem(stack.getItem()) instanceof CustomPaintBlock) {
+			CustomPaintBlock paint = (CustomPaintBlock) Block.getBlockFromItem(stack.getItem());
+			if (!paint.isInternal()) {
+				return paint.getLocalName();
+			}
+		}
+
+		if (Block.getBlockFromItem(stack.getItem()) instanceof IMetaBlockName) {
+			if (unloc.contains("white")) { I18n.translateToLocal(unloc + ".name").trim(); }
+			if (unloc.contains("yellow")) { I18n.translateToLocal(unloc.replace("yellow", "white") + ".name").trim(); }
+			if (unloc.contains("red")) { I18n.translateToLocal(unloc.replace("red", "white") + ".name").trim(); }
+		}
+
+		return super.getItemStackDisplayName(stack);
+	}
 }

@@ -29,7 +29,7 @@ public class LinePaintBlock extends PaintBlockCustomRenderBase {
 	public static final PropertyEnum<LinePaintBlock.EnumRotation> FACING = PropertyEnum.create("facing", LinePaintBlock.EnumRotation.class);
 
 	public LinePaintBlock(String name, String category, PaintColour colour) {
-		super(name, category, new int[] { 0, 2 }, true, colour);
+		super(name, category, new int[] { 0, 2 }, new boolean[] {false, true}, colour);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, LinePaintBlock.EnumRotation.ns));
 		this.setCreativeTab(FurenikusRoads.tab_paint_lines);
 	}

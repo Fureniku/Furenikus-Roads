@@ -1,12 +1,19 @@
 package com.silvaniastudios.roads.client.model;
 
 import java.awt.Color;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import javax.vecmath.Matrix4f;
 
+import com.silvaniastudios.roads.blocks.FRBlocks;
+import com.silvaniastudios.roads.blocks.PaintColour;
+import com.silvaniastudios.roads.blocks.diagonal.ShapeLibrary;
+import com.silvaniastudios.roads.blocks.paint.customs.CustomPaintBlock;
+import com.silvaniastudios.roads.blocks.paint.customs.ICustomBlock;
+import com.silvaniastudios.roads.client.render.Quad;
+import net.minecraft.client.renderer.texture.TextureUtil;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.util.math.Vec3d;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.primitives.Ints;
@@ -32,8 +39,14 @@ import net.minecraft.world.World;
 public class PaintGunModel implements IBakedModel {
 	
 	private IBakedModel mainModel;
+	protected TextureAtlasSprite[] sprites;
 	private final PaintGunOverrideList overrideList;
 	private ItemStack stack;
+	private List<BakedQuad> itemQuadsCache = null;
+
+	//Used to detect selection changes
+	private int selOld;
+	private int pageOld;
 	
 	public static final ModelResourceLocation modelResourceLocation = new ModelResourceLocation(FurenikusRoads.MODID + ":paint_gun", "inventory");
 	
@@ -41,6 +54,10 @@ public class PaintGunModel implements IBakedModel {
 		this.mainModel = mainModel;
 		this.overrideList = new PaintGunOverrideList(this);
 		this.stack = null;
+		sprites = new TextureAtlasSprite[FRBlocks.col.length];
+		for (int i = 0; i < FRBlocks.col.length; i++) {
+			sprites[i] = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(FurenikusRoads.MODID + ":blocks/paint_" + FRBlocks.col[i].getName());
+		}
 	}
 
 	@Override
@@ -62,8 +79,21 @@ public class PaintGunModel implements IBakedModel {
 		
 		int selId = nbt.getInteger("selectedId");
 		int pageId = nbt.getInteger("pageId");
-		
-		combinedQuadList.add(createDisplay(getDisplayTexture(selId, pageId), getColourId(selId, pageId)));
+
+		if (selId != selOld || pageId != pageOld) {
+			itemQuadsCache = null; //Clear cache if selections changed
+			selOld = selId;
+			pageOld = pageId;
+		}
+
+		PaintColour col = PaintColour.getFromName(nbt.getString("colour"));
+		PaintBlockBase block = PaintGunItemRegistry.getSelectedPaint(pageId, selId);
+		if (block instanceof CustomPaintBlock && !((CustomPaintBlock) block).isInternal()) {
+			combinedQuadList.addAll(createCustomDisplay((CustomPaintBlock) block));
+		} else {
+			combinedQuadList.addAll(createDisplay(getDisplayTexture(block, PaintGunItemRegistry.getSelectedPaintMeta(pageId, selId)), col.getColourInt()));
+		}
+
 		
 		return combinedQuadList;
 	}
@@ -79,14 +109,6 @@ public class PaintGunModel implements IBakedModel {
 		float y = x*100;
 		if (y > 100) { return 100; }
 		return y;
-	}
-	
-	private int getColourId(int selection, int pageId) {
-		PaintBlockBase block = PaintGunItemRegistry.getSelectedPaint(pageId, selection);
-		if (block != null) {
-			return block.getColour().getColourInt();
-		}
-		return 0;
 	}
 
 	private List<BakedQuad> getTankFluid(int col, int paintLevel) {
@@ -112,45 +134,52 @@ public class PaintGunModel implements IBakedModel {
 		return list;
 	}
 	
-	private TextureAtlasSprite getDisplayTexture(int selection, int pageId) {
-		PaintBlockBase block = PaintGunItemRegistry.getSelectedPaint(pageId, selection);
-		int meta = PaintGunItemRegistry.getSelectedPaintMeta(pageId, selection);
-		return Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(FurenikusRoads.MODID + ":" + "paints/" + block.getIconName() + "_" + meta);
+	private TextureAtlasSprite getDisplayTexture(PaintBlockBase block, int meta) {
+		return Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(FurenikusRoads.MODID + ":paints/" + block.getIconName() + "_" + meta);
+	}
+
+	public Quad getSpriteQuad(TextureAtlasSprite sprite) {
+		Quad quad = new Quad(
+				new Vec3d(0.3671875F, 0.271875F, 0.621875F), 16f, 0f, //BL
+				new Vec3d(0.2578125F, 0.271875F, 0.621875F), 0f, 0f,//BR
+				new Vec3d(0.2578125F, 0.171875F, 0.66375F), 0f, 16f, //TR
+				new Vec3d(0.3671875F, 0.171875F, 0.66375F), 16f, 16f, //TL
+				sprite, DefaultVertexFormats.ITEM);
+
+		return quad;
 	}
 	
-	private BakedQuad createDisplay(TextureAtlasSprite texture, int col) {
-		float x1, x2, x3, x4;
-		float y1, y2, y3, y4;
-		float z1, z2, z3, z4;
-		int packednormal;
-		
-		//SW
-		x4 = 0.2578125F;
-		y4 = 0.171875F;
-		z4 = 0.66375F;
-		
-		//SE
-		x1 = 0.3671875F;
-		y1 = 0.171875F;
-		z1 = 0.66375F;
-		
-		//NE
-		x2 = 0.3671875F;
-		y2 = 0.271875F;
-		z2 = 0.621875F;
-		
-		//NW
-		x3 = 0.2578125F;
-		y3 = 0.271875F;
-		z3 = 0.621875F;
-		
-		packednormal = calculatePackedNormal(x1, y1, z1,  x2, y2, z2,  x3, y3, z3,  x4, y4, z4);
-		return new BakedQuad(Ints.concat(
-				vertexToInts(0, 1, 1, 0, texture, 16, 16, packednormal),
-				vertexToInts(1, 1, 1, 0, texture, 16, 0, packednormal),
-				vertexToInts(1, 0, 1, 0, texture, 0, 0, packednormal),
-				vertexToInts(0, 0, 1, 0, texture, 0, 16, packednormal)),
-				0, EnumFacing.SOUTH, texture, true, net.minecraft.client.renderer.vertex.DefaultVertexFormats.ITEM);
+	private List<BakedQuad> createDisplay(TextureAtlasSprite texture, int col) {
+		List<BakedQuad> list = new ArrayList<>();
+		list.add(getSpriteQuad(texture).createQuad(col));
+		return list;
+	}
+
+	private List<BakedQuad> createCustomDisplay(CustomPaintBlock paintBlock) {
+		List<Quad> rawQuads;
+		if (itemQuadsCache == null) {
+			int colId = PaintColour.getFromName(stack.getTagCompound().getString("colour")).getId();
+			boolean[][]grid = ((ICustomBlock) paintBlock).getGrid(stack.getItemDamage() < 7 ? 0 : 1).getGrid();
+
+			rawQuads = ShapeLibrary.shapeFromGridFlat(grid, 0.2578125F, 0.3671875F, 0.171875F, 0.271875F, 0.621875F, 0.66375F, sprites[colId]);
+
+			itemQuadsCache = shapeBuilderItem(rawQuads, paintBlock.getColour().getColourInt(), 0, 0);
+		}
+		return itemQuadsCache;
+	}
+
+	protected List<BakedQuad> shapeBuilderItem(List<Quad> rawQuads, int col, int xRot, int yRot) {
+		List<BakedQuad> bakedQuads = new ArrayList<>();
+		for (int i = 0; i < rawQuads.size(); i++) {
+			if (rawQuads.get(i) != null) {
+				rawQuads.set(i, Quad.rotateQuadX(rawQuads.get(i), xRot).rotateQuadY(rawQuads.get(i), yRot));
+				BakedQuad baked = rawQuads.get(i).createQuad(col);
+
+				bakedQuads.add(baked);
+			}
+		}
+
+		return bakedQuads;
 	}
 	
 	private BakedQuad createBakedQuadForFace(float centreLR, float width, float centreUD, float height, float forwardDisplacement, int itemRenderLayer, TextureAtlasSprite texture, EnumFacing face) {

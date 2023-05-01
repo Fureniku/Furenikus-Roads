@@ -65,6 +65,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fluids.BlockFluidClassic;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -75,10 +76,9 @@ import net.minecraftforge.registries.IForgeRegistry;
 public class FRBlocks {
 	
 	public static final PaintColour[] col = {
-			new PaintColour("white", 0, 0),
-			new PaintColour("yellow", Color.YELLOW.getRGB(), 1),
-			new PaintColour("red", Color.RED.getRGB(), 2),
-			//new PaintColour("blue", Color.BLUE.getRGB(), 3)
+			new PaintColour("white", 0, 0, TextFormatting.WHITE),
+			new PaintColour("yellow", Color.YELLOW.getRGB(), 1, TextFormatting.YELLOW),
+			new PaintColour("red", Color.RED.getRGB(), 2, TextFormatting.RED),
 	};
 
 	public static ArrayList<RoadBlock> roadBlockList = new ArrayList<RoadBlock>();

@@ -25,9 +25,12 @@
 
 package com.silvaniastudios.roads.client.gui;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.block.model.IBakedModel;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
@@ -35,10 +38,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.client.config.GuiUtils;
@@ -350,29 +349,39 @@ public abstract class GuiScrollingList_Mod
     protected void drawItemStack(FontRenderer fontRenderer, ItemStack stack, int x, int y) {
 		RenderHelper.disableStandardItemLighting();
 		RenderHelper.enableGUIStandardItemLighting();
-		
+
 		GlStateManager.translate(0.0F, 0.0F, 32.0F);
         client.getRenderItem().renderItemAndEffectIntoGUI(stack, x, y);
-        
+
         GlStateManager.scale(0.5, 0.5, 0.5);
         fontRenderer.drawString("" + stack.getCount(), (x+12)*2, (y+12)*2, 0xFFFFFF);
         GlStateManager.scale(2.0, 2.0, 2.0);
         GlStateManager.translate(0.0F, 0.0F, -32.0F);
-        
+
         RenderHelper.enableStandardItemLighting();
     }
-    
-    protected void drawItemStack(ItemStack stack, int x, int y, float r, float g, float b) {
+
+    protected void drawItemStack(ItemStack stack, int x, int y) {
 		RenderHelper.disableStandardItemLighting();
 		RenderHelper.enableGUIStandardItemLighting();
-		
+
 		GlStateManager.translate(0.0F, 0.0F, 32.0F);
-		GlStateManager.color(0.0f, 0.0f, 0.0f);
-        client.getRenderItem().renderItemAndEffectIntoGUI(stack, x, y);
-        GlStateManager.color(1.0f, 1.0f, 1.0f);
+        client.getRenderItem().renderItemIntoGUI(stack, x, y);
 
         GlStateManager.translate(0.0F, 0.0F, -32.0F);
-        
+
         RenderHelper.enableStandardItemLighting();
+    }
+
+
+    private void renderItemWithCol(ItemStack stack, int x, int y) {
+        Color colorFilter = new Color(255, 0, 0, 128); // red with 50% alpha
+        RenderItem renderItem = client.getRenderItem();
+        IBakedModel model = renderItem.getItemModelWithOverrides(stack, null, null);
+        int color = colorFilter.getRGB() & 0xFFFFFF;
+
+        renderItem.renderQuads(Tessellator.getInstance().getBuffer(), model.getQuads(null, null, 0), color, stack);
+
+        renderItem.renderItemIntoGUI(stack, x, y);
     }
 }

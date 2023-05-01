@@ -2,6 +2,10 @@ package com.silvaniastudios.roads.client.gui.paintgun;
 
 import java.util.ArrayList;
 
+import com.silvaniastudios.roads.blocks.PaintColour;
+import com.silvaniastudios.roads.blocks.paint.PaintBlockBase;
+import com.silvaniastudios.roads.blocks.paint.customs.CustomPaintBlock;
+import com.silvaniastudios.roads.items.RoadItemBlock;
 import org.lwjgl.opengl.GL11;
 
 import com.silvaniastudios.roads.FurenikusRoads;
@@ -78,16 +82,23 @@ public class PaintGunPaintList extends GuiScrollingList_Mod {
 				if (gui.getCategoryId() == gui.getSelectedCategoryId() && gui.getSlotId() == slot+horizontal) {
 					yOffset = 48;
 				}
+
+				PaintIconObject paint = paints.get(slot+horizontal);
+				ItemStack stack = new ItemStack(paint.getPaint(), 1, paint.getMeta());
 				
 				//If we're hovering over it, put a lighter ring around it
 				if (mouseY >= slotTop && mouseY <= (slotTop + this.slotHeight)) {
 					if (mouseX >= left + (horizontal*25) && mouseX <= left + (horizontal*25) + 24) {
 						yOffset += 24;
+
+						if (stack.getItem() instanceof RoadItemBlock) {
+							RoadItemBlock ib = (RoadItemBlock) stack.getItem();
+
+							tooltipList.add(PaintColour.getFromName(gui.getSelectedColour()).getFormat() + ib.getUnformattedDisplayName(stack));
+						}
 					}
 				}
-				
-				PaintIconObject paint = paints.get(slot+horizontal);
-				
+
 				if (paint.getPaint().canConnect(paint.getIndex()) || paint.getPaint() instanceof LargeTextPaintBlock && paint.getMeta() != 0) {
 					gui.drawTexturedModalRect(left + (horizontal*25), slotTop, 24, yOffset, 24, 24);
 				} else {
@@ -101,7 +112,9 @@ public class PaintGunPaintList extends GuiScrollingList_Mod {
 		horizontal = 0;
 		while (horizontal < 5) {
 			if (slot+horizontal < paints.size()) {
-				drawItemStack(new ItemStack(paints.get(slot+horizontal).getPaint(), 1, paints.get(slot+horizontal).getMeta()), left + (horizontal*25) + 4, slotTop + 4, 1.0f, 0.0f, 0.0f);
+				PaintBlockBase paint = gui.getSelectedColour().equals("white") ? paints.get(slot+horizontal).getPaint() : paints.get(slot+horizontal).getRecolouredPaint(gui.getSelectedColour());
+				drawItemStack(new ItemStack(paint, 1, paints.get(slot+horizontal).getMeta()), left + (horizontal*25) + 4, slotTop + 4);
+
 			}
 			horizontal++;
 		}

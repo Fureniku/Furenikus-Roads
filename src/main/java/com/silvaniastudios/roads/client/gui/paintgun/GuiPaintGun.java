@@ -3,6 +3,7 @@ package com.silvaniastudios.roads.client.gui.paintgun;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import net.minecraft.util.text.TextFormatting;
 import org.lwjgl.opengl.GL11;
 
 import com.silvaniastudios.roads.FurenikusRoads;
@@ -40,7 +41,7 @@ public class GuiPaintGun extends GuiScreen {
 	private int currentPageId = 0;
 	private int selectedPageId = 0;
 	private int selectedSlotId = 0;
-	private int selectedColour = 0; //0 = white, 1 = yellow, 2 = red
+	private String selectedColour = "white"; //0 = white, 1 = yellow, 2 = red
 	private boolean isLarge = false;
 	
 	private int gun_white = 0;
@@ -89,7 +90,7 @@ public class GuiPaintGun extends GuiScreen {
 		if (item.getItem() instanceof PaintGun) {
 			if (item.hasTagCompound()) {
 				NBTTagCompound nbt = item.getTagCompound();
-				selectedColour = nbt.getInteger("colour");
+				selectedColour = nbt.getString("colour");
 				currentPageId = nbt.getInteger("pageId");
 				selectedPageId = currentPageId;
 				isLarge = nbt.getBoolean("isLarge");
@@ -117,8 +118,8 @@ public class GuiPaintGun extends GuiScreen {
 	    }
 		
 		whitePaint = new GuiButton(47, guiLeft + 113, guiTop + 171, 42, 20, "White");
-		yellowPaint = new GuiButton(48, guiLeft + 158, guiTop + 171, 43, 20, "Yellow");
-		redPaint = new GuiButton(49, guiLeft + 204, guiTop + 171, 42, 20, "Red");
+		yellowPaint = new GuiButton(48, guiLeft + 158, guiTop + 171, 43, 20, TextFormatting.YELLOW + "Yellow");
+		redPaint = new GuiButton(49, guiLeft + 204, guiTop + 171, 42, 20, TextFormatting.RED + "Red");
 		
 		sizeSmall = new GuiButton(50, guiLeft + 118, guiTop + 140, 60, 20, "Small");
 		sizeLarge = new GuiButton(51, guiLeft + 182, guiTop + 140, 60, 20, "Large");
@@ -138,9 +139,9 @@ public class GuiPaintGun extends GuiScreen {
 	
 	@Override
 	public void updateScreen() {
-		if (selectedColour == 0) { whitePaint.enabled = false; yellowPaint.enabled = true; redPaint.enabled = true; }
-		if (selectedColour == 1) { whitePaint.enabled = true; yellowPaint.enabled = false; redPaint.enabled = true; }
-		if (selectedColour == 2) { whitePaint.enabled = true; yellowPaint.enabled = true; redPaint.enabled = false; }
+		if (selectedColour.equals("white")) { whitePaint.enabled = false; yellowPaint.enabled = true; redPaint.enabled = true; }
+		if (selectedColour.equals("yellow")) { whitePaint.enabled = true; yellowPaint.enabled = false; redPaint.enabled = true; }
+		if (selectedColour.equals("red")) { whitePaint.enabled = true; yellowPaint.enabled = true; redPaint.enabled = false; }
 		
 		sizeSmall.visible = false;
 		sizeLarge.visible = false;
@@ -186,6 +187,10 @@ public class GuiPaintGun extends GuiScreen {
         
         drawTooltip(guiLeft+256, guiTop, mouseX, mouseY);
     }
+
+	public String getSelectedColour() {
+		return selectedColour;
+	}
 	
 	private void drawTooltip(int left, int top, int mouseX, int mouseY) {
 		if (mouseX >= (left)      && mouseX <= (left + 10) && mouseY >= (top + 10) && mouseY <= (top + 60)) { this.drawHoveringText(gun_white  + "/" + PaintFillerEntity.GUN_TANK_CAP, mouseX, mouseY); }
@@ -205,13 +210,11 @@ public class GuiPaintGun extends GuiScreen {
 		return y;
 	}
 	
-	
-	
 	@Override
 	protected void actionPerformed(GuiButton button) {
-		if (button == whitePaint) { selectedColour = 0; }
-		if (button == yellowPaint) { selectedColour = 1; }
-		if (button == redPaint) { selectedColour = 2; }
+		if (button == whitePaint) { selectedColour = "white"; }
+		if (button == yellowPaint) { selectedColour = "yellow"; }
+		if (button == redPaint) { selectedColour = "red"; }
 		
 		if (button == sizeSmall) { isLarge = false; }
 		if (button == sizeLarge) { isLarge = true; }

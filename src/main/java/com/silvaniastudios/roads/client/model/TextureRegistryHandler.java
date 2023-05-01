@@ -161,7 +161,4 @@ public class TextureRegistryHandler {
 	public static String getTextureNameFromUnloc(String unlocalizedName) {
 		return unlocalizedName.replace("white_", "").replace("tile.furenikusroads.", "");
 	}
-
-	public static ArrayList<TextureAtlasSprite> customSprites = new ArrayList<>();
-	public static ArrayList<ResourceLocation> customLocations = new ArrayList<>();
 }

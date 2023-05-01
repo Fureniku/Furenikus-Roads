@@ -7,6 +7,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumHand;
+import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
@@ -16,11 +17,11 @@ public class PaintGunUpdatePacket implements IMessage {
 	public PaintGunUpdatePacket(){}
 	
 	private int selection;
-	private int selectedColour;
+	private String selectedColour;
 	private int pageId;
 	private boolean isLarge;
 	
-	public PaintGunUpdatePacket(int selection, int selectedColour, int pageId, boolean isLarge) {
+	public PaintGunUpdatePacket(int selection, String selectedColour, int pageId, boolean isLarge) {
 		this.selection = selection;
 		this.selectedColour = selectedColour;
 		this.pageId = pageId;
@@ -30,7 +31,7 @@ public class PaintGunUpdatePacket implements IMessage {
 	@Override
 	public void toBytes(ByteBuf buf) {
 		buf.writeInt(selection);
-		buf.writeInt(selectedColour);
+		ByteBufUtils.writeUTF8String(buf, selectedColour);
 		buf.writeInt(pageId);
 		buf.writeBoolean(isLarge);
 	}
@@ -38,7 +39,7 @@ public class PaintGunUpdatePacket implements IMessage {
 	@Override
 	public void fromBytes(ByteBuf buf) {
 		selection = buf.readInt();
-		selectedColour = buf.readInt();
+		selectedColour = ByteBufUtils.readUTF8String(buf);
 		pageId = buf.readInt();
 		isLarge = buf.readBoolean();
 	}
@@ -50,7 +51,7 @@ public class PaintGunUpdatePacket implements IMessage {
 			EntityPlayerMP player = ctx.getServerHandler().player;
 			
 			int selection = message.selection;
-			int selectedColour = message.selectedColour;
+			String selectedColour = message.selectedColour;
 			int pageId = message.pageId;
 			boolean isLarge = message.isLarge;
 			
@@ -66,7 +67,7 @@ public class PaintGunUpdatePacket implements IMessage {
 					}
 					
 					nbt.setInteger("selectedId", selection);
-					nbt.setInteger("colour", selectedColour);
+					nbt.setString("colour", selectedColour);
 					nbt.setInteger("pageId", pageId);
 					nbt.setBoolean("isLarge", isLarge);
 					

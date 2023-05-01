@@ -66,6 +66,7 @@ public class PaintGun extends RoadItemBase {
 				selMeta = nbt.getInteger("selMeta");
 
 				tooltip.add("Selection: " + new ItemStack(selection, 1, selMeta).getDisplayName());
+				tooltip.add("Colour: " + nbt.getString("colour"));
 				tooltip.add(" ");
 				tooltip.add("White level: " + nbt.getInteger("white_paint"));
 				tooltip.add("Yellow level: " + nbt.getInteger("yellow_paint"));
@@ -96,6 +97,7 @@ public class PaintGun extends RoadItemBase {
 			NBTTagCompound nbt = new NBTTagCompound();
 			nbt.setInteger("selectedId", 1);
 			nbt.setInteger("pageId", 1);
+			nbt.setString("colour", "white");
 			nbt.setInteger("white_paint", PaintFillerEntity.GUN_TANK_CAP);
 			nbt.setInteger("yellow_paint", PaintFillerEntity.GUN_TANK_CAP);
 			nbt.setInteger("red_paint", PaintFillerEntity.GUN_TANK_CAP);
@@ -126,23 +128,30 @@ public class PaintGun extends RoadItemBase {
 			red_paint = nbt.getInteger("red_paint");
 		}
 
-		int colourId = nbt.getInteger("colour");
+		String colourId = nbt.getString("colour");
+
+		//Legacy-proof code, ensure safe switching from int to string based colour information:
+		if (colourId.equals("0")) { colourId = "white"; }
+		if (colourId.equals("1")) { colourId = "yellow"; }
+		if (colourId.equals("2")) { colourId = "red"; }
+		nbt.setString("colour", colourId);
+
 		boolean creative = player.isCreative();
 		int cost = RoadsConfig.general.costToPaint;
 
-		if (colourId == 0 && (white_paint >= cost || creative)) {
-			if (selectBlockToPlace(nbt, world, pos, facing, hitX, hitY, hitZ, player, hand, colourId)) { 
-				if (!creative) { white_paint = white_paint - cost; }
-			}
-		}
-		if (colourId == 1 && (yellow_paint >= cost || creative)) {
+		if (colourId.equals("yellow") && (yellow_paint >= cost || creative)) {
 			if (selectBlockToPlace(nbt, world, pos, facing, hitX, hitY, hitZ, player, hand, colourId)) {
 				if (!creative) { yellow_paint = yellow_paint - cost; }
 			}
 		}
-		if (colourId == 2 && (red_paint >= cost || creative)) {
+		if (colourId.equals("red") && (red_paint >= cost || creative)) {
 			if (selectBlockToPlace(nbt, world, pos, facing, hitX, hitY, hitZ, player, hand, colourId)) {
 				if (!creative) { red_paint = red_paint - cost; }
+			}
+		}
+		if (!colourId.equals("yellow") && !colourId.equals("red") && (white_paint >= cost || creative)) { //All other colours will use white paint
+			if (selectBlockToPlace(nbt, world, pos, facing, hitX, hitY, hitZ, player, hand, colourId)) {
+				if (!creative) { white_paint = white_paint - cost; }
 			}
 		}
 
@@ -179,7 +188,7 @@ public class PaintGun extends RoadItemBase {
 		return new ActionResult<ItemStack>(EnumActionResult.PASS, player.getHeldItem(handIn));
 	}
 
-	public boolean selectBlockToPlace(NBTTagCompound nbt, World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, EntityPlayer player, EnumHand hand, int col) {
+	public boolean selectBlockToPlace(NBTTagCompound nbt, World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, EntityPlayer player, EnumHand hand, String col) {
 		/*if (RoadsConfig.general.debugLevel >= 1) {
 			System.out.println("PaintGun#selectBlockToPlace called. Trying to find where it's called from...");
 			StackTraceElement[] ste = Thread.currentThread().getStackTrace();
@@ -207,9 +216,7 @@ public class PaintGun extends RoadItemBase {
 		}
 		
 		if (block != null) {
-			/*TODO if (col == 0) { block = PaintGunItemRegistry.getWhite(block); }
-			if (col == 1) { block = PaintGunItemRegistry.getYellow(block); }
-			if (col == 2) { block = PaintGunItemRegistry.getRed(block); }*/
+			if (!col.equals("white")) { block = PaintGunItemRegistry.getAlternativeColour(block, col); }
 
 			int offsetCount = 0;
 

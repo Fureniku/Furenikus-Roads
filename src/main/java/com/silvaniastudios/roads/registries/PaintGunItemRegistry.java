@@ -3,6 +3,8 @@ package com.silvaniastudios.roads.registries;
 import java.util.ArrayList;
 
 import com.silvaniastudios.roads.blocks.paint.PaintBlockBase;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 public class PaintGunItemRegistry {
 	
@@ -26,6 +28,14 @@ public class PaintGunItemRegistry {
 		categoryList.add(letters);
 		categoryList.add(text);
 		categoryList.add(junctions);
+	}
+
+	public static PaintBlockBase getAlternativeColour(PaintBlockBase paintWhite, String col) {
+		ResourceLocation loc = new ResourceLocation(paintWhite.getRegistryName().toString().replace("white", col));
+		if (ForgeRegistries.BLOCKS.containsKey(loc)) {
+			return (PaintBlockBase) ForgeRegistries.BLOCKS.getValue(loc);
+		}
+		return paintWhite;
 	}
 	
 	public static PaintBlockBase getSelectedPaint(int catId, int selectId) {

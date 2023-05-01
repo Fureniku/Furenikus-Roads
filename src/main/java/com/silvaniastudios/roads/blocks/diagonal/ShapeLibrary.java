@@ -11,6 +11,7 @@ import com.silvaniastudios.roads.blocks.paint.properties.PaintGrid;
 import com.silvaniastudios.roads.client.render.Quad;
 
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.util.math.Vec3d;
 
@@ -34,13 +35,13 @@ public class ShapeLibrary {
 	public static List<Quad> shapeFromGrid(boolean[][] grid, float top, TextureAtlasSprite sprite, VertexFormat format, boolean drawBottom) {
 		return shapeFromGrid(grid, top, sprite, format, drawBottom, 1.0f);
 	}
-	
+
 	public static List<Quad> shapeFromGrid(boolean[][] grid, float top, TextureAtlasSprite sprite, VertexFormat format, boolean drawBottom, float scale) {
 		sprite.setFramesTextureData(null);
 		List<Quad> quads = new ArrayList<>();
 		float p = scale / grid.length;
 		float p2 = scale / 64.0f;
-		
+
 		for (int i = 0; i < grid.length; i++) {
 			for (int j = 0; j < grid[i].length; j++) {
 				if (grid[j][i]) {
@@ -53,7 +54,7 @@ public class ShapeLibrary {
 								new Vec3d(j*p+p, top,    i*p), 0,    0, //TL
 								sprite, format));
 					}
-					
+
 					//east side
 					if (j+1 == grid.length || (j+1 < grid.length && !grid[j+1][i])) {
 						quads.add(new Quad(
@@ -63,7 +64,7 @@ public class ShapeLibrary {
 								new Vec3d(j*p+p, top,    i*p+p),   0,    0, //TL
 								sprite, format));
 					}
-					
+
 					//south side
 					if (i+1 == grid.length || (i+1 < grid.length && !grid[j][i+1])) {
 						quads.add(new Quad(
@@ -73,7 +74,7 @@ public class ShapeLibrary {
 								new Vec3d(j*p,   top,    i*p+p), 0,    0, //TL
 								sprite, format));
 					}
-					
+
 					//west side
 					if (j == 0 || (j-1 >= 0 && !grid[j-1][i])) {
 						quads.add(new Quad(
@@ -83,9 +84,9 @@ public class ShapeLibrary {
 								new Vec3d(j*p, top,    i*p), 0,    0, //TL
 								sprite, format));
 					}
-					
-					
-					
+
+
+
 					quads.add(new Quad( //Top
 							new Vec3d(j*p, top, i*p+p),   //BL
 							new Vec3d(j*p+p, top, i*p+p),     //BR
@@ -104,7 +105,34 @@ public class ShapeLibrary {
 				}
 			}
 		}
-		
+
+		return quads;
+	}
+
+	public static List<Quad> shapeFromGridFlat(boolean[][] grid, float xMin, float xMax, float yMin, float yMax, float zMin, float zMax, TextureAtlasSprite sprite) {
+		sprite.setFramesTextureData(null);
+		List<Quad> quads = new ArrayList<>();
+
+		float deltaX = xMax - xMin;
+		float deltaY = yMax - yMin;
+		float deltaZ = zMax - zMin;
+		float x = deltaX / (grid.length);
+		float y = deltaY / (grid.length);
+		float z = deltaZ / (grid.length);
+
+		for (int i = 0; i < grid.length; i++) {
+			for (int j = 0; j < grid[i].length; j++) {
+				if (grid[j][i]) {
+					quads.add(new Quad(
+							new Vec3d(xMin + x*j + x, yMax - i*y,     zMin + z*i),   //BL
+							new Vec3d(xMin + x*j,     yMax - i*y,     zMin + z*i),     //BR
+							new Vec3d(xMin + x*j,     yMax - i*y - y, zMin + z*i + z), //TR
+							new Vec3d(xMin + x*j + x, yMax - i*y - y, zMin + z*i + z),     //TL
+							sprite, DefaultVertexFormats.ITEM));
+				}
+			}
+		}
+
 		return quads;
 	}
 	
