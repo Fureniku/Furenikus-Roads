@@ -11,6 +11,7 @@ import com.silvaniastudios.roads.blocks.diagonal.ShapeLibrary;
 import com.silvaniastudios.roads.blocks.paint.customs.CustomPaintBlock;
 import com.silvaniastudios.roads.blocks.paint.customs.ICustomBlock;
 import com.silvaniastudios.roads.client.render.Quad;
+import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.math.Vec3d;
@@ -54,9 +55,9 @@ public class PaintGunModel implements IBakedModel {
 		this.mainModel = mainModel;
 		this.overrideList = new PaintGunOverrideList(this);
 		this.stack = null;
-		sprites = new TextureAtlasSprite[FRBlocks.col.length];
-		for (int i = 0; i < FRBlocks.col.length; i++) {
-			sprites[i] = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(FurenikusRoads.MODID + ":blocks/paint_" + FRBlocks.col[i].getName());
+		sprites = new TextureAtlasSprite[FRBlocks.col.size()];
+		for (int i = 0; i < FRBlocks.col.size(); i++) {
+			sprites[i] = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(FurenikusRoads.MODID + ":blocks/paint_" + FRBlocks.col.get(i).getName());
 		}
 	}
 
@@ -88,10 +89,15 @@ public class PaintGunModel implements IBakedModel {
 
 		PaintColour col = PaintColour.getFromName(nbt.getString("colour"));
 		PaintBlockBase block = PaintGunItemRegistry.getSelectedPaint(pageId, selId);
-		if (block instanceof CustomPaintBlock && !((CustomPaintBlock) block).isInternal()) {
-			combinedQuadList.addAll(createCustomDisplay((CustomPaintBlock) block));
+		if (block instanceof CustomPaintBlock) {
+			CustomPaintBlock customBlock = (CustomPaintBlock) block;
+			if (customBlock.isInternal()) {
+				combinedQuadList.addAll(createDisplay(getDisplayTexture(block, PaintGunItemRegistry.getSelectedPaintMeta(pageId, selId)), col.getColourInt()));
+			} else {
+				combinedQuadList.addAll(createCustomDisplay((CustomPaintBlock) block));
+			}
 		} else {
-			combinedQuadList.addAll(createDisplay(getDisplayTexture(block, PaintGunItemRegistry.getSelectedPaintMeta(pageId, selId)), col.getColourInt()));
+			combinedQuadList.addAll(createDisplay(getDisplayTexture(block.getIconName() + "_" + PaintGunItemRegistry.getSelectedPaintMeta(pageId, selId)), col.getColourInt()));
 		}
 
 		
@@ -133,9 +139,13 @@ public class PaintGunModel implements IBakedModel {
 		list.add(createBakedQuadForFace(0.5F, fluidWidth, 0.75F - (col*0.125F) + (fluidWidth/2), fluidWidth, baseHeight + fluidHeight + 0.0585F, 0, texture, EnumFacing.UP));
 		return list;
 	}
-	
+
 	private TextureAtlasSprite getDisplayTexture(PaintBlockBase block, int meta) {
 		return Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(FurenikusRoads.MODID + ":paints/" + block.getIconName() + "_" + meta);
+	}
+
+	private TextureAtlasSprite getDisplayTexture(String name) {
+		return Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(FurenikusRoads.MODID + ":paints/" + name);
 	}
 
 	public Quad getSpriteQuad(TextureAtlasSprite sprite) {
@@ -148,11 +158,18 @@ public class PaintGunModel implements IBakedModel {
 
 		return quad;
 	}
-	
+
 	private List<BakedQuad> createDisplay(TextureAtlasSprite texture, int col) {
 		List<BakedQuad> list = new ArrayList<>();
 		list.add(getSpriteQuad(texture).createQuad(col));
 		return list;
+	}
+
+	private List<BakedQuad> createDisplay(ItemStack stack, int col) {
+		List<BakedQuad> list = new ArrayList<>();
+		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
+		IBakedModel model = renderItem.getItemModelWithOverrides(stack, null, null);
+		return model.getQuads(null, null, 0);
 	}
 
 	private List<BakedQuad> createCustomDisplay(CustomPaintBlock paintBlock) {

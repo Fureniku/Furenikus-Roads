@@ -18,6 +18,10 @@ public class CustomMetaPaintBlock extends CustomPaintBlock {
 
     public static final PropertyEnum<EnumMeta> META_ID = PropertyEnum.create("meta", EnumMeta.class);
 
+    public CustomMetaPaintBlock(String name, String localName, EnumPaintType paintType, PaintGrid[] grids, String category, int[] subBlocks, PaintColour colour) {
+        super(name, localName, paintType, grids, category, subBlocks, colour);
+    }
+
     public CustomMetaPaintBlock(String name, EnumPaintType paintType, PaintGrid[] grids, String category, int[] subBlocks, PaintColour colour, CreativeTabs tab) {
         super(name, paintType, grids, category, subBlocks, colour, tab);
     }

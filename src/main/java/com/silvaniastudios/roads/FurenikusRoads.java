@@ -1,6 +1,7 @@
 package com.silvaniastudios.roads;
 
-import com.silvaniastudios.roads.blocks.CustomPaintModelRegistry;
+import com.silvaniastudios.roads.registries.CustomPaintModelRegistry;
+import com.silvaniastudios.roads.client.TextureRegistryHandler;
 import org.apache.logging.log4j.Logger;
 
 import com.silvaniastudios.roads.blocks.FRBlocks;
@@ -38,6 +39,18 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.JarURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
+
 @Mod(modid=FurenikusRoads.MODID, name="Fureniku's Roads", version=FurenikusRoads.VERSION)
 public class FurenikusRoads {
 	
@@ -54,7 +67,8 @@ public class FurenikusRoads {
     public static final SimpleNetworkWrapper PACKET_CHANNEL = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
 
 	public static final boolean genInternalTextures = false; //Set to true to generate a texture set from internal json paint files.
-    
+	public static final boolean genJsonFromTextures = false; //Set to true to generate a json file from a texture. Create a folder called "conversions" in root dir, put PNGs in there and magic happens.
+
     public static CreativeTabs tab_roads = new CreativeTabs("tab_roads") {
 		@Override
 		public ItemStack getTabIconItem() {
@@ -138,6 +152,10 @@ public class FurenikusRoads {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
+		if (genJsonFromTextures) {
+			TextureRegistryHandler.generateJSONFromTextures();
+		}
+
 		CustomPaintModelRegistry.register(event);
 		DynamicBlockRegistry.register();
 		proxy.preInit();

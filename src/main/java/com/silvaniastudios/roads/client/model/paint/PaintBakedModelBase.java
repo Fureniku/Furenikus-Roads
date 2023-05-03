@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.function.Function;
 
 import com.silvaniastudios.roads.FurenikusRoads;
+import com.silvaniastudios.roads.blocks.FRBlocks;
 import com.silvaniastudios.roads.blocks.diagonal.ShapeLibrary;
 import com.silvaniastudios.roads.blocks.paint.PaintBlockBase;
 import com.silvaniastudios.roads.blocks.paint.customs.CustomPaintBlock;
@@ -49,6 +50,14 @@ public abstract class PaintBakedModelBase implements IBakedModel {
 		stack = null;
 
 		overrideList = new PaintOverrideList(this);
+	}
+
+	protected void populateSprites() {
+		sprites = new TextureAtlasSprite[FRBlocks.col.size()];
+
+		for (int i = 0; i < FRBlocks.col.size(); i++) {
+			sprites[i] = mc.getTextureMapBlocks().getAtlasSprite(FurenikusRoads.MODID + ":blocks/paint_" + FRBlocks.col.get(i).getName());
+		}
 	}
 
 	@Override
@@ -154,14 +163,17 @@ public abstract class PaintBakedModelBase implements IBakedModel {
 			}
 		}
 
-		if (rawQuads.get(0) != null) {
-			rawQuads.get(0).updateUVs(); //Prevent UV rotation on top face
+		if (!rawQuads.isEmpty()) {
+			if (rawQuads.get(0) != null) {
+				rawQuads.get(0).updateUVs(); //Prevent UV rotation on top face
+			}
+
+			if (rawQuads.get(1) != null) {
+				rawQuads.get(1).setFlipV(true); //Flip UVs for bottom face
+				rawQuads.get(1).updateUVs(); //Prevent UV rotation on bottom face
+			}
 		}
 
-		if (rawQuads.get(1) != null) {
-			rawQuads.get(1).setFlipV(true); //Flip UVs for bottom face
-			rawQuads.get(1).updateUVs(); //Prevent UV rotation on bottom face
-		}
 
 		for (int i = 0; i < rawQuads.size(); i++) {
 			if (rawQuads.get(i) != null) {

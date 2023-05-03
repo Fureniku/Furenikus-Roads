@@ -5,6 +5,7 @@ import com.silvaniastudios.roads.blocks.PaintColour;
 import com.silvaniastudios.roads.blocks.enums.EnumConnectJunctionChevron;
 import com.silvaniastudios.roads.blocks.enums.EnumMeta;
 
+import com.silvaniastudios.roads.blocks.paint.customs.Custom1x4PaintBlock;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
@@ -60,10 +61,10 @@ public class ChevronSidePaintBlock extends ChevronMidPaintBlock {
 		IBlockState offsetBlockEast  = world.getBlockState(pos.offset(EnumFacing.EAST));
 		IBlockState offsetBlockSouth = world.getBlockState(pos.offset(EnumFacing.SOUTH));
 		IBlockState offsetBlockWest  = world.getBlockState(pos.offset(EnumFacing.WEST));
-		int offsetMetaNorth = offsetBlockNorth.getBlock() instanceof Connected1x4PaintBlock ? offsetBlockNorth.getBlock().getMetaFromState(offsetBlockNorth) : -1;
-		int offsetMetaEast  = offsetBlockEast.getBlock()  instanceof Connected1x4PaintBlock ? offsetBlockEast.getBlock().getMetaFromState(offsetBlockEast) : -1;
-		int offsetMetaSouth = offsetBlockSouth.getBlock() instanceof Connected1x4PaintBlock ? offsetBlockSouth.getBlock().getMetaFromState(offsetBlockSouth) : -1;
-		int offsetMetaWest  = offsetBlockWest.getBlock()  instanceof Connected1x4PaintBlock ? offsetBlockWest.getBlock().getMetaFromState(offsetBlockWest) : -1;
+		int offsetMetaNorth = offsetBlockNorth.getBlock() instanceof Custom1x4PaintBlock ? offsetBlockNorth.getBlock().getMetaFromState(offsetBlockNorth) : -1;
+		int offsetMetaEast  = offsetBlockEast.getBlock()  instanceof Custom1x4PaintBlock ? offsetBlockEast.getBlock().getMetaFromState(offsetBlockEast) : -1;
+		int offsetMetaSouth = offsetBlockSouth.getBlock() instanceof Custom1x4PaintBlock ? offsetBlockSouth.getBlock().getMetaFromState(offsetBlockSouth) : -1;
+		int offsetMetaWest  = offsetBlockWest.getBlock()  instanceof Custom1x4PaintBlock ? offsetBlockWest.getBlock().getMetaFromState(offsetBlockWest) : -1;
 		
 		
 		if (rootBlockMeta == 4  && offsetMetaWest  == 3  && offsetMetaSouth == 0)  { return EnumConnectJunctionChevron.N_1; }

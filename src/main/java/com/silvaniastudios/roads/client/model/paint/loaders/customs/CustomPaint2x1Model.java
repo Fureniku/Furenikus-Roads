@@ -3,8 +3,10 @@ package com.silvaniastudios.roads.client.model.paint.loaders.customs;
 import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.blocks.FRBlocks;
 import com.silvaniastudios.roads.blocks.diagonal.ShapeLibrary;
+import com.silvaniastudios.roads.blocks.enums.EnumTwoLengthConnectable;
 import com.silvaniastudios.roads.blocks.paint.customs.Custom1x2PaintBlock;
 import com.silvaniastudios.roads.blocks.paint.PaintBlockBase;
+import com.silvaniastudios.roads.blocks.paint.customs.Custom1x4PaintBlock;
 import com.silvaniastudios.roads.blocks.paint.customs.ICustomBlock;
 import com.silvaniastudios.roads.client.model.paint.PaintBakedModelBase;
 import com.silvaniastudios.roads.client.model.paint.PaintModelBase;
@@ -33,11 +35,7 @@ class CustomPaint2x1BakedModel extends PaintBakedModelBase {
 
 	public CustomPaint2x1BakedModel(IModelState state, VertexFormat format, Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
 		super(state, format, bakedTextureGetter);
-		sprites = new TextureAtlasSprite[FRBlocks.col.length];
-
-		for (int i = 0; i < FRBlocks.col.length; i++) {
-			sprites[i] = mc.getTextureMapBlocks().getAtlasSprite(FurenikusRoads.MODID + ":blocks/paint_" + FRBlocks.col[i].getName());
-		}
+		populateSprites();
 	}
 
 	@Override
@@ -49,7 +47,7 @@ class CustomPaint2x1BakedModel extends PaintBakedModelBase {
 			int colId = ((PaintBlockBase) state.getBlock()).getColour().getId();
 
 			TextureAtlasSprite tex = sprites[colId];
-			Custom1x2PaintBlock.Enum1x2Block rotState = state.getValue(Custom1x2PaintBlock.CONNECT);
+			EnumTwoLengthConnectable rotState = state.getValue(Custom1x2PaintBlock.CONNECT);
 
 			int xRot = 0;
 			int yRot = 45;

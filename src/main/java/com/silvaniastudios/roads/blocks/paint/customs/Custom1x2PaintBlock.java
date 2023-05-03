@@ -3,6 +3,7 @@ package com.silvaniastudios.roads.blocks.paint.customs;
 import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.blocks.PaintColour;
 
+import com.silvaniastudios.roads.blocks.enums.EnumTwoLengthConnectable;
 import com.silvaniastudios.roads.blocks.paint.properties.PaintGrid;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
@@ -22,16 +23,19 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class Custom1x2PaintBlock extends CustomPaintBlock {
 	
-	public static final PropertyEnum<Custom1x2PaintBlock.Enum1x2Block> CONNECT = PropertyEnum.create("position_rotation", Custom1x2PaintBlock.Enum1x2Block.class);
+	public static final PropertyEnum<EnumTwoLengthConnectable> CONNECT = PropertyEnum.create("position_rotation", EnumTwoLengthConnectable.class);
 
-	public Custom1x2PaintBlock(String name, String localName, PaintGrid[] grids, String category, PaintColour colour) {
+	private boolean horizontal = false;
+
+	public Custom1x2PaintBlock(String name, String localName, PaintGrid[] grids, String category, PaintColour colour, boolean horizontal) {
 		super(name, localName, EnumPaintType.MULTI_2x1, grids, category, new int[] {0}, colour);
-		this.setDefaultState(this.blockState.getBaseState().withProperty(CONNECT, Custom1x2PaintBlock.Enum1x2Block.n1));
+		this.horizontal = horizontal;
+		this.setDefaultState(this.blockState.getBaseState().withProperty(CONNECT, EnumTwoLengthConnectable.n1));
 	}
 
 	public Custom1x2PaintBlock(String name, PaintGrid[] grids, String category, PaintColour colour) {
 		super(name, EnumPaintType.MULTI_2x1, grids, category, new int[] {0}, colour, FurenikusRoads.tab_paint_icons);
-		this.setDefaultState(this.blockState.getBaseState().withProperty(CONNECT, Custom1x2PaintBlock.Enum1x2Block.n1));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(CONNECT, EnumTwoLengthConnectable.n1));
 	}
 	
 	@Override
@@ -47,6 +51,13 @@ public class Custom1x2PaintBlock extends CustomPaintBlock {
 		IBlockState eastBlock =  world.getBlockState(pos.offset(EnumFacing.EAST));
 		IBlockState southBlock = world.getBlockState(pos.offset(EnumFacing.SOUTH));
 		IBlockState westBlock =  world.getBlockState(pos.offset(EnumFacing.WEST));
+
+		if (horizontal) { //Change the checking directions for horizontal placement
+			southBlock = westBlock;
+			westBlock = northBlock;
+			northBlock = eastBlock;
+			eastBlock = world.getBlockState(pos.offset(EnumFacing.SOUTH));
+		}
 		
 		if (placerFacing.equals(EnumFacing.NORTH)) {
 			if (southBlock.getBlock() instanceof Custom1x2PaintBlock) {
@@ -79,70 +90,21 @@ public class Custom1x2PaintBlock extends CustomPaintBlock {
 				if (getMetaFromState(westBlock) == 7) { returnMeta = 3; }
 			}
 		}
-		return this.getDefaultState().withProperty(CONNECT, Custom1x2PaintBlock.Enum1x2Block.byMetadata(returnMeta));
+		return this.getDefaultState().withProperty(CONNECT, EnumTwoLengthConnectable.byMetadata(returnMeta));
 	}
 	
 	@Override
 	public int getMetaFromState(IBlockState state) {
-		return ((Custom1x2PaintBlock.Enum1x2Block)state.getValue(CONNECT)).getMetadata();
+		return state.getValue(CONNECT).getMetadata();
 	}
 	
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		return this.getDefaultState().withProperty(CONNECT, Custom1x2PaintBlock.Enum1x2Block.byMetadata(meta));
+		return this.getDefaultState().withProperty(CONNECT, EnumTwoLengthConnectable.byMetadata(meta));
 	}
 	
 	@Override
 	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, new IProperty[] {CONNECT});
-	}
-
-	@SideOnly(Side.CLIENT)
-	@Override
-	public void initModel() {
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "inventory"));
-	}
-	
-	public static enum Enum1x2Block implements IStringSerializable {
-		n1(0, "n1"),
-		e1(1, "e1"),
-		s1(2, "s1"),
-		w1(3, "w1"),
-		n2(4, "n2"),
-		e2(5, "e2"),
-		s2(6, "s2"),
-		w2(7, "w2");
-		
-		private static final Enum1x2Block[] META_LOOKUP = new Enum1x2Block[values().length];
-		private final int meta;
-		private final String name;
-		
-		private Enum1x2Block(int meta, String name) {
-			this.meta = meta;
-			this.name = name;
-		}
-
-		@Override
-		public String getName() {
-			return this.name;
-		}
-		
-		public int getMetadata() {
-	        return this.meta;
-	    }
-		
-		public static Enum1x2Block byMetadata(int meta) {
-	        if (meta < 0 || meta >= META_LOOKUP.length) {
-	            meta = 0;
-	        }
-	        
-	        return META_LOOKUP[meta];
-	    }
-		
-		static {
-	        for (Enum1x2Block type: values()) {
-	            META_LOOKUP[type.getMetadata()] = type;
-	        }
-	    }
 	}
 }

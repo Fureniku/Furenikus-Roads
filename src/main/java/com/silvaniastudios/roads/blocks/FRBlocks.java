@@ -24,10 +24,7 @@ import com.silvaniastudios.roads.blocks.decorative.StreetLight;
 import com.silvaniastudios.roads.blocks.decorative.WheelStopBlock;
 import com.silvaniastudios.roads.blocks.diagonal.RoadBlockDiagonal;
 import com.silvaniastudios.roads.blocks.paint.*;
-import com.silvaniastudios.roads.blocks.paint.customs.Custom1x2PaintBlock;
-import com.silvaniastudios.roads.blocks.paint.customs.CustomMetaPaintBlock;
-import com.silvaniastudios.roads.blocks.paint.customs.CustomPaintBlock;
-import com.silvaniastudios.roads.blocks.paint.customs.CustomPaintWallBlock;
+import com.silvaniastudios.roads.blocks.paint.customs.*;
 import com.silvaniastudios.roads.blocks.paint.properties.PaintGrid;
 import com.silvaniastudios.roads.blocks.paint.uniques.ChevronIconPaintBlock;
 import com.silvaniastudios.roads.blocks.paint.uniques.HatchBoxPaintBlock;
@@ -60,6 +57,7 @@ import com.silvaniastudios.roads.blocks.tileentities.tarmaccutter.TarmacCutterEn
 import com.silvaniastudios.roads.fluids.FRFluids;
 import com.silvaniastudios.roads.items.FRItems;
 import com.silvaniastudios.roads.items.RoadItemBlock;
+import com.silvaniastudios.roads.registries.CustomPaintModelRegistry;
 import com.silvaniastudios.roads.registries.DynamicBlockRegistry;
 import com.silvaniastudios.roads.registries.PaintGunItemRegistry;
 
@@ -78,11 +76,14 @@ import net.minecraftforge.registries.IForgeRegistry;
 
 public class FRBlocks {
 	
-	public static final PaintColour[] col = {
-			new PaintColour("white", 0, 0, TextFormatting.WHITE),
-			new PaintColour("yellow", Color.YELLOW.getRGB(), 1, TextFormatting.YELLOW),
-			new PaintColour("red", Color.RED.getRGB(), 2, TextFormatting.RED),
-	};
+	public static ArrayList<PaintColour> col;
+
+	static {
+		col = new ArrayList<>();
+		col.add(new PaintColour("white", 0, 0, TextFormatting.WHITE));
+		col.add(new PaintColour("yellow", Color.YELLOW.getRGB(), 1, TextFormatting.YELLOW));
+		col.add(new PaintColour("red", Color.RED.getRGB(), 2, TextFormatting.RED));
+	}
 
 	public static ArrayList<RoadBlock> roadBlockList = new ArrayList<RoadBlock>();
 	public static ArrayList<RoadBlockDiagonal> roadBlockDiagonalList = new ArrayList<RoadBlockDiagonal>();
@@ -342,127 +343,121 @@ public class FRBlocks {
 		roadBlockList.add(sidewalk_dark);
 		roadBlockList.add(sidewalk_tan);
 
-		for (int i = 0; i < col.length; i++) {
-			paintBlockList.add(new LinePaintBlock("line_" + col[i].getName() + "_straight_full", PaintGunItemRegistry.LINES, col[i]));
-			paintBlockList.add(new LinePaintBlock("line_" + col[i].getName() + "_straight_thick", PaintGunItemRegistry.LINES, col[i]));
-			paintBlockList.add(new LinePaintBlock("line_" + col[i].getName() + "_straight_double", PaintGunItemRegistry.LINES, col[i]));
-			paintBlockList.add(new LinePaintBlock("line_" + col[i].getName() + "_straight_double_thick", PaintGunItemRegistry.LINES, col[i]));
+		for (int i = 0; i < col.size(); i++) {
+			paintBlockList.add(new LinePaintBlock("line_" + col.get(i).getName() + "_straight_full", PaintGunItemRegistry.LINES, col.get(i)));
+			paintBlockList.add(new LinePaintBlock("line_" + col.get(i).getName() + "_straight_thick", PaintGunItemRegistry.LINES, col.get(i)));
+			paintBlockList.add(new LinePaintBlock("line_" + col.get(i).getName() + "_straight_double", PaintGunItemRegistry.LINES, col.get(i)));
+			paintBlockList.add(new LinePaintBlock("line_" + col.get(i).getName() + "_straight_double_thick", PaintGunItemRegistry.LINES, col.get(i)));
 			
-			paintBlockList.add(new SideLinePaintBlock("line_" + col[i].getName() + "_side_double", PaintGunItemRegistry.LINES, col[i]));
-			paintBlockList.add(new SideLinePaintBlock("line_" + col[i].getName() + "_side_double_thick", PaintGunItemRegistry.LINES, col[i]));
-			paintBlockList.add(new SideLinePaintBlock("line_" + col[i].getName() + "_side_single", PaintGunItemRegistry.LINES, col[i]));
-			paintBlockList.add(new SideLinePaintBlock("line_" + col[i].getName() + "_side_single_thick", PaintGunItemRegistry.LINES, col[i]));
+			paintBlockList.add(new SideLinePaintBlock("line_" + col.get(i).getName() + "_side_double", PaintGunItemRegistry.LINES, col.get(i)));
+			paintBlockList.add(new SideLinePaintBlock("line_" + col.get(i).getName() + "_side_double_thick", PaintGunItemRegistry.LINES, col.get(i)));
+			paintBlockList.add(new SideLinePaintBlock("line_" + col.get(i).getName() + "_side_single", PaintGunItemRegistry.LINES, col.get(i)));
+			paintBlockList.add(new SideLinePaintBlock("line_" + col.get(i).getName() + "_side_single_thick", PaintGunItemRegistry.LINES, col.get(i)));
 			
-			paintBlockList.add(new SideLinePaintBlock("line_" + col[i].getName() + "_far_side", PaintGunItemRegistry.LINES, col[i]));
-			paintBlockList.add(new SideLinePaintBlock("line_" + col[i].getName() + "_far_side_thick", PaintGunItemRegistry.LINES, col[i]));
+			paintBlockList.add(new SideLinePaintBlock("line_" + col.get(i).getName() + "_far_side", PaintGunItemRegistry.LINES, col.get(i)));
+			paintBlockList.add(new SideLinePaintBlock("line_" + col.get(i).getName() + "_far_side_thick", PaintGunItemRegistry.LINES, col.get(i)));
 			
-			paintBlockList.add(new SimpleLinePaintBlock("line_" + col[i].getName() + "_middle_half_double", PaintGunItemRegistry.LINES, col[i]));
-			paintBlockList.add(new SimpleLinePaintBlock("line_" + col[i].getName() + "_middle_dash_double", PaintGunItemRegistry.LINES,col[i]));
-			paintBlockList.add(new SimpleLinePaintBlock("line_" + col[i].getName() + "_middle_short", PaintGunItemRegistry.LINES, col[i]));
-			paintBlockList.add(new SimpleLinePaintBlock("line_" + col[i].getName() + "_filter_lane", PaintGunItemRegistry.LINES,  col[i]));
-			paintBlockList.add(new SimpleLinePaintBlock("line_" + col[i].getName() + "_side_short", PaintGunItemRegistry.LINES, col[i]));
-			paintBlockList.add(new SimpleLinePaintBlock("line_" + col[i].getName() + "_thin_crossing", PaintGunItemRegistry.LINES,  col[i]));
+			paintBlockList.add(new SimpleLinePaintBlock("line_" + col.get(i).getName() + "_middle_half_double", PaintGunItemRegistry.LINES, col.get(i)));
+			paintBlockList.add(new SimpleLinePaintBlock("line_" + col.get(i).getName() + "_middle_dash_double", PaintGunItemRegistry.LINES,col.get(i)));
+			paintBlockList.add(new SimpleLinePaintBlock("line_" + col.get(i).getName() + "_middle_short", PaintGunItemRegistry.LINES, col.get(i)));
+			paintBlockList.add(new SimpleLinePaintBlock("line_" + col.get(i).getName() + "_filter_lane", PaintGunItemRegistry.LINES,  col.get(i)));
+			paintBlockList.add(new SimpleLinePaintBlock("line_" + col.get(i).getName() + "_side_short", PaintGunItemRegistry.LINES, col.get(i)));
+			paintBlockList.add(new SimpleLinePaintBlock("line_" + col.get(i).getName() + "_thin_crossing", PaintGunItemRegistry.LINES,  col.get(i)));
 
-			paintBlockList.add(new CustomPaintBlock(col[i].getName() + "_wheelchair_icon", CustomPaintBlock.EnumPaintType.ICON_1x1, new PaintGrid[] {paintRegistry.wheelchair_icon}, PaintGunItemRegistry.ICONS, new int[] {0}, col[i], FurenikusRoads.tab_paint_icons));
-			paintBlockList.add(new CustomPaintBlock(col[i].getName() + "_chevron", CustomPaintBlock.EnumPaintType.ICON_1x1, new PaintGrid[] {paintRegistry.chevron_icon}, PaintGunItemRegistry.ICONS, new int[] {0}, col[i], FurenikusRoads.tab_paint_icons));
+			paintBlockList.add(new CustomPaintBlock(col.get(i).getName() + "_wheelchair_icon", CustomPaintBlock.EnumPaintType.ICON_1x1, new PaintGrid[] {paintRegistry.wheelchair_icon}, PaintGunItemRegistry.ICONS, new int[] {0}, col.get(i), FurenikusRoads.tab_paint_icons));
+			paintBlockList.add(new CustomPaintBlock(col.get(i).getName() + "_chevron", CustomPaintBlock.EnumPaintType.ICON_1x1, new PaintGrid[] {paintRegistry.chevron_icon}, PaintGunItemRegistry.ICONS, new int[] {0}, col.get(i), FurenikusRoads.tab_paint_icons));
 			
-			paintBlockList.add(new Custom1x2PaintBlock(col[i].getName() + "_pedestrian", new PaintGrid[] {paintRegistry.pedestrian_low, paintRegistry.pedestrian_high}, PaintGunItemRegistry.ICONS, col[i]));
-			paintBlockList.add(new Custom1x2PaintBlock(col[i].getName() + "_merge_arrow", new PaintGrid[] {paintRegistry.merge_arrow_low, paintRegistry.merge_arrow_high}, PaintGunItemRegistry.ICONS, col[i]));
-			paintBlockList.add(new Custom1x2PaintBlock(col[i].getName() + "_give_way", new PaintGrid[] {paintRegistry.give_way_low, paintRegistry.give_way_high}, PaintGunItemRegistry.ICONS, col[i]));
+			paintBlockList.add(new Custom1x2PaintBlock(col.get(i).getName() + "_pedestrian", new PaintGrid[] {paintRegistry.pedestrian_low, paintRegistry.pedestrian_high}, PaintGunItemRegistry.ICONS, col.get(i)));
+			paintBlockList.add(new Custom1x2PaintBlock(col.get(i).getName() + "_merge_arrow", new PaintGrid[] {paintRegistry.merge_arrow_low, paintRegistry.merge_arrow_high}, PaintGunItemRegistry.ICONS, col.get(i)));
+			paintBlockList.add(new Custom1x2PaintBlock(col.get(i).getName() + "_give_way", new PaintGrid[] {paintRegistry.give_way_low, paintRegistry.give_way_high}, PaintGunItemRegistry.ICONS, col.get(i)));
+
+			//TODO Skipping
+			paintBlockList.add(new JunctionFilterLinePaintBlock(col.get(i).getName() + "_junction_filter_left", true, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true, col.get(i)));
+			paintBlockList.add(new JunctionFilterLinePaintBlock(col.get(i).getName() + "_junction_filter_left_thin", true, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true, col.get(i)));
+			paintBlockList.add(new JunctionFilterLinePaintBlock(col.get(i).getName() + "_junction_filter_left_empty", true, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true, col.get(i)));
+			paintBlockList.add(new JunctionFilterLinePaintBlock(col.get(i).getName() + "_junction_filter_right", false, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true, col.get(i)));
+			paintBlockList.add(new JunctionFilterLinePaintBlock(col.get(i).getName() + "_junction_filter_right_thin", false, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true, col.get(i)));
+			paintBlockList.add(new JunctionFilterLinePaintBlock(col.get(i).getName() + "_junction_filter_right_empty", false, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true, col.get(i)));
+
+			paintBlockList.add(new Custom1x4PaintBlock(col.get(i).getName() + "_junction_fork_mid", new PaintGrid[]{paintRegistry.junction_mid_1, paintRegistry.junction_mid_2, paintRegistry.junction_mid_3, paintRegistry.empty}, PaintGunItemRegistry.JUNCTIONS, col.get(i), false));
+			paintBlockList.add(new Custom1x4PaintBlock(col.get(i).getName() + "_junction_fork_mid_thin", new PaintGrid[]{paintRegistry.junction_mid_thin_1, paintRegistry.junction_mid_thin_2, paintRegistry.junction_mid_thin_3, paintRegistry.empty}, PaintGunItemRegistry.JUNCTIONS, col.get(i), false));
+			paintBlockList.add(new Custom1x4PaintBlock(col.get(i).getName() + "_junction_fork_chevron_mid", new PaintGrid[]{paintRegistry.junction_mid_1, paintRegistry.junction_mid_chevron_2, paintRegistry.junction_mid_chevron_3, paintRegistry.junction_mid_chevron_4}, PaintGunItemRegistry.JUNCTIONS, col.get(i), false));
+			paintBlockList.add(new Custom1x4PaintBlock(col.get(i).getName() + "_junction_fork_chevron_mid_thin", new PaintGrid[]{paintRegistry.junction_mid_thin_1, paintRegistry.junction_mid_thin_2, paintRegistry.junction_mid_chevron_thin_3, paintRegistry.chevron_mid_thin_1}, PaintGunItemRegistry.JUNCTIONS, col.get(i), false));
+
+			//TODO Skipping
+			paintBlockList.add(new ChevronPaintBlock(col.get(i).getName() + "_chevron_left_a", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_A, true, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true, col.get(i)));
+			paintBlockList.add(new ChevronPaintBlock(col.get(i).getName() + "_chevron_left_b", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_B, false, PaintGunItemRegistry.JUNCTIONS, null, true, col.get(i)));
+			paintBlockList.add(new ChevronPaintBlock(col.get(i).getName() + "_chevron_left_a_thin", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_THIN_A, true, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true, col.get(i)));
+			paintBlockList.add(new ChevronPaintBlock(col.get(i).getName() + "_chevron_left_b_thin", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_THIN_B, false, PaintGunItemRegistry.JUNCTIONS, null, true, col.get(i)));
+			paintBlockList.add(new ChevronPaintBlock(col.get(i).getName() + "_chevron_right_a", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_A, true, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true, col.get(i)));
+			paintBlockList.add(new ChevronPaintBlock(col.get(i).getName() + "_chevron_right_b", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_B, false, PaintGunItemRegistry.JUNCTIONS, null, true, col.get(i)));
+			paintBlockList.add(new ChevronPaintBlock(col.get(i).getName() + "_chevron_right_a_thin", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_THIN_A, true, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true, col.get(i)));
+			paintBlockList.add(new ChevronPaintBlock(col.get(i).getName() + "_chevron_right_b_thin", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_THIN_B, false, PaintGunItemRegistry.JUNCTIONS, null, true, col.get(i)));
+			
+			paintBlockList.add(new CustomMetaPaintBlock(col.get(i).getName() + "_junction_side_line_connection", CustomPaintBlock.EnumPaintType.ICON_1x1, new PaintGrid[] {paintRegistry.junction_side_line_connection_a, paintRegistry.junction_side_line_connection_b, paintRegistry.junction_side_line_connection_c, paintRegistry.junction_side_line_connection_d}, PaintGunItemRegistry.JUNCTIONS, new int[] {0, 4, 8, 12}, col.get(i), FurenikusRoads.tab_paint_junction));
+			paintBlockList.add(new CustomMetaPaintBlock(col.get(i).getName() + "_junction_side_line_connection_thin", CustomPaintBlock.EnumPaintType.ICON_1x1, new PaintGrid[] {paintRegistry.junction_side_line_connection_thin_a, paintRegistry.junction_side_line_connection_thin_b, paintRegistry.junction_side_line_connection_thin_c, paintRegistry.junction_side_line_connection_thin_d}, PaintGunItemRegistry.JUNCTIONS, new int[] {0, 4, 8, 12}, col.get(i), FurenikusRoads.tab_paint_junction));
+			paintBlockList.add(new CustomMetaPaintBlock(col.get(i).getName() + "_junction_side_line_connection_thick_thick", CustomPaintBlock.EnumPaintType.ICON_1x1, new PaintGrid[] {paintRegistry.junction_side_line_connection_thick_thick_a, paintRegistry.junction_side_line_connection_thick_thick_b, paintRegistry.junction_side_line_connection_thick_thick_c, paintRegistry.junction_side_line_connection_thick_thick_d}, PaintGunItemRegistry.JUNCTIONS, new int[] {0, 4, 8, 12}, col.get(i), FurenikusRoads.tab_paint_junction));
+			paintBlockList.add(new CustomMetaPaintBlock(col.get(i).getName() + "_junction_mid_line_connection", CustomPaintBlock.EnumPaintType.ICON_1x1, new PaintGrid[] {paintRegistry.junction_mid_line_connection_a, paintRegistry.junction_mid_line_connection_b, paintRegistry.junction_mid_line_connection_c, paintRegistry.junction_mid_line_connection_d}, PaintGunItemRegistry.JUNCTIONS, new int[] {0, 4, 8, 12}, col.get(i), FurenikusRoads.tab_paint_junction));
+			paintBlockList.add(new CustomMetaPaintBlock(col.get(i).getName() + "_junction_a", CustomPaintBlock.EnumPaintType.ICON_1x1, new PaintGrid[] {paintRegistry.junction_in_a, paintRegistry.junction_out_b, paintRegistry.junction_mid_a}, PaintGunItemRegistry.ICONS, new int[] {0, 4, 8}, col.get(i), FurenikusRoads.tab_paint_junction));
+			paintBlockList.add(new CustomMetaPaintBlock(col.get(i).getName() + "_junction_b", CustomPaintBlock.EnumPaintType.ICON_1x1, new PaintGrid[] {paintRegistry.junction_in_b, paintRegistry.junction_out_a, paintRegistry.junction_mid_b}, PaintGunItemRegistry.ICONS, new int[] {0, 4, 8}, col.get(i), FurenikusRoads.tab_paint_junction));
+
+			paintBlockList.add(new ChevronIconPaintBlock(col.get(i).getName() + "_chevron_mid", new PaintGrid[] {paintRegistry.chevron_mid_1, paintRegistry.chevron_mid_2, paintRegistry.chevron_mid_thin_1, paintRegistry.chevron_mid_thin_2}, PaintGunItemRegistry.JUNCTIONS, col.get(i)));
+			paintBlockList.add(new ChevronIconPaintBlock(col.get(i).getName() + "_chevron_mid_left", new PaintGrid[] {paintRegistry.chevron_mid_left_1, paintRegistry.chevron_mid_left_2, paintRegistry.chevron_mid_thin_left_1, paintRegistry.chevron_mid_thin_left_2}, PaintGunItemRegistry.JUNCTIONS, col.get(i)));
+			paintBlockList.add(new ChevronIconPaintBlock(col.get(i).getName() + "_chevron_mid_right", new PaintGrid[] {paintRegistry.chevron_mid_right_1, paintRegistry.chevron_mid_right_2, paintRegistry.chevron_mid_thin_right_1, paintRegistry.chevron_mid_thin_right_2}, PaintGunItemRegistry.JUNCTIONS, col.get(i)));
+
+			//TODO skipping
+			paintBlockList.add(new ChevronSideLinePaintBlock(col.get(i).getName() + "_chevron_side_line", PaintGunItemRegistry.JUNCTIONS, new int[] {0}, false, col.get(i)));
 
 			//TODO
-			paintBlockList.add(new JunctionFilterLinePaintBlock(col[i].getName() + "_junction_filter_left", true, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true, col[i]));
-			paintBlockList.add(new JunctionFilterLinePaintBlock(col[i].getName() + "_junction_filter_left_thin", true, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true, col[i]));
-			paintBlockList.add(new JunctionFilterLinePaintBlock(col[i].getName() + "_junction_filter_left_empty", true, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true, col[i]));
-			paintBlockList.add(new JunctionFilterLinePaintBlock(col[i].getName() + "_junction_filter_right", false, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true, col[i]));
-			paintBlockList.add(new JunctionFilterLinePaintBlock(col[i].getName() + "_junction_filter_right_thin", false, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true, col[i]));
-			paintBlockList.add(new JunctionFilterLinePaintBlock(col[i].getName() + "_junction_filter_right_empty", false, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true, col[i]));
+			paintBlockList.add(new LargeTextPaintBlock(col.get(i).getName() + "_slow",      new PaintGrid[]{paintRegistry.text_slow_small, paintRegistry.text_slow_l, paintRegistry.text_slow_m, paintRegistry.text_slow_r}, PaintGunItemRegistry.TEXT, col.get(i)));
+			paintBlockList.add(new LargeTextPaintBlock(col.get(i).getName() + "_stop",      new PaintGrid[]{paintRegistry.text_stop_small, paintRegistry.text_stop_l, paintRegistry.text_stop_m, paintRegistry.text_stop_r}, PaintGunItemRegistry.TEXT, col.get(i)));
+			paintBlockList.add(new LargeTextPaintBlock(col.get(i).getName() + "_bike",      new PaintGrid[]{paintRegistry.text_bike_small, paintRegistry.text_bike_l, paintRegistry.text_bike_m, paintRegistry.text_bike_r}, PaintGunItemRegistry.TEXT, col.get(i)));
+			paintBlockList.add(new LargeTextPaintBlock(col.get(i).getName() + "_bus",       new PaintGrid[]{paintRegistry.text_bus_small, paintRegistry.text_bus_l, paintRegistry.text_bus_m, paintRegistry.text_bus_r}, PaintGunItemRegistry.TEXT, col.get(i)));
+			paintBlockList.add(new LargeTextPaintBlock(col.get(i).getName() + "_taxi",      new PaintGrid[]{paintRegistry.text_taxi_small, paintRegistry.text_taxi_l, paintRegistry.text_taxi_m, paintRegistry.text_taxi_r}, PaintGunItemRegistry.TEXT, col.get(i)));
+			paintBlockList.add(new LargeTextPaintBlock(col.get(i).getName() + "_lane",      new PaintGrid[]{paintRegistry.text_lane_small, paintRegistry.text_lane_l, paintRegistry.text_lane_m, paintRegistry.text_lane_r}, PaintGunItemRegistry.TEXT, col.get(i)));
+			paintBlockList.add(new LargeTextPaintBlock(col.get(i).getName() + "_keep",      new PaintGrid[]{paintRegistry.text_keep_small, paintRegistry.text_keep_l, paintRegistry.text_keep_m, paintRegistry.text_keep_r}, PaintGunItemRegistry.TEXT, col.get(i)));
+			paintBlockList.add(new LargeTextPaintBlock(col.get(i).getName() + "_clear",     new PaintGrid[]{paintRegistry.text_clear_small, paintRegistry.text_clear_l, paintRegistry.text_clear_m, paintRegistry.text_clear_r}, PaintGunItemRegistry.TEXT, col.get(i)));
+			paintBlockList.add(new LargeTextPaintBlock(col.get(i).getName() + "_turn",      new PaintGrid[]{paintRegistry.text_turn_small, paintRegistry.text_turn_l, paintRegistry.text_turn_m, paintRegistry.text_turn_r}, PaintGunItemRegistry.TEXT, col.get(i)));
+			paintBlockList.add(new LargeTextPaintBlock(col.get(i).getName() + "_left",      new PaintGrid[]{paintRegistry.text_left_small, paintRegistry.text_left_l, paintRegistry.text_left_m, paintRegistry.text_left_r}, PaintGunItemRegistry.TEXT, col.get(i)));
+			paintBlockList.add(new LargeTextPaintBlock(col.get(i).getName() + "_right",     new PaintGrid[]{paintRegistry.text_right_small, paintRegistry.text_right_l, paintRegistry.text_right_m, paintRegistry.text_right_r}, PaintGunItemRegistry.TEXT, col.get(i)));
+			paintBlockList.add(new LargeTextPaintBlock(col.get(i).getName() + "_only",      new PaintGrid[]{paintRegistry.text_only_small, paintRegistry.text_only_l, paintRegistry.text_only_m, paintRegistry.text_only_r}, PaintGunItemRegistry.TEXT, col.get(i)));
+			paintBlockList.add(new LargeTextPaintBlock(col.get(i).getName() + "_no",        new PaintGrid[]{paintRegistry.text_no_small, paintRegistry.text_no_l, paintRegistry.text_no_m, paintRegistry.text_no_r}, PaintGunItemRegistry.TEXT, col.get(i)));
+			paintBlockList.add(new LargeTextPaintBlock(col.get(i).getName() + "_entry",     new PaintGrid[]{paintRegistry.text_entry_small, paintRegistry.text_entry_l, paintRegistry.text_entry_m, paintRegistry.text_entry_r}, PaintGunItemRegistry.TEXT, col.get(i)));
+			paintBlockList.add(new LargeTextPaintBlock(col.get(i).getName() + "_bike_icon", new PaintGrid[]{paintRegistry.text_bike_icon_small, paintRegistry.text_bike_icon_l, paintRegistry.text_bike_icon_m, paintRegistry.text_bike_icon_r}, PaintGunItemRegistry.TEXT, col.get(i)));
+			paintBlockList.add(new LargeTextPaintBlock(col.get(i).getName() + "_town",      new PaintGrid[]{paintRegistry.text_town_small, paintRegistry.text_town_l, paintRegistry.text_town_m, paintRegistry.text_town_r}, PaintGunItemRegistry.TEXT, col.get(i)));
+			paintBlockList.add(new LargeTextPaintBlock(col.get(i).getName() + "_city",      new PaintGrid[]{paintRegistry.text_city_small, paintRegistry.text_city_l, paintRegistry.text_city_m, paintRegistry.text_city_r}, PaintGunItemRegistry.TEXT, col.get(i)));
+			paintBlockList.add(new LargeTextPaintBlock(col.get(i).getName() + "_ctre",      new PaintGrid[]{paintRegistry.text_ctre_small, paintRegistry.text_ctre_l, paintRegistry.text_ctre_m, paintRegistry.text_ctre_r}, PaintGunItemRegistry.TEXT, col.get(i)));
 
-			//TODO
-			paintBlockList.add(new Connected1x4PaintBlock(col[i].getName() + "_junction_fork_mid", false, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true, col[i]));
-			paintBlockList.add(new Connected1x4PaintBlock(col[i].getName() + "_junction_fork_mid_thin", false, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true, col[i]));
-			paintBlockList.add(new Connected1x4PaintBlock(col[i].getName() + "_junction_fork_chevron_mid", false, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true, col[i]));
-			paintBlockList.add(new Connected1x4PaintBlock(col[i].getName() + "_junction_fork_chevron_mid_thin", false, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true, col[i]));
+			paintBlockList.add(new CustomPaintWallBlock("paint_letter_" + col.get(i).getName() + "_ab", new PaintGrid[]{paintRegistry.letter_a, paintRegistry.letter_b}, PaintGunItemRegistry.LETTERS, new int[] {0, 8}, col.get(i), FurenikusRoads.tab_paint_letters));
+			paintBlockList.add(new CustomPaintWallBlock("paint_letter_" + col.get(i).getName() + "_cd", new PaintGrid[]{paintRegistry.letter_c, paintRegistry.letter_d}, PaintGunItemRegistry.LETTERS, new int[] {0, 8}, col.get(i), FurenikusRoads.tab_paint_letters));
+			paintBlockList.add(new CustomPaintWallBlock("paint_letter_" + col.get(i).getName() + "_ef", new PaintGrid[]{paintRegistry.letter_e, paintRegistry.letter_f}, PaintGunItemRegistry.LETTERS, new int[] {0, 8}, col.get(i), FurenikusRoads.tab_paint_letters));
+			paintBlockList.add(new CustomPaintWallBlock("paint_letter_" + col.get(i).getName() + "_gh", new PaintGrid[]{paintRegistry.letter_g, paintRegistry.letter_h}, PaintGunItemRegistry.LETTERS, new int[] {0, 8}, col.get(i), FurenikusRoads.tab_paint_letters));
+			paintBlockList.add(new CustomPaintWallBlock("paint_letter_" + col.get(i).getName() + "_ij", new PaintGrid[]{paintRegistry.letter_i, paintRegistry.letter_j}, PaintGunItemRegistry.LETTERS, new int[] {0, 8}, col.get(i), FurenikusRoads.tab_paint_letters));
+			paintBlockList.add(new CustomPaintWallBlock("paint_letter_" + col.get(i).getName() + "_kl", new PaintGrid[]{paintRegistry.letter_k, paintRegistry.letter_l}, PaintGunItemRegistry.LETTERS, new int[] {0, 8}, col.get(i), FurenikusRoads.tab_paint_letters));
+			paintBlockList.add(new CustomPaintWallBlock("paint_letter_" + col.get(i).getName() + "_mn", new PaintGrid[]{paintRegistry.letter_m, paintRegistry.letter_n}, PaintGunItemRegistry.LETTERS, new int[] {0, 8}, col.get(i), FurenikusRoads.tab_paint_letters));
+			paintBlockList.add(new CustomPaintWallBlock("paint_letter_" + col.get(i).getName() + "_op", new PaintGrid[]{paintRegistry.letter_o, paintRegistry.letter_p}, PaintGunItemRegistry.LETTERS, new int[] {0, 8}, col.get(i), FurenikusRoads.tab_paint_letters));
+			paintBlockList.add(new CustomPaintWallBlock("paint_letter_" + col.get(i).getName() + "_qr", new PaintGrid[]{paintRegistry.letter_q, paintRegistry.letter_r}, PaintGunItemRegistry.LETTERS, new int[] {0, 8}, col.get(i), FurenikusRoads.tab_paint_letters));
+			paintBlockList.add(new CustomPaintWallBlock("paint_letter_" + col.get(i).getName() + "_st", new PaintGrid[]{paintRegistry.letter_s, paintRegistry.letter_t}, PaintGunItemRegistry.LETTERS, new int[] {0, 8}, col.get(i), FurenikusRoads.tab_paint_letters));
+			paintBlockList.add(new CustomPaintWallBlock("paint_letter_" + col.get(i).getName() + "_uv", new PaintGrid[]{paintRegistry.letter_u, paintRegistry.letter_v}, PaintGunItemRegistry.LETTERS, new int[] {0, 8}, col.get(i), FurenikusRoads.tab_paint_letters));
+			paintBlockList.add(new CustomPaintWallBlock("paint_letter_" + col.get(i).getName() + "_wx", new PaintGrid[]{paintRegistry.letter_w, paintRegistry.letter_x}, PaintGunItemRegistry.LETTERS, new int[] {0, 8}, col.get(i), FurenikusRoads.tab_paint_letters));
+			paintBlockList.add(new CustomPaintWallBlock("paint_letter_" + col.get(i).getName() + "_yz", new PaintGrid[]{paintRegistry.letter_y, paintRegistry.letter_z}, PaintGunItemRegistry.LETTERS, new int[] {0, 8}, col.get(i), FurenikusRoads.tab_paint_letters));
 
-			//TODO
-			paintBlockList.add(new ChevronPaintBlock(col[i].getName() + "_chevron_left_a", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_A, true, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true, col[i]));
-			paintBlockList.add(new ChevronPaintBlock(col[i].getName() + "_chevron_left_b", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_B, false, PaintGunItemRegistry.JUNCTIONS, null, true, col[i]));
-			paintBlockList.add(new ChevronPaintBlock(col[i].getName() + "_chevron_left_a_thin", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_THIN_A, true, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true, col[i]));
-			paintBlockList.add(new ChevronPaintBlock(col[i].getName() + "_chevron_left_b_thin", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_THIN_B, false, PaintGunItemRegistry.JUNCTIONS, null, true, col[i]));
-			paintBlockList.add(new ChevronPaintBlock(col[i].getName() + "_chevron_right_a", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_A, true, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true, col[i]));
-			paintBlockList.add(new ChevronPaintBlock(col[i].getName() + "_chevron_right_b", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_B, false, PaintGunItemRegistry.JUNCTIONS, null, true, col[i]));
-			paintBlockList.add(new ChevronPaintBlock(col[i].getName() + "_chevron_right_a_thin", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_THIN_A, true, PaintGunItemRegistry.JUNCTIONS, new int[] {0}, true, col[i]));
-			paintBlockList.add(new ChevronPaintBlock(col[i].getName() + "_chevron_right_b_thin", ChevronPaintBlock.EnumJunctionConnections.CHEVRON_THIN_B, false, PaintGunItemRegistry.JUNCTIONS, null, true, col[i]));
+			paintBlockList.add(new CustomPaintWallBlock("paint_letter_" + col.get(i).getName() + "_01", new PaintGrid[]{paintRegistry.number_0, paintRegistry.number_1}, PaintGunItemRegistry.LETTERS, new int[] {0, 8}, col.get(i), FurenikusRoads.tab_paint_letters));
+			paintBlockList.add(new CustomPaintWallBlock("paint_letter_" + col.get(i).getName() + "_23", new PaintGrid[]{paintRegistry.number_2, paintRegistry.number_3}, PaintGunItemRegistry.LETTERS, new int[] {0, 8}, col.get(i), FurenikusRoads.tab_paint_letters));
+			paintBlockList.add(new CustomPaintWallBlock("paint_letter_" + col.get(i).getName() + "_45", new PaintGrid[]{paintRegistry.number_4, paintRegistry.number_5}, PaintGunItemRegistry.LETTERS, new int[] {0, 8}, col.get(i), FurenikusRoads.tab_paint_letters));
+			paintBlockList.add(new CustomPaintWallBlock("paint_letter_" + col.get(i).getName() + "_67", new PaintGrid[]{paintRegistry.number_6, paintRegistry.number_7}, PaintGunItemRegistry.LETTERS, new int[] {0, 8}, col.get(i), FurenikusRoads.tab_paint_letters));
+			paintBlockList.add(new CustomPaintWallBlock("paint_letter_" + col.get(i).getName() + "_89", new PaintGrid[]{paintRegistry.number_8, paintRegistry.number_9}, PaintGunItemRegistry.LETTERS, new int[] {0, 8}, col.get(i), FurenikusRoads.tab_paint_letters));
+
+			paintBlockList.add(new CustomPaintWallBlock("paint_letter_" + col.get(i).getName() + "_punct_question_exclamation", new PaintGrid[]{paintRegistry.punct_question, paintRegistry.punct_exclamation}, PaintGunItemRegistry.LETTERS, new int[] {0, 8}, col.get(i), FurenikusRoads.tab_paint_letters));
+			paintBlockList.add(new CustomPaintWallBlock("paint_letter_" + col.get(i).getName() + "_punct_hash_slash", new PaintGrid[]{paintRegistry.punct_hash, paintRegistry.punct_slash}, PaintGunItemRegistry.LETTERS, new int[] {0, 8}, col.get(i), FurenikusRoads.tab_paint_letters));
 			
-			paintBlockList.add(new CustomMetaPaintBlock(col[i].getName() + "_junction_side_line_connection", CustomPaintBlock.EnumPaintType.ICON_1x1, new PaintGrid[] {paintRegistry.junction_side_line_connection_a, paintRegistry.junction_side_line_connection_b, paintRegistry.junction_side_line_connection_c, paintRegistry.junction_side_line_connection_d}, PaintGunItemRegistry.JUNCTIONS, new int[] {0, 4, 8, 12}, col[i], FurenikusRoads.tab_paint_junction));
-			paintBlockList.add(new CustomMetaPaintBlock(col[i].getName() + "_junction_side_line_connection_thin", CustomPaintBlock.EnumPaintType.ICON_1x1, new PaintGrid[] {paintRegistry.junction_side_line_connection_thin_a, paintRegistry.junction_side_line_connection_thin_b, paintRegistry.junction_side_line_connection_thin_c, paintRegistry.junction_side_line_connection_thin_d}, PaintGunItemRegistry.JUNCTIONS, new int[] {0, 4, 8, 12}, col[i], FurenikusRoads.tab_paint_junction));
-			paintBlockList.add(new CustomMetaPaintBlock(col[i].getName() + "_junction_side_line_connection_thick_thick", CustomPaintBlock.EnumPaintType.ICON_1x1, new PaintGrid[] {paintRegistry.junction_side_line_connection_thick_thick_a, paintRegistry.junction_side_line_connection_thick_thick_b, paintRegistry.junction_side_line_connection_thick_thick_c, paintRegistry.junction_side_line_connection_thick_thick_d}, PaintGunItemRegistry.JUNCTIONS, new int[] {0, 4, 8, 12}, col[i], FurenikusRoads.tab_paint_junction));
-			paintBlockList.add(new CustomMetaPaintBlock(col[i].getName() + "_junction_mid_line_connection", CustomPaintBlock.EnumPaintType.ICON_1x1, new PaintGrid[] {paintRegistry.junction_mid_line_connection_a, paintRegistry.junction_mid_line_connection_b, paintRegistry.junction_mid_line_connection_c, paintRegistry.junction_mid_line_connection_d}, PaintGunItemRegistry.JUNCTIONS, new int[] {0, 4, 8, 12}, col[i], FurenikusRoads.tab_paint_junction));
-			paintBlockList.add(new CustomMetaPaintBlock(col[i].getName() + "_junction_a", CustomPaintBlock.EnumPaintType.ICON_1x1, new PaintGrid[] {paintRegistry.junction_in_a, paintRegistry.junction_out_b, paintRegistry.junction_mid_a}, PaintGunItemRegistry.ICONS, new int[] {0, 4, 8}, col[i], FurenikusRoads.tab_paint_junction));
-			paintBlockList.add(new CustomMetaPaintBlock(col[i].getName() + "_junction_b", CustomPaintBlock.EnumPaintType.ICON_1x1, new PaintGrid[] {paintRegistry.junction_in_b, paintRegistry.junction_out_a, paintRegistry.junction_mid_b}, PaintGunItemRegistry.ICONS, new int[] {0, 4, 8}, col[i], FurenikusRoads.tab_paint_junction));
-
-			paintBlockList.add(new ChevronIconPaintBlock(col[i].getName() + "_chevron_mid", new PaintGrid[] {paintRegistry.chevron_mid_1, paintRegistry.chevron_mid_2, paintRegistry.chevron_mid_thin_1, paintRegistry.chevron_mid_thin_2}, PaintGunItemRegistry.JUNCTIONS, col[i]));
-			paintBlockList.add(new ChevronIconPaintBlock(col[i].getName() + "_chevron_mid_left", new PaintGrid[] {paintRegistry.chevron_mid_left_1, paintRegistry.chevron_mid_left_2, paintRegistry.chevron_mid_thin_left_1, paintRegistry.chevron_mid_thin_left_2}, PaintGunItemRegistry.JUNCTIONS, col[i]));
-			paintBlockList.add(new ChevronIconPaintBlock(col[i].getName() + "_chevron_mid_right", new PaintGrid[] {paintRegistry.chevron_mid_right_1, paintRegistry.chevron_mid_right_2, paintRegistry.chevron_mid_thin_right_1, paintRegistry.chevron_mid_thin_right_2}, PaintGunItemRegistry.JUNCTIONS, col[i]));
-
-			genTexturesList.add(paintRegistry.chevron_mid_1);
-			genTexturesList.add(paintRegistry.chevron_mid_thin_1);
-			genTexturesList.add(paintRegistry.chevron_mid_left_1);
-			genTexturesList.add(paintRegistry.chevron_mid_thin_left_1);
-			genTexturesList.add(paintRegistry.chevron_mid_right_1);
-			genTexturesList.add(paintRegistry.chevron_mid_thin_right_1);
-
-			paintBlockList.add(new ChevronSideLinePaintBlock(col[i].getName() + "_chevron_side_line", PaintGunItemRegistry.JUNCTIONS, new int[] {0}, false, col[i]));
+			paintBlockList.add(new HatchBoxPaintBlock("hatch_box_" + col.get(i).getName(), PaintGunItemRegistry.ICONS, new int[] {0}, true, col.get(i)));
+			paintBlockList.add(new Custom1x4PaintBlock("line_" + col.get(i).getName() + "_crossing_diagonal", new PaintGrid[]{paintRegistry.crossing_diagonal_1, paintRegistry.crossing_diagonal_2, paintRegistry.crossing_diagonal_3, paintRegistry.crossing_diagonal_4}, PaintGunItemRegistry.ICONS, col.get(i), true));
+			paintBlockList.add(new CrossingPaintBlock(col.get(i).getName() + "_crossing_paint", PaintGunItemRegistry.ICONS, new int[] {0}, true, col.get(i)));
 			
-			paintBlockList.add(new LargeTextPaintBlock(col[i].getName() + "_slow", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false, col[i]));
-			paintBlockList.add(new LargeTextPaintBlock(col[i].getName() + "_stop", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false, col[i]));
-			paintBlockList.add(new LargeTextPaintBlock(col[i].getName() + "_bike", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false, col[i]));
-			paintBlockList.add(new LargeTextPaintBlock(col[i].getName() + "_bus", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false, col[i]));
-			paintBlockList.add(new LargeTextPaintBlock(col[i].getName() + "_taxi", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false, col[i]));
-			paintBlockList.add(new LargeTextPaintBlock(col[i].getName() + "_lane", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false, col[i]));
-			paintBlockList.add(new LargeTextPaintBlock(col[i].getName() + "_keep", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false, col[i]));
-			paintBlockList.add(new LargeTextPaintBlock(col[i].getName() + "_clear", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false, col[i]));
-			paintBlockList.add(new LargeTextPaintBlock(col[i].getName() + "_turn", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false, col[i]));
-			paintBlockList.add(new LargeTextPaintBlock(col[i].getName() + "_left", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false, col[i]));
-			paintBlockList.add(new LargeTextPaintBlock(col[i].getName() + "_right", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false, col[i]));
-			paintBlockList.add(new LargeTextPaintBlock(col[i].getName() + "_only", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false, col[i]));
-			paintBlockList.add(new LargeTextPaintBlock(col[i].getName() + "_no", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false, col[i]));
-			paintBlockList.add(new LargeTextPaintBlock(col[i].getName() + "_entry", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false, col[i]));
-			paintBlockList.add(new LargeTextPaintBlock(col[i].getName() + "_bike_icon", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false, col[i]));
-			paintBlockList.add(new LargeTextPaintBlock(col[i].getName() + "_town", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false, col[i]));
-			paintBlockList.add(new LargeTextPaintBlock(col[i].getName() + "_city", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false, col[i]));
-			paintBlockList.add(new LargeTextPaintBlock(col[i].getName() + "_ctre", PaintGunItemRegistry.TEXT, new int[] {0, 4}, false, col[i]));
-
-			paintBlockList.add(new CustomPaintWallBlock("paint_letter_" + col[i].getName() + "_ab", new PaintGrid[]{paintRegistry.letter_a, paintRegistry.letter_b}, PaintGunItemRegistry.LETTERS, new int[] {0, 8}, col[i], FurenikusRoads.tab_paint_letters));
-			paintBlockList.add(new CustomPaintWallBlock("paint_letter_" + col[i].getName() + "_cd", new PaintGrid[]{paintRegistry.letter_c, paintRegistry.letter_d}, PaintGunItemRegistry.LETTERS, new int[] {0, 8}, col[i], FurenikusRoads.tab_paint_letters));
-			paintBlockList.add(new CustomPaintWallBlock("paint_letter_" + col[i].getName() + "_ef", new PaintGrid[]{paintRegistry.letter_e, paintRegistry.letter_f}, PaintGunItemRegistry.LETTERS, new int[] {0, 8}, col[i], FurenikusRoads.tab_paint_letters));
-			paintBlockList.add(new CustomPaintWallBlock("paint_letter_" + col[i].getName() + "_gh", new PaintGrid[]{paintRegistry.letter_g, paintRegistry.letter_h}, PaintGunItemRegistry.LETTERS, new int[] {0, 8}, col[i], FurenikusRoads.tab_paint_letters));
-			paintBlockList.add(new CustomPaintWallBlock("paint_letter_" + col[i].getName() + "_ij", new PaintGrid[]{paintRegistry.letter_i, paintRegistry.letter_j}, PaintGunItemRegistry.LETTERS, new int[] {0, 8}, col[i], FurenikusRoads.tab_paint_letters));
-			paintBlockList.add(new CustomPaintWallBlock("paint_letter_" + col[i].getName() + "_kl", new PaintGrid[]{paintRegistry.letter_k, paintRegistry.letter_l}, PaintGunItemRegistry.LETTERS, new int[] {0, 8}, col[i], FurenikusRoads.tab_paint_letters));
-			paintBlockList.add(new CustomPaintWallBlock("paint_letter_" + col[i].getName() + "_mn", new PaintGrid[]{paintRegistry.letter_m, paintRegistry.letter_n}, PaintGunItemRegistry.LETTERS, new int[] {0, 8}, col[i], FurenikusRoads.tab_paint_letters));
-			paintBlockList.add(new CustomPaintWallBlock("paint_letter_" + col[i].getName() + "_op", new PaintGrid[]{paintRegistry.letter_o, paintRegistry.letter_p}, PaintGunItemRegistry.LETTERS, new int[] {0, 8}, col[i], FurenikusRoads.tab_paint_letters));
-			paintBlockList.add(new CustomPaintWallBlock("paint_letter_" + col[i].getName() + "_qr", new PaintGrid[]{paintRegistry.letter_q, paintRegistry.letter_r}, PaintGunItemRegistry.LETTERS, new int[] {0, 8}, col[i], FurenikusRoads.tab_paint_letters));
-			paintBlockList.add(new CustomPaintWallBlock("paint_letter_" + col[i].getName() + "_st", new PaintGrid[]{paintRegistry.letter_s, paintRegistry.letter_t}, PaintGunItemRegistry.LETTERS, new int[] {0, 8}, col[i], FurenikusRoads.tab_paint_letters));
-			paintBlockList.add(new CustomPaintWallBlock("paint_letter_" + col[i].getName() + "_uv", new PaintGrid[]{paintRegistry.letter_u, paintRegistry.letter_v}, PaintGunItemRegistry.LETTERS, new int[] {0, 8}, col[i], FurenikusRoads.tab_paint_letters));
-			paintBlockList.add(new CustomPaintWallBlock("paint_letter_" + col[i].getName() + "_wx", new PaintGrid[]{paintRegistry.letter_w, paintRegistry.letter_x}, PaintGunItemRegistry.LETTERS, new int[] {0, 8}, col[i], FurenikusRoads.tab_paint_letters));
-			paintBlockList.add(new CustomPaintWallBlock("paint_letter_" + col[i].getName() + "_yz", new PaintGrid[]{paintRegistry.letter_y, paintRegistry.letter_z}, PaintGunItemRegistry.LETTERS, new int[] {0, 8}, col[i], FurenikusRoads.tab_paint_letters));
-
-			paintBlockList.add(new CustomPaintWallBlock("paint_letter_" + col[i].getName() + "_01", new PaintGrid[]{paintRegistry.number_0, paintRegistry.number_1}, PaintGunItemRegistry.LETTERS, new int[] {0, 8}, col[i], FurenikusRoads.tab_paint_letters));
-			paintBlockList.add(new CustomPaintWallBlock("paint_letter_" + col[i].getName() + "_23", new PaintGrid[]{paintRegistry.number_2, paintRegistry.number_3}, PaintGunItemRegistry.LETTERS, new int[] {0, 8}, col[i], FurenikusRoads.tab_paint_letters));
-			paintBlockList.add(new CustomPaintWallBlock("paint_letter_" + col[i].getName() + "_45", new PaintGrid[]{paintRegistry.number_4, paintRegistry.number_5}, PaintGunItemRegistry.LETTERS, new int[] {0, 8}, col[i], FurenikusRoads.tab_paint_letters));
-			paintBlockList.add(new CustomPaintWallBlock("paint_letter_" + col[i].getName() + "_67", new PaintGrid[]{paintRegistry.number_6, paintRegistry.number_7}, PaintGunItemRegistry.LETTERS, new int[] {0, 8}, col[i], FurenikusRoads.tab_paint_letters));
-			paintBlockList.add(new CustomPaintWallBlock("paint_letter_" + col[i].getName() + "_89", new PaintGrid[]{paintRegistry.number_8, paintRegistry.number_9}, PaintGunItemRegistry.LETTERS, new int[] {0, 8}, col[i], FurenikusRoads.tab_paint_letters));
-
-			paintBlockList.add(new CustomPaintWallBlock("paint_letter_" + col[i].getName() + "_punct_question_exclamation", new PaintGrid[]{paintRegistry.punct_question, paintRegistry.punct_exclamation}, PaintGunItemRegistry.LETTERS, new int[] {0, 8}, col[i], FurenikusRoads.tab_paint_letters));
-			paintBlockList.add(new CustomPaintWallBlock("paint_letter_" + col[i].getName() + "_punct_hash_slash", new PaintGrid[]{paintRegistry.punct_hash, paintRegistry.punct_slash}, PaintGunItemRegistry.LETTERS, new int[] {0, 8}, col[i], FurenikusRoads.tab_paint_letters));
-			
-			paintBlockList.add(new HatchBoxPaintBlock("hatch_box_" + col[i].getName(), PaintGunItemRegistry.ICONS, new int[] {0}, true, col[i]));
-			paintBlockList.add(new Connected1x4PaintBlock("line_" + col[i].getName() + "_crossing_diagonal", true, PaintGunItemRegistry.ICONS, new int[] {0}, true, col[i]));
-			paintBlockList.add(new CrossingPaintBlock(col[i].getName() + "_crossing_paint", PaintGunItemRegistry.ICONS, new int[] {0}, true, col[i]));
-			
-			paintBlockList.add(new ArrowPaintBlock(col[i].getName() + "_arrow", PaintGunItemRegistry.ICONS, new int[] {0, 4}, true, col[i]));
-			paintBlockList.add(new ArrowLinePaintBlock(col[i].getName() + "_arrow_line", PaintGunItemRegistry.ICONS, new int[] {0}, true, col[i]));
-			paintBlockList.add(new ArrowDiagonalPaintBlock(col[i].getName() + "_arrow_diagonal", PaintGunItemRegistry.ICONS, new int[] {0, 4}, true, col[i]));
+			paintBlockList.add(new ArrowPaintBlock(col.get(i).getName() + "_arrow", PaintGunItemRegistry.ICONS, new int[] {0, 4}, true, col.get(i)));
+			paintBlockList.add(new ArrowLinePaintBlock(col.get(i).getName() + "_arrow_line", PaintGunItemRegistry.ICONS, new int[] {0}, true, col.get(i)));
+			paintBlockList.add(new ArrowDiagonalPaintBlock(col.get(i).getName() + "_arrow_diagonal", PaintGunItemRegistry.ICONS, new int[] {0, 4}, true, col.get(i)));
 			
 
 		}
@@ -756,7 +751,10 @@ public class FRBlocks {
 			PaintBlockBase block = DynamicBlockRegistry.customPaints.get(i);
 			
 			if (block.getUnlocalizedName().contains("white")) {
-				PaintGunItemRegistry.registerPaint(block);
+				for (int j = 0; j < block.getCoreMetas().length; j++) {
+					PaintGunItemRegistry.registerPaint(block, block.getCoreMetas()[j], j);
+					count++;
+				}
 				count++;
 			}
 		}

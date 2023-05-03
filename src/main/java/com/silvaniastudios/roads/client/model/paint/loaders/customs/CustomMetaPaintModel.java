@@ -35,11 +35,7 @@ class CustomMetaPaintBakedModel extends PaintBakedModelBase {
 
     public CustomMetaPaintBakedModel(IModelState state, VertexFormat format, Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
         super(state, format, bakedTextureGetter);
-        sprites = new TextureAtlasSprite[FRBlocks.col.length];
-
-        for (int i = 0; i < FRBlocks.col.length; i++) {
-            sprites[i] = mc.getTextureMapBlocks().getAtlasSprite(FurenikusRoads.MODID + ":blocks/paint_" + FRBlocks.col[i].getName());
-        }
+        populateSprites();
     }
 
     @Override
@@ -51,9 +47,16 @@ class CustomMetaPaintBakedModel extends PaintBakedModelBase {
             CustomMetaPaintBlock block = (CustomMetaPaintBlock) state.getBlock();
             int colId = block.getColour().getId();
             EnumMeta meta = state.getValue(CustomMetaPaintBlock.META_ID);
-            boolean[][] grid = getGrid(meta.getMetadata(), block).getGrid();
-
             TextureAtlasSprite tex = sprites[colId];
+
+            if (getGrid(meta.getMetadata(), block) == null) {
+                FurenikusRoads.debug(0, "Failed to load paint grid for " + block.getLocalName() + " and meta " + meta.getMetadata());
+                rawQuads = ShapeLibrary.shapeFromGrid(PaintGrid.EMPTY.getGrid(), 0.015625f, tex, format, false);
+                quads = shapeBuilder(rawQuads, new ArrayList<>(), 0, 0);
+                return quads;
+            }
+
+            boolean[][] grid = getGrid(meta.getMetadata(), block).getGrid();
 
             int xRot = 0;
             int yRot = meta.getRotation();
@@ -69,41 +72,15 @@ class CustomMetaPaintBakedModel extends PaintBakedModelBase {
 
     private PaintGrid getGrid(int meta, CustomMetaPaintBlock block) {
         int gridId = 0;
+        int[] metas = new int[] {0, 4, 8, 12};
 
-        for (int i = 0; i < block.getCoreMetas().length; i++) {
-            if (meta >= block.getCoreMetas()[i]) {
+        for (int i = 0; i < metas.length; i++) {
+            if (meta >= metas[i]) {
                 gridId = i;
             }
         }
 
         return block.getGrid(gridId);
-    }
-
-    protected List<BakedQuad> shapeBuilder(List<Quad> rawQuads, List<BakedQuad> quads, int rotX, int rotY) {
-        for (int i = 0; i < rawQuads.size(); i++) {
-            if (rawQuads.get(i) != null) {
-                rawQuads.set(i, Quad.rotateQuadX(rawQuads.get(i), rotX).rotateQuadY(rawQuads.get(i), rotY));
-            }
-        }
-
-        if (rawQuads.get(0) != null) {
-            rawQuads.get(0).updateUVs(); //Prevent UV rotation on top face
-        }
-
-        if (rawQuads.get(1) != null) {
-            rawQuads.get(1).setFlipV(true); //Flip UVs for bottom face
-            rawQuads.get(1).updateUVs(); //Prevent UV rotation on bottom face
-        }
-
-        for (int i = 0; i < rawQuads.size(); i++) {
-            if (rawQuads.get(i) != null) {
-                BakedQuad baked = rawQuads.get(i).createQuad(0);
-
-                quads.add(baked);
-            }
-        }
-
-        return quads;
     }
 
     protected List<BakedQuad> shapeBuilderItem(List<Quad> rawQuads, List<BakedQuad> quads, int col, int yRot) {

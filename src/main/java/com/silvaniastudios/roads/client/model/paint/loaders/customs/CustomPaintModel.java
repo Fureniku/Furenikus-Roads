@@ -35,11 +35,7 @@ class CustomPaintBakedModel extends PaintBakedModelBase {
 
 	public CustomPaintBakedModel(IModelState state, VertexFormat format, Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
 		super(state, format, bakedTextureGetter);
-		sprites = new TextureAtlasSprite[FRBlocks.col.length];
-
-		for (int i = 0; i < FRBlocks.col.length; i++) {
-			sprites[i] = mc.getTextureMapBlocks().getAtlasSprite(FurenikusRoads.MODID + ":blocks/paint_" + FRBlocks.col[i].getName());
-		}
+		populateSprites();
 	}
 
 	@Override

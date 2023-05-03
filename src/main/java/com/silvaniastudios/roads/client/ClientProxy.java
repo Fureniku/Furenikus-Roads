@@ -21,7 +21,6 @@ import com.silvaniastudios.roads.client.model.PaintOvenRenderer;
 import com.silvaniastudios.roads.client.model.RoadFactoryRenderer;
 import com.silvaniastudios.roads.client.model.TarDistillerRenderer;
 import com.silvaniastudios.roads.client.model.TarmacCutterRenderer;
-import com.silvaniastudios.roads.client.model.TextureRegistryHandler;
 import com.silvaniastudios.roads.client.model.diagonal.loaders.Diagonal11MirrorModelLoader;
 import com.silvaniastudios.roads.client.model.diagonal.loaders.Diagonal11ModelLoader;
 import com.silvaniastudios.roads.client.model.diagonal.loaders.Diagonal12MirrorModelLoader;
@@ -38,12 +37,9 @@ import com.silvaniastudios.roads.client.model.diagonal.loaders.Diagonal38MirrorM
 import com.silvaniastudios.roads.client.model.diagonal.loaders.Diagonal38ModelLoader;
 import com.silvaniastudios.roads.client.model.diagonal.loaders.Diagonal48MirrorModelLoader;
 import com.silvaniastudios.roads.client.model.diagonal.loaders.Diagonal48ModelLoader;
-import com.silvaniastudios.roads.client.model.paint.loaders.customs.CustomMetaPaintModel;
-import com.silvaniastudios.roads.client.model.paint.loaders.customs.CustomPaint2x1Model;
-import com.silvaniastudios.roads.client.model.paint.loaders.customs.CustomPaintModel;
+import com.silvaniastudios.roads.client.model.paint.loaders.customs.*;
 import com.silvaniastudios.roads.client.model.paint.loaders.CustomPaintModelLoader;
 import com.silvaniastudios.roads.client.model.paint.loaders.PaintLoaderBase;
-import com.silvaniastudios.roads.client.model.paint.loaders.customs.CustomWallPaintModel;
 import com.silvaniastudios.roads.client.model.paint.loaders.lines.*;
 
 import com.silvaniastudios.roads.registries.DynamicBlockRegistry;
@@ -97,13 +93,17 @@ public class ClientProxy extends CommonProxy {
 				case WALL_ICON_1x1:
 					ModelLoaderRegistry.registerLoader(new CustomPaintModelLoader(name, new CustomWallPaintModel()));
 					break;
-				case MULTI_2x1: //TODO and below
+				case MULTI_2x1:
+					ModelLoaderRegistry.registerLoader(new CustomPaintModelLoader(name, new CustomPaint2x1Model()));
 					break;
 				case MULTI_3x1:
+					ModelLoaderRegistry.registerLoader(new CustomPaintModelLoader(name, new CustomPaint3x1Model()));
 					break;
 				case MULTI_4x1:
+					ModelLoaderRegistry.registerLoader(new CustomPaintModelLoader(name, new CustomPaint4x1Model()));
 					break;
 				case LARGE_TEXT:
+					ModelLoaderRegistry.registerLoader(new CustomPaintModelLoader(name, new CustomMetaPaintModel()));
 					break;
 			}
 		}
@@ -136,9 +136,35 @@ public class ClientProxy extends CommonProxy {
 		ModelLoaderRegistry.registerLoader(new PaintLoaderBase(new CustomPaint2x1Model(), "", "_merge_arrow"));
 		ModelLoaderRegistry.registerLoader(new PaintLoaderBase(new CustomPaint2x1Model(), "", "_give_way"));
 
+		ModelLoaderRegistry.registerLoader(new PaintLoaderBase(new CustomPaint4x1Model(), "line_", "_crossing_diagonal"));
+
+		ModelLoaderRegistry.registerLoader(new PaintLoaderBase(new CustomPaint4x1Model(), "", "_junction_fork_mid"));
+		ModelLoaderRegistry.registerLoader(new PaintLoaderBase(new CustomPaint4x1Model(), "", "_junction_fork_mid_thin"));
+		ModelLoaderRegistry.registerLoader(new PaintLoaderBase(new CustomPaint4x1Model(), "", "_junction_fork_chevron_mid"));
+		ModelLoaderRegistry.registerLoader(new PaintLoaderBase(new CustomPaint4x1Model(), "", "_junction_fork_chevron_mid_thin"));
+
 		ModelLoaderRegistry.registerLoader(new PaintLoaderBase(new CustomMetaPaintModel(), "", "_chevron_mid"));
 		ModelLoaderRegistry.registerLoader(new PaintLoaderBase(new CustomMetaPaintModel(), "", "_chevron_mid_left"));
 		ModelLoaderRegistry.registerLoader(new PaintLoaderBase(new CustomMetaPaintModel(), "", "_chevron_mid_right"));
+
+		ModelLoaderRegistry.registerLoader(new PaintLoaderBase(new CustomMetaPaintModel(), "", "_slow"));
+		ModelLoaderRegistry.registerLoader(new PaintLoaderBase(new CustomMetaPaintModel(), "", "_stop"));
+		ModelLoaderRegistry.registerLoader(new PaintLoaderBase(new CustomMetaPaintModel(), "", "_bike"));
+		ModelLoaderRegistry.registerLoader(new PaintLoaderBase(new CustomMetaPaintModel(), "", "_bus"));
+		ModelLoaderRegistry.registerLoader(new PaintLoaderBase(new CustomMetaPaintModel(), "", "_taxi"));
+		ModelLoaderRegistry.registerLoader(new PaintLoaderBase(new CustomMetaPaintModel(), "", "_lane"));
+		ModelLoaderRegistry.registerLoader(new PaintLoaderBase(new CustomMetaPaintModel(), "", "_keep"));
+		ModelLoaderRegistry.registerLoader(new PaintLoaderBase(new CustomMetaPaintModel(), "", "_clear"));
+		ModelLoaderRegistry.registerLoader(new PaintLoaderBase(new CustomMetaPaintModel(), "", "_turn"));
+		ModelLoaderRegistry.registerLoader(new PaintLoaderBase(new CustomMetaPaintModel(), "", "_left"));
+		ModelLoaderRegistry.registerLoader(new PaintLoaderBase(new CustomMetaPaintModel(), "", "_right"));
+		ModelLoaderRegistry.registerLoader(new PaintLoaderBase(new CustomMetaPaintModel(), "", "_only"));
+		ModelLoaderRegistry.registerLoader(new PaintLoaderBase(new CustomMetaPaintModel(), "", "_no"));
+		ModelLoaderRegistry.registerLoader(new PaintLoaderBase(new CustomMetaPaintModel(), "", "_entry"));
+		ModelLoaderRegistry.registerLoader(new PaintLoaderBase(new CustomMetaPaintModel(), "", "_bike_icon"));
+		ModelLoaderRegistry.registerLoader(new PaintLoaderBase(new CustomMetaPaintModel(), "", "_town"));
+		ModelLoaderRegistry.registerLoader(new PaintLoaderBase(new CustomMetaPaintModel(), "", "_city"));
+		ModelLoaderRegistry.registerLoader(new PaintLoaderBase(new CustomMetaPaintModel(), "", "_ctre"));
 
 		ModelLoaderRegistry.registerLoader(new PaintLoaderBase(new CustomMetaPaintModel(), "", "_junction_side_line_connection"));
 		ModelLoaderRegistry.registerLoader(new PaintLoaderBase(new CustomMetaPaintModel(), "", "_junction_side_line_connection_thin"));

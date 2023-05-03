@@ -36,12 +36,12 @@ public class PaintColour {
 	}
 
 	public static PaintColour getFromName(String name) {
-		for (int i = 0; i < FRBlocks.col.length; i++) {
-			if (FRBlocks.col[i].name.equalsIgnoreCase(name)) {
-				return FRBlocks.col[i];
+		for (int i = 0; i < FRBlocks.col.size(); i++) {
+			if (FRBlocks.col.get(i).name.equalsIgnoreCase(name)) {
+				return FRBlocks.col.get(i);
 			}
 		}
-		return FRBlocks.col[0];
+		return FRBlocks.col.get(0);
 	}
 
 	public TextFormatting getFormat() {

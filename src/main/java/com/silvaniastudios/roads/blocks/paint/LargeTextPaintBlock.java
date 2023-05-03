@@ -4,6 +4,9 @@ import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.blocks.PaintColour;
 import com.silvaniastudios.roads.blocks.enums.EnumMeta;
 
+import com.silvaniastudios.roads.blocks.paint.customs.CustomMetaPaintBlock;
+import com.silvaniastudios.roads.blocks.paint.customs.CustomPaintBlock;
+import com.silvaniastudios.roads.blocks.paint.properties.PaintGrid;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
@@ -25,14 +28,18 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class LargeTextPaintBlock extends PaintBlockBase {
-	
-	public static final PropertyEnum<EnumMeta> META_ID = PropertyEnum.create("meta", EnumMeta.class);
+public class LargeTextPaintBlock extends CustomMetaPaintBlock {
 
-	public LargeTextPaintBlock(String name, String category, int[] coreMetas, boolean dynamic, PaintColour colour) {
-		super(name, category, coreMetas, dynamic, colour);
+	public LargeTextPaintBlock(String name, String localName, PaintGrid[] grids, String category, PaintColour colour) {
+		super(name, localName, EnumPaintType.LARGE_TEXT, grids, category, new int[] {0, 4}, colour);
+		this.dynamic = new boolean[] {false, true};
 		this.setDefaultState(this.blockState.getBaseState().withProperty(META_ID, EnumMeta.id0));
-		this.setCreativeTab(FurenikusRoads.tab_paint_text);
+	}
+
+	public LargeTextPaintBlock(String name, PaintGrid[] grids, String category, PaintColour colour) {
+		super(name, EnumPaintType.LARGE_TEXT, grids, category, new int[] {0, 4}, colour, FurenikusRoads.tab_paint_text);
+		this.dynamic = new boolean[] {false, true};
+		this.setDefaultState(this.blockState.getBaseState().withProperty(META_ID, EnumMeta.id0));
 	}
 	
 	@Override
@@ -84,46 +91,4 @@ public class LargeTextPaintBlock extends PaintBlockBase {
 		}
 		return this.getDefaultState().withProperty(META_ID, EnumMeta.byMetadata(returnMeta));
 	}
-	
-	@SideOnly(Side.CLIENT)
-	@Override
-	public void getSubBlocks(CreativeTabs creativeTabs, NonNullList<ItemStack> list) {
-		list.add(new ItemStack(this, 1, 0));
-		list.add(new ItemStack(this, 1, 4));
-	}
-	
-	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-    	int meta = getMetaFromState(state);
-    	
-    	if (meta < 4) { return new ItemStack(this, 1, 0); }
-    	return new ItemStack(this, 1, 4);
-    }
-	
-	@Override
-	public int getMetaFromState(IBlockState state) {
-		return ((EnumMeta)state.getValue(META_ID)).getMetadata();
-	}
-	
-	@Override
-	public IBlockState getStateFromMeta(int meta) {
-		return this.getDefaultState().withProperty(META_ID, EnumMeta.byMetadata(meta));
-	}
-	
-	@Override
-	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, new IProperty[] {META_ID});
-	}
-
-	@SideOnly(Side.CLIENT)
-	@Override
-	public void initModel() {
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "inventory"));
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 4, new ModelResourceLocation(getRegistryName(), "inventory"));
-	}
-	
-	@Override
-	@SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer() {
-        return BlockRenderLayer.CUTOUT;
-    }
 }

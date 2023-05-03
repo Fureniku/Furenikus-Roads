@@ -4,21 +4,17 @@ import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.blocks.FRBlocks;
 import com.silvaniastudios.roads.blocks.diagonal.ShapeLibrary;
 import com.silvaniastudios.roads.blocks.enums.EnumRotatable;
-import com.silvaniastudios.roads.blocks.paint.customs.CustomPaintBlock;
 import com.silvaniastudios.roads.blocks.paint.customs.CustomPaintWallBlock;
 import com.silvaniastudios.roads.blocks.paint.customs.ICustomBlock;
 import com.silvaniastudios.roads.blocks.paint.PaintBlockBase;
-import com.silvaniastudios.roads.client.model.TextureRegistryHandler;
 import com.silvaniastudios.roads.client.model.paint.PaintBakedModelBase;
 import com.silvaniastudios.roads.client.model.paint.PaintModelBase;
 import com.silvaniastudios.roads.client.render.Quad;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.VertexFormat;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.model.IModelState;
 
@@ -38,14 +34,8 @@ class CustomWallBakedModel extends PaintBakedModelBase {
 
     public CustomWallBakedModel(IModelState state, VertexFormat format, Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
         super(state, format, bakedTextureGetter);
-        sprites = new TextureAtlasSprite[FRBlocks.col.length];
-
-        for (int i = 0; i < FRBlocks.col.length; i++) {
-            sprites[i] = mc.getTextureMapBlocks().getAtlasSprite(FurenikusRoads.MODID + ":blocks/paint_" + FRBlocks.col[i].getName());
-        }
+        populateSprites();
     }
-
-
 
     @Override
     protected List<BakedQuad> packQuads(IBlockState state) {
@@ -60,7 +50,7 @@ class CustomWallBakedModel extends PaintBakedModelBase {
             EnumRotatable rotState = state.getValue(CustomPaintWallBlock.ROTATE_ID);
             int meta = state.getBlock().getMetaFromState(state);
 
-            if (meta < 7) {
+            if (meta <= 7) {
                 grid = ((ICustomBlock) state.getBlock()).getGrid(0).getGrid();
             } else {
                 grid = ((ICustomBlock) state.getBlock()).getGrid(1).getGrid();

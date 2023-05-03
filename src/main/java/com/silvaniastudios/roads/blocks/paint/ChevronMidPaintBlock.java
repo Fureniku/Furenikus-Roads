@@ -4,6 +4,7 @@ import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.blocks.PaintColour;
 import com.silvaniastudios.roads.blocks.enums.EnumMeta;
 
+import com.silvaniastudios.roads.blocks.paint.customs.Custom1x4PaintBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
@@ -97,9 +98,9 @@ public class ChevronMidPaintBlock extends PaintBlockBase {
 			return this.getDefaultState().withProperty(META_ID, EnumMeta.byMetadata(blockUp.getMetaFromState(stateUp)));
 		} else if (blockDown.getRegistryName().equals(this.getRegistryName())) {
 			return this.getDefaultState().withProperty(META_ID, EnumMeta.byMetadata(blockDown.getMetaFromState(stateDown)));
-		} else if (blockLeft instanceof Connected1x4PaintBlock || blockLeft instanceof ChevronSidePaintBlock) {
+		} else if (blockLeft instanceof Custom1x4PaintBlock || blockLeft instanceof ChevronSidePaintBlock) {
 			return this.getDefaultState().withProperty(META_ID, EnumMeta.byMetadata(placeMeta(blockLeft, rot, stateLeft)));
-		} else if (blockRight instanceof Connected1x4PaintBlock || blockRight instanceof ChevronSidePaintBlock) {
+		} else if (blockRight instanceof Custom1x4PaintBlock || blockRight instanceof ChevronSidePaintBlock) {
 			return this.getDefaultState().withProperty(META_ID, EnumMeta.byMetadata(placeMeta(blockRight, rot, stateRight)));
 		} else {
 			return this.getDefaultState().withProperty(META_ID, EnumMeta.byMetadata(meta+rot));
@@ -107,7 +108,7 @@ public class ChevronMidPaintBlock extends PaintBlockBase {
 	}
 	
 	public int placeMeta(Block block, int meta, IBlockState state) {
-		if (block instanceof Connected1x4PaintBlock) {
+		if (block instanceof Custom1x4PaintBlock) {
 			return meta + 4;
 		}
 		

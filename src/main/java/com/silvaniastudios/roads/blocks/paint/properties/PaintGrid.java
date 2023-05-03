@@ -4,6 +4,8 @@ public class PaintGrid {
 
     protected boolean[][] grid;
 
+    public static PaintGrid EMPTY = empty();
+
     public PaintGrid(short[][] gridIn) {
         grid = toBoolean(gridIn);
     }
@@ -30,5 +32,11 @@ public class PaintGrid {
 
     public int size() {
         return grid.length;
+    }
+
+    public static PaintGrid empty() {
+        boolean[][] arr = new boolean[16][16];
+
+        return new PaintGrid(arr);
     }
 }
