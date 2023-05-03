@@ -456,7 +456,6 @@ public class ShapeLibrary {
 		File outputfile = new File(name + "_" + id + ".png");
 		ImageIO.write(image, "png", outputfile);
 
-		System.out.println("Path: " + outputfile.getAbsolutePath());
 		return image;
 	}
 

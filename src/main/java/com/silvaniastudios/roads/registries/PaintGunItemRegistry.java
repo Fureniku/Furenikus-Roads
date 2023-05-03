@@ -66,11 +66,7 @@ public class PaintGunItemRegistry {
 		}
 		return null;
 	}
-	
-	public static void registerPaint(PaintBlockBase block) {
-		registerPaint(block, 0, 0);
-	}
-	
+
 	public static void registerPaint(PaintBlockBase block, int meta, int index) {
 		String cat = block.getCategory();
 		
