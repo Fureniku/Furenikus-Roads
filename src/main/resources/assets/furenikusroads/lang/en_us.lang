@@ -500,6 +500,35 @@ tile.furenikusroads.white_junction_mid_line_connection.4.name=Thin Mid Line to T
 tile.furenikusroads.white_junction_mid_line_connection.8.name=Thick Mid Line to Thick Filter Line R
 tile.furenikusroads.white_junction_mid_line_connection.12.name=Thick Mid Line to Thick Filter Line R
 
+
+tile.furenikusroads.yellow_junction_filter_left.name=§eFilter Lane (Left)
+tile.furenikusroads.yellow_junction_filter_right.name=§eFilter Lane (Right)
+tile.furenikusroads.yellow_junction_filter_left_thin.name=§eFilter Lane (Left, Thin)
+tile.furenikusroads.yellow_junction_filter_right_thin.name=§eFilter Lane (Right, Thin)
+tile.furenikusroads.yellow_junction_filter_left_empty.name=§eFilter Lane (Left, Hidden)
+tile.furenikusroads.yellow_junction_filter_right_empty.name=§eFilter Lane (Right, Hidden)
+tile.furenikusroads.yellow_chevron_left_a.name=§eChevron (Left)
+tile.furenikusroads.yellow_chevron_right_a.name=§eChevron (Right)
+tile.furenikusroads.yellow_chevron_left_a_thin.name=§eChevron (Left, Thin)
+tile.furenikusroads.yellow_chevron_right_a_thin.name=§eChevron (Right, Thin)
+tile.furenikusroads.yellow_chevron_side_line.name=§eCentral Divider (Full)
+tile.furenikusroads.yellow_box_white.name=§eHatching Box
+tile.furenikusroads.yellow_crossing_paint.name=§eCrosswalk
+
+tile.furenikusroads.red_junction_filter_left.name=§cFilter Lane (Left)
+tile.furenikusroads.red_junction_filter_right.name=§cFilter Lane (Right)
+tile.furenikusroads.red_junction_filter_left_thin.name=§cFilter Lane (Left, Thin)
+tile.furenikusroads.red_junction_filter_right_thin.name=§cFilter Lane (Right, Thin)
+tile.furenikusroads.red_junction_filter_left_empty.name=§cFilter Lane (Left, Hidden)
+tile.furenikusroads.red_junction_filter_right_empty.name=§cFilter Lane (Right, Hidden)
+tile.furenikusroads.red_chevron_left_a.name=§cChevron (Left)
+tile.furenikusroads.red_chevron_right_a.name=§cChevron (Right)
+tile.furenikusroads.red_chevron_left_a_thin.name=§cChevron (Left, Thin)
+tile.furenikusroads.red_chevron_right_a_thin.name=§cChevron (Right, Thin)
+tile.furenikusroads.red_chevron_side_line.name=§cCentral Divider (Full)
+tile.furenikusroads.hatch_box_red.name=§cHatching Box
+tile.furenikusroads.red_crossing_paint.name=§cCrosswalk
+
 tile.furenikusroads.road_snow.name=Snow (But magic snow that settles on roads)
 
 tile.furenikusroads.road_block_diagonal_1_1.name=Diagonal Connector (1/1)

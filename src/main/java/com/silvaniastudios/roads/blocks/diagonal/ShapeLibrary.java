@@ -37,7 +37,6 @@ public class ShapeLibrary {
 	}
 
 	public static List<Quad> shapeFromGrid(boolean[][] grid, float top, TextureAtlasSprite sprite, VertexFormat format, boolean drawBottom, float scale) {
-		sprite.setFramesTextureData(null);
 		List<Quad> quads = new ArrayList<>();
 		float p = scale / grid.length;
 		float p2 = scale / 64.0f;
@@ -455,18 +454,6 @@ public class ShapeLibrary {
 
 		File outputfile = new File(name + "_" + id + ".png");
 		ImageIO.write(image, "png", outputfile);
-
-		return image;
-	}
-
-	public static int[][] get2DIntArrayFromImage(BufferedImage img) {
-		int[][] image = new int[img.getHeight()][img.getWidth()];
-
-		for (int i = 0; i < img.getHeight(); i++) {
-			for (int j = 0; j < img.getWidth(); j++) {
-				image[j][i] = img.getRGB(j, i);
-			}
-		}
 
 		return image;
 	}

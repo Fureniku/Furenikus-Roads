@@ -10,6 +10,7 @@ import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.blocks.BlockBase;
 import com.silvaniastudios.roads.blocks.diagonal.HalfBlock.HalfBlockSide;
 
+import com.silvaniastudios.roads.client.BoundingBoxDraw;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
@@ -384,15 +385,15 @@ public class RoadBlockDiagonal extends BlockBase {
 		
 		
 		if (facing.equals(EnumFacing.EAST)) {
-			vecs = getRotatedVecs(vecs, 270, new Vec3d(2,0,0));
+			vecs = BoundingBoxDraw.getRotatedVecs(vecs, 270, new Vec3d(2,0,0));
 		}
 		
 		if (facing.equals(EnumFacing.SOUTH)) {
-			vecs = getRotatedVecs(vecs, 180, new Vec3d(2,0,2));
+			vecs = BoundingBoxDraw.getRotatedVecs(vecs, 180, new Vec3d(2,0,2));
 		}
 		
 		if (facing.equals(EnumFacing.WEST)) {
-			vecs = getRotatedVecs(vecs, 90, new Vec3d(0,0,2));
+			vecs = BoundingBoxDraw.getRotatedVecs(vecs, 90, new Vec3d(0,0,2));
 		}
 		
 		return vecs;
@@ -473,31 +474,21 @@ public class RoadBlockDiagonal extends BlockBase {
 		
 
 		if (facing.equals(EnumFacing.EAST)) {
-			vecs = getRotatedVecs(vecs, 270, new Vec3d(2,0,0));
+			vecs = BoundingBoxDraw.getRotatedVecs(vecs, 270, new Vec3d(2,0,0));
 		}
 		
 		if (facing.equals(EnumFacing.SOUTH)) {
-			vecs = getRotatedVecs(vecs, 180, new Vec3d(2,0,2));
+			vecs = BoundingBoxDraw.getRotatedVecs(vecs, 180, new Vec3d(2,0,2));
 		}
 		
 		if (facing.equals(EnumFacing.WEST)) {
-			vecs = getRotatedVecs(vecs, 90, new Vec3d(0,0,2));
+			vecs = BoundingBoxDraw.getRotatedVecs(vecs, 90, new Vec3d(0,0,2));
 		}
 		
 		return vecs;
 	}
 	
-	//idk why its being dumb and needing different offsets depending on the rotation but oh well
-	public Vec3d[] getRotatedVecs(Vec3d[] vecsIn, int rot, Vec3d offset) {
-		Vec3d vecs[] = new Vec3d[vecsIn.length];
-		
-		for (int i = 0; i < vecsIn.length; i++) {
-			Vec3d offsetVec = new Vec3d(vecsIn[i].x + 0.5, vecsIn[i].y + 0.5, vecsIn[i].z + 0.5).rotateYaw((float) Math.toRadians(rot));
-			vecs[i] = new Vec3d(offsetVec.x - 0.5 + offset.x, offsetVec.y - 0.5, offsetVec.z - 0.5 + offset.z);
-		}
-		
-		return vecs;
-	}
+
 
 
 	@Override

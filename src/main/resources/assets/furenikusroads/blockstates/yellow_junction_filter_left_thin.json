@@ -4,6 +4,7 @@
 		"transform": "forge:default-block",
 		"textures": {
 			"0": "furenikusroads:blocks/paint_yellow",
+			"1": "furenikusroads:blocks/paint_yellow",
 			"particle": "furenikusroads:blocks/paint_yellow"
 		},
 		"model": "furenikusroads:junction_filter_left_thin_1"

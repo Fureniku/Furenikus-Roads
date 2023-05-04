@@ -48,7 +48,8 @@ public class TextureRegistryHandler {
 		ResourceLocation cats_eye_yellow = new ResourceLocation(FurenikusRoads.MODID + ":blocks/cats_eye_yellow");
 		ResourceLocation cats_eye_red    = new ResourceLocation(FurenikusRoads.MODID + ":blocks/cats_eye_red");
 		ResourceLocation cats_eye_green  = new ResourceLocation(FurenikusRoads.MODID + ":blocks/cats_eye_green");
-		
+		ResourceLocation cats_eye_blue  = new ResourceLocation(FurenikusRoads.MODID + ":blocks/cats_eye_blue");
+
 		ResourceLocation machine_vent_on = new ResourceLocation(FurenikusRoads.MODID + ":blocks/machine_vent_back_on");
 		ResourceLocation paint_filler_display = new ResourceLocation(FurenikusRoads.MODID + ":blocks/paint_filler_machine_display");
 		
@@ -108,7 +109,8 @@ public class TextureRegistryHandler {
 		event.getMap().registerSprite(cats_eye_yellow);
 		event.getMap().registerSprite(cats_eye_red);
 		event.getMap().registerSprite(cats_eye_green);
-		
+		event.getMap().registerSprite(cats_eye_blue);
+
 		event.getMap().registerSprite(machine_vent_on);
 		event.getMap().registerSprite(paint_filler_display);
 		

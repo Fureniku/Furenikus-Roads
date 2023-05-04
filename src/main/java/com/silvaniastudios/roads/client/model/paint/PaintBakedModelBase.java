@@ -32,9 +32,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.model.pipeline.UnpackedBakedQuad;
 import net.minecraftforge.common.model.IModelState;
 import net.minecraftforge.common.property.IExtendedBlockState;
+import net.minecraftforge.fml.common.Loader;
 
 public abstract class PaintBakedModelBase implements IBakedModel {
 
+	private final String foamFixModId = "foamfix";
 	private final PaintOverrideList overrideList;
 
 	protected TextureAtlasSprite[] sprites;
@@ -100,7 +102,7 @@ public abstract class PaintBakedModelBase implements IBakedModel {
 				int colId = paintBlock.getColour().getId();
 				boolean[][]grid = ((ICustomBlock) paintBlock).getGrid(stack.getItemDamage() < 7 ? 0 : 1).getGrid();
 
-				rawQuads = ShapeLibrary.shapeFromGrid(grid, 0.5f, sprites[colId], format, true);
+				rawQuads = ShapeLibrary.shapeFromGrid(grid, 0.5f, sprites[colId], format, !Loader.isModLoaded(foamFixModId));
 
 				itemQuadsCache = shapeBuilderItem(rawQuads, quads, paintBlock.getColour().getColourInt(), 90, stack.isOnItemFrame() ? 180 : 0);
 			}
@@ -145,7 +147,9 @@ public abstract class PaintBakedModelBase implements IBakedModel {
 				new Vec3d(1, 0, 0.5), 16f, 16f, //TL
 				sprite, format);
 
-		quads.add(front);
+		if (!Loader.isModLoaded(foamFixModId)) {
+			quads.add(front);
+		}
 		quads.add(back);
 
 		return quads;

@@ -2,18 +2,24 @@ package com.silvaniastudios.roads.blocks.decorative;
 
 import javax.annotation.Nullable;
 
+import com.google.common.collect.Lists;
 import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.RoadsConfig;
 import com.silvaniastudios.roads.blocks.BlockBase;
 import com.silvaniastudios.roads.blocks.BlockFakeLight;
+import com.silvaniastudios.roads.blocks.NonPaintRoadTopBlock;
+import com.silvaniastudios.roads.blocks.RoadBlock;
+import com.silvaniastudios.roads.blocks.diagonal.HalfBlock;
 import com.silvaniastudios.roads.blocks.enums.IConnectable;
 import com.silvaniastudios.roads.blocks.enums.IMetaBlockName;
 import com.silvaniastudios.roads.blocks.enums.IPostConnectable;
 import com.silvaniastudios.roads.blocks.paint.PaintBlockBase;
+import com.silvaniastudios.roads.client.BoundingBoxDraw;
 import com.silvaniastudios.roads.items.FRItems;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockAir;
+import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
@@ -35,12 +41,17 @@ import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CurbBlock extends BlockBase implements IMetaBlockName {
 	
@@ -318,6 +329,99 @@ public class CurbBlock extends BlockBase implements IMetaBlockName {
         double offsetY = 1.0 - getBlockConnectedHeight(state, worldIn, pos);
         return new Vec3d(0, -offsetY+0.75, 0);
     }
+
+	@Override
+	public RayTraceResult collisionRayTrace(IBlockState blockState, World worldIn, BlockPos pos, Vec3d start, Vec3d end) {
+		List<RayTraceResult> list = Lists.<RayTraceResult>newArrayList();
+
+		for (AxisAlignedBB axisalignedbb : getBoxList(pos, worldIn, blockState)) {
+			list.add(this.rayTrace(pos, start, end, axisalignedbb));
+		}
+
+		RayTraceResult raytraceresult1 = null;
+		double d1 = 0.0D;
+
+		for (RayTraceResult raytraceresult : list) {
+			if (raytraceresult != null) {
+				double d0 = raytraceresult.hitVec.squareDistanceTo(end);
+
+				if (d0 > d1) {
+					raytraceresult1 = raytraceresult;
+					d1 = d0;
+				}
+			}
+		}
+
+		return raytraceresult1;
+	}
+
+	public ArrayList<AxisAlignedBB> getBoxList(BlockPos pos, World world, IBlockState state) {
+		ArrayList<AxisAlignedBB> list = new ArrayList<>();
+		double y = getBlockConnectedHeight(state,world, pos);
+		EnumFacing dir = state.getValue(FACING);
+		switch (dir) {
+			case NORTH:
+				list.add(new AxisAlignedBB(0.0,y-0.25625,-0.25,1.0,y,0.0));
+				break;
+			case EAST:
+				list.add(new AxisAlignedBB(1.0,y-0.25625,0.0,1.25,y,1.0));
+				break;
+			case SOUTH:
+				list.add(new AxisAlignedBB(0.0,y-0.25625,1.0,1.0,y,1.25));
+				break;
+			case WEST:
+				list.add(new AxisAlignedBB(-0.25,y-0.25625,0.0,0.0, y,1.0));
+				break;
+		}
+
+		return list;
+	}
+
+	public Vec3d[] getVecs(World world, IBlockState state, BlockPos pos) {
+		Vec3d vecs[] = new Vec3d[16];
+		EnumFacing facing = state.getValue(FACING);
+
+		double height = getBlockConnectedHeight(state,world, pos);
+
+		double g = 0.0320000000949949026D; //The amount a vanilla drawn box is bigger than the actual collision box
+
+		vecs[0] = new Vec3d(0-g, height-0.25f-g,-0.25-g);
+		vecs[1] = new Vec3d(1+g, height-0.25f-g,-0.25-g);
+		vecs[2] = new Vec3d(1+g, height-0.25f-g,0.0+g);
+		vecs[3] = new Vec3d(0-g, height-0.25f-g,0.0+g);
+
+		vecs[4] = new Vec3d(0-g, height-0.25f-g,-0.25-g);
+
+		vecs[5] = new Vec3d(0-g, height+g, 	-0.25-g);
+		vecs[6] = new Vec3d(1+g, height+g, 	-0.25-g);
+		vecs[7] = new Vec3d(1+g, height+g, 	 0.0+g);
+		vecs[8] = new Vec3d(0-g, height+g, 	 0.0+g);
+
+		vecs[9] = new Vec3d(0-g, height+g, 	-0.25-g);
+
+		vecs[10] = new Vec3d(0-g, height+g, 	0.0+g);
+
+		vecs[11] = new Vec3d(0-g, height-0.25f-g, 		0.0+g);
+		vecs[12] = new Vec3d(1+g, height-0.25f-g, 		0.0+g);
+
+		vecs[13] = new Vec3d(1+g, height+g, 	0.0+g);
+		vecs[14] = new Vec3d(1+g, height+g, 	-0.25-g);
+		vecs[15] = new Vec3d(1+g, height-0.25f-g, 		-0.25-g);
+
+		if (facing.equals(EnumFacing.EAST)) {
+			vecs = BoundingBoxDraw.getRotatedVecs(vecs, 270, new Vec3d(2,0,0));
+		}
+
+		if (facing.equals(EnumFacing.SOUTH)) {
+			vecs = BoundingBoxDraw.getRotatedVecs(vecs, 180, new Vec3d(2,0,2));
+		}
+
+		if (facing.equals(EnumFacing.WEST)) {
+			vecs = BoundingBoxDraw.getRotatedVecs(vecs, 90, new Vec3d(0,0,2));
+		}
+
+		return vecs;
+	}
     
     @SuppressWarnings("deprecation")
 	private double getBlockConnectedHeight(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
@@ -338,11 +442,7 @@ public class CurbBlock extends BlockBase implements IMetaBlockName {
 			IBlockState endBlock = worldIn.getBlockState(sideOffset);
 			if (endBlock.getBlock() != Blocks.AIR) {
 				IBlockState endState = worldIn.getBlockState(sideOffset.offset(EnumFacing.UP));
-				if (endState.getBlock() instanceof BlockBase &&
-						!(endState.getBlock() instanceof PaintBlockBase) &&
-						!(endState.getBlock() instanceof IConnectable) &&
-						!(endState.getBlock() instanceof IPostConnectable) &&
-						!(endState.getBlock() instanceof BlockFakeLight)) {
+				if (endState.getBlock() instanceof RoadBlock) {
 					return endState.getBoundingBox(worldIn, sideOffset.offset(EnumFacing.UP)).maxY-countDown;
 				}
 				return endBlock.getBoundingBox(worldIn, sideOffset).maxY-countDown-1;
