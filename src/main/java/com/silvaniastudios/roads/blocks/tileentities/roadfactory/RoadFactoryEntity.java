@@ -143,7 +143,9 @@ public class RoadFactoryEntity extends RoadTileEntity implements ITickable, ICap
 				timerCount = 0;
 			}
 		} else {
-			process();
+			if (fuel_remaining > 0) {
+				process();
+			}
 			timerCount = 0;
 		}
 		

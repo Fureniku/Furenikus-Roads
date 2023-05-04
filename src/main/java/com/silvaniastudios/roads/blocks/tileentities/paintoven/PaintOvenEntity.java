@@ -107,7 +107,9 @@ public class PaintOvenEntity extends RoadTileEntity implements ITickable, ICapab
 				timerCount = 0;
 			}
 		} else {
-			process();
+			if (fuel_remaining > 0) {
+				process();
+			}
 			timerCount = 0;
 		}
 		
