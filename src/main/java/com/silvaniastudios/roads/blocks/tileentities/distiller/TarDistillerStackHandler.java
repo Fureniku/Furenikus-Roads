@@ -1,5 +1,7 @@
 package com.silvaniastudios.roads.blocks.tileentities.distiller;
 
+import com.silvaniastudios.roads.blocks.tileentities.recipes.RecipeRegistry;
+import com.silvaniastudios.roads.blocks.tileentities.recipes.TarDistillerRecipes;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
@@ -42,9 +44,12 @@ public class TarDistillerStackHandler extends ItemStackHandler {
 		if (slot == TarDistillerContainer.FUEL && stack.getItem() == Items.LAVA_BUCKET && !electric) {
 			return internalStackHandler.insertItem(slot, stack, simulate);
 		}
-		//Right now we only accept coal, so just hard-check it.
-		if (slot == TarDistillerContainer.INPUT && stack.getItem() == Items.COAL) {
-			return internalStackHandler.insertItem(slot, stack, simulate);
+
+		for (int i = 0; i < RecipeRegistry.tarDistillerRecipes.size(); i++) {
+			TarDistillerRecipes tdr = RecipeRegistry.tarDistillerRecipes.get(i);
+			if (tdr.getInputStack().getItem() == stack.getItem() && tdr.getInputStack().getItemDamage() == stack.getItemDamage()) {
+				return internalStackHandler.insertItem(slot, stack, simulate);
+			}
 		}
 		
 		if ((slot == TarDistillerContainer.FLUID_OUT_1_BUCKET || slot == TarDistillerContainer.FLUID_OUT_1_BUCKET) && stack.getItem() == Items.BUCKET) {

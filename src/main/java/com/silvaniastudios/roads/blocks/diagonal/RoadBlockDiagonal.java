@@ -44,6 +44,7 @@ import net.minecraftforge.common.property.ExtendedBlockState;
 import net.minecraftforge.common.property.IExtendedBlockState;
 import net.minecraftforge.common.property.IUnlistedProperty;
 import net.minecraftforge.fluids.BlockFluidBase;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -89,9 +90,11 @@ public class RoadBlockDiagonal extends BlockBase {
 		IBlockState stateRight = world.getBlockState(right);
 		
 		boolean trans = false;
-		
-		if (stateLeft.getBlock().getBlockLayer() == BlockRenderLayer.TRANSLUCENT || stateRight.getBlock().getBlockLayer() == BlockRenderLayer.TRANSLUCENT) {
-			trans = true;
+
+		if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) {
+			if (stateLeft.getBlock().getBlockLayer() == BlockRenderLayer.TRANSLUCENT || stateRight.getBlock().getBlockLayer() == BlockRenderLayer.TRANSLUCENT) {
+				trans = true;
+			}
 		}
 		
 		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing()).withProperty(TRANSPARENCY, trans);

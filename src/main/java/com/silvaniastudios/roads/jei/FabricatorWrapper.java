@@ -44,7 +44,7 @@ public class FabricatorWrapper implements IRecipeWrapper {
 	}
 	
 	private static <T> List<T> asList(T ... items) {
-        List<T> list = new ArrayList<T>();
+        List<T> list = new ArrayList<>();
         for (T item : items) {
             list.add(item);
         }

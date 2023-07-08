@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.silvaniastudios.roads.blocks.FRBlocks;
 import com.silvaniastudios.roads.blocks.RoadBlock;
 
+import com.silvaniastudios.roads.items.FRItems;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -59,7 +60,7 @@ public class CrusherStackHandler extends ItemStackHandler {
 		}
 
 		if (slot == CrusherContainer.INPUT_1) {
-			//Right now everything is a block, so we can just check this here for slight performance gainz.
+			//Right now everything* is a block, so we can just check this here for slight performance gainz.
 			//If we add any items later, then move the valid input for loop out of the scope of this itemblock check.
 			if (stack.getItem() instanceof ItemBlock) {
 				ItemBlock ib = (ItemBlock) stack.getItem();
@@ -72,6 +73,11 @@ public class CrusherStackHandler extends ItemStackHandler {
 						return internalStackHandler.insertItem(slot, stack, simulate);
 					}
 				}
+			}
+
+			//* Forgot clinker mix was a thing. Handle that one edge case here coz im lazy.
+			if (stack.getItem() == FRItems.clinker_mix) {
+				return internalStackHandler.insertItem(slot, stack, simulate);
 			}
 		}
 		
