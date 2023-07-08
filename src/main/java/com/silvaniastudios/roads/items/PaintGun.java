@@ -6,6 +6,7 @@ import javax.annotation.Nullable;
 
 import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.RoadsConfig;
+import com.silvaniastudios.roads.blocks.FRBlocks;
 import com.silvaniastudios.roads.blocks.RoadBlock;
 import com.silvaniastudios.roads.blocks.paint.PaintBlockBase;
 import com.silvaniastudios.roads.blocks.tileentities.paintfiller.PaintFillerEntity;
@@ -16,6 +17,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockSnow;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -54,8 +56,8 @@ public class PaintGun extends RoadItemBase {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-		tooltip.add("Place paint in the world!");
-		tooltip.add("Shift right click to open UI.");
+		tooltip.add(I18n.format("item.tooltip.paint_gun_1"));
+		tooltip.add(I18n.format("item.tooltip.paint_gun_2"));
 		if (stack.hasTagCompound()) {
 			if (GuiScreen.isShiftKeyDown()) {
 				NBTTagCompound nbt = stack.getTagCompound();
@@ -65,14 +67,14 @@ public class PaintGun extends RoadItemBase {
 				selection = getBlockFromSelection(selectId, pageId);
 				selMeta = nbt.getInteger("selMeta");
 
-				tooltip.add("Selection: " + new ItemStack(selection, 1, selMeta).getDisplayName());
-				tooltip.add("Colour: " + nbt.getString("colour"));
+				tooltip.add(I18n.format("item.tooltip.paint_gun.selection") + " " + new ItemStack(selection, 1, selMeta).getDisplayName());
+				tooltip.add(I18n.format("item.tooltip.paint_gun.colour") + " " + I18n.format("colour." + nbt.getString("colour")));
 				tooltip.add(" ");
-				tooltip.add("White level: " + nbt.getInteger("white_paint"));
-				tooltip.add("Yellow level: " + nbt.getInteger("yellow_paint"));
-				tooltip.add("Red level: " + nbt.getInteger("red_paint"));
+				tooltip.add(I18n.format("item.tooltip.paint_gun.white") + " " + nbt.getInteger("white_paint"));
+				tooltip.add(I18n.format("item.tooltip.paint_gun.yellow") + " " + nbt.getInteger("yellow_paint"));
+				tooltip.add(I18n.format("item.tooltip.paint_gun.red") + " " + nbt.getInteger("red_paint"));
 			} else {
-				tooltip.add("Press Shift to see more information");
+				tooltip.add(I18n.format("item.tooltip.more_info"));
 			}
 		}
 	}

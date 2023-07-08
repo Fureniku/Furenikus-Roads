@@ -16,6 +16,7 @@ import com.silvaniastudios.roads.blocks.paint.PaintBlockBase;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
@@ -51,7 +52,7 @@ public class PneumaticDrill extends ItemTool {
 	
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-		tooltip.add("Used to destroy tarmac blocks (left click). Can also reduce the height by one (right click)");
+		tooltip.add(I18n.format("item.tooltip.pneumatic_drill"));
 	}
 
 	public void registerItemModel() {

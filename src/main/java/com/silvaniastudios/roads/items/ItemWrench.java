@@ -6,6 +6,7 @@ import javax.annotation.Nullable;
 
 import com.silvaniastudios.roads.FurenikusRoads;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -27,10 +28,10 @@ public class ItemWrench extends RoadItemBase {
 	
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-		tooltip.add("Used to make minor adjustments to certain blocks");
-		tooltip.add("Right-click the air to switch modes");
+		tooltip.add(I18n.format("item.tooltip.wrench_1"));
+		tooltip.add(I18n.format("item.tooltip.wrench_2"));
 		if (stack.hasTagCompound()) {
-			tooltip.add("Current mode: " + stack.getTagCompound().getInteger("mode"));
+			tooltip.add(I18n.format("item.tooltip.wrench_3" + " " + + stack.getTagCompound().getInteger("mode")));
 		}
 	}
 	

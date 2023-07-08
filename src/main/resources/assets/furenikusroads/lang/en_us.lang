@@ -568,6 +568,26 @@ item.cement_dust.name=Cement Dust
 item.limestone_dust.name=Limestone Dust
 item.clinker_mix.name=Clinker Mix
 
+item.tooltip.pneumatic_drill=Used to destroy tarmac blocks (left click). Can also reduce the height by one (right click)
+item.tooltip.paint_gun_1=Place paint in the world!
+item.tooltip.paint_gun_2=Shift right click to open UI.
+item.tooltip.paint_gun.selection=Selection:
+item.tooltip.paint_gun.colour=Color:
+item.tooltip.paint_gun.white=White level:
+item.tooltip.paint_gun.yellow=Yellow level:
+item.tooltip.paint_gun.red=Red level:
+item.tooltip.tarmac_rammer_1=Used to increase the height of blocks
+item.tooltip.tarmac_rammer_2=Right click, requires fragments in inventory
+item.tooltip.wrench_1=Used to make minor adjustments to certain blocks
+item.tooltip.wrench_2=Right-click the air to switch modes
+item.tooltip.wrench_3=Current mode:
+
+item.tooltip.more_info=Press Shift to see more information
+
+colour.white=White
+colour.yellow=Yellow
+colour.red=Red
+
 item.tarmac_cutter_blade_1_iron.name=Iron Tarmac Cutter Blade
 item.tarmac_cutter_blade_1_gold.name=Gold Tarmac Cutter Blade
 item.tarmac_cutter_blade_1_diamond.name=Diamond Tarmac Cutter Blade
