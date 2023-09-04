@@ -3,6 +3,7 @@ package com.silvaniastudios.roads.blocks.paint;
 import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.blocks.PaintColour;
 
+import com.silvaniastudios.roads.blocks.enums.IMetaBlockName;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
@@ -10,6 +11,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -21,7 +23,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ChevronSideLinePaintBlock extends PaintBlockBase {
+public class ChevronSideLinePaintBlock extends PaintBlockBase implements IMetaBlockName {
 	
 	public static final PropertyEnum<EnumTypeRotation> TYPE_ROT = PropertyEnum.create("type_rotation", EnumTypeRotation.class);
 	public static final PropertyEnum<EnumConnections> CONNECT = PropertyEnum.create("connect", EnumConnections.class);
@@ -172,6 +174,11 @@ public class ChevronSideLinePaintBlock extends PaintBlockBase {
 	@Override
 	public void initModel() {
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "inventory"));
+	}
+
+	@Override
+	public String getSpecialName(ItemStack stack) {
+		return stack.getItemDamage() + "";
 	}
 	
 	public static enum EnumConnections implements IStringSerializable {

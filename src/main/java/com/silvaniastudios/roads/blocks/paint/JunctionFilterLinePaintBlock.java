@@ -4,6 +4,7 @@ import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.blocks.PaintColour;
 import com.silvaniastudios.roads.blocks.enums.EnumFourLengthConnectable;
 
+import com.silvaniastudios.roads.blocks.enums.IMetaBlockName;
 import com.silvaniastudios.roads.blocks.paint.uniques.ChevronIconPaintBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
@@ -13,6 +14,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -24,7 +26,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class JunctionFilterLinePaintBlock extends PaintBlockBase {
+public class JunctionFilterLinePaintBlock extends PaintBlockBase implements IMetaBlockName {
 	
 	public static final PropertyEnum<EnumFourLengthConnectable> TYPE_ROT = PropertyEnum.create("position_rotation", EnumFourLengthConnectable.class);
 	public static final PropertyEnum<EnumChevronConnections> CONNECT = PropertyEnum.create("connect", EnumChevronConnections.class);
@@ -324,6 +326,11 @@ public class JunctionFilterLinePaintBlock extends PaintBlockBase {
 	@Override
 	public void initModel() {
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "inventory"));
+	}
+
+	@Override
+	public String getSpecialName(ItemStack stack) {
+		return stack.getItemDamage() + "";
 	}
 	
 	public static enum EnumChevronConnections implements IStringSerializable {

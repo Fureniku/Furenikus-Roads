@@ -1,5 +1,7 @@
 package com.silvaniastudios.roads.items;
 
+import com.silvaniastudios.roads.blocks.FRBlocks;
+import com.silvaniastudios.roads.blocks.PaintColour;
 import com.silvaniastudios.roads.blocks.enums.IMetaBlockName;
 import com.silvaniastudios.roads.blocks.paint.customs.CustomPaintBlock;
 
@@ -46,16 +48,28 @@ public class RoadItemBlock extends ItemBlock {
 		if (Block.getBlockFromItem(stack.getItem()) instanceof CustomPaintBlock) {
 			CustomPaintBlock paint = (CustomPaintBlock) Block.getBlockFromItem(stack.getItem());
 			if (!paint.isInternal()) {
-				if (unloc.contains("white")) { return TextFormatting.WHITE + paint.getLocalName(); }
-				if (unloc.contains("yellow")) { return TextFormatting.YELLOW + paint.getLocalName(); }
-				if (unloc.contains("red")) { return TextFormatting.RED + paint.getLocalName(); }
+				for (int i = 0; i < FRBlocks.col.size(); i++) {
+					PaintColour paintCol = FRBlocks.col.get(i);
+					if (unloc.contains(paintCol.getName())) {
+						return paintCol.getFormat() + paint.getLocalName();
+					}
+				}
 			}
+		}
+
+		if (unloc.contains("hatch_box")) {
+
 		}
 
 		if (Block.getBlockFromItem(stack.getItem()) instanceof IMetaBlockName) {
 			if (unloc.contains("white")) { return TextFormatting.WHITE + I18n.translateToLocal(unloc + ".name").trim(); }
-			if (unloc.contains("yellow")) { return TextFormatting.YELLOW + I18n.translateToLocal(unloc.replace("yellow", "white") + ".name").trim(); }
-			if (unloc.contains("red")) { return TextFormatting.RED + I18n.translateToLocal(unloc.replace("red", "white") + ".name").trim(); }
+
+			for (int i = 0; i < FRBlocks.col.size(); i++) {
+				PaintColour paintCol = FRBlocks.col.get(i);
+				if (unloc.contains(paintCol.getName())) {
+					return paintCol.getFormat() + I18n.translateToLocal(unloc.replace(paintCol.getName(), "white") + ".name").trim();
+				}
+			}
 		}
 		
         return super.getItemStackDisplayName(stack);

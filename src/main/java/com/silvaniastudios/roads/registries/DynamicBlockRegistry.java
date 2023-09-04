@@ -17,32 +17,41 @@ import com.silvaniastudios.roads.blocks.paint.properties.PaintGrid;
 public class DynamicBlockRegistry {
 	
 	public static ArrayList<CustomPaintBlock> customPaints = new ArrayList<>();
+
+	private static ArrayList<File> jsonList = new ArrayList<File>();
 	
 	public static void register() {
 		FurenikusRoads.debug(0, "Starting to load custom paint files");
-		ArrayList<File> jsonList = new ArrayList<File>();
 		jsonList = getJsonFiles("./mods/RoadPaints/", jsonList);
 		
 		if (jsonList.size() > 0) {
 			FurenikusRoads.debug(0, "Found " + jsonList.size() + " custom paint files. Loading...");
 			int success = 0;
+
 			for (int a = 0; a < FRBlocks.col.size(); a++) {
-				for (int i = 0; i < jsonList.size(); i++) {
-					CustomPaintBlock block = importedBlock(jsonList.get(i), FRBlocks.col.get(a));
-					if (block != null) {
-						customPaints.add(block);
-						success++;
-					} else {
-						FurenikusRoads.debug(0, jsonList.get(i).getName() + " failed to load. Skipping...");
-					}
-				}
+				success += registerColour(FRBlocks.col.get(a));
 			}
 			
-			FurenikusRoads.debug(0, "Custom paint files loading complete, " + success + "/" + jsonList.size()*FRBlocks.col.size() + " (with " + FRBlocks.col.size() + " colour variants) files loaded successfully.");
+			FurenikusRoads.debug(0, "Custom paint files loading complete, " + success + "/" + jsonList.size()*FRBlocks.col.size() + " (with " + FRBlocks.col.size() + " internal colour variants) files loaded successfully.");
 		} else {
 			FurenikusRoads.debug(0, "No custom paint files found; skipping custom paint loading.");
 		}
 		System.out.println("Final: " + customPaints.size());
+	}
+
+	public static int registerColour(PaintColour col) {
+		int success = 0;
+		for (int i = 0; i < jsonList.size(); i++) {
+			CustomPaintBlock block = importedBlock(jsonList.get(i), col);
+			if (block != null) {
+				customPaints.add(block);
+				success++;
+			} else {
+				FurenikusRoads.debug(0, jsonList.get(i).getName() + " failed to load. Skipping...");
+			}
+		}
+
+		return success;
 	}
 	
 	private static ArrayList<File> getJsonFiles(String dir, ArrayList<File> jsonList) {

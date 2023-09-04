@@ -76,13 +76,22 @@ import net.minecraftforge.registries.IForgeRegistry;
 
 public class FRBlocks {
 	
-	public static ArrayList<PaintColour> col;
+	public static ArrayList<PaintColour> col = new ArrayList<>();
 
 	static {
-		col = new ArrayList<>();
 		col.add(new PaintColour("white", 0, 0, TextFormatting.WHITE));
 		col.add(new PaintColour("yellow", Color.YELLOW.getRGB(), 1, TextFormatting.YELLOW));
 		col.add(new PaintColour("red", Color.RED.getRGB(), 2, TextFormatting.RED));
+	}
+
+	private static int colourCount = 3;
+
+	public static PaintColour addNewColour(String name, int colour, TextFormatting formatting) {
+		FurenikusRoads.debug(0, "Adding colour " + name);
+		PaintColour paintColour = new PaintColour(name, colour, colourCount, formatting);
+		col.add(paintColour);
+		colourCount++;
+		return paintColour;
 	}
 
 	public static ArrayList<RoadBlock> roadBlockList = new ArrayList<RoadBlock>();
@@ -613,7 +622,7 @@ public class FRBlocks {
 		for (int i = 0; i < paintBlockList.size(); i++)  { registry.register(new RoadItemBlock(paintBlockList.get(i)).setRegistryName(paintBlockList.get(i).getRegistryName())); }
 		for (int i = 0; i < genericList.size(); i++)  { registry.register(new RoadItemBlock(genericList.get(i)).setRegistryName(genericList.get(i).getRegistryName())); }
 		for (int i = 0; i < catsEyeList.size(); i++)  { registry.register(new RoadItemBlock(catsEyeList.get(i)).setRegistryName(catsEyeList.get(i).getRegistryName())); }
-		for (int i = 0; i < DynamicBlockRegistry.customPaints.size(); i++) { registry.register(new RoadItemBlock(DynamicBlockRegistry.customPaints.get(i)).setRegistryName(DynamicBlockRegistry.customPaints.get(i).getRegistryName())); }
+		for (int i = 0; i < DynamicBlockRegistry.customPaints.size(); i++) { registry.register(new RoadItemBlock(DynamicBlockRegistry.customPaints.get(i)).setRegistryName(DynamicBlockRegistry.customPaints.get(i).getRegistryName()));}
 		
 		registry.register(new RoadItemBlock(paint_filler).setRegistryName(paint_filler.getRegistryName()));
 		registry.register(new RoadItemBlock(tar_distiller).setRegistryName(tar_distiller.getRegistryName()));

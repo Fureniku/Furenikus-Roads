@@ -2,6 +2,8 @@ package com.silvaniastudios.roads;
 
 import com.silvaniastudios.roads.registries.CustomPaintModelRegistry;
 import com.silvaniastudios.roads.client.TextureRegistryHandler;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.fml.common.Loader;
 import org.apache.logging.log4j.Logger;
 
 import com.silvaniastudios.roads.blocks.FRBlocks;
@@ -38,7 +40,10 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
+import scala.Array;
+import scala.Dynamic;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.JarURLConnection;
@@ -55,7 +60,7 @@ import java.util.zip.ZipInputStream;
 public class FurenikusRoads {
 	
 	public static final String MODID = "furenikusroads";
-	public static final String VERSION = "1.2.3";
+	public static final String VERSION = "1.2.4";
 	
 	@Instance(MODID)
 	public static FurenikusRoads instance;
@@ -145,13 +150,25 @@ public class FurenikusRoads {
 			return new ItemStack(Block.REGISTRY.getObject(new ResourceLocation(MODID, "white_junction_fork_chevron_mid")), 1, 0);
 		}
 	};
-	
+
 	static {
 		FluidRegistry.enableUniversalBucket();
 	}
 
+	public static ArrayList<String> plugins = new ArrayList<>();
+
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
+		for (int i = 0; i < plugins.size(); i++) {
+			if (Loader.isModLoaded(plugins.get(i))) {
+				Object modMainClass = Loader.instance().getIndexedModList().get(plugins.get(i)).getMod();
+				if (modMainClass instanceof IColour) {
+					IColour col = (IColour) modMainClass;
+					FRBlocks.addNewColour(col.getColourName(), col.getColour().getRGB(), col.getTextFormat());
+				}
+			}
+		}
+
 		if (genJsonFromTextures) {
 			TextureRegistryHandler.generateJSONFromTextures();
 		}
@@ -199,6 +216,8 @@ public class FurenikusRoads {
 				
 		@SubscribeEvent
 		public static void registerBlocks(RegistryEvent.Register<Block> event) {
+			System.out.println("register blocks!!");
+
 			FRBlocks.register(event.getRegistry());
 			FRBlocks.registerTileEntities();
 		}

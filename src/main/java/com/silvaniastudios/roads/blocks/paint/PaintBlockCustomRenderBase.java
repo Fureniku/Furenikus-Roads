@@ -51,6 +51,14 @@ public class PaintBlockCustomRenderBase extends PaintBlockBase implements IMetaB
 		Item itemBlock = Item.REGISTRY.getObject(new ResourceLocation(FurenikusRoads.MODID, this.name));
 		ModelResourceLocation itemModelResourceLocation = new ModelResourceLocation(getRegistryName(), "inventory");
 		for (int i = 0; i < getCoreMetas().length; i++) {
+			if (itemBlock == null) {
+				FurenikusRoads.debug(0, "itemblock null!");
+				continue;
+			}
+			if (itemModelResourceLocation == null) {
+				FurenikusRoads.debug(0, "MRL null!");
+				continue;
+			}
 			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(itemBlock, getCoreMetas()[i], itemModelResourceLocation);
     	}
 	}

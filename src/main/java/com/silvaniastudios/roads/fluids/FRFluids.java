@@ -1,5 +1,6 @@
 package com.silvaniastudios.roads.fluids;
 
+import com.silvaniastudios.roads.FurenikusRoads;
 import net.minecraftforge.fluids.FluidRegistry;
 
 public class FRFluids {
@@ -10,6 +11,7 @@ public class FRFluids {
 	public static ModFluid red_paint = new ModFluid("red_paint");
 	
 	public static void registerFluids() {
+		FurenikusRoads.debug(0, "Registering fluids");
 		FluidRegistry.registerFluid(tar);
 		FluidRegistry.registerFluid(white_paint);
 		FluidRegistry.registerFluid(yellow_paint);

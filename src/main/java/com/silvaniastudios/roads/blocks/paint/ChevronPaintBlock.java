@@ -6,6 +6,7 @@ import com.silvaniastudios.roads.FurenikusRoads;
 import com.silvaniastudios.roads.blocks.FRBlocks;
 import com.silvaniastudios.roads.blocks.PaintColour;
 
+import com.silvaniastudios.roads.blocks.enums.IMetaBlockName;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
@@ -31,7 +32,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ChevronPaintBlock extends PaintBlockBase {
+public class ChevronPaintBlock extends PaintBlockBase implements IMetaBlockName {
 
 	public static final PropertyEnum<EnumType> META_ID = PropertyEnum.create("rotation", EnumType.class);
 	public static final PropertyEnum<EnumJunctionConnections> TYPE = PropertyEnum.create("connect", EnumJunctionConnections.class);
@@ -245,6 +246,11 @@ public class ChevronPaintBlock extends PaintBlockBase {
     public BlockRenderLayer getBlockLayer() {
         return BlockRenderLayer.CUTOUT;
     }
+
+	@Override
+	public String getSpecialName(ItemStack stack) {
+		return stack.getItemDamage() + "";
+	}
 	
 	public static enum EnumType implements IStringSerializable {
 		//up = left side low, right side up. down = left side up, right side down.
