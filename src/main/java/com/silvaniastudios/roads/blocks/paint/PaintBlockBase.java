@@ -125,6 +125,9 @@ public class PaintBlockBase extends BlockBase {
 	//Get pick block from the provided core meta options.
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
 		int closest = 0;
+		if (getCoreMetas() == null) { //I should fix the nulls, but honestly don't care enough about 1.12 anymore to commit any more time than writing this comment.
+			return new ItemStack(this, 1, 0);
+		}
 		for (int i = 0; i < getCoreMetas().length; i++) {
 			if (getCoreMetas()[i] <= getMetaFromState(state) && getCoreMetas()[i] > closest) {
 				closest = getCoreMetas()[i];

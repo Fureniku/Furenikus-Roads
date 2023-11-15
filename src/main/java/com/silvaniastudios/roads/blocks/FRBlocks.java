@@ -467,8 +467,6 @@ public class FRBlocks {
 			paintBlockList.add(new ArrowPaintBlock(col.get(i).getName() + "_arrow", PaintGunItemRegistry.ICONS, new int[] {0, 4}, true, col.get(i)));
 			paintBlockList.add(new ArrowLinePaintBlock(col.get(i).getName() + "_arrow_line", PaintGunItemRegistry.ICONS, new int[] {0}, true, col.get(i)));
 			paintBlockList.add(new ArrowDiagonalPaintBlock(col.get(i).getName() + "_arrow_diagonal", PaintGunItemRegistry.ICONS, new int[] {0, 4}, true, col.get(i)));
-			
-
 		}
 
 		catsEyeList.add(cats_eye_white);

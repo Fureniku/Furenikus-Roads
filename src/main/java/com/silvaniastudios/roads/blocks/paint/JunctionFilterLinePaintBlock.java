@@ -276,8 +276,7 @@ public class JunctionFilterLinePaintBlock extends PaintBlockBase implements IMet
 
 		if (blockSide) {
 			ChevronPaintBlock.EnumJunctionConnections cnct = null;
-			
-			
+
 			if (stateSide.getBlock() instanceof ChevronIconPaintBlock) {
 				ChevronIconPaintBlock mipb = (ChevronIconPaintBlock) stateSide.getBlock();
 				int mipbMeta = mipb.getMetaFromState(stateSide);
@@ -288,6 +287,10 @@ public class JunctionFilterLinePaintBlock extends PaintBlockBase implements IMet
 				} else { cnct = ChevronPaintBlock.EnumJunctionConnections.CHEVRON_THIN_A; }
 			} else {
 				cnct = (ChevronPaintBlock.EnumJunctionConnections) stateSide.getProperties().get(ChevronPaintBlock.TYPE);
+			}
+
+			if (cnct == null) {
+				return EnumChevronConnections.TOP_CHEVRON_A;
 			}
 			
 			if (cnct.equals(ChevronPaintBlock.EnumJunctionConnections.CHEVRON_A)) {

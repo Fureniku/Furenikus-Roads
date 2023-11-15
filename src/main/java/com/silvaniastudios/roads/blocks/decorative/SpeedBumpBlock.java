@@ -6,10 +6,14 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 
 public class SpeedBumpBlock extends TwoWayRotDecorativeBlock {
 	
@@ -61,6 +65,22 @@ public class SpeedBumpBlock extends TwoWayRotDecorativeBlock {
     		return new AxisAlignedBB(0*v, -1+belowHeight, 4*v, 16*v, -1+belowHeight+(3*v), 12*v);
 		}
     	return new AxisAlignedBB(4*v, -1+belowHeight, 0*v, 12*v, -1+belowHeight+(3*v), 16*v);
-    	
     }
+
+	@Override
+	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+		return new ItemStack(state.getBlock(), 1, getDroppedMeta(state));
+	}
+
+	@Override
+	public int damageDropped(IBlockState state) {
+		return getDroppedMeta(state);
+	}
+
+	private int getDroppedMeta(IBlockState state) {
+		int meta = getMetaFromState(state);
+
+		if (meta % 2 == 1) { return meta - 1; }
+		return meta;
+	}
 }
