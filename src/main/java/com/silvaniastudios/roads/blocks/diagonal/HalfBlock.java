@@ -12,6 +12,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -86,7 +87,6 @@ public class HalfBlock {
 		this.pos = pos;
 		this.facing = facing;
 		
-		
 		if (side == HalfBlockSide.LEFT) {
 			this.posSide = pos.offset(
 					facing.rotateYCCW());
@@ -96,11 +96,18 @@ public class HalfBlock {
 					facing.rotateY());
 			this.stateSide = sharedState.getValue(RoadBlockDiagonal.RIGHT);
 		}
-		
+
 		this.height = block.getSideHeight(sharedState, world, pos, side);
+
+		//Grass paths annoyingly work differently to everything else?? Top and bottom quads seem to be swapped, and it's not a full block, and its particle is dirt not path.
+		if (stateSide.getBlock() == Blocks.GRASS_PATH) {
+			this.quadsSide = mc.getBlockRendererDispatcher().getModelForState(stateSide).getQuads(stateSide, null, 0);
+			sprite = quadsSide.get(0).getSprite();
+			return;
+		}
+
 		this.quadsSide = mc.getBlockRendererDispatcher().getModelForState(stateSide).getQuads(stateSide, EnumFacing.UP, 0);
-		
-		
+
 		//Sprite handling - no sprite for no height, default sprite of particle texture
 		sprite = height == 0 ? null : mc.getBlockRendererDispatcher().getModelForState(stateSide).getParticleTexture();
 		//If it's a normal cube, go for top texture instead.
