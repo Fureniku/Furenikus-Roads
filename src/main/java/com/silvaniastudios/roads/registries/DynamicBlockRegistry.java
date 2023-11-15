@@ -3,11 +3,14 @@ package com.silvaniastudios.roads.registries;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.silvaniastudios.roads.FurenikusRoads;
+import com.silvaniastudios.roads.RoadsConfig;
 import com.silvaniastudios.roads.blocks.FRBlocks;
 import com.silvaniastudios.roads.blocks.PaintColour;
 import com.silvaniastudios.roads.blocks.paint.LargeTextPaintBlock;
@@ -59,7 +62,13 @@ public class DynamicBlockRegistry {
 		
 		if (!directory.exists()) {
 			FurenikusRoads.debug(0, "Custom paint directory is missing; creating...");
-			directory.mkdir();
+			boolean success = directory.mkdir();
+			if (!success && !RoadsConfig.general.skipCustomPaints) {
+				FurenikusRoads.debug(0, "Unable to create custom paint directory! Is your filesystem locked?");
+				FurenikusRoads.debug(0, "If you do not need custom paints, you can turn them off in the config.");
+				FurenikusRoads.debug(0, "Alternatively, manually create a folder called RoadPaints in your mod directory.");
+				throw new RuntimeException("Failed to create custom paint directory! See latest.log for details.");
+			}
 		}
 		
 		File[] files = directory.listFiles();

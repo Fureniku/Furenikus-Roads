@@ -46,6 +46,9 @@ public class RoadsConfig {
 
 		@Config.Comment("Whether barriers should work like fences and prevent you from jumping over them.")
 		public boolean barriersLikeFences = false;
+
+		@Config.Comment("Skip loading the custom paints from file system. Use this if your environment is crashing due to not making the paints folder.")
+		public boolean skipCustomPaints = false;
 	}
 	
 	public static class Machines {
