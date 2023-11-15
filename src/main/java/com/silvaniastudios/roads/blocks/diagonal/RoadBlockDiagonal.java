@@ -138,11 +138,14 @@ public class RoadBlockDiagonal extends BlockBase {
 		
 		IBlockState stateLeft = worldIn.getBlockState(left);
 		IBlockState stateRight = worldIn.getBlockState(right);
-		
-		boolean trans = false;
-		
-		if (stateLeft.getBlock().getBlockLayer() == BlockRenderLayer.TRANSLUCENT || stateRight.getBlock().getBlockLayer() == BlockRenderLayer.TRANSLUCENT) {
-			trans = true;
+
+		//Server doesn't know about the renderer, so we'll just approximate for light propagation
+		boolean trans = !stateLeft.getBlock().isFullBlock(stateLeft) || !stateLeft.getBlock().isFullBlock(stateRight);
+		if (worldIn.isRemote) {
+			//Client we can be a bit more granular
+			if (stateLeft.getBlock().getBlockLayer() == BlockRenderLayer.TRANSLUCENT || stateRight.getBlock().getBlockLayer() == BlockRenderLayer.TRANSLUCENT) {
+				trans = true;
+			}
 		}
 		
 		worldIn.setBlockState(pos, state.withProperty(TRANSPARENCY, trans));
