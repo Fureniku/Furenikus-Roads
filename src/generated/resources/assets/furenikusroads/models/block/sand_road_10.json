@@ -1,0 +1,6 @@
+{
+  "parent": "furenikusroads:blocks/roads/road_block_10",
+  "textures": {
+    "texture": "minecraft:block/sand"
+  }
+}

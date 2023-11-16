@@ -1,0 +1,6 @@
+{
+  "parent": "furenikusroads:blocks/roads/road_block_5",
+  "textures": {
+    "texture": "furenikusroads:block/roads/road_block_yellow"
+  }
+}
