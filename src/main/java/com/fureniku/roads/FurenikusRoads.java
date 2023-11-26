@@ -26,13 +26,7 @@ public class FurenikusRoads {
         registration = new RegistrationRoads(MODID, modEventBus);
         registration.init(modEventBus);
 
-        // Register the commonSetup method for modloading
-        modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(DataGeneration::generate);
-    }
-
-    private void commonSetup(final FMLCommonSetupEvent event) {
-        registration.generateCreativeTabs();
     }
 }
 
