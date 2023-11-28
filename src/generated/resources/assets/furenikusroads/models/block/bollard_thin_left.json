@@ -1,0 +1,6 @@
+{
+  "parent": "furenikusroads:blocks/decorative/bollard_traffic_2",
+  "textures": {
+    "texture": "furenikusroads:block/decorative/traffic_bollard_thin_left"
+  }
+}

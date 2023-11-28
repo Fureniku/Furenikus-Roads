@@ -1,7 +1,6 @@
 {
   "parent": "furenikusroads:blocks/decorative/bollard_topped",
   "textures": {
-    "texture": "furenikusroads:block/decorative/bollard_black",
-    "top": "furenikusroads:block/decorative/bollard_black"
+    "texture": "furenikusroads:block/decorative/bollard_black"
   }
 }

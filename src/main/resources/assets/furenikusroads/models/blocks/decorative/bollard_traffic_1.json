@@ -1,9 +1,9 @@
 {
-	"credit": "Made with Blockbench",
+	"parent": "block/block",
 	"textures": {
-		"0": "furenikusroads:blocks/machine_part_dark",
-		"1": "furenikusroads:blocks/traffic_bollard_left",
-		"particle": "furenikusroads:blocks/machine_part_dark"
+		"0": "furenikusroads:block/machine/machine_metal_dark",
+		"1": "#texture",
+		"particle": "furenikusroads:block/machine/machine_metal_dark"
 	},
 	"elements": [
 		{
@@ -27,7 +27,7 @@
 				"south": {"uv": [0, 0, 6, 15], "texture": "#1"},
 				"west": {"uv": [6, 0, 12, 15], "texture": "#1"},
 				"up": {"uv": [12, 0, 16, 4], "texture": "#1"},
-				"down": {"uv": [0, 0, 6, 6], "texture": "#missing"}
+				"down": {"uv": [0, 0, 6, 6], "texture": "#1"}
 			}
 		}
 	]

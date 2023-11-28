@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "furenikusroads:block/bollard_thin_left",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "furenikusroads:block/bollard_thin_left"
+    },
+    "facing=south": {
+      "model": "furenikusroads:block/bollard_thin_left",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "furenikusroads:block/bollard_thin_left",
+      "y": 270
+    }
+  }
+}
