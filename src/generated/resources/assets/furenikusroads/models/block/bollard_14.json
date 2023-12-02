@@ -1,6 +1,6 @@
 {
-  "parent": "furenikusroads:blocks/decorative/bollard_topped",
+  "parent": "furenikusroads:blocks/decorative/bollard_concrete_square_stubby_ring",
   "textures": {
-    "texture": "furenikusroads:block/decorative/bollard_smooth_metal"
+    "texture": "furenikusroads:block/roads/road_block_concrete_2"
   }
 }

@@ -1,0 +1,6 @@
+{
+  "parent": "furenikusroads:blocks/decorative/bollard_retract_thick_down",
+  "textures": {
+    "texture": "furenikusroads:block/decorative/bollard_smooth_metal"
+  }
+}

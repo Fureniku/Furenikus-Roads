@@ -1,6 +1,7 @@
 {
-  "parent": "furenikusroads:blocks/decorative/bollard_portable",
+  "parent": "furenikusroads:blocks/decorative/bollard_smooth",
   "textures": {
-    "texture": "furenikusroads:block/decorative/bollard_small_portable"
+    "texture": "furenikusroads:block/decorative/bollard_striped_metal",
+    "top": "furenikusroads:block/decorative/bollard_black"
   }
 }

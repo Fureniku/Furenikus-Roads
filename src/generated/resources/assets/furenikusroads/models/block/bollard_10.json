@@ -1,7 +1,6 @@
 {
-  "parent": "furenikusroads:blocks/decorative/bollard_smooth_thin",
+  "parent": "furenikusroads:blocks/decorative/bollard_concrete_square",
   "textures": {
-    "texture": "furenikusroads:block/decorative/bollard_black_ringed",
-    "top": "furenikusroads:block/decorative/bollard_black"
+    "texture": "furenikusroads:block/roads/road_block_concrete_2"
   }
 }

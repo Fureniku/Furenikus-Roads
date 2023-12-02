@@ -1,10 +1,10 @@
 {
-	"credit": "Made with Blockbench",
+	"parent": "block/block",
 	"textures": {
-		"0": "furenikusroads:blocks/bollard_smooth_metal",
-		"2": "furenikusroads:blocks/bollard_black",
-		"3": "furenikusroads:blocks/machine_metal",
-		"particle": "furenikusroads:blocks/machine_metal"
+		"0": "#texture",
+		"2": "furenikusroads:block/decorative/bollard_black",
+		"3": "furenikusroads:block/machine/machine_metal",
+		"particle": "#texture"
 	},
 	"elements": [
 		{
