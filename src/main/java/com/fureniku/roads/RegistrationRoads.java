@@ -1,13 +1,17 @@
 package com.fureniku.roads;
 
 import com.fureniku.metropolis.RegistrationBase;
+import com.fureniku.metropolis.client.rendering.CustomModelLoader;
 import com.fureniku.metropolis.utils.CreativeTabSet;
 import com.fureniku.roads.registrations.RegistrationDecorative;
 import com.fureniku.roads.registrations.RegistrationGeneral;
 import com.fureniku.roads.registrations.RegistrationRoadBlocks;
+import net.minecraft.client.multiplayer.ClientRegistryLayer;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.client.event.ModelEvent;
 
 import java.util.ArrayList;
 
@@ -48,5 +52,13 @@ public class RegistrationRoads extends RegistrationBase {
     protected void commonSetup(FMLCommonSetupEvent event) {}
 
     @Override
-    protected void clientSetup(FMLClientSetupEvent event) {}
+    protected void clientSetup(FMLClientSetupEvent event) {
+
+    }
+
+    @SubscribeEvent
+    public static void registerModelLoaders(ModelEvent.RegisterAdditional event) {
+
+    }
+
 }
