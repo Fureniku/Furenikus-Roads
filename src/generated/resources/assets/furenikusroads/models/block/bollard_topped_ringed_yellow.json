@@ -1,0 +1,7 @@
+{
+  "parent": "furenikusroads:blocks/decorative/bollard_topped_ringed",
+  "textures": {
+    "ring": "furenikusroads:block/decorative/bollard_yellow",
+    "texture": "furenikusroads:block/decorative/bollard_yellow"
+  }
+}

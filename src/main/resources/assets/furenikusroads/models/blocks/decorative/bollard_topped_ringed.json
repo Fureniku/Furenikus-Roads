@@ -3,7 +3,7 @@
 	"textures": {
 		"0": "#texture",
 		"particle": "#texture",
-		"ring": "furenikusroads:block/decorative/bollard_yellow"
+		"ring": "#ring"
 	},
 	"elements": [
 		{

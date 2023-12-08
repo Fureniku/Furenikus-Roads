@@ -14,6 +14,6 @@ public class DataGeneration {
         DataGenerator generator = event.getGenerator();
         PackOutput packOutput = generator.getPackOutput();
         ExistingFileHelper efh = event.getExistingFileHelper();
-        generator.addProvider(event.includeClient(), new MetroBlockStateProvider(packOutput, FurenikusRoads.MODID, efh, FurenikusRoads.INSTANCE.registration));
+
     }
 }

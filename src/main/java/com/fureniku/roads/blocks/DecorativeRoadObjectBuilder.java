@@ -1,6 +1,7 @@
 package com.fureniku.roads.blocks;
 
-import com.fureniku.metropolis.blocks.decorative.MetroBlockDecorativeBuilder;
+import com.fureniku.metropolis.blocks.decorative.builders.MetroBlockDecorativeBuilder;
+import com.fureniku.metropolis.blocks.decorative.builders.MetroBlockDecorativeToggleBuilder;
 import com.fureniku.metropolis.enums.BlockOffsetDirection;
 import com.fureniku.metropolis.enums.DecorativeBuilderType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -28,3 +29,4 @@ public class DecorativeRoadObjectBuilder extends MetroBlockDecorativeBuilder {
         setShape(width, height);
     }
 }
+

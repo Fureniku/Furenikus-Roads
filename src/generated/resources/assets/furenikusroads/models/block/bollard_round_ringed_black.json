@@ -1,0 +1,7 @@
+{
+  "parent": "furenikusroads:blocks/decorative/bollard_round_ringed",
+  "textures": {
+    "accent": "furenikusroads:block/decorative/bollard_gold",
+    "texture": "furenikusroads:block/decorative/bollard_black"
+  }
+}

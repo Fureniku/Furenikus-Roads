@@ -1,0 +1,6 @@
+{
+  "parent": "furenikusroads:blocks/decorative/bollard_folding_1_upright",
+  "textures": {
+    "texture": "furenikusroads:block/decorative/bollard_metal_light"
+  }
+}

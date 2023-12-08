@@ -1,7 +1,6 @@
 package com.fureniku.roads;
 
 import com.fureniku.metropolis.utils.Debug;
-import com.fureniku.roads.datagen.DataGeneration;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -21,8 +20,6 @@ public class FurenikusRoads {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         registration = new RegistrationRoads(MODID, modEventBus);
         registration.init(modEventBus);
-
-        modEventBus.addListener(DataGeneration::generate);
     }
 }
 

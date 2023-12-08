@@ -1,6 +1,0 @@
-{
-  "parent": "furenikusroads:blocks/decorative/bollard_retract_stumpy_down",
-  "textures": {
-    "texture": "furenikusroads:block/decorative/bollard_black"
-  }
-}

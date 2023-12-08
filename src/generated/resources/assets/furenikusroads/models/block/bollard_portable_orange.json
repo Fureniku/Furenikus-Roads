@@ -1,0 +1,7 @@
+{
+  "parent": "furenikusroads:blocks/decorative/bollard_portable",
+  "textures": {
+    "reflection": "furenikusroads:block/decorative/reflective_surface",
+    "texture": "furenikusroads:block/decorative/bollard_orange"
+  }
+}

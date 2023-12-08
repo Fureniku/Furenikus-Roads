@@ -1,0 +1,6 @@
+{
+  "parent": "furenikusroads:blocks/decorative/bollard_slant_square",
+  "textures": {
+    "texture": "furenikusroads:block/decorative/bollard_metal_light"
+  }
+}

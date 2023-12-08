@@ -1,17 +1,19 @@
 package com.fureniku.roads;
 
 import com.fureniku.metropolis.RegistrationBase;
-import com.fureniku.metropolis.client.rendering.CustomModelLoader;
+import com.fureniku.metropolis.datagen.MetroBlockStateProvider;
 import com.fureniku.metropolis.utils.CreativeTabSet;
 import com.fureniku.roads.registrations.RegistrationDecorative;
 import com.fureniku.roads.registrations.RegistrationGeneral;
 import com.fureniku.roads.registrations.RegistrationRoadBlocks;
-import net.minecraft.client.multiplayer.ClientRegistryLayer;
+import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.client.event.ModelEvent;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 import java.util.ArrayList;
 
@@ -52,13 +54,19 @@ public class RegistrationRoads extends RegistrationBase {
     protected void commonSetup(FMLCommonSetupEvent event) {}
 
     @Override
-    protected void clientSetup(FMLClientSetupEvent event) {
+    protected void clientSetup(FMLClientSetupEvent event) {}
 
+    @Override
+    protected void modelSetup(ModelEvent.RegisterGeometryLoaders registerGeometryLoaders) {}
+
+    @Override
+    protected void modifyBakingResult(ModelEvent.ModifyBakingResult modifyBakingResult) {}
+
+    @Override
+    protected void bakingComplete(ModelEvent.BakingCompleted bakingCompleted) {}
+
+    @Override
+    protected void dataGen(GatherDataEvent event, DataGenerator gen, PackOutput packOutput, ExistingFileHelper efh) {
+        gen.addProvider(event.includeClient(), new MetroBlockStateProvider(packOutput, FurenikusRoads.MODID, efh, FurenikusRoads.INSTANCE.registration));
     }
-
-    @SubscribeEvent
-    public static void registerModelLoaders(ModelEvent.RegisterAdditional event) {
-
-    }
-
 }

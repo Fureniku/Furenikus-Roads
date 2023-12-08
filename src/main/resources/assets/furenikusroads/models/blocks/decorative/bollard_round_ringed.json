@@ -2,7 +2,7 @@
 	"parent": "block/block",
 	"textures": {
 		"0": "#texture",
-		"1": "furenikusroads:block/decorative/bollard_yellow",
+		"1": "#accent",
 		"particle": "#texture"
 	},
 	"elements": [
