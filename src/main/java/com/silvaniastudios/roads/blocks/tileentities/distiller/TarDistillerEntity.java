@@ -193,7 +193,7 @@ public class TarDistillerEntity extends RoadTileEntity implements ITickable, ICa
 			FluidStack fluidStack = null;
 			
 			
-			if (fluid_in.getUnlocalizedName().compareTo("item.forge.bucketFilled") == 0) {
+			if (fluid_in.getTranslationKey().compareTo("item.forge.bucketFilled") == 0) {
 				fluidStack = FluidUtil.getFluidContained(fluid_in);
 			} else if (fluid_in.getItem() == Items.WATER_BUCKET) {
 				fluidStack = new FluidStack(FluidRegistry.WATER, 1000);

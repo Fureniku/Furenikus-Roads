@@ -126,7 +126,7 @@ public class ChevronSideLinePaintBlock extends PaintBlockBase implements IMetaBl
 	}
 	
 	@SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT_MIPPED;
     }
 	

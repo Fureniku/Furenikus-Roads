@@ -152,7 +152,7 @@ public class TextureRegistryHandler {
 			PaintCategoryList category = PaintGunItemRegistry.categoryList.get(i);
 			for (int j = 0; j < category.size(); j++) {
 				PaintBlockBase block = category.getPaint(j);
-				String name = block.getUnlocalizedName().substring(20); //tile.furenikusroads: ...
+				String name = block.getTranslationKey().substring(20); //tile.furenikusroads: ...
 				if (category.getMeta(j) > 0) { name = name + "_" + category.getMeta(j); }
 				ResourceLocation sprite = new ResourceLocation(FurenikusRoads.MODID + ":items/paint_gun_display/" + name);
 				event.getMap().registerSprite(sprite);
@@ -179,9 +179,9 @@ public class TextureRegistryHandler {
 		for (int i = 0; i < paints.size(); i++) {
 			if (paints.get(i) instanceof PaintBlockCustomRenderBase) {
 				PaintBlockCustomRenderBase paint = (PaintBlockCustomRenderBase) paints.get(i);
-				if (paint.getUnlocalizedName().contains("white")) {
+				if (paint.getTranslationKey().contains("white")) {
 					for (int j = 0; j < paint.getCoreMetas().length; j++) {
-						registry.add(getTextureNameFromUnloc(paint.getUnlocalizedName()) + "_" + paint.getCoreMetas()[j]);
+						registry.add(getTextureNameFromUnloc(paint.getTranslationKey()) + "_" + paint.getCoreMetas()[j]);
 					}
 				}
 			}

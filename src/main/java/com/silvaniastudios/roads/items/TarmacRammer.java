@@ -36,7 +36,7 @@ public class TarmacRammer extends ItemTool {
 		super(materialIn, EFFECTIVE_ON);
 		this.setHarvestLevel("pneumatic_drill", 0);
 		this.name = name;
-		this.setUnlocalizedName(name);
+		this.setTranslationKey(name);
 		this.setRegistryName(name);
 		this.maxStackSize = 1;
 		this.setCreativeTab(FurenikusRoads.tab_tools);

@@ -14,7 +14,7 @@ public class Diagonal18ModelLoader implements ICustomModelLoader {
 	
 	@Override
 	public boolean accepts(ResourceLocation modelLocation) {
-		return modelLocation.getResourceDomain().equals(FurenikusRoads.MODID) && "diagonal_18".equals(modelLocation.getResourcePath());
+		return modelLocation.getNamespace().equals(FurenikusRoads.MODID) && "diagonal_18".equals(modelLocation.getPath());
 	}
 	
 	@Override

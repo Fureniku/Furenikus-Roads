@@ -164,10 +164,10 @@ public class FRBlocks {
 
 	public static PaintFillerHopperBlock paint_filler_hopper = new PaintFillerHopperBlock("paint_filler_hopper");
 
-	public static BlockFluidClassic tar_fluid = (BlockFluidClassic) new BlockFluidClassic(FRFluids.tar, Material.WATER).setUnlocalizedName(FurenikusRoads.MODID + ".tar_fluid").setRegistryName("tar_fluid");
-	public static BlockFluidClassic paint_white_fluid = (BlockFluidClassic) new BlockFluidClassic(FRFluids.white_paint, Material.WATER).setUnlocalizedName(FurenikusRoads.MODID + ".paint_white_fluid").setRegistryName("paint_white_fluid");
-	public static BlockFluidClassic paint_yellow_fluid = (BlockFluidClassic) new BlockFluidClassic(FRFluids.yellow_paint, Material.WATER).setUnlocalizedName(FurenikusRoads.MODID + ".paint_yellow_fluid").setRegistryName("paint_yellow_fluid");
-	public static BlockFluidClassic paint_red_fluid = (BlockFluidClassic) new BlockFluidClassic(FRFluids.red_paint, Material.WATER).setUnlocalizedName(FurenikusRoads.MODID + ".paint_red_fluid").setRegistryName("paint_red_fluid");
+	public static BlockFluidClassic tar_fluid = (BlockFluidClassic) new BlockFluidClassic(FRFluids.tar, Material.WATER).setTranslationKey(FurenikusRoads.MODID + ".tar_fluid").setRegistryName("tar_fluid");
+	public static BlockFluidClassic paint_white_fluid = (BlockFluidClassic) new BlockFluidClassic(FRFluids.white_paint, Material.WATER).setTranslationKey(FurenikusRoads.MODID + ".paint_white_fluid").setRegistryName("paint_white_fluid");
+	public static BlockFluidClassic paint_yellow_fluid = (BlockFluidClassic) new BlockFluidClassic(FRFluids.yellow_paint, Material.WATER).setTranslationKey(FurenikusRoads.MODID + ".paint_yellow_fluid").setRegistryName("paint_yellow_fluid");
+	public static BlockFluidClassic paint_red_fluid = (BlockFluidClassic) new BlockFluidClassic(FRFluids.red_paint, Material.WATER).setTranslationKey(FurenikusRoads.MODID + ".paint_red_fluid").setRegistryName("paint_red_fluid");
 
 	public static StreetBlock street_block_a = (StreetBlock) new StreetBlock("street_block_a", 16).setCreativeTab(FurenikusRoads.tab_sidewalks);
 	public static StreetBlock street_block_b = (StreetBlock) new StreetBlock("street_block_b", 16).setCreativeTab(FurenikusRoads.tab_sidewalks);
@@ -744,7 +744,7 @@ public class FRBlocks {
 		for (int i = 0; i < paintBlockList.size(); i++) {
 			PaintBlockBase block = paintBlockList.get(i);
 			
-			if (block.getUnlocalizedName().contains("white")) {
+			if (block.getTranslationKey().contains("white")) {
 				if (block.getCoreMetas() != null) {
 					for (int j = 0; j < block.getCoreMetas().length; j++) {
 						PaintGunItemRegistry.registerPaint(block, block.getCoreMetas()[j], j);
@@ -757,7 +757,7 @@ public class FRBlocks {
 		for (int i = 0; i < DynamicBlockRegistry.customPaints.size(); i++) {
 			PaintBlockBase block = DynamicBlockRegistry.customPaints.get(i);
 			
-			if (block.getUnlocalizedName().contains("white")) {
+			if (block.getTranslationKey().contains("white")) {
 				for (int j = 0; j < block.getCoreMetas().length; j++) {
 					PaintGunItemRegistry.registerPaint(block, block.getCoreMetas()[j], j);
 					count++;

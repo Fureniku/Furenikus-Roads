@@ -49,9 +49,9 @@ public class ChevronIconPaintBlock extends CustomMetaPaintBlock implements IMeta
 		boolean checkLeft = false;
 		boolean checkRight = false;
 
-		if (this.getUnlocalizedName().contains("_chevron_mid")) { checkLeft = true; checkRight = true; }
-		if (this.getUnlocalizedName().contains("_chevron_mid_left")) { checkLeft = true; }
-		if (this.getUnlocalizedName().contains("_chevron_mid_right")) { checkRight = true; }
+		if (this.getTranslationKey().contains("_chevron_mid")) { checkLeft = true; checkRight = true; }
+		if (this.getTranslationKey().contains("_chevron_mid_left")) { checkLeft = true; }
+		if (this.getTranslationKey().contains("_chevron_mid_right")) { checkRight = true; }
 
 		if (placer.getHorizontalFacing().equals(EnumFacing.EAST)) {
 			leftBlock = northBlock.getBlock();
@@ -71,15 +71,15 @@ public class ChevronIconPaintBlock extends CustomMetaPaintBlock implements IMeta
 			rot = 3;
 		}
 
-		if (leftBlock.getUnlocalizedName().contains("chevron_left_a") && checkLeft) { placedMeta = 0 + rot; }
-		if (leftBlock.getUnlocalizedName().contains("chevron_left_b") && checkLeft) { placedMeta = 4 + rot; }
-		if (leftBlock.getUnlocalizedName().contains("chevron_left_a_thin") && checkLeft) { placedMeta = 8 + rot; }
-		if (leftBlock.getUnlocalizedName().contains("chevron_left_b_thin") && checkLeft) { placedMeta = 12 + rot; }
+		if (leftBlock.getTranslationKey().contains("chevron_left_a") && checkLeft) { placedMeta = 0 + rot; }
+		if (leftBlock.getTranslationKey().contains("chevron_left_b") && checkLeft) { placedMeta = 4 + rot; }
+		if (leftBlock.getTranslationKey().contains("chevron_left_a_thin") && checkLeft) { placedMeta = 8 + rot; }
+		if (leftBlock.getTranslationKey().contains("chevron_left_b_thin") && checkLeft) { placedMeta = 12 + rot; }
 
-		if (rightBlock.getUnlocalizedName().contains("chevron_right_a") && checkRight) { placedMeta = 0 + rot; }
-		if (rightBlock.getUnlocalizedName().contains("chevron_right_b") && checkRight) { placedMeta = 4 + rot; }
-		if (rightBlock.getUnlocalizedName().contains("chevron_right_a_thin") && checkRight) { placedMeta = 8 + rot; }
-		if (rightBlock.getUnlocalizedName().contains("chevron_right_b_thin") && checkRight) { placedMeta = 12 + rot; }
+		if (rightBlock.getTranslationKey().contains("chevron_right_a") && checkRight) { placedMeta = 0 + rot; }
+		if (rightBlock.getTranslationKey().contains("chevron_right_b") && checkRight) { placedMeta = 4 + rot; }
+		if (rightBlock.getTranslationKey().contains("chevron_right_a_thin") && checkRight) { placedMeta = 8 + rot; }
+		if (rightBlock.getTranslationKey().contains("chevron_right_b_thin") && checkRight) { placedMeta = 12 + rot; }
 
 		return this.getDefaultState().withProperty(META_ID, EnumMeta.byMetadata(placedMeta));
 	}

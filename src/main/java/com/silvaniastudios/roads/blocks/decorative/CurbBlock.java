@@ -280,7 +280,7 @@ public class CurbBlock extends BlockBase implements IMetaBlockName {
 	}
 	
 	@SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT;
     }
 	

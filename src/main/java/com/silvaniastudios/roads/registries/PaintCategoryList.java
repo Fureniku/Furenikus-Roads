@@ -47,7 +47,7 @@ public class PaintCategoryList {
 		ArrayList<PaintIconObject> whites = new ArrayList<PaintIconObject>(); 
 		
 		for (int i = 0; i < paints.size(); i++) {
-			if (paints.get(i).getUnlocalizedName().contains("white")) {
+			if (paints.get(i).getTranslationKey().contains("white")) {
 				PaintIconObject pio = new PaintIconObject(paints.get(i), metas.get(i), indices.get(i));
 				
 				whites.add(pio);

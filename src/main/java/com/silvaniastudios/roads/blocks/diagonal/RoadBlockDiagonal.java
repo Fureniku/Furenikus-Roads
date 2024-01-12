@@ -92,7 +92,7 @@ public class RoadBlockDiagonal extends BlockBase {
 		boolean trans = false;
 
 		if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) {
-			if (stateLeft.getBlock().getBlockLayer() == BlockRenderLayer.TRANSLUCENT || stateRight.getBlock().getBlockLayer() == BlockRenderLayer.TRANSLUCENT) {
+			if (stateLeft.getBlock().getRenderLayer() == BlockRenderLayer.TRANSLUCENT || stateRight.getBlock().getRenderLayer() == BlockRenderLayer.TRANSLUCENT) {
 				trans = true;
 			}
 		}
@@ -143,7 +143,7 @@ public class RoadBlockDiagonal extends BlockBase {
 		boolean trans = !stateLeft.getBlock().isFullBlock(stateLeft) || !stateLeft.getBlock().isFullBlock(stateRight);
 		if (worldIn.isRemote) {
 			//Client we can be a bit more granular
-			if (stateLeft.getBlock().getBlockLayer() == BlockRenderLayer.TRANSLUCENT || stateRight.getBlock().getBlockLayer() == BlockRenderLayer.TRANSLUCENT) {
+			if (stateLeft.getBlock().getRenderLayer() == BlockRenderLayer.TRANSLUCENT || stateRight.getBlock().getRenderLayer() == BlockRenderLayer.TRANSLUCENT) {
 				trans = true;
 			}
 		}
@@ -620,12 +620,12 @@ public class RoadBlockDiagonal extends BlockBase {
 			}
 		}
 		
-		return getBlockLayer() == layer;
+		return getRenderLayer() == layer;
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public BlockRenderLayer getBlockLayer() {
+	public BlockRenderLayer getRenderLayer() {
 		return BlockRenderLayer.CUTOUT_MIPPED;
 	}
 
@@ -644,7 +644,7 @@ public class RoadBlockDiagonal extends BlockBase {
 			return true;
 		}
 
-		if (block.getBlockLayer() == BlockRenderLayer.TRANSLUCENT) {
+		if (block.getRenderLayer() == BlockRenderLayer.TRANSLUCENT) {
 			return true;
 		}
 

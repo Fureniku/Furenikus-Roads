@@ -15,7 +15,7 @@ public class SlotFluid extends SlotItemHandler {
 	
 	@Override
 	public boolean isItemValid(@Nullable ItemStack stack) {
-		if (stack.getUnlocalizedName().compareTo("item.forge.bucketFilled") == 0) {
+		if (stack.getTranslationKey().compareTo("item.forge.bucketFilled") == 0) {
 			return true;
 		}
 		return stack.getItem() instanceof ItemBucket;

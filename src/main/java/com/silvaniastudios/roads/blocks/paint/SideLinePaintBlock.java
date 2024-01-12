@@ -52,7 +52,7 @@ public class SideLinePaintBlock extends PaintBlockCustomRenderBase {
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
 		boolean connect = meta <= 5;
-		EnumFacing enumfacing = EnumFacing.getFront(connect ? meta : meta-4);
+		EnumFacing enumfacing = EnumFacing.byIndex(connect ? meta : meta-4);
 		if (enumfacing == EnumFacing.DOWN || enumfacing == EnumFacing.UP) {
 			return this.getDefaultState().withProperty(FACING, EnumFacing.NORTH).withProperty(CONNECTING, connect);
 		}

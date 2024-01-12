@@ -243,7 +243,7 @@ public class ChevronPaintBlock extends PaintBlockBase implements IMetaBlockName 
     }
 	
 	@Override
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT;
     }
 

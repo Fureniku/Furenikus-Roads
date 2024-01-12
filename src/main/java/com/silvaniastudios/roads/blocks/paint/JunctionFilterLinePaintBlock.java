@@ -185,13 +185,13 @@ public class JunctionFilterLinePaintBlock extends PaintBlockBase implements IMet
 		
 	
 	@SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT_MIPPED;
     }
 	
 	private boolean isMidChevron(IBlockAccess world, BlockPos pos, EnumFacing facing) {
 		Block block = world.getBlockState(pos.offset(facing)).getBlock();
-		if (block.getUnlocalizedName().contains("_chevron_mid")) {
+		if (block.getTranslationKey().contains("_chevron_mid")) {
 			return true;
 		}
 		

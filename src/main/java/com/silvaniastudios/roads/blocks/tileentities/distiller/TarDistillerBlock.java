@@ -104,7 +104,7 @@ public class TarDistillerBlock extends RoadTEBlock {
 				}
 			}
 		
-			if (held.getItem().getUnlocalizedName().compareTo("item.forge.bucketFilled") == 0) {
+			if (held.getItem().getTranslationKey().compareTo("item.forge.bucketFilled") == 0) {
 				FluidStack fluidStack = FluidUtil.getFluidContained(held);
 				if (te.fluidInput.getFluidAmount() + 1000 <= PaintOvenEntity.FILLER_TANK_CAP ) {
 					if ((te.fluidInput.getFluidAmount() > 0 && te.fluidInput.getFluid().getFluid() == fluidStack.getFluid()) || te.fluidInput.getFluidAmount() == 0) {

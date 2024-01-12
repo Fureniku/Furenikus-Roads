@@ -42,7 +42,7 @@ public class SimpleLinePaintBlock extends PaintBlockCustomRenderBase {
 	
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		EnumFacing enumfacing = EnumFacing.getFront(meta);
+		EnumFacing enumfacing = EnumFacing.byIndex(meta);
 		if (enumfacing == EnumFacing.DOWN || enumfacing == EnumFacing.UP) {
 			return this.getDefaultState().withProperty(FACING, EnumFacing.NORTH);
 		}

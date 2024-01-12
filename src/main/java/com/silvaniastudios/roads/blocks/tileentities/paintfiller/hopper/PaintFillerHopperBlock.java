@@ -59,7 +59,7 @@ public class PaintFillerHopperBlock extends Block {
 	public PaintFillerHopperBlock(String name) {
 		super(Material.IRON);
 		this.name = name;
-		setUnlocalizedName(FurenikusRoads.MODID + "." + name);
+		setTranslationKey(FurenikusRoads.MODID + "." + name);
 		setRegistryName(name);
 		this.setCreativeTab(FurenikusRoads.tab_tools);
 		this.setHardness(2.5F);
@@ -191,7 +191,7 @@ public class PaintFillerHopperBlock extends Block {
     }
 	
 	@Override
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT;
     }
 	

@@ -42,7 +42,7 @@ public class NonPaintRoadTopBlock extends BlockBase {
     }
 	
 	@Override
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT;
     }
 	
