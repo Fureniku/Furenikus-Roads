@@ -1,0 +1,6 @@
+{
+  "parent": "furenikusroads:blocks/decorative/barrier_metal_center_tall_connection",
+  "textures": {
+    "texture": "furenikusroads:block/decorative/barrier_metal"
+  }
+}

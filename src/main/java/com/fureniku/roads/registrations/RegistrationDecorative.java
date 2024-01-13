@@ -2,16 +2,24 @@ package com.fureniku.roads.registrations;
 
 import com.fureniku.metropolis.RegistrationBase;
 import com.fureniku.metropolis.RegistrationGroup;
+import com.fureniku.metropolis.blocks.decorative.builders.MetroBlockDecorativeBuilder;
 import com.fureniku.metropolis.blocks.decorative.builders.MetroBlockDecorativeConnectingBuilder;
 import com.fureniku.metropolis.blocks.decorative.builders.MetroBlockDecorativeToggleBuilder;
+import com.fureniku.metropolis.blocks.decorative.helpers.OffsetHelper;
+import com.fureniku.metropolis.blocks.decorative.helpers.RotationHelper;
+import com.fureniku.metropolis.blocks.decorative.helpers.ToggleHelper;
 import com.fureniku.metropolis.datagen.TextureSet;
+import com.fureniku.metropolis.enums.BlockConnectionType;
+import com.fureniku.metropolis.enums.BlockOffsetDirection;
 import com.fureniku.metropolis.enums.DecorativeBuilderType;
 import com.fureniku.metropolis.enums.ToggleType;
 import com.fureniku.metropolis.utils.CreativeTabSet;
+import com.fureniku.metropolis.utils.ShapeUtils;
 import com.fureniku.roads.FurenikusRoads;
 import com.fureniku.roads.blocks.DecorativeRoadObjectBuilder;
 import com.fureniku.roads.blocks.DecorativeRoadObjectToggleBuilder;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -132,6 +140,20 @@ public class RegistrationDecorative extends RegistrationGroup {
 
     public final String WALL_CONCRETE_CENTER_SOLID_1 = "wall_concrete_center_solid_1";
     public final String WALL_CONCRETE_CENTER_SOLID_2 = "wall_concrete_center_solid_2";
+
+    public final String BARRIER_METAL_CENTER_SHORT = "barrier_metal_center_short";
+    public final String BARRIER_METAL_CENTER_TALL = "barrier_metal_center_tall";
+
+    public final String BARRIER_BARS_CENTER_1 = "barrier_bars_center_1";
+    public final String BARRIER_BARS_CENTER_2 = "barrier_bars_center_2";
+    public final String BARRIER_BARS_CENTER_3 = "barrier_bars_center_3";
+    public final String BARRIER_BARS_CENTER_4 = "barrier_bars_center_4";
+    public final String BARRIER_BARS_CENTER_5 = "barrier_bars_center_5";
+
+    public final String WALL_CONCRETE_CENTER_THIN_1 = "wall_concrete_center_thin_1";
+    public final String WALL_CONCRETE_CENTER_THIN_2 = "wall_concrete_center_thin_2";
+    public final String WALL_CONCRETE_CENTER_THIN_3 = "wall_concrete_center_thin_3";
+    public final String WALL_CONCRETE_CENTER_THIN_4 = "wall_concrete_center_thin_4";
     //endregion
 
     //region Textures
@@ -156,18 +178,34 @@ public class RegistrationDecorative extends RegistrationGroup {
         super(registrationBase);
     }
 
+    public MetroBlockDecorativeBuilder foldingRedstoneToggle(String modelName, float size, float height) {
+        return new MetroBlockDecorativeBuilder(_props)
+                .setModelDirectory("blocks/decorative/")
+                .setModelName(modelName + "_up")
+                .addHelper(new OffsetHelper(BlockOffsetDirection.DOWN))
+                .addHelper(new ToggleHelper(true, ShapeUtils.makeShape(size, height), ShapeUtils.makeShape(size, 1), modelName + "_down", ToggleType.REDSTONE));
+    }
+
+    public MetroBlockDecorativeBuilder bollardRedstoneToggle(String modelName, float size, float height) {
+        return new MetroBlockDecorativeBuilder(_props)
+                .setModelDirectory("blocks/decorative/")
+                .setModelName(modelName + "_up")
+                .addHelper(new OffsetHelper(BlockOffsetDirection.DOWN))
+                .addHelper(new ToggleHelper(true, ShapeUtils.makeShape(size, height), ShapeUtils.makeShape(size, 1), modelName + "_down", ToggleType.REDSTONE));
+    }
+
     @Override
     public void init(IEventBus modEventBus) {
         //region Generic abstracts
         //Foldable
-        MetroBlockDecorativeToggleBuilder bollard_redstone_rotatable_toggle = new DecorativeRoadObjectToggleBuilder(_props, DecorativeBuilderType.DECORATIVE_ROTATABLE_TOGGLE).setToggleType(ToggleType.REDSTONE);
-        MetroBlockDecorativeToggleBuilder bollard_folding_thin = bollard_redstone_rotatable_toggle.setModelNames("bollard_folding_1_upright", "bollard_folding_1_down").setShape(2, 16).setToggledShape(Block.box(7, 0, 0, 9, 2, 9));
+        MetroBlockDecorativeBuilder bollard_redstone_rotatable_toggle = new DecorativeRoadObjectToggleBuilder(_props, DecorativeBuilderType.DECORATIVE_ROTATABLE_TOGGLE).setToggleType(ToggleType.REDSTONE);
+        /*MetroBlockDecorativeToggleBuilder bollard_folding_thin = bollard_redstone_rotatable_toggle.setModelNames("bollard_folding_1_upright", "bollard_folding_1_down").setShape(2, 16).setToggledShape(Block.box(7, 0, 0, 9, 2, 9));
         //Retracting
         MetroBlockDecorativeToggleBuilder bollard_redstone_toggle = new DecorativeRoadObjectToggleBuilder(_props, DecorativeBuilderType.DECORATIVE_TOGGLE).setToggleType(ToggleType.REDSTONE);
         MetroBlockDecorativeToggleBuilder bollard_retracting_thick = bollard_redstone_toggle.setModelNames("bollard_retract_thick_up", "bollard_retract_thick_down").setShape(4, 16).setToggledShape(5, 1);
         MetroBlockDecorativeToggleBuilder bollard_retracting_thin = bollard_redstone_toggle.setModelNames("bollard_retract_thin_up", "bollard_retract_thin_down").setShape(3, 16).setToggledShape(5, 1);
         MetroBlockDecorativeToggleBuilder bollard_retracting_stumpy = bollard_redstone_toggle.setModelNames("bollard_retract_stumpy_up", "bollard_retract_stumpy_down").setShape(5.5f, 13).setToggledShape(5, 1);
-        MetroBlockDecorativeToggleBuilder bollard_retracting_round = bollard_redstone_toggle.setModelNames("bollard_retract_round_ringed_up", "bollard_retract_round_ringed_down").setShape(5, 16).setToggledShape(5, 1);
+        MetroBlockDecorativeToggleBuilder bollard_retracting_round = bollard_redstone_toggle.setModelNames("bollard_retract_round_ringed_up", "bollard_retract_round_ringed_down").setShape(5, 16).setToggledShape(5, 1);*/
         //endregion
 
         //region Bollards
@@ -253,33 +291,57 @@ public class RegistrationDecorative extends RegistrationGroup {
         _blockNames.add(registerBlockSet(BOLLARD_FOLDING_THIN_WHITE, () ->  bollard_folding_thin.setTextures(TEX_WHITE).build()));
 
         //Retracting
-        _blockNames.add(registerBlockSet(BOLLARD_RETRACTING_THICK_BLACK, () -> bollard_retracting_thick.setTextures(TEX_BLACK).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_RETRACTING_THICK_DARK_METAL, () -> bollard_retracting_thick.setTextures(TEX_METAL_DARK).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_RETRACTING_THICK_LIGHT_METAL, () -> bollard_retracting_thick.setTextures(TEX_METAL_LIGHT).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_RETRACTING_THICK_YELLOW, () -> bollard_retracting_thick.setTextures(TEX_YELLOW).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_RETRACTING_THICK_WHITE, () -> bollard_retracting_thick.setTextures(TEX_WHITE).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_RETRACTING_THICK_BLACK, () -> bollardRedstoneToggle("bollard_retract_thick", 4, 16).setTextures(TEX_BLACK).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_RETRACTING_THICK_DARK_METAL, () -> bollardRedstoneToggle("bollard_retract_thick", 4, 16).setTextures(TEX_METAL_DARK).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_RETRACTING_THICK_LIGHT_METAL, () -> bollardRedstoneToggle("bollard_retract_thick", 4, 16).setTextures(TEX_METAL_LIGHT).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_RETRACTING_THICK_YELLOW, () -> bollardRedstoneToggle("bollard_retract_thick", 4, 16).setTextures(TEX_YELLOW).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_RETRACTING_THICK_WHITE, () -> bollardRedstoneToggle("bollard_retract_thick", 4, 16).setTextures(TEX_WHITE).build()));
 
-        _blockNames.add(registerBlockSet(BOLLARD_RETRACTING_THIN_BLACK, () -> bollard_retracting_thin.setTextures(TEX_BLACK).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_RETRACTING_THIN_DARK_METAL, () -> bollard_retracting_thin.setTextures(TEX_METAL_DARK).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_RETRACTING_THIN_LIGHT_METAL, () -> bollard_retracting_thin.setTextures(TEX_METAL_LIGHT).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_RETRACTING_THIN_YELLOW, () -> bollard_retracting_thin.setTextures(TEX_YELLOW).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_RETRACTING_THIN_WHITE, () -> bollard_retracting_thin.setTextures(TEX_WHITE).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_RETRACTING_THIN_BLACK, () -> bollardRedstoneToggle("bollard_retract_thin", 3, 16).setTextures(TEX_BLACK).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_RETRACTING_THIN_DARK_METAL, () -> bollardRedstoneToggle("bollard_retract_thin", 3, 16).setTextures(TEX_METAL_DARK).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_RETRACTING_THIN_LIGHT_METAL, () -> bollardRedstoneToggle("bollard_retract_thin", 3, 16).setTextures(TEX_METAL_LIGHT).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_RETRACTING_THIN_YELLOW, () -> bollardRedstoneToggle("bollard_retract_thin", 3, 16).setTextures(TEX_YELLOW).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_RETRACTING_THIN_WHITE, () -> bollardRedstoneToggle("bollard_retract_thin", 3, 16).setTextures(TEX_WHITE).build()));
 
-        _blockNames.add(registerBlockSet(BOLLARD_RETRACTING_STUMPY_BLACK, () -> bollard_retracting_stumpy.setTextures(TEX_BLACK).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_RETRACTING_STUMPY_DARK_METAL, () -> bollard_retracting_stumpy.setTextures(TEX_METAL_DARK).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_RETRACTING_STUMPY_LIGHT_METAL, () -> bollard_retracting_stumpy.setTextures(TEX_METAL_LIGHT).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_RETRACTING_STUMPY_YELLOW, () -> bollard_retracting_stumpy.setTextures(TEX_YELLOW).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_RETRACTING_STUMPY_WHITE, () -> bollard_retracting_stumpy.setTextures(TEX_WHITE).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_RETRACTING_STUMPY_BLACK, () -> bollardRedstoneToggle("bollard_retract_stumpy", 5.5f, 13).setTextures(TEX_BLACK).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_RETRACTING_STUMPY_DARK_METAL, () -> bollardRedstoneToggle("bollard_retract_stumpy", 5.5f, 13).setTextures(TEX_METAL_DARK).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_RETRACTING_STUMPY_LIGHT_METAL, () -> bollardRedstoneToggle("bollard_retract_stumpy", 5.5f, 13).setTextures(TEX_METAL_LIGHT).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_RETRACTING_STUMPY_YELLOW, () -> bollardRedstoneToggle("bollard_retract_stumpy", 5.5f, 13).setTextures(TEX_YELLOW).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_RETRACTING_STUMPY_WHITE, () -> bollardRedstoneToggle("bollard_retract_stumpy", 5.5f, 13).setTextures(TEX_WHITE).build()));
 
-        _blockNames.add(registerBlockSet(BOLLARD_RETRACTING_ROUND_BLACK, () -> bollard_retracting_round.setTextures(TEX_BLACK).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_RETRACTING_ROUND_DARK_METAL, () -> bollard_retracting_round.setTextures(TEX_METAL_DARK).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_RETRACTING_ROUND_LIGHT_METAL, () -> bollard_retracting_round.setTextures(TEX_METAL_LIGHT).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_RETRACTING_ROUND_YELLOW, () -> bollard_retracting_round.setTextures(TEX_YELLOW).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_RETRACTING_ROUND_WHITE, () -> bollard_retracting_round.setTextures(TEX_WHITE).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_RETRACTING_ROUND_BLACK, () -> bollardRedstoneToggle("bollard_retract_round_ringed", 5, 16).setTextures(TEX_BLACK).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_RETRACTING_ROUND_DARK_METAL, () -> bollardRedstoneToggle("bollard_retract_round_ringed", 5, 16).setTextures(TEX_METAL_DARK).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_RETRACTING_ROUND_LIGHT_METAL, () -> bollardRedstoneToggle("bollard_retract_round_ringed", 5, 16).setTextures(TEX_METAL_LIGHT).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_RETRACTING_ROUND_YELLOW, () -> bollardRedstoneToggle("bollard_retract_round_ringed", 5, 16).setTextures(TEX_YELLOW).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_RETRACTING_ROUND_WHITE, () -> bollardRedstoneToggle("bollard_retract_round_ringed", 5, 16).setTextures(TEX_WHITE).build()));
         //endregion
 
-        _blockNames.add(registerBlockSet(WALL_CONCRETE_CENTER_SOLID_1, () -> new MetroBlockDecorativeConnectingBuilder(_props, DecorativeBuilderType.DECORATIVE_CONNECT_HORIZONTAL).setShape(4, 16).setModelName("barrier_concrete_middle").setTextures(TEX_CONC_1).build()));
-        _blockNames.add(registerBlockSet(WALL_CONCRETE_CENTER_SOLID_2, () -> new MetroBlockDecorativeConnectingBuilder(_props, DecorativeBuilderType.DECORATIVE_CONNECT_HORIZONTAL).setShape(4, 16).setModelName("barrier_concrete_middle").setTextures(TEX_CONC_2).build()));
+        VoxelShape[] shapeA = ShapeUtils.makeShapes(4f, 4f);
+        VoxelShape[] shapeB = ShapeUtils.makeShapes(2.5f, 4f, 16f);
+
+        MetroBlockDecorativeConnectingBuilder standard_wall = new MetroBlockDecorativeConnectingBuilder(_props, DecorativeBuilderType.DECORATIVE_CONNECT_HORIZONTAL).setConnectionType(BlockConnectionType.SOLID_CONNECTING);
+        MetroBlockDecorativeConnectingBuilder standard_barrier = new MetroBlockDecorativeConnectingBuilder(_props, DecorativeBuilderType.DECORATIVE_CONNECT_HORIZONTAL_TOGGLE).setToggleItem(Items.DIAMOND).setConnectionType(BlockConnectionType.SOLID_CONNECTING).setShapes(ShapeUtils.makeShapes(2f, 16f));
+
+        _blockNames.add(registerBlockSet(WALL_CONCRETE_CENTER_SOLID_1, () -> standard_wall.setShapes(ShapeUtils.combineMultiShapes(shapeA, shapeB)).setModelName("barrier_concrete_middle").setTextures(TEX_CONC_1).build()));
+        _blockNames.add(registerBlockSet(WALL_CONCRETE_CENTER_SOLID_2, () -> standard_wall.setShapes(ShapeUtils.combineMultiShapes(shapeA, shapeB)).setModelName("barrier_concrete_middle").setTextures(TEX_CONC_2).build()));
+
+        _blockNames.add(registerBlockSet(BARRIER_METAL_CENTER_SHORT, () -> standard_barrier
+                .setNoToggledConnectionNames("barrier_metal_center_short", "barrier_metal_center_short_connection", "barrier_metal_center_post")
+                .setTextures(texture("texture", getLoc("barrier_metal")), texture("accent", getLoc("barrier_metal_dark"))).setCenterFourSided(true, false).setIndependentModelsPerSide().build()));
+        _blockNames.add(registerBlockSet(BARRIER_METAL_CENTER_TALL, () -> standard_barrier
+                .setNoToggledConnectionNames("barrier_metal_center_tall", "barrier_metal_center_tall_connection", "barrier_metal_center_post")
+                .setTextures(texture("texture", getLoc("barrier_metal")), texture("accent", getLoc("barrier_metal_dark"))).setCenterFourSided(true, false).setIndependentModelsPerSide().build()));
+
+        /*_blockNames.add(registerBlockSet(WALL_CONCRETE_CENTER_THIN_1, () -> standard_barrier.setModelName("barrier_wall_mid").setToggleModelName("barrier_wall_mid_toggled").setTextures(TEX_CONC_1).build()));
+        _blockNames.add(registerBlockSet(WALL_CONCRETE_CENTER_THIN_2, () -> standard_barrier.setModelName("barrier_wall_mid").setToggleModelName("barrier_wall_mid_toggled").setTextures(TEX_CONC_2).build()));
+        _blockNames.add(registerBlockSet(WALL_CONCRETE_CENTER_THIN_3, () -> standard_barrier.setModelName("barrier_wall_mid").setToggleModelName("barrier_wall_mid_toggled").setTextures(TEX_CONC_2).build()));
+        _blockNames.add(registerBlockSet(WALL_CONCRETE_CENTER_THIN_4, () -> standard_barrier.setModelName("barrier_wall_mid").setToggleModelName("barrier_wall_mid_toggled").setTextures(TEX_CONC_2).build()));
+
+        _blockNames.add(registerBlockSet(BARRIER_BARS_CENTER_1, () -> standard_barrier.setModelName("barrier_wall_mid").setToggleModelName("barrier_wall_mid_toggled").setTextures(TEX_CONC_2).build()));
+        _blockNames.add(registerBlockSet(BARRIER_BARS_CENTER_2, () -> standard_barrier.setModelName("barrier_wall_mid").setToggleModelName("barrier_wall_mid_toggled").setTextures(TEX_CONC_2).build()));
+        _blockNames.add(registerBlockSet(BARRIER_BARS_CENTER_3, () -> standard_barrier.setModelName("barrier_wall_mid").setToggleModelName("barrier_wall_mid_toggled").setTextures(TEX_CONC_2).build()));
+        _blockNames.add(registerBlockSet(BARRIER_BARS_CENTER_4, () -> standard_barrier.setModelName("barrier_wall_mid").setToggleModelName("barrier_wall_mid_toggled").setTextures(TEX_CONC_2).build()));
+        _blockNames.add(registerBlockSet(BARRIER_BARS_CENTER_5, () -> standard_barrier.setModelName("barrier_wall_mid").setToggleModelName("barrier_wall_mid_toggled").setTextures(TEX_CONC_2).build()));*/
 
         _decorativeTab = new CreativeTabSet(registration.getCreativeTabDeferredRegister(),"tab_decorative", getItem(BOLLARD_ROUND_RINGED_DARK_METAL));
     }

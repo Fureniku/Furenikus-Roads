@@ -1,0 +1,8 @@
+{
+    "loader": "neoforge:obj",
+    "model": "furenikusroads:models/block/decorative/barrier_metal_center_tall_connection.obj",
+    "textures": {
+        "texture0": "minecraft:block/dirt",
+        "particle": "minecraft:block/dirt"
+    }
+}

@@ -1,0 +1,109 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "furenikusroads:block/barrier_metal_center_short_standard_toggled",
+        "uvlock": true
+      },
+      "when": {
+        "north": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "furenikusroads:block/barrier_metal_center_short_standard_toggled",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "east": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "furenikusroads:block/barrier_metal_center_short_standard_toggled",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "south": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "furenikusroads:block/barrier_metal_center_short_standard_toggled",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "furenikusroads:block/barrier_metal_center_short_standard",
+        "y": 90
+      },
+      "when": {
+        "north": "true",
+        "south": "true",
+        "toggle": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "furenikusroads:block/barrier_metal_center_short_standard"
+      },
+      "when": {
+        "east": "true|false",
+        "north": "true|false",
+        "south": "false",
+        "toggle": "true",
+        "west": "true|false"
+      }
+    },
+    {
+      "apply": {
+        "model": "furenikusroads:block/barrier_metal_center_short_standard"
+      },
+      "when": {
+        "east": "true|false",
+        "north": "false",
+        "south": "true|false",
+        "toggle": "true",
+        "west": "true|false"
+      }
+    },
+    {
+      "apply": {
+        "model": "furenikusroads:block/barrier_metal_center_short_standard"
+      },
+      "when": {
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "toggle": "true",
+        "west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "furenikusroads:block/barrier_metal_center_short_connection_toggled",
+        "uvlock": true
+      },
+      "when": {
+        "north": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "furenikusroads:block/barrier_metal_center_short_connection_toggled",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "east": "true"
+      }
+    }
+  ]
+}

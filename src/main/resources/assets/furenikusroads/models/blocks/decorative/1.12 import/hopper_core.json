@@ -1,0 +1,21 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "furenikusroads:blocks/machine_part_plain",
+		"particle": "furenikusroads:blocks/machine_part_plain"
+	},
+	"elements": [
+		{
+			"from": [3, 4, 3],
+			"to": [13, 12, 13],
+			"faces": {
+				"north": {"uv": [3, 4, 13, 12], "texture": "#0"},
+				"east": {"uv": [3, 4, 13, 12], "texture": "#0"},
+				"south": {"uv": [3, 4, 13, 12], "texture": "#0"},
+				"west": {"uv": [3, 4, 13, 12], "texture": "#0"},
+				"up": {"uv": [3, 3, 13, 13], "texture": "#0"},
+				"down": {"uv": [3, 3, 13, 13], "texture": "#0"}
+			}
+		}
+	]
+}
