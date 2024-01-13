@@ -196,7 +196,7 @@ public class RoadFactoryEntity extends RoadTileEntity implements ITickable, ICap
 			ItemStack fluid_in = inventory.getStackInSlot(RoadFactoryContainer.FLUID_IN);
 			ItemStack bucket_out = inventory.getStackInSlot(RoadFactoryContainer.FLUID_IN_BUCKET);
 
-			if (fluid_in.getUnlocalizedName().compareTo("item.forge.bucketFilled") == 0) {
+			if (fluid_in.getTranslationKey().compareTo("item.forge.bucketFilled") == 0) {
 				FluidStack fluidStack = FluidUtil.getFluidContained(fluid_in);
 				for (int i = 0; i < RecipeRegistry.tar.size(); i++) {
 					if (RecipeRegistry.tar.get(i).getFluid() == fluidStack.getFluid() && tarFluid.fill(fluidStack, false) == fluidStack.amount) {
@@ -242,7 +242,7 @@ public class RoadFactoryEntity extends RoadTileEntity implements ITickable, ICap
 		ItemStack fluid_in = inventory.getStackInSlot(RoadFactoryContainer.FLUID_IN);
 		ItemStack bucket_out = inventory.getStackInSlot(RoadFactoryContainer.FLUID_IN_BUCKET);
 
-		if (fluid_in.getUnlocalizedName().compareTo("item.forge.bucketFilled") == 0) {
+		if (fluid_in.getTranslationKey().compareTo("item.forge.bucketFilled") == 0) {
 			if (tarFluid.getFluidAmount() <= TANK_CAP - 100 && (bucket_out.isEmpty() || bucket_out.getCount() < bucket_out.getMaxStackSize())) {
 				return true;
 			}

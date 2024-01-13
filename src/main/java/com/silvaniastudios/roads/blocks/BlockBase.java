@@ -23,7 +23,7 @@ public class BlockBase extends Block {
 	public BlockBase(String name, Material mat) {
 		super(mat);
 		this.name = name;
-		setUnlocalizedName(FurenikusRoads.MODID + "." + name);
+		setTranslationKey(FurenikusRoads.MODID + "." + name);
 		setRegistryName(name);
 	}
 	

@@ -31,15 +31,15 @@ public class RoadItemBlock extends ItemBlock {
 	}
 	
 	@Override
-	public String getUnlocalizedName(ItemStack stack) {
+	public String getTranslationKey(ItemStack stack) {
 		if (stack.getItem() instanceof ItemBlock) {
 			ItemBlock ib = (ItemBlock) stack.getItem();
 			Block block = ib.getBlock();
 			if (block instanceof IMetaBlockName) {
-				return super.getUnlocalizedName(stack) + "." + ((IMetaBlockName) this.block).getSpecialName(stack);
+				return super.getTranslationKey(stack) + "." + ((IMetaBlockName) this.block).getSpecialName(stack);
 			}
 		}
-		return super.getUnlocalizedName(stack);
+		return super.getTranslationKey(stack);
 	}
 	
 	public String getItemStackDisplayName(ItemStack stack) {

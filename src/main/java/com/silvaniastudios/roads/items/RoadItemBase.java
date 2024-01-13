@@ -10,7 +10,7 @@ public class RoadItemBase extends Item {
 	
 	public RoadItemBase(String name, int stackSize) {
 		this.name = name;
-		this.setUnlocalizedName(name);
+		this.setTranslationKey(name);
 		this.setRegistryName(name);
 		this.maxStackSize = stackSize;
 	}

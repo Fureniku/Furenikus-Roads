@@ -14,7 +14,7 @@ public class Diagonal12MirrorModelLoader implements ICustomModelLoader {
 	
 	@Override
 	public boolean accepts(ResourceLocation modelLocation) {
-		return modelLocation.getResourceDomain().equals(FurenikusRoads.MODID) && "diagonal_12_mirror".equals(modelLocation.getResourcePath());
+		return modelLocation.getNamespace().equals(FurenikusRoads.MODID) && "diagonal_12_mirror".equals(modelLocation.getPath());
 	}
 	
 	@Override

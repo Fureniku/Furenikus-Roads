@@ -46,7 +46,7 @@ public class RoadTEBlock extends Block {
 	public RoadTEBlock(String name, boolean electric, int guiId) {
 		super(Material.IRON);
 		this.name = name;
-		setUnlocalizedName(FurenikusRoads.MODID + "." + name);
+		setTranslationKey(FurenikusRoads.MODID + "." + name);
 		setRegistryName(name);
 		this.setCreativeTab(FurenikusRoads.tab_tools);
 		this.setHardness(2.5F);
@@ -177,7 +177,7 @@ public class RoadTEBlock extends Block {
     }
 	
 	@Override
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT;
     }
 	

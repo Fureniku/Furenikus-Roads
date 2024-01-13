@@ -76,77 +76,77 @@ public class FurenikusRoads {
 
     public static CreativeTabs tab_roads = new CreativeTabs("tab_roads") {
 		@Override
-		public ItemStack getTabIconItem() {
+		public ItemStack createIcon() {
 			return new ItemStack(FRBlocks.road_block_standard, 1, 11);
 		}
 	};
 	
 	public static CreativeTabs tab_sidewalks = new CreativeTabs("tab_sidewalks") {
 		@Override
-		public ItemStack getTabIconItem() {
+		public ItemStack createIcon() {
 			return new ItemStack(FRBlocks.street_block_a, 1, 3);
 		}
 	};
 	
 	public static CreativeTabs tab_road_parts = new CreativeTabs("tab_road_parts") {
 		@Override
-		public ItemStack getTabIconItem() {
+		public ItemStack createIcon() {
 			return new ItemStack(FRBlocks.tactile_crossing_bumps, 1, 0);
 		}
 	};
 	
 	public static CreativeTabs tab_tools = new CreativeTabs("tab_tools") {
 		@Override
-		public ItemStack getTabIconItem() {
+		public ItemStack createIcon() {
 			return new ItemStack(FRItems.paint_gun, 1, 0);
 		}
 	};
 	
 	public static CreativeTabs tab_diagonals = new CreativeTabs("tab_diagonals") {
 		@Override
-		public ItemStack getTabIconItem() {
+		public ItemStack createIcon() {
 			return new ItemStack(FRBlocks.road_block_diagonal_1_2, 1, 0);
 		}
 	};
 	
 	public static CreativeTabs tab_paint_lines = new CreativeTabs("tab_paint_lines") {
 		@Override
-		public ItemStack getTabIconItem() {
+		public ItemStack createIcon() {
 			return new ItemStack(Block.REGISTRY.getObject(new ResourceLocation(MODID, "line_white_straight_thick")), 1, 0);
 		}
 	};
 	
 	public static CreativeTabs tab_paint_icons = new CreativeTabs("tab_paint_icons") {
 		@Override
-		public ItemStack getTabIconItem() {
+		public ItemStack createIcon() {
 			return new ItemStack(Block.REGISTRY.getObject(new ResourceLocation(MODID, "white_wheelchair_icon")), 1, 0);
 		}
 	};
 	
 	public static CreativeTabs tab_paint_letters = new CreativeTabs("tab_paint_letters") {
 		@Override
-		public ItemStack getTabIconItem() {
+		public ItemStack createIcon() {
 			return new ItemStack(Block.REGISTRY.getObject(new ResourceLocation(MODID, "paint_letter_white_ab")), 1, 0);
 		}
 	};
 	
 	public static CreativeTabs tab_paint_text = new CreativeTabs("tab_paint_text") {
 		@Override
-		public ItemStack getTabIconItem() {
+		public ItemStack createIcon() {
 			return new ItemStack(Block.REGISTRY.getObject(new ResourceLocation(MODID, "white_slow")), 1, 0);
 		}
 	};
 	
 	public static CreativeTabs tab_paint_junction = new CreativeTabs("tab_paint_junction") {
 		@Override
-		public ItemStack getTabIconItem() {
+		public ItemStack createIcon() {
 			return new ItemStack(Block.REGISTRY.getObject(new ResourceLocation(MODID, "white_junction_fork_chevron_mid")), 1, 0);
 		}
 	};
 	
 	public static CreativeTabs tab_paint_customs = new CreativeTabs("tab_paint_customs") {
 		@Override
-		public ItemStack getTabIconItem() {
+		public ItemStack createIcon() {
 			return new ItemStack(Block.REGISTRY.getObject(new ResourceLocation(MODID, "white_junction_fork_chevron_mid")), 1, 0);
 		}
 	};

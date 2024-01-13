@@ -21,9 +21,9 @@ public class PaintLoaderBase implements ICustomModelLoader {
 
     @Override
     public boolean accepts(ResourceLocation modelLocation) {
-        if (modelLocation.getResourceDomain().equals(FurenikusRoads.MODID)) {
+        if (modelLocation.getNamespace().equals(FurenikusRoads.MODID)) {
             for (int i = 0; i < FRBlocks.col.size(); i++) {
-                if (modelLocation.getResourcePath().equals(texturePre + FRBlocks.col.get(i).getName() + texturePost)) {
+                if (modelLocation.getPath().equals(texturePre + FRBlocks.col.get(i).getName() + texturePost)) {
                     return true;
                 }
             }

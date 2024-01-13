@@ -73,7 +73,7 @@ public class RoadFactoryBlock extends RoadTEBlock {
 				}
 			}
 		
-			if (held.getItem().getUnlocalizedName().compareTo("item.forge.bucketFilled") == 0) {
+			if (held.getItem().getTranslationKey().compareTo("item.forge.bucketFilled") == 0) {
 				FluidStack fluidStack = FluidUtil.getFluidContained(held);
 				if (te.tarFluid.getFluidAmount() + 1000 <= PaintOvenEntity.FILLER_TANK_CAP ) {
 					if ((te.tarFluid.getFluidAmount() > 0 && te.tarFluid.getFluid().getFluid() == fluidStack.getFluid()) || te.tarFluid.getFluidAmount() == 0) {

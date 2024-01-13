@@ -20,8 +20,8 @@ public class CustomPaintModelLoader implements ICustomModelLoader {
 	
 	@Override
 	public boolean accepts(ResourceLocation modelLocation) {
-		if (modelLocation.getResourceDomain().equals(FurenikusRoads.MODID)) {
-			return modelLocation.getResourcePath().equals(name);
+		if (modelLocation.getNamespace().equals(FurenikusRoads.MODID)) {
+			return modelLocation.getPath().equals(name);
 		}
 		return false;
 	}

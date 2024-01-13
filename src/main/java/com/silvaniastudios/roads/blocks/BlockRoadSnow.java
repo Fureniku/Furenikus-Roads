@@ -32,7 +32,7 @@ public class BlockRoadSnow extends BlockSnow {
 	public BlockRoadSnow(String name) {
 		super();
 		this.name = name;
-		setUnlocalizedName(FurenikusRoads.MODID + "." + name);
+		setTranslationKey(FurenikusRoads.MODID + "." + name);
 		setRegistryName(name);
 	}
 	

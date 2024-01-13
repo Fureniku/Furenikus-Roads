@@ -1,0 +1,16 @@
+// Add any additional repositories for your dependencies here
+
+repositories {
+    maven {
+        name "Progwml6 maven"
+        url "https://dvs1.progwml6.com/files/maven/"
+    }
+    maven {
+        name "ChickenBones Maven"
+        url "https://chickenbones.net/maven/"
+    }
+    maven {
+        name "CoFH Maven"
+        url "https://maven.covers1624.net"
+    }
+}

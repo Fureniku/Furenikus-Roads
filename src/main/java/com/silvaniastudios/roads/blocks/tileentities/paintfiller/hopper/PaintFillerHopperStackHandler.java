@@ -49,7 +49,7 @@ public class PaintFillerHopperStackHandler extends ItemStackHandler {
 			return internalStackHandler.insertItem(slot, stack, simulate);
 		}
 		
-		if (slot == 3 && stack.getItem().getUnlocalizedName().compareTo("item.forge.bucketFilled") == 0) {
+		if (slot == 3 && stack.getItem().getTranslationKey().compareTo("item.forge.bucketFilled") == 0) {
 			return internalStackHandler.insertItem(slot, stack, simulate);
 		}
 		
