@@ -1,10 +1,10 @@
 {
   "variants": {
     "toggled=false": {
-      "model": "furenikusroads:block/bollard_retracting_thin_yellow_standard"
+      "model": "furenikusroads:block/bollard_retracting_thin_yellow"
     },
     "toggled=true": {
-      "model": "furenikusroads:block/bollard_retracting_thin_yellow_toggled"
+      "model": "furenikusroads:block/bollard_retracting_thin_yellow"
     }
   }
 }

@@ -1,5 +1,5 @@
 {
-  "parent": "furenikusroads:blocks/decorative/bollard_folding_1_upright",
+  "parent": "furenikusroads:blocks/decorative/bollard_retract_thin_down",
   "textures": {
     "texture": "furenikusroads:block/decorative/bollard_metal_dark"
   }

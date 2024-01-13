@@ -3,26 +3,19 @@ package com.fureniku.roads.registrations;
 import com.fureniku.metropolis.RegistrationBase;
 import com.fureniku.metropolis.RegistrationGroup;
 import com.fureniku.metropolis.blocks.decorative.builders.MetroBlockDecorativeBuilder;
-import com.fureniku.metropolis.blocks.decorative.builders.MetroBlockDecorativeConnectingBuilder;
-import com.fureniku.metropolis.blocks.decorative.builders.MetroBlockDecorativeToggleBuilder;
 import com.fureniku.metropolis.blocks.decorative.helpers.OffsetHelper;
 import com.fureniku.metropolis.blocks.decorative.helpers.RotationHelper;
 import com.fureniku.metropolis.blocks.decorative.helpers.ToggleHelper;
-import com.fureniku.metropolis.datagen.TextureSet;
-import com.fureniku.metropolis.enums.BlockConnectionType;
 import com.fureniku.metropolis.enums.BlockOffsetDirection;
-import com.fureniku.metropolis.enums.DecorativeBuilderType;
 import com.fureniku.metropolis.enums.ToggleType;
 import com.fureniku.metropolis.utils.CreativeTabSet;
 import com.fureniku.metropolis.utils.ShapeUtils;
 import com.fureniku.roads.FurenikusRoads;
-import com.fureniku.roads.blocks.DecorativeRoadObjectBuilder;
-import com.fureniku.roads.blocks.DecorativeRoadObjectToggleBuilder;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.bus.api.IEventBus;
 
@@ -178,12 +171,14 @@ public class RegistrationDecorative extends RegistrationGroup {
         super(registrationBase);
     }
 
-    public MetroBlockDecorativeBuilder foldingRedstoneToggle(String modelName, float size, float height) {
+    //Generic functions to create similar block styles. The individual calls still set the texture in case there's multiple to set
+    public MetroBlockDecorativeBuilder foldingRedstoneToggle(String modelName, VoxelShape shapeUp, VoxelShape shapeDown) {
         return new MetroBlockDecorativeBuilder(_props)
                 .setModelDirectory("blocks/decorative/")
                 .setModelName(modelName + "_up")
                 .addHelper(new OffsetHelper(BlockOffsetDirection.DOWN))
-                .addHelper(new ToggleHelper(true, ShapeUtils.makeShape(size, height), ShapeUtils.makeShape(size, 1), modelName + "_down", ToggleType.REDSTONE));
+                .addHelper(new ToggleHelper(true, shapeUp, shapeDown, modelName + "_down", ToggleType.REDSTONE))
+                .addHelper(new RotationHelper());
     }
 
     public MetroBlockDecorativeBuilder bollardRedstoneToggle(String modelName, float size, float height) {
@@ -194,101 +189,107 @@ public class RegistrationDecorative extends RegistrationGroup {
                 .addHelper(new ToggleHelper(true, ShapeUtils.makeShape(size, height), ShapeUtils.makeShape(size, 1), modelName + "_down", ToggleType.REDSTONE));
     }
 
+    public MetroBlockDecorativeBuilder rotateableBlock(BlockBehaviour.Properties props, String modelName, Vec3 shape) {
+        return new MetroBlockDecorativeBuilder(props)
+                .setModelDirectory("blocks/decorative/")
+                .setModelName(modelName)
+                .addHelper(new RotationHelper(ShapeUtils.makeShape(shape)))
+                .addHelper(new OffsetHelper(BlockOffsetDirection.DOWN));
+    }
+
+    public MetroBlockDecorativeBuilder genericBlock(BlockBehaviour.Properties props, String modelName, float width, float height) {
+        return new MetroBlockDecorativeBuilder(props)
+                .setModelDirectory("blocks/decorative/")
+                .setModelName(modelName)
+                .setWidth(width)
+                .setHeight(height)
+                .addHelper(new OffsetHelper(BlockOffsetDirection.DOWN));
+    }
+
     @Override
     public void init(IEventBus modEventBus) {
-        //region Generic abstracts
-        //Foldable
-        MetroBlockDecorativeBuilder bollard_redstone_rotatable_toggle = new DecorativeRoadObjectToggleBuilder(_props, DecorativeBuilderType.DECORATIVE_ROTATABLE_TOGGLE).setToggleType(ToggleType.REDSTONE);
-        /*MetroBlockDecorativeToggleBuilder bollard_folding_thin = bollard_redstone_rotatable_toggle.setModelNames("bollard_folding_1_upright", "bollard_folding_1_down").setShape(2, 16).setToggledShape(Block.box(7, 0, 0, 9, 2, 9));
-        //Retracting
-        MetroBlockDecorativeToggleBuilder bollard_redstone_toggle = new DecorativeRoadObjectToggleBuilder(_props, DecorativeBuilderType.DECORATIVE_TOGGLE).setToggleType(ToggleType.REDSTONE);
-        MetroBlockDecorativeToggleBuilder bollard_retracting_thick = bollard_redstone_toggle.setModelNames("bollard_retract_thick_up", "bollard_retract_thick_down").setShape(4, 16).setToggledShape(5, 1);
-        MetroBlockDecorativeToggleBuilder bollard_retracting_thin = bollard_redstone_toggle.setModelNames("bollard_retract_thin_up", "bollard_retract_thin_down").setShape(3, 16).setToggledShape(5, 1);
-        MetroBlockDecorativeToggleBuilder bollard_retracting_stumpy = bollard_redstone_toggle.setModelNames("bollard_retract_stumpy_up", "bollard_retract_stumpy_down").setShape(5.5f, 13).setToggledShape(5, 1);
-        MetroBlockDecorativeToggleBuilder bollard_retracting_round = bollard_redstone_toggle.setModelNames("bollard_retract_round_ringed_up", "bollard_retract_round_ringed_down").setShape(5, 16).setToggledShape(5, 1);*/
-        //endregion
-
         //region Bollards
         //Concrete
-        _blockNames.add(registerBlockSet(BOLLARD_CONCRETE_PILLAR_1,             () -> new DecorativeRoadObjectBuilder(_props, 4, 16).setModelName("bollard_concrete_pillar").setTextures(TEX_CONC_1).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_CONCRETE_PILLAR_2,             () -> new DecorativeRoadObjectBuilder(_props, 4, 16).setModelName("bollard_concrete_pillar").setTextures(TEX_CONC_2).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_CONCRETE_PILLAR_DOUBLE_1,      () -> new DecorativeRoadObjectBuilder(_props, 5, 16).setModelName("bollard_concrete_pillar_double").setTextures(TEX_CONC_1).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_CONCRETE_PILLAR_DOUBLE_2,      () -> new DecorativeRoadObjectBuilder(_props, 5, 16).setModelName("bollard_concrete_pillar_double").setTextures(TEX_CONC_2).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_CONCRETE_ROUND_1,              () -> new DecorativeRoadObjectBuilder(_props, 4, 16).setModelName("bollard_concrete_round").setTextures(TEX_CONC_1).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_CONCRETE_ROUND_2,              () -> new DecorativeRoadObjectBuilder(_props, 4, 16).setModelName("bollard_concrete_round").setTextures(TEX_CONC_2).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_CONCRETE_ROUND_STUBBY_1,       () -> new DecorativeRoadObjectBuilder(_props, 4,  9).setModelName("bollard_concrete_round_stubby").setTextures(TEX_CONC_1).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_CONCRETE_ROUND_STUBBY_2,       () -> new DecorativeRoadObjectBuilder(_props, 4,  9).setModelName("bollard_concrete_round_stubby").setTextures(TEX_CONC_2).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_CONCRETE_SQUARE_1,             () -> new DecorativeRoadObjectBuilder(_props, 4, 16).setModelName("bollard_concrete_square").setTextures(TEX_CONC_1).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_CONCRETE_SQUARE_2,             () -> new DecorativeRoadObjectBuilder(_props, 4, 16).setModelName("bollard_concrete_square").setTextures(TEX_CONC_2).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_CONCRETE_SQUARE_STUBBY_1,      () -> new DecorativeRoadObjectBuilder(_props, 4,  9).setModelName("bollard_concrete_square_stubby").setTextures(TEX_CONC_1).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_CONCRETE_SQUARE_STUBBY_2,      () -> new DecorativeRoadObjectBuilder(_props, 4,  9).setModelName("bollard_concrete_square_stubby").setTextures(TEX_CONC_2).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_CONCRETE_SQUARE_STUBBY_RING_1, () -> new DecorativeRoadObjectBuilder(_props, 4, 10).setModelName("bollard_concrete_square_stubby_ring").setTextures(TEX_CONC_1).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_CONCRETE_SQUARE_STUBBY_RING_2, () -> new DecorativeRoadObjectBuilder(_props, 4, 10).setModelName("bollard_concrete_square_stubby_ring").setTextures(TEX_CONC_2).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_CONCRETE_PILLAR_1,             () -> genericBlock(_props, "bollard_concrete_pillar", 4, 16).setTextures(TEX_CONC_1).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_CONCRETE_PILLAR_2,             () -> genericBlock(_props, "bollard_concrete_pillar", 4, 16).setTextures(TEX_CONC_2).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_CONCRETE_PILLAR_DOUBLE_1,      () -> genericBlock(_props, "bollard_concrete_pillar_double", 5, 16).setTextures(TEX_CONC_1).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_CONCRETE_PILLAR_DOUBLE_2,      () -> genericBlock(_props, "bollard_concrete_pillar_double", 5, 16).setTextures(TEX_CONC_2).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_CONCRETE_ROUND_1,              () -> genericBlock(_props, "bollard_concrete_round", 4, 16).setTextures(TEX_CONC_1).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_CONCRETE_ROUND_2,              () -> genericBlock(_props, "bollard_concrete_round", 4, 16).setTextures(TEX_CONC_2).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_CONCRETE_ROUND_STUBBY_1,       () -> genericBlock(_props, "bollard_concrete_round_stubby", 4, 9).setTextures(TEX_CONC_1).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_CONCRETE_ROUND_STUBBY_2,       () -> genericBlock(_props, "bollard_concrete_round_stubby", 4, 9).setTextures(TEX_CONC_2).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_CONCRETE_SQUARE_1,             () -> genericBlock(_props, "bollard_concrete_square", 4, 16).setTextures(TEX_CONC_1).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_CONCRETE_SQUARE_2,             () -> genericBlock(_props, "bollard_concrete_square", 4, 16).setTextures(TEX_CONC_2).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_CONCRETE_SQUARE_STUBBY_1,      () -> genericBlock(_props, "bollard_concrete_square_stubby", 4, 9).setTextures(TEX_CONC_1).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_CONCRETE_SQUARE_STUBBY_2,      () -> genericBlock(_props, "bollard_concrete_square_stubby", 4, 9).setTextures(TEX_CONC_2).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_CONCRETE_SQUARE_STUBBY_RING_1, () -> genericBlock(_props, "bollard_concrete_square_stubby_ring", 4, 10).setTextures(TEX_CONC_1).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_CONCRETE_SQUARE_STUBBY_RING_2, () -> genericBlock(_props, "bollard_concrete_square_stubby_ring", 4, 10).setTextures(TEX_CONC_2).build()));
 
         //Standard
-        _blockNames.add(registerBlockSet(BOLLARD_ROUND_RINGED_BLACK,        () -> new DecorativeRoadObjectBuilder(_props, 4, 16).setModelName("bollard_round_ringed").setTextures(texture("texture", TEX_BLACK), texture("accent", TEX_GOLD)).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_ROUND_RINGED_DARK_METAL,   () -> new DecorativeRoadObjectBuilder(_props, 4, 16).setModelName("bollard_round_ringed").setTextures(texture("texture", TEX_METAL_DARK), texture("accent", TEX_GOLD)).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_ROUND_RINGED_LIGHT_METAL,  () -> new DecorativeRoadObjectBuilder(_props, 4, 16).setModelName("bollard_round_ringed").setTextures(texture("texture", TEX_METAL_LIGHT), texture("accent", TEX_GOLD)).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_ROUND_RINGED_YELLOW,       () -> new DecorativeRoadObjectBuilder(_props, 4, 16).setModelName("bollard_round_ringed").setTextures(texture("texture", TEX_YELLOW), texture("accent", TEX_YELLOW)).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_ROUND_RINGED_WHITE,        () -> new DecorativeRoadObjectBuilder(_props, 4, 16).setModelName("bollard_round_ringed").setTextures(texture("texture", TEX_WHITE), texture("accent", TEX_GOLD)).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_BLACK,                     () -> new DecorativeRoadObjectBuilder(_props, 3, 16).setModelName("bollard").setTextures(TEX_BLACK).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_METAL_DARK,                () -> new DecorativeRoadObjectBuilder(_props, 3, 16).setModelName("bollard").setTextures(TEX_METAL_DARK).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_METAL_LIGHT,               () -> new DecorativeRoadObjectBuilder(_props, 3, 16).setModelName("bollard").setTextures(TEX_METAL_LIGHT).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_YELLOW,                    () -> new DecorativeRoadObjectBuilder(_props, 3, 16).setModelName("bollard").setTextures(TEX_YELLOW).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_WHITE,                     () -> new DecorativeRoadObjectBuilder(_props, 3, 16).setModelName("bollard").setTextures(TEX_WHITE).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_THIN_BLACK,                () -> new DecorativeRoadObjectBuilder(_props, 2, 16).setModelName("bollard_thin").setTextures(TEX_BLACK).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_THIN_METAL_DARK,           () -> new DecorativeRoadObjectBuilder(_props, 2, 16).setModelName("bollard_thin").setTextures(TEX_METAL_DARK).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_THIN_METAL_LIGHT,          () -> new DecorativeRoadObjectBuilder(_props, 2, 16).setModelName("bollard_thin").setTextures(TEX_METAL_LIGHT).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_THIN_YELLOW,               () -> new DecorativeRoadObjectBuilder(_props, 2, 16).setModelName("bollard_thin").setTextures(TEX_YELLOW).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_THIN_WHITE,                () -> new DecorativeRoadObjectBuilder(_props, 2, 16).setModelName("bollard_thin").setTextures(TEX_WHITE).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_TOPPED_BLACK,              () -> new DecorativeRoadObjectBuilder(_props, 3, 16).setModelName("bollard_topped").setTextures(TEX_BLACK).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_TOPPED_METAL_DARK,         () -> new DecorativeRoadObjectBuilder(_props, 3, 16).setModelName("bollard_topped").setTextures(TEX_METAL_DARK).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_TOPPED_METAL_LIGHT,        () -> new DecorativeRoadObjectBuilder(_props, 3, 16).setModelName("bollard_topped").setTextures(TEX_METAL_LIGHT).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_TOPPED_YELLOW,             () -> new DecorativeRoadObjectBuilder(_props, 3, 16).setModelName("bollard_topped").setTextures(TEX_YELLOW).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_TOPPED_WHITE,              () -> new DecorativeRoadObjectBuilder(_props, 3, 16).setModelName("bollard_topped").setTextures(TEX_WHITE).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_TOPPED_RINGED_BLACK,       () -> new DecorativeRoadObjectBuilder(_props, 3, 16).setModelName("bollard_topped_ringed").setTextures(texture("texture", TEX_BLACK), texture("ring", TEX_GOLD)).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_TOPPED_RINGED_METAL_DARK,  () -> new DecorativeRoadObjectBuilder(_props, 3, 16).setModelName("bollard_topped_ringed").setTextures(texture("texture", TEX_METAL_DARK), texture("ring", TEX_GOLD)).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_TOPPED_RINGED_METAL_LIGHT, () -> new DecorativeRoadObjectBuilder(_props, 3, 16).setModelName("bollard_topped_ringed").setTextures(texture("texture", TEX_METAL_LIGHT), texture("ring", TEX_GOLD)).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_TOPPED_RINGED_YELLOW,      () -> new DecorativeRoadObjectBuilder(_props, 3, 16).setModelName("bollard_topped_ringed").setTextures(texture("texture", TEX_YELLOW), texture("ring", TEX_YELLOW)).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_TOPPED_RINGED_WHITE,       () -> new DecorativeRoadObjectBuilder(_props, 3, 16).setModelName("bollard_topped_ringed").setTextures(texture("texture", TEX_WHITE), texture("ring", TEX_GOLD)).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_ROUND_RINGED_BLACK,        () -> genericBlock(_props, "bollard_round_ringed", 4, 16).setTextures(texture("texture", TEX_BLACK), texture("accent", TEX_GOLD)).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_ROUND_RINGED_DARK_METAL,   () -> genericBlock(_props, "bollard_round_ringed", 4, 16).setTextures(texture("texture", TEX_METAL_DARK), texture("accent", TEX_GOLD)).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_ROUND_RINGED_LIGHT_METAL,  () -> genericBlock(_props, "bollard_round_ringed", 4, 16).setTextures(texture("texture", TEX_METAL_LIGHT), texture("accent", TEX_GOLD)).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_ROUND_RINGED_YELLOW,       () -> genericBlock(_props, "bollard_round_ringed", 4, 16).setTextures(texture("texture", TEX_YELLOW), texture("accent", TEX_YELLOW)).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_ROUND_RINGED_WHITE,        () -> genericBlock(_props, "bollard_round_ringed", 4, 16).setTextures(texture("texture", TEX_WHITE), texture("accent", TEX_GOLD)).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_BLACK,                     () -> genericBlock(_props, "bollard", 3, 16).setTextures(TEX_BLACK).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_METAL_DARK,                () -> genericBlock(_props, "bollard", 3, 16).setTextures(TEX_METAL_DARK).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_METAL_LIGHT,               () -> genericBlock(_props, "bollard", 3, 16).setTextures(TEX_METAL_LIGHT).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_YELLOW,                    () -> genericBlock(_props, "bollard", 3, 16).setTextures(TEX_YELLOW).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_WHITE,                     () -> genericBlock(_props, "bollard", 3, 16).setTextures(TEX_WHITE).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_THIN_BLACK,                () -> genericBlock(_props, "bollard_thin", 2, 16).setTextures(TEX_BLACK).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_THIN_METAL_DARK,           () -> genericBlock(_props, "bollard_thin", 2, 16).setTextures(TEX_METAL_DARK).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_THIN_METAL_LIGHT,          () -> genericBlock(_props, "bollard_thin", 2, 16).setTextures(TEX_METAL_LIGHT).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_THIN_YELLOW,               () -> genericBlock(_props, "bollard_thin", 2, 16).setTextures(TEX_YELLOW).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_THIN_WHITE,                () -> genericBlock(_props, "bollard_thin", 2, 16).setTextures(TEX_WHITE).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_TOPPED_BLACK,              () -> genericBlock(_props, "bollard_topped", 3, 16).setTextures(TEX_BLACK).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_TOPPED_METAL_DARK,         () -> genericBlock(_props, "bollard_topped", 3, 16).setTextures(TEX_METAL_DARK).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_TOPPED_METAL_LIGHT,        () -> genericBlock(_props, "bollard_topped", 3, 16).setTextures(TEX_METAL_LIGHT).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_TOPPED_YELLOW,             () -> genericBlock(_props, "bollard_topped", 3, 16).setTextures(TEX_YELLOW).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_TOPPED_WHITE,              () -> genericBlock(_props, "bollard_topped", 3, 16).setTextures(TEX_WHITE).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_TOPPED_RINGED_BLACK,       () -> genericBlock(_props, "bollard_topped_ringed", 3, 16).setTextures(texture("texture", TEX_BLACK), texture("ring", TEX_GOLD)).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_TOPPED_RINGED_METAL_DARK,  () -> genericBlock(_props, "bollard_topped_ringed", 3, 16).setTextures(texture("texture", TEX_METAL_DARK), texture("ring", TEX_GOLD)).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_TOPPED_RINGED_METAL_LIGHT, () -> genericBlock(_props, "bollard_topped_ringed", 3, 16).setTextures(texture("texture", TEX_METAL_LIGHT), texture("ring", TEX_GOLD)).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_TOPPED_RINGED_YELLOW,      () -> genericBlock(_props, "bollard_topped_ringed", 3, 16).setTextures(texture("texture", TEX_YELLOW), texture("ring", TEX_YELLOW)).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_TOPPED_RINGED_WHITE,       () -> genericBlock(_props, "bollard_topped_ringed", 3, 16).setTextures(texture("texture", TEX_WHITE), texture("ring", TEX_GOLD)).build()));
 
         //Rotatable
-        _blockNames.add(registerBlockSet(BOLLARD_SLANT_SQUARE_BLACK, () -> new DecorativeRoadObjectBuilder(_props, DecorativeBuilderType.DECORATIVE_ROTATABLE).setWidth(2).setModelName("bollard_slant_square").setTextures(TEX_BLACK).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_SLANT_SQUARE_DARK_METAL, () -> new DecorativeRoadObjectBuilder(_props, DecorativeBuilderType.DECORATIVE_ROTATABLE).setWidth(2).setModelName("bollard_slant_square").setTextures(TEX_METAL_DARK).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_SLANT_SQUARE_LIGHT_METAL, () -> new DecorativeRoadObjectBuilder(_props, DecorativeBuilderType.DECORATIVE_ROTATABLE).setWidth(2).setModelName("bollard_slant_square").setTextures(TEX_METAL_LIGHT).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_SLANT_SQUARE_YELLOW, () -> new DecorativeRoadObjectBuilder(_props, DecorativeBuilderType.DECORATIVE_ROTATABLE).setWidth(2).setModelName("bollard_slant_square").setTextures(TEX_YELLOW).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_SLANT_SQUARE_WHITE, () -> new DecorativeRoadObjectBuilder(_props, DecorativeBuilderType.DECORATIVE_ROTATABLE).setWidth(2).setModelName("bollard_slant_square").setTextures(TEX_WHITE).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_SLANT_ROUND_BLACK, () -> new DecorativeRoadObjectBuilder(_props, DecorativeBuilderType.DECORATIVE_ROTATABLE).setWidth(2).setModelName("bollard_slant_round").setTextures(TEX_BLACK).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_SLANT_ROUND_DARK_METAL, () -> new DecorativeRoadObjectBuilder(_props, DecorativeBuilderType.DECORATIVE_ROTATABLE).setWidth(2).setModelName("bollard_slant_round").setTextures(TEX_METAL_DARK).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_SLANT_ROUND_LIGHT_METAL, () -> new DecorativeRoadObjectBuilder(_props, DecorativeBuilderType.DECORATIVE_ROTATABLE).setWidth(2).setModelName("bollard_slant_round").setTextures(TEX_METAL_LIGHT).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_SLANT_ROUND_YELLOW, () -> new DecorativeRoadObjectBuilder(_props, DecorativeBuilderType.DECORATIVE_ROTATABLE).setWidth(2).setModelName("bollard_slant_round").setTextures(TEX_YELLOW).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_SLANT_ROUND_WHITE, () -> new DecorativeRoadObjectBuilder(_props, DecorativeBuilderType.DECORATIVE_ROTATABLE).setWidth(2).setModelName("bollard_slant_round").setTextures(TEX_WHITE).build()));
+        Vec3 smallFullHeight = new Vec3(2, 16, 2);
+        _blockNames.add(registerBlockSet(BOLLARD_SLANT_SQUARE_BLACK, () -> rotateableBlock(_props, "bollard_slant_square", smallFullHeight).setTextures(TEX_BLACK).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_SLANT_SQUARE_DARK_METAL, () -> rotateableBlock(_props, "bollard_slant_square", smallFullHeight).setTextures(TEX_METAL_DARK).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_SLANT_SQUARE_LIGHT_METAL, () -> rotateableBlock(_props, "bollard_slant_square", smallFullHeight).setTextures(TEX_METAL_LIGHT).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_SLANT_SQUARE_YELLOW, () -> rotateableBlock(_props, "bollard_slant_square", smallFullHeight).setTextures(TEX_YELLOW).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_SLANT_SQUARE_WHITE, () -> rotateableBlock(_props, "bollard_slant_square", smallFullHeight).setTextures(TEX_WHITE).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_SLANT_ROUND_BLACK, () -> rotateableBlock(_props, "bollard_slant_round", smallFullHeight).setTextures(TEX_BLACK).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_SLANT_ROUND_DARK_METAL, () -> rotateableBlock(_props, "bollard_slant_round", smallFullHeight).setTextures(TEX_METAL_DARK).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_SLANT_ROUND_LIGHT_METAL, () -> rotateableBlock(_props, "bollard_slant_round", smallFullHeight).setTextures(TEX_METAL_LIGHT).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_SLANT_ROUND_YELLOW, () -> rotateableBlock(_props, "bollard_slant_round", smallFullHeight).setTextures(TEX_YELLOW).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_SLANT_ROUND_WHITE, () -> rotateableBlock(_props, "bollard_slant_round", smallFullHeight).setTextures(TEX_WHITE).build()));
 
         //Illuminated
-        _blockNames.add(registerBlockSet(BOLLARD_LIGHT_1_CONCRETE_1,  () -> new DecorativeRoadObjectBuilder(_propsLit, 3, 16).setModelName("bollard_light_1").setTextures(TEX_CONC_1).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_LIGHT_1_CONCRETE_2,  () -> new DecorativeRoadObjectBuilder(_propsLit, 3, 16).setModelName("bollard_light_1").setTextures(TEX_CONC_2).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_LIGHT_1_BLACK,       () -> new DecorativeRoadObjectBuilder(_propsLit, 3, 16).setModelName("bollard_light_1").setTextures(TEX_BLACK).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_LIGHT_1_DARK_METAL,  () -> new DecorativeRoadObjectBuilder(_propsLit, 3, 16).setModelName("bollard_light_1").setTextures(TEX_METAL_DARK).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_LIGHT_1_LIGHT_METAL, () -> new DecorativeRoadObjectBuilder(_propsLit, 3, 16).setModelName("bollard_light_1").setTextures(TEX_METAL_LIGHT).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_LIGHT_1_YELLOW,      () -> new DecorativeRoadObjectBuilder(_propsLit, 3, 16).setModelName("bollard_light_1").setTextures(TEX_YELLOW).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_LIGHT_1_WHITE,       () -> new DecorativeRoadObjectBuilder(_propsLit, 3, 16).setModelName("bollard_light_1").setTextures(TEX_WHITE).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_LIGHT_1_CONCRETE_1,  () -> genericBlock(_propsLit, "bollard_light_1", 3, 16).setTextures(TEX_CONC_1).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_LIGHT_1_CONCRETE_2,  () -> genericBlock(_propsLit, "bollard_light_1", 3, 16).setTextures(TEX_CONC_2).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_LIGHT_1_BLACK,       () -> genericBlock(_propsLit, "bollard_light_1", 3, 16).setTextures(TEX_BLACK).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_LIGHT_1_DARK_METAL,  () -> genericBlock(_propsLit, "bollard_light_1", 3, 16).setTextures(TEX_METAL_DARK).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_LIGHT_1_LIGHT_METAL, () -> genericBlock(_propsLit, "bollard_light_1", 3, 16).setTextures(TEX_METAL_LIGHT).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_LIGHT_1_YELLOW,      () -> genericBlock(_propsLit, "bollard_light_1", 3, 16).setTextures(TEX_YELLOW).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_LIGHT_1_WHITE,       () -> genericBlock(_propsLit, "bollard_light_1", 3, 16).setTextures(TEX_WHITE).build()));
 
         //Rotatable Illuminated
-        _blockNames.add(registerBlockSet(BOLLARD_THICK_LEFT, () -> new DecorativeRoadObjectBuilder(_propsLit, DecorativeBuilderType.DECORATIVE_ROTATABLE).setWidth(6).setModelName("bollard_traffic_1").setTextures(getLoc("traffic_bollard_thick_left")).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_THICK_RIGHT, () -> new DecorativeRoadObjectBuilder(_propsLit, DecorativeBuilderType.DECORATIVE_ROTATABLE).setWidth(6).setModelName("bollard_traffic_1").setTextures(getLoc("traffic_bollard_thick_right")).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_THIN_LEFT, () -> new DecorativeRoadObjectBuilder(_propsLit, DecorativeBuilderType.DECORATIVE_ROTATABLE).setShape(6, 16, 2).setModelName("bollard_traffic_2").setTextures(getLoc("traffic_bollard_thin_left")).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_THIN_RIGHT, () -> new DecorativeRoadObjectBuilder(_propsLit, DecorativeBuilderType.DECORATIVE_ROTATABLE).setShape(6, 16, 2).setModelName("bollard_traffic_2").setTextures(getLoc("traffic_bollard_thin_right")).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_THICK_LEFT, () -> rotateableBlock(_propsLit, "bollard_traffic_1", new Vec3(6, 16, 6)).setTextures(getLoc("traffic_bollard_thick_left")).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_THICK_RIGHT, () -> rotateableBlock(_propsLit, "bollard_traffic_1", new Vec3(6, 16, 6)).setTextures(getLoc("traffic_bollard_thick_right")).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_THIN_LEFT, () -> rotateableBlock(_propsLit, "bollard_traffic_2", new Vec3(6, 16, 2)).setTextures(getLoc("traffic_bollard_thin_left")).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_THIN_RIGHT, () -> rotateableBlock(_propsLit, "bollard_traffic_2", new Vec3(6, 16, 2)).setTextures(getLoc("traffic_bollard_thin_right")).build()));
 
         //Reflective
-        _blockNames.add(registerBlockSet(BOLLARD_PORTABLE_ORANGE, () -> new DecorativeRoadObjectBuilder(_props, 2, 16).setModelName("bollard_portable").setTextures(texture("texture", "bollard_orange"), texture("reflection", "reflective_surface")).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_PORTABLE_YELLOW, () -> new DecorativeRoadObjectBuilder(_props, 2, 16).setModelName("bollard_portable").setTextures(texture("texture", TEX_YELLOW), texture("reflection", "reflective_surface")).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_PORTABLE_ORANGE, () -> genericBlock(_props, "bollard_portable", 2, 16).setTextures(texture("texture", "bollard_orange"), texture("reflection", "reflective_surface")).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_PORTABLE_YELLOW, () -> genericBlock(_props, "bollard_portable", 2, 16).setTextures(texture("texture", TEX_YELLOW), texture("reflection", "reflective_surface")).build()));
 
-         //Foldable
-        _blockNames.add(registerBlockSet(BOLLARD_FOLDING_THIN_BLACK, () ->  bollard_folding_thin.setTextures(TEX_BLACK).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_FOLDING_THIN_DARK_METAL, () ->  bollard_folding_thin.setTextures(TEX_METAL_DARK).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_FOLDING_THIN_LIGHT_METAL, () ->  bollard_folding_thin.setTextures(TEX_METAL_LIGHT).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_FOLDING_THIN_YELLOW, () ->  bollard_folding_thin.setTextures(TEX_YELLOW).build()));
-        _blockNames.add(registerBlockSet(BOLLARD_FOLDING_THIN_WHITE, () ->  bollard_folding_thin.setTextures(TEX_WHITE).build()));
+        //Foldable
+        _blockNames.add(registerBlockSet(BOLLARD_FOLDING_THIN_BLACK, () ->  foldingRedstoneToggle("bollard_folding_1", ShapeUtils.makeShape(2, 16), Block.box(7, 0, 0, 9, 2, 9)).setTextures(TEX_BLACK).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_FOLDING_THIN_DARK_METAL, () ->  foldingRedstoneToggle("bollard_folding_1", ShapeUtils.makeShape(2, 16), Block.box(7, 0, 0, 9, 2, 9)).setTextures(TEX_METAL_DARK).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_FOLDING_THIN_LIGHT_METAL, () ->  foldingRedstoneToggle("bollard_folding_1", ShapeUtils.makeShape(2, 16), Block.box(7, 0, 0, 9, 2, 9)).setTextures(TEX_METAL_LIGHT).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_FOLDING_THIN_YELLOW, () ->  foldingRedstoneToggle("bollard_folding_1", ShapeUtils.makeShape(2, 16), Block.box(7, 0, 0, 9, 2, 9)).setTextures(TEX_YELLOW).build()));
+        _blockNames.add(registerBlockSet(BOLLARD_FOLDING_THIN_WHITE, () ->  foldingRedstoneToggle("bollard_folding_1", ShapeUtils.makeShape(2, 16), Block.box(7, 0, 0, 9, 2, 9)).setTextures(TEX_WHITE).build()));
 
         //Retracting
         _blockNames.add(registerBlockSet(BOLLARD_RETRACTING_THICK_BLACK, () -> bollardRedstoneToggle("bollard_retract_thick", 4, 16).setTextures(TEX_BLACK).build()));
@@ -319,6 +320,8 @@ public class RegistrationDecorative extends RegistrationGroup {
         VoxelShape[] shapeA = ShapeUtils.makeShapes(4f, 4f);
         VoxelShape[] shapeB = ShapeUtils.makeShapes(2.5f, 4f, 16f);
 
+        //TODO walls not updated in metro yet
+        /*
         MetroBlockDecorativeConnectingBuilder standard_wall = new MetroBlockDecorativeConnectingBuilder(_props, DecorativeBuilderType.DECORATIVE_CONNECT_HORIZONTAL).setConnectionType(BlockConnectionType.SOLID_CONNECTING);
         MetroBlockDecorativeConnectingBuilder standard_barrier = new MetroBlockDecorativeConnectingBuilder(_props, DecorativeBuilderType.DECORATIVE_CONNECT_HORIZONTAL_TOGGLE).setToggleItem(Items.DIAMOND).setConnectionType(BlockConnectionType.SOLID_CONNECTING).setShapes(ShapeUtils.makeShapes(2f, 16f));
 
@@ -332,7 +335,7 @@ public class RegistrationDecorative extends RegistrationGroup {
                 .setNoToggledConnectionNames("barrier_metal_center_tall", "barrier_metal_center_tall_connection", "barrier_metal_center_post")
                 .setTextures(texture("texture", getLoc("barrier_metal")), texture("accent", getLoc("barrier_metal_dark"))).setCenterFourSided(true, false).setIndependentModelsPerSide().build()));
 
-        /*_blockNames.add(registerBlockSet(WALL_CONCRETE_CENTER_THIN_1, () -> standard_barrier.setModelName("barrier_wall_mid").setToggleModelName("barrier_wall_mid_toggled").setTextures(TEX_CONC_1).build()));
+        _blockNames.add(registerBlockSet(WALL_CONCRETE_CENTER_THIN_1, () -> standard_barrier.setModelName("barrier_wall_mid").setToggleModelName("barrier_wall_mid_toggled").setTextures(TEX_CONC_1).build()));
         _blockNames.add(registerBlockSet(WALL_CONCRETE_CENTER_THIN_2, () -> standard_barrier.setModelName("barrier_wall_mid").setToggleModelName("barrier_wall_mid_toggled").setTextures(TEX_CONC_2).build()));
         _blockNames.add(registerBlockSet(WALL_CONCRETE_CENTER_THIN_3, () -> standard_barrier.setModelName("barrier_wall_mid").setToggleModelName("barrier_wall_mid_toggled").setTextures(TEX_CONC_2).build()));
         _blockNames.add(registerBlockSet(WALL_CONCRETE_CENTER_THIN_4, () -> standard_barrier.setModelName("barrier_wall_mid").setToggleModelName("barrier_wall_mid_toggled").setTextures(TEX_CONC_2).build()));
@@ -360,19 +363,8 @@ public class RegistrationDecorative extends RegistrationGroup {
         return tabList;
     }
 
-    private ResourceLocation getLoc(String name) {
+    @Override
+    protected ResourceLocation getLoc(String name) {
         return new ResourceLocation(FurenikusRoads.MODID, "block/decorative/" + name);
-    }
-
-    private ResourceLocation getLocFull(String name) {
-        return new ResourceLocation(FurenikusRoads.MODID, name);
-    }
-
-    private TextureSet texture(String name, String loc) {
-        return texture(name, getLoc(loc));
-    }
-
-    private TextureSet texture(String name, ResourceLocation loc) {
-        return new TextureSet(name, loc);
     }
 }

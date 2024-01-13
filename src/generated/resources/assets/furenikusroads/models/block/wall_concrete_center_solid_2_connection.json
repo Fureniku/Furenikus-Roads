@@ -1,6 +1,0 @@
-{
-  "parent": "furenikusroads:blocks/decorative/barrier_concrete_middle_connection",
-  "textures": {
-    "texture": "furenikusroads:block/roads/road_block_concrete_2"
-  }
-}
