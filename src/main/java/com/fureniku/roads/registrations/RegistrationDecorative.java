@@ -3,15 +3,19 @@ package com.fureniku.roads.registrations;
 import com.fureniku.metropolis.RegistrationBase;
 import com.fureniku.metropolis.RegistrationGroup;
 import com.fureniku.metropolis.blocks.decorative.builders.MetroBlockDecorativeBuilder;
+import com.fureniku.metropolis.blocks.decorative.helpers.ConnectHorizontalHelper;
 import com.fureniku.metropolis.blocks.decorative.helpers.OffsetHelper;
 import com.fureniku.metropolis.blocks.decorative.helpers.RotationHelper;
 import com.fureniku.metropolis.blocks.decorative.helpers.ToggleHelper;
+import com.fureniku.metropolis.enums.BlockConnectionType;
 import com.fureniku.metropolis.enums.BlockOffsetDirection;
 import com.fureniku.metropolis.enums.ToggleType;
 import com.fureniku.metropolis.utils.CreativeTabSet;
 import com.fureniku.metropolis.utils.ShapeUtils;
 import com.fureniku.roads.FurenikusRoads;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -206,6 +210,24 @@ public class RegistrationDecorative extends RegistrationGroup {
                 .addHelper(new OffsetHelper(BlockOffsetDirection.DOWN));
     }
 
+    public MetroBlockDecorativeBuilder connectingBlock(BlockBehaviour.Properties props, String tag, String modelName, VoxelShape[] shapes) {
+        return new MetroBlockDecorativeBuilder(props)
+                .setModelDirectory("blocks/decorative/")
+                .setTag(tag)
+                .setModelName(modelName)
+                .addHelper(new OffsetHelper(BlockOffsetDirection.DOWN))
+                .addHelper(new ConnectHorizontalHelper(true, true, false, false, true, modelName + "_connection", modelName + "_item", BlockConnectionType.SAME, shapes));
+    }
+    public MetroBlockDecorativeBuilder connectingToggleBlock(BlockBehaviour.Properties props, String tag, String modelName, VoxelShape[] shapes, Item toggleItem) {
+        return new MetroBlockDecorativeBuilder(props)
+                .setModelDirectory("blocks/decorative/")
+                .setTag(tag)
+                .setModelName(modelName)
+                .addHelper(new OffsetHelper(BlockOffsetDirection.DOWN))
+                .addHelper(new ConnectHorizontalHelper(true, true, false, false, true, modelName + "_connection", modelName + "_item", BlockConnectionType.SAME, shapes))
+                .addHelper(new ToggleHelper(false, Block.box(0, 0, 0, 16, 16, 16), Block.box(0, 0, 0, 16, 16, 16), modelName + "_toggled", toggleItem));
+    }
+
     @Override
     public void init(IEventBus modEventBus) {
         //region Bollards
@@ -317,34 +339,31 @@ public class RegistrationDecorative extends RegistrationGroup {
         _blockNames.add(registerBlockSet(BOLLARD_RETRACTING_ROUND_WHITE, () -> bollardRedstoneToggle("bollard_retract_round_ringed", 5, 16).setTextures(TEX_WHITE).build()));
         //endregion
 
-        VoxelShape[] shapeA = ShapeUtils.makeShapes(4f, 4f);
-        VoxelShape[] shapeB = ShapeUtils.makeShapes(2.5f, 4f, 16f);
+        VoxelShape[] wall_shape = ShapeUtils.combineMultiShapes(ShapeUtils.makeShapes(4f, 4f), ShapeUtils.makeShapes(2.5f, 4f, 16f));
+        VoxelShape[] barrier_shape = ShapeUtils.makeShapes(2f, 16f);
 
-        //TODO walls not updated in metro yet
-        /*
-        MetroBlockDecorativeConnectingBuilder standard_wall = new MetroBlockDecorativeConnectingBuilder(_props, DecorativeBuilderType.DECORATIVE_CONNECT_HORIZONTAL).setConnectionType(BlockConnectionType.SOLID_CONNECTING);
-        MetroBlockDecorativeConnectingBuilder standard_barrier = new MetroBlockDecorativeConnectingBuilder(_props, DecorativeBuilderType.DECORATIVE_CONNECT_HORIZONTAL_TOGGLE).setToggleItem(Items.DIAMOND).setConnectionType(BlockConnectionType.SOLID_CONNECTING).setShapes(ShapeUtils.makeShapes(2f, 16f));
 
-        _blockNames.add(registerBlockSet(WALL_CONCRETE_CENTER_SOLID_1, () -> standard_wall.setShapes(ShapeUtils.combineMultiShapes(shapeA, shapeB)).setModelName("barrier_concrete_middle").setTextures(TEX_CONC_1).build()));
-        _blockNames.add(registerBlockSet(WALL_CONCRETE_CENTER_SOLID_2, () -> standard_wall.setShapes(ShapeUtils.combineMultiShapes(shapeA, shapeB)).setModelName("barrier_concrete_middle").setTextures(TEX_CONC_2).build()));
+        _blockNames.add(registerBlockSet(WALL_CONCRETE_CENTER_SOLID_1, () -> connectingBlock(_props, "roads_wall", "barrier_concrete_middle", wall_shape).setTextures(TEX_CONC_1).build()));
+        _blockNames.add(registerBlockSet(WALL_CONCRETE_CENTER_SOLID_2, () -> connectingBlock(_props, "roads_wall", "barrier_concrete_middle", wall_shape).setTextures(TEX_CONC_2).build()));
 
-        _blockNames.add(registerBlockSet(BARRIER_METAL_CENTER_SHORT, () -> standard_barrier
+        //TODO connection + toggle together dont work yet
+        /*_blockNames.add(registerBlockSet(BARRIER_METAL_CENTER_SHORT, () -> standard_barrier
                 .setNoToggledConnectionNames("barrier_metal_center_short", "barrier_metal_center_short_connection", "barrier_metal_center_post")
                 .setTextures(texture("texture", getLoc("barrier_metal")), texture("accent", getLoc("barrier_metal_dark"))).setCenterFourSided(true, false).setIndependentModelsPerSide().build()));
         _blockNames.add(registerBlockSet(BARRIER_METAL_CENTER_TALL, () -> standard_barrier
                 .setNoToggledConnectionNames("barrier_metal_center_tall", "barrier_metal_center_tall_connection", "barrier_metal_center_post")
-                .setTextures(texture("texture", getLoc("barrier_metal")), texture("accent", getLoc("barrier_metal_dark"))).setCenterFourSided(true, false).setIndependentModelsPerSide().build()));
+                .setTextures(texture("texture", getLoc("barrier_metal")), texture("accent", getLoc("barrier_metal_dark"))).setCenterFourSided(true, false).setIndependentModelsPerSide().build()));*/
 
-        _blockNames.add(registerBlockSet(WALL_CONCRETE_CENTER_THIN_1, () -> standard_barrier.setModelName("barrier_wall_mid").setToggleModelName("barrier_wall_mid_toggled").setTextures(TEX_CONC_1).build()));
-        _blockNames.add(registerBlockSet(WALL_CONCRETE_CENTER_THIN_2, () -> standard_barrier.setModelName("barrier_wall_mid").setToggleModelName("barrier_wall_mid_toggled").setTextures(TEX_CONC_2).build()));
-        _blockNames.add(registerBlockSet(WALL_CONCRETE_CENTER_THIN_3, () -> standard_barrier.setModelName("barrier_wall_mid").setToggleModelName("barrier_wall_mid_toggled").setTextures(TEX_CONC_2).build()));
-        _blockNames.add(registerBlockSet(WALL_CONCRETE_CENTER_THIN_4, () -> standard_barrier.setModelName("barrier_wall_mid").setToggleModelName("barrier_wall_mid_toggled").setTextures(TEX_CONC_2).build()));
+        _blockNames.add(registerBlockSet(WALL_CONCRETE_CENTER_THIN_1, () -> connectingToggleBlock(_props, "roads_barrier_mid", "barrier_wall_mid", barrier_shape, Items.DIAMOND).setTextures(TEX_CONC_1).build()));
+        _blockNames.add(registerBlockSet(WALL_CONCRETE_CENTER_THIN_2, () -> connectingToggleBlock(_props, "roads_barrier_mid", "barrier_wall_mid", barrier_shape, Items.DIAMOND).setTextures(TEX_CONC_2).build()));
+        _blockNames.add(registerBlockSet(WALL_CONCRETE_CENTER_THIN_3, () -> connectingToggleBlock(_props, "roads_barrier_mid", "barrier_wall_mid", barrier_shape, Items.DIAMOND).setTextures(TEX_CONC_2).build()));
+        _blockNames.add(registerBlockSet(WALL_CONCRETE_CENTER_THIN_4, () -> connectingToggleBlock(_props, "roads_barrier_mid", "barrier_wall_mid", barrier_shape, Items.DIAMOND).setTextures(TEX_CONC_2).build()));
 
-        _blockNames.add(registerBlockSet(BARRIER_BARS_CENTER_1, () -> standard_barrier.setModelName("barrier_wall_mid").setToggleModelName("barrier_wall_mid_toggled").setTextures(TEX_CONC_2).build()));
-        _blockNames.add(registerBlockSet(BARRIER_BARS_CENTER_2, () -> standard_barrier.setModelName("barrier_wall_mid").setToggleModelName("barrier_wall_mid_toggled").setTextures(TEX_CONC_2).build()));
-        _blockNames.add(registerBlockSet(BARRIER_BARS_CENTER_3, () -> standard_barrier.setModelName("barrier_wall_mid").setToggleModelName("barrier_wall_mid_toggled").setTextures(TEX_CONC_2).build()));
-        _blockNames.add(registerBlockSet(BARRIER_BARS_CENTER_4, () -> standard_barrier.setModelName("barrier_wall_mid").setToggleModelName("barrier_wall_mid_toggled").setTextures(TEX_CONC_2).build()));
-        _blockNames.add(registerBlockSet(BARRIER_BARS_CENTER_5, () -> standard_barrier.setModelName("barrier_wall_mid").setToggleModelName("barrier_wall_mid_toggled").setTextures(TEX_CONC_2).build()));*/
+        _blockNames.add(registerBlockSet(BARRIER_BARS_CENTER_1, () -> connectingToggleBlock(_props, "roads_barrier_mid", "barrier_wall_mid", barrier_shape, Items.DIAMOND).setTextures(TEX_CONC_2).build()));
+        _blockNames.add(registerBlockSet(BARRIER_BARS_CENTER_2, () -> connectingToggleBlock(_props, "roads_barrier_mid", "barrier_wall_mid", barrier_shape, Items.DIAMOND).setTextures(TEX_CONC_2).build()));
+        _blockNames.add(registerBlockSet(BARRIER_BARS_CENTER_3, () -> connectingToggleBlock(_props, "roads_barrier_mid", "barrier_wall_mid", barrier_shape, Items.DIAMOND).setTextures(TEX_CONC_2).build()));
+        _blockNames.add(registerBlockSet(BARRIER_BARS_CENTER_4, () -> connectingToggleBlock(_props, "roads_barrier_mid", "barrier_wall_mid", barrier_shape, Items.DIAMOND).setTextures(TEX_CONC_2).build()));
+        _blockNames.add(registerBlockSet(BARRIER_BARS_CENTER_5, () -> connectingToggleBlock(_props, "roads_barrier_mid", "barrier_wall_mid", barrier_shape, Items.DIAMOND).setTextures(TEX_CONC_2).build()));
 
         _decorativeTab = new CreativeTabSet(registration.getCreativeTabDeferredRegister(),"tab_decorative", getItem(BOLLARD_ROUND_RINGED_DARK_METAL));
     }

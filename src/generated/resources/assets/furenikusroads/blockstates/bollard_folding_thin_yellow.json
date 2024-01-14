@@ -1,33 +1,33 @@
 {
   "variants": {
     "facing=east,toggled=false": {
-      "model": "furenikusroads:block/bollard_folding_thin_yellow",
+      "model": "furenikusroads:block/bollard_folding_thin_yellow_standard",
       "y": 270
     },
     "facing=east,toggled=true": {
-      "model": "furenikusroads:block/bollard_folding_thin_yellow",
+      "model": "furenikusroads:block/bollard_folding_thin_yellow_toggled",
       "y": 270
     },
     "facing=north,toggled=false": {
-      "model": "furenikusroads:block/bollard_folding_thin_yellow",
+      "model": "furenikusroads:block/bollard_folding_thin_yellow_standard",
       "y": 180
     },
     "facing=north,toggled=true": {
-      "model": "furenikusroads:block/bollard_folding_thin_yellow",
+      "model": "furenikusroads:block/bollard_folding_thin_yellow_toggled",
       "y": 180
     },
     "facing=south,toggled=false": {
-      "model": "furenikusroads:block/bollard_folding_thin_yellow"
+      "model": "furenikusroads:block/bollard_folding_thin_yellow_standard"
     },
     "facing=south,toggled=true": {
-      "model": "furenikusroads:block/bollard_folding_thin_yellow"
+      "model": "furenikusroads:block/bollard_folding_thin_yellow_toggled"
     },
     "facing=west,toggled=false": {
-      "model": "furenikusroads:block/bollard_folding_thin_yellow",
+      "model": "furenikusroads:block/bollard_folding_thin_yellow_standard",
       "y": 90
     },
     "facing=west,toggled=true": {
-      "model": "furenikusroads:block/bollard_folding_thin_yellow",
+      "model": "furenikusroads:block/bollard_folding_thin_yellow_toggled",
       "y": 90
     }
   }

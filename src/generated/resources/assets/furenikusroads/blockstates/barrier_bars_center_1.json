@@ -1,0 +1,100 @@
+{
+  "variants": {
+    "east=false,north=false,south=false,toggled=false,west=false": {
+      "model": "furenikusroads:block/barrier_bars_center_1_standard"
+    },
+    "east=false,north=false,south=false,toggled=false,west=true": {
+      "model": "furenikusroads:block/barrier_bars_center_1_standard"
+    },
+    "east=false,north=false,south=false,toggled=true,west=false": {
+      "model": "furenikusroads:block/barrier_bars_center_1_toggled"
+    },
+    "east=false,north=false,south=false,toggled=true,west=true": {
+      "model": "furenikusroads:block/barrier_bars_center_1_toggled"
+    },
+    "east=false,north=false,south=true,toggled=false,west=false": {
+      "model": "furenikusroads:block/barrier_bars_center_1_standard"
+    },
+    "east=false,north=false,south=true,toggled=false,west=true": {
+      "model": "furenikusroads:block/barrier_bars_center_1_standard"
+    },
+    "east=false,north=false,south=true,toggled=true,west=false": {
+      "model": "furenikusroads:block/barrier_bars_center_1_toggled"
+    },
+    "east=false,north=false,south=true,toggled=true,west=true": {
+      "model": "furenikusroads:block/barrier_bars_center_1_toggled"
+    },
+    "east=false,north=true,south=false,toggled=false,west=false": {
+      "model": "furenikusroads:block/barrier_bars_center_1_standard"
+    },
+    "east=false,north=true,south=false,toggled=false,west=true": {
+      "model": "furenikusroads:block/barrier_bars_center_1_standard"
+    },
+    "east=false,north=true,south=false,toggled=true,west=false": {
+      "model": "furenikusroads:block/barrier_bars_center_1_toggled"
+    },
+    "east=false,north=true,south=false,toggled=true,west=true": {
+      "model": "furenikusroads:block/barrier_bars_center_1_toggled"
+    },
+    "east=false,north=true,south=true,toggled=false,west=false": {
+      "model": "furenikusroads:block/barrier_bars_center_1_standard"
+    },
+    "east=false,north=true,south=true,toggled=false,west=true": {
+      "model": "furenikusroads:block/barrier_bars_center_1_standard"
+    },
+    "east=false,north=true,south=true,toggled=true,west=false": {
+      "model": "furenikusroads:block/barrier_bars_center_1_toggled"
+    },
+    "east=false,north=true,south=true,toggled=true,west=true": {
+      "model": "furenikusroads:block/barrier_bars_center_1_toggled"
+    },
+    "east=true,north=false,south=false,toggled=false,west=false": {
+      "model": "furenikusroads:block/barrier_bars_center_1_standard"
+    },
+    "east=true,north=false,south=false,toggled=false,west=true": {
+      "model": "furenikusroads:block/barrier_bars_center_1_standard"
+    },
+    "east=true,north=false,south=false,toggled=true,west=false": {
+      "model": "furenikusroads:block/barrier_bars_center_1_toggled"
+    },
+    "east=true,north=false,south=false,toggled=true,west=true": {
+      "model": "furenikusroads:block/barrier_bars_center_1_toggled"
+    },
+    "east=true,north=false,south=true,toggled=false,west=false": {
+      "model": "furenikusroads:block/barrier_bars_center_1_standard"
+    },
+    "east=true,north=false,south=true,toggled=false,west=true": {
+      "model": "furenikusroads:block/barrier_bars_center_1_standard"
+    },
+    "east=true,north=false,south=true,toggled=true,west=false": {
+      "model": "furenikusroads:block/barrier_bars_center_1_toggled"
+    },
+    "east=true,north=false,south=true,toggled=true,west=true": {
+      "model": "furenikusroads:block/barrier_bars_center_1_toggled"
+    },
+    "east=true,north=true,south=false,toggled=false,west=false": {
+      "model": "furenikusroads:block/barrier_bars_center_1_standard"
+    },
+    "east=true,north=true,south=false,toggled=false,west=true": {
+      "model": "furenikusroads:block/barrier_bars_center_1_standard"
+    },
+    "east=true,north=true,south=false,toggled=true,west=false": {
+      "model": "furenikusroads:block/barrier_bars_center_1_toggled"
+    },
+    "east=true,north=true,south=false,toggled=true,west=true": {
+      "model": "furenikusroads:block/barrier_bars_center_1_toggled"
+    },
+    "east=true,north=true,south=true,toggled=false,west=false": {
+      "model": "furenikusroads:block/barrier_bars_center_1_standard"
+    },
+    "east=true,north=true,south=true,toggled=false,west=true": {
+      "model": "furenikusroads:block/barrier_bars_center_1_standard"
+    },
+    "east=true,north=true,south=true,toggled=true,west=false": {
+      "model": "furenikusroads:block/barrier_bars_center_1_toggled"
+    },
+    "east=true,north=true,south=true,toggled=true,west=true": {
+      "model": "furenikusroads:block/barrier_bars_center_1_toggled"
+    }
+  }
+}
