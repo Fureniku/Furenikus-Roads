@@ -1,0 +1,58 @@
+{
+	"parent": "block/block",
+	"textures": {
+		"3": "furenikusroads:block/machine/paint_filler_machine_a",
+		"7": "furenikusroads:block/machine/machine_part_dark",
+		"particle": "furenikusroads:block/machine/machine_metal"
+	},
+	"elements": [
+		{
+			"from": [8, 0, 0],
+			"to": [16, 0.25, 8],
+			"faces": {
+				"north": {"uv": [0, 15.75, 8, 16], "texture": "#3"},
+				"east": {"uv": [8, 15.75, 16, 16], "texture": "#3"},
+				"south": {"uv": [8, 15.75, 16, 16], "texture": "#3"},
+				"west": {"uv": [0, 15.75, 8, 16], "texture": "#3"},
+				"up": {"uv": [8, 0, 16, 8], "texture": "#7"},
+				"down": {"uv": [8, 8, 16, 16], "texture": "#7"}
+			}
+		},
+		{
+			"from": [1.25, 0, 1.25],
+			"to": [4.25, 0.25, 4.25],
+			"faces": {
+				"north": {"uv": [0, 15.75, 8, 16], "texture": "#3"},
+				"east": {"uv": [8, 15.75, 16, 16], "texture": "#3"},
+				"south": {"uv": [8, 15.75, 16, 16], "texture": "#3"},
+				"west": {"uv": [0, 15.75, 8, 16], "texture": "#3"},
+				"up": {"uv": [8, 0, 16, 8], "texture": "#7"},
+				"down": {"uv": [8, 8, 16, 16], "texture": "#7"}
+			}
+		},
+		{
+			"from": [1.25, 0, 6.5],
+			"to": [4.25, 0.25, 9.5],
+			"faces": {
+				"north": {"uv": [0, 15.75, 8, 16], "texture": "#3"},
+				"east": {"uv": [8, 15.75, 16, 16], "texture": "#3"},
+				"south": {"uv": [8, 15.75, 16, 16], "texture": "#3"},
+				"west": {"uv": [0, 15.75, 8, 16], "texture": "#3"},
+				"up": {"uv": [8, 0, 16, 8], "texture": "#7"},
+				"down": {"uv": [8, 8, 16, 16], "texture": "#7"}
+			}
+		},
+		{
+			"from": [1.25, 0, 11.75],
+			"to": [4.25, 0.25, 14.75],
+			"faces": {
+				"north": {"uv": [0, 15.75, 8, 16], "texture": "#3"},
+				"east": {"uv": [8, 15.75, 16, 16], "texture": "#3"},
+				"south": {"uv": [8, 15.75, 16, 16], "texture": "#3"},
+				"west": {"uv": [0, 15.75, 8, 16], "texture": "#3"},
+				"up": {"uv": [8, 0, 16, 8], "texture": "#7"},
+				"down": {"uv": [8, 8, 16, 16], "texture": "#7"}
+			}
+		}
+	]
+}

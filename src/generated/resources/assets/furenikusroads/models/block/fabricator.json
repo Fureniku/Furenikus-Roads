@@ -1,0 +1,6 @@
+{
+  "parent": "furenikusroads:blocks/machine/fabricator",
+  "textures": {
+    "texture": "furenikusroads:block/machine/fabricator"
+  }
+}

@@ -1,0 +1,20 @@
+{
+	"parent": "block/block",
+	"textures": {
+		"10": "furenikusroads:block/machine/machine_part_dark",
+		"particle": "furenikusroads:block/machine/machine_metal"
+	},
+	"elements": [
+		{
+			"from": [2, 0, 0],
+			"to": [14, 0.25, 13.5],
+			"faces": {
+				"north": {"uv": [2, 15.75, 14, 16], "texture": "#10"},
+				"east": {"uv": [2.5, 15.75, 16, 16], "texture": "#10"},
+				"south": {"uv": [2, 15.75, 14, 16], "texture": "#10"},
+				"west": {"uv": [0, 15.75, 13.5, 16], "texture": "#10"},
+				"down": {"uv": [2, 2.5, 14, 16], "texture": "#10"}
+			}
+		}
+	]
+}

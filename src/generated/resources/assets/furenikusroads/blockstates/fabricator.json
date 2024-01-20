@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "furenikusroads:block/fabricator",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "furenikusroads:block/fabricator"
+    },
+    "facing=south": {
+      "model": "furenikusroads:block/fabricator",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "furenikusroads:block/fabricator",
+      "y": 270
+    }
+  }
+}

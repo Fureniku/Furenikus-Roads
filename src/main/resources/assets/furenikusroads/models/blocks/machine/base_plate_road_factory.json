@@ -1,0 +1,43 @@
+{
+	"parent": "block/block",
+	"textures": {
+		"4": "furenikusroads:block/machine/road_factory_machine_b",
+		"7": "furenikusroads:block/machine/machine_part_dark",
+		"particle": "furenikusroads:block/machine/machine_metal"
+	},
+	"elements": [
+		{
+			"from": [1.5, 0, 1.5],
+			"to": [14.5, 0.25, 11.25],
+			"faces": {
+				"north": {"uv": [1.25, 15.75, 14.25, 16], "texture": "#4"},
+				"east": {"uv": [4.75, 15.75, 14.5, 16], "texture": "#4"},
+				"south": {"uv": [1.5, 15.75, 14.5, 16], "texture": "#4"},
+				"west": {"uv": [1.5, 15.75, 11.25, 16], "texture": "#4"},
+				"down": {"uv": [1.5, 4.75, 14.5, 14.5], "texture": "#7"}
+			}
+		},
+		{
+			"from": [4.75, 0, 11.25],
+			"to": [14.5, 0.25, 14.5],
+			"faces": {
+				"east": {"uv": [1.5, 15.75, 4.75, 16], "texture": "#4"},
+				"south": {"uv": [4.75, 15.75, 14.5, 16], "texture": "#4"},
+				"west": {"uv": [11.25, 15.75, 14.5, 16], "texture": "#4"},
+				"down": {"uv": [4.75, 1.5, 14.5, 4.75], "texture": "#7"}
+			}
+		},
+		{
+			"from": [1.25, 0, 11.75],
+			"to": [4.25, 0.25, 14.75],
+			"faces": {
+				"north": {"uv": [11.75, 15.75, 14.75, 16], "texture": "#7"},
+				"east": {"uv": [1.25, 15.75, 4.25, 16], "texture": "#7"},
+				"south": {"uv": [1.25, 15.75, 4.25, 16], "texture": "#7"},
+				"west": {"uv": [11.75, 15.75, 14.75, 16], "texture": "#7"},
+				"up": {"uv": [1.25, 11.75, 4.25, 14.75], "texture": "#7"},
+				"down": {"uv": [1.25, 1.25, 4.25, 4.25], "texture": "#7"}
+			}
+		}
+	]
+}

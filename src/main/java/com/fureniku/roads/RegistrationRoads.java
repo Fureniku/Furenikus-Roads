@@ -5,6 +5,7 @@ import com.fureniku.metropolis.datagen.MetroBlockStateProvider;
 import com.fureniku.metropolis.utils.CreativeTabSet;
 import com.fureniku.roads.registrations.RegistrationDecorative;
 import com.fureniku.roads.registrations.RegistrationGeneral;
+import com.fureniku.roads.registrations.RegistrationMachines;
 import com.fureniku.roads.registrations.RegistrationRoadBlocks;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -19,9 +20,10 @@ import java.util.ArrayList;
 
 public class RegistrationRoads extends RegistrationBase {
 
-    private RegistrationRoadBlocks _registrationRoads = new RegistrationRoadBlocks(this);
-    private RegistrationGeneral _registrationGeneral = new RegistrationGeneral(this);
-    private RegistrationDecorative _registrationDecorative = new RegistrationDecorative(this);
+    public final RegistrationRoadBlocks _registrationRoads = new RegistrationRoadBlocks(this);
+    public final RegistrationGeneral _registrationGeneral = new RegistrationGeneral(this);
+    public final RegistrationDecorative _registrationDecorative = new RegistrationDecorative(this);
+    public final RegistrationMachines _registrationMachines = new RegistrationMachines(this);
 
     public RegistrationRoads(String modid, IEventBus modEventBus) {
         super(modid, modEventBus);
@@ -32,6 +34,7 @@ public class RegistrationRoads extends RegistrationBase {
         _registrationRoads.init(modEventBus);
         _registrationGeneral.init(modEventBus);
         _registrationDecorative.init(modEventBus);
+        _registrationMachines.init(modEventBus);
     }
 
     @Override
@@ -39,6 +42,7 @@ public class RegistrationRoads extends RegistrationBase {
         _registrationRoads.generateCreativeTabs();
         _registrationGeneral.generateCreativeTabs();
         _registrationDecorative.generateCreativeTabs();
+        _registrationMachines.generateCreativeTabs();
     }
 
     @Override
@@ -47,6 +51,7 @@ public class RegistrationRoads extends RegistrationBase {
         tabList.addAll(_registrationRoads.getCreativeTabs());
         tabList.addAll(_registrationGeneral.getCreativeTabs());
         tabList.addAll(_registrationDecorative.getCreativeTabs());
+        tabList.addAll(_registrationMachines.getCreativeTabs());
         return tabList;
     }
 

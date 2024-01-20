@@ -1,0 +1,6 @@
+{
+  "parent": "furenikusroads:blocks/machine/crusher",
+  "textures": {
+    "texture": "furenikusroads:block/machine/crusher"
+  }
+}
