@@ -37,6 +37,8 @@ public class RegistrationMachines extends RegistrationGroup {
     private RegistryObject<BlockEntityType<MetroBlockEntity>> CRUSHER_ENTITY;
     private RegistryObject<BlockEntityType<MetroBlockEntity>> FABRICATOR_ENTITY;
 
+    private RegistryObject<BlockEntityType<MetroBlockEntity>> CRUSHER_MENU;
+
     private CreativeTabSet _machineTab;
 
     private BlockBehaviour.Properties _props = BlockBehaviour.Properties.of().strength(1.0f).sound(SoundType.METAL);
@@ -44,6 +46,7 @@ public class RegistrationMachines extends RegistrationGroup {
 
     public RegistrationMachines(RegistrationBase registrationBase) {
         super(registrationBase);
+        CRUSHER_ENTITY = null;
     }
 
     @Override
