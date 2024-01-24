@@ -2,19 +2,14 @@ package com.fureniku.roads.blocks;
 
 import com.fureniku.metropolis.blocks.MetroBlockBase;
 import com.fureniku.metropolis.datagen.MetroBlockStateProvider;
-import com.fureniku.metropolis.utils.Debug;
 import com.fureniku.roads.FurenikusRoads;
-import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.client.model.generators.ModelFile;
-import net.neoforged.neoforge.registries.RegistryObject;
+import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.registries.RegistryObject;
 
 public class RoadBlock extends MetroBlockBase {
 
@@ -41,12 +36,6 @@ public class RoadBlock extends MetroBlockBase {
         BLOCK_SHAPE = Block.box(0, 0, 0, 16, height, 16);
         _roadBlockSet = blockSet;
         _resourceLocation = texture;
-    }
-
-    @Override
-    protected void onRightClickRemote(BlockState state, BlockPos pos, Player player) {
-        ItemStack heldItem = player.getItemInHand(InteractionHand.MAIN_HAND);
-        //TODO various interactions from items
     }
 
     @Override

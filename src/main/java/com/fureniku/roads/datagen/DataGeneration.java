@@ -1,12 +1,9 @@
 package com.fureniku.roads.datagen;
 
-import com.fureniku.metropolis.datagen.MetroBlockStateProvider;
-import com.fureniku.metropolis.utils.Debug;
-import com.fureniku.roads.FurenikusRoads;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import net.neoforged.neoforge.data.event.GatherDataEvent;
+import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.data.event.GatherDataEvent;
 
 public class DataGeneration {
 

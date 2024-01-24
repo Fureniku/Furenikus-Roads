@@ -18,14 +18,18 @@ import com.fureniku.roads.blockentities.FabricatorBlockEntity;
 import com.fureniku.roads.blockentities.menus.CrusherMenu;
 import com.fureniku.roads.blocks.entityblock.CrusherEntityBlock;
 import com.fureniku.roads.blocks.entityblock.FabricatorEntityBlock;
+import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.RegistryObject;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.RegistryObject;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -50,7 +54,7 @@ public class RegistrationMachines extends RegistrationGroup {
     @Override
     public void init(IEventBus iEventBus) {
         CrusherEntityBlock.ENTITY = registerEntity(CRUSHER, getHelpers(12, 14), BlockType.CRUSHER, CrusherBlockEntity::new);
-        CrusherEntityBlock.MENU = registration.registerMenuType(CRUSHER + "_menu", () -> new MenuType(CrusherMenu::new, FeatureFlags.DEFAULT_FLAGS));
+        //CrusherEntityBlock.MENU = registration.registerMenuType(CRUSHER + "_menu", () -> new MenuType(CrusherMenu::new, FeatureFlags.DEFAULT_FLAGS));
 
         FabricatorEntityBlock.ENTITY = registerEntity(FABRICATOR, getHelpers(12, 9.5f), BlockType.FABRICATOR, FabricatorBlockEntity::new);
 

@@ -1,7 +1,6 @@
 package com.fureniku.roads.blockentities;
 
 import com.fureniku.metropolis.blockentity.MetroBlockEntity;
-import com.fureniku.roads.FurenikusRoads;
 import com.fureniku.roads.blocks.entityblock.FabricatorEntityBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;

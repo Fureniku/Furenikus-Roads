@@ -4,7 +4,7 @@ import com.fureniku.metropolis.RegistrationBase;
 import com.fureniku.metropolis.RegistrationGroup;
 import com.fureniku.metropolis.utils.CreativeTabSet;
 import com.fureniku.roads.blocks.DecorativeBlock;
-import net.neoforged.bus.api.IEventBus;
+import net.minecraftforge.eventbus.api.IEventBus;
 
 import java.util.ArrayList;
 
