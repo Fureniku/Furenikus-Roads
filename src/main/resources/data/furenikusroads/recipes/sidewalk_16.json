@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "xxx",
+    "xax",
+    "xxx"
+  ],
+  "key":
+  {
+    "x":
+    {
+      "item": "minecraft:stone"
+    },
+    "a":
+    {
+      "item": "minecraft:gravel"
+    }
+  },
+  "result":
+  {
+    "item": "furenikusroads:sidewalk_16",
+    "count": 16
+  }
+}

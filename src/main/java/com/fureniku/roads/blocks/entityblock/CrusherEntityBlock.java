@@ -6,11 +6,13 @@ import com.fureniku.metropolis.datagen.TextureSet;
 import com.fureniku.metropolis.menus.MetroMenu;
 import com.fureniku.metropolis.utils.Debug;
 import com.fureniku.roads.blockentities.CrusherBlockEntity;
+import com.fureniku.roads.blockentities.menus.CrusherMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -23,7 +25,7 @@ import org.jetbrains.annotations.Nullable;
 public abstract class CrusherEntityBlock extends MetroEntityBlockDecorative {
 
     public static RegistryObject<BlockEntityType<MetroBlockEntity>> ENTITY;
-    public static RegistryObject<MetroMenu> MENU;
+    public static RegistryObject<MenuType<CrusherMenu>> MENU_TYPE;
 
     public CrusherEntityBlock(Properties props, VoxelShape shape, String modelDir, String modelName, String tag, boolean dynamicShape, TextureSet... textures) {
         super(props, shape, modelDir, modelName, tag, dynamicShape, textures);
@@ -38,15 +40,16 @@ public abstract class CrusherEntityBlock extends MetroEntityBlockDecorative {
 
     @Override
     public MenuProvider getMenu(BlockState state, Level level, BlockPos pos) { //TODO
-        return null;
+        Debug.Log("calling get menu???");
+        BlockEntity entity = level.getBlockEntity(pos);
+        return entity instanceof CrusherBlockEntity ? (MenuProvider) entity : null;
     }
 
     @Override
     protected InteractionResult onRightClick(BlockState state, Level level, BlockPos pos, Player player) {
         if (!level.isClientSide && player instanceof ServerPlayer serverPlayer) {
             NetworkHooks.openScreen(serverPlayer, state.getMenuProvider(level, pos));
-            return InteractionResult.CONSUME;
         }
-        return InteractionResult.PASS;
+        return InteractionResult.sidedSuccess(level.isClientSide);
     }
 }

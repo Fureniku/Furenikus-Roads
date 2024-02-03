@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "xx",
+    "xx"
+  ],
+  "key":
+  {
+    "x":
+    {
+      "item": "furenikusroads:stone_road_16"
+    }
+  },
+  "result":
+  {
+    "item": "furenikusroads:stone_road_12",
+    "count": 4
+  }
+}

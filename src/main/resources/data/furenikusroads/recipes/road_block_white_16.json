@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "xxx",
+    "xax",
+    "xxx"
+  ],
+  "key":
+  {
+    "x":
+    {
+      "item": "furenikusroads:road_block_standard_16"
+    },
+    "a":
+    {
+      "item": "minecraft:white_dye"
+    }
+  },
+  "result":
+  {
+    "item": "furenikusroads:road_block_white_16",
+    "count": 8
+  }
+}

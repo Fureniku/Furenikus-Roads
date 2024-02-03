@@ -3,10 +3,11 @@ package com.fureniku.roads;
 import com.fureniku.metropolis.RegistrationBase;
 import com.fureniku.metropolis.datagen.MetroBlockStateProvider;
 import com.fureniku.metropolis.utils.CreativeTabSet;
-import com.fureniku.roads.registrations.RegistrationDecorative;
-import com.fureniku.roads.registrations.RegistrationGeneral;
-import com.fureniku.roads.registrations.RegistrationMachines;
-import com.fureniku.roads.registrations.RegistrationRoadBlocks;
+import com.fureniku.metropolis.utils.Debug;
+import com.fureniku.roads.blocks.entityblock.CrusherEntityBlock;
+import com.fureniku.roads.client.screens.CrusherScreen;
+import com.fureniku.roads.registrations.*;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.client.event.ModelEvent;
@@ -60,16 +61,15 @@ public class RegistrationRoads extends RegistrationBase {
     protected void commonSetup(FMLCommonSetupEvent event) {}
 
     @Override
-    protected void clientSetup(FMLClientSetupEvent event) {}
-
-    @Override
-    protected void modelSetup(ModelEvent.RegisterGeometryLoaders registerGeometryLoaders) {}
-
-    @Override
-    protected void modifyBakingResult(ModelEvent.ModifyBakingResult modifyBakingResult) {}
-
-    @Override
-    protected void bakingComplete(ModelEvent.BakingCompleted bakingCompleted) {}
+    protected void clientSetup(FMLClientSetupEvent event) {
+        Debug.Log("### registered screen");
+        MenuScreens.register(CrusherEntityBlock.MENU_TYPE.get(), CrusherScreen::new);
+        if (RoadMenuTypes.CRUSHER_MENU == null) {
+            Debug.Log("Menu is null");
+        } else {
+            Debug.Log("Menu is not null");
+        }
+    }
 
     @Override
     protected void dataGen(GatherDataEvent event, DataGenerator gen, PackOutput packOutput, ExistingFileHelper efh) {

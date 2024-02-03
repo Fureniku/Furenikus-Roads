@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "xx",
+    "xx"
+  ],
+  "key":
+  {
+    "x":
+    {
+      "item": "furenikusroads:sidewalk_tan_16"
+    }
+  },
+  "result":
+  {
+    "item": "furenikusroads:sidewalk_tan_12",
+    "count": 4
+  }
+}

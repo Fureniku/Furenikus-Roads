@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "xx",
+    "xx"
+  ],
+  "key":
+  {
+    "x":
+    {
+      "item": "furenikusroads:road_block_standard_12"
+    }
+  },
+  "result":
+  {
+    "item": "furenikusroads:road_block_standard_8",
+    "count": 4
+  }
+}

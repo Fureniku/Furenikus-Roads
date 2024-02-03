@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "xxx",
+    "xax",
+    "xxx"
+  ],
+  "key":
+  {
+    "x":
+    {
+      "item": "minecraft:gravel"
+    },
+    "a":
+    {
+      "item": "minecraft:stone"
+    }
+  },
+  "result":
+  {
+    "item": "furenikusroads:road_block_standard_16",
+    "count": 16
+  }
+}
