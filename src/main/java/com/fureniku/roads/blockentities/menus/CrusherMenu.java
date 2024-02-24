@@ -26,6 +26,10 @@ public class CrusherMenu extends MetroMenu {
         this.addSlot(new SlotItemHandler(dataInventory,0, 10, 10));
     }
 
+    public CrusherMenu(int containerId, Inventory inventory, FriendlyByteBuf friendlyByteBuf) {
+        super(CrusherEntityBlock.MENU_TYPE.get(), containerId);
+    }
+
     @Override
     public ItemStack quickMoveStack(Player player, int p_38942_) {
         return null;
